@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "98484105015",
+    "firebase_url": "https://parka-240a6.firebaseio.com",
+    "project_id": "parka-240a6",
+    "storage_bucket": "parka-240a6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98484105015:android:e90dab10eb5201f92d34b2",
+        "android_client_info": {
+          "package_name": "com.parka.parka"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "98484105015-933btdv0havf7bl4kkc225kehcl59du8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1XrooM5vPh_6vn_A7t4ELItqWdw5eGcs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "98484105015-933btdv0havf7bl4kkc225kehcl59du8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
