@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.lightBlue,
+        primarySwatch: Colors.lightBlue[800],
         // This makes the visual density adapt to the platform that you run
         // the app on. For desktop platforms, the controls will be smaller and
         // closer together (more dense) than on mobile platforms.
@@ -75,13 +75,9 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(
-          widget.title, 
-          style: TextStyle( 
-            color: Colors.white ,
-            fontFamily: 'Righteous',
-            fontSize: 40)),
-      
+        title: Text(widget.title,
+            style: TextStyle(
+                color: Colors.white, fontFamily: 'Righteous', fontSize: 40)),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -105,9 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Text(
               'Welcome to ParkA:',
-              style: TextStyle(
-                fontSize: 28
-              ),
+              style: TextStyle(fontSize: 28),
             ),
             Text(
               '$_counter',
