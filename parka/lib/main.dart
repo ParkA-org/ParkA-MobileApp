@@ -90,17 +90,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Text(
-            '$_counter',
-            style: Theme.of(context).textTheme.headline4,
-          ),
-          Text(
-            "Iniciar Sesion",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontFamily: "Montserrat",
-                fontSize: 48,
-                fontWeight: FontWeight.bold),
+          Center(
+            child: Text(
+              "Iniciar Sesión",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontFamily: "Montserrat",
+                  fontSize: 48,
+                  fontWeight: FontWeight.bold),
+            ),
           )
         ],
       ),
