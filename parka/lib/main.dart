@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -46,24 +48,6 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
@@ -72,42 +56,80 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      body: Column(
-        // Column is also a layout widget. It takes a list of children and
-        // arranges them vertically. By default, it sizes itself to fit its
-        // children horizontally, and tries to be as tall as its parent.
-        //
-        // Invoke "debug painting" (press "p" in the console, choose the
-        // "Toggle Debug Paint" action from the Flutter Inspector in Android
-        // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-        // to see the wireframe for each widget.
-        //
-        // Column has various properties to control how it sizes itself and
-        // how it positions its children. Here we use mainAxisAlignment to
-        // center the children vertically; the main axis here is the vertical
-        // axis because Columns are vertical (the cross axis would be
-        // horizontal).
-
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Center(
-            child: Text(
-              "Iniciar Sesión",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontFamily: "Montserrat",
-                  fontSize: 48,
-                  fontWeight: FontWeight.bold),
+      resizeToAvoidBottomInset: true,
+      body: SingleChildScrollView(
+        child:
+            //2 Columns -> 1: Header with image and text 2: Login Form
+            Column(
+          children: <Widget>[
+            //Header Column
+            Row(children: <Widget>[
+              Container(
+                  margin: const EdgeInsets.fromLTRB(0, 73, 0, 14),
+                  child: SvgPicture.asset(
+                    'Resources/BlueCar.svg',
+                  ))
+            ]),
+            const Center(
+              child: const Text(
+                "Iniciar Sesión",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontFamily: "Montserrat",
+                    fontSize: 48,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF0B768C)),
+              ),
             ),
-          )
-        ],
-      ),
+            //Login Column
+            Container(
+                margin: const EdgeInsets.fromLTRB(0, 22, 0, 0),
+                child:
 
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+                    //A Stack to have the image in the background
+
+                    Stack(alignment: Alignment.center, children: <Widget>[
+                  SvgPicture.asset('Resources/LoginRectangle.svg',
+                      allowDrawingOutsideViewBox: true),
+
+                  //Login Form
+                  Container(
+                      margin: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+                      child: Form(
+                          child:
+                              // 6 Columns 1 per line of the Login form and a button
+                              Column(
+                        children: <Widget>[
+                          //Email Text
+                          Row(
+                            children: <Widget>[
+                              SvgPicture.asset(
+                                  "Resources/WhiteProfileIcon.svg"),
+                              const Spacer(),
+                              const Text("Correo/Usuario",
+                                  style: const TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white)),
+                              const Spacer(
+                                flex: 7,
+                              )
+                            ],
+                          ),
+                          //Email Input
+
+                          TextFormField(
+                            keyboardType: TextInputType.emailAddress,
+                            decoration:
+                                InputDecoration(fillColor: Color(0xFFD7D2D2)),
+                          )
+                        ],
+                      ))),
+                ]))
+          ],
+        ),
+      ),
     );
   }
 }
