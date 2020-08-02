@@ -89,104 +89,137 @@ class MyHomePage extends StatelessWidget {
 
                       //A Stack to have the image in the background
 
-                      Stack(alignment: Alignment.center, children: <Widget>[
-                    SvgPicture.asset('Resources/LoginRectangle.svg',
-                        allowDrawingOutsideViewBox: true),
-
-                    //Login Form
-                    Container(
-                        margin: const EdgeInsets.fromLTRB(40, 0, 40, 0),
-                        child: Form(
-                            child:
-                                // 6 Columns 1 per line of the Login form and a button
-                                Column(
+                      Stack(
+                          alignment: Alignment.bottomCenter,
                           children: <Widget>[
-                            //Email Text
-                            Row(
+                        SvgPicture.asset('Resources/LoginRectangle.svg',
+                            allowDrawingOutsideViewBox: true),
+
+                        //Login Form
+                        Container(
+                            margin: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+                            child: Form(
+                                child:
+                                    // 6 Columns 1 per line of the Login form and a button
+                                    Column(
                               children: <Widget>[
-                                SvgPicture.asset(
-                                    "Resources/WhiteProfileIcon.svg"),
-                                const Spacer(),
-                                const Text("Correo/Usuario",
-                                    style: const TextStyle(
-                                        fontFamily: "Montserrat",
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white)),
-                                const Spacer(
-                                  flex: 7,
+                                //Email Text
+                                Row(
+                                  children: <Widget>[
+                                    SvgPicture.asset(
+                                        "Resources/WhiteProfileIcon.svg"),
+                                    const Spacer(),
+                                    const Text("Correo/Usuario",
+                                        style: const TextStyle(
+                                            fontFamily: "Montserrat",
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white)),
+                                    const Spacer(
+                                      flex: 7,
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 13,
+                                ),
+                                //Email Input
+                                Material(
+                                    elevation: 25,
+                                    borderRadius: BorderRadius.circular(15),
+                                    shadowColor: Colors.black,
+                                    child: TextFormField(
+                                      style: const TextStyle(
+                                          fontFamily: "Montserrat",
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                      keyboardType: TextInputType.emailAddress,
+                                      decoration: InputDecoration(
+                                          filled: true,
+                                          isDense: true,
+                                          contentPadding: EdgeInsets.all(9),
+                                          fillColor: Color(0xFFD7D2D2),
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(15))),
+                                    )),
+                                SizedBox(
+                                  height: 30,
+                                ),
+
+                                //Password Text
+                                Row(
+                                  children: <Widget>[
+                                    SvgPicture.asset(
+                                        "Resources/WhiteLockIcon.svg"),
+                                    const Spacer(),
+                                    const Text("Contraseña",
+                                        style: const TextStyle(
+                                            fontFamily: "Montserrat",
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white)),
+                                    const Spacer(
+                                      flex: 7,
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 13,
+                                ),
+                                //Password Input
+                                Material(
+                                    elevation: 25,
+                                    borderRadius: BorderRadius.circular(15),
+                                    shadowColor: Colors.black,
+                                    child: TextFormField(
+                                      style: const TextStyle(
+                                          fontFamily: "Montserrat",
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                      keyboardType: TextInputType.emailAddress,
+                                      decoration: InputDecoration(
+                                          filled: true,
+                                          isDense: true,
+                                          contentPadding: EdgeInsets.all(9),
+                                          fillColor: Color(0xFFD7D2D2),
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(15))),
+                                    )),
+                                SizedBox(
+                                  height: 28,
+                                ),
+                                Text(
+                                  "Olvide mi Contraseña",
+                                  style: TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                MaterialButton(
+                                  color: Color(0xFF63C7B2),
+                                  height: 60,
+                                  minWidth: 200,
+                                  elevation: 20,
+                                  shape: StadiumBorder(),
+                                  child: Text("Entrar",
+                                      style: TextStyle(
+                                          fontFamily: "Montserrat",
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white)),
+                                  onPressed: () => {},
                                 )
                               ],
-                            ),
-                            SizedBox(
-                              height: 13,
-                            ),
-                            //Email Input
-                            Material(
-                                elevation: 25,
-                                borderRadius: BorderRadius.circular(15),
-                                shadowColor: Colors.black,
-                                child: TextFormField(
-                                  style: const TextStyle(
-                                      fontFamily: "Montserrat",
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                  keyboardType: TextInputType.emailAddress,
-                                  decoration: InputDecoration(
-                                      filled: true,
-                                      isDense: true,
-                                      contentPadding: EdgeInsets.all(9),
-                                      fillColor: Color(0xFFD7D2D2),
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15))),
-                                )),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            Row(
-                              children: <Widget>[
-                                SvgPicture.asset("Resources/WhiteLockIcon.svg"),
-                                const Spacer(),
-                                const Text("Contraseña",
-                                    style: const TextStyle(
-                                        fontFamily: "Montserrat",
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white)),
-                                const Spacer(
-                                  flex: 7,
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 13,
-                            ),
-                            //Email Input
-                            Material(
-                                elevation: 25,
-                                borderRadius: BorderRadius.circular(15),
-                                shadowColor: Colors.black,
-                                child: TextFormField(
-                                  style: const TextStyle(
-                                      fontFamily: "Montserrat",
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                  keyboardType: TextInputType.emailAddress,
-                                  decoration: InputDecoration(
-                                      filled: true,
-                                      isDense: true,
-                                      contentPadding: EdgeInsets.all(9),
-                                      fillColor: Color(0xFFD7D2D2),
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15))),
-                                ))
-                          ],
-                        ))),
-                  ]))
+                            ))),
+                      ]))
             ],
           ),
         ),
