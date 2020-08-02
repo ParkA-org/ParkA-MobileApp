@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 void main() {
   runApp(MyApp());
@@ -60,74 +59,136 @@ class MyHomePage extends StatelessWidget {
       body: SingleChildScrollView(
         child:
             //2 Columns -> 1: Header with image and text 2: Login Form
-            Column(
-          children: <Widget>[
-            //Header Column
-            Row(children: <Widget>[
-              Container(
-                  margin: const EdgeInsets.fromLTRB(0, 73, 0, 14),
-                  child: SvgPicture.asset(
-                    'Resources/BlueCar.svg',
-                  ))
-            ]),
-            const Center(
-              child: const Text(
-                "Iniciar Sesión",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: 48,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF0B768C)),
-              ),
-            ),
-            //Login Column
             Container(
-                margin: const EdgeInsets.fromLTRB(0, 22, 0, 0),
-                child:
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            children: <Widget>[
+              //Header Column
+              Row(children: <Widget>[
+                Container(
+                    margin: const EdgeInsets.fromLTRB(0, 73, 0, 14),
+                    child: SvgPicture.asset(
+                      'Resources/BlueCar.svg',
+                    ))
+              ]),
+              const Center(
+                child: const Text(
+                  "Iniciar Sesión",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontFamily: "Montserrat",
+                      fontSize: 48,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF0B768C)),
+                ),
+              ),
+              //Login Column
+              Container(
+                  margin: const EdgeInsets.fromLTRB(0, 22, 0, 0),
+                  child:
 
-                    //A Stack to have the image in the background
+                      //A Stack to have the image in the background
 
-                    Stack(alignment: Alignment.center, children: <Widget>[
-                  SvgPicture.asset('Resources/LoginRectangle.svg',
-                      allowDrawingOutsideViewBox: true),
+                      Stack(alignment: Alignment.center, children: <Widget>[
+                    SvgPicture.asset('Resources/LoginRectangle.svg',
+                        allowDrawingOutsideViewBox: true),
 
-                  //Login Form
-                  Container(
-                      margin: const EdgeInsets.fromLTRB(50, 0, 50, 0),
-                      child: Form(
-                          child:
-                              // 6 Columns 1 per line of the Login form and a button
-                              Column(
-                        children: <Widget>[
-                          //Email Text
-                          Row(
-                            children: <Widget>[
-                              SvgPicture.asset(
-                                  "Resources/WhiteProfileIcon.svg"),
-                              const Spacer(),
-                              const Text("Correo/Usuario",
+                    //Login Form
+                    Container(
+                        margin: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+                        child: Form(
+                            child:
+                                // 6 Columns 1 per line of the Login form and a button
+                                Column(
+                          children: <Widget>[
+                            //Email Text
+                            Row(
+                              children: <Widget>[
+                                SvgPicture.asset(
+                                    "Resources/WhiteProfileIcon.svg"),
+                                const Spacer(),
+                                const Text("Correo/Usuario",
+                                    style: const TextStyle(
+                                        fontFamily: "Montserrat",
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white)),
+                                const Spacer(
+                                  flex: 7,
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 13,
+                            ),
+                            //Email Input
+                            Material(
+                                elevation: 25,
+                                borderRadius: BorderRadius.circular(15),
+                                shadowColor: Colors.black,
+                                child: TextFormField(
                                   style: const TextStyle(
                                       fontFamily: "Montserrat",
-                                      fontSize: 22,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.white)),
-                              const Spacer(
-                                flex: 7,
-                              )
-                            ],
-                          ),
-                          //Email Input
-
-                          TextFormField(
-                            keyboardType: TextInputType.emailAddress,
-                            decoration:
-                                InputDecoration(fillColor: Color(0xFFD7D2D2)),
-                          )
-                        ],
-                      ))),
-                ]))
-          ],
+                                      color: Colors.black),
+                                  keyboardType: TextInputType.emailAddress,
+                                  decoration: InputDecoration(
+                                      filled: true,
+                                      isDense: true,
+                                      contentPadding: EdgeInsets.all(9),
+                                      fillColor: Color(0xFFD7D2D2),
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15))),
+                                )),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            Row(
+                              children: <Widget>[
+                                SvgPicture.asset("Resources/WhiteLockIcon.svg"),
+                                const Spacer(),
+                                const Text("Contraseña",
+                                    style: const TextStyle(
+                                        fontFamily: "Montserrat",
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white)),
+                                const Spacer(
+                                  flex: 7,
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 13,
+                            ),
+                            //Email Input
+                            Material(
+                                elevation: 25,
+                                borderRadius: BorderRadius.circular(15),
+                                shadowColor: Colors.black,
+                                child: TextFormField(
+                                  style: const TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                  keyboardType: TextInputType.emailAddress,
+                                  decoration: InputDecoration(
+                                      filled: true,
+                                      isDense: true,
+                                      contentPadding: EdgeInsets.all(9),
+                                      fillColor: Color(0xFFD7D2D2),
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15))),
+                                ))
+                          ],
+                        ))),
+                  ]))
+            ],
+          ),
         ),
       ),
     );
