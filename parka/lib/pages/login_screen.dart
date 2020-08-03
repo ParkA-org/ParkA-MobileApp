@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../components/round_button.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -17,10 +19,11 @@ class LoginScreen extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     Text(
                       "Bienvenido a ParkA",
-                      textAlign: TextAlign.center,
+                      // textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Color(0xFF0B768C),
                           fontSize: 48.0,
@@ -34,30 +37,30 @@ class LoginScreen extends StatelessWidget {
                           fontFamily: "Montserrat",
                           fontWeight: FontWeight.bold),
                     ),
-                    Container(
-                      height: 32.0,
-                      width: 300.0,
-                      decoration: BoxDecoration(
-                          color: Color(0xFF3B5998),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(50.0))),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                        child: Row(
-                          children: <Widget>[
-                            Image.asset("images/facebook_logo.png"),
-                            Text(
-                              "Iniciar sesion con Facebook",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "Montserrat",
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                      ),
-                    )
+                    RoundedButton(
+                      color: Color(0xFF3B5998),
+                      icon: FontAwesomeIcons.facebookF,
+                      label: "Iniciar sesion con Facebook",
+                    ),
+                    RoundedButton(
+                      color: Color(0xFFFF3E30),
+                      icon: FontAwesomeIcons.google,
+                      label: "Iniciar sesion con Google",
+                    ),
+                    Text(
+                      "Iniciar Sesion con Correo",
+                      style: TextStyle(
+                          color: Color(0xFF0B768C),
+                          fontFamily: "Montserrat",
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Registrarse",
+                      style: TextStyle(
+                          color: Color(0xFF0B768C),
+                          fontFamily: "Montserrat",
+                          fontWeight: FontWeight.bold),
+                    ),
                   ],
                 ),
               ))
