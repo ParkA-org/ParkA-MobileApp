@@ -1,7 +1,8 @@
 import "package:flutter/material.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../components/round_button.dart';
-import "../components/parkaIcons.dart";
+import "../components/transparent_button.dart";
+import '../utils/parkaIcons.dart';
 import "../utils/curves_painter.dart";
 
 class LoginScreen extends StatelessWidget {
@@ -12,7 +13,7 @@ class LoginScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
-            flex: 1,
+            flex: 4,
             child: WavyHeaderImage(
               child: Container(
                 alignment: Alignment.centerLeft,
@@ -26,7 +27,7 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-              flex: 2,
+              flex: 7,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32.0),
                 child: Column(
@@ -58,19 +59,11 @@ class LoginScreen extends StatelessWidget {
                       icon: FontAwesomeIcons.google,
                       label: "Iniciar sesion con Google",
                     ),
-                    Text(
-                      "Iniciar Sesion con Correo",
-                      style: TextStyle(
-                          color: Color(0xFF0B768C),
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.bold),
+                    TransparentButton(
+                      label: "Iniciar Sesion con Correo",
                     ),
-                    Text(
-                      "Registrarse",
-                      style: TextStyle(
-                          color: Color(0xFF0B768C),
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.bold),
+                    TransparentButton(
+                      label: "Registrarse",
                     ),
                   ],
                 ),

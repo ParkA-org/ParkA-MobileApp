@@ -4,22 +4,23 @@ class RoundedButton extends StatelessWidget {
   final IconData icon;
   final String label;
   final Color color;
+  final Function onTapHandler;
 
-  const RoundedButton({Key key, this.color, this.icon, this.label})
-      : super(key: key);
+  const RoundedButton({this.color, this.icon, this.label, this.onTapHandler});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        print("tapped");
-      },
+      onTap: this.onTapHandler,
       child: Container(
         height: 40.0,
         width: 300.0,
         decoration: BoxDecoration(
-            color: this.color,
-            borderRadius: BorderRadius.all(Radius.circular(50.0))),
+          color: this.color,
+          borderRadius: BorderRadius.all(
+            Radius.circular(50.0),
+          ),
+        ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Row(
