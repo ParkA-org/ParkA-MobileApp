@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../components/round_button.dart';
 import "../components/parkaIcons.dart";
+import "../utils/curves_painter.dart";
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -12,24 +13,25 @@ class LoginScreen extends StatelessWidget {
         children: <Widget>[
           Expanded(
             flex: 1,
-            child: Container(
-              alignment: Alignment.centerLeft,
-              color: Color(0xFF0B768C),
-              child: Icon(
-                ParkaIcons.parkaCar,
-                color: Colors.white,
-                size: 150.0,
+            child: WavyHeaderImage(
+              child: Container(
+                alignment: Alignment.centerLeft,
+                color: Color(0xFF0B768C),
+                child: Icon(
+                  ParkaIcons.parkaCar,
+                  color: Colors.white,
+                  size: 130.0,
+                ),
               ),
             ),
           ),
           Expanded(
               flex: 2,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                padding: EdgeInsets.symmetric(horizontal: 32.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    CustomPaint(),
                     Text(
                       "Bienvenido a ParkA",
                       // textAlign: TextAlign.center,
