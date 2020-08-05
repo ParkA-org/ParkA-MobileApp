@@ -1,7 +1,5 @@
 import 'package:ParkA/Silvio/Screens/LoginPage/components/login_page.dart';
-import 'package:ParkA/components/Input/ParkA_Input.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 void main() {
   runApp(MyApp());
