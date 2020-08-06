@@ -34,7 +34,7 @@ class ParkAInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        SvgPicture.asset("Resources/$icon"),
+        SvgPicture.asset("resources/images/$icon"),
         const Spacer(),
         Text("$text",
             style: const TextStyle(

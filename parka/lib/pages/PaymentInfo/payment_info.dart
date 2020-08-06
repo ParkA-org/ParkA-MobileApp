@@ -1,6 +1,6 @@
+import 'package:ParkA/components/Cards/credit_card.dart';
+import 'package:ParkA/components/Utils/curves_painter.dart';
 import "package:flutter/material.dart";
-import "../utils/curves_painter.dart";
-import "../components/credit_card.dart";
 
 class PaymentInfoScreen extends StatefulWidget {
   @override

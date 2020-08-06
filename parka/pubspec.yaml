@@ -46,11 +46,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - Resources/
-
-  # To add assets to your application, add an assets section, like this:
-  assets:
-    - images/
+      - resources/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -64,19 +60,14 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Righteous
-      fonts:
-        - asset: fonts/righteous-regular.ttf
-
     - family: Montserrat
       fonts:
-        - asset: fonts/Montserrat-Bold.ttf
-        - asset: fonts/Montserrat-Regular.ttf
-        - asset: fonts/Montserrat-ExtraBold.ttf
-        - asset: fonts/montserrat-regular.ttf
+        - asset: resources/fonts/Montserrat-Bold.ttf
+        - asset: resources/fonts/Montserrat-ExtraBold.ttf
+        - asset: resources/fonts/montserrat-regular.ttf
     - family: ParkaIcons
       fonts:
-        - asset: images/carIcon.ttf
+        - asset: resources/images/carIcon.ttf
 
   #   - family: Trajan Pro
   #     fonts:

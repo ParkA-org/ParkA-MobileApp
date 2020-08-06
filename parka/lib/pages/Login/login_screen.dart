@@ -1,9 +1,9 @@
+import 'package:ParkA/components/Buttons/round_button.dart';
+import 'package:ParkA/components/Buttons/transparent_button.dart';
 import "package:flutter/material.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../components/round_button.dart';
-import "../components/transparent_button.dart";
-import '../utils/parkaIcons.dart';
-import "../utils/curves_painter.dart";
+import '../../components/Utils/parkaIcons.dart';
+import '../../components/Utils/curves_painter.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
