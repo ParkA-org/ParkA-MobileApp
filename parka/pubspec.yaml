@@ -1,4 +1,4 @@
-name: parka
+name: ParkA
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  
+  flutter_svg: ^0.18.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -42,6 +44,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - Resources/
 
   # To add assets to your application, add an assets section, like this:
   assets:
@@ -64,6 +68,9 @@ flutter:
         - asset: fonts/righteous-regular.ttf
     - family: Montserrat
       fonts:
+        - asset: fonts/Montserrat-Bold.ttf
+        - asset: fonts/Montserrat-Regular.ttf
+        - asset: fonts/Montserrat-ExtraBold.ttf
         - asset: fonts/montserrat-regular.ttf
     - family: ParkaIcons
       fonts:
