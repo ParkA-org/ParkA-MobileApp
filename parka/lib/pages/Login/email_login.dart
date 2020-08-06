@@ -7,161 +7,102 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size currentScreen = MediaQuery.of(context).size;
+
     return Scaffold(
       body: SingleChildScrollView(
         child:
             //2 Columns -> 1: Header with image and text 2: Login Form
+
             Container(
-          height: MediaQuery.of(context).size.height,
+          height: currentScreen.height,
           child: Column(
             children: <Widget>[
               //Header Column
               Row(children: <Widget>[
                 Container(
-                    margin: const EdgeInsets.fromLTRB(0, 73, 0, 14),
+                    margin: EdgeInsets.fromLTRB(
+                        0, currentScreen.height * 0.1, 0, 0),
                     child: SvgPicture.asset(
                       'resources/images/BlueCar.svg',
-                      height: 80,
-                      width: 60,
+                      height: currentScreen.height * 0.18,
                     ))
               ]),
-              const Center(
-                child: const Text(
-                  "Iniciar Sesión",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontFamily: "Montserrat",
-                      fontSize: 48,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF0B768C)),
-                ),
+              const Text(
+                "Iniciar Sesión",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontFamily: "Montserrat",
+                    fontSize: 48,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF0B768C)),
               ),
               //Login Column
               Container(
-                  margin: const EdgeInsets.fromLTRB(0, 22, 0, 0),
+                  margin:
+                      EdgeInsets.fromLTRB(0, currentScreen.height * 0.01, 0, 0),
                   child:
-
                       //A Stack to have the image in the background
-
                       Stack(
                           alignment: Alignment.bottomCenter,
                           children: <Widget>[
-                        SvgPicture.asset('resources/images/LoginRectangle.svg',
-                            allowDrawingOutsideViewBox: true),
+                        SvgPicture.asset(
+                          'resources/images/LoginRectangle.svg',
+                          allowDrawingOutsideViewBox: true,
+                          height: currentScreen.height * 0.52,
+                        ),
 
                         //Login Form
                         Container(
-                            margin: const EdgeInsets.fromLTRB(40, 0, 40, 0),
-                            child: Form(
-                                child:
-                                    // 6 Columns 1 per line of the Login form and a button
-                                    Column(
-                              children: <Widget>[
-                                //Email Text
-                                ParkAInput(
-                                  icon: "WhiteProfileIcon.svg",
-                                  text: "Password",
-                                  isPassword: true,
-                                ),
-                                SizedBox(
-                                  height: 13,
-                                ),
-                                //Email Input
-                                Material(
-                                    elevation: 25,
-                                    borderRadius: BorderRadius.circular(15),
-                                    shadowColor: Colors.black,
-                                    child: TextFormField(
-                                      style: const TextStyle(
-                                          fontFamily: "Montserrat",
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black),
-                                      keyboardType: TextInputType.emailAddress,
-                                      decoration: InputDecoration(
-                                          filled: true,
-                                          isDense: true,
-                                          contentPadding: EdgeInsets.all(9),
-                                          fillColor: Color(0xFFD7D2D2),
-                                          border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(15))),
-                                    )),
-                                SizedBox(
-                                  height: 30,
-                                ),
-
-                                //Password Text
-                                Row(
-                                  children: <Widget>[
-                                    SvgPicture.asset(
-                                        "resources/images/WhiteLockIcon.svg"),
-                                    const Spacer(),
-                                    const Text("Contraseña",
-                                        style: const TextStyle(
-                                            fontFamily: "Montserrat",
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white)),
-                                    const Spacer(
-                                      flex: 7,
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 13,
-                                ),
-                                //Password Input
-                                Material(
-                                    elevation: 25,
-                                    borderRadius: BorderRadius.circular(15),
-                                    shadowColor: Colors.black,
-                                    child: TextFormField(
-                                      style: const TextStyle(
-                                          fontFamily: "Montserrat",
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black),
-                                      keyboardType: TextInputType.emailAddress,
-                                      decoration: InputDecoration(
-                                          filled: true,
-                                          isDense: true,
-                                          contentPadding: EdgeInsets.all(9),
-                                          fillColor: Color(0xFFD7D2D2),
-                                          border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(15))),
-                                    )),
-                                SizedBox(
-                                  height: 28,
-                                ),
-                                Text(
-                                  "Olvide mi Contraseña",
-                                  style: TextStyle(
-                                      fontFamily: "Montserrat",
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ),
-                                SizedBox(
-                                  height: 30,
-                                ),
-                                MaterialButton(
-                                  color: Color(0xFF63C7B2),
-                                  height: 60,
-                                  minWidth: 200,
-                                  elevation: 20,
-                                  shape: StadiumBorder(),
-                                  child: Text("Entrar",
-                                      style: TextStyle(
-                                          fontFamily: "Montserrat",
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white)),
-                                  onPressed: () => {},
-                                )
-                              ],
-                            ))),
+                          margin: EdgeInsets.fromLTRB(
+                              currentScreen.height * 0.05,
+                              0,
+                              currentScreen.height * 0.05,
+                              0),
+                          child: Column(
+                            children: [
+                              ParkAInput(
+                                icon: 'WhiteProfileIcon.svg',
+                                text: 'Correo',
+                              ),
+                              SizedBox(
+                                height: currentScreen.height * 0.005,
+                              ),
+                              ParkAInput(
+                                icon: 'WhiteProfileIcon.svg',
+                                text: 'Correo',
+                              ),
+                              SizedBox(
+                                height: currentScreen.height * 0.005,
+                              ),
+                              Text(
+                                "Olvide mi contraseña",
+                                style: TextStyle(
+                                    fontFamily: "Montserrat",
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                              SizedBox(
+                                height: currentScreen.height * 0.03,
+                              ),
+                              MaterialButton(
+                                color: Color(0xFF63C7B2),
+                                height: currentScreen.height * 0.085,
+                                minWidth: currentScreen.width * 0.5,
+                                elevation: 15,
+                                shape: StadiumBorder(),
+                                child: Text("Entrar",
+                                    style: TextStyle(
+                                        fontFamily: "Montserrat",
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white)),
+                                onPressed: () => {},
+                              ),
+                            ],
+                          ),
+                        ),
                       ]))
             ],
           ),
