@@ -90,7 +90,7 @@ class LoginPage extends StatelessWidget {
                                 color: Color(0xFF63C7B2),
                                 height: currentScreen.height * 0.085,
                                 minWidth: currentScreen.width * 0.5,
-                                elevation: 15,
+                                elevation: 20,
                                 shape: StadiumBorder(),
                                 child: Text("Entrar",
                                     style: TextStyle(
