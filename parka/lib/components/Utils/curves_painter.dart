@@ -2,14 +2,34 @@ import "package:flutter/material.dart";
 
 class WavyHeaderImage extends StatelessWidget {
   final Widget child;
+  final String type;
 
-  WavyHeaderImage({this.child});
+  WavyHeaderImage({this.child, this.type});
 
   @override
   Widget build(BuildContext context) {
+    CustomClipper selectedClipper;
+
+    switch (this.type) {
+      case 'MainLogin':
+        selectedClipper = BottomWaveClipper();
+        break;
+      case 'EmailLogin':
+        selectedClipper = BottomWaveClipper();
+        break;
+
+      case 'Registration':
+        selectedClipper = BottomWaveClipper();
+        break;
+
+      default:
+        selectedClipper = BottomWaveClipper();
+        break;
+    }
+
     return ClipPath(
       child: this.child,
-      clipper: BottomWaveClipper(),
+      clipper: selectedClipper,
     );
   }
 }
