@@ -17,16 +17,15 @@ class LoginPage extends StatelessWidget {
             Container(
           height: currentScreen.height,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               //Header Column
               Row(children: <Widget>[
                 Container(
-                    margin: EdgeInsets.fromLTRB(
-                        0, currentScreen.height * 0.1, 0, 0),
                     child: SvgPicture.asset(
-                      'resources/images/BlueCar.svg',
-                      height: currentScreen.height * 0.18,
-                    ))
+                  'resources/images/BlueCar.svg',
+                  height: currentScreen.height * 0.18,
+                ))
               ]),
               const Text(
                 "Iniciar Sesión",
@@ -56,7 +55,7 @@ class LoginPage extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.fromLTRB(
                               currentScreen.height * 0.05,
-                              0,
+                              currentScreen.height * 0.1,
                               currentScreen.height * 0.05,
                               0),
                           child: Column(

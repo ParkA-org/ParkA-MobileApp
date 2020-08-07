@@ -36,6 +36,7 @@ class ParkAInput extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
+        SizedBox(height: 5),
         Row(children: <Widget>[
           SvgPicture.asset("resources/images/$icon"),
           Spacer(
