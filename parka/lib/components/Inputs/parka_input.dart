@@ -13,16 +13,18 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ParkAInput extends StatelessWidget {
-  const ParkAInput(
+  ParkAInput(
       {Key key,
-      this.icon,
-      this.text,
+      @required this.icon,
+      @required this.text,
       this.isPassword,
       this.textColor,
-      this.textDecoration})
+      this.textDecoration,
+      this.keyboardType})
       : super(key: key);
 
   final String icon;
@@ -30,21 +32,55 @@ class ParkAInput extends StatelessWidget {
   final bool isPassword;
   final Color textColor;
   final TextDecoration textDecoration;
+  final TextInputType keyboardType;
+
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        SvgPicture.asset("resources/images/$icon"),
-        const Spacer(),
-        Text("$text",
-            style: const TextStyle(
-                fontFamily: "Montserrat",
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.white)),
-        const Spacer(
-          flex: 7,
-        )
+        SizedBox(height: 5),
+        Row(children: <Widget>[
+          SvgPicture.asset("resources/images/$icon"),
+          Spacer(
+            flex: 1,
+          ),
+          Text("$text",
+              style: (textDecoration ??
+                  TextStyle(
+                      fontFamily: "Montserrat",
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: textColor ?? Colors.white))),
+          Spacer(
+            flex: 13,
+          ),
+        ]),
+        SizedBox(
+          height: 13,
+        ),
+        Material(
+            elevation: 25,
+            borderRadius: BorderRadius.circular(15),
+            shadowColor: Colors.black,
+            child: TextFormField(
+              style: const TextStyle(
+                  fontFamily: "Montserrat",
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
+              obscureText: isPassword ?? false,
+              keyboardType: keyboardType ?? TextInputType.emailAddress,
+              decoration: InputDecoration(
+                  filled: true,
+                  isDense: true,
+                  fillColor: Color(0xFFD7D2D2),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15))),
+            )),
+        SizedBox(
+          height: 15,
+        ),
       ],
     );
   }
