@@ -68,8 +68,9 @@ class LoginPage extends StatelessWidget {
                                 height: currentScreen.height * 0.005,
                               ),
                               ParkAInput(
-                                icon: 'WhiteProfileIcon.svg',
-                                text: 'Correo',
+                                icon: 'WhiteLockIcon.svg',
+                                text: 'Contraseña',
+                                isPassword: true,
                               ),
                               SizedBox(
                                 height: currentScreen.height * 0.005,
