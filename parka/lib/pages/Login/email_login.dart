@@ -48,7 +48,7 @@ class LoginPage extends StatelessWidget {
                         SvgPicture.asset(
                           'resources/images/LoginRectangle.svg',
                           allowDrawingOutsideViewBox: true,
-                          height: currentScreen.height * 0.52,
+                          height: currentScreen.height * 0.6,
                         ),
 
                         //Login Form
@@ -62,7 +62,7 @@ class LoginPage extends StatelessWidget {
                             children: [
                               ParkAInput(
                                 icon: 'WhiteProfileIcon.svg',
-                                text: 'Correo',
+                                text: 'Correo / Usuario',
                               ),
                               SizedBox(
                                 height: currentScreen.height * 0.005,
@@ -71,6 +71,7 @@ class LoginPage extends StatelessWidget {
                                 icon: 'WhiteLockIcon.svg',
                                 text: 'Contraseña',
                                 isPassword: true,
+                                keyboardType: TextInputType.text,
                               ),
                               SizedBox(
                                 height: currentScreen.height * 0.005,
