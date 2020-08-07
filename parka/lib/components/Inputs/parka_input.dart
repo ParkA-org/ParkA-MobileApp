@@ -13,16 +13,18 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ParkAInput extends StatelessWidget {
-  const ParkAInput(
+  ParkAInput(
       {Key key,
-      this.icon,
-      this.text,
+      @required this.icon,
+      @required this.text,
       this.isPassword,
       this.textColor,
-      this.textDecoration})
+      this.textDecoration,
+      this.keyboardType})
       : super(key: key);
 
   final String icon;
@@ -30,6 +32,7 @@ class ParkAInput extends StatelessWidget {
   final bool isPassword;
   final Color textColor;
   final TextDecoration textDecoration;
+  final TextInputType keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +46,12 @@ class ParkAInput extends StatelessWidget {
             flex: 1,
           ),
           Text("$text",
-              style: const TextStyle(
-                  fontFamily: "Montserrat",
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white)),
+              style: (textDecoration ??
+                  TextStyle(
+                      fontFamily: "Montserrat",
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: textColor ?? Colors.white))),
           Spacer(
             flex: 13,
           ),
@@ -65,7 +69,8 @@ class ParkAInput extends StatelessWidget {
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.black),
-              keyboardType: TextInputType.emailAddress,
+              obscureText: isPassword ?? false,
+              keyboardType: keyboardType ?? TextInputType.emailAddress,
               decoration: InputDecoration(
                   filled: true,
                   isDense: true,
