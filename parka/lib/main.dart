@@ -1,4 +1,3 @@
-import 'package:ParkA/pages/ForgotPassword/forgot_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'routes/routes.dart';
 
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: routes,
-      initialRoute: ForgotPasswordScreen.routeName,
+      initialRoute: '/EmailLogin',
     );
   }
 }
