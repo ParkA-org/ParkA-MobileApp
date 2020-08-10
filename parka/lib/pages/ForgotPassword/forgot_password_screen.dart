@@ -1,5 +1,6 @@
 import 'package:ParkA/components/Buttons/round_button.dart';
 import 'package:ParkA/components/Buttons/transparent_button.dart';
+import 'package:ParkA/components/Utils/constants.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_svg/svg.dart';
@@ -81,6 +82,47 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     color: Color(0xFF63C7B2),
                     hasIcon: false,
                     width: 150.0,
+                    onTapHandler: () {
+                      return showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: Color(0xFF0B768C),
+                              width: 3.0,
+                            ),
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          content: Container(
+                            height: 150,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Expanded(
+                                  child: SvgPicture.asset(
+                                    'resources/images/checked.svg',
+                                    allowDrawingOutsideViewBox: true,
+                                    height: 50.0,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Center(
+                                    child: Text(
+                                      "Correo Enviado",
+                                      style: TextStyle(
+                                          color: Color(0xFF0B768C),
+                                          fontSize: 24.0,
+                                          fontFamily: "Montserrat",
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
                   TransparentButton(
                     label: "Cancelar",
@@ -99,22 +141,3 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     );
   }
 }
-
-const kInputStyle = InputDecoration(
-  hintText: '',
-  hintStyle: TextStyle(color: Colors.grey),
-  filled: true,
-  fillColor: Color(0xFFD7D2D2),
-  contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-  border: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-  ),
-  enabledBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.lightBlueAccent, width: 1.0),
-    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-  ),
-  focusedBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
-    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-  ),
-);
