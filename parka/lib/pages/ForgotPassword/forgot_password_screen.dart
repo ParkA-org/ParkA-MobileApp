@@ -61,7 +61,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               this.email = value;
                             });
                           },
-                          decoration: kInputStyle,
+                          decoration: kInputStyle.copyWith(
+                            hintText: "Email",
+                          ),
                         ),
                         SizedBox(
                           height: 50.0,
@@ -81,51 +83,15 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     label: "Enviar",
                     color: Color(0xFF63C7B2),
                     hasIcon: false,
+                    hasShadow: true,
                     width: 150.0,
                     onTapHandler: () {
-                      return showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              color: Color(0xFF0B768C),
-                              width: 3.0,
-                            ),
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          content: Container(
-                            height: 150,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Expanded(
-                                  child: SvgPicture.asset(
-                                    'resources/images/checked.svg',
-                                    allowDrawingOutsideViewBox: true,
-                                    height: 50.0,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Center(
-                                    child: Text(
-                                      "Correo Enviado",
-                                      style: TextStyle(
-                                          color: Color(0xFF0B768C),
-                                          fontSize: 24.0,
-                                          fontFamily: "Montserrat",
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
+                      return buildShowDialog(context);
                     },
                   ),
                   TransparentButton(
                     label: "Cancelar",
+                    onTapHandler: () => Navigator.pop(context),
                     buttonTextStyle: TextStyle(
                         color: Color(0xFFB3E8FF),
                         fontFamily: "Montserrat",
@@ -140,4 +106,46 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       ),
     );
   }
+}
+
+Future buildShowDialog(BuildContext context) {
+  return showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      shape: RoundedRectangleBorder(
+        side: BorderSide(
+          color: Color(0xFF0B768C),
+          width: 3.0,
+        ),
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      content: Container(
+        height: 150,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Expanded(
+              child: SvgPicture.asset(
+                'resources/images/checked.svg',
+                allowDrawingOutsideViewBox: true,
+                height: 50.0,
+              ),
+            ),
+            Expanded(
+              child: Center(
+                child: Text(
+                  "Correo Enviado",
+                  style: TextStyle(
+                      color: Color(0xFF0B768C),
+                      fontSize: 24.0,
+                      fontFamily: "Montserrat",
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    ),
+  );
 }

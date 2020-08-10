@@ -7,6 +7,7 @@ class RoundedButton extends StatelessWidget {
   final Function onTapHandler;
   final double width;
   final bool hasIcon;
+  final bool hasShadow;
 
   const RoundedButton(
       {this.color,
@@ -14,6 +15,7 @@ class RoundedButton extends StatelessWidget {
       this.label,
       this.onTapHandler,
       this.width,
+      @required this.hasShadow,
       @required this.hasIcon});
 
   @override
@@ -28,6 +30,13 @@ class RoundedButton extends StatelessWidget {
           borderRadius: BorderRadius.all(
             Radius.circular(50.0),
           ),
+          boxShadow: [
+            BoxShadow(
+              offset: Offset(0, 10.0),
+              color: this.hasShadow ? Colors.black26 : Colors.transparent,
+              blurRadius: 5.0,
+            ),
+          ],
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
