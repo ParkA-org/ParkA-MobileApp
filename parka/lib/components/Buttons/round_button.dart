@@ -5,8 +5,16 @@ class RoundedButton extends StatelessWidget {
   final String label;
   final Color color;
   final Function onTapHandler;
+  final double width;
+  final bool hasIcon;
 
-  const RoundedButton({this.color, this.icon, this.label, this.onTapHandler});
+  const RoundedButton(
+      {this.color,
+      this.icon,
+      this.label,
+      this.onTapHandler,
+      this.width,
+      @required this.hasIcon});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +22,7 @@ class RoundedButton extends StatelessWidget {
       onTap: this.onTapHandler,
       child: Container(
         height: 40.0,
-        width: 300.0,
+        width: this.width ?? 300.0,
         decoration: BoxDecoration(
           color: this.color,
           borderRadius: BorderRadius.all(
@@ -27,19 +35,22 @@ class RoundedButton extends StatelessWidget {
             children: <Widget>[
               Icon(
                 this.icon,
-                size: 16.0,
+                size: this.hasIcon ? 16.0 : 0,
                 color: Colors.white,
               ),
               SizedBox(
-                width: 15.0,
+                width: this.hasIcon ? 15.0 : 0,
               ),
-              Text(
-                this.label,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: "Montserrat",
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold),
+              Expanded(
+                child: Text(
+                  this.label,
+                  textAlign: this.hasIcon ? TextAlign.start : TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "Montserrat",
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold),
+                ),
               )
             ],
           ),
