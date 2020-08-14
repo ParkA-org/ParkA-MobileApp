@@ -1,5 +1,7 @@
+import 'package:ParkA/components/Buttons/transparent_button_test.dart';
 import 'package:ParkA/components/Cards/credit_card.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
+import 'package:ParkA/pages/PaymentInfo/Components/credit_card_info_form.dart';
 import "package:flutter/material.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -104,151 +106,50 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
                           creditCardYear: this.creditCardYear,
                           creditCardInfo: this.gradientGetter(),
                         ),
-                        Text(
-                          "Numero Tarjeta",
-                          style: TextStyle(
-                            color: Color(0xFF0B768C),
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        CreditCardNumberForm(
-                          formHandlers: [
-                            (value) {
-                              setState(() {
-                                this.creditCardNumber1 = value;
-                              });
-                            },
-                            (value) {
-                              setState(() {
-                                this.creditCardNumber2 = value;
-                              });
-                            },
-                            (value) {
-                              setState(() {
-                                this.creditCardNumber3 = value;
-                              });
-                            },
-                            (value) {
-                              setState(() {
-                                this.creditCardNumber4 = value;
-                              });
-                            },
-                          ],
-                        ),
-                        Text(
-                          "Nombre del titular",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            color: Color(0xFF0B768C),
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(8.0),
-                          height: 50.0,
-                          child: TextField(
-                            decoration: kInputStyle,
-                            onChanged: (value) {
+                        CreditCardInfoForm(
+                            creditCardNameHandler: (value) {
                               setState(() {
                                 this.fullName = value;
                               });
                             },
-                          ),
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: <Widget>[
-                                  Text(
-                                    "Valido Hasta",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Color(0xFF0B768C),
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      Expanded(
-                                        child: Container(
-                                          height: 50.0,
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextField(
-                                            decoration: kInputStyle,
-                                            keyboardType: TextInputType.number,
-                                            onChanged: (value) {
-                                              setState(() {
-                                                this.creditCardMonth = value;
-                                              });
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                      Text(
-                                        "/",
-                                        style: TextStyle(
-                                          color: Color(0xFF0B768C),
-                                          fontSize: 25.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          height: 50.0,
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextField(
-                                            decoration: kInputStyle,
-                                            keyboardType: TextInputType.number,
-                                            onChanged: (value) {
-                                              setState(() {
-                                                this.creditCardYear = value;
-                                              });
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: <Widget>[
-                                  Text(
-                                    "CVV",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Color(0xFF0B768C),
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 50.0,
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: TextField(
-                                      decoration: kInputStyle,
-                                      keyboardType: TextInputType.number,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          this.creditCardCvv = value;
-                                        });
-                                        print(this.creditCardCvv);
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        )
+                            creditCardNumberHandlers: [
+                              (value) {
+                                setState(() {
+                                  this.creditCardNumber1 = value;
+                                });
+                              },
+                              (value) {
+                                setState(() {
+                                  this.creditCardNumber2 = value;
+                                });
+                              },
+                              (value) {
+                                setState(() {
+                                  this.creditCardNumber3 = value;
+                                });
+                              },
+                              (value) {
+                                setState(() {
+                                  this.creditCardNumber4 = value;
+                                });
+                              },
+                            ],
+                            creditCardMonthHanlder: (value) {
+                              setState(() {
+                                this.creditCardMonth = value;
+                              });
+                            },
+                            creditCardYearHandler: (value) {
+                              setState(() {
+                                this.creditCardYear = value;
+                              });
+                            },
+                            creditCardCvvHandler: (value) {
+                              setState(() {
+                                this.creditCardCvv = value;
+                              });
+                              print(this.creditCardCvv);
+                            })
                       ],
                     ),
                   ),
@@ -278,123 +179,6 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
           ],
         ),
       ),
-    );
-  }
-}
-
-//TODO: Export this component to new file
-class CreditCardNumberForm extends StatelessWidget {
-  final List formHandlers;
-
-  const CreditCardNumberForm({Key key, @required this.formHandlers})
-      : super(key: key);
-
-  List<Widget> formBuilder() {
-    List<Widget> ret = new List<Widget>();
-
-    this.formHandlers.forEach((handler) {
-      ret.add(Expanded(
-        child: ParkaInputTest(
-          handler: handler,
-          inputMaxLength: 4,
-          inputType: TextInputType.number,
-        ),
-      ));
-    });
-
-    return ret;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: this.formBuilder());
-  }
-}
-
-//TODO: Export this component to new file
-class ParkaInputTest extends StatelessWidget {
-  final Function handler;
-  final int inputMaxLength;
-  final TextInputType inputType;
-
-  const ParkaInputTest({
-    this.handler,
-    this.inputMaxLength,
-    this.inputType,
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8.0),
-      height: 50.0,
-      child: TextField(
-        maxLength: this.inputMaxLength ?? TextField.noMaxLength,
-        decoration: kInputStyle,
-        keyboardType: this.inputType,
-        onChanged: this.handler,
-      ),
-    );
-  }
-}
-
-class TransparentButtonWithIcon extends StatelessWidget {
-  final String label;
-  final Color color;
-
-  const TransparentButtonWithIcon({Key key, this.label, this.color})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Icon(
-          Icons.arrow_forward_ios,
-          textDirection: TextDirection.rtl,
-          color: this.color,
-        ),
-        Text(
-          this.label,
-          style: TextStyle(
-            color: this.color,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class TransparentButtonWithRightIcon extends StatelessWidget {
-  final String label;
-  final Color color;
-  final IconData icon;
-
-  const TransparentButtonWithRightIcon(
-      {Key key, this.label, this.color, this.icon})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(
-          this.label,
-          style: TextStyle(
-            fontSize: 20.0,
-            color: this.color,
-          ),
-        ),
-        Icon(
-          this.icon,
-          size: this.icon != null ? 24.0 : 0,
-          color: this.color,
-        ),
-      ],
     );
   }
 }
