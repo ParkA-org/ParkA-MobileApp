@@ -1,3 +1,4 @@
+import 'package:ParkA/pages/FilterPage/filter_page.dart';
 import 'package:flutter/material.dart';
 import 'routes/routes.dart';
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: routes,
-      initialRoute: '/RegisterPage',
+      initialRoute: FilterPage.routeName,
     );
   }
 }
