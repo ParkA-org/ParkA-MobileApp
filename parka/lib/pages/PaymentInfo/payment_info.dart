@@ -1,8 +1,5 @@
 import 'package:ParkA/components/Buttons/transparent_button_test.dart';
-import 'package:ParkA/components/Cards/credit_card.dart';
-import 'package:ParkA/components/Utils/curves_painter.dart';
-import 'package:ParkA/pages/PaymentInfo/Components/credit_card_info_form.dart';
-import 'package:ParkA/pages/PaymentInfo/utils/utils.dart';
+import 'package:ParkA/pages/PaymentInfo/Components/credit_card_complete_info_form.dart';
 import "package:flutter/material.dart";
 
 class PaymentInfoScreen extends StatefulWidget {
@@ -21,17 +18,57 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
   String creditCardMonth = "--";
   String creditCardYear = "--";
   String creditCardCvv;
+  Map formHandlers;
 
-  Map<String, dynamic> gradientGetter() {
-    if (this.creditCardNumber1.length > 0 && this.creditCardNumber1[0] == "4")
-      return CreditCardTypes.visa.gradient;
-    else if (this.creditCardNumber1.length > 1 &&
-        this.creditCardNumber1[0] == "5") {
-      print("mastercardo");
-      return CreditCardTypes.mastercard.gradient;
-    }
-
-    return CreditCardTypes.unknown.gradient;
+  @override
+  void initState() {
+    super.initState();
+    formHandlers = {
+      "creditCardNameHandler": (value) {
+        setState(() {
+          this.fullName = value;
+        });
+      },
+      "creditCardNumberHandlers": [
+        (value) {
+          setState(() {
+            this.creditCardNumber1 = value;
+          });
+        },
+        (value) {
+          setState(() {
+            this.creditCardNumber2 = value;
+          });
+        },
+        (value) {
+          setState(() {
+            this.creditCardNumber3 = value;
+          });
+        },
+        (value) {
+          setState(() {
+            this.creditCardNumber4 = value;
+          });
+        },
+      ],
+      "creditCardMonthHanlder": (value) {
+        setState(() {
+          this.creditCardMonth = value;
+        });
+      },
+      "creditCardYearHandler": (value) {
+        setState(() {
+          this.creditCardYear = value;
+        });
+      },
+      "creditCardCvvHandler": (value) {
+        setState(
+          () {
+            this.creditCardCvv = value;
+          },
+        );
+      },
+    };
   }
 
   @override
@@ -44,86 +81,27 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Expanded(
-              flex: 7,
-              child: WavyHeaderImage(
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 50.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        TransparentButtonWithIcon(
-                          label: "Atras",
-                          color: Color(0xFF0B768C),
-                        ),
-                        Text(
-                          "Metodo de pago",
-                          style: TextStyle(
-                              color: Color(0xFF0B768C),
-                              fontSize: 32.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        CreditCardWidget(
-                          fullName: this.fullName,
-                          creditCardNumber1: this.creditCardNumber1,
-                          creditCardNumber2: this.creditCardNumber2,
-                          creditCardNumber3: this.creditCardNumber3,
-                          creditCardNumber4: this.creditCardNumber4,
-                          creditCardMonth: this.creditCardMonth,
-                          creditCardYear: this.creditCardYear,
-                          creditCardInfo: this.gradientGetter(),
-                        ),
-                        CreditCardInfoForm(
-                            creditCardNameHandler: (value) {
-                              setState(() {
-                                this.fullName = value;
-                              });
-                            },
-                            creditCardNumberHandlers: [
-                              (value) {
-                                setState(() {
-                                  this.creditCardNumber1 = value;
-                                });
-                              },
-                              (value) {
-                                setState(() {
-                                  this.creditCardNumber2 = value;
-                                });
-                              },
-                              (value) {
-                                setState(() {
-                                  this.creditCardNumber3 = value;
-                                });
-                              },
-                              (value) {
-                                setState(() {
-                                  this.creditCardNumber4 = value;
-                                });
-                              },
-                            ],
-                            creditCardMonthHanlder: (value) {
-                              setState(() {
-                                this.creditCardMonth = value;
-                              });
-                            },
-                            creditCardYearHandler: (value) {
-                              setState(() {
-                                this.creditCardYear = value;
-                              });
-                            },
-                            creditCardCvvHandler: (value) {
-                              setState(() {
-                                this.creditCardCvv = value;
-                              });
-                              print(this.creditCardCvv);
-                            })
-                      ],
-                    ),
-                  ),
+              flex: 0,
+              child: Container(
+                color: Colors.white,
+                child: TransparentButtonWithIcon(
+                  label: "Atras",
+                  color: Color(0xFF0B768C),
                 ),
+              ),
+            ),
+            Expanded(
+              flex: 7,
+              child: PaymentInfoCompleteForm(
+                fullName: fullName,
+                creditCardNumber1: creditCardNumber1,
+                creditCardNumber2: creditCardNumber2,
+                creditCardNumber3: creditCardNumber3,
+                creditCardNumber4: creditCardNumber4,
+                creditCardMonth: creditCardMonth,
+                creditCardYear: creditCardYear,
+                creditCardCvv: creditCardCvv,
+                formHandlers: formHandlers,
               ),
             ),
             Expanded(
@@ -152,23 +130,3 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
     );
   }
 }
-
-const kInputStyle = InputDecoration(
-  hintText: '',
-  hintStyle: TextStyle(color: Colors.grey),
-  filled: true,
-  counterText: "",
-  fillColor: Color(0xFFD7D2D2),
-  contentPadding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
-  border: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-  ),
-  enabledBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.lightBlueAccent, width: 1.0),
-    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-  ),
-  focusedBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
-    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-  ),
-);
