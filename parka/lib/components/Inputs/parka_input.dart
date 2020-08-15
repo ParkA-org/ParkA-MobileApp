@@ -40,19 +40,22 @@ class ParkAInput extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Expanded(
-          child: Row(children: <Widget>[
-            SvgPicture.asset("resources/images/$icon"),
-            SizedBox(
-              width: 13.0,
-            ),
-            Text("$text",
-                style: (textDecoration ??
-                    TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: textColor ?? Colors.white))),
-          ]),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 11.0),
+            child: Row(children: <Widget>[
+              SvgPicture.asset("resources/images/$icon"),
+              SizedBox(
+                width: 13.0,
+              ),
+              Text("$text",
+                  style: (textDecoration ??
+                      TextStyle(
+                          fontFamily: "Montserrat",
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: textColor ?? Colors.white))),
+            ]),
+          ),
         ),
         Expanded(
           child: Material(
