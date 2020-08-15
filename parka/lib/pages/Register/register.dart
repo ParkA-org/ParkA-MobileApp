@@ -50,7 +50,7 @@ class RegisterPage extends StatelessWidget {
               flex: 5,
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 42.0),
-                color: Colors.blue,
+                color: Color(0xFF0B768C),
                 child: Column(
                   children: [
                     Expanded(
@@ -87,15 +87,10 @@ class RegisterPage extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: MaterialButton(
-                        color: Colors.blue,
-                        child: Text("Continuar >",
-                            style: TextStyle(
-                                fontFamily: "Montserrat",
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white)),
-                        onPressed: () => {},
+                      child: TransparentButtonWithRightIcon(
+                        label: 'Continuar',
+                        icon: Icons.arrow_forward_ios,
+                        color: Colors.white,
                       ),
                     ),
                   ],
