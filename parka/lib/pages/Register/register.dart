@@ -1,5 +1,5 @@
+import 'package:ParkA/components/Buttons/transparent_button_test.dart';
 import 'package:ParkA/components/Inputs/parka_input.dart';
-import 'package:ParkA/pages/PaymentInfo/payment_info.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatelessWidget {
