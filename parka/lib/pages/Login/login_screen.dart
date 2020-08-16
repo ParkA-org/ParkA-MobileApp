@@ -53,17 +53,29 @@ class LoginScreen extends StatelessWidget {
                       color: Color(0xFF3B5998),
                       icon: FontAwesomeIcons.facebookF,
                       label: "Iniciar sesion con Facebook",
+                      hasIcon: true,
+                      hasShadow: false,
                     ),
                     RoundedButton(
                       color: Color(0xFFFF3E30),
                       icon: FontAwesomeIcons.google,
                       label: "Iniciar sesion con Google",
+                      hasIcon: true,
+                      hasShadow: false,
                     ),
                     TransparentButton(
                       label: "Iniciar Sesion con Correo",
+                      buttonTextStyle: TextStyle(
+                          color: Color(0xFF0B768C),
+                          fontFamily: "Montserrat",
+                          fontWeight: FontWeight.bold),
                     ),
                     TransparentButton(
                       label: "Registrarse",
+                      buttonTextStyle: TextStyle(
+                          color: Color(0xFF0B768C),
+                          fontFamily: "Montserrat",
+                          fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
