@@ -1,168 +1,34 @@
-import 'package:ParkA/components/Inputs/parka_input.dart';
+import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+
+import 'Components/login_form.dart';
+import 'Components/login_header.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Size currentScreen = MediaQuery.of(context).size;
+    SystemChrome.setEnabledSystemUIOverlays([]);
+
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child:
             //2 Columns -> 1: Header with image and text 2: Login Form
+
             Container(
-          height: MediaQuery.of(context).size.height,
+          height: currentScreen.height,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               //Header Column
-              Row(children: <Widget>[
-                Container(
-                    margin: const EdgeInsets.fromLTRB(0, 73, 0, 14),
-                    child: SvgPicture.asset(
-                      'resources/images/BlueCar.svg',
-                      height: 80,
-                      width: 60,
-                    ))
-              ]),
-              const Center(
-                child: const Text(
-                  "Iniciar Sesión",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontFamily: "Montserrat",
-                      fontSize: 48,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF0B768C)),
-                ),
-              ),
+              LoginHeader(screenSize: currentScreen),
               //Login Column
-              Container(
-                  margin: const EdgeInsets.fromLTRB(0, 22, 0, 0),
-                  child:
-
-                      //A Stack to have the image in the background
-
-                      Stack(
-                          alignment: Alignment.bottomCenter,
-                          children: <Widget>[
-                        SvgPicture.asset('resources/images/LoginRectangle.svg',
-                            allowDrawingOutsideViewBox: true),
-
-                        //Login Form
-                        Container(
-                            margin: const EdgeInsets.fromLTRB(40, 0, 40, 0),
-                            child: Form(
-                                child:
-                                    // 6 Columns 1 per line of the Login form and a button
-                                    Column(
-                              children: <Widget>[
-                                //Email Text
-                                ParkAInput(
-                                  icon: "WhiteProfileIcon.svg",
-                                  text: "Password",
-                                  isPassword: true,
-                                ),
-                                SizedBox(
-                                  height: 13,
-                                ),
-                                //Email Input
-                                Material(
-                                    elevation: 25,
-                                    borderRadius: BorderRadius.circular(15),
-                                    shadowColor: Colors.black,
-                                    child: TextFormField(
-                                      style: const TextStyle(
-                                          fontFamily: "Montserrat",
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black),
-                                      keyboardType: TextInputType.emailAddress,
-                                      decoration: InputDecoration(
-                                          filled: true,
-                                          isDense: true,
-                                          contentPadding: EdgeInsets.all(9),
-                                          fillColor: Color(0xFFD7D2D2),
-                                          border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(15))),
-                                    )),
-                                SizedBox(
-                                  height: 30,
-                                ),
-
-                                //Password Text
-                                Row(
-                                  children: <Widget>[
-                                    SvgPicture.asset(
-                                        "resources/images/WhiteLockIcon.svg"),
-                                    const Spacer(),
-                                    const Text("Contraseña",
-                                        style: const TextStyle(
-                                            fontFamily: "Montserrat",
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white)),
-                                    const Spacer(
-                                      flex: 7,
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 13,
-                                ),
-                                //Password Input
-                                Material(
-                                    elevation: 25,
-                                    borderRadius: BorderRadius.circular(15),
-                                    shadowColor: Colors.black,
-                                    child: TextFormField(
-                                      style: const TextStyle(
-                                          fontFamily: "Montserrat",
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black),
-                                      keyboardType: TextInputType.emailAddress,
-                                      decoration: InputDecoration(
-                                          filled: true,
-                                          isDense: true,
-                                          contentPadding: EdgeInsets.all(9),
-                                          fillColor: Color(0xFFD7D2D2),
-                                          border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(15))),
-                                    )),
-                                SizedBox(
-                                  height: 28,
-                                ),
-                                Text(
-                                  "Olvide mi Contraseña",
-                                  style: TextStyle(
-                                      fontFamily: "Montserrat",
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ),
-                                SizedBox(
-                                  height: 30,
-                                ),
-                                MaterialButton(
-                                  color: Color(0xFF63C7B2),
-                                  height: 60,
-                                  minWidth: 200,
-                                  elevation: 20,
-                                  shape: StadiumBorder(),
-                                  child: Text("Entrar",
-                                      style: TextStyle(
-                                          fontFamily: "Montserrat",
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white)),
-                                  onPressed: () => {},
-                                )
-                              ],
-                            ))),
-                      ]))
+              LoginForm(screenSize: currentScreen),
             ],
           ),
         ),
