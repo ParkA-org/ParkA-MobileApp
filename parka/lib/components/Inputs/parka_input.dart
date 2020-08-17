@@ -24,7 +24,9 @@ class ParkAInput extends StatelessWidget {
       this.isPassword,
       this.textColor,
       this.textDecoration,
-      this.keyboardType})
+      this.keyboardType,
+      this.inputHeight,
+      this.inputWidth})
       : super(key: key);
 
   final String icon;
@@ -33,6 +35,8 @@ class ParkAInput extends StatelessWidget {
   final Color textColor;
   final TextDecoration textDecoration;
   final TextInputType keyboardType;
+  final double inputHeight;
+  final double inputWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +63,8 @@ class ParkAInput extends StatelessWidget {
             height: 5,
           ),
           SizedBox(
-            height: 50,
+            height: inputHeight ?? 40,
+            width: inputWidth ?? 350,
             child: TextFormField(
               style: const TextStyle(
                   fontFamily: "Montserrat",
