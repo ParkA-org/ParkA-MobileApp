@@ -37,47 +37,47 @@ class TopWaveClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     Path path = Path();
     final double _xScaling = size.width / 375;
-    final double _yScaling = size.height / 200;
-    path.lineTo(0.0000228882 * _xScaling, 33.7588 * _yScaling);
+    final double _yScaling = size.height / 400;
+    path.lineTo(0 * _xScaling, 17.9999 * _yScaling);
     path.cubicTo(
-      0.00000727075 * _xScaling,
-      -61.5327 * _yScaling,
+      114.477 * _xScaling,
+      78.966 * _yScaling,
+      270.744 * _xScaling,
+      -42.7372 * _yScaling,
       375 * _xScaling,
-      80.0496 * _yScaling,
-      375 * _xScaling,
-      33.7588 * _yScaling,
+      18.0001 * _yScaling,
     );
     path.cubicTo(
       375 * _xScaling,
-      -12.532 * _yScaling,
+      18.0001 * _yScaling,
       375 * _xScaling,
-      210 * _yScaling,
+      516 * _yScaling,
       375 * _xScaling,
-      210 * _yScaling,
+      516 * _yScaling,
     );
     path.cubicTo(
       375 * _xScaling,
-      210 * _yScaling,
+      516 * _yScaling,
       0 * _xScaling,
-      210 * _yScaling,
+      516 * _yScaling,
       0 * _xScaling,
-      210 * _yScaling,
+      516 * _yScaling,
     );
     path.cubicTo(
       0 * _xScaling,
-      210 * _yScaling,
-      0.0000385056 * _xScaling,
-      129.05 * _yScaling,
-      0.0000228882 * _xScaling,
-      33.7588 * _yScaling,
+      516 * _yScaling,
+      0 * _xScaling,
+      17.9999 * _yScaling,
+      0 * _xScaling,
+      17.9999 * _yScaling,
     );
     path.cubicTo(
-      0.0000228882 * _xScaling,
-      33.7588 * _yScaling,
-      0.0000228882 * _xScaling,
-      33.7588 * _yScaling,
-      0.0000228882 * _xScaling,
-      33.7588 * _yScaling,
+      0 * _xScaling,
+      17.9999 * _yScaling,
+      0 * _xScaling,
+      17.9999 * _yScaling,
+      0 * _xScaling,
+      17.9999 * _yScaling,
     );
     return path;
   }

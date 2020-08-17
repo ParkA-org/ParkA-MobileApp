@@ -14,14 +14,12 @@ class LoginHeader extends StatelessWidget {
           color: Colors.white,
         ),
         Container(
-          color: Colors.transparent,
           child: Column(children: <Widget>[
             Container(
               //This is where the back button will be
               height: screenSize.height * 0.05,
             ),
             Container(
-                margin: EdgeInsets.fromLTRB(0, screenSize.height * 0.025, 0, 0),
                 alignment: Alignment.centerLeft,
                 child: SvgPicture.asset(
                   'resources/images/BlueCar.svg',

@@ -59,7 +59,7 @@ class ParkAInput extends StatelessWidget {
             height: 5,
           ),
           SizedBox(
-            height: 25,
+            height: 50,
             child: TextFormField(
               style: const TextStyle(
                   fontFamily: "Montserrat",
