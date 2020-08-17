@@ -26,7 +26,8 @@ class ParkAInput extends StatelessWidget {
       this.textDecoration,
       this.keyboardType,
       this.inputHeight,
-      this.inputWidth})
+      this.inputWidth,
+      this.textSize})
       : super(key: key);
 
   final String icon;
@@ -37,9 +38,11 @@ class ParkAInput extends StatelessWidget {
   final TextInputType keyboardType;
   final double inputHeight;
   final double inputWidth;
+  final int textSize;
 
   @override
   Widget build(BuildContext context) {
+    Size currentScreen = MediaQuery.of(context).size;
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -52,19 +55,25 @@ class ParkAInput extends StatelessWidget {
                 style: (textDecoration ??
                     TextStyle(
                         fontFamily: "Montserrat",
-                        fontSize: 14,
+                        fontSize: textSize ?? 16,
                         fontWeight: FontWeight.bold,
                         color: textColor ?? Colors.white))),
             Spacer(
-              flex: 13,
+              flex: 10,
             ),
           ]),
           SizedBox(
-            height: 5,
+            height: currentScreen.height * 0.005,
           ),
-          SizedBox(
-            height: inputHeight ?? 40,
-            width: inputWidth ?? 350,
+          Container(
+            decoration: BoxDecoration(boxShadow: [
+              BoxShadow(
+                  blurRadius: 5,
+                  offset: Offset(0, 10),
+                  color: Color(0x40000000))
+            ]),
+            height: inputHeight ?? currentScreen.height * 0.06,
+            width: inputWidth ?? currentScreen.height * 0.5,
             child: TextFormField(
               style: const TextStyle(
                   fontFamily: "Montserrat",
