@@ -6,6 +6,7 @@ import 'Components/login_header.dart';
 
 class EmailLogin extends StatelessWidget {
   const EmailLogin({Key key}) : super(key: key);
+  static const String routeName = "/EmailLogin";
 
   @override
   Widget build(BuildContext context) {

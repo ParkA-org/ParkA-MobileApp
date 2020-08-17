@@ -9,6 +9,8 @@ import 'package:image_picker/image_picker.dart';
 class ProfilePicPage extends StatefulWidget {
   ProfilePicPage({Key key}) : super(key: key);
 
+  static const String routeName = "/ProfilePicPage";
+
   @override
   _ProfilePicPageState createState() => _ProfilePicPageState();
 }

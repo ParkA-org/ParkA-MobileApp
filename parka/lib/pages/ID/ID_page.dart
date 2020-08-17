@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class IDPage extends StatefulWidget {
   IDPage({Key key}) : super(key: key);
-
+  static const String routeName = "/IDPage";
   @override
   _IDPageState createState() => _IDPageState();
 }
