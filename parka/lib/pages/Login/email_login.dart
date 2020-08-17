@@ -1,13 +1,11 @@
-import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 
 import 'Components/login_form.dart';
 import 'Components/login_header.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key key}) : super(key: key);
+class EmailLogin extends StatelessWidget {
+  const EmailLogin({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

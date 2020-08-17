@@ -41,7 +41,7 @@ class PaymentInfoCompleteForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WavyHeaderImage(
+    return WavyClipper.withTopWave(
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         color: Colors.white,

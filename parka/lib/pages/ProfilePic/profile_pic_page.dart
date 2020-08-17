@@ -1,7 +1,7 @@
 import 'dart:io';
 
+import 'package:ParkA/components/Buttons/transparent_button_test.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
-import 'package:ParkA/pages/PaymentInfo/payment_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
@@ -69,7 +69,7 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
                     height: screenSize.height * 0.4,
                   ),
                   // Buttons
-                  WavyHeaderImage(
+                  WavyClipper.withTopWave(
                     type: 'IDPage',
                     child: Container(
                         width: screenSize.width,

@@ -28,7 +28,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           children: [
             Expanded(
               flex: 4,
-              child: WavyHeaderImage(
+              child: WavyClipper.withTopWave(
                 child: Container(
                   color: Colors.white,
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),

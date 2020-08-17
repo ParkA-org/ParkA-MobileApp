@@ -9,7 +9,7 @@ class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: WavyHeaderImage(
+      child: WavyClipper.withTopWave(
         child: Container(
             color: Color(0xFF0B768C),
             child:
