@@ -1,4 +1,3 @@
-import 'package:ParkA/pages/Login/email_login.dart';
 import 'package:ParkA/pages/Register/register_page.dart';
 import 'package:flutter/material.dart';
 import 'routes/routes.dart';

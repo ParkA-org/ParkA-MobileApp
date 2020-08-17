@@ -53,48 +53,62 @@ class RegisterPage extends StatelessWidget {
             //Login Column
             Expanded(
               flex: 6,
+              // fit: FlexFit.tight,
               child: WavyClipper.withTopWave(
                 child: Container(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 50.0, horizontal: 42.0),
+                  padding: EdgeInsets.fromLTRB(42, 20, 42, 15),
                   color: Color(0xFF0B768C),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        SizedBox(
-                          height: currentScreen.height * 0.02,
+                  child: LayoutBuilder(
+                    builder:
+                        (BuildContext context, BoxConstraints constraints) {
+                      return SingleChildScrollView(
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minHeight: constraints.maxHeight,
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              SizedBox(
+                                height: currentScreen.height * 0.02,
+                              ),
+                              ParkAInput(
+                                icon: 'WhiteProfileIcon.svg',
+                                text: 'Nombres',
+                              ),
+                              ParkAInput(
+                                icon: 'WhiteProfileIcon.svg',
+                                text: 'Apellidos',
+                              ),
+                              ParkAInput(
+                                icon: 'Mail.svg',
+                                text: 'Correo/Usuario',
+                                isPassword: true,
+                              ),
+                              ParkAInput(
+                                icon: 'WhiteLockIcon.svg',
+                                text: 'Contraseña',
+                                isPassword: true,
+                              ),
+                              ParkAInput(
+                                icon: 'Lockcheck.svg',
+                                text: 'Confirmar contraseña',
+                                isPassword: true,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TransparentButtonWithRightIcon(
+                                label: 'Continuar',
+                                icon: Icons.arrow_forward_ios,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
                         ),
-                        ParkAInput(
-                          icon: 'WhiteProfileIcon.svg',
-                          text: 'Nombres',
-                        ),
-                        ParkAInput(
-                          icon: 'WhiteProfileIcon.svg',
-                          text: 'Apellidos',
-                        ),
-                        ParkAInput(
-                          icon: 'Mail.svg',
-                          text: 'Correo/Usuario',
-                          isPassword: true,
-                        ),
-                        ParkAInput(
-                          icon: 'WhiteLockIcon.svg',
-                          text: 'Contraseña',
-                          isPassword: true,
-                        ),
-                        ParkAInput(
-                          icon: 'Lockcheck.svg',
-                          text: 'Confirmar contraseña',
-                          isPassword: true,
-                        ),
-                        TransparentButtonWithRightIcon(
-                          label: 'Continuar',
-                          icon: Icons.arrow_forward_ios,
-                          color: Colors.white,
-                        ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
                 ),
               ),
