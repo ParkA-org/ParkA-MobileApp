@@ -9,12 +9,21 @@ class SearchPage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
+            flex: 1,
             child: Container(
               color: Color(0xFF0B768C),
             ),
           ),
-          Expanded(child: Container()),
-          Expanded(child: ListView()),
+          Expanded(
+            flex: 1,
+            child: Container(
+              color: Colors.red,
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: ListView(),
+          ),
         ],
       ),
     );
