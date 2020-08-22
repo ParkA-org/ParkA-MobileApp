@@ -15,6 +15,7 @@ class _FilterPageState extends State<FilterPage> {
   double rentPriceFilter = 200.0;
   int parkingVoteFilter = 4;
   List<String> parkingTypeReservation = new List();
+  List<bool> isSelected = [false, false, false];
 
   void changeParkingVoteFilter(int vote) {
     setState(() {
@@ -30,9 +31,10 @@ class _FilterPageState extends State<FilterPage> {
     );
   }
 
-  void changeParkingTypeFilter(String type, bool isSelected) {
+  void changeParkingTypeFilter(String type, int index) {
     setState(() {
-      if (isSelected) {
+      this.isSelected[index] = !this.isSelected[index];
+      if (!this.isSelected[index]) {
         this.parkingTypeReservation.remove(type);
         return;
       }
@@ -70,6 +72,7 @@ class _FilterPageState extends State<FilterPage> {
                     "Dias",
                     "Semanas",
                   ],
+                  selectedTypes: this.isSelected,
                   onPressedHandler: this.changeParkingTypeFilter,
                 ),
               ),

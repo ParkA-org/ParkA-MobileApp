@@ -4,27 +4,29 @@ class ReserveTypeSelectorWidget extends StatelessWidget {
   const ReserveTypeSelectorWidget({
     Key key,
     this.types,
+    this.selectedTypes,
     this.onPressedHandler,
   }) : super(key: key);
 
   final List<String> types;
+  final List<bool> selectedTypes;
   final Function onPressedHandler;
 
   List<Widget> _buttonsBuilder() {
     List<Widget> ret = new List<Widget>();
 
-    this.types.forEach((label) => {
-          ret.add(
-            Expanded(
-              child: FilterButton(
-                label: label,
-                isSelected: false,
-                onTapHandler: this.onPressedHandler,
-              ),
-            ),
-          )
-        });
-
+    for (int i = 0; i < this.types.length; ++i) {
+      ret.add(
+        Expanded(
+          child: FilterButton(
+            label: this.types[i],
+            isSelected: this.selectedTypes[i],
+            onTapHandler: this.onPressedHandler,
+            index: i,
+          ),
+        ),
+      );
+    }
     return ret;
   }
 
@@ -56,18 +58,20 @@ class FilterButton extends StatelessWidget {
     @required this.label,
     @required this.isSelected,
     @required this.onTapHandler,
+    @required this.index,
     Key key,
   }) : super(key: key);
 
   final String label;
   final bool isSelected;
   final Function onTapHandler;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        this.onTapHandler(this.label, this.isSelected);
+        this.onTapHandler(this.label, this.index);
       },
       child: Container(
         margin: EdgeInsets.all(8.0),
