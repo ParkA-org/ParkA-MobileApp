@@ -18,7 +18,8 @@ class ReserveTypeSelectorWidget extends StatelessWidget {
             Expanded(
               child: FilterButton(
                 label: label,
-                isSelected: true,
+                isSelected: false,
+                onTapHandler: this.onPressedHandler,
               ),
             ),
           )
@@ -66,7 +67,7 @@ class FilterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        this.onTapHandler();
+        this.onTapHandler(this.label, this.isSelected);
       },
       child: Container(
         margin: EdgeInsets.all(8.0),

@@ -14,6 +14,7 @@ class FilterPage extends StatefulWidget {
 class _FilterPageState extends State<FilterPage> {
   double rentPriceFilter = 200.0;
   int parkingVoteFilter = 4;
+  List<String> parkingTypeReservation = new List();
 
   void changeParkingVoteFilter(int vote) {
     setState(() {
@@ -27,6 +28,19 @@ class _FilterPageState extends State<FilterPage> {
         this.rentPriceFilter = price;
       },
     );
+  }
+
+  void changeParkingTypeFilter(String type, bool isSelected) {
+    setState(() {
+      if (isSelected) {
+        this.parkingTypeReservation.remove(type);
+        return;
+      }
+
+      this.parkingTypeReservation.add(type);
+    });
+
+    print(this.parkingTypeReservation);
   }
 
   @override
@@ -56,6 +70,7 @@ class _FilterPageState extends State<FilterPage> {
                     "Dias",
                     "Semanas",
                   ],
+                  onPressedHandler: this.changeParkingTypeFilter,
                 ),
               ),
               Expanded(
