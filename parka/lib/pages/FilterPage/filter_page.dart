@@ -1,3 +1,4 @@
+import 'package:ParkA/pages/FilterPage/components/buttons_reservation_type_widget.dart';
 import "package:flutter/material.dart";
 
 import 'components/slider_price_widget.dart';
@@ -49,18 +50,11 @@ class _FilterPageState extends State<FilterPage> {
                 ),
               ),
               Expanded(
-                child: Column(
-                  children: [
-                    Expanded(child: Text("Tipo dereserva")),
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Expanded(child: Text("Horas")),
-                          Expanded(child: Text("Dias")),
-                          Expanded(child: Text("Semanas")),
-                        ],
-                      ),
-                    ),
+                child: ReserveTypeSelectorWidget(
+                  types: [
+                    "Horas",
+                    "Dias",
+                    "Semanas",
                   ],
                 ),
               ),

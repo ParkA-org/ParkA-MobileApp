@@ -45,7 +45,7 @@ class StarRatingFilter extends StatelessWidget {
               "Puntuacion Minima",
               style: TextStyle(
                   color: Color(0xFF0B768C),
-                  fontSize: 32.0,
+                  fontSize: 28.0,
                   fontWeight: FontWeight.bold),
             ),
           ),
