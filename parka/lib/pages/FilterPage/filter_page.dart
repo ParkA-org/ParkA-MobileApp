@@ -1,5 +1,8 @@
 import "package:flutter/material.dart";
 
+import 'components/slider_price_widget.dart';
+import 'components/star_rating_widget.dart';
+
 class FilterPage extends StatefulWidget {
   static String routeName = "/parkSearchFilterPage";
 
@@ -9,6 +12,21 @@ class FilterPage extends StatefulWidget {
 
 class _FilterPageState extends State<FilterPage> {
   double rentPriceFilter = 200.0;
+  int parkingVoteFilter = 4;
+
+  void changeParkingVoteFilter(int vote) {
+    setState(() {
+      this.parkingVoteFilter = vote;
+    });
+  }
+
+  void changeParkingPriceFilter(double price) {
+    setState(
+      () {
+        this.rentPriceFilter = price;
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,42 +37,15 @@ class _FilterPageState extends State<FilterPage> {
           child: Column(
             children: [
               Expanded(
-                child: Column(
-                  children: [
-                    Expanded(child: Text("Puntuacion Minima")),
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Icon(Icons.star),
-                          Icon(Icons.star),
-                          Icon(Icons.star),
-                          Icon(Icons.star),
-                          Icon(Icons.star)
-                        ],
-                      ),
-                    ),
-                  ],
+                child: StarRatingFilter(
+                  rating: this.parkingVoteFilter,
+                  rateHandler: this.changeParkingVoteFilter,
                 ),
               ),
               Expanded(
-                child: Column(
-                  children: [
-                    Expanded(child: Text("Precio")),
-                    Expanded(
-                      child: Slider(
-                        value: this.rentPriceFilter,
-                        min: 50.0,
-                        max: 1000.0,
-                        onChanged: (value) {
-                          setState(
-                            () {
-                              this.rentPriceFilter = value;
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                  ],
+                child: PriceSliderWidget(
+                  rentPriceFilter: rentPriceFilter,
+                  sliderChangeHandler: changeParkingPriceFilter,
                 ),
               ),
               Expanded(
