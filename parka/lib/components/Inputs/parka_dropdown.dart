@@ -1,4 +1,5 @@
 import 'package:ParkA/components/Placeholders/parka_placeholder.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -59,7 +60,13 @@ class ParkADropdown extends StatelessWidget {
           items: options.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,
-              child: Text(value),
+              child: Container(
+                width: double.infinity,
+                child: Text(
+                  value,
+                  textAlign: TextAlign.center,
+                ),
+              ),
             );
           }).toList(),
           onChanged: onChanged ?? (value) => {},

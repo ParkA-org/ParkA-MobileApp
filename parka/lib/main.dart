@@ -1,4 +1,5 @@
-import 'package:ParkA/pages/Register/register_page.dart';
+import 'package:ParkA/pages/ID/ID_page.dart';
+
 import 'package:flutter/material.dart';
 import 'routes/routes.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: routes,
-      initialRoute: RegisterPage.routeName,
+      initialRoute: IDPage.routeName,
     );
   }
 }
