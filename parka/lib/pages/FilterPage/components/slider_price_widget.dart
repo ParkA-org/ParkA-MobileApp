@@ -9,6 +9,8 @@ class PriceSliderWidget extends StatelessWidget {
 
   final double rentPriceFilter;
   final Function sliderChangeHandler;
+  final double minSliderValue = 50.0;
+  final double maxSliderValue = 2000.0;
 
   @override
   Widget build(BuildContext context) {
@@ -20,22 +22,45 @@ class PriceSliderWidget extends StatelessWidget {
               "Precio",
               style: TextStyle(
                 color: Color(0xFF0B768C),
-                fontSize: 32.0,
+                fontSize: 28.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
         ),
         Expanded(
-          child: Slider(
-            value: this.rentPriceFilter,
-            min: 50.0,
-            max: 1000.0,
-            onChanged: (value) {
-              this.sliderChangeHandler(value);
-            },
+          child: SliderTheme(
+            data: SliderThemeData(
+              activeTrackColor: Color(0xFF0B768C),
+              thumbColor: Color(0xFF0B768C),
+            ),
+            child: Slider(
+              value: this.rentPriceFilter,
+              min: this.minSliderValue,
+              max: this.maxSliderValue,
+              onChanged: (value) {
+                this.sliderChangeHandler(value);
+              },
+            ),
           ),
         ),
+        Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "${this.minSliderValue.toInt()}\$",
+                style: TextStyle(
+                  color: Color(0xFF0B768C),
+                ),
+              ),
+              Text("${this.maxSliderValue.toInt()}\$",
+                  style: TextStyle(
+                    color: Color(0xFF0B768C),
+                  ))
+            ],
+          ),
+        )
       ],
     );
   }
