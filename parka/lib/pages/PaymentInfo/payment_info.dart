@@ -1,4 +1,5 @@
 import 'package:ParkA/components/Buttons/transparent_button_test.dart';
+import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:ParkA/pages/PaymentInfo/Components/credit_card_complete_info_form.dart';
 import "package:flutter/material.dart";
 
@@ -75,56 +76,66 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
-      backgroundColor: Color(0xFF0B768C),
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Expanded(
-              flex: 0,
-              child: Container(
-                color: Colors.white,
-                child: TransparentButtonWithIcon(
-                  label: "Atras",
-                  color: Color(0xFF0B768C),
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Expanded(
+                flex: 0,
+                child: Container(
+                  color: Colors.white,
+                  child: TransparentButtonWithIcon(
+                    label: "Atras",
+                    color: Color(0xFF0B768C),
+                  ),
                 ),
               ),
-            ),
-            Expanded(
-              flex: 7,
-              child: PaymentInfoCompleteForm(
-                fullName: fullName,
-                creditCardNumber1: creditCardNumber1,
-                creditCardNumber2: creditCardNumber2,
-                creditCardNumber3: creditCardNumber3,
-                creditCardNumber4: creditCardNumber4,
-                creditCardMonth: creditCardMonth,
-                creditCardYear: creditCardYear,
-                creditCardCvv: creditCardCvv,
-                formHandlers: formHandlers,
+              Expanded(
+                flex: 7,
+                child: PaymentInfoCompleteForm(
+                  fullName: fullName,
+                  creditCardNumber1: creditCardNumber1,
+                  creditCardNumber2: creditCardNumber2,
+                  creditCardNumber3: creditCardNumber3,
+                  creditCardNumber4: creditCardNumber4,
+                  creditCardMonth: creditCardMonth,
+                  creditCardYear: creditCardYear,
+                  creditCardCvv: creditCardCvv,
+                  formHandlers: formHandlers,
+                ),
               ),
-            ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Expanded(
-                    child: TransparentButtonWithRightIcon(
-                      label: "Continuar",
-                      color: Colors.white,
-                      icon: Icons.arrow_forward_ios,
+              Flexible(
+                flex: 2,
+                child: WavyClipper.withTopWave(
+                  child: Container(
+                    color: Color(0xFF0B768C),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Expanded(
+                          child: TransparentButtonWithRightIcon(
+                            label: "Continuar",
+                            color: Colors.white,
+                            icon: Icons.arrow_forward_ios,
+                          ),
+                        ),
+                        Expanded(
+                          child: TransparentButtonWithRightIcon(
+                            label: "Omitir",
+                            color: Color(0xFFB3E8FF),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Expanded(
-                    child: TransparentButtonWithRightIcon(
-                      label: "Omitir",
-                      color: Color(0xFFB3E8FF),
-                    ),
-                  ),
-                ],
-              ),
-            )
-          ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

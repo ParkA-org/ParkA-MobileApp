@@ -6,6 +6,7 @@ import '../../components/Utils/parkaIcons.dart';
 import '../../components/Utils/curves_painter.dart';
 
 class LoginScreen extends StatelessWidget {
+  static const String routeName = "/";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +15,7 @@ class LoginScreen extends StatelessWidget {
         children: <Widget>[
           Expanded(
             flex: 4,
-            child: WavyHeaderImage(
+            child: WavyClipper.withBottomWave(
               child: Container(
                 alignment: Alignment.centerLeft,
                 color: Color(0xFF0B768C),

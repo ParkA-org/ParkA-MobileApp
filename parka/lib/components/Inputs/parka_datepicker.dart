@@ -12,19 +12,18 @@
 // -8/3/2020 Silvio Arzeno: Widget created
 //
 
+import 'package:ParkA/components/Placeholders/parka_placeholder.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 import 'package:flutter_svg/svg.dart';
 
-class ParkAInput extends StatelessWidget {
-  ParkAInput(
+class ParkADatePicker extends StatelessWidget {
+  ParkADatePicker(
       {Key key,
       this.icon,
       @required this.text,
-      this.isPassword,
       this.textColor,
       this.textDecoration,
-      this.keyboardType,
       this.inputHeight,
       this.inputWidth,
       this.textSize})
@@ -32,10 +31,8 @@ class ParkAInput extends StatelessWidget {
 
   final String icon;
   final String text;
-  final bool isPassword;
   final Color textColor;
   final TextDecoration textDecoration;
-  final TextInputType keyboardType;
   final double inputHeight;
   final double inputWidth;
   final double textSize;
@@ -66,30 +63,25 @@ class ParkAInput extends StatelessWidget {
             height: currentScreen.height * 0.005,
           ),
           Container(
-            decoration: BoxDecoration(boxShadow: [
-              BoxShadow(
-                  blurRadius: 5,
-                  offset: Offset(0, 10),
-                  color: Color(0x40000000))
-            ]),
-            height: inputHeight ?? currentScreen.height * 0.06,
-            width: inputWidth ?? currentScreen.height * 0.5,
-            child: TextFormField(
-              style: const TextStyle(
-                  fontFamily: "Montserrat",
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
-              obscureText: isPassword ?? false,
-              keyboardType: keyboardType ?? TextInputType.emailAddress,
-              decoration: InputDecoration(
-                  filled: true,
-                  isDense: true,
-                  fillColor: Color(0xFFD7D2D2),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15))),
-            ),
-          ),
+              decoration: BoxDecoration(boxShadow: [
+                BoxShadow(
+                    blurRadius: 5,
+                    offset: Offset(0, 10),
+                    color: Color(0x40000000))
+              ]),
+              height: inputHeight ?? currentScreen.height * 0.06,
+              width: inputWidth ?? currentScreen.width * 0.75,
+              child: GestureDetector(
+                child: ParkAPlaceholder(
+                  height: inputHeight ?? currentScreen.height * 0.06,
+                  width: inputWidth ?? currentScreen.height * 0.2,
+                ),
+                onTap: () => showModalBottomSheet(
+                    context: context,
+                    builder: (context) => Container(
+                        height: currentScreen.height * 0.35,
+                        child: DatePickerWidget())),
+              )),
         ],
       ),
     );

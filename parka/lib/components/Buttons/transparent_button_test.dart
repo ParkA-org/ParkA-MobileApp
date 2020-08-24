@@ -46,6 +46,7 @@ class TransparentButtonWithRightIcon extends StatelessWidget {
           style: TextStyle(
             fontSize: 20.0,
             color: this.color,
+            fontWeight: FontWeight.bold,
           ),
         ),
         Icon(

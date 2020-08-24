@@ -12,7 +12,7 @@ class IDCard extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
     return Card(
         elevation: 20,
-        margin: EdgeInsets.all(20),
+        margin: EdgeInsets.all(10),
         shape: RoundedRectangleBorder(
             side: BorderSide(color: Color(0xFF0B768C), width: 5),
             borderRadius: BorderRadius.circular(25.0)),

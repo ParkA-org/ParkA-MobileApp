@@ -9,7 +9,7 @@ class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: WavyHeaderImage(
+      child: WavyClipper.withTopWave(
         child: Container(
             color: Color(0xFF0B768C),
             child:
@@ -19,12 +19,15 @@ class LoginForm extends StatelessWidget {
                   screenSize.height * 0.07, screenSize.height * 0.05, 0),
               child: Column(
                 children: [
+                  SizedBox(
+                    height: screenSize.height * 0.025,
+                  ),
                   ParkAInput(
                     icon: 'WhiteProfileIcon.svg',
                     text: 'Correo / Usuario',
                   ),
                   SizedBox(
-                    height: screenSize.height * 0.005,
+                    height: screenSize.height * 0.03,
                   ),
                   ParkAInput(
                     icon: 'WhiteLockIcon.svg',
@@ -33,7 +36,7 @@ class LoginForm extends StatelessWidget {
                     keyboardType: TextInputType.text,
                   ),
                   SizedBox(
-                    height: screenSize.height * 0.005,
+                    height: screenSize.height * 0.025,
                   ),
                   Text(
                     "Olvide mi contraseña",

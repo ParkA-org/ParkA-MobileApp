@@ -1,32 +1,27 @@
 import "package:flutter/material.dart";
 
-class WavyHeaderImage extends StatelessWidget {
+class WavyClipper extends StatelessWidget {
   final Widget child;
   final String type;
 
-  WavyHeaderImage({this.child, this.type});
+  const WavyClipper.withTopWave(
+      {@required this.child, this.type = "TopWaveClipper"});
+
+  const WavyClipper.withBottomWave(
+      {@required this.child, this.type = "BottomWaveClipper"});
 
   @override
   Widget build(BuildContext context) {
     CustomClipper selectedClipper;
-
-    switch (this.type) {
-      case 'MainLogin':
+    switch (type) {
+      case 'TopWaveClipper':
+        selectedClipper = TopWaveClipper();
+        break;
+      case 'BottomWaveClipper':
         selectedClipper = BottomWaveClipper();
         break;
-      case 'EmailLogin':
-        selectedClipper = BottomWaveClipper();
-        break;
-
-      case 'Registration':
-        selectedClipper = BottomWaveClipper();
-        break;
-      case 'IDPage':
-        selectedClipper = IDPageClipper();
-        break;
-
       default:
-        selectedClipper = BottomWaveClipper();
+        selectedClipper = TopWaveClipper();
         break;
     }
 
@@ -37,66 +32,12 @@ class WavyHeaderImage extends StatelessWidget {
   }
 }
 
-class IDPageClipper extends CustomClipper<Path> {
+class TopWaveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     Path path = Path();
     final double _xScaling = size.width / 375;
-    final double _yScaling = size.height / 200;
-    path.lineTo(0.0000228882 * _xScaling, 33.7588 * _yScaling);
-    path.cubicTo(
-      0.00000727075 * _xScaling,
-      -61.5327 * _yScaling,
-      375 * _xScaling,
-      80.0496 * _yScaling,
-      375 * _xScaling,
-      33.7588 * _yScaling,
-    );
-    path.cubicTo(
-      375 * _xScaling,
-      -12.532 * _yScaling,
-      375 * _xScaling,
-      210 * _yScaling,
-      375 * _xScaling,
-      210 * _yScaling,
-    );
-    path.cubicTo(
-      375 * _xScaling,
-      210 * _yScaling,
-      0 * _xScaling,
-      210 * _yScaling,
-      0 * _xScaling,
-      210 * _yScaling,
-    );
-    path.cubicTo(
-      0 * _xScaling,
-      210 * _yScaling,
-      0.0000385056 * _xScaling,
-      129.05 * _yScaling,
-      0.0000228882 * _xScaling,
-      33.7588 * _yScaling,
-    );
-    path.cubicTo(
-      0.0000228882 * _xScaling,
-      33.7588 * _yScaling,
-      0.0000228882 * _xScaling,
-      33.7588 * _yScaling,
-      0.0000228882 * _xScaling,
-      33.7588 * _yScaling,
-    );
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => true;
-}
-
-class BottomWaveClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-    final double _xScaling = size.width / 375;
-    final double _yScaling = size.height / 450;
+    final double _yScaling = size.height / 400;
     path.lineTo(0 * _xScaling, 17.9999 * _yScaling);
     path.cubicTo(
       114.477 * _xScaling,
@@ -137,6 +78,60 @@ class BottomWaveClipper extends CustomClipper<Path> {
       17.9999 * _yScaling,
       0 * _xScaling,
       17.9999 * _yScaling,
+    );
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => true;
+}
+
+class BottomWaveClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    Path path = Path();
+    final double _xScaling = size.width / 375;
+    final double _yScaling = size.height / 700;
+    path.lineTo(0 * _xScaling, -3 * _yScaling);
+    path.cubicTo(
+      0 * _xScaling,
+      -3 * _yScaling,
+      381 * _xScaling,
+      -3 * _yScaling,
+      381 * _xScaling,
+      -3 * _yScaling,
+    );
+    path.cubicTo(
+      381 * _xScaling,
+      254.746 * _yScaling,
+      381 * _xScaling,
+      399.254 * _yScaling,
+      381 * _xScaling,
+      657 * _yScaling,
+    );
+    path.cubicTo(
+      213.548 * _xScaling,
+      710.324 * _yScaling,
+      68.3344 * _xScaling,
+      567.571 * _yScaling,
+      0 * _xScaling,
+      657 * _yScaling,
+    );
+    path.cubicTo(
+      0 * _xScaling,
+      657 * _yScaling,
+      0 * _xScaling,
+      -3 * _yScaling,
+      0 * _xScaling,
+      -3 * _yScaling,
+    );
+    path.cubicTo(
+      0 * _xScaling,
+      -3 * _yScaling,
+      0 * _xScaling,
+      -3 * _yScaling,
+      0 * _xScaling,
+      -3 * _yScaling,
     );
     return path;
   }
