@@ -93,6 +93,7 @@ class _FilterPageState extends State<FilterPage> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
                         Expanded(
                           child: StarRatingFilter(
@@ -118,25 +119,7 @@ class _FilterPageState extends State<FilterPage> {
                           ),
                         ),
                         Expanded(
-                          child: Column(
-                            children: [
-                              Expanded(child: Text("Disponibilidad")),
-                              Expanded(
-                                child: Row(
-                                  children: [
-                                    Text("Fecha"),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Row(
-                                  children: [
-                                    Text("Horas"),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                          child: FilterDatePicker(),
                         ),
                         FeatureSelectorFilter(
                           renderAvaliableWidth: viewportConstraints.maxWidth,
@@ -151,7 +134,19 @@ class _FilterPageState extends State<FilterPage> {
                             "Valet Parking"
                           ],
                           iconNames: this.iconNames,
-                        )
+                        ),
+                        Expanded(
+                          flex: 0,
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: Text(
+                              "Terminos y condiciones legales",
+                              style: TextStyle(
+                                color: Color(0xFF0B768C),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -161,6 +156,37 @@ class _FilterPageState extends State<FilterPage> {
           },
         ),
       ),
+    );
+  }
+}
+
+class FilterDatePicker extends StatelessWidget {
+  const FilterDatePicker({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+          child: Text("Disponibilidad"),
+        ),
+        Expanded(
+          child: Row(
+            children: [
+              Text("Fecha"),
+            ],
+          ),
+        ),
+        Expanded(
+          child: Row(
+            children: [
+              Text("Horas"),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
