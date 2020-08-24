@@ -170,7 +170,14 @@ class FilterDatePicker extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          child: Text("Disponibilidad"),
+          child: Text(
+            "Disponibilidad",
+            style: TextStyle(
+              color: Color(0xFF0B768C),
+              fontSize: 28.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
         Expanded(
           child: Row(
