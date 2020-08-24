@@ -91,47 +91,47 @@ class BottomWaveClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     Path path = Path();
     final double _xScaling = size.width / 375;
-    final double _yScaling = size.height / 290;
-    path.lineTo(-0.480675 * _xScaling, -10 * _yScaling);
+    final double _yScaling = size.height / 700;
+    path.lineTo(0 * _xScaling, -3 * _yScaling);
     path.cubicTo(
-      146.154 * _xScaling,
-      -10 * _yScaling,
-      228.366 * _xScaling,
-      -10 * _yScaling,
-      375 * _xScaling,
-      -10 * _yScaling,
+      0 * _xScaling,
+      -3 * _yScaling,
+      381 * _xScaling,
+      -3 * _yScaling,
+      381 * _xScaling,
+      -3 * _yScaling,
     );
     path.cubicTo(
-      375 * _xScaling,
-      -10 * _yScaling,
-      375 * _xScaling,
-      146.809 * _yScaling,
-      375 * _xScaling,
-      248.172 * _yScaling,
+      381 * _xScaling,
+      254.746 * _yScaling,
+      381 * _xScaling,
+      399.254 * _yScaling,
+      381 * _xScaling,
+      657 * _yScaling,
     );
     path.cubicTo(
-      375 * _xScaling,
-      349.535 * _yScaling,
-      0.687807 * _xScaling,
-      227.675 * _yScaling,
-      -0.480675 * _xScaling,
-      248.172 * _yScaling,
+      213.548 * _xScaling,
+      710.324 * _yScaling,
+      68.3344 * _xScaling,
+      567.571 * _yScaling,
+      0 * _xScaling,
+      657 * _yScaling,
     );
     path.cubicTo(
-      -1.64916 * _xScaling,
-      268.669 * _yScaling,
-      -0.480675 * _xScaling,
-      -10 * _yScaling,
-      -0.480675 * _xScaling,
-      -10 * _yScaling,
+      0 * _xScaling,
+      657 * _yScaling,
+      0 * _xScaling,
+      -3 * _yScaling,
+      0 * _xScaling,
+      -3 * _yScaling,
     );
     path.cubicTo(
-      -0.480675 * _xScaling,
-      -10 * _yScaling,
-      -0.480675 * _xScaling,
-      -10 * _yScaling,
-      -0.480675 * _xScaling,
-      -10 * _yScaling,
+      0 * _xScaling,
+      -3 * _yScaling,
+      0 * _xScaling,
+      -3 * _yScaling,
+      0 * _xScaling,
+      -3 * _yScaling,
     );
     return path;
   }
