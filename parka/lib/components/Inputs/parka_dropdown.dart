@@ -34,8 +34,18 @@ class ParkADropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    List<Widget> children = new List<Widget>();
+    options.forEach((element) {
+      children.add(Text(element,
+          style: TextStyle(
+            fontFamily: "Montserrat",
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF0B768C),
+          )));
+    });
     return Container(
-        child: Column(children: [
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(
         children: <Widget>[
           if (textIcon != null) SvgPicture.asset("resources/images/$textIcon"),
@@ -51,26 +61,52 @@ class ParkADropdown extends StatelessWidget {
       SizedBox(
         height: 10,
       ),
-      ParkAPlaceholder(
-        height: height ?? screenSize.height * 0.025,
-        width: width ?? screenSize.width * 0.8,
-        child: DropdownButton(
-          isExpanded: true,
-          icon: buttonIcon ?? Icon(Icons.keyboard_arrow_down),
-          items: options.map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Container(
-                width: double.infinity,
-                child: Text(
-                  value,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            );
-          }).toList(),
-          onChanged: onChanged ?? (value) => {},
+      GestureDetector(
+        child: ParkAPlaceholder(
+          height: height ?? screenSize.height * 0.025,
+          width: width ?? screenSize.width * 0.8,
+          childAlignment: Alignment.centerRight,
+          child: Icon(Icons.arrow_drop_down),
         ),
+        onTap: () => {
+          showModalBottomSheet(
+            builder: (context) => Container(
+                height: screenSize.height * 0.35,
+                child: Scaffold(
+                  appBar: AppBar(
+                    backgroundColor: Colors.white,
+                    automaticallyImplyLeading: false,
+                    elevation: 0,
+                    title: Text("$text",
+                        style: TextStyle(
+                          fontFamily: "Montserrat",
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF0B768C),
+                        )),
+                    actions: [
+                      IconButton(
+                        icon: Icon(
+                          Icons.check,
+                          color: Color(0xFF0B768C),
+                          size: 32.0,
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      )
+                    ],
+                  ),
+                  body: CupertinoPicker(
+                    magnification: 1.2,
+                    itemExtent: 60,
+                    onSelectedItemChanged: (int value) {},
+                    children: children,
+                  ),
+                )),
+            context: context,
+          )
+        },
       )
     ]));
   }

@@ -42,7 +42,7 @@ class ParkADatePicker extends StatelessWidget {
     Size currentScreen = MediaQuery.of(context).size;
     return Container(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SizedBox(height: 5),
           Row(children: <Widget>[
@@ -80,7 +80,17 @@ class ParkADatePicker extends StatelessWidget {
                     context: context,
                     builder: (context) => Container(
                         height: currentScreen.height * 0.35,
-                        child: DatePickerWidget())),
+                        child: DatePickerWidget(
+                          dateFormat: 'dd/MM/yyyy',
+                          initialDateTime: DateTime(DateTime.now().year - 18),
+                          maxDateTime: DateTime.now(),
+                          pickerTheme: DateTimePickerTheme(
+                              itemTextStyle: TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF0B768C))),
+                        ))),
               )),
         ],
       ),

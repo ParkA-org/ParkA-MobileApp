@@ -45,7 +45,7 @@ class ParkAInput extends StatelessWidget {
     Size currentScreen = MediaQuery.of(context).size;
     return Container(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SizedBox(height: 5),
           Row(children: <Widget>[

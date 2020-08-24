@@ -1,3 +1,5 @@
+import 'package:ParkA/components/Buttons/round_button.dart';
+import 'package:ParkA/components/Buttons/transparent_button.dart';
 import 'package:ParkA/components/Buttons/transparent_button_test.dart';
 import 'package:ParkA/components/Cards/ID_card.dart';
 import 'package:ParkA/components/Inputs/parka_datepicker.dart';
@@ -36,10 +38,9 @@ class _IDPageState extends State<IDPage> {
             ),
             IDCard(),
             Expanded(
-              flex: 6,
               child: WavyClipper.withTopWave(
                 child: Container(
-                    padding: EdgeInsets.fromLTRB(15, 60, 80, 10),
+                    padding: EdgeInsets.fromLTRB(15, 45, 15, 15),
                     color: Color(0xFF0B768C),
                     child: LayoutBuilder(builder:
                         (BuildContext context, BoxConstraints constraints) {
@@ -54,27 +55,53 @@ class _IDPageState extends State<IDPage> {
                               ParkADropdown(
                                 text: "Tipo de Documento",
                                 options: ["Pasaporte", "Cedula"],
+                                height: currentScreen.height * 0.03,
+                                width: currentScreen.width * 0.8,
                               ),
                               ParkAInput(
                                 text: "No. de Documento",
                                 textSize: 14,
                                 inputHeight: currentScreen.height * 0.03,
+                                inputWidth: currentScreen.width * 0.8,
                               ),
                               ParkADatePicker(
                                 text: "Fecha de nacimiento",
                                 textSize: 14,
                                 inputHeight: currentScreen.height * 0.03,
+                                inputWidth: currentScreen.width * 0.8,
                               ),
-                              ParkAInput(
+                              ParkADropdown(
                                 text: "Nacionalidad",
-                                textSize: 14,
-                                inputHeight: currentScreen.height * 0.03,
+                                options: ["Italiano", "Dominicano"],
+                                height: currentScreen.height * 0.03,
+                                width: currentScreen.width * 0.8,
                               ),
-                              ParkAInput(
+                              ParkADropdown(
                                 text: "Lugar de Nacimiento",
-                                textSize: 14,
-                                inputHeight: currentScreen.height * 0.03,
+                                options: [
+                                  "Santo Domingo",
+                                  "La Romana",
+                                  "Espagetti"
+                                ],
+                                height: currentScreen.height * 0.03,
+                                width: currentScreen.width * 0.8,
                               ),
+                              TransparentButton(
+                                  label: "Continuar",
+                                  buttonTextStyle: TextStyle(
+                                      color: Color(0xFFFFFFFF),
+                                      fontFamily: "Montserrat",
+                                      fontSize: 22.0,
+                                      fontWeight: FontWeight.bold)),
+                              TransparentButton(
+                                  label: "Omitir",
+                                  //TODO Navigate forward without validation
+                                  onTapHandler: () => {},
+                                  buttonTextStyle: TextStyle(
+                                      color: Color(0xFFB3E8FF),
+                                      fontFamily: "Montserrat",
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold))
                             ],
                           ),
                         ),
