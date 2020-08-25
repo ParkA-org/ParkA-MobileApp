@@ -15,6 +15,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class ParkAInput extends StatelessWidget {
   ParkAInput(
@@ -66,9 +67,9 @@ class ParkAInput extends StatelessWidget {
             height: currentScreen.height * 0.005,
           ),
           Container(
-            decoration: BoxDecoration(boxShadow: [
+            decoration: BoxDecoration(shape: BoxShape.circle, boxShadow: [
               BoxShadow(
-                  blurRadius: 5,
+                  blurRadius: 7,
                   offset: Offset(0, 10),
                   color: Color(0x40000000))
             ]),

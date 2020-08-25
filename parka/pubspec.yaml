@@ -27,6 +27,7 @@ dependencies:
   
   flutter_svg: ^0.18.0
   flutter_cupertino_date_picker: ^1.0.26+2
+  google_maps_flutter: ^0.5.30
 
   
   image_picker: 0.6.7+4
