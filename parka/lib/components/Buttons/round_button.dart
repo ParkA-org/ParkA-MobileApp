@@ -5,8 +5,18 @@ class RoundedButton extends StatelessWidget {
   final String label;
   final Color color;
   final Function onTapHandler;
+  final double width;
+  final bool hasIcon;
+  final bool hasShadow;
 
-  const RoundedButton({this.color, this.icon, this.label, this.onTapHandler});
+  const RoundedButton(
+      {this.color,
+      this.icon,
+      this.label,
+      this.onTapHandler,
+      this.width,
+      @required this.hasShadow,
+      @required this.hasIcon});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +24,19 @@ class RoundedButton extends StatelessWidget {
       onTap: this.onTapHandler,
       child: Container(
         height: 40.0,
-        width: 300.0,
+        width: this.width ?? 300.0,
         decoration: BoxDecoration(
           color: this.color,
           borderRadius: BorderRadius.all(
             Radius.circular(50.0),
           ),
+          boxShadow: [
+            BoxShadow(
+              offset: Offset(0, 10.0),
+              color: this.hasShadow ? Colors.black26 : Colors.transparent,
+              blurRadius: 5.0,
+            ),
+          ],
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -27,19 +44,22 @@ class RoundedButton extends StatelessWidget {
             children: <Widget>[
               Icon(
                 this.icon,
-                size: 16.0,
+                size: this.hasIcon ? 16.0 : 0,
                 color: Colors.white,
               ),
               SizedBox(
-                width: 15.0,
+                width: this.hasIcon ? 15.0 : 0,
               ),
-              Text(
-                this.label,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: "Montserrat",
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold),
+              Expanded(
+                child: Text(
+                  this.label,
+                  textAlign: this.hasIcon ? TextAlign.start : TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "Montserrat",
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold),
+                ),
               )
             ],
           ),
