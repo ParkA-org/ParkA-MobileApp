@@ -26,7 +26,9 @@ class ParkADatePicker extends StatelessWidget {
       this.textDecoration,
       this.inputHeight,
       this.inputWidth,
-      this.textSize})
+      this.textSize,
+      this.onChanged,
+      this.selectedDate})
       : super(key: key);
 
   final String icon;
@@ -36,6 +38,8 @@ class ParkADatePicker extends StatelessWidget {
   final double inputHeight;
   final double inputWidth;
   final double textSize;
+  final Function onChanged;
+  final DateTime selectedDate;
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +67,7 @@ class ParkADatePicker extends StatelessWidget {
             height: currentScreen.height * 0.005,
           ),
           Container(
+              alignment: Alignment.centerLeft,
               decoration: BoxDecoration(boxShadow: [
                 BoxShadow(
                     blurRadius: 5,
@@ -73,14 +78,27 @@ class ParkADatePicker extends StatelessWidget {
               width: inputWidth ?? currentScreen.width * 0.75,
               child: GestureDetector(
                 child: ParkAPlaceholder(
+                  childAlignment: Alignment.centerLeft,
                   height: inputHeight ?? currentScreen.height * 0.06,
                   width: inputWidth ?? currentScreen.height * 0.2,
+                  child: selectedDate != null
+                      ? Text(
+                          "$selectedDate",
+                          style: const TextStyle(
+                            fontFamily: "Montserrat",
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        )
+                      : null,
                 ),
                 onTap: () => showModalBottomSheet(
                     context: context,
                     builder: (context) => Container(
                         height: currentScreen.height * 0.35,
                         child: DatePickerWidget(
+                          onConfirm: onChanged ?? {},
                           dateFormat: 'dd/MM/yyyy',
                           initialDateTime: DateTime(DateTime.now().year - 18),
                           maxDateTime: DateTime.now(),

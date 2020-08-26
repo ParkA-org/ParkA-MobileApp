@@ -1,4 +1,3 @@
-import 'package:ParkA/components/Buttons/round_button.dart';
 import 'package:ParkA/components/Buttons/transparent_button.dart';
 import 'package:ParkA/components/Buttons/transparent_button_test.dart';
 import 'package:ParkA/components/Cards/ID_card.dart';
@@ -16,9 +15,33 @@ class IDPage extends StatefulWidget {
 }
 
 class _IDPageState extends State<IDPage> {
+  String docNumber;
+
+  DateTime dateOfBirth;
+
+  String docType;
+
+  String nationality;
+
+  String placeOfBirth;
+
   @override
   Widget build(BuildContext context) {
+    dynamic onChanged(DateTime value, List<int> index) {
+      setState() {
+        this.dateOfBirth = value;
+      }
+    }
+
     Size currentScreen = MediaQuery.of(context).size;
+    List<String> nationalityOptions = ["Italiano", "Dominicano"];
+    List<String> docTypeOptions = ["Pasaporte", "Cedula"];
+    List<String> placeOfBirthOptions = [
+      "Santo Domingo",
+      "La Romana",
+      "Espagetti"
+    ];
+
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -36,7 +59,13 @@ class _IDPageState extends State<IDPage> {
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF0B768C)),
             ),
-            IDCard(),
+            IDCard(
+              docNumber: this.docNumber,
+              dateOfBirth: this.dateOfBirth,
+              docType: this.docType,
+              nationality: this.nationality,
+              placeOfBirth: this.placeOfBirth,
+            ),
             Expanded(
               child: WavyClipper.withTopWave(
                 child: Container(
@@ -53,39 +82,59 @@ class _IDPageState extends State<IDPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               ParkADropdown(
-                                text: "Tipo de Documento",
-                                options: ["Pasaporte", "Cedula"],
-                                height: currentScreen.height * 0.03,
-                                width: currentScreen.width * 0.8,
-                              ),
+                                  text: "Tipo de Documento",
+                                  selectedItem: docType,
+                                  options: docTypeOptions,
+                                  height: currentScreen.height * 0.03,
+                                  width: currentScreen.width * 0.8,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      this.docType = docTypeOptions[value];
+                                    });
+                                  }),
                               ParkAInput(
                                 text: "No. de Documento",
                                 textSize: 14,
                                 inputHeight: currentScreen.height * 0.03,
                                 inputWidth: currentScreen.width * 0.8,
+                                onChanged: (value) {
+                                  setState(() {
+                                    this.docNumber = value;
+                                  });
+                                },
                               ),
                               ParkADatePicker(
                                 text: "Fecha de nacimiento",
                                 textSize: 14,
+                                selectedDate: this.dateOfBirth,
                                 inputHeight: currentScreen.height * 0.03,
                                 inputWidth: currentScreen.width * 0.8,
+                                onChanged: onChanged,
                               ),
                               ParkADropdown(
-                                text: "Nacionalidad",
-                                options: ["Italiano", "Dominicano"],
-                                height: currentScreen.height * 0.03,
-                                width: currentScreen.width * 0.8,
-                              ),
+                                  text: "Nacionalidad",
+                                  selectedItem: nationality,
+                                  options: nationalityOptions,
+                                  height: currentScreen.height * 0.03,
+                                  width: currentScreen.width * 0.8,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      this.nationality =
+                                          nationalityOptions[value];
+                                    });
+                                  }),
                               ParkADropdown(
-                                text: "Lugar de Nacimiento",
-                                options: [
-                                  "Santo Domingo",
-                                  "La Romana",
-                                  "Espagetti"
-                                ],
-                                height: currentScreen.height * 0.03,
-                                width: currentScreen.width * 0.8,
-                              ),
+                                  text: "Lugar de Nacimiento",
+                                  selectedItem: placeOfBirth,
+                                  options: placeOfBirthOptions,
+                                  height: currentScreen.height * 0.03,
+                                  width: currentScreen.width * 0.8,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      this.placeOfBirth =
+                                          placeOfBirthOptions[value];
+                                    });
+                                  }),
                               TransparentButton(
                                   label: "Continuar",
                                   buttonTextStyle: TextStyle(

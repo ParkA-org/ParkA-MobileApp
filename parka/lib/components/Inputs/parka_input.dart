@@ -27,7 +27,8 @@ class ParkAInput extends StatelessWidget {
       this.keyboardType,
       this.inputHeight,
       this.inputWidth,
-      this.textSize})
+      this.textSize,
+      this.onChanged})
       : super(key: key);
 
   final String icon;
@@ -39,6 +40,7 @@ class ParkAInput extends StatelessWidget {
   final double inputHeight;
   final double inputWidth;
   final double textSize;
+  final Function onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +77,7 @@ class ParkAInput extends StatelessWidget {
             height: inputHeight ?? currentScreen.height * 0.06,
             width: inputWidth ?? currentScreen.height * 0.5,
             child: TextFormField(
+              onChanged: onChanged ?? {},
               style: const TextStyle(
                   fontFamily: "Montserrat",
                   fontSize: 16,
@@ -85,7 +88,7 @@ class ParkAInput extends StatelessWidget {
               decoration: InputDecoration(
                   filled: true,
                   isDense: true,
-                  fillColor: Color(0xFFD7D2D2),
+                  fillColor: Colors.white,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15))),
             ),

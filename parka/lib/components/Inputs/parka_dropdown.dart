@@ -15,21 +15,23 @@ class ParkADropdown extends StatelessWidget {
   final TextDecoration textDecoration;
   final TextDecoration inputTextDecoration;
   final int textSize;
+  final String selectedItem;
 
-  const ParkADropdown(
-      {Key key,
-      this.textIcon,
-      this.buttonIcon,
-      @required this.text,
-      @required this.options,
-      this.height,
-      this.width,
-      this.onChanged,
-      this.textDecoration,
-      this.inputTextDecoration,
-      this.textColor,
-      this.textSize})
-      : super(key: key);
+  const ParkADropdown({
+    Key key,
+    this.textIcon,
+    this.buttonIcon,
+    @required this.text,
+    @required this.options,
+    this.height,
+    this.width,
+    this.selectedItem,
+    this.onChanged,
+    this.textDecoration,
+    this.inputTextDecoration,
+    this.textColor,
+    this.textSize,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -63,11 +65,23 @@ class ParkADropdown extends StatelessWidget {
       ),
       GestureDetector(
         child: ParkAPlaceholder(
-          height: height ?? screenSize.height * 0.025,
-          width: width ?? screenSize.width * 0.8,
-          childAlignment: Alignment.centerRight,
-          child: Icon(Icons.arrow_drop_down),
-        ),
+            height: height ?? screenSize.height * 0.025,
+            width: width ?? screenSize.width * 0.8,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  selectedItem == null ? "" : "$selectedItem",
+                  style: const TextStyle(
+                    fontFamily: "Montserrat",
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                Icon(Icons.arrow_drop_down)
+              ],
+            )),
         onTap: () => {
           showModalBottomSheet(
             builder: (context) => Container(
@@ -98,9 +112,10 @@ class ParkADropdown extends StatelessWidget {
                     ],
                   ),
                   body: CupertinoPicker(
-                    magnification: 1.2,
+                    scrollController: FixedExtentScrollController(
+                        initialItem: options.indexOf("$selectedItem")),
                     itemExtent: 60,
-                    onSelectedItemChanged: (int value) {},
+                    onSelectedItemChanged: onChanged ?? (int value) {},
                     children: children,
                   ),
                 )),

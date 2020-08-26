@@ -3,8 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class IDCard extends StatelessWidget {
+  final String docNumber;
+
+  final DateTime dateOfBirth;
+
+  final String docType;
+
+  final String nationality;
+
+  final String placeOfBirth;
+
   const IDCard({
     Key key,
+    this.docNumber,
+    this.dateOfBirth,
+    this.nationality,
+    this.placeOfBirth,
+    this.docType,
   }) : super(key: key);
 
   @override
@@ -36,10 +51,19 @@ class IDCard extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
-                    ParkAPlaceholder(
-                      height: screenSize.height * 0.025,
-                      width: screenSize.width * 0.6,
-                    ),
+                    docNumber == null || docNumber.isEmpty
+                        ? ParkAPlaceholder(
+                            height: screenSize.height * 0.025,
+                            width: screenSize.width * 0.6,
+                          )
+                        : Text(
+                            "$docNumber",
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                color: Colors.black,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold),
+                          ),
                   ],
                 ),
               ],

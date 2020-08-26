@@ -21,6 +21,7 @@ class ParkAPlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
       alignment: childAlignment ?? Alignment.center,
       height: height,
       width: width,
