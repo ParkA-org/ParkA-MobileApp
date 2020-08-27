@@ -1,4 +1,7 @@
+import 'package:ParkA/components/FilterResultTile/filter_result_tile.dart';
 import 'package:flutter/material.dart';
+import 'Components/favorite_place_button.dart';
+import 'Components/search_section.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key key}) : super(key: key);
@@ -6,25 +9,33 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            flex: 1,
-            child: Container(
-              color: Color(0xFF0B768C),
-            ),
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Color(0xFF0B768C),
+      body: SafeArea(
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                flex: 1,
+                child: SearchSection(),
+              ),
+              Flexible(
+                fit: FlexFit.loose,
+                child: FavoritePlaceButton(),
+              ),
+              Expanded(
+                flex: 3,
+                child: ListView(
+                  children: [
+                    FilterResultTile(),
+                  ],
+                ),
+              ),
+            ],
           ),
-          Expanded(
-            flex: 1,
-            child: Container(
-              color: Colors.red,
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: ListView(),
-          ),
-        ],
+        ),
       ),
     );
   }
