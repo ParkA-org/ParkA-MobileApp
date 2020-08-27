@@ -1,6 +1,4 @@
-import 'package:ParkA/pages/ForgotPassword/forgot_password_screen.dart';
-import 'package:ParkA/pages/ID/ID_page.dart';
-import 'package:ParkA/pages/MapPage/map_page.dart';
+import 'package:ParkA/pages/MapPage/maps_page.dart';
 
 import 'package:flutter/material.dart';
 import 'routes/routes.dart';
@@ -19,7 +17,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: routes,
-      initialRoute: IDPage.routeName,
+      initialRoute: MapPage.routeName,
     );
   }
 }
