@@ -1,3 +1,4 @@
+import 'package:ParkA/pages/FilterPage/components/filter_date_widget.dart';
 import 'package:ParkA/pages/FilterPage/components/buttons_reservation_type_widget.dart';
 import 'package:ParkA/pages/FilterPage/components/featureFilterWidget/feature_filter_widget.dart';
 import "package:flutter/material.dart";
@@ -34,6 +35,9 @@ class _FilterPageState extends State<FilterPage> {
     false,
     false
   ];
+  String selectedDate = "";
+  String minHour = '';
+  String maxHour = '';
 
   void changeParkingVoteFilter(int vote) {
     setState(() {
@@ -78,6 +82,29 @@ class _FilterPageState extends State<FilterPage> {
     print(this.parkingFeatureList);
   }
 
+  void parseDate(DateTime date) {
+    String year = date.toString().split(" ")[0].split("-")[0];
+    String month = date.toString().split(" ")[0].split("-")[1];
+    String day = date.toString().split(" ")[0].split("-")[2];
+    setState(() {
+      this.selectedDate = "$day $month $year";
+    });
+  }
+
+  void changeParkingMinHourFilter(String hour) {
+    String filterhour = hour.length == 2 ? hour + ":" : hour;
+    setState(() {
+      this.minHour = filterhour;
+    });
+    print(this.minHour);
+  }
+
+  void changeParkingMaxHourFilter(String hour) {
+    setState(() {
+      this.maxHour = hour.length == 2 ? "$hour:" : hour;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,7 +146,14 @@ class _FilterPageState extends State<FilterPage> {
                           ),
                         ),
                         Expanded(
-                          child: FilterDatePicker(),
+                          child: FilterDatePicker(
+                            date: this.selectedDate,
+                            datePickerHandler: this.parseDate,
+                            minHourPickerHandler:
+                                this.changeParkingMinHourFilter,
+                            maxHourPickerHandler:
+                                this.changeParkingMaxHourFilter,
+                          ),
                         ),
                         FeatureSelectorFilter(
                           renderAvaliableWidth: viewportConstraints.maxWidth,
@@ -156,44 +190,6 @@ class _FilterPageState extends State<FilterPage> {
           },
         ),
       ),
-    );
-  }
-}
-
-class FilterDatePicker extends StatelessWidget {
-  const FilterDatePicker({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: Text(
-            "Disponibilidad",
-            style: TextStyle(
-              color: Color(0xFF0B768C),
-              fontSize: 28.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Expanded(
-          child: Row(
-            children: [
-              Text("Fecha"),
-            ],
-          ),
-        ),
-        Expanded(
-          child: Row(
-            children: [
-              Text("Horas"),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }
