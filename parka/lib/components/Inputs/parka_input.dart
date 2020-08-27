@@ -19,12 +19,15 @@ import 'package:flutter_svg/svg.dart';
 class ParkAInput extends StatelessWidget {
   ParkAInput(
       {Key key,
-      @required this.icon,
+      this.icon,
       @required this.text,
       this.isPassword,
       this.textColor,
       this.textDecoration,
-      this.keyboardType})
+      this.keyboardType,
+      this.inputHeight,
+      this.inputWidth,
+      this.textSize})
       : super(key: key);
 
   final String icon;
@@ -33,6 +36,9 @@ class ParkAInput extends StatelessWidget {
   final Color textColor;
   final TextDecoration textDecoration;
   final TextInputType keyboardType;
+  final double inputHeight;
+  final double inputWidth;
+  final double textSize;
 
   @override
   Widget build(BuildContext context) {
