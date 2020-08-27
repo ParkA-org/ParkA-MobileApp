@@ -1,6 +1,7 @@
 import 'package:ParkA/pages/FilterPage/components/filter_date_widget.dart';
 import 'package:ParkA/pages/FilterPage/components/buttons_reservation_type_widget.dart';
 import 'package:ParkA/pages/FilterPage/components/featureFilterWidget/feature_filter_widget.dart';
+import 'package:ParkA/pages/FilterPage/components/top_bar.dart';
 import "package:flutter/material.dart";
 
 import 'components/slider_price_widget.dart';
@@ -14,8 +15,11 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPageState extends State<FilterPage> {
-  double rentPriceFilter = 200.0;
+  double minRentPriceFilter = 50.0;
+  double maxRentPriceFilter = 2000.0;
+  double rentPriceFilter;
   int parkingVoteFilter = 4;
+
   List<String> parkingTypeReservation = new List();
   List<String> parkingFeatureList = new List();
   List<bool> isSelectedParkingType = [false, false, false];
@@ -38,6 +42,12 @@ class _FilterPageState extends State<FilterPage> {
   String selectedDate = "";
   String minHour = '';
   String maxHour = '';
+
+  @override
+  void initState() {
+    super.initState();
+    this.rentPriceFilter = (minRentPriceFilter + maxRentPriceFilter) / 2;
+  }
 
   void changeParkingVoteFilter(int vote) {
     setState(() {
@@ -106,7 +116,6 @@ class _FilterPageState extends State<FilterPage> {
   }
 
   void resetFilters() {
-    print("entered");
     setState(() {
       this.selectedDate = "";
       this.parkingTypeReservation.clear();
@@ -142,32 +151,8 @@ class _FilterPageState extends State<FilterPage> {
                       children: <Widget>[
                         Expanded(
                           flex: 0,
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Filtros",
-                                  style: TextStyle(
-                                    color: Color(0xFF0B768C),
-                                    fontSize: 24.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                GestureDetector(
-                                  child: Text(
-                                    "Reiniciar",
-                                    style: TextStyle(
-                                      color: Color(0xFFED9393),
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  onTap: this.resetFilters,
-                                )
-                              ],
-                            ),
+                          child: FilterPageTopBar(
+                            onTapHandler: this.resetFilters,
                           ),
                         ),
                         Expanded(
@@ -179,6 +164,8 @@ class _FilterPageState extends State<FilterPage> {
                         Expanded(
                           child: PriceSliderWidget(
                             rentPriceFilter: rentPriceFilter,
+                            minSliderValue: this.minRentPriceFilter,
+                            maxSliderValue: this.maxRentPriceFilter,
                             sliderChangeHandler: changeParkingPriceFilter,
                           ),
                         ),

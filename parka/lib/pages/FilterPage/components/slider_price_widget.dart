@@ -5,12 +5,14 @@ class PriceSliderWidget extends StatelessWidget {
     Key key,
     @required this.rentPriceFilter,
     @required this.sliderChangeHandler,
+    @required this.maxSliderValue,
+    @required this.minSliderValue,
   }) : super(key: key);
 
   final double rentPriceFilter;
   final Function sliderChangeHandler;
-  final double minSliderValue = 50.0;
-  final double maxSliderValue = 2000.0;
+  final double minSliderValue;
+  final double maxSliderValue;
 
   @override
   Widget build(BuildContext context) {
