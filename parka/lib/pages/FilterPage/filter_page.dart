@@ -105,6 +105,24 @@ class _FilterPageState extends State<FilterPage> {
     });
   }
 
+  void resetFilters() {
+    print("entered");
+    setState(() {
+      this.selectedDate = "";
+      this.parkingTypeReservation.clear();
+      this.parkingFeatureList.clear();
+      this.minHour = "";
+      this.maxHour = "";
+      for (int i = 0; i < this.isSelectedParkingType.length; i++) {
+        this.isSelectedParkingType[i] = false;
+      }
+
+      for (int i = 0; i < this.isSelectedParkingFeature.length; i++) {
+        this.isSelectedParkingFeature[i] = false;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,6 +140,36 @@ class _FilterPageState extends State<FilterPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
+                        Expanded(
+                          flex: 0,
+                          child: Container(
+                            margin: EdgeInsets.symmetric(vertical: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Filtros",
+                                  style: TextStyle(
+                                    color: Color(0xFF0B768C),
+                                    fontSize: 24.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  child: Text(
+                                    "Reiniciar",
+                                    style: TextStyle(
+                                      color: Color(0xFFED9393),
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  onTap: this.resetFilters,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
                         Expanded(
                           child: StarRatingFilter(
                             rating: this.parkingVoteFilter,

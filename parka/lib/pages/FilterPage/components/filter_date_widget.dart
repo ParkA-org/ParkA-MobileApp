@@ -45,27 +45,27 @@ class FilterDatePicker extends StatelessWidget {
               ),
               Expanded(
                 flex: 4,
-                child: Container(
-                  margin: EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    color: Color(0xFFD7D2D2),
-                  ),
-                  child: GestureDetector(
+                child: GestureDetector(
+                  child: Container(
+                    margin: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      color: Color(0xFFD7D2D2),
+                    ),
                     child: Center(
                       child: Text(
                         this.date,
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    onTap: () => showModalBottomSheet(
-                      context: context,
-                      builder: (context) => Container(
-                        height: 300,
-                        child: DatePickerWidget(
-                          onConfirm: (dateTime, selectedIndex) =>
-                              {datePickerHandler(dateTime)},
-                        ),
+                  ),
+                  onTap: () => showModalBottomSheet(
+                    context: context,
+                    builder: (context) => Container(
+                      height: 300,
+                      child: DatePickerWidget(
+                        onConfirm: (dateTime, selectedIndex) =>
+                            {datePickerHandler(dateTime)},
                       ),
                     ),
                   ),
