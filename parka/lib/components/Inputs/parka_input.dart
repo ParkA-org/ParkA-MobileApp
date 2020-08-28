@@ -42,51 +42,56 @@ class ParkAInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Expanded(
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 11.0),
-            child: Row(children: <Widget>[
-              SvgPicture.asset("resources/images/$icon"),
-              SizedBox(
-                width: 13.0,
-              ),
-              Text("$text",
-                  style: (textDecoration ??
-                      TextStyle(
-                          fontFamily: "Montserrat",
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: textColor ?? Colors.white))),
-            ]),
+    Size currentScreen = MediaQuery.of(context).size;
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(height: 5),
+          Row(children: <Widget>[
+            if (icon != null) SvgPicture.asset("resources/images/$icon"),
+            if (icon != null) Spacer(),
+            Text("$text",
+                style: (textDecoration ??
+                    TextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: textSize ?? 16,
+                        fontWeight: FontWeight.bold,
+                        color: textColor ?? Colors.white))),
+            Spacer(
+              flex: 10,
+            ),
+          ]),
+          SizedBox(
+            height: currentScreen.height * 0.005,
           ),
-        ),
-        Expanded(
-          child: Material(
-              color: Colors.transparent,
-              elevation: 25,
-              borderRadius: BorderRadius.circular(15),
-              shadowColor: Colors.black,
-              child: TextFormField(
-                onChanged: (value) => {},
-                style: const TextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-                obscureText: isPassword ?? false,
-                keyboardType: keyboardType ?? TextInputType.emailAddress,
-                decoration: InputDecoration(
-                    filled: true,
-                    isDense: true,
-                    fillColor: Color(0xFFD7D2D2),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15))),
-              )),
-        ),
-      ],
+          Container(
+            decoration: BoxDecoration(boxShadow: [
+              BoxShadow(
+                  blurRadius: 5,
+                  offset: Offset(0, 10),
+                  color: Color(0x40000000))
+            ]),
+            height: inputHeight ?? currentScreen.height * 0.06,
+            width: inputWidth ?? currentScreen.height * 0.5,
+            child: TextFormField(
+              style: const TextStyle(
+                  fontFamily: "Montserrat",
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
+              obscureText: isPassword ?? false,
+              keyboardType: keyboardType ?? TextInputType.emailAddress,
+              decoration: InputDecoration(
+                  filled: true,
+                  isDense: true,
+                  fillColor: Color(0xFFD7D2D2),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15))),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
