@@ -1,3 +1,4 @@
+import 'package:ParkA/pages/FilterPage/filter_page.dart';
 import 'package:ParkA/pages/ID/ID_page.dart';
 import 'package:ParkA/pages/ForgotPassword/forgot_password_screen.dart';
 import 'package:ParkA/pages/Login/email_login.dart';
@@ -16,4 +17,5 @@ Map<String, WidgetBuilder> routes = {
   ForgotPasswordScreen.routeName: (BuildContext context) =>
       ForgotPasswordScreen(),
   RegisterPage.routeName: (BuildContext context) => RegisterPage(),
+  FilterPage.routeName: (BuildContext context) => FilterPage()
 };

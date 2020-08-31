@@ -1,3 +1,4 @@
+import 'package:ParkA/pages/FilterPage/filter_page.dart';
 import 'package:ParkA/pages/ForgotPassword/forgot_password_screen.dart';
 import 'package:ParkA/pages/ID/ID_page.dart';
 import 'package:ParkA/pages/Login/Components/login_form.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: routes,
-      initialRoute: ForgotPasswordScreen.routeName,
+      initialRoute: FilterPage.routeName,
     );
   }
 }

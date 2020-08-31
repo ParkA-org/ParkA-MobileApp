@@ -1,3 +1,4 @@
+import 'package:ParkA/components/Utils/constants.dart';
 import "package:flutter/material.dart";
 
 import 'credit_card_number_form.dart';
@@ -46,7 +47,7 @@ class CreditCardInfoForm extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           height: 50.0,
           child: TextField(
-            decoration: kInputStyle,
+            decoration: kInputStyleSlim,
             onChanged: this.creditCardNameHandler,
           ),
         ),
@@ -72,7 +73,7 @@ class CreditCardInfoForm extends StatelessWidget {
                           height: 50.0,
                           padding: const EdgeInsets.all(8.0),
                           child: TextField(
-                              decoration: kInputStyle,
+                              decoration: kInputStyleSlim,
                               keyboardType: TextInputType.number,
                               onChanged: this.creditCardMonthHanlder),
                         ),
@@ -90,7 +91,7 @@ class CreditCardInfoForm extends StatelessWidget {
                           height: 50.0,
                           padding: const EdgeInsets.all(8.0),
                           child: TextField(
-                            decoration: kInputStyle,
+                            decoration: kInputStyleSlim,
                             keyboardType: TextInputType.number,
                             onChanged: this.creditCardYearHandler,
                           ),
@@ -118,7 +119,7 @@ class CreditCardInfoForm extends StatelessWidget {
                     height: 50.0,
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
-                      decoration: kInputStyle,
+                      decoration: kInputStyleSlim,
                       keyboardType: TextInputType.number,
                       onChanged: this.creditCardCvvHandler,
                     ),
@@ -132,23 +133,3 @@ class CreditCardInfoForm extends StatelessWidget {
     );
   }
 }
-
-const kInputStyle = InputDecoration(
-  hintText: '',
-  hintStyle: TextStyle(color: Colors.grey),
-  filled: true,
-  counterText: "",
-  fillColor: Color(0xFFD7D2D2),
-  contentPadding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
-  border: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-  ),
-  enabledBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.lightBlueAccent, width: 1.0),
-    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-  ),
-  focusedBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
-    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-  ),
-);
