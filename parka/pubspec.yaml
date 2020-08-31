@@ -50,6 +50,8 @@ flutter:
   uses-material-design: true
   assets:
     - resources/images/
+    - resources/images/features/
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -71,7 +73,6 @@ flutter:
     - family: ParkaIcons
       fonts:
         - asset: resources/images/carIcon.ttf
-
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
