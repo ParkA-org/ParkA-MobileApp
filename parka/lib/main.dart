@@ -19,7 +19,7 @@ void main() {
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
-  ParkaGraphqlClient parkaGraphqlClient = new ParkaGraphqlClient();
+  final ParkaGraphqlClient parkaGraphqlClient = new ParkaGraphqlClient();
 
   @override
   Widget build(BuildContext context) {
