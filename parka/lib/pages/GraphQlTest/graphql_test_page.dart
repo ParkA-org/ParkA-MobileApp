@@ -31,6 +31,34 @@ class _GraphqlTestScreenState extends State<GraphqlTestScreen> {
       print(value.data);
       return value;
     });
+
+    String createColor = r'''
+    mutation($input:createColorExteriorInput){
+  createColorExterior(input:$input){
+    colorExterior{
+      name
+    }
+  }
+}
+    ''';
+
+    //this way you create a MutationOptions instance to send your mutation
+    //with your variables
+    MutationOptions mutationOptions = MutationOptions(
+        documentNode: gql(createColor),
+        variables: <String, dynamic>{
+          "input": {
+            "data": {"name": "blanco pero desde flutter"}
+          }
+        });
+
+    //this way you send your mutation to the api
+    final QueryResult mutationResult = await ParkaGraphqlClient.graphQlClient
+        .mutate(mutationOptions)
+        .then((value) {
+      print(value.data);
+      return value;
+    });
   }
 
   @override
