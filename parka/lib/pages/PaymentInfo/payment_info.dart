@@ -88,6 +88,9 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
                   child: TransparentButtonWithIcon(
                     label: "Atras",
                     color: Color(0xFF0B768C),
+                    onTapHandler: () {
+                      Navigator.pop(context);
+                    },
                   ),
                 ),
               ),

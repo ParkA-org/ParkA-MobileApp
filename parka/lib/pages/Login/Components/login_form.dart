@@ -1,5 +1,6 @@
 import 'package:ParkA/components/Inputs/parka_input.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
+import 'package:ParkA/pages/ForgotPassword/forgot_password_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatelessWidget {
@@ -38,13 +39,19 @@ class LoginForm extends StatelessWidget {
                   SizedBox(
                     height: screenSize.height * 0.025,
                   ),
-                  Text(
-                    "Olvide mi contraseña",
-                    style: TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, ForgotPasswordScreen.routeName);
+                    },
+                    child: Text(
+                      "Olvide mi contraseña",
+                      style: TextStyle(
+                          fontFamily: "Montserrat",
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
                   ),
                   SizedBox(
                     height: screenSize.height * 0.03,
