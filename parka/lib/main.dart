@@ -1,4 +1,3 @@
-
 import 'package:ParkA/components/Utils/graphql/graphql_client.dart';
 import 'package:ParkA/pages/FilterPage/filter_page.dart';
 import 'package:ParkA/pages/ForgotPassword/forgot_password_screen.dart';
@@ -31,7 +30,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: routes,
-      initialRoute: FilterPage.routeName,
+      initialRoute: LoginScreen.routeName,
     );
   }
 }

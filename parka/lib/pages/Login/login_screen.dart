@@ -1,5 +1,7 @@
 import 'package:ParkA/components/Buttons/round_button.dart';
 import 'package:ParkA/components/Buttons/transparent_button.dart';
+import 'package:ParkA/pages/Login/email_login.dart';
+import 'package:ParkA/pages/Register/register_page.dart';
 import "package:flutter/material.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../components/Utils/parkaIcons.dart';
@@ -70,6 +72,9 @@ class LoginScreen extends StatelessWidget {
                           color: Color(0xFF0B768C),
                           fontFamily: "Montserrat",
                           fontWeight: FontWeight.bold),
+                      onTapHandler: () {
+                        Navigator.pushNamed(context, EmailLogin.routeName);
+                      },
                     ),
                     TransparentButton(
                       label: "Registrarse",
@@ -77,6 +82,9 @@ class LoginScreen extends StatelessWidget {
                           color: Color(0xFF0B768C),
                           fontFamily: "Montserrat",
                           fontWeight: FontWeight.bold),
+                      onTapHandler: () {
+                        Navigator.pushNamed(context, RegisterPage.routeName);
+                      },
                     ),
                   ],
                 ),
