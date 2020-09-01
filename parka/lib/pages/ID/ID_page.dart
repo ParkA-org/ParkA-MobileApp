@@ -6,6 +6,7 @@ import 'package:ParkA/components/Inputs/parka_dropdown.dart';
 import 'package:ParkA/components/Inputs/parka_input.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class IDPage extends StatefulWidget {
   IDPage({Key key}) : super(key: key);
@@ -28,9 +29,9 @@ class _IDPageState extends State<IDPage> {
   @override
   Widget build(BuildContext context) {
     dynamic onChanged(DateTime value, List<int> index) {
-      setState() {
+      setState(() {
         this.dateOfBirth = value;
-      }
+      });
     }
 
     Size currentScreen = MediaQuery.of(context).size;
@@ -106,7 +107,7 @@ class _IDPageState extends State<IDPage> {
                               ParkADatePicker(
                                 text: "Fecha de nacimiento",
                                 textSize: 14,
-                                selectedDate: this.dateOfBirth,
+                                selectedDate: dateOfBirth,
                                 inputHeight: currentScreen.height * 0.03,
                                 inputWidth: currentScreen.width * 0.8,
                                 onChanged: onChanged,

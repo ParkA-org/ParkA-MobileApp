@@ -16,6 +16,7 @@ import 'package:ParkA/components/Placeholders/parka_placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 
 class ParkADatePicker extends StatelessWidget {
   ParkADatePicker(
@@ -44,6 +45,7 @@ class ParkADatePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size currentScreen = MediaQuery.of(context).size;
+    String formattedDate = DateFormat.yMMMd().format(selectedDate);
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,12 +80,13 @@ class ParkADatePicker extends StatelessWidget {
               width: inputWidth ?? currentScreen.width * 0.75,
               child: GestureDetector(
                 child: ParkAPlaceholder(
+                  color: Colors.white,
                   childAlignment: Alignment.centerLeft,
                   height: inputHeight ?? currentScreen.height * 0.06,
                   width: inputWidth ?? currentScreen.height * 0.2,
                   child: selectedDate != null
                       ? Text(
-                          "$selectedDate",
+                          "$formattedDate",
                           style: const TextStyle(
                             fontFamily: "Montserrat",
                             fontSize: 16,
@@ -100,7 +103,9 @@ class ParkADatePicker extends StatelessWidget {
                         child: DatePickerWidget(
                           onConfirm: onChanged ?? {},
                           dateFormat: 'dd/MM/yyyy',
-                          initialDateTime: DateTime(DateTime.now().year - 18),
+                          initialDateTime: selectedDate == null
+                              ? DateTime(DateTime.now().year - 18)
+                              : selectedDate,
                           maxDateTime: DateTime.now(),
                           pickerTheme: DateTimePickerTheme(
                               itemTextStyle: TextStyle(

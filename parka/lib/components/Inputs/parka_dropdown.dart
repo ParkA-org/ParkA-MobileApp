@@ -67,6 +67,7 @@ class ParkADropdown extends StatelessWidget {
         child: ParkAPlaceholder(
             height: height ?? screenSize.height * 0.025,
             width: width ?? screenSize.width * 0.8,
+            color: Colors.white,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
