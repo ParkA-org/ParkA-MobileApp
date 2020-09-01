@@ -24,18 +24,17 @@ dependencies:
   flutter:
     sdk: flutter
 
-  
   flutter_svg: ^0.18.0
   flutter_cupertino_date_picker: ^1.0.26+2
   google_maps_flutter: ^0.5.30
 
-  
   image_picker: 0.6.7+4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
   font_awesome_flutter: ^8.8.1
+  graphql: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -51,8 +50,11 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
+
       - resources/images/
       - resources/styles/
+      - resources/images/features/
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -74,7 +76,6 @@ flutter:
     - family: ParkaIcons
       fonts:
         - asset: resources/images/carIcon.ttf
-
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
