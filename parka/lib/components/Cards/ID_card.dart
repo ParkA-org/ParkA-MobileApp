@@ -27,7 +27,8 @@ class IDCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    String formattedDate = DateFormat.yMMMd().format(dateOfBirth);
+    String formattedDate =
+        dateOfBirth == null ? null : DateFormat.yMMMd().format(dateOfBirth);
     return Card(
         elevation: 20,
         margin: EdgeInsets.all(10),
@@ -104,7 +105,7 @@ class IDCard extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    width: screenSize.width * 0.15,
+                    width: screenSize.width * 0.05,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -168,7 +169,7 @@ class IDCard extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    width: screenSize.width * 0.15,
+                    width: screenSize.width * 0.05,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

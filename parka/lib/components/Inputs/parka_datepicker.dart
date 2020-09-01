@@ -45,7 +45,8 @@ class ParkADatePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size currentScreen = MediaQuery.of(context).size;
-    String formattedDate = DateFormat.yMMMd().format(selectedDate);
+    String formattedDate =
+        selectedDate == null ? null : DateFormat.yMMMd().format(selectedDate);
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
