@@ -5,6 +5,7 @@ import 'package:ParkA/components/Inputs/parka_datepicker.dart';
 import 'package:ParkA/components/Inputs/parka_dropdown.dart';
 import 'package:ParkA/components/Inputs/parka_input.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
+import 'package:ParkA/pages/PaymentInfo/payment_info.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -50,6 +51,9 @@ class _IDPageState extends State<IDPage> {
             TransparentButtonWithIcon(
               label: "Atras",
               color: Color(0xFF0B768C),
+              onTapHandler: () {
+                Navigator.pop(context);
+              },
             ),
             const Text(
               "Identificación",
@@ -137,16 +141,25 @@ class _IDPageState extends State<IDPage> {
                                     });
                                   }),
                               TransparentButton(
-                                  label: "Continuar",
-                                  buttonTextStyle: TextStyle(
-                                      color: Color(0xFFFFFFFF),
-                                      fontFamily: "Montserrat",
-                                      fontSize: 22.0,
-                                      fontWeight: FontWeight.bold)),
+                                label: "Continuar",
+                                buttonTextStyle: TextStyle(
+                                  color: Color(0xFFFFFFFF),
+                                  fontFamily: "Montserrat",
+                                  fontSize: 22.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                onTapHandler: () {
+                                  Navigator.popAndPushNamed(
+                                      context, PaymentInfoScreen.routeName);
+                                },
+                              ),
                               TransparentButton(
                                   label: "Omitir",
                                   //TODO Navigate forward without validation
-                                  onTapHandler: () => {},
+                                  onTapHandler: () => {
+                                        Navigator.pushNamed(context,
+                                            PaymentInfoScreen.routeName)
+                                      },
                                   buttonTextStyle: TextStyle(
                                       color: Color(0xFFB3E8FF),
                                       fontFamily: "Montserrat",

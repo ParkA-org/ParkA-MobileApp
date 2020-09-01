@@ -77,7 +77,7 @@ class ParkAInput extends StatelessWidget {
             height: inputHeight ?? currentScreen.height * 0.06,
             width: inputWidth ?? currentScreen.height * 0.5,
             child: TextFormField(
-              onChanged: onChanged ?? {},
+              onChanged: onChanged ?? (value) {},
               style: const TextStyle(
                   fontFamily: "Montserrat",
                   fontSize: 16,
