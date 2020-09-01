@@ -1,6 +1,7 @@
 import 'package:ParkA/components/Buttons/transparent_button_test.dart';
 import 'package:ParkA/components/Inputs/parka_input.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
+import 'package:ParkA/pages/ProfilePic/profile_pic_page.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -107,6 +108,10 @@ class RegisterPage extends StatelessWidget {
                                 label: 'Continuar',
                                 icon: Icons.arrow_forward_ios,
                                 color: Colors.white,
+                                onTapHandler: () {
+                                  Navigator.pushNamed(
+                                      context, ProfilePicPage.routeName);
+                                },
                               ),
                             ],
                           ),

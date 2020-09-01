@@ -39,30 +39,38 @@ class TransparentButtonWithRightIcon extends StatelessWidget {
   final String label;
   final Color color;
   final IconData icon;
+  final Function onTapHandler;
 
-  const TransparentButtonWithRightIcon(
-      {Key key, this.label, this.color, this.icon})
-      : super(key: key);
+  const TransparentButtonWithRightIcon({
+    Key key,
+    this.label,
+    this.color,
+    this.icon,
+    this.onTapHandler,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(
-          this.label,
-          style: TextStyle(
-            fontSize: 20.0,
-            color: this.color,
-            fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: this.onTapHandler,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            this.label,
+            style: TextStyle(
+              fontSize: 20.0,
+              color: this.color,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        Icon(
-          this.icon,
-          size: this.icon != null ? 24.0 : 0,
-          color: this.color,
-        ),
-      ],
+          Icon(
+            this.icon,
+            size: this.icon != null ? 24.0 : 0,
+            color: this.color,
+          ),
+        ],
+      ),
     );
   }
 }
