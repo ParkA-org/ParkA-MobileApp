@@ -19,10 +19,7 @@ Map<String, WidgetBuilder> routes = {
   ForgotPasswordScreen.routeName: (BuildContext context) =>
       ForgotPasswordScreen(),
   RegisterPage.routeName: (BuildContext context) => RegisterPage(),
-<<<<<<< HEAD
   MapPage.routeName: (BuildContext context) => MapPage(),
-=======
   GraphqlTestScreen.routeName: (BuildContext context) => GraphqlTestScreen(),
   FilterPage.routeName: (BuildContext context) => FilterPage(),
->>>>>>> dev
 };
