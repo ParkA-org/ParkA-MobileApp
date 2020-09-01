@@ -1,15 +1,34 @@
 import 'package:ParkA/components/Placeholders/parka_placeholder.dart';
+import 'package:ParkA/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 
 class IDCard extends StatelessWidget {
+  final String docNumber;
+
+  final DateTime dateOfBirth;
+
+  final String docType;
+
+  final String nationality;
+
+  final String placeOfBirth;
+
   const IDCard({
     Key key,
+    this.docNumber,
+    this.dateOfBirth,
+    this.nationality,
+    this.placeOfBirth,
+    this.docType,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    String formattedDate =
+        dateOfBirth == null ? null : DateFormat.yMMMd().format(dateOfBirth);
     return Card(
         elevation: 20,
         margin: EdgeInsets.all(10),
@@ -36,10 +55,19 @@ class IDCard extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
-                    ParkAPlaceholder(
-                      height: screenSize.height * 0.025,
-                      width: screenSize.width * 0.6,
-                    ),
+                    docNumber == null || docNumber.isEmpty
+                        ? ParkAPlaceholder(
+                            height: screenSize.height * 0.025,
+                            width: screenSize.width * 0.6,
+                          )
+                        : Text(
+                            "$docNumber",
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                color: Colors.black,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold),
+                          ),
                   ],
                 ),
               ],
@@ -47,7 +75,7 @@ class IDCard extends StatelessWidget {
             Container(
               margin: EdgeInsets.fromLTRB(23, 0, 18, 13),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,11 +89,23 @@ class IDCard extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
-                      ParkAPlaceholder(
-                        height: screenSize.height * 0.025,
-                        width: screenSize.width * 0.35,
-                      ),
+                      dateOfBirth == null
+                          ? ParkAPlaceholder(
+                              height: screenSize.height * 0.025,
+                              width: screenSize.width * 0.35,
+                            )
+                          : Text(
+                              "$formattedDate",
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  color: Colors.black,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
                     ],
+                  ),
+                  SizedBox(
+                    width: screenSize.width * 0.05,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,10 +119,19 @@ class IDCard extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
-                      ParkAPlaceholder(
-                        height: screenSize.height * 0.025,
-                        width: screenSize.width * 0.35,
-                      ),
+                      nationality == null || nationality.isEmpty
+                          ? ParkAPlaceholder(
+                              height: screenSize.height * 0.025,
+                              width: screenSize.width * 0.35,
+                            )
+                          : Text(
+                              "$nationality",
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  color: Colors.black,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
                     ],
                   )
                 ],
@@ -91,7 +140,6 @@ class IDCard extends StatelessWidget {
             Container(
               margin: EdgeInsets.fromLTRB(23, 0, 18, 23),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,11 +153,23 @@ class IDCard extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
-                      ParkAPlaceholder(
-                        height: screenSize.height * 0.025,
-                        width: screenSize.width * 0.35,
-                      ),
+                      placeOfBirth == null || placeOfBirth.isEmpty
+                          ? ParkAPlaceholder(
+                              height: screenSize.height * 0.025,
+                              width: screenSize.width * 0.35,
+                            )
+                          : Text(
+                              "$placeOfBirth",
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  color: Colors.black,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
                     ],
+                  ),
+                  SizedBox(
+                    width: screenSize.width * 0.05,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,10 +183,19 @@ class IDCard extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
-                      ParkAPlaceholder(
-                        height: screenSize.height * 0.025,
-                        width: screenSize.width * 0.35,
-                      ),
+                      docType == null || docType.isEmpty
+                          ? ParkAPlaceholder(
+                              height: screenSize.height * 0.025,
+                              width: screenSize.width * 0.35,
+                            )
+                          : Text(
+                              "$docType",
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  color: Colors.black,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
                     ],
                   )
                 ],
