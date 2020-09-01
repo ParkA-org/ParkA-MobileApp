@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:ParkA/components/Buttons/transparent_button_test.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
+import 'package:ParkA/pages/ID/ID_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
@@ -45,6 +46,9 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
                       child: TransparentButtonWithIcon(
                         label: "Atras",
                         color: Color(0xFF0B768C),
+                        onTapHandler: () {
+                          Navigator.pop(context);
+                        },
                       )),
                   //Title of the page
                   const Center(
@@ -78,25 +82,41 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
                         color: Color(0xFF0B768C),
                         child: Column(
                           children: <Widget>[
-                            SizedBox(height: screenSize.height * 0.075),
-                            const Text(
-                              "Continuar ",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontFamily: "Montserrat",
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                            SizedBox(
+                              height: screenSize.height * 0.075,
                             ),
-                            SizedBox(height: screenSize.height * 0.05),
-                            const Text(
-                              "Omitir ",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context, IDPage.routeName);
+                              },
+                              child: Text(
+                                "Continuar ",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
                                   fontFamily: "Montserrat",
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
-                                  color: Color(0xFF63C7B2)),
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: screenSize.height * 0.05,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context, IDPage.routeName);
+                              },
+                              child: Text(
+                                "Omitir ",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF63C7B2),
+                                ),
+                              ),
                             ),
                             SizedBox(height: screenSize.height * 0.075),
                           ],
