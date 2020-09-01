@@ -1,5 +1,4 @@
 import 'package:ParkA/components/Cards/credit_card.dart';
-import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:ParkA/pages/PaymentInfo/Components/credit_card_info_form.dart';
 import 'package:ParkA/pages/PaymentInfo/utils/utils.dart';
 import "package:flutter/material.dart";

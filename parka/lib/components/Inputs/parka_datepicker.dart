@@ -16,6 +16,7 @@ import 'package:ParkA/components/Placeholders/parka_placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 
 class ParkADatePicker extends StatelessWidget {
   ParkADatePicker(
@@ -26,7 +27,9 @@ class ParkADatePicker extends StatelessWidget {
       this.textDecoration,
       this.inputHeight,
       this.inputWidth,
-      this.textSize})
+      this.textSize,
+      this.onChanged,
+      this.selectedDate})
       : super(key: key);
 
   final String icon;
@@ -36,13 +39,17 @@ class ParkADatePicker extends StatelessWidget {
   final double inputHeight;
   final double inputWidth;
   final double textSize;
+  final Function onChanged;
+  final DateTime selectedDate;
 
   @override
   Widget build(BuildContext context) {
     Size currentScreen = MediaQuery.of(context).size;
+    String formattedDate =
+        selectedDate == null ? null : DateFormat.yMMMd().format(selectedDate);
     return Container(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SizedBox(height: 5),
           Row(children: <Widget>[
@@ -63,6 +70,7 @@ class ParkADatePicker extends StatelessWidget {
             height: currentScreen.height * 0.005,
           ),
           Container(
+              alignment: Alignment.centerLeft,
               decoration: BoxDecoration(boxShadow: [
                 BoxShadow(
                     blurRadius: 5,
@@ -73,14 +81,40 @@ class ParkADatePicker extends StatelessWidget {
               width: inputWidth ?? currentScreen.width * 0.75,
               child: GestureDetector(
                 child: ParkAPlaceholder(
+                  color: Colors.white,
+                  childAlignment: Alignment.centerLeft,
                   height: inputHeight ?? currentScreen.height * 0.06,
                   width: inputWidth ?? currentScreen.height * 0.2,
+                  child: selectedDate != null
+                      ? Text(
+                          "$formattedDate",
+                          style: const TextStyle(
+                            fontFamily: "Montserrat",
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        )
+                      : null,
                 ),
                 onTap: () => showModalBottomSheet(
                     context: context,
                     builder: (context) => Container(
                         height: currentScreen.height * 0.35,
-                        child: DatePickerWidget())),
+                        child: DatePickerWidget(
+                          onConfirm: onChanged ?? {},
+                          dateFormat: 'dd/MM/yyyy',
+                          initialDateTime: selectedDate == null
+                              ? DateTime(DateTime.now().year - 18)
+                              : selectedDate,
+                          maxDateTime: DateTime.now(),
+                          pickerTheme: DateTimePickerTheme(
+                              itemTextStyle: TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF0B768C))),
+                        ))),
               )),
         ],
       ),
