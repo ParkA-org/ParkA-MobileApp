@@ -19,11 +19,15 @@ class RegisterPage extends StatelessWidget {
             Expanded(
               flex: 0,
               child: Container(
-                  alignment: Alignment.bottomLeft,
-                  child: const TransparentButtonWithIcon(
-                    label: "Atras",
-                    color: Color(0xFF0B768C),
-                  )),
+                alignment: Alignment.bottomLeft,
+                child: TransparentButtonWithIcon(
+                  label: "Atras",
+                  color: Color(0xFF0B768C),
+                  onTapHandler: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
             ),
             Expanded(
               child: Row(
