@@ -3,26 +3,34 @@ import "package:flutter/material.dart";
 class TransparentButtonWithIcon extends StatelessWidget {
   final String label;
   final Color color;
+  final Function onTapHandler;
 
-  const TransparentButtonWithIcon({Key key, this.label, this.color})
-      : super(key: key);
+  const TransparentButtonWithIcon({
+    Key key,
+    this.label,
+    this.color,
+    this.onTapHandler,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Icon(
-          Icons.arrow_forward_ios,
-          textDirection: TextDirection.rtl,
-          color: this.color,
-        ),
-        Text(
-          this.label,
-          style: TextStyle(
+    return GestureDetector(
+      onTap: this.onTapHandler,
+      child: Row(
+        children: <Widget>[
+          Icon(
+            Icons.arrow_forward_ios,
+            textDirection: TextDirection.rtl,
             color: this.color,
           ),
-        ),
-      ],
+          Text(
+            this.label,
+            style: TextStyle(
+              color: this.color,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

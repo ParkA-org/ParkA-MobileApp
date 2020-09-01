@@ -27,6 +27,9 @@ class EmailLogin extends StatelessWidget {
                 TransparentButtonWithIcon(
                   label: "Atras",
                   color: Color(0xFF0B768C),
+                  onTapHandler: () {
+                    Navigator.pop(context);
+                  },
                 ),
                 //Header Column
                 LoginHeader(screenSize: currentScreen),
