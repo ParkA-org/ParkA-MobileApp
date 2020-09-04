@@ -1,4 +1,4 @@
-import 'package:ParkA/components/Utils/styles/parka-colors.dart';
+import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:flutter/material.dart';
 
 final kParkaTextBaseStyle = TextStyle(

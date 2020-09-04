@@ -9,15 +9,15 @@ class TransparentButton extends StatelessWidget {
   final Function onTapHandler;
   final TextStyle buttonTextStyle;
 
-  const TransparentButton(
-      {Key key,
-      this.label,
-      this.color,
-      this.onTapHandler,
-      this.leadingIconData,
-      this.trailingIconData,
-      this.buttonTextStyle})
-      : super(key: key);
+  const TransparentButton({
+    Key key,
+    this.label,
+    this.color,
+    this.onTapHandler,
+    this.leadingIconData,
+    this.trailingIconData,
+    this.buttonTextStyle,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +33,7 @@ class TransparentButton extends StatelessWidget {
           ),
           Text(
             this.label,
-            style: this.buttonTextStyle ??
-                kParkaButtonTextStyle.copyWith(
+            style: this.buttonTextStyle.copyWith(
                   color: this.color,
                 ),
           ),
