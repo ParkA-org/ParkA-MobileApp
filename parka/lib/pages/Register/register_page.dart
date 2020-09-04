@@ -2,6 +2,7 @@ import 'package:ParkA/components/Buttons/transparent_button.dart';
 import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:ParkA/components/Inputs/parka_input.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
+import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/pages/ProfilePic/profile_pic_page.dart';
 import 'package:flutter/material.dart';
 import "package:ParkA/components/Utils/styles/text.dart";
@@ -30,7 +31,7 @@ class RegisterPage extends StatelessWidget {
                   Icon(
                     Icons.account_circle,
                     size: 70,
-                    color: Color(0xFF0B768C),
+                    color: ParkaColors.parkaGreen,
                   ),
                   Spacer(),
                   Text(

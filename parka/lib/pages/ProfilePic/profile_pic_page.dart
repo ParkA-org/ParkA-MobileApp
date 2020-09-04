@@ -90,9 +90,7 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
                         label: "Omitir",
                         color: ParkaColors.parkaLightGreen,
                         buttonTextStyle: kParkaBigButtonTextStyle.copyWith(
-                          color: Color(
-                            0xFFB3E8FF,
-                          ),
+                          color: ParkaColors.parkaLimeGreen,
                         ),
                         onTapHandler: () {
                           Navigator.pushNamed(context, IDPage.routeName);
