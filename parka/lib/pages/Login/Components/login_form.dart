@@ -1,5 +1,6 @@
 import 'package:ParkA/components/Inputs/parka_input.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
+import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/pages/ForgotPassword/forgot_password_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ class LoginForm extends StatelessWidget {
     return Expanded(
       child: WavyClipper.withTopWave(
         child: Container(
-            color: Color(0xFF0B768C),
+            color: ParkaColors.parkaGreen,
             child:
                 //Login inputs container
                 Container(
@@ -57,7 +58,7 @@ class LoginForm extends StatelessWidget {
                     height: screenSize.height * 0.03,
                   ),
                   MaterialButton(
-                    color: Color(0xFF63C7B2),
+                    color: ParkaColors.parkaLimeGreen,
                     height: screenSize.height * 0.085,
                     minWidth: screenSize.width * 0.5,
                     elevation: 20,

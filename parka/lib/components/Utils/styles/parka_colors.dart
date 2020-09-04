@@ -5,4 +5,5 @@ class ParkaColors {
   static Color parkaGoogleRed = Color(0xFFFF3E30);
   static Color parkaFacebookBlue = Color(0xFF3B5998);
   static Color parkaLightGreen = Color(0xFFB3E8FF);
+  static Color parkaLimeGreen = Color(0xFF63C7B2);
 }
