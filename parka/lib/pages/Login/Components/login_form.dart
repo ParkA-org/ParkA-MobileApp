@@ -62,12 +62,14 @@ class LoginForm extends StatelessWidget {
                     minWidth: screenSize.width * 0.5,
                     elevation: 20,
                     shape: StadiumBorder(),
-                    child: Text("Entrar",
-                        style: TextStyle(
-                            fontFamily: "Montserrat",
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)),
+                    child: Text(
+                      "Entrar",
+                      style: TextStyle(
+                          fontFamily: "Montserrat",
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
                     onPressed: () => {},
                   ),
                 ],

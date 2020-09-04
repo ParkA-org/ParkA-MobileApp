@@ -12,6 +12,8 @@
 // -8/3/2020 Silvio Arzeno: Widget created
 //
 
+import 'package:ParkA/components/Utils/styles/inputs.dart';
+import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -53,13 +55,16 @@ class ParkAInput extends StatelessWidget {
           Row(children: <Widget>[
             if (icon != null) SvgPicture.asset("resources/images/$icon"),
             if (icon != null) Spacer(),
-            Text("$text",
-                style: (textDecoration ??
-                    TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: textSize ?? 16,
-                        fontWeight: FontWeight.bold,
-                        color: textColor ?? Colors.white))),
+            Text(
+              "$text",
+              style: (textDecoration ??
+                  TextStyle(
+                    fontFamily: "Montserrat",
+                    fontSize: textSize ?? 16,
+                    fontWeight: FontWeight.bold,
+                    color: textColor ?? Colors.white,
+                  )),
+            ),
             Spacer(
               flex: 10,
             ),
@@ -70,27 +75,19 @@ class ParkAInput extends StatelessWidget {
           Container(
             decoration: BoxDecoration(boxShadow: [
               BoxShadow(
-                  blurRadius: 5,
-                  offset: Offset(0, 10),
-                  color: Color(0x40000000))
+                blurRadius: 5,
+                offset: Offset(0, 10),
+                color: Color(0x40000000),
+              )
             ]),
             height: inputHeight ?? currentScreen.height * 0.06,
             width: inputWidth ?? currentScreen.height * 0.5,
             child: TextFormField(
               onChanged: onChanged ?? (value) {},
-              style: const TextStyle(
-                  fontFamily: "Montserrat",
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
+              style: kParkaInputTextStyle,
               obscureText: isPassword ?? false,
               keyboardType: keyboardType ?? TextInputType.emailAddress,
-              decoration: InputDecoration(
-                  filled: true,
-                  isDense: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15))),
+              decoration: kParkaInputTextFieldDefaultStyle,
             ),
           ),
         ],

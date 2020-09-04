@@ -1,5 +1,6 @@
 import 'package:ParkA/components/Buttons/round_button.dart';
 import 'package:ParkA/components/Buttons/transparent_button.dart';
+import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/Login/email_login.dart';
 import 'package:ParkA/pages/Register/register_page.dart';
 import "package:flutter/material.dart";
@@ -47,10 +48,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     Text(
                       "Simplificando la busqueda y alquiler de parqueos",
-                      style: TextStyle(
-                          color: Color(0xFF0B768C),
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.bold),
+                      style: kParkaTextBaseStyle,
                     ),
                     RoundedButton(
                       color: Color(0xFF3B5998),
@@ -68,20 +66,14 @@ class LoginScreen extends StatelessWidget {
                     ),
                     TransparentButton(
                       label: "Iniciar Sesion con Correo",
-                      buttonTextStyle: TextStyle(
-                          color: Color(0xFF0B768C),
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.bold),
+                      buttonTextStyle: kParkaTextBaseStyle,
                       onTapHandler: () {
                         Navigator.pushNamed(context, EmailLogin.routeName);
                       },
                     ),
                     TransparentButton(
                       label: "Registrarse",
-                      buttonTextStyle: TextStyle(
-                          color: Color(0xFF0B768C),
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.bold),
+                      buttonTextStyle: kParkaTextBaseStyle,
                       onTapHandler: () {
                         Navigator.pushNamed(context, RegisterPage.routeName);
                       },
