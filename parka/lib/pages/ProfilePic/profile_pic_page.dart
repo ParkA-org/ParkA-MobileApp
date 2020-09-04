@@ -85,6 +85,7 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
                             SizedBox(
                               height: screenSize.height * 0.075,
                             ),
+                            //TODO:refactor in a transparent button
                             GestureDetector(
                               onTap: () {
                                 Navigator.pushNamed(context, IDPage.routeName);
@@ -103,6 +104,7 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
                             SizedBox(
                               height: screenSize.height * 0.05,
                             ),
+                            //TODO:refactor in a transparent button
                             GestureDetector(
                               onTap: () {
                                 Navigator.pushNamed(context, IDPage.routeName);

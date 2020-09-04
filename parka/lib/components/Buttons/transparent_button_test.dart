@@ -1,3 +1,4 @@
+import 'package:ParkA/components/Utils/styles/text.dart';
 import "package:flutter/material.dart";
 
 class TransparentButtonWithIcon extends StatelessWidget {
@@ -58,10 +59,8 @@ class TransparentButtonWithRightIcon extends StatelessWidget {
         children: <Widget>[
           Text(
             this.label,
-            style: TextStyle(
-              fontSize: 20.0,
+            style: kParkaButtonTextStyle.copyWith(
               color: this.color,
-              fontWeight: FontWeight.bold,
             ),
           ),
           Icon(
