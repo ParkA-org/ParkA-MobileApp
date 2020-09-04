@@ -50,17 +50,19 @@ class ParkAInput extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SizedBox(height: 5),
-          Row(children: <Widget>[
-            if (icon != null) SvgPicture.asset("resources/images/$icon"),
-            if (icon != null) Spacer(),
-            Text(
-              "$text",
-              style: (textDecoration ?? kParkaInputDefaultSyle),
-            ),
-            Spacer(
-              flex: 10,
-            ),
-          ]),
+          Row(
+            children: <Widget>[
+              if (icon != null) SvgPicture.asset("resources/images/$icon"),
+              if (icon != null) Spacer(),
+              Text(
+                "$text",
+                style: (textDecoration ?? kParkaInputDefaultSyle),
+              ),
+              Spacer(
+                flex: 10,
+              ),
+            ],
+          ),
           SizedBox(
             height: currentScreen.height * 0.005,
           ),

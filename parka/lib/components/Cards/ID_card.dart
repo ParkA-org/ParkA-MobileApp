@@ -32,26 +32,32 @@ class IDCard extends StatelessWidget {
         elevation: 20,
         margin: EdgeInsets.all(10),
         shape: RoundedRectangleBorder(
-            side: BorderSide(color: Color(0xFF0B768C), width: 5),
-            borderRadius: BorderRadius.circular(25.0)),
+          side: BorderSide(
+            color: Color(0xFF0B768C),
+            width: 5,
+          ),
+          borderRadius: BorderRadius.circular(25.0),
+        ),
         child: Column(
           children: <Widget>[
             Row(
               children: <Widget>[
                 Container(
-                    margin: EdgeInsets.fromLTRB(23, 15, 10, 14),
-                    child: SvgPicture.asset(
-                        'resources/images/BlueProfileIcon.svg')),
+                  margin: EdgeInsets.fromLTRB(23, 15, 10, 14),
+                  child:
+                      SvgPicture.asset('resources/images/BlueProfileIcon.svg'),
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
                       "No. de Documento",
                       style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          color: Color(0xFF0B768C),
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.bold),
+                        fontFamily: 'Montserrat',
+                        color: Color(0xFF0B768C),
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                     docNumber == null || docNumber.isEmpty
@@ -62,10 +68,11 @@ class IDCard extends StatelessWidget {
                         : Text(
                             "$docNumber",
                             style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                color: Colors.black,
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.bold),
+                              fontFamily: 'Montserrat',
+                              color: Colors.black,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                   ],
                 ),
@@ -82,10 +89,11 @@ class IDCard extends StatelessWidget {
                       Text(
                         "Fecha de Nacimiento",
                         style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            color: Color(0xFF0B768C),
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.bold),
+                          fontFamily: 'Montserrat',
+                          color: Color(0xFF0B768C),
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.bold,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                       dateOfBirth == null
@@ -96,10 +104,11 @@ class IDCard extends StatelessWidget {
                           : Text(
                               "$formattedDate",
                               style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold),
+                                fontFamily: 'Montserrat',
+                                color: Colors.black,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                     ],
                   ),

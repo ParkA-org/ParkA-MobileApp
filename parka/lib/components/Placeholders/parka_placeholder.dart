@@ -26,12 +26,16 @@ class ParkAPlaceholder extends StatelessWidget {
       height: height,
       width: width,
       decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-                blurRadius: 5, offset: Offset(0, 10), color: Color(0x40000000))
-          ],
-          color: color ?? Color(0xFFD7D2D2),
-          borderRadius: borderRadius ?? BorderRadius.circular(15)),
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 5,
+            offset: Offset(0, 10),
+            color: Color(0x40000000),
+          )
+        ],
+        color: color ?? Color(0xFFD7D2D2),
+        borderRadius: borderRadius ?? BorderRadius.circular(15),
+      ),
       child: child ?? null,
     );
   }
