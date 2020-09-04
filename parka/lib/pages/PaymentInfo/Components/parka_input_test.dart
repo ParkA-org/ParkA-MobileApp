@@ -1,4 +1,4 @@
-import 'package:ParkA/components/Utils/constants.dart';
+import 'package:ParkA/components/Utils/styles/inputs.dart';
 import "package:flutter/material.dart";
 
 class ParkaInputTest extends StatelessWidget {
