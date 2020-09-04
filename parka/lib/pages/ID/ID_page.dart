@@ -141,12 +141,7 @@ class _IDPageState extends State<IDPage> {
                                   }),
                               TransparentButton(
                                 label: "Continuar",
-                                buttonTextStyle: TextStyle(
-                                  color: Color(0xFFFFFFFF),
-                                  fontFamily: "Montserrat",
-                                  fontSize: 22.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                buttonTextStyle: kParkaBigButtonTextStyle,
                                 onTapHandler: () {
                                   Navigator.popAndPushNamed(
                                       context, PaymentInfoScreen.routeName);

@@ -1,4 +1,5 @@
 import 'package:ParkA/components/Utils/constants.dart';
+import 'package:ParkA/components/Utils/styles/text.dart';
 import "package:flutter/material.dart";
 
 import 'credit_card_number_form.dart';
@@ -22,14 +23,11 @@ class CreditCardInfoForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
           "Numero Tarjeta",
-          style: TextStyle(
-            color: Color(0xFF0B768C),
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-          ),
+          style: kParkaPaymentFormStyle,
         ),
         CreditCardNumberForm(
           formHandlers: this.creditCardNumberHandlers,
@@ -37,11 +35,7 @@ class CreditCardInfoForm extends StatelessWidget {
         Text(
           "Nombre del titular",
           textAlign: TextAlign.left,
-          style: TextStyle(
-            color: Color(0xFF0B768C),
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-          ),
+          style: kParkaPaymentFormStyle,
         ),
         Container(
           padding: const EdgeInsets.all(8.0),
@@ -60,11 +54,7 @@ class CreditCardInfoForm extends StatelessWidget {
                   Text(
                     "Valido Hasta",
                     textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: Color(0xFF0B768C),
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: kParkaPaymentFormStyle,
                   ),
                   Row(
                     children: <Widget>[
@@ -109,11 +99,7 @@ class CreditCardInfoForm extends StatelessWidget {
                   Text(
                     "CVV",
                     textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: Color(0xFF0B768C),
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: kParkaPaymentFormStyle,
                   ),
                   Container(
                     height: 50.0,

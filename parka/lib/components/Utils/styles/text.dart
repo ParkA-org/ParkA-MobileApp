@@ -21,10 +21,19 @@ final kParkaButtonTextStyle = kParkaTextBaseStyle.copyWith(
   fontSize: 20.0,
 );
 
+final kParkaBigButtonTextStyle = kParkaTextBaseStyle.copyWith(
+  color: Colors.white,
+  fontSize: 22.0,
+);
+
 final kParkaPageTitleTextStyle = kParkaTextBaseStyle.copyWith(
   fontSize: 32.0,
 );
 
 final kParkaBigTitleTextStyle = kParkaTextBaseStyle.copyWith(
   fontSize: 48.0,
+);
+
+final kParkaPaymentFormStyle = kParkaTextBaseStyle.copyWith(
+  fontSize: 18.0,
 );
