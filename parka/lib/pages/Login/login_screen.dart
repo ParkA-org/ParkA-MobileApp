@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
             child: WavyClipper.withBottomWave(
               child: Container(
                 alignment: Alignment.centerLeft,
-                color: Color(0xFF0B768C),
+                color: ParkaColors.parkaGreen,
                 child: Icon(
                   ParkaIcons.parkaCar,
                   color: Colors.white,
