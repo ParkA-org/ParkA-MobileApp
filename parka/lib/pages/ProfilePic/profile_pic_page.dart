@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:ParkA/components/Buttons/transparent_button.dart';
 import 'package:ParkA/components/Buttons/transparent_button_test.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
+import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/ID/ID_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -32,100 +34,87 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
     }
 
     return Scaffold(
-        extendBodyBehindAppBar: true,
-        resizeToAvoidBottomInset: true,
-        body: SafeArea(
-          child: Container(
-            height: screenSize.height,
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  //Back Button
-                  Container(
-                      alignment: Alignment.bottomLeft,
-                      child: TransparentButtonWithIcon(
-                        label: "Atras",
-                        color: Color(0xFF0B768C),
+      extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: true,
+      body: SafeArea(
+        child: Container(
+          height: screenSize.height,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              //Back Button
+              Container(
+                alignment: Alignment.bottomLeft,
+                child: TransparentButton(
+                  label: "Atras",
+                  color: Color(0xFF0B768C),
+                  leadingIconData: Icons.keyboard_arrow_left,
+                  onTapHandler: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+              //Title of the page
+              Center(
+                  child: Text(
+                "Imagen De Perfil",
+                textAlign: TextAlign.center,
+                style: kParkaPageTitleTextStyle,
+              )),
+              // Image container
+              Container(
+                child: GestureDetector(
+                  onTap: () => getImage(),
+                  child: _image != null
+                      ? ClipOval(child: Image.file(_image))
+                      : SvgPicture.asset(
+                          'resources/images/BlueProfileIcon.svg',
+                          height: screenSize.height * 0.4,
+                        ),
+                ),
+                height: screenSize.height * 0.4,
+              ),
+              // Buttons
+              WavyClipper.withTopWave(
+                type: 'IDPage',
+                child: Container(
+                  width: screenSize.width,
+                  color: Color(0xFF0B768C),
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: screenSize.height * 0.075,
+                      ),
+                      TransparentButton(
+                        label: "Continuar",
+                        buttonTextStyle: kParkaBigButtonTextStyle,
                         onTapHandler: () {
-                          Navigator.pop(context);
+                          Navigator.pushNamed(context, IDPage.routeName);
                         },
-                      )),
-                  //Title of the page
-                  const Center(
-                      child: const Text(
-                    "Imagen De Perfil",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF0B768C)),
-                  )),
-                  // Image container
-                  Container(
-                    child: GestureDetector(
-                      onTap: () => getImage(),
-                      child: _image != null
-                          ? ClipOval(child: Image.file(_image))
-                          : SvgPicture.asset(
-                              'resources/images/BlueProfileIcon.svg',
-                              height: screenSize.height * 0.4,
-                            ),
-                    ),
-                    height: screenSize.height * 0.4,
+                      ),
+                      SizedBox(
+                        height: screenSize.height * 0.05,
+                      ),
+                      TransparentButton(
+                        label: "Omitir",
+                        buttonTextStyle: kParkaBigButtonTextStyle.copyWith(
+                          color: Color(
+                            0xFFB3E8FF,
+                          ),
+                        ),
+                        onTapHandler: () {
+                          Navigator.pushNamed(context, IDPage.routeName);
+                        },
+                      ),
+                      SizedBox(height: screenSize.height * 0.075),
+                    ],
                   ),
-                  // Buttons
-                  WavyClipper.withTopWave(
-                    type: 'IDPage',
-                    child: Container(
-                        width: screenSize.width,
-                        color: Color(0xFF0B768C),
-                        child: Column(
-                          children: <Widget>[
-                            SizedBox(
-                              height: screenSize.height * 0.075,
-                            ),
-                            //TODO:refactor in a transparent button
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(context, IDPage.routeName);
-                              },
-                              child: Text(
-                                "Continuar ",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: "Montserrat",
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: screenSize.height * 0.05,
-                            ),
-                            //TODO:refactor in a transparent button
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(context, IDPage.routeName);
-                              },
-                              child: Text(
-                                "Omitir ",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: "Montserrat",
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFF63C7B2),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: screenSize.height * 0.075),
-                          ],
-                        )),
-                  )
-                ]),
+                ),
+              )
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

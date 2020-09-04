@@ -85,9 +85,10 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
                 flex: 0,
                 child: Container(
                   color: Colors.white,
-                  child: TransparentButtonWithIcon(
+                  child: TransparentButton(
                     label: "Atras",
                     color: Color(0xFF0B768C),
+                    leadingIconData: Icons.keyboard_arrow_left,
                     onTapHandler: () {
                       Navigator.pop(context);
                     },
@@ -120,14 +121,14 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
                           height: 20,
                         ),
                         Expanded(
-                          child: TransparentButtonWithRightIcon(
+                          child: TransparentButton(
                             label: "Continuar",
                             color: Colors.white,
-                            icon: Icons.arrow_forward_ios,
+                            trailingIconData: Icons.arrow_forward_ios,
                           ),
                         ),
                         Expanded(
-                          child: TransparentButtonWithRightIcon(
+                          child: TransparentButton(
                             label: "Omitir",
                             color: Color(0xFFB3E8FF),
                           ),

@@ -24,9 +24,10 @@ class EmailLogin extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                TransparentButtonWithIcon(
+                TransparentButton(
                   label: "Atras",
                   color: Color(0xFF0B768C),
+                  leadingIconData: Icons.keyboard_arrow_left,
                   onTapHandler: () {
                     Navigator.pop(context);
                   },

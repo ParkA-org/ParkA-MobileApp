@@ -22,7 +22,8 @@ class RegisterPage extends StatelessWidget {
               flex: 0,
               child: Container(
                 alignment: Alignment.bottomLeft,
-                child: TransparentButtonWithIcon(
+                child: TransparentButton(
+                  leadingIconData: Icons.keyboard_arrow_left,
                   label: "Atras",
                   color: Color(0xFF0B768C),
                   onTapHandler: () {
@@ -101,9 +102,9 @@ class RegisterPage extends StatelessWidget {
                               SizedBox(
                                 height: 10,
                               ),
-                              TransparentButtonWithRightIcon(
+                              TransparentButton(
                                 label: 'Continuar',
-                                icon: Icons.arrow_forward_ios,
+                                trailingIconData: Icons.arrow_forward_ios,
                                 color: Colors.white,
                                 onTapHandler: () {
                                   Navigator.pushNamed(

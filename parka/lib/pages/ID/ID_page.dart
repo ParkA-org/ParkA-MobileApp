@@ -49,9 +49,10 @@ class _IDPageState extends State<IDPage> {
       body: SafeArea(
         child: Container(
           child: Column(children: <Widget>[
-            TransparentButtonWithIcon(
+            TransparentButton(
               label: "Atras",
               color: Color(0xFF0B768C),
+              leadingIconData: Icons.keyboard_arrow_left,
               onTapHandler: () {
                 Navigator.pop(context);
               },
