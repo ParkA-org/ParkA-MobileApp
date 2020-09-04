@@ -1,5 +1,6 @@
 import 'dart:io';
-import 'package:ParkA/components/Buttons/transparent_button_test.dart';
+import 'package:ParkA/components/Buttons/transparent_button.dart';
+import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/ID/ID_page.dart';
@@ -41,17 +42,7 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               //Back Button
-              Container(
-                alignment: Alignment.bottomLeft,
-                child: TransparentButton(
-                  label: "Atras",
-                  color: Color(0xFF0B768C),
-                  leadingIconData: Icons.keyboard_arrow_left,
-                  onTapHandler: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
+              ParkaHeader(),
               //Title of the page
               Center(
                   child: Text(

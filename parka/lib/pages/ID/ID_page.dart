@@ -1,5 +1,6 @@
-import 'package:ParkA/components/Buttons/transparent_button_test.dart';
+import 'package:ParkA/components/Buttons/transparent_button.dart';
 import 'package:ParkA/components/Cards/ID_card.dart';
+import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:ParkA/components/Inputs/parka_datepicker.dart';
 import 'package:ParkA/components/Inputs/parka_dropdown.dart';
 import 'package:ParkA/components/Inputs/parka_input.dart';
@@ -48,14 +49,7 @@ class _IDPageState extends State<IDPage> {
       body: SafeArea(
         child: Container(
           child: Column(children: <Widget>[
-            TransparentButton(
-              label: "Atras",
-              color: Color(0xFF0B768C),
-              leadingIconData: Icons.keyboard_arrow_left,
-              onTapHandler: () {
-                Navigator.pop(context);
-              },
-            ),
+            ParkaHeader(),
             Text(
               "Identificación",
               textAlign: TextAlign.center,
@@ -71,9 +65,10 @@ class _IDPageState extends State<IDPage> {
             Expanded(
               child: WavyClipper.withTopWave(
                 child: Container(
-                    padding: EdgeInsets.fromLTRB(15, 45, 15, 15),
-                    color: Color(0xFF0B768C),
-                    child: LayoutBuilder(builder:
+                  padding: EdgeInsets.fromLTRB(15, 45, 15, 15),
+                  color: Color(0xFF0B768C),
+                  child: LayoutBuilder(
+                    builder:
                         (BuildContext context, BoxConstraints constraints) {
                       return SingleChildScrollView(
                         child: ConstrainedBox(
@@ -162,7 +157,9 @@ class _IDPageState extends State<IDPage> {
                           ),
                         ),
                       );
-                    })),
+                    },
+                  ),
+                ),
               ),
             )
           ]),
