@@ -3,6 +3,7 @@ import 'package:ParkA/components/Inputs/parka_input.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:ParkA/pages/ProfilePic/profile_pic_page.dart';
 import 'package:flutter/material.dart';
+import "package:ParkA/components/Utils/styles/text.dart";
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({Key key}) : super(key: key);
@@ -34,22 +35,18 @@ class RegisterPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.account_circle,
                     size: 70,
                     color: Color(0xFF0B768C),
                   ),
-                  const Spacer(),
-                  const Text(
+                  Spacer(),
+                  Text(
                     "Crear Cuenta",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF0B768C)),
+                    style: kParkaPageTitleTextStyle,
                   ),
-                  const Spacer(
+                  Spacer(
                     flex: 3,
                   )
                 ],

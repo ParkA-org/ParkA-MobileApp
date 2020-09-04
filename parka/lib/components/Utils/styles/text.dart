@@ -20,3 +20,15 @@ final kParkaInputTextStyle = kParkaTextBaseStyle.copyWith(
 final kParkaButtonTextStyle = kParkaTextBaseStyle.copyWith(
   fontSize: 20.0,
 );
+
+final kParkaLittlePageTitleTextStyle = kParkaTextBaseStyle.copyWith(
+  fontSize: 32.0,
+);
+
+final kParkaPageTitleTextStyle = kParkaTextBaseStyle.copyWith(
+  fontSize: 40.0,
+);
+
+final kParkaBigTitleTextStyle = kParkaTextBaseStyle.copyWith(
+  fontSize: 48.0,
+);

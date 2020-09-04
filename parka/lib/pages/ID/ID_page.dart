@@ -5,6 +5,7 @@ import 'package:ParkA/components/Inputs/parka_datepicker.dart';
 import 'package:ParkA/components/Inputs/parka_dropdown.dart';
 import 'package:ParkA/components/Inputs/parka_input.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
+import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/PaymentInfo/payment_info.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -55,14 +56,10 @@ class _IDPageState extends State<IDPage> {
                 Navigator.pop(context);
               },
             ),
-            const Text(
+            Text(
               "Identificación",
               textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontFamily: "Montserrat",
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF0B768C)),
+              style: kParkaPageTitleTextStyle,
             ),
             IDCard(
               docNumber: this.docNumber,

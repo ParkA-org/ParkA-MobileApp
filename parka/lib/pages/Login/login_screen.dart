@@ -40,11 +40,7 @@ class LoginScreen extends StatelessWidget {
                     Text(
                       "Bienvenido a ParkA",
                       // textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Color(0xFF0B768C),
-                          fontSize: 48.0,
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.bold),
+                      style: kParkaBigTitleTextStyle,
                     ),
                     Text(
                       "Simplificando la busqueda y alquiler de parqueos",

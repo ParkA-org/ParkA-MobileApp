@@ -1,4 +1,5 @@
 import 'package:ParkA/components/Cards/credit_card.dart';
+import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/PaymentInfo/Components/credit_card_info_form.dart';
 import 'package:ParkA/pages/PaymentInfo/utils/utils.dart';
 import "package:flutter/material.dart";
@@ -51,10 +52,7 @@ class PaymentInfoCompleteForm extends StatelessWidget {
           children: <Widget>[
             Text(
               "Metodo de pago",
-              style: TextStyle(
-                  color: Color(0xFF0B768C),
-                  fontSize: 32.0,
-                  fontWeight: FontWeight.bold),
+              style: kParkaLittlePageTitleTextStyle,
             ),
             CreditCardWidget(
               fullName: this.fullName,
