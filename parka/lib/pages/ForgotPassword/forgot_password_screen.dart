@@ -51,7 +51,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 22.0,
-                        color: Color(0xFF0B768C),
+                        color: ParkaColors.parkaGreen,
                       ),
                     ),
                     TextField(
@@ -71,13 +71,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             Expanded(
               child: WavyClipper.withTopWave(
                 child: Container(
-                  color: Color(0xFF0B768C),
+                  color: ParkaColors.parkaGreen,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       RoundedButton(
                         label: "Enviar",
-                        color: Color(0xFF63C7B2),
+                        color: ParkaColors.parkaLimeGreen,
                         hasIcon: false,
                         hasShadow: true,
                         width: 150.0,

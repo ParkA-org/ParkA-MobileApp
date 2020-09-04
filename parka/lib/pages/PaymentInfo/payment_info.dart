@@ -106,7 +106,7 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
                 flex: 2,
                 child: WavyClipper.withTopWave(
                   child: Container(
-                    color: Color(0xFF0B768C),
+                    color: ParkaColors.parkaGreen,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
