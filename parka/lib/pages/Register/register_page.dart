@@ -1,4 +1,5 @@
 import 'package:ParkA/components/Buttons/transparent_button_test.dart';
+import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:ParkA/components/Inputs/parka_input.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:ParkA/pages/ProfilePic/profile_pic_page.dart';
@@ -20,17 +21,7 @@ class RegisterPage extends StatelessWidget {
             //Header Column
             Expanded(
               flex: 0,
-              child: Container(
-                alignment: Alignment.bottomLeft,
-                child: TransparentButton(
-                  leadingIconData: Icons.keyboard_arrow_left,
-                  label: "Atras",
-                  color: Color(0xFF0B768C),
-                  onTapHandler: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
+              child: ParkaHeader(),
             ),
             Expanded(
               child: Row(

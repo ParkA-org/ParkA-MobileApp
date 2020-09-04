@@ -1,4 +1,3 @@
-import 'package:ParkA/components/Buttons/transparent_button.dart';
 import 'package:ParkA/components/Buttons/transparent_button_test.dart';
 import 'package:ParkA/components/Cards/ID_card.dart';
 import 'package:ParkA/components/Inputs/parka_datepicker.dart';
