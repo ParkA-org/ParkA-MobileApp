@@ -1,5 +1,4 @@
 import 'package:ParkA/components/Placeholders/parka_placeholder.dart';
-import 'package:ParkA/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';

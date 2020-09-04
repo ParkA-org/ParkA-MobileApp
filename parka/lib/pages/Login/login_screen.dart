@@ -63,6 +63,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   TransparentButton(
                     label: "Iniciar Sesion con Correo",
+                    color: ParkaColors.parkaGreen,
                     buttonTextStyle: kParkaTextBaseStyle,
                     onTapHandler: () {
                       Navigator.pushNamed(context, EmailLogin.routeName);
@@ -70,6 +71,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   TransparentButton(
                     label: "Registrarse",
+                    color: ParkaColors.parkaGreen,
                     buttonTextStyle: kParkaTextBaseStyle,
                     onTapHandler: () {
                       Navigator.pushNamed(context, RegisterPage.routeName);

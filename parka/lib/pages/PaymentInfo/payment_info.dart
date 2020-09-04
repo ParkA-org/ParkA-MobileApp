@@ -1,6 +1,7 @@
 import 'package:ParkA/components/Buttons/transparent_button.dart';
 import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
+import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/PaymentInfo/Components/credit_card_complete_info_form.dart';
 import "package:flutter/material.dart";
 
@@ -114,12 +115,14 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
                         Expanded(
                           child: TransparentButton(
                             label: "Continuar",
+                            buttonTextStyle: kParkaInputDefaultSyle,
                             color: Colors.white,
                             trailingIconData: Icons.arrow_forward_ios,
                           ),
                         ),
                         Expanded(
                           child: TransparentButton(
+                            buttonTextStyle: kParkaInputDefaultSyle,
                             label: "Omitir",
                             color: Color(0xFFB3E8FF),
                           ),

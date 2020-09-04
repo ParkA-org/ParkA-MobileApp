@@ -95,6 +95,7 @@ class RegisterPage extends StatelessWidget {
                               ),
                               TransparentButton(
                                 label: 'Continuar',
+                                buttonTextStyle: kParkaButtonTextStyle,
                                 trailingIconData: Icons.arrow_forward_ios,
                                 color: Colors.white,
                                 onTapHandler: () {

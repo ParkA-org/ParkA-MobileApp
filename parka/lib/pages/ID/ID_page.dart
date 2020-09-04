@@ -8,7 +8,6 @@ import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/PaymentInfo/payment_info.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class IDPage extends StatefulWidget {
   IDPage({Key key}) : super(key: key);
@@ -136,6 +135,7 @@ class _IDPageState extends State<IDPage> {
                                   }),
                               TransparentButton(
                                 label: "Continuar",
+                                color: Colors.white,
                                 buttonTextStyle: kParkaBigButtonTextStyle,
                                 onTapHandler: () {
                                   Navigator.popAndPushNamed(
@@ -144,14 +144,12 @@ class _IDPageState extends State<IDPage> {
                               ),
                               TransparentButton(
                                 label: "Omitir",
+                                color: Color(0xFFB3E8FF),
                                 onTapHandler: () => {
                                   Navigator.pushNamed(
                                       context, PaymentInfoScreen.routeName)
                                 },
-                                buttonTextStyle:
-                                    kParkaInputDefaultSyle.copyWith(
-                                  color: Color(0xFFB3E8FF),
-                                ),
+                                buttonTextStyle: kParkaInputDefaultSyle,
                               )
                             ],
                           ),

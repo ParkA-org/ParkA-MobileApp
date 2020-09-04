@@ -1,9 +1,9 @@
 import 'package:ParkA/components/Buttons/round_button.dart';
 import 'package:ParkA/components/Buttons/transparent_button.dart';
-import 'package:ParkA/components/Buttons/transparent_button.dart';
 import 'package:ParkA/components/Utils/constants.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:ParkA/components/Utils/functions.dart';
+import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_svg/svg.dart';
@@ -90,6 +90,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       ),
                       TransparentButton(
                         label: "Cancelar",
+                        color: ParkaColors.parkaLightGreen,
                         onTapHandler: () => Navigator.pop(context),
                         buttonTextStyle: kParkaInputDefaultSyle,
                       )

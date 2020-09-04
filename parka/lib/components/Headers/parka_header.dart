@@ -1,4 +1,5 @@
 import 'package:ParkA/components/Buttons/transparent_button.dart';
+import 'package:ParkA/components/Utils/styles/text.dart';
 import "package:flutter/material.dart";
 
 class ParkaHeader extends StatelessWidget {
@@ -13,6 +14,7 @@ class ParkaHeader extends StatelessWidget {
       children: [
         TransparentButton(
           label: "Atras",
+          buttonTextStyle: kParkaInputDefaultSyle,
           color: Color(0xFF0B768C),
           leadingIconData: Icons.keyboard_arrow_left,
           onTapHandler: () {

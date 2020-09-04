@@ -1,4 +1,3 @@
-import 'package:ParkA/components/Utils/styles/text.dart';
 import "package:flutter/material.dart";
 
 class TransparentButton extends StatelessWidget {
@@ -11,12 +10,12 @@ class TransparentButton extends StatelessWidget {
 
   const TransparentButton({
     Key key,
-    this.label,
-    this.color,
+    @required this.label,
+    @required this.color,
     this.onTapHandler,
     this.leadingIconData,
     this.trailingIconData,
-    this.buttonTextStyle,
+    @required this.buttonTextStyle,
   }) : super(key: key);
 
   @override
