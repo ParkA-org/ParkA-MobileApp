@@ -145,11 +145,11 @@ class _IDPageState extends State<IDPage> {
                               TransparentButton(
                                 label: "Omitir",
                                 color: Color(0xFFB3E8FF),
+                                buttonTextStyle: kParkaInputDefaultSyle,
                                 onTapHandler: () => {
                                   Navigator.pushNamed(
                                       context, PaymentInfoScreen.routeName)
                                 },
-                                buttonTextStyle: kParkaInputDefaultSyle,
                               )
                             ],
                           ),

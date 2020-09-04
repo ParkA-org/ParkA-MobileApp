@@ -115,14 +115,14 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
                         Expanded(
                           child: TransparentButton(
                             label: "Continuar",
-                            buttonTextStyle: kParkaInputDefaultSyle,
+                            buttonTextStyle: kParkaButtonTextStyle,
                             color: Colors.white,
                             trailingIconData: Icons.arrow_forward_ios,
                           ),
                         ),
                         Expanded(
                           child: TransparentButton(
-                            buttonTextStyle: kParkaInputDefaultSyle,
+                            buttonTextStyle: kParkaButtonTextStyle,
                             label: "Omitir",
                             color: Color(0xFFB3E8FF),
                           ),
