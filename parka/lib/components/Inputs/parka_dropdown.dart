@@ -14,7 +14,7 @@ class ParkADropdown extends StatelessWidget {
   final Function onChanged;
   final TextDecoration textDecoration;
   final TextDecoration inputTextDecoration;
-  final int textSize;
+  final double textSize;
   final String selectedItem;
 
   const ParkADropdown({

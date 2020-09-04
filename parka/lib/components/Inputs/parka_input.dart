@@ -29,7 +29,6 @@ class ParkAInput extends StatelessWidget {
       this.keyboardType,
       this.inputHeight,
       this.inputWidth,
-      this.textSize,
       this.onChanged})
       : super(key: key);
 
@@ -41,7 +40,6 @@ class ParkAInput extends StatelessWidget {
   final TextInputType keyboardType;
   final double inputHeight;
   final double inputWidth;
-  final double textSize;
   final Function onChanged;
 
   @override
@@ -57,13 +55,7 @@ class ParkAInput extends StatelessWidget {
             if (icon != null) Spacer(),
             Text(
               "$text",
-              style: (textDecoration ??
-                  TextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: textSize ?? 16,
-                    fontWeight: FontWeight.bold,
-                    color: textColor ?? Colors.white,
-                  )),
+              style: (textDecoration ?? kParkaInputDefaultSyle),
             ),
             Spacer(
               flex: 10,

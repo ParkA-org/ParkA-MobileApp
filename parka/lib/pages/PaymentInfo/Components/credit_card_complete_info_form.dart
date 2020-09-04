@@ -52,7 +52,7 @@ class PaymentInfoCompleteForm extends StatelessWidget {
           children: <Widget>[
             Text(
               "Metodo de pago",
-              style: kParkaLittlePageTitleTextStyle,
+              style: kParkaPageTitleTextStyle,
             ),
             CreditCardWidget(
               fullName: this.fullName,

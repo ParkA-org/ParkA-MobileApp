@@ -85,6 +85,7 @@ class _IDPageState extends State<IDPage> {
                             children: [
                               ParkADropdown(
                                   text: "Tipo de Documento",
+                                  textSize: 16.0,
                                   selectedItem: docType,
                                   options: docTypeOptions,
                                   height: currentScreen.height * 0.03,
@@ -96,7 +97,6 @@ class _IDPageState extends State<IDPage> {
                                   }),
                               ParkAInput(
                                 text: "No. de Documento",
-                                textSize: 14,
                                 inputHeight: currentScreen.height * 0.03,
                                 inputWidth: currentScreen.width * 0.8,
                                 onChanged: (value) {
@@ -107,7 +107,7 @@ class _IDPageState extends State<IDPage> {
                               ),
                               ParkADatePicker(
                                 text: "Fecha de nacimiento",
-                                textSize: 14,
+                                textSize: 16,
                                 selectedDate: dateOfBirth,
                                 inputHeight: currentScreen.height * 0.03,
                                 inputWidth: currentScreen.width * 0.8,
@@ -115,6 +115,7 @@ class _IDPageState extends State<IDPage> {
                               ),
                               ParkADropdown(
                                   text: "Nacionalidad",
+                                  textSize: 16.0,
                                   selectedItem: nationality,
                                   options: nationalityOptions,
                                   height: currentScreen.height * 0.03,
@@ -127,6 +128,7 @@ class _IDPageState extends State<IDPage> {
                                   }),
                               ParkADropdown(
                                   text: "Lugar de Nacimiento",
+                                  textSize: 16.0,
                                   selectedItem: placeOfBirth,
                                   options: placeOfBirthOptions,
                                   height: currentScreen.height * 0.03,
@@ -151,17 +153,16 @@ class _IDPageState extends State<IDPage> {
                                 },
                               ),
                               TransparentButton(
-                                  label: "Omitir",
-                                  //TODO Navigate forward without validation
-                                  onTapHandler: () => {
-                                        Navigator.pushNamed(context,
-                                            PaymentInfoScreen.routeName)
-                                      },
-                                  buttonTextStyle: TextStyle(
-                                      color: Color(0xFFB3E8FF),
-                                      fontFamily: "Montserrat",
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.bold))
+                                label: "Omitir",
+                                onTapHandler: () => {
+                                  Navigator.pushNamed(
+                                      context, PaymentInfoScreen.routeName)
+                                },
+                                buttonTextStyle:
+                                    kParkaInputDefaultSyle.copyWith(
+                                  color: Color(0xFFB3E8FF),
+                                ),
+                              )
                             ],
                           ),
                         ),
