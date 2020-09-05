@@ -48,6 +48,19 @@ class ProfileScreen extends StatelessWidget {
                               informativeMessage: "Reservaciones como cliente",
                             ),
                           ),
+                          Expanded(
+                            child: InformativeTab(
+                              data: "69",
+                              informativeMessage:
+                                  "Reservaciones como anfitrion",
+                            ),
+                          ),
+                          Expanded(
+                            child: InformativeTab(
+                              data: "25",
+                              informativeMessage: "Reservas Pendientes",
+                            ),
+                          ),
                         ],
                       ),
                     )
