@@ -1,3 +1,4 @@
+import 'package:ParkA/components/Utils/styles/buttons.dart';
 import 'package:flutter/material.dart';
 
 class ReserveTypeSelectorWidget extends StatelessWidget {
@@ -88,20 +89,3 @@ class FilterButton extends StatelessWidget {
     );
   }
 }
-
-final notSelectedStyle = BoxDecoration(
-  border: Border.all(
-    color: Color(0xFF0B768C),
-    width: 2.0,
-  ),
-  borderRadius: BorderRadius.circular(20.0),
-);
-
-final selectedStyle = BoxDecoration(
-  color: Color(0xFF0B768C),
-  border: Border.all(
-    color: Color(0xFF0B768C),
-    width: 2.0,
-  ),
-  borderRadius: BorderRadius.circular(20.0),
-);

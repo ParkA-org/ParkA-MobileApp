@@ -1,7 +1,11 @@
-import 'package:ParkA/components/Buttons/transparent_button_test.dart';
+import 'package:ParkA/components/Buttons/transparent_button.dart';
+import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:ParkA/components/Inputs/parka_input.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
+import 'package:ParkA/components/Utils/styles/parka_colors.dart';
+import 'package:ParkA/pages/ProfilePic/profile_pic_page.dart';
 import 'package:flutter/material.dart';
+import "package:ParkA/components/Utils/styles/text.dart";
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({Key key}) : super(key: key);
@@ -18,33 +22,24 @@ class RegisterPage extends StatelessWidget {
             //Header Column
             Expanded(
               flex: 0,
-              child: Container(
-                  alignment: Alignment.bottomLeft,
-                  child: const TransparentButtonWithIcon(
-                    label: "Atras",
-                    color: Color(0xFF0B768C),
-                  )),
+              child: ParkaHeader(),
             ),
             Expanded(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.account_circle,
                     size: 70,
-                    color: Color(0xFF0B768C),
+                    color: ParkaColors.parkaGreen,
                   ),
-                  const Spacer(),
-                  const Text(
+                  Spacer(),
+                  Text(
                     "Crear Cuenta",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF0B768C)),
+                    style: kParkaPageTitleTextStyle,
                   ),
-                  const Spacer(
+                  Spacer(
                     flex: 3,
                   )
                 ],
@@ -99,10 +94,15 @@ class RegisterPage extends StatelessWidget {
                               SizedBox(
                                 height: 10,
                               ),
-                              TransparentButtonWithRightIcon(
+                              TransparentButton(
                                 label: 'Continuar',
-                                icon: Icons.arrow_forward_ios,
+                                buttonTextStyle: kParkaButtonTextStyle,
+                                trailingIconData: Icons.arrow_forward_ios,
                                 color: Colors.white,
+                                onTapHandler: () {
+                                  Navigator.pushNamed(
+                                      context, ProfilePicPage.routeName);
+                                },
                               ),
                             ],
                           ),

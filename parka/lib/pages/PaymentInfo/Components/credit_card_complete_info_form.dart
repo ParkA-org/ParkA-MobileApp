@@ -1,4 +1,5 @@
 import 'package:ParkA/components/Cards/credit_card.dart';
+import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/PaymentInfo/Components/credit_card_info_form.dart';
 import 'package:ParkA/pages/PaymentInfo/utils/utils.dart';
 import "package:flutter/material.dart";
@@ -43,40 +44,33 @@ class PaymentInfoCompleteForm extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 50.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(
-              "Metodo de pago",
-              style: TextStyle(
-                  color: Color(0xFF0B768C),
-                  fontSize: 32.0,
-                  fontWeight: FontWeight.bold),
-            ),
-            CreditCardWidget(
-              fullName: this.fullName,
-              creditCardNumber1: this.creditCardNumber1,
-              creditCardNumber2: this.creditCardNumber2,
-              creditCardNumber3: this.creditCardNumber3,
-              creditCardNumber4: this.creditCardNumber4,
-              creditCardMonth: this.creditCardMonth,
-              creditCardYear: this.creditCardYear,
-              creditCardInfo: this.gradientGetter(),
-            ),
-            CreditCardInfoForm(
-              creditCardNameHandler: this.formHandlers["creditCardNameHandler"],
-              creditCardNumberHandlers:
-                  this.formHandlers["creditCardNumberHandlers"],
-              creditCardMonthHanlder:
-                  this.formHandlers["creditCardMonthHanlder"],
-              creditCardYearHandler: this.formHandlers["creditCardYearHandler"],
-              creditCardCvvHandler: this.formHandlers["creditCardCvvHandler"],
-            ),
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Text(
+            "Metodo de pago",
+            style: kParkaPageTitleTextStyle,
+          ),
+          CreditCardWidget(
+            fullName: this.fullName,
+            creditCardNumber1: this.creditCardNumber1,
+            creditCardNumber2: this.creditCardNumber2,
+            creditCardNumber3: this.creditCardNumber3,
+            creditCardNumber4: this.creditCardNumber4,
+            creditCardMonth: this.creditCardMonth,
+            creditCardYear: this.creditCardYear,
+            creditCardInfo: this.gradientGetter(),
+          ),
+          CreditCardInfoForm(
+            creditCardNameHandler: this.formHandlers["creditCardNameHandler"],
+            creditCardNumberHandlers:
+                this.formHandlers["creditCardNumberHandlers"],
+            creditCardMonthHanlder: this.formHandlers["creditCardMonthHanlder"],
+            creditCardYearHandler: this.formHandlers["creditCardYearHandler"],
+            creditCardCvvHandler: this.formHandlers["creditCardCvvHandler"],
+          ),
+        ],
       ),
     );
   }

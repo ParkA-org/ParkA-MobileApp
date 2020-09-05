@@ -50,10 +50,11 @@ class CreditCardWidget extends StatelessWidget {
             "${this.creditCardNumber1} ${this.creditCardNumber2} ${this.creditCardNumber3} ${this.creditCardNumber4}",
             textAlign: TextAlign.left,
             style: TextStyle(
-                color: Colors.white,
-                wordSpacing: 10.0,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),
+              color: Colors.white,
+              wordSpacing: 10.0,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -63,24 +64,28 @@ class CreditCardWidget extends StatelessWidget {
                 child: Text(
                   this.fullName,
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold),
+                    color: Colors.white,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Expanded(
                 child: Text(
                   "Valido \n hasta",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
               Expanded(
                 child: Text(
                   "${this.creditCardMonth}/${this.creditCardYear}",
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold),
+                    color: Colors.white,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               )
             ],
