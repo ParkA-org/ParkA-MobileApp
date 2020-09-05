@@ -3,7 +3,10 @@ import 'package:ParkA/components/Utils/styles/text.dart';
 import "package:flutter/material.dart";
 
 class ParkaHeader extends StatelessWidget {
+  final Color color;
+
   const ParkaHeader({
+    @required this.color,
     Key key,
   }) : super(key: key);
 
@@ -15,7 +18,7 @@ class ParkaHeader extends StatelessWidget {
         TransparentButton(
           label: "Atras",
           buttonTextStyle: kParkaInputDefaultSyle,
-          color: Color(0xFF0B768C),
+          color: this.color,
           leadingIconData: Icons.keyboard_arrow_left,
           onTapHandler: () {
             Navigator.pop(context);

@@ -1,4 +1,5 @@
 import 'package:ParkA/components/Headers/parka_header.dart';
+import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:flutter/material.dart';
 
 import 'Components/login_form.dart';
@@ -24,7 +25,9 @@ class EmailLogin extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                ParkaHeader(),
+                ParkaHeader(
+                  color: ParkaColors.parkaGreen,
+                ),
                 //Header Column
                 LoginHeader(screenSize: currentScreen),
                 //Login Column

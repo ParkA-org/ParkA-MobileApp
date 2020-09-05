@@ -22,7 +22,9 @@ class RegisterPage extends StatelessWidget {
             //Header Column
             Expanded(
               flex: 0,
-              child: ParkaHeader(),
+              child: ParkaHeader(
+                color: ParkaColors.parkaGreen,
+              ),
             ),
             Expanded(
               child: Row(
