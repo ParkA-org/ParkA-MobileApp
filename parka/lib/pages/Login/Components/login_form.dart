@@ -2,6 +2,7 @@ import 'package:ParkA/components/Inputs/parka_input.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/pages/ForgotPassword/forgot_password_screen.dart';
+import 'package:ParkA/pages/Login/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatefulWidget {
@@ -12,6 +13,7 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  String user, password, result;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -34,6 +36,11 @@ class _LoginFormState extends State<LoginForm> {
                   ParkAInput(
                     icon: 'WhiteProfileIcon.svg',
                     text: 'Correo / Usuario',
+                    onChanged: (user) {
+                      setState(() {
+                        this.user = user;
+                      });
+                    },
                   ),
                   SizedBox(
                     height: widget.screenSize.height * 0.03,
@@ -43,6 +50,11 @@ class _LoginFormState extends State<LoginForm> {
                     text: 'Contraseña',
                     isPassword: true,
                     keyboardType: TextInputType.text,
+                    onChanged: (password) {
+                      setState(() {
+                        this.password = password;
+                      });
+                    },
                   ),
                   SizedBox(
                     height: widget.screenSize.height * 0.025,
@@ -78,7 +90,8 @@ class _LoginFormState extends State<LoginForm> {
                           fontWeight: FontWeight.bold,
                           color: Colors.white),
                     ),
-                    onPressed: () => {},
+                    onPressed: () async =>
+                        {result = await login(this.user, this.password)},
                   ),
                 ],
               ),
