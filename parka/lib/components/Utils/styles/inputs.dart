@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
 const kInputStyle = InputDecoration(
   hintText: '',
@@ -36,5 +36,14 @@ const kInputStyleSlim = InputDecoration(
   focusedBorder: OutlineInputBorder(
     borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
     borderRadius: BorderRadius.all(Radius.circular(15.0)),
+  ),
+);
+
+final InputDecoration kParkaInputTextFieldDefaultStyle = InputDecoration(
+  filled: true,
+  isDense: true,
+  fillColor: Colors.white,
+  border: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(15),
   ),
 );

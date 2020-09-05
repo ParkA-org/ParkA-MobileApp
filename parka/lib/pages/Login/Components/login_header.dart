@@ -1,3 +1,4 @@
+import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -25,14 +26,14 @@ class LoginHeader extends StatelessWidget {
                   'resources/images/BlueCar.svg',
                   height: screenSize.height * 0.18,
                 )),
-            const Text(
+            Text(
               "Iniciar Sesión",
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: "Montserrat",
                   fontSize: 48,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF0B768C)),
+                  color: ParkaColors.parkaGreen),
             ),
           ]),
         ),

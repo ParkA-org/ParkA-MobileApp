@@ -1,4 +1,4 @@
-import 'package:ParkA/components/Buttons/transparent_button_test.dart';
+import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:flutter/material.dart';
 
 import 'Components/login_form.dart';
@@ -24,10 +24,7 @@ class EmailLogin extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                TransparentButtonWithIcon(
-                  label: "Atras",
-                  color: Color(0xFF0B768C),
-                ),
+                ParkaHeader(),
                 //Header Column
                 LoginHeader(screenSize: currentScreen),
                 //Login Column

@@ -1,5 +1,9 @@
 import 'package:ParkA/components/Buttons/round_button.dart';
 import 'package:ParkA/components/Buttons/transparent_button.dart';
+import 'package:ParkA/components/Utils/styles/parka_colors.dart';
+import 'package:ParkA/components/Utils/styles/text.dart';
+import 'package:ParkA/pages/Login/email_login.dart';
+import 'package:ParkA/pages/Register/register_page.dart';
 import "package:flutter/material.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../components/Utils/parkaIcons.dart';
@@ -18,7 +22,7 @@ class LoginScreen extends StatelessWidget {
             child: WavyClipper.withBottomWave(
               child: Container(
                 alignment: Alignment.centerLeft,
-                color: Color(0xFF0B768C),
+                color: ParkaColors.parkaGreen,
                 child: Icon(
                   ParkaIcons.parkaCar,
                   color: Colors.white,
@@ -28,59 +32,55 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-              flex: 7,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 32.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Text(
-                      "Bienvenido a ParkA",
-                      // textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Color(0xFF0B768C),
-                          fontSize: 48.0,
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      "Simplificando la busqueda y alquiler de parqueos",
-                      style: TextStyle(
-                          color: Color(0xFF0B768C),
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.bold),
-                    ),
-                    RoundedButton(
-                      color: Color(0xFF3B5998),
-                      icon: FontAwesomeIcons.facebookF,
-                      label: "Iniciar sesion con Facebook",
-                      hasIcon: true,
-                      hasShadow: false,
-                    ),
-                    RoundedButton(
-                      color: Color(0xFFFF3E30),
-                      icon: FontAwesomeIcons.google,
-                      label: "Iniciar sesion con Google",
-                      hasIcon: true,
-                      hasShadow: false,
-                    ),
-                    TransparentButton(
-                      label: "Iniciar Sesion con Correo",
-                      buttonTextStyle: TextStyle(
-                          color: Color(0xFF0B768C),
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.bold),
-                    ),
-                    TransparentButton(
-                      label: "Registrarse",
-                      buttonTextStyle: TextStyle(
-                          color: Color(0xFF0B768C),
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ))
+            flex: 7,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 32.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Text(
+                    "Bienvenido a ParkA",
+                    // textAlign: TextAlign.center,
+                    style: kParkaBigTitleTextStyle,
+                  ),
+                  Text(
+                    "Simplificando la busqueda y alquiler de parqueos",
+                    style: kParkaTextBaseStyle,
+                  ),
+                  RoundedButton(
+                    color: ParkaColors.parkaFacebookBlue,
+                    icon: FontAwesomeIcons.facebookF,
+                    label: "Iniciar sesion con Facebook",
+                    hasIcon: true,
+                    hasShadow: false,
+                  ),
+                  RoundedButton(
+                    color: ParkaColors.parkaGoogleRed,
+                    icon: FontAwesomeIcons.google,
+                    label: "Iniciar sesion con Google",
+                    hasIcon: true,
+                    hasShadow: false,
+                  ),
+                  TransparentButton(
+                    label: "Iniciar Sesion con Correo",
+                    color: ParkaColors.parkaGreen,
+                    buttonTextStyle: kParkaTextBaseStyle,
+                    onTapHandler: () {
+                      Navigator.pushNamed(context, EmailLogin.routeName);
+                    },
+                  ),
+                  TransparentButton(
+                    label: "Registrarse",
+                    color: ParkaColors.parkaGreen,
+                    buttonTextStyle: kParkaTextBaseStyle,
+                    onTapHandler: () {
+                      Navigator.pushNamed(context, RegisterPage.routeName);
+                    },
+                  ),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );

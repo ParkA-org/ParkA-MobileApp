@@ -27,15 +27,16 @@ class FeatureSelectButton extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            color: this.isSelected ? Color(0xFF0B768C) : Color(0xFFE5E4E4),
-            borderRadius: BorderRadius.circular(15.0),
-            boxShadow: [
-              BoxShadow(
-                offset: Offset(0, 7.0),
-                color: Colors.black38,
-                blurRadius: 5.0,
-              ),
-            ]),
+          color: this.isSelected ? Color(0xFF0B768C) : Color(0xFFE5E4E4),
+          borderRadius: BorderRadius.circular(15.0),
+          boxShadow: [
+            BoxShadow(
+              offset: Offset(0, 7.0),
+              color: Colors.black38,
+              blurRadius: 5.0,
+            ),
+          ],
+        ),
         margin: EdgeInsets.all(8.0),
         height: renderAvaliableWidth / 3.5,
         width: renderAvaliableWidth / 3.5,
