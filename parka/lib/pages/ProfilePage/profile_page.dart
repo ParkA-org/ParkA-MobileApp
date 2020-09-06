@@ -138,6 +138,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 hasIcon: false,
                                 label: "Actividad",
                                 color: ParkaColors.parkaGreen,
+                                isSelected: this.infoScreenPage == 1,
                                 onTapHandler: () {
                                   this._setPage(1);
                                 },
@@ -152,6 +153,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 hasIcon: false,
                                 label: "Resenas",
                                 color: ParkaColors.parkaGreen,
+                                isSelected: this.infoScreenPage == 2,
                                 onTapHandler: () {
                                   this._setPage(2);
                                 },
