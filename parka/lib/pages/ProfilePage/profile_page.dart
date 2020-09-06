@@ -123,6 +123,7 @@ class ProfileScreen extends StatelessWidget {
                       child: ListView(
                         children: [
                           ParkaServiceHistoryWidget(),
+                          ParkaServiceHistoryWidget(),
                         ],
                       ),
                     )
@@ -144,64 +145,126 @@ class ParkaServiceHistoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "Se estaciono en",
+    return LayoutBuilder(builder: (context, constraints) {
+      final double tileHeight = constraints.maxWidth / 2.5;
+
+      return Container(
+        height: tileHeight,
+        child: Column(
+          children: [
+            Expanded(
+              flex: 0,
+              child: Container(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Se estaciono en",
+                  style: kParkaTextBaseStyle,
+                ),
+              ),
             ),
-          ),
-          Row(
-            children: [
-              Expanded(
-                flex: 0,
-                child: Container(
-                  child: Center(
-                    child: Container(
-                      margin: EdgeInsets.all(8.0),
-                      height: 100.0,
-                      width: 100.0,
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(15.0),
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 0,
+                    child: Center(
+                      child: Container(
+                        margin: EdgeInsets.fromLTRB(0, 8.0, 16.0, 8.0),
+                        height: 100.0,
+                        width: 100.0,
+                        decoration: BoxDecoration(
+                          color: ParkaColors.parkaGreen,
+                          borderRadius: BorderRadius.circular(15.0),
+                          border: Border.all(
+                            color: Color(0xFF949494),
+                            width: 1.0,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      "Alma Rosa",
-                      style: kParkaBigButtonTextStyle.copyWith(
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "Alma Rosa I",
+                            style: kParkaBigButtonTextStyle.copyWith(
+                              color: ParkaColors.parkaGreen,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Fecha", style: kParkaTextBaseStyle),
+                              Text(
+                                "Ago 16,2020",
+                                style: kParkaTextBaseStyle.copyWith(
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Vehiculo", style: kParkaTextBaseStyle),
+                              Text(
+                                "Tesla Model 3",
+                                style: kParkaTextBaseStyle.copyWith(
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Tiempo", style: kParkaTextBaseStyle),
+                              Text(
+                                "3 Horas",
+                                style: kParkaTextBaseStyle.copyWith(
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 0,
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                        size: tileHeight / 3,
                         color: ParkaColors.parkaGreen,
                       ),
                     ),
-                    Text("Fecha", style: kParkaTextBaseStyle),
-                    Text("Vehiculo", style: kParkaTextBaseStyle),
-                    Text("Tiempo", style: kParkaTextBaseStyle),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Expanded(
-                flex: 0,
-                child: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 40.0,
-                ),
+            ),
+            Expanded(
+              flex: 0,
+              child: Divider(
+                thickness: 1.0,
+                color: Color(0xFF949494),
               ),
-            ],
-          ),
-          Divider(
-            thickness: 1.0,
-            color: Color(0xFF949494),
-          )
-        ],
-      ),
-    );
+            )
+          ],
+        ),
+      );
+    });
   }
 }
