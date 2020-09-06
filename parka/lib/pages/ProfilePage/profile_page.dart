@@ -1,6 +1,7 @@
 import 'package:ParkA/components/Buttons/round_button.dart';
 import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
+import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/ProfilePage/components/informative_tab.dart';
 import 'package:ParkA/pages/ProfilePage/components/profile_personal_information_widget.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 class ProfileScreen extends StatelessWidget {
   static String routeName = "/profileScreen";
 
+  //TODO: Refactor the below widgets to acept data
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,7 +122,7 @@ class ProfileScreen extends StatelessWidget {
                     Expanded(
                       child: ListView(
                         children: [
-                          Text("driga"),
+                          ParkaServiceHistoryWidget(),
                         ],
                       ),
                     )
@@ -130,6 +132,75 @@ class ProfileScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ParkaServiceHistoryWidget extends StatelessWidget {
+  const ParkaServiceHistoryWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Se estaciono en",
+            ),
+          ),
+          Row(
+            children: [
+              Expanded(
+                flex: 0,
+                child: Container(
+                  child: Center(
+                    child: Container(
+                      margin: EdgeInsets.all(8.0),
+                      height: 100.0,
+                      width: 100.0,
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "Alma Rosa",
+                      style: kParkaBigButtonTextStyle.copyWith(
+                        color: ParkaColors.parkaGreen,
+                      ),
+                    ),
+                    Text("Fecha", style: kParkaTextBaseStyle),
+                    Text("Vehiculo", style: kParkaTextBaseStyle),
+                    Text("Tiempo", style: kParkaTextBaseStyle),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 0,
+                child: Icon(
+                  Icons.arrow_forward_ios,
+                  size: 40.0,
+                ),
+              ),
+            ],
+          ),
+          Divider(
+            thickness: 1.0,
+            color: Color(0xFF949494),
+          )
+        ],
       ),
     );
   }
