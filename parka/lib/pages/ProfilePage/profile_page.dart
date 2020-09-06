@@ -9,10 +9,43 @@ import 'package:ParkA/pages/ProfilePage/components/parka_service_history_tile_wi
 import 'package:ParkA/pages/ProfilePage/components/profile_personal_information_widget.dart';
 import 'package:flutter/material.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   static String routeName = "/profileScreen";
 
-  //TODO: Refactor the below widgets to acept data
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  int infoScreenPage = 1;
+
+  void _setPage(int index) {
+    setState(() {
+      this.infoScreenPage = index;
+    });
+  }
+
+  Widget _serviceListViewBuilder() {
+    return ListView(
+      children: [
+        ParkaServiceHistoryWidget(),
+      ],
+    );
+  }
+
+  Widget _reviewListView() {
+    return ListView(
+      children: [
+        ParkaReviewHistoryTile(
+          rating: 3,
+        ),
+        ParkaReviewHistoryTile(
+          rating: 3,
+        )
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,6 +138,9 @@ class ProfileScreen extends StatelessWidget {
                                 hasIcon: false,
                                 label: "Actividad",
                                 color: ParkaColors.parkaGreen,
+                                onTapHandler: () {
+                                  this._setPage(1);
+                                },
                               ),
                             ),
                           ),
@@ -116,6 +152,9 @@ class ProfileScreen extends StatelessWidget {
                                 hasIcon: false,
                                 label: "Resenas",
                                 color: ParkaColors.parkaGreen,
+                                onTapHandler: () {
+                                  this._setPage(2);
+                                },
                               ),
                             ),
                           )
@@ -123,17 +162,9 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: ListView(
-                        children: [
-                          ParkaServiceHistoryWidget(),
-                          ParkaReviewHistoryTile(
-                            rating: 3,
-                          ),
-                          ParkaReviewHistoryTile(
-                            rating: 3,
-                          )
-                        ],
-                      ),
+                      child: this.infoScreenPage == 1
+                          ? _serviceListViewBuilder()
+                          : _reviewListView(),
                     )
                   ],
                 ),

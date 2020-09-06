@@ -41,6 +41,7 @@ class ParkaReviewHistoryTile extends StatelessWidget {
                 6;
 
         return Container(
+          margin: EdgeInsets.symmetric(vertical: 4.0),
           height: tileHeight,
           // color: Colors.blueAccent,
           child: Column(
