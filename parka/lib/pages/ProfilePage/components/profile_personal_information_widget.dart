@@ -16,7 +16,9 @@ class ProfilePersonalInformationWidget extends StatelessWidget {
       children: [
         Expanded(
           flex: 1,
-          child: ParkaCircleAvatarWidget(),
+          child: Center(
+            child: ParkaCircleAvatarWidget(),
+          ),
         ),
         Expanded(
           flex: 2,
