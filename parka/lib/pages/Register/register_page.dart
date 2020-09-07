@@ -4,6 +4,7 @@ import 'package:ParkA/components/Inputs/parka_input.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/pages/ProfilePic/profile_pic_page.dart';
+import 'package:ParkA/pages/Register/utils/utils.dart';
 import 'package:flutter/material.dart';
 import "package:ParkA/components/Utils/styles/text.dart";
 
@@ -15,7 +16,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  String username, password, email, lastname, confirm_password;
+  String username, password, email, lastname, confirmpassword;
   @override
   Widget build(BuildContext context) {
     Size currentScreen = MediaQuery.of(context).size;
@@ -94,10 +95,9 @@ class _RegisterPageState extends State<RegisterPage> {
                               ParkAInput(
                                 icon: 'Mail.svg',
                                 text: 'Correo/Usuario',
-                                isPassword: true,
-                                onChanged: (password) {
+                                onChanged: (email) {
                                   setState(() {
-                                    this.password = password;
+                                    this.email = email;
                                   });
                                 },
                               ),
@@ -115,9 +115,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                 icon: 'Lockcheck.svg',
                                 text: 'Confirmar contraseña',
                                 isPassword: true,
-                                onChanged: (confirmed_password) {
+                                onChanged: (confirmpassword) {
                                   setState(() {
-                                    this.confirmed_password = password;
+                                    this.confirmpassword = confirmpassword;
                                   });
                                 },
                               ),
@@ -129,9 +129,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                 buttonTextStyle: kParkaButtonTextStyle,
                                 trailingIconData: Icons.arrow_forward_ios,
                                 color: Colors.white,
-                                onTapHandler: () {
+                                onTapHandler: () async => {
+                                  await createUser(this.username, this.lastname,
+                                      this.email, this.password),
                                   Navigator.pushNamed(
-                                      context, ProfilePicPage.routeName);
+                                      context, ProfilePicPage.routeName)
                                 },
                               ),
                             ],

@@ -21,11 +21,15 @@ Future createUser(
   MutationOptions mutationOptions = MutationOptions(
       documentNode: gql(createUserMutation),
       variables: <String, dynamic>{
-        "username": name,
-        "password": password,
-        "lastname": lastname,
-        "confirmed": confirmed,
-        "email": email
+        "user": {
+          "data": {
+            "username": name,
+            "password": password,
+            "lastname": lastname,
+            "confirmed": confirmed,
+            "email": email
+          }
+        }
       });
 
   final QueryResult mutationResult = await ParkaGraphqlClient.graphQlClient
