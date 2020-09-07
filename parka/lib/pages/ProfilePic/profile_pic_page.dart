@@ -11,7 +11,7 @@ import 'package:image_picker/image_picker.dart';
 
 class ProfilePicPage extends StatefulWidget {
   ProfilePicPage({Key key}) : super(key: key);
-
+  Object arguments;
   static const String routeName = "/ProfilePicPage";
 
   @override

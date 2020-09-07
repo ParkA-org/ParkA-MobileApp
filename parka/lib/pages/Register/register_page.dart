@@ -20,6 +20,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     Size currentScreen = MediaQuery.of(context).size;
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -130,10 +131,15 @@ class _RegisterPageState extends State<RegisterPage> {
                                 trailingIconData: Icons.arrow_forward_ios,
                                 color: Colors.white,
                                 onTapHandler: () async => {
-                                  await createUser(this.username, this.lastname,
-                                      this.email, this.password),
                                   Navigator.pushNamed(
-                                      context, ProfilePicPage.routeName)
+                                    context,
+                                    ProfilePicPage.routeName,
+                                    arguments: await createUser(
+                                        this.username,
+                                        this.lastname,
+                                        this.email,
+                                        this.password),
+                                  )
                                 },
                               ),
                             ],
