@@ -7,10 +7,15 @@ import 'package:ParkA/pages/ProfilePic/profile_pic_page.dart';
 import 'package:flutter/material.dart';
 import "package:ParkA/components/Utils/styles/text.dart";
 
-class RegisterPage extends StatelessWidget {
-  const RegisterPage({Key key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  RegisterPage({Key key}) : super(key: key);
   static const String routeName = "/RegisterPage";
+  @override
+  _RegisterPageState createState() => _RegisterPageState();
+}
 
+class _RegisterPageState extends State<RegisterPage> {
+  String username, password, email, lastname, confirm_password;
   @override
   Widget build(BuildContext context) {
     Size currentScreen = MediaQuery.of(context).size;
@@ -71,25 +76,50 @@ class RegisterPage extends StatelessWidget {
                               ParkAInput(
                                 icon: 'WhiteProfileIcon.svg',
                                 text: 'Nombres',
+                                onChanged: (username) {
+                                  setState(() {
+                                    this.username = username;
+                                  });
+                                },
                               ),
                               ParkAInput(
                                 icon: 'WhiteProfileIcon.svg',
                                 text: 'Apellidos',
+                                onChanged: (lastname) {
+                                  setState(() {
+                                    this.lastname = lastname;
+                                  });
+                                },
                               ),
                               ParkAInput(
                                 icon: 'Mail.svg',
                                 text: 'Correo/Usuario',
                                 isPassword: true,
+                                onChanged: (password) {
+                                  setState(() {
+                                    this.password = password;
+                                  });
+                                },
                               ),
                               ParkAInput(
                                 icon: 'WhiteLockIcon.svg',
                                 text: 'Contraseña',
                                 isPassword: true,
+                                onChanged: (password) {
+                                  setState(() {
+                                    this.password = password;
+                                  });
+                                },
                               ),
                               ParkAInput(
                                 icon: 'Lockcheck.svg',
                                 text: 'Confirmar contraseña',
                                 isPassword: true,
+                                onChanged: (confirmed_password) {
+                                  setState(() {
+                                    this.confirmed_password = password;
+                                  });
+                                },
                               ),
                               SizedBox(
                                 height: 10,
