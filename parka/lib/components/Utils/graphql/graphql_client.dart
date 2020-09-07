@@ -12,11 +12,11 @@ class ParkaGraphqlClient {
       uri: 'http://parka-api.herokuapp.com/graphql',
     );
 
-// final AuthLink _authLink = AuthLink(
-//     getToken: () async => 'Bearer $YOUR_PERSONAL_ACCESS_TOKEN',
-// );
+    // final AuthLink _authLink = AuthLink(
+    //   getToken: () async => 'Bearer $YOUR_PERSONAL_ACCESS_TOKEN',
+    // );
 
-// final Link _link = _authLink.concat(_httpLink);
+    // final Link _link = _authLink.concat(_httpLink);
 
     _client = GraphQLClient(
       cache: InMemoryCache(),
