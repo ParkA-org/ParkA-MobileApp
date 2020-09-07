@@ -7,6 +7,7 @@ import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/ID/ID_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:graphql/client.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfilePicPage extends StatefulWidget {
@@ -20,11 +21,13 @@ class ProfilePicPage extends StatefulWidget {
 
 class _ProfilePicPageState extends State<ProfilePicPage> {
   File _image;
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     final picker = ImagePicker();
-
+    final QueryResult args = ModalRoute.of(context).settings.arguments;
+    String id = args.data['createUser']['user']['id'];
     Future getImage() async {
       final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
@@ -93,7 +96,11 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
                           color: ParkaColors.parkaLimeGreen,
                         ),
                         onTapHandler: () {
-                          Navigator.pushNamed(context, IDPage.routeName);
+                          Navigator.pushNamed(
+                            context,
+                            IDPage.routeName,
+                            arguments: id,
+                          );
                         },
                       ),
                       SizedBox(height: screenSize.height * 0.075),
