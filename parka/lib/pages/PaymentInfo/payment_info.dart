@@ -1,5 +1,8 @@
-import 'package:ParkA/components/Buttons/transparent_button_test.dart';
+import 'package:ParkA/components/Buttons/transparent_button.dart';
+import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
+import 'package:ParkA/components/Utils/styles/parka_colors.dart';
+import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/PaymentInfo/Components/credit_card_complete_info_form.dart';
 import "package:flutter/material.dart";
 
@@ -83,13 +86,7 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
             children: <Widget>[
               Expanded(
                 flex: 0,
-                child: Container(
-                  color: Colors.white,
-                  child: TransparentButtonWithIcon(
-                    label: "Atras",
-                    color: Color(0xFF0B768C),
-                  ),
-                ),
+                child: ParkaHeader(),
               ),
               Expanded(
                 flex: 7,
@@ -109,7 +106,7 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
                 flex: 2,
                 child: WavyClipper.withTopWave(
                   child: Container(
-                    color: Color(0xFF0B768C),
+                    color: ParkaColors.parkaGreen,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
@@ -117,16 +114,18 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
                           height: 20,
                         ),
                         Expanded(
-                          child: TransparentButtonWithRightIcon(
+                          child: TransparentButton(
                             label: "Continuar",
+                            buttonTextStyle: kParkaButtonTextStyle,
                             color: Colors.white,
-                            icon: Icons.arrow_forward_ios,
+                            trailingIconData: Icons.arrow_forward_ios,
                           ),
                         ),
                         Expanded(
-                          child: TransparentButtonWithRightIcon(
+                          child: TransparentButton(
+                            buttonTextStyle: kParkaButtonTextStyle,
                             label: "Omitir",
-                            color: Color(0xFFB3E8FF),
+                            color: ParkaColors.parkaLightGreen,
                           ),
                         ),
                       ],

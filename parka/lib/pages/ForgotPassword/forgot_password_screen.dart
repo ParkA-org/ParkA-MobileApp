@@ -1,8 +1,10 @@
 import 'package:ParkA/components/Buttons/round_button.dart';
 import 'package:ParkA/components/Buttons/transparent_button.dart';
-import 'package:ParkA/components/Utils/constants.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:ParkA/components/Utils/functions.dart';
+import 'package:ParkA/components/Utils/styles/inputs.dart';
+import 'package:ParkA/components/Utils/styles/parka_colors.dart';
+import 'package:ParkA/components/Utils/styles/text.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_svg/svg.dart';
 
@@ -37,11 +39,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     Text(
                       "Olvidaste tu contraseña?",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Color(0xFF0B768C),
-                          fontSize: 32.0,
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.bold),
+                      style: kParkaPageTitleTextStyle,
                     ),
                     SvgPicture.asset(
                       'resources/images/ForgotPasswordIcon.svg',
@@ -53,7 +51,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 22.0,
-                        color: Color(0xFF0B768C),
+                        color: ParkaColors.parkaGreen,
                       ),
                     ),
                     TextField(
@@ -73,13 +71,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             Expanded(
               child: WavyClipper.withTopWave(
                 child: Container(
-                  color: Color(0xFF0B768C),
+                  color: ParkaColors.parkaGreen,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       RoundedButton(
                         label: "Enviar",
-                        color: Color(0xFF63C7B2),
+                        color: ParkaColors.parkaLimeGreen,
                         hasIcon: false,
                         hasShadow: true,
                         width: 150.0,
@@ -92,12 +90,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       ),
                       TransparentButton(
                         label: "Cancelar",
+                        color: ParkaColors.parkaLightGreen,
                         onTapHandler: () => Navigator.pop(context),
-                        buttonTextStyle: TextStyle(
-                            color: Color(0xFFB3E8FF),
-                            fontFamily: "Montserrat",
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold),
+                        buttonTextStyle: kParkaInputDefaultSyle,
                       )
                     ],
                   ),

@@ -19,15 +19,15 @@ class SearchBar extends StatelessWidget {
       width: width ?? 900,
       padding: EdgeInsets.symmetric(horizontal: 10.0),
       decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(5.0, 5.0),
-              color: Colors.black54,
-            ),
-          ],
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15.0),
-          border: Border.all(color: Colors.grey)),
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(5.0, 5.0),
+            color: Colors.black54,
+          ),
+        ],
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15.0),
+      ),
       margin: EdgeInsets.only(left: 25.0, right: 19.0),
       child: TextField(
         enabled: enabled ?? true,
