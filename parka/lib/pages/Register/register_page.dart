@@ -79,7 +79,6 @@ class RegisterPage extends StatelessWidget {
                               ParkAInput(
                                 icon: 'Mail.svg',
                                 text: 'Correo/Usuario',
-                                isPassword: true,
                               ),
                               ParkAInput(
                                 icon: 'WhiteLockIcon.svg',
