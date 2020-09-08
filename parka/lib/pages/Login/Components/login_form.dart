@@ -4,6 +4,7 @@ import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/pages/ForgotPassword/forgot_password_screen.dart';
 import 'package:ParkA/pages/Login/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:graphql/client.dart';
 
 class LoginForm extends StatefulWidget {
   LoginForm({Key key, this.screenSize}) : super(key: key);
@@ -13,7 +14,8 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  String user, password, result;
+  String user, password;
+  QueryResult result;
   @override
   Widget build(BuildContext context) {
     return Expanded(
