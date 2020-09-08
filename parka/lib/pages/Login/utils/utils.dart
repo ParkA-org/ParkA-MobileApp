@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:graphql/client.dart';
 import '../../../components/Utils/graphql/graphql_client.dart';
 
-// Aprendiendo con sebastiano faiella
 Future login(String user, String password) async {
   final local = "local";
   const loginMutation = r'''mutation(

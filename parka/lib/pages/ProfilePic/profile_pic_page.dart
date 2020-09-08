@@ -5,11 +5,13 @@ import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/ID/ID_page.dart';
+import 'package:ParkA/pages/ProfilePic/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:graphql/client.dart';
 import 'package:image_picker/image_picker.dart';
 
+// ignore: must_be_immutable
 class ProfilePicPage extends StatefulWidget {
   ProfilePicPage({Key key}) : super(key: key);
   Object arguments;
@@ -82,8 +84,12 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
                         label: "Continuar",
                         color: Colors.white,
                         buttonTextStyle: kParkaBigButtonTextStyle,
-                        onTapHandler: () {
-                          Navigator.pushNamed(context, IDPage.routeName);
+                        onTapHandler: () async => {
+                          Navigator.pushNamed(
+                            context,
+                            IDPage.routeName,
+                            arguments: await updateUser(id, _image),
+                          ),
                         },
                       ),
                       SizedBox(
@@ -96,11 +102,8 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
                           color: ParkaColors.parkaLimeGreen,
                         ),
                         onTapHandler: () {
-                          Navigator.pushNamed(
-                            context,
-                            IDPage.routeName,
-                            arguments: id,
-                          );
+                          Navigator.pushNamed(context, IDPage.routeName,
+                              arguments: id);
                         },
                       ),
                       SizedBox(height: screenSize.height * 0.075),
