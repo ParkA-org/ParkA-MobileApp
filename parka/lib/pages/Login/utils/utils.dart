@@ -41,6 +41,5 @@ Future login(String user, String password) async {
   }).catchError((value) {
     return value;
   });
-
   return mutationResult;
 }

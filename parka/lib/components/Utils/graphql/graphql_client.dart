@@ -9,7 +9,7 @@ class ParkaGraphqlClient {
 
   ParkaGraphqlClient() {
     final HttpLink _httpLink = HttpLink(
-      uri: 'http://parka-api.herokuapp.com/graphql',
+      uri: 'https://parka-api.herokuapp.com/graphql',
     );
 
     // final AuthLink _authLink = AuthLink(
