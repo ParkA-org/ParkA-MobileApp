@@ -8,8 +8,15 @@ class SearchBar extends StatelessWidget {
   final double textSize;
 
   final bool enabled;
+
+  final String hintText;
   const SearchBar(
-      {Key key, this.height, this.width, this.textSize, this.enabled})
+      {Key key,
+      this.height,
+      this.width,
+      this.textSize,
+      this.enabled,
+      this.hintText})
       : super(key: key);
 
   @override
@@ -19,6 +26,7 @@ class SearchBar extends StatelessWidget {
       width: width ?? 900,
       padding: EdgeInsets.symmetric(horizontal: 10.0),
       decoration: BoxDecoration(
+        border: Border.all(color: Colors.blueGrey),
         boxShadow: [
           BoxShadow(
             offset: Offset(5.0, 5.0),
@@ -36,7 +44,8 @@ class SearchBar extends StatelessWidget {
             fontFamily: 'Montserrat',
             fontSize: textSize ?? 25.0,
           ),
-          hintText: 'Buscar...',
+          contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 8),
+          hintText: hintText ?? 'Buscar...',
           icon: Icon(
             Icons.search,
             size: 35,

@@ -68,7 +68,7 @@ class ParkAInput extends StatelessWidget {
             height: currentScreen.height * 0.005,
           ),
           Container(
-            decoration: BoxDecoration(shape: BoxShape.circle, boxShadow: [
+            decoration: BoxDecoration(boxShadow: [
               BoxShadow(
                 blurRadius: 5,
                 offset: Offset(0, 10),
