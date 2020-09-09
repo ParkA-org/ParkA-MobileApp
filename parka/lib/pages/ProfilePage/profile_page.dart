@@ -62,6 +62,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       flex: 0,
                       child: ParkaHeader(
                         color: Colors.white,
+                        trailing: GestureDetector(
+                          child: Icon(
+                            Icons.edit,
+                          ),
+                        ),
                       ),
                     ),
                     Expanded(
