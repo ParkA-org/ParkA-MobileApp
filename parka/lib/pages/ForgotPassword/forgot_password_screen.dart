@@ -5,10 +5,11 @@ import 'package:ParkA/components/Utils/functions.dart';
 import 'package:ParkA/components/Utils/styles/inputs.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
+import 'package:ParkA/pages/ForgotPassword/components/email_sent_confirmation_widget.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_svg/svg.dart';
 
-import 'components/forgot_password_alert_dialog.dart';
+import '../../components/Alerts/parka_base_alert_widget.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   static const String routeName = "/forgotPassword";
@@ -84,7 +85,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         onTapHandler: () {
                           return buildShowDialog(
                             context,
-                            ForgotPasswordAlertDialog(),
+                            BaseAlertWidget(
+                              child: EmailSentConfirmationWidget(),
+                            ),
                           );
                         },
                       ),
