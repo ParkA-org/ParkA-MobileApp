@@ -26,7 +26,8 @@ dependencies:
 
   flutter_svg: ^0.18.0
   flutter_cupertino_date_picker: ^1.0.26+2
-
+  google_maps_flutter: ^0.5.30
+  location: ^3.0.2
   image_picker: 0.6.7+4
 
   # The following adds the Cupertino Icons font to your application.
@@ -50,8 +51,10 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - resources/images/
-    - resources/images/features/
+
+      - resources/images/
+      - resources/styles/
+      - resources/images/features/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
