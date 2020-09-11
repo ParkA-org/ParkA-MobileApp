@@ -86,7 +86,9 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
             children: <Widget>[
               Expanded(
                 flex: 0,
-                child: ParkaHeader(),
+                child: ParkaHeader(
+                  color: ParkaColors.parkaGreen,
+                ),
               ),
               Expanded(
                 flex: 7,
