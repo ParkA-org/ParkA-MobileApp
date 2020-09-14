@@ -1,5 +1,7 @@
+import 'package:ParkA/components/MenuItem/parka_menu_item.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
+import 'package:ParkA/pages/Search/search.dart';
 import 'package:flutter/material.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -94,63 +96,48 @@ class MainDrawer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Mis Reservas",
-                    style: kParkaInputDefaultSyle,
-                    textAlign: TextAlign.start,
+                  ParkAMenuItem(
+                    label: "Mis Reservas",
                   ),
-                  Text(
-                    "Mis Parqueos",
-                    style: kParkaInputDefaultSyle,
-                    textAlign: TextAlign.start,
+                  ParkAMenuItem(
+                    label: "Mis Parqueos",
                   ),
-                  Text(
-                    "Mis Vehiculos",
-                    style: kParkaInputDefaultSyle,
-                    textAlign: TextAlign.start,
+                  ParkAMenuItem(
+                    label: "Mis Vehiculos",
                   ),
-                  Text(
-                    "Mis Reservas",
-                    style: kParkaInputDefaultSyle,
-                    textAlign: TextAlign.start,
+                  ParkAMenuItem(
+                    label: "Favoritos",
                   ),
                   SizedBox(
                     height: screenSize.height * 0.001,
                   ),
-                  Text(
-                    "Metodos de Pago",
-                    style: kParkaInputDefaultStyleBlue,
-                    textAlign: TextAlign.start,
+                  ParkAMenuItem(
+                    label: "Metodos de pago",
+                    itemStyle: kParkaInputDefaultStyleBlue,
                   ),
-                  Text(
-                    "Chats",
-                    style: kParkaInputDefaultStyleBlue,
-                    textAlign: TextAlign.start,
+                  ParkAMenuItem(
+                    label: "Chats",
+                    itemStyle: kParkaInputDefaultStyleBlue,
                   ),
-                  Text(
-                    "Buscar Parqueo",
-                    style: kParkaInputDefaultStyleBlue,
-                    textAlign: TextAlign.start,
+                  ParkAMenuItem(
+                    label: "Buscar Parqueo",
+                    itemStyle: kParkaInputDefaultStyleBlue,
                   ),
-                  Text(
-                    "Registra tu Parqueo",
-                    style: kParkaInputDefaultStyleBlue,
-                    textAlign: TextAlign.start,
+                  ParkAMenuItem(
+                    label: "Registra tu Parqueo",
+                    itemStyle: kParkaInputDefaultStyleBlue,
                   ),
-                  Text(
-                    "Ayuda",
-                    style: kParkaInputDefaultStyleBlue,
-                    textAlign: TextAlign.start,
+                  ParkAMenuItem(
+                    label: "Ayuda",
+                    itemStyle: kParkaInputDefaultStyleBlue,
                   ),
-                  Text(
-                    "Configuracion",
-                    style: kParkaInputDefaultStyleBlue,
-                    textAlign: TextAlign.start,
+                  ParkAMenuItem(
+                    label: "Configuracion",
+                    itemStyle: kParkaInputDefaultStyleBlue,
                   ),
-                  Text(
-                    "Salir",
-                    style: kParkaInputDefaultStyleBlue,
-                    textAlign: TextAlign.start,
+                  ParkAMenuItem(
+                    label: "Salir",
+                    itemStyle: kParkaInputDefaultStyleBlue,
                   ),
                 ],
               ),
@@ -163,7 +150,7 @@ class MainDrawer extends StatelessWidget {
               "Terminos y condiciones legales",
               textAlign: TextAlign.left,
               style: kParkaInputDefaultStyleBlue.copyWith(
-                  fontWeight: FontWeight.normal, fontSize: 12),
+                  fontWeight: FontWeight.normal, fontSize: 14),
             ),
           )
         ]),
