@@ -2,6 +2,7 @@ import 'package:ParkA/components/MenuItem/parka_menu_item.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/Search/search.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -40,12 +41,14 @@ class MainDrawer extends StatelessWidget {
                                 children: [
                                   SizedBox(
                                     width: screenSize.width * 0.46,
-                                    child: Text(
-                                      "Sebastiano Faiella",
+                                    child: AutoSizeText(
+                                      "David",
                                       style: kParkaInputDefaultSyle.copyWith(
-                                          fontSize: 16),
+                                          fontSize: 22),
                                       softWrap: false,
-                                      overflow: TextOverflow.fade,
+                                      overflow: TextOverflow.clip,
+                                      maxLines: 1,
+                                      minFontSize: 16,
                                     ),
                                   ),
                                   SizedBox(
