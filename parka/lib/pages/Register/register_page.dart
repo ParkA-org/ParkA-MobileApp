@@ -4,7 +4,6 @@ import 'package:ParkA/components/Inputs/parka_input.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/pages/ProfilePic/profile_pic_page.dart';
-import 'package:ParkA/pages/Register/utils/utils.dart';
 import 'package:flutter/material.dart';
 import "package:ParkA/components/Utils/styles/text.dart";
 
@@ -28,8 +27,8 @@ var createAccount = <String, dynamic>{
   },
   "idpage": {
     "document": "",
-    "idNationality": "",
-    "idTypeDocument": "",
+    "nationality": "",
+    "typeDocument": "",
     "Placeofbirth": "",
     "datebirth": "",
   },

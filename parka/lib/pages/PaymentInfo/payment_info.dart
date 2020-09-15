@@ -8,7 +8,7 @@ import "package:flutter/material.dart";
 
 class PaymentInfoScreen extends StatefulWidget {
   static String routeName = "/paymentInfoPage";
-
+  Object arguments;
   @override
   _PaymentInfoScreenState createState() => _PaymentInfoScreenState();
 }
@@ -77,6 +77,9 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> createAccount =
+        ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: SafeArea(
@@ -119,6 +122,24 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
                             buttonTextStyle: kParkaButtonTextStyle,
                             color: Colors.white,
                             trailingIconData: Icons.arrow_forward_ios,
+                            onTapHandler: () async => {
+                              createAccount["paymentpage"]["digit"] =
+                                  creditCardNumber1 +
+                                      creditCardNumber2 +
+                                      creditCardNumber3 +
+                                      creditCardNumber4,
+                              createAccount["paymentpage"]["name"] = fullName,
+                              createAccount["paymentpage"]["expirationdate"] =
+                                  "01/" +
+                                      creditCardMonth +
+                                      "/" +
+                                      creditCardYear,
+                              // Navigator.pushNamed(
+                              //   context,
+                              //   PaymentInfoScreen.routeName,
+                              //   arguments: createAccount,
+                              // )
+                            },
                           ),
                         ),
                         Expanded(
@@ -126,6 +147,14 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
                             buttonTextStyle: kParkaButtonTextStyle,
                             label: "Omitir",
                             color: ParkaColors.parkaLightGreen,
+                            onTapHandler: () async => {
+                              createAccount["paymentpage"]["digit"] = 0,
+                              // Navigator.pushNamed(
+                              //   context,
+                              //   PaymentInfoScreen.routeName,
+                              //   arguments: createAccount,
+                              // )
+                            },
                           ),
                         ),
                       ],

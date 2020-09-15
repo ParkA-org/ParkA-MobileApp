@@ -10,6 +10,7 @@ import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/PaymentInfo/payment_info.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class IDPage extends StatefulWidget {
   IDPage({Key key}) : super(key: key);
   Object arguments;
@@ -92,7 +93,9 @@ class _IDPageState extends State<IDPage> {
                                     width: currentScreen.width * 0.8,
                                     onChanged: (value) {
                                       setState(() {
-                                        this.docType = docTypeOptions[value];
+                                        createAccount["idpage"]
+                                                ["typeDocument"] =
+                                            docTypeOptions[value];
                                       });
                                     }),
                                 ParkAInput(
@@ -101,7 +104,8 @@ class _IDPageState extends State<IDPage> {
                                   inputWidth: currentScreen.width * 0.8,
                                   onChanged: (value) {
                                     setState(() {
-                                      this.docNumber = value;
+                                      createAccount["idpage"]["document"] =
+                                          value;
                                     });
                                   },
                                 ),
@@ -122,7 +126,7 @@ class _IDPageState extends State<IDPage> {
                                     width: currentScreen.width * 0.8,
                                     onChanged: (value) {
                                       setState(() {
-                                        this.nationality =
+                                        createAccount["idpage"]["nationality"] =
                                             nationalityOptions[value];
                                       });
                                     }),
@@ -135,7 +139,8 @@ class _IDPageState extends State<IDPage> {
                                     width: currentScreen.width * 0.8,
                                     onChanged: (value) {
                                       setState(() {
-                                        this.placeOfBirth =
+                                        createAccount["idpage"]
+                                                ["Placeofbirth"] =
                                             placeOfBirthOptions[value];
                                       });
                                     }),
@@ -143,9 +148,14 @@ class _IDPageState extends State<IDPage> {
                                   label: "Continuar",
                                   color: Colors.white,
                                   buttonTextStyle: kParkaBigButtonTextStyle,
-                                  onTapHandler: () {
-                                    Navigator.popAndPushNamed(
-                                        context, PaymentInfoScreen.routeName);
+                                  onTapHandler: () => {
+                                    createAccount["idpage"]["datebirth"] =
+                                        this.dateOfBirth,
+                                    Navigator.pushNamed(
+                                      context,
+                                      PaymentInfoScreen.routeName,
+                                      arguments: createAccount,
+                                    )
                                   },
                                 ),
                                 TransparentButton(
@@ -153,10 +163,12 @@ class _IDPageState extends State<IDPage> {
                                   color: ParkaColors.parkaLightGreen,
                                   buttonTextStyle: kParkaInputDefaultSyle,
                                   onTapHandler: () => {
+                                    createAccount["idpage"]["datebirth"] =
+                                        "null",
                                     Navigator.pushNamed(
                                       context,
                                       PaymentInfoScreen.routeName,
-                                      arguments: "",
+                                      arguments: createAccount,
                                     )
                                   },
                                 )
