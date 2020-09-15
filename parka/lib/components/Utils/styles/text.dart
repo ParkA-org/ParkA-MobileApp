@@ -37,3 +37,8 @@ final kParkaBigTitleTextStyle = kParkaTextBaseStyle.copyWith(
 final kParkaPaymentFormStyle = kParkaTextBaseStyle.copyWith(
   fontSize: 18.0,
 );
+
+final kParkaInputDefaultStyleBlue = kParkaTextBaseStyle.copyWith(
+  fontSize: 16,
+  color: ParkaColors.parkaGreen,
+);
