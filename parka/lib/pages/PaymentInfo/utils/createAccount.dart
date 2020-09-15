@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 Future createUser(Map<String, dynamic> createAccount) async {
+  print(createAccount);
   final confirmed = true;
   const createUserMutation = r'''
   mutation CreateUser($user: createUserInput!) {
@@ -41,12 +42,13 @@ Future createUser(Map<String, dynamic> createAccount) async {
     return value;
   });
 
-  String profileId = mutationResult.data["id"];
+  String profileId = mutationResult.data["createUser"]["user"]["id"];
   print(profileId);
-  if (createAccount["profilepage"]["picture"] == "null") {
+  if (createAccount["profilepage"]["pictures"] == "null" ||
+      createAccount["profilepage"]["pictures"] == null) {
     createAccountData(createAccount, profileId);
   } else {
-    File imageFile = createAccount["profilepage"]["picture"];
+    File imageFile = File(createAccount["profilepage"]["pictures"]);
     updateUser(profileId, imageFile, createAccount);
   }
 }
@@ -104,13 +106,12 @@ Future updateUser(String profileId, File imageFile,
 Future createAccountData(
     Map<String, dynamic> createAccount, String profileId) async {
   String accountID = "";
-  const reateNewAccountMutation = r'''
+  const createNewAccountMutation = r'''
   mutation createNewAccount($userAccount: createAccountDatumInput){
   createAccountDatum(input: $userAccount){
     accountDatum{
-      document_type{
-        name
-      }
+      id
+      document_type
       placeofbirth
       user{
         id
@@ -121,16 +122,16 @@ Future createAccountData(
 } ''';
 
   MutationOptions mutationOptions = MutationOptions(
-      documentNode: gql(reateNewAccountMutation),
+      documentNode: gql(createNewAccountMutation),
       variables: <String, dynamic>{
         "userAccount": {
           "data": {
-            "document": createAccount["profilepage"]["document"],
+            "document": createAccount["idpage"]["document"],
             "user": profileId,
-            "nationality": createAccount["profilepage"]["nationality"],
-            "document_type": createAccount["profilepage"]["typeDocument"],
-            "datebirth": createAccount["profilepage"]["datebirth"],
-            "placeofbirth": createAccount["profilepage"]["Placeofbirth"]
+            "nationality": createAccount["idpage"]["nationality"],
+            "document_type": createAccount["idpage"]["typeDocument"],
+            "datebirth": createAccount["idpage"]["datebirth"],
+            "placeofbirth": createAccount["idpage"]["Placeofbirth"]
           }
         }
       });
@@ -144,7 +145,7 @@ Future createAccountData(
     return value;
   });
 
-  accountID = mutationResult.data["id"];
+  accountID = mutationResult.data["createAccountDatum"]["accountDatum"]["id"];
 
   createPaymentInformation(createAccount, profileId, accountID);
 }
@@ -172,6 +173,7 @@ Future createPaymentInformation(
           "data": {
             "expirationdate": createAccount["paymentpage"]["expirationdate"],
             "digit": createAccount["paymentpage"]["digit"],
+            "name": createAccount["paymentpage"]["name"],
             "account_data": accountId,
             "activate": true
           }

@@ -4,6 +4,7 @@ import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/PaymentInfo/Components/credit_card_complete_info_form.dart';
+import 'package:ParkA/pages/PaymentInfo/utils/createAccount.dart';
 import "package:flutter/material.dart";
 
 class PaymentInfoScreen extends StatefulWidget {
@@ -130,10 +131,12 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
                                       creditCardNumber4,
                               createAccount["paymentpage"]["name"] = fullName,
                               createAccount["paymentpage"]["expirationdate"] =
-                                  "01/" +
+                                  "20" +
+                                      creditCardYear +
+                                      "-" +
                                       creditCardMonth +
-                                      "/" +
-                                      creditCardYear,
+                                      "-01",
+                              await createUser(createAccount),
                               // Navigator.pushNamed(
                               //   context,
                               //   PaymentInfoScreen.routeName,
@@ -149,6 +152,7 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
                             color: ParkaColors.parkaLightGreen,
                             onTapHandler: () async => {
                               createAccount["paymentpage"]["digit"] = 0,
+                              await createUser(createAccount),
                               // Navigator.pushNamed(
                               //   context,
                               //   PaymentInfoScreen.routeName,

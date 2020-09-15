@@ -22,16 +22,18 @@ class ProfilePicPage extends StatefulWidget {
 
 class _ProfilePicPageState extends State<ProfilePicPage> {
   File _image;
+  var path;
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     final picker = ImagePicker();
+
     Map<String, dynamic> createAccount =
         ModalRoute.of(context).settings.arguments;
     Future getImage() async {
       final pickedFile = await picker.getImage(source: ImageSource.gallery);
-
+      path = pickedFile.path;
       setState(() {
         _image = File(pickedFile.path);
       });
@@ -84,7 +86,8 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
                         color: Colors.white,
                         buttonTextStyle: kParkaBigButtonTextStyle,
                         onTapHandler: () async => {
-                          createAccount["profilepage"]["pictures"] = _image,
+                          print(path),
+                          createAccount["profilepage"]["pictures"] = path,
                           createAccount["countries"] = await getCountries(),
                           createAccount["typedocuments"] =
                               await getTypeDocument(),

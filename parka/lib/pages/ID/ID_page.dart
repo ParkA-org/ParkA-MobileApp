@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:ParkA/components/Buttons/transparent_button.dart';
 import 'package:ParkA/components/Cards/ID_card.dart';
 import 'package:ParkA/components/Headers/parka_header.dart';
@@ -40,7 +42,6 @@ class _IDPageState extends State<IDPage> {
 
     Map<String, dynamic> createAccount =
         ModalRoute.of(context).settings.arguments;
-    print(createAccount["countries"]);
     Size currentScreen = MediaQuery.of(context).size;
     List<String> nationalityOptions = createAccount["countries"];
     List<String> docTypeOptions = createAccount["typedocuments"];
@@ -93,6 +94,7 @@ class _IDPageState extends State<IDPage> {
                                     width: currentScreen.width * 0.8,
                                     onChanged: (value) {
                                       setState(() {
+                                        this.docType = docTypeOptions[value];
                                         createAccount["idpage"]
                                                 ["typeDocument"] =
                                             docTypeOptions[value];
@@ -104,6 +106,7 @@ class _IDPageState extends State<IDPage> {
                                   inputWidth: currentScreen.width * 0.8,
                                   onChanged: (value) {
                                     setState(() {
+                                      this.docNumber = value;
                                       createAccount["idpage"]["document"] =
                                           value;
                                     });
@@ -126,6 +129,8 @@ class _IDPageState extends State<IDPage> {
                                     width: currentScreen.width * 0.8,
                                     onChanged: (value) {
                                       setState(() {
+                                        this.nationality =
+                                            nationalityOptions[value];
                                         createAccount["idpage"]["nationality"] =
                                             nationalityOptions[value];
                                       });
@@ -139,6 +144,8 @@ class _IDPageState extends State<IDPage> {
                                     width: currentScreen.width * 0.8,
                                     onChanged: (value) {
                                       setState(() {
+                                        this.placeOfBirth =
+                                            placeOfBirthOptions[value];
                                         createAccount["idpage"]
                                                 ["Placeofbirth"] =
                                             placeOfBirthOptions[value];
@@ -149,8 +156,11 @@ class _IDPageState extends State<IDPage> {
                                   color: Colors.white,
                                   buttonTextStyle: kParkaBigButtonTextStyle,
                                   onTapHandler: () => {
-                                    createAccount["idpage"]["datebirth"] =
-                                        this.dateOfBirth,
+                                    print(dateOfBirth),
+                                    createAccount["idpage"]["datebirth"] = this
+                                        .dateOfBirth
+                                        .toString()
+                                        .split(" ")[0],
                                     Navigator.pushNamed(
                                       context,
                                       PaymentInfoScreen.routeName,
