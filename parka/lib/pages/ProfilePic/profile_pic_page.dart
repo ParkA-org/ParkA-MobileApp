@@ -8,7 +8,6 @@ import 'package:ParkA/pages/ID/ID_page.dart';
 import 'package:ParkA/pages/ProfilePic/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:graphql/client.dart';
 import 'package:image_picker/image_picker.dart';
 
 // ignore: must_be_immutable
@@ -23,16 +22,18 @@ class ProfilePicPage extends StatefulWidget {
 
 class _ProfilePicPageState extends State<ProfilePicPage> {
   File _image;
+  var path;
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     final picker = ImagePicker();
-    final QueryResult args = ModalRoute.of(context).settings.arguments;
-    String id = args.data['createUser']['user']['id'];
+
+    Map<String, dynamic> createAccount =
+        ModalRoute.of(context).settings.arguments;
     Future getImage() async {
       final pickedFile = await picker.getImage(source: ImageSource.gallery);
-
+      path = pickedFile.path;
       setState(() {
         _image = File(pickedFile.path);
       });
@@ -87,10 +88,15 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
                         color: Colors.white,
                         buttonTextStyle: kParkaBigButtonTextStyle,
                         onTapHandler: () async => {
+                          print(path),
+                          createAccount["profilepage"]["pictures"] = path,
+                          createAccount["countries"] = await getCountries(),
+                          createAccount["typedocuments"] =
+                              await getTypeDocument(),
                           Navigator.pushNamed(
                             context,
                             IDPage.routeName,
-                            arguments: await updateUser(id, _image),
+                            arguments: createAccount,
                           ),
                         },
                       ),
@@ -103,9 +109,13 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
                         buttonTextStyle: kParkaBigButtonTextStyle.copyWith(
                           color: ParkaColors.parkaLimeGreen,
                         ),
-                        onTapHandler: () {
+                        onTapHandler: () async => {
+                          createAccount["profilepage"]["pictures"] = "null",
+                          createAccount["countries"] = await getCountries(),
+                          createAccount["typedocuments"] =
+                              await getTypeDocument(),
                           Navigator.pushNamed(context, IDPage.routeName,
-                              arguments: id);
+                              arguments: createAccount),
                         },
                       ),
                       SizedBox(height: screenSize.height * 0.075),

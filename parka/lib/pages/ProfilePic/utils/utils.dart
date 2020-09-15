@@ -1,59 +1,65 @@
 import 'package:graphql/client.dart';
 import '../../../components/Utils/graphql/graphql_client.dart';
-import 'dart:io';
-import 'package:http/http.dart' as http;
 
-// Aprendiendo con sebastiano faiella
-Future updateUser(String profileId, File file) async {
-  print("testting open");
-
-  const updateUser = r'''
-  mutation UpdateUser($user: updateUserInput) {
-    updateUser(input: $user) {
-      user {
-        id
-      }
-    }
-  }''';
-
-  final postUri = Uri.parse("https://parka-api.herokuapp.com/upload");
-
-  http.MultipartRequest request = http.MultipartRequest('POST', postUri);
-
-  http.MultipartFile multipartFile =
-      await http.MultipartFile.fromPath('files', file.absolute.path);
-
-  //final token = userDataSource.getToken();
-  //if (token.isNotNullOrNotEmpty) {
-  //request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
-  //}
-
-  print(multipartFile);
-  request.files.add(multipartFile);
-  print(request.files);
-  final response = await request.send().then((value) {
-    print(value);
-    return value;
-  });
-  // if (response.statusCode != 200) throw ServerException();
-  print(response);
-
-  MutationOptions mutationOptions = MutationOptions(
-      documentNode: gql(updateUser),
-      variables: <String, dynamic>{
-        "user": {
-          "data": {"profilepicture": profileId}
+Future getCountries() async {
+  String getCountries = r'''
+          query{
+        countries{
+          name
         }
-      });
+      }
+    ''';
 
-  final QueryResult mutationResult = await ParkaGraphqlClient.graphQlClient
-      .mutate(mutationOptions)
-      .then((value) {
+  //this way you create a QueryOptions instance to send your query
+  QueryOptions options = QueryOptions(documentNode: gql(getCountries));
+
+  //store the result of your query calling the static client property
+  // and the method query passing the query options created above
+  final QueryResult result =
+      await ParkaGraphqlClient.graphQlClient.query(options).then((value) {
+    // print the data you got from the api
     print(value.data);
     return value;
-  }).catchError((value) {
+  });
+
+  List<String> countries = [];
+
+  print('ok');
+  print(result.data['countries'].length);
+  for (var i = 0; i < result.data['countries'].length; i++) {
+    String value = result.data['countries'][i]['name'];
+    countries.add(value);
+  }
+  return countries;
+}
+
+Future getTypeDocument() async {
+  String getDocumentTypes = r'''
+          query{
+        documentTypes{
+          name
+        }
+      }
+    ''';
+
+  //this way you create a QueryOptions instance to send your query
+  QueryOptions options = QueryOptions(documentNode: gql(getDocumentTypes));
+
+  //store the result of your query calling the static client property
+  // and the method query passing the query options created above
+  final QueryResult result =
+      await ParkaGraphqlClient.graphQlClient.query(options).then((value) {
+    // print the data you got from the api
+    print(value.data);
     return value;
   });
 
-  return mutationResult;
+  List<String> documents = [];
+
+  for (var i = 0; i < result.data['documentTypes'].length; i++) {
+    String value = result.data['documentTypes'][i]['name'];
+    documents.add(value);
+    print(value);
+  }
+  return documents;
 }

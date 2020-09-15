@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:ParkA/components/Buttons/transparent_button.dart';
 import 'package:ParkA/components/Cards/ID_card.dart';
 import 'package:ParkA/components/Headers/parka_header.dart';
@@ -10,8 +12,10 @@ import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/PaymentInfo/payment_info.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class IDPage extends StatefulWidget {
   IDPage({Key key}) : super(key: key);
+  Object arguments;
   static const String routeName = "/IDPage";
   @override
   _IDPageState createState() => _IDPageState();
@@ -36,9 +40,11 @@ class _IDPageState extends State<IDPage> {
       });
     }
 
+    Map<String, dynamic> createAccount =
+        ModalRoute.of(context).settings.arguments;
     Size currentScreen = MediaQuery.of(context).size;
-    List<String> nationalityOptions = ["Italiano", "Dominicano"];
-    List<String> docTypeOptions = ["Pasaporte", "Cedula"];
+    List<String> nationalityOptions = createAccount["countries"];
+    List<String> docTypeOptions = createAccount["typedocuments"];
     List<String> placeOfBirthOptions = [
       "Santo Domingo",
       "La Romana",
@@ -91,6 +97,9 @@ class _IDPageState extends State<IDPage> {
                                     onChanged: (value) {
                                       setState(() {
                                         this.docType = docTypeOptions[value];
+                                        createAccount["idpage"]
+                                                ["typeDocument"] =
+                                            docTypeOptions[value];
                                       });
                                     }),
                                 ParkAInput(
@@ -100,6 +109,8 @@ class _IDPageState extends State<IDPage> {
                                   onChanged: (value) {
                                     setState(() {
                                       this.docNumber = value;
+                                      createAccount["idpage"]["document"] =
+                                          value;
                                     });
                                   },
                                 ),
@@ -122,6 +133,8 @@ class _IDPageState extends State<IDPage> {
                                       setState(() {
                                         this.nationality =
                                             nationalityOptions[value];
+                                        createAccount["idpage"]["nationality"] =
+                                            nationalityOptions[value];
                                       });
                                     }),
                                 ParkADropdown(
@@ -135,15 +148,26 @@ class _IDPageState extends State<IDPage> {
                                       setState(() {
                                         this.placeOfBirth =
                                             placeOfBirthOptions[value];
+                                        createAccount["idpage"]
+                                                ["Placeofbirth"] =
+                                            placeOfBirthOptions[value];
                                       });
                                     }),
                                 TransparentButton(
                                   label: "Continuar",
                                   color: Colors.white,
                                   buttonTextStyle: kParkaBigButtonTextStyle,
-                                  onTapHandler: () {
-                                    Navigator.popAndPushNamed(
-                                        context, PaymentInfoScreen.routeName);
+                                  onTapHandler: () => {
+                                    print(dateOfBirth),
+                                    createAccount["idpage"]["datebirth"] = this
+                                        .dateOfBirth
+                                        .toString()
+                                        .split(" ")[0],
+                                    Navigator.pushNamed(
+                                      context,
+                                      PaymentInfoScreen.routeName,
+                                      arguments: createAccount,
+                                    )
                                   },
                                 ),
                                 TransparentButton(
@@ -151,8 +175,13 @@ class _IDPageState extends State<IDPage> {
                                   color: ParkaColors.parkaLightGreen,
                                   buttonTextStyle: kParkaInputDefaultSyle,
                                   onTapHandler: () => {
+                                    createAccount["idpage"]["datebirth"] =
+                                        "null",
                                     Navigator.pushNamed(
-                                        context, PaymentInfoScreen.routeName)
+                                      context,
+                                      PaymentInfoScreen.routeName,
+                                      arguments: createAccount,
+                                    )
                                   },
                                 )
                               ],
