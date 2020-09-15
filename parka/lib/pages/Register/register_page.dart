@@ -15,8 +15,35 @@ class RegisterPage extends StatefulWidget {
   _RegisterPageState createState() => _RegisterPageState();
 }
 
+var createAccount = <String, dynamic>{
+  "registerpage": {
+    "username": "",
+    "lastname": "",
+    "email": "",
+    "password": "",
+    "phone": "",
+  },
+  "profilepage": {
+    "pictures": "",
+  },
+  "idpage": {
+    "document": "",
+    "idNationality": "",
+    "idTypeDocument": "",
+    "Placeofbirth": "",
+    "datebirth": "",
+  },
+  "paymentpage": {
+    "digit": "",
+    "name": "",
+    "expirationdate": "",
+  },
+  "typedocuments": [],
+  "countries": [],
+};
+
 class _RegisterPageState extends State<RegisterPage> {
-  String username, password, email, lastname, confirmpassword;
+  String username, email, password, confirmpassword;
   @override
   Widget build(BuildContext context) {
     Size currentScreen = MediaQuery.of(context).size;
@@ -80,7 +107,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                 text: 'Nombres',
                                 onChanged: (username) {
                                   setState(() {
-                                    this.username = username;
+                                    createAccount["registerpage"]["username"] =
+                                        username;
                                   });
                                 },
                               ),
@@ -89,7 +117,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                 text: 'Apellidos',
                                 onChanged: (lastname) {
                                   setState(() {
-                                    this.lastname = lastname;
+                                    createAccount["registerpage"]["lastname"] =
+                                        lastname;
                                   });
                                 },
                               ),
@@ -98,7 +127,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                 text: 'Correo/Usuario',
                                 onChanged: (email) {
                                   setState(() {
-                                    this.email = email;
+                                    createAccount["registerpage"]["email"] =
+                                        email;
                                   });
                                 },
                               ),
@@ -108,7 +138,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                 isPassword: true,
                                 onChanged: (password) {
                                   setState(() {
-                                    this.password = password;
+                                    createAccount["registerpage"]["password"] =
+                                        password;
                                   });
                                 },
                               ),
@@ -130,16 +161,15 @@ class _RegisterPageState extends State<RegisterPage> {
                                 buttonTextStyle: kParkaButtonTextStyle,
                                 trailingIconData: Icons.arrow_forward_ios,
                                 color: Colors.white,
-                                onTapHandler: () async => {
+                                onTapHandler: () async {
+                                  // This part in future is for validate email are exists
+                                  // var result = await createUser(this.username,
+                                  //     this.lastname, this.email, this.password);
                                   Navigator.pushNamed(
                                     context,
                                     ProfilePicPage.routeName,
-                                    arguments: await createUser(
-                                        this.username,
-                                        this.lastname,
-                                        this.email,
-                                        this.password),
-                                  )
+                                    arguments: createAccount,
+                                  );
                                 },
                               ),
                             ],

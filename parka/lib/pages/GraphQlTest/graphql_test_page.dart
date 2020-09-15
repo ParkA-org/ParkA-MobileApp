@@ -9,6 +9,12 @@ class GraphqlTestScreen extends StatefulWidget {
   _GraphqlTestScreenState createState() => _GraphqlTestScreenState();
 }
 
+var variables = <String, dynamic>{
+  "input": {
+    "data": {"name": "blanco pero desde flutter"}
+  }
+};
+
 class _GraphqlTestScreenState extends State<GraphqlTestScreen> {
   Future<dynamic> getData() async {
     //this way you define a query

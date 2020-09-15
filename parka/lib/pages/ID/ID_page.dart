@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 
 class IDPage extends StatefulWidget {
   IDPage({Key key}) : super(key: key);
+  Object arguments;
   static const String routeName = "/IDPage";
   @override
   _IDPageState createState() => _IDPageState();
@@ -36,9 +37,12 @@ class _IDPageState extends State<IDPage> {
       });
     }
 
+    Map<String, dynamic> createAccount =
+        ModalRoute.of(context).settings.arguments;
+    print(createAccount["countries"]);
     Size currentScreen = MediaQuery.of(context).size;
-    List<String> nationalityOptions = ["Italiano", "Dominicano"];
-    List<String> docTypeOptions = ["Pasaporte", "Cedula"];
+    List<String> nationalityOptions = createAccount["countries"];
+    List<String> docTypeOptions = createAccount["typedocuments"];
     List<String> placeOfBirthOptions = [
       "Santo Domingo",
       "La Romana",
@@ -150,7 +154,10 @@ class _IDPageState extends State<IDPage> {
                                   buttonTextStyle: kParkaInputDefaultSyle,
                                   onTapHandler: () => {
                                     Navigator.pushNamed(
-                                        context, PaymentInfoScreen.routeName)
+                                      context,
+                                      PaymentInfoScreen.routeName,
+                                      arguments: "",
+                                    )
                                   },
                                 )
                               ],
