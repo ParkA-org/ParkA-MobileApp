@@ -5,6 +5,7 @@ import 'Components/search_section.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key key}) : super(key: key);
+  static const String routeName = "/SearchPage";
 
   @override
   Widget build(BuildContext context) {

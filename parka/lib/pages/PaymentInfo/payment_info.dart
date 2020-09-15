@@ -3,6 +3,7 @@ import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
+import 'package:ParkA/pages/MapPage/maps_page.dart';
 import 'package:ParkA/pages/PaymentInfo/Components/credit_card_complete_info_form.dart';
 import 'package:ParkA/pages/PaymentInfo/utils/createAccount.dart';
 import "package:flutter/material.dart";
@@ -90,7 +91,9 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
             children: <Widget>[
               Expanded(
                 flex: 0,
-                child: ParkaHeader(),
+                child: ParkaHeader(
+                  color: ParkaColors.parkaGreen,
+                ),
               ),
               Expanded(
                 flex: 7,

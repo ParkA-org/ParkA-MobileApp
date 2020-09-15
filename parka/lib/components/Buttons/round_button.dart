@@ -7,6 +7,7 @@ class RoundedButton extends StatelessWidget {
   final Function onTapHandler;
   final double width;
   final bool hasIcon;
+  final bool isSelected;
   final bool hasShadow;
 
   const RoundedButton(
@@ -15,6 +16,7 @@ class RoundedButton extends StatelessWidget {
       this.label,
       this.onTapHandler,
       this.width,
+      this.isSelected = true,
       @required this.hasShadow,
       @required this.hasIcon});
 
@@ -26,7 +28,8 @@ class RoundedButton extends StatelessWidget {
         height: 40.0,
         width: this.width ?? 300.0,
         decoration: BoxDecoration(
-          color: this.color,
+          color: this.isSelected ? this.color : Colors.white,
+          border: Border.all(color: this.color),
           borderRadius: BorderRadius.all(
             Radius.circular(50.0),
           ),
@@ -55,7 +58,7 @@ class RoundedButton extends StatelessWidget {
                   this.label,
                   textAlign: this.hasIcon ? TextAlign.start : TextAlign.center,
                   style: TextStyle(
-                      color: Colors.white,
+                      color: this.isSelected ? Colors.white : this.color,
                       fontFamily: "Montserrat",
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold),

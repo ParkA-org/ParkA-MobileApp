@@ -56,7 +56,9 @@ class _IDPageState extends State<IDPage> {
         child: Container(
           child: Column(
             children: <Widget>[
-              ParkaHeader(),
+              ParkaHeader(
+                color: ParkaColors.parkaGreen,
+              ),
               Text(
                 "Identificación",
                 textAlign: TextAlign.center,

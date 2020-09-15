@@ -49,7 +49,9 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               //Back Button
-              ParkaHeader(),
+              ParkaHeader(
+                color: ParkaColors.parkaGreen,
+              ),
               //Title of the page
               Center(
                   child: Text(
