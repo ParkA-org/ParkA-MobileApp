@@ -5,6 +5,8 @@ import 'package:ParkA/pages/Search/search.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
+import '../../pages/Login/login_screen.dart';
+
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key key}) : super(key: key);
 
@@ -29,10 +31,16 @@ class MainDrawer extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Icon(
-                              Icons.account_circle_outlined,
-                              color: Colors.white,
-                              size: 50,
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, LoginScreen.routeName);
+                              },
+                              child: Icon(
+                                Icons.account_circle,
+                                color: Colors.white,
+                                size: 50,
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 6.5),
