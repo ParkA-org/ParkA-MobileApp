@@ -131,7 +131,8 @@ Future createAccountData(
             "nationality": createAccount["idpage"]["nationality"],
             "document_type": createAccount["idpage"]["typeDocument"],
             "datebirth": createAccount["idpage"]["datebirth"],
-            "placeofbirth": createAccount["idpage"]["Placeofbirth"]
+            "placeofbirth": createAccount["idpage"]["Placeofbirth"],
+            "phone": createAccount["registerpage"]["phone"],
           }
         }
       });
