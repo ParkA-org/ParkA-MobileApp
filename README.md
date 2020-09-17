@@ -5,9 +5,9 @@ Parka is a plataform to easily rent your avaliable parking space to other people
 
 ### About this project
 
-This is the mobile app repository of the ParkA platform developed using google's flutter framework and dart programming language 
+This is the mobile app repository of the ParkA platform, developed using google's flutter framework and dart programming language 
 
-you can find more info about flutter [here](https://flutter.dev/)
+You can find more info about flutter [here](https://flutter.dev/)
 
 ![alt text](https://itcraftapps.com/wp-content/uploads/2019/03/Flutter-Cover.png "flutter logo")
 
@@ -40,24 +40,22 @@ If you get any error installing  flutter on your device refer to official guide
 
 ## Installation
 
-clone this project in your desired folder
+Clone this project in your desired folder
 
 #### Clone with SSH
-```
-git clone git@github.com:ParkA-org/ParkA-MobileApp.git
-```
+
+`git clone git@github.com:ParkA-org/ParkA-MobileApp.git`
 
 #### Clone with HTTP
-```
-git clone https://github.com/ParkA-org/ParkA-MobileApp.git
-```
+
+`git clone https://github.com/ParkA-org/ParkA-MobileApp.git`
 
 ### Run the project
 
 Open a terminal window in your project's root folder and run the following command to install the dependencies:
-```
-flutter packages get
-```
+
+`flutter packages get`
+
 Or alternatively you can:
 * Click on the `packages get` button in Android Studio 
 
