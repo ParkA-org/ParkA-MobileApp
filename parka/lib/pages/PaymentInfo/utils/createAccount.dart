@@ -24,7 +24,8 @@ Future createUser(Map<String, dynamic> createAccount) async {
       variables: <String, dynamic>{
         "user": {
           "data": {
-            "username": createAccount["registerpage"]["username"],
+            "username": createAccount["registerpage"]["email"],
+            "name": createAccount["registerpage"]["username"],
             "password": createAccount["registerpage"]["password"],
             "lastname": createAccount["registerpage"]["lastname"],
             "confirmed": confirmed,
