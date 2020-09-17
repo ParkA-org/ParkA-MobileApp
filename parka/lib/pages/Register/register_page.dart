@@ -43,7 +43,7 @@ var createAccount = <String, dynamic>{
 };
 
 class _RegisterPageState extends State<RegisterPage> {
-  String username, email, password, confirmpassword;
+  String username, email, password, confirmpassword, phone;
   @override
   Widget build(BuildContext context) {
     Size currentScreen = MediaQuery.of(context).size;
@@ -85,101 +85,114 @@ class _RegisterPageState extends State<RegisterPage> {
             Expanded(
               flex: 6,
               // fit: FlexFit.tight,
-              child: WavyClipper.withTopWave(
-                child: Container(
-                  padding: EdgeInsets.fromLTRB(42, 20, 42, 15),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(42, 0, 42, 0),
+                decoration: BoxDecoration(
                   color: Color(0xFF0B768C),
-                  child: LayoutBuilder(
-                    builder:
-                        (BuildContext context, BoxConstraints constraints) {
-                      return SingleChildScrollView(
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(
-                            minHeight: constraints.maxHeight,
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              SizedBox(
-                                height: currentScreen.height * 0.02,
-                              ),
-                              ParkAInput(
-                                icon: 'WhiteProfileIcon.svg',
-                                text: 'Nombres',
-                                onChanged: (username) {
-                                  setState(() {
-                                    createAccount["registerpage"]["username"] =
-                                        username;
-                                  });
-                                },
-                              ),
-                              ParkAInput(
-                                icon: 'WhiteProfileIcon.svg',
-                                text: 'Apellidos',
-                                onChanged: (lastname) {
-                                  setState(() {
-                                    createAccount["registerpage"]["lastname"] =
-                                        lastname;
-                                  });
-                                },
-                              ),
-                              ParkAInput(
-                                icon: 'Mail.svg',
-                                text: 'Correo/Usuario',
-                                onChanged: (email) {
-                                  setState(() {
-                                    createAccount["registerpage"]["email"] =
-                                        email;
-                                  });
-                                },
-                              ),
-                              ParkAInput(
-                                icon: 'WhiteLockIcon.svg',
-                                text: 'Contraseña',
-                                isPassword: true,
-                                onChanged: (password) {
-                                  setState(() {
-                                    createAccount["registerpage"]["password"] =
-                                        password;
-                                  });
-                                },
-                              ),
-                              ParkAInput(
-                                icon: 'Lockcheck.svg',
-                                text: 'Confirmar contraseña',
-                                isPassword: true,
-                                onChanged: (confirmpassword) {
-                                  setState(() {
-                                    this.confirmpassword = confirmpassword;
-                                  });
-                                },
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              TransparentButton(
-                                label: 'Continuar',
-                                buttonTextStyle: kParkaButtonTextStyle,
-                                trailingIconData: Icons.arrow_forward_ios,
-                                color: Colors.white,
-                                onTapHandler: () async {
-                                  // This part in future is for validate email are exists
-                                  // var result = await createUser(this.username,
-                                  //     this.lastname, this.email, this.password);
-                                  Navigator.pushNamed(
-                                    context,
-                                    ProfilePicPage.routeName,
-                                    arguments: createAccount,
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(16.0),
                   ),
+                ),
+                child: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    return SingleChildScrollView(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minHeight: constraints.maxHeight,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ParkAInput(
+                              icon: 'WhiteProfileIcon.svg',
+                              text: 'Nombres',
+                              onChanged: (username) {
+                                setState(() {
+                                  createAccount["registerpage"]["username"] =
+                                      username;
+                                });
+                              },
+                            ),
+                            ParkAInput(
+                              icon: 'WhiteProfileIcon.svg',
+                              text: 'Apellidos',
+                              onChanged: (lastname) {
+                                setState(() {
+                                  createAccount["registerpage"]["lastname"] =
+                                      lastname;
+                                });
+                              },
+                            ),
+                            ParkAInput(
+                              icon: 'Mail.svg',
+                              text: 'Correo/Usuario',
+                              keyboardType: TextInputType.emailAddress,
+                              onChanged: (email) {
+                                setState(() {
+                                  createAccount["registerpage"]["email"] =
+                                      email;
+                                });
+                              },
+                            ),
+                            ParkAInput(
+                              icon: 'WhiteLockIcon.svg',
+                              text: 'Contraseña',
+                              isPassword: true,
+                              keyboardType: TextInputType.visiblePassword,
+                              onChanged: (password) {
+                                setState(() {
+                                  createAccount["registerpage"]["password"] =
+                                      password;
+                                });
+                              },
+                            ),
+                            ParkAInput(
+                              icon: 'Lockcheck.svg',
+                              text: 'Confirmar contraseña',
+                              isPassword: true,
+                              keyboardType: TextInputType.visiblePassword,
+                              onChanged: (confirmpassword) {
+                                setState(() {
+                                  this.confirmpassword = confirmpassword;
+                                });
+                              },
+                            ),
+                            ParkAInput(
+                              icon: 'Phone.svg',
+                              text: 'Numero de Telefono',
+                              keyboardType: TextInputType.phone,
+                              onChanged: (phone) {
+                                setState(() {
+                                  createAccount["registerpage"]["phone"] =
+                                      phone;
+                                });
+                              },
+                            ),
+                            SizedBox(
+                              height: 6,
+                            ),
+                            TransparentButton(
+                              label: 'Continuar',
+                              buttonTextStyle: kParkaButtonTextStyle,
+                              trailingIconData: Icons.arrow_forward_ios,
+                              color: Colors.white,
+                              onTapHandler: () async {
+                                // This part in future is for validate email are exists
+                                // var result = await createUser(this.username,
+                                //     this.lastname, this.email, this.password);
+                                Navigator.pushNamed(
+                                  context,
+                                  ProfilePicPage.routeName,
+                                  arguments: createAccount,
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),

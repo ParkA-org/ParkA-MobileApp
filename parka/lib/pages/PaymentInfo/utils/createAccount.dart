@@ -24,7 +24,8 @@ Future createUser(Map<String, dynamic> createAccount) async {
       variables: <String, dynamic>{
         "user": {
           "data": {
-            "username": createAccount["registerpage"]["username"],
+            "username": createAccount["registerpage"]["email"],
+            "name": createAccount["registerpage"]["username"],
             "password": createAccount["registerpage"]["password"],
             "lastname": createAccount["registerpage"]["lastname"],
             "confirmed": confirmed,
@@ -131,7 +132,8 @@ Future createAccountData(
             "nationality": createAccount["idpage"]["nationality"],
             "document_type": createAccount["idpage"]["typeDocument"],
             "datebirth": createAccount["idpage"]["datebirth"],
-            "placeofbirth": createAccount["idpage"]["Placeofbirth"]
+            "placeofbirth": createAccount["idpage"]["Placeofbirth"],
+            "phone": createAccount["registerpage"]["phone"],
           }
         }
       });
