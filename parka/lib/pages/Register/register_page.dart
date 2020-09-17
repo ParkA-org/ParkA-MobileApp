@@ -162,7 +162,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               icon: 'Phone.svg',
                               text: 'Numero de Telefono',
                               keyboardType: TextInputType.phone,
-                              onChanged: ([phone]) {
+                              onChanged: (phone) {
                                 setState(() {
                                   createAccount["registerpage"]["phone"] =
                                       phone;
