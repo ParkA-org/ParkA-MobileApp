@@ -10,11 +10,11 @@ class FavoritePlaceButton extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        height: 40.0,
+        padding: EdgeInsets.symmetric(vertical: 8.0),
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
-            BoxShadow(offset: Offset(5.0, 5.0), color: Colors.black54),
+            BoxShadow(offset: Offset(0, 5.0), color: Colors.black54),
           ],
         ),
         child: Row(
@@ -22,8 +22,8 @@ class FavoritePlaceButton extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Container(
-                width: 50,
-                height: 50,
+                width: 40.0,
+                height: 40.0,
                 decoration: BoxDecoration(
                   color: Color(0xFFE9E9E9),
                   shape: BoxShape.circle,
@@ -50,7 +50,7 @@ class FavoritePlaceButton extends StatelessWidget {
               child: Icon(
                 Icons.navigate_next,
                 color: Color(0xFF077187),
-                size: 60,
+                size: 40.0,
               ),
             )
           ],

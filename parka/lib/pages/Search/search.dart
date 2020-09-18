@@ -54,8 +54,8 @@ class SearchPage extends StatelessWidget {
                   flex: 1,
                   child: SearchSection(),
                 ),
-                Flexible(
-                  fit: FlexFit.loose,
+                Expanded(
+                  flex: 0,
                   child: FavoritePlaceButton(),
                 ),
                 Expanded(
