@@ -22,7 +22,7 @@ class ProfilePicPage extends StatefulWidget {
 
 class _ProfilePicPageState extends State<ProfilePicPage> {
   File _image;
-  var path;
+  String _path;
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +33,22 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
         ModalRoute.of(context).settings.arguments;
     Future getImage() async {
       final pickedFile = await picker.getImage(source: ImageSource.gallery);
-      path = pickedFile.path;
+      this._path = pickedFile.path;
       setState(() {
         _image = File(pickedFile.path);
       });
+    }
+
+    Future nextStep() async {
+      print(this._path);
+      createAccount["profilepage"]["pictures"] = this._path ?? "null";
+      createAccount["countries"] = await getCountries();
+      createAccount["typedocuments"] = await getTypeDocument();
+      Navigator.pushNamed(
+        context,
+        IDPage.routeName,
+        arguments: createAccount,
+      );
     }
 
     return Scaffold(
@@ -49,59 +61,61 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               //Back Button
-              ParkaHeader(
-                color: ParkaColors.parkaGreen,
+              Expanded(
+                flex: 0,
+                child: ParkaHeader(
+                  color: ParkaColors.parkaGreen,
+                ),
               ),
               //Title of the page
-              Center(
+              Expanded(
+                flex: 0,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16.0),
                   child: Text(
-                "Imagen De Perfil",
-                textAlign: TextAlign.center,
-                style: kParkaPageTitleTextStyle,
-              )),
-              // Image container
-              Container(
-                child: GestureDetector(
-                  onTap: () => getImage(),
-                  child: _image != null
-                      ? ClipOval(child: Image.file(_image))
-                      : SvgPicture.asset(
-                          'resources/images/BlueProfileIcon.svg',
-                          height: screenSize.height * 0.4,
-                        ),
+                    "Imagen De Perfil",
+                    textAlign: TextAlign.center,
+                    style: kParkaPageTitleTextStyle,
+                  ),
                 ),
-                height: screenSize.height * 0.4,
+              ),
+              // Image container
+              Expanded(
+                flex: 3,
+                child: Container(
+                  child: GestureDetector(
+                    onTap: () => getImage(),
+                    child: _image != null
+                        ? ClipOval(child: Image.file(_image))
+                        : SvgPicture.asset(
+                            'resources/images/BlueProfileIcon.svg',
+                            height: screenSize.height * 0.4,
+                          ),
+                  ),
+                  height: screenSize.height * 0.4,
+                ),
               ),
               // Buttons
-              WavyClipper.withTopWave(
-                type: 'IDPage',
+              Expanded(
                 child: Container(
-                  width: screenSize.width,
-                  color: Color(0xFF0B768C),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF0B768C),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16.0),
+                      topRight: Radius.circular(16.0),
+                    ),
+                  ),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      SizedBox(
-                        height: screenSize.height * 0.075,
-                      ),
                       TransparentButton(
                         label: "Continuar",
                         color: Colors.white,
                         buttonTextStyle: kParkaBigButtonTextStyle,
-                        onTapHandler: () async => {
-                          print(path),
-                          createAccount["profilepage"]["pictures"] = path,
-                          createAccount["countries"] = await getCountries(),
-                          createAccount["typedocuments"] =
-                              await getTypeDocument(),
-                          Navigator.pushNamed(
-                            context,
-                            IDPage.routeName,
-                            arguments: createAccount,
-                          ),
+                        trailingIconData: Icons.arrow_forward_ios,
+                        onTapHandler: () async {
+                          nextStep();
                         },
-                      ),
-                      SizedBox(
-                        height: screenSize.height * 0.05,
                       ),
                       TransparentButton(
                         label: "Omitir",
@@ -109,16 +123,10 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
                         buttonTextStyle: kParkaBigButtonTextStyle.copyWith(
                           color: ParkaColors.parkaLimeGreen,
                         ),
-                        onTapHandler: () async => {
-                          createAccount["profilepage"]["pictures"] = "null",
-                          createAccount["countries"] = await getCountries(),
-                          createAccount["typedocuments"] =
-                              await getTypeDocument(),
-                          Navigator.pushNamed(context, IDPage.routeName,
-                              arguments: createAccount),
+                        onTapHandler: () async {
+                          nextStep();
                         },
                       ),
-                      SizedBox(height: screenSize.height * 0.075),
                     ],
                   ),
                 ),
