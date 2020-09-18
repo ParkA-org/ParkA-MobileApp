@@ -10,7 +10,7 @@ import "package:flutter/material.dart";
 
 class PaymentInfoScreen extends StatefulWidget {
   static String routeName = "/paymentInfoPage";
-  Object arguments;
+  // Object arguments;
   @override
   _PaymentInfoScreenState createState() => _PaymentInfoScreenState();
 }
@@ -111,61 +111,65 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
               ),
               Flexible(
                 flex: 2,
-                child: WavyClipper.withTopWave(
-                  child: Container(
+                child: Container(
+                  decoration: BoxDecoration(
                     color: ParkaColors.parkaGreen,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Expanded(
-                          child: TransparentButton(
-                            label: "Continuar",
-                            buttonTextStyle: kParkaButtonTextStyle,
-                            color: Colors.white,
-                            trailingIconData: Icons.arrow_forward_ios,
-                            onTapHandler: () async => {
-                              createAccount["paymentpage"]["digit"] =
-                                  creditCardNumber1 +
-                                      creditCardNumber2 +
-                                      creditCardNumber3 +
-                                      creditCardNumber4,
-                              createAccount["paymentpage"]["name"] = fullName,
-                              createAccount["paymentpage"]["expirationdate"] =
-                                  "20" +
-                                      creditCardYear +
-                                      "-" +
-                                      creditCardMonth +
-                                      "-01",
-                              await createUser(createAccount),
-                              // Navigator.pushNamed(
-                              //   context,
-                              //   PaymentInfoScreen.routeName,
-                              //   arguments: createAccount,
-                              // )
-                            },
-                          ),
-                        ),
-                        Expanded(
-                          child: TransparentButton(
-                            buttonTextStyle: kParkaButtonTextStyle,
-                            label: "Omitir",
-                            color: ParkaColors.parkaLightGreen,
-                            onTapHandler: () async => {
-                              createAccount["paymentpage"]["digit"] = 0,
-                              await createUser(createAccount),
-                              // Navigator.pushNamed(
-                              //   context,
-                              //   PaymentInfoScreen.routeName,
-                              //   arguments: createAccount,
-                              // )
-                            },
-                          ),
-                        ),
-                      ],
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(
+                        16.0,
+                      ),
+                      topRight: Radius.circular(
+                        16.0,
+                      ),
                     ),
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                        child: TransparentButton(
+                          label: "Continuar",
+                          buttonTextStyle: kParkaButtonTextStyle,
+                          color: Colors.white,
+                          trailingIconData: Icons.arrow_forward_ios,
+                          onTapHandler: () async => {
+                            createAccount["paymentpage"]["digit"] =
+                                creditCardNumber1 +
+                                    creditCardNumber2 +
+                                    creditCardNumber3 +
+                                    creditCardNumber4,
+                            createAccount["paymentpage"]["name"] = fullName,
+                            createAccount["paymentpage"]["expirationdate"] =
+                                "20" +
+                                    creditCardYear +
+                                    "-" +
+                                    creditCardMonth +
+                                    "-01",
+                            await createUser(createAccount),
+                            // Navigator.pushNamed(
+                            //   context,
+                            //   PaymentInfoScreen.routeName,
+                            //   arguments: createAccount,
+                            // )
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: TransparentButton(
+                          buttonTextStyle: kParkaButtonTextStyle,
+                          label: "Omitir",
+                          color: ParkaColors.parkaLightGreen,
+                          onTapHandler: () async => {
+                            createAccount["paymentpage"]["digit"] = 0,
+                            await createUser(createAccount),
+                            // Navigator.pushNamed(
+                            //   context,
+                            //   PaymentInfoScreen.routeName,
+                            //   arguments: createAccount,
+                            // )
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               )
