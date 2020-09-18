@@ -5,12 +5,14 @@ import "package:flutter/material.dart";
 class ParkaHeader extends StatelessWidget {
   final Color color;
   final Widget leading;
+  final Widget central;
   final Widget trailing;
 
   const ParkaHeader({
     Key key,
     @required this.color,
     this.leading,
+    this.central,
     this.trailing,
   }) : super(key: key);
 
@@ -35,6 +37,7 @@ class ParkaHeader extends StatelessWidget {
                   Navigator.pop(context);
                 },
               ),
+          this.central ?? Container(),
           this.trailing ?? Container()
         ],
       ),

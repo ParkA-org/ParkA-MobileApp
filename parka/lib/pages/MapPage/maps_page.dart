@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
+
+import '../../components/Utils/styles/parka_colors.dart';
 
 class MapPage extends StatefulWidget {
   MapPage({Key key}) : super(key: key);
@@ -22,6 +25,24 @@ class _MapPageState extends State<MapPage> {
   bool _fabIsVisible;
   LocationData userLocation;
   CameraPosition initialCameraPosition;
+
+  void toggleFloatingActionButton() {
+    setState(() {
+      this._fabIsVisible = !_fabIsVisible;
+    });
+  }
+
+  void getCurrentLocation() async {
+    final LocationData currentUserLocation = await Location().getLocation();
+    setState(
+      () {
+        userLocation = currentUserLocation;
+        initialCameraPosition = CameraPosition(
+            target: LatLng(userLocation.latitude, userLocation.longitude),
+            zoom: 15.5);
+      },
+    );
+  }
 
   @override
   void initState() {
@@ -40,11 +61,24 @@ class _MapPageState extends State<MapPage> {
   Widget build(BuildContext context) {
     GoogleMapController mapController;
     LocationData currentUserLocation = userLocation;
+
+    BuildContext mapPageContext = context;
+
     return Scaffold(
       drawer: MainDrawer(),
-      body: currentUserLocation == null
-          ? Container() // Posible Loading screen
-          : Stack(alignment: Alignment.bottomCenter, children: [
+      floatingActionButton: Visibility(
+        visible: _fabIsVisible,
+        child: MainFAB(),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+      body: SafeArea(
+        child: ModalProgressHUD(
+          color: ParkaColors.parkaGreen,
+          inAsyncCall: currentUserLocation == null,
+          opacity: 0.2,
+          child: Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
               GoogleMap(
                 onMapCreated: (GoogleMapController controller) {
                   mapController = controller;
@@ -56,35 +90,19 @@ class _MapPageState extends State<MapPage> {
                 zoomControlsEnabled: false,
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 60),
+                padding: const EdgeInsets.only(bottom: 60.0),
                 child: Builder(
                   builder: (context) => DummySearch(
+                    // statusBarSize: MediaQuery.of(context).padding.top,
+                    mainContext: mapPageContext,
                     buttonToggle: toggleFloatingActionButton,
                   ),
                 ),
               ),
-            ]),
-      floatingActionButton: Visibility(
-        visible: _fabIsVisible,
-        child: MainFAB(),
+            ],
+          ),
+        ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
     );
-  }
-
-  void toggleFloatingActionButton() {
-    setState(() {
-      this._fabIsVisible = !_fabIsVisible;
-    });
-  }
-
-  void getCurrentLocation() async {
-    final LocationData currentUserLocation = await Location().getLocation();
-    setState(() {
-      userLocation = currentUserLocation;
-      initialCameraPosition = CameraPosition(
-          target: LatLng(userLocation.latitude, userLocation.longitude),
-          zoom: 15.5);
-    });
   }
 }

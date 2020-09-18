@@ -13,36 +13,37 @@ class SearchSection extends StatelessWidget {
         padding: const EdgeInsets.only(top: 8.0, bottom: 17.0),
         child: Column(
           children: [
-            Expanded(
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Icon(
-                      Icons.arrow_forward_ios,
-                      size: 35.0,
-                      textDirection: TextDirection.rtl,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Expanded(
-                    flex: 10,
-                    child: Text(
-                      'Buscar Parqueo',
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        color: Colors.white,
-                        fontSize: 29.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(),
-                  ),
-                ],
-              ),
-            ),
+            // Expanded(
+            //   child: Row(
+            //     children: <Widget>[
+            //       Expanded(
+            //         child: Icon(
+            //           Icons.arrow_forward_ios,
+            //           size: 35.0,
+            //           textDirection: TextDirection.rtl,
+            //           color: Colors.white,
+            //         ),
+            //       ),
+            //       Expanded(
+            //         flex: 10,
+            //         child: Text(
+            //           'Buscar Parqueo',
+            //           style: TextStyle(
+            //             fontFamily: 'Montserrat',
+            //             color: Colors.white,
+            //             fontSize: 29.0,
+            //             fontWeight: FontWeight.bold,
+            //           ),
+            //           textAlign: TextAlign.center,
+            //         ),
+            //       ),
+            //       Expanded(
+            //         child: Container(),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+
             Expanded(
               child: Row(
                 children: [

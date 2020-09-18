@@ -4,9 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DummySearch extends StatelessWidget {
-  const DummySearch({Key key, this.buttonToggle}) : super(key: key);
+  const DummySearch({Key key, this.buttonToggle, this.mainContext})
+      : super(key: key);
 
   final VoidCallback buttonToggle;
+  final BuildContext mainContext;
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +22,8 @@ class DummySearch extends StatelessWidget {
         ),
         onTap: () async {
           buttonToggle();
-          var bottomSheetController =
-              Scaffold.of(context).showBottomSheet((context) => SearchPage());
+          var bottomSheetController = Scaffold.of(context).showBottomSheet(
+              (context) => SearchPage(mainContext: this.mainContext));
           await bottomSheetController.closed;
           buttonToggle();
         },
