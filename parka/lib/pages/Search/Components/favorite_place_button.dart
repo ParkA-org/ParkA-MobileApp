@@ -20,7 +20,7 @@ class FavoritePlaceButton extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              flex: 2,
+              flex: 1,
               child: Container(
                 width: 40.0,
                 height: 40.0,
@@ -31,19 +31,23 @@ class FavoritePlaceButton extends StatelessWidget {
                 child: Icon(
                   Icons.star,
                   color: Color(0xFF0B768C),
-                  size: 40.0,
+                  size: 30.0,
                 ),
               ),
             ),
             Expanded(
                 flex: 5,
-                child: Text(
-                  'Lugares Favoritos',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    color: Color(0xFF077187),
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
+                child: Container(
+                  height: 40.0,
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Lugares Favoritos',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      color: Color(0xFF077187),
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 )),
             Expanded(
