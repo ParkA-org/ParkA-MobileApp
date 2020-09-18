@@ -21,7 +21,9 @@ class SearchSection extends StatelessWidget {
         children: [
           Expanded(
             flex: 5,
-            child: SearchBar(),
+            child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 12.0),
+                child: SearchBar()),
           ),
           Flexible(
             fit: FlexFit.loose,

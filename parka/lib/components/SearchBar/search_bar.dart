@@ -2,17 +2,12 @@ import 'package:flutter/material.dart';
 
 class SearchBar extends StatelessWidget {
   final double width;
-
-  final double height;
-
   final double textSize;
-
   final bool enabled;
-
   final String hintText;
+
   const SearchBar({
     Key key,
-    this.height,
     this.width,
     this.textSize,
     this.enabled,
