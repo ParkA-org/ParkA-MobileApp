@@ -61,24 +61,27 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ),
             Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.account_circle,
-                    size: 70,
-                    color: ParkaColors.parkaGreen,
-                  ),
-                  Spacer(),
-                  Text(
-                    "Crear Cuenta",
-                    textAlign: TextAlign.center,
-                    style: kParkaPageTitleTextStyle,
-                  ),
-                  Spacer(
-                    flex: 3,
-                  )
-                ],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 42.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.account_circle,
+                      size: 70,
+                      color: ParkaColors.parkaGreen,
+                    ),
+                    Spacer(),
+                    Text(
+                      "Crear Cuenta",
+                      textAlign: TextAlign.center,
+                      style: kParkaPageTitleTextStyle,
+                    ),
+                    Spacer(
+                      flex: 3,
+                    )
+                  ],
+                ),
               ),
             ),
             //Login Column
