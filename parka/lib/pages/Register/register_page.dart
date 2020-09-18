@@ -111,20 +111,24 @@ class _RegisterPageState extends State<RegisterPage> {
                               icon: 'WhiteProfileIcon.svg',
                               text: 'Nombres',
                               onChanged: (username) {
-                                setState(() {
-                                  createAccount["registerpage"]["username"] =
-                                      username;
-                                });
+                                setState(
+                                  () {
+                                    createAccount["registerpage"]["username"] =
+                                        username;
+                                  },
+                                );
                               },
                             ),
                             ParkAInput(
                               icon: 'WhiteProfileIcon.svg',
                               text: 'Apellidos',
                               onChanged: (lastname) {
-                                setState(() {
-                                  createAccount["registerpage"]["lastname"] =
-                                      lastname;
-                                });
+                                setState(
+                                  () {
+                                    createAccount["registerpage"]["lastname"] =
+                                        lastname;
+                                  },
+                                );
                               },
                             ),
                             ParkAInput(
@@ -132,10 +136,12 @@ class _RegisterPageState extends State<RegisterPage> {
                               text: 'Correo/Usuario',
                               keyboardType: TextInputType.emailAddress,
                               onChanged: (email) {
-                                setState(() {
-                                  createAccount["registerpage"]["email"] =
-                                      email;
-                                });
+                                setState(
+                                  () {
+                                    createAccount["registerpage"]["email"] =
+                                        email;
+                                  },
+                                );
                               },
                             ),
                             ParkAInput(
@@ -144,10 +150,12 @@ class _RegisterPageState extends State<RegisterPage> {
                               isPassword: true,
                               keyboardType: TextInputType.visiblePassword,
                               onChanged: (password) {
-                                setState(() {
-                                  createAccount["registerpage"]["password"] =
-                                      password;
-                                });
+                                setState(
+                                  () {
+                                    createAccount["registerpage"]["password"] =
+                                        password;
+                                  },
+                                );
                               },
                             ),
                             ParkAInput(
@@ -156,9 +164,11 @@ class _RegisterPageState extends State<RegisterPage> {
                               isPassword: true,
                               keyboardType: TextInputType.visiblePassword,
                               onChanged: (confirmpassword) {
-                                setState(() {
-                                  this.confirmpassword = confirmpassword;
-                                });
+                                setState(
+                                  () {
+                                    this.confirmpassword = confirmpassword;
+                                  },
+                                );
                               },
                             ),
                             ParkAInput(
@@ -166,10 +176,12 @@ class _RegisterPageState extends State<RegisterPage> {
                               text: 'Numero de Telefono',
                               keyboardType: TextInputType.phone,
                               onChanged: (phone) {
-                                setState(() {
-                                  createAccount["registerpage"]["phone"] =
-                                      phone;
-                                });
+                                setState(
+                                  () {
+                                    createAccount["registerpage"]["phone"] =
+                                        phone;
+                                  },
+                                );
                               },
                             ),
                             SizedBox(

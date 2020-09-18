@@ -28,27 +28,28 @@ class IDCard extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
     String formattedDate =
         dateOfBirth == null ? null : DateFormat.yMMMd().format(dateOfBirth);
-    return Card(
-        elevation: 20,
-        margin: EdgeInsets.all(10),
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: Color(0xFF0B768C),
-            width: 5,
-          ),
+    return Container(
+      padding: EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25.0),
-        ),
-        child: Column(
-          children: <Widget>[
-            Row(
+          border: Border.all(
+            color: Color(0xFF0B768C),
+            width: 4.0,
+          )),
+      child: Column(
+        children: <Widget>[
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.fromLTRB(23, 15, 10, 14),
+                  // margin: EdgeInsets.fromLTRB(23, 15, 10, 14),
                   child:
                       SvgPicture.asset('resources/images/BlueProfileIcon.svg'),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
                       "No. de Documento",
@@ -78,13 +79,16 @@ class IDCard extends StatelessWidget {
                 ),
               ],
             ),
-            Container(
-              margin: EdgeInsets.fromLTRB(23, 0, 18, 13),
+          ),
+          Expanded(
+            child: Container(
+              // margin: EdgeInsets.fromLTRB(23, 0, 18, 13),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Fecha de Nacimiento",
@@ -112,11 +116,9 @@ class IDCard extends StatelessWidget {
                             ),
                     ],
                   ),
-                  SizedBox(
-                    width: screenSize.width * 0.05,
-                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Nacionalidad",
@@ -145,12 +147,16 @@ class IDCard extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              margin: EdgeInsets.fromLTRB(23, 0, 18, 23),
+          ),
+          Expanded(
+            child: Container(
+              // margin: EdgeInsets.fromLTRB(23, 0, 18, 23),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Lugar de Nacimiento",
@@ -176,11 +182,9 @@ class IDCard extends StatelessWidget {
                             ),
                     ],
                   ),
-                  SizedBox(
-                    width: screenSize.width * 0.05,
-                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Tipo de documento",
@@ -199,17 +203,20 @@ class IDCard extends StatelessWidget {
                           : Text(
                               "$docType",
                               style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold),
+                                fontFamily: 'Montserrat',
+                                color: Colors.black,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                     ],
                   )
                 ],
               ),
-            )
-          ],
-        ));
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
