@@ -51,7 +51,7 @@ class SearchPage extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  flex: 1,
+                  flex: 0,
                   child: SearchSection(),
                 ),
                 Expanded(

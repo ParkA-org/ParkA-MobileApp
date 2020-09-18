@@ -12,12 +12,11 @@ class DummySearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size currentScreen = MediaQuery.of(context).size;
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: 24.0),
       child: GestureDetector(
         child: SearchBar(
           hintText: "Buscar...",
-          height: currentScreen.height * 0.05,
           enabled: false,
         ),
         onTap: () async {
