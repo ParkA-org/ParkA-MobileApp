@@ -1,3 +1,4 @@
+import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:flutter/material.dart';
 
 class FilterPageTopBar extends StatelessWidget {
@@ -18,19 +19,16 @@ class FilterPageTopBar extends StatelessWidget {
           Text(
             "Filtros",
             style: TextStyle(
-              color: Color(0xFF0B768C),
+              color: ParkaColors.parkaGreen,
               fontSize: 24.0,
               fontWeight: FontWeight.bold,
             ),
           ),
           GestureDetector(
-            child: Text(
-              "Reiniciar",
-              style: TextStyle(
-                color: Color(0xFFED9393),
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
+            child: Icon(
+              Icons.replay,
+              color: ParkaColors.parkaLightRed,
+              size: 32.0,
             ),
             onTap: this.onTapHandler,
           )

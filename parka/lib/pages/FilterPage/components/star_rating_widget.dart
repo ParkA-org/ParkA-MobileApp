@@ -1,3 +1,4 @@
+import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import "package:flutter/material.dart";
 
 class StarRatingFilter extends StatelessWidget {
@@ -24,7 +25,7 @@ class StarRatingFilter extends StatelessWidget {
             },
             child: Icon(
               _icon,
-              color: Color(0xFF0B768C),
+              color: ParkaColors.parkaGreen,
               size: 45.0,
             ),
           ),
@@ -44,7 +45,7 @@ class StarRatingFilter extends StatelessWidget {
             child: Text(
               "Puntuacion Minima",
               style: TextStyle(
-                  color: Color(0xFF0B768C),
+                  color: ParkaColors.parkaGreen,
                   fontSize: 28.0,
                   fontWeight: FontWeight.bold),
             ),
