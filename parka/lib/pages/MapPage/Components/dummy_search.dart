@@ -4,8 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DummySearch extends StatelessWidget {
-  const DummySearch({Key key, this.buttonToggle, this.mainContext})
-      : super(key: key);
+  const DummySearch({
+    Key key,
+    this.buttonToggle,
+    this.mainContext,
+  }) : super(key: key);
 
   final VoidCallback buttonToggle;
   final BuildContext mainContext;

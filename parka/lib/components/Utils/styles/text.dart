@@ -30,6 +30,11 @@ final kParkaButtonTextStyle = kParkaTextBaseStyleBold.copyWith(
   fontSize: 20.0,
 );
 
+final kParkaTextStyleBoldWhite20 = kParkaTextBaseStyleBold.copyWith(
+  fontSize: 20.0,
+  color: Colors.white,
+);
+
 final kParkaTextStyleGrey = kParkaTextBaseStyle.copyWith(
   color: ParkaColors.parkaGreen,
   fontSize: 20.0,
