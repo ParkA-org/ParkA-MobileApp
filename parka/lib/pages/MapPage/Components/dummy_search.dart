@@ -1,5 +1,5 @@
 import 'package:ParkA/components/SearchBar/search_bar.dart';
-import 'package:ParkA/pages/Search/search.dart';
+import 'package:ParkA/pages/Search/search_panel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +25,7 @@ class DummySearch extends StatelessWidget {
         onTap: () async {
           buttonToggle();
           var bottomSheetController = Scaffold.of(context).showBottomSheet(
-              (context) => SearchPage(mainContext: this.mainContext));
+              (context) => SearchPanel(mainContext: this.mainContext));
           await bottomSheetController.closed;
           buttonToggle();
         },

@@ -9,7 +9,6 @@ import 'package:ParkA/pages/ProfilePic/profile_pic_page.dart';
 import 'package:ParkA/pages/PaymentInfo/payment_info.dart';
 import 'package:ParkA/pages/Register/register_page.dart';
 import 'package:ParkA/pages/GraphQlTest/graphql_test_page.dart';
-import 'package:ParkA/pages/Search/search.dart';
 import 'package:flutter/material.dart';
 
 Map<String, WidgetBuilder> routes = {
@@ -24,6 +23,5 @@ Map<String, WidgetBuilder> routes = {
   MapPage.routeName: (BuildContext context) => MapPage(),
   GraphqlTestScreen.routeName: (BuildContext context) => GraphqlTestScreen(),
   FilterPage.routeName: (BuildContext context) => FilterPage(),
-  SearchPage.routeName: (BuildContext context) => SearchPage(),
   ProfileScreen.routeName: (BuildContext context) => ProfileScreen(),
 };

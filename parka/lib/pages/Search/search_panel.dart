@@ -6,9 +6,9 @@ import '../../components/Utils/styles/parka_colors.dart';
 import 'Components/favorite_place_button.dart';
 import 'Components/search_section.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchPanel extends StatelessWidget {
   final BuildContext mainContext;
-  const SearchPage({
+  const SearchPanel({
     Key key,
     @required this.mainContext,
   }) : super(key: key);
