@@ -1,9 +1,7 @@
 import 'package:ParkA/components/Buttons/round_button.dart';
 import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
-import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/ProfilePage/components/informative_tab.dart';
-import 'package:ParkA/pages/ProfilePage/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/pages/ProfilePage/components/parka_review_history_tile.dart';
 import 'package:ParkA/pages/ProfilePage/components/parka_service_history_tile_widget.dart';
 import 'package:ParkA/pages/ProfilePage/components/profile_personal_information_widget.dart';

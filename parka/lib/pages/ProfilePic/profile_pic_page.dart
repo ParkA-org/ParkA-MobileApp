@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:ParkA/components/Buttons/transparent_button.dart';
 import 'package:ParkA/components/Headers/parka_header.dart';
-import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/ID/ID_page.dart';

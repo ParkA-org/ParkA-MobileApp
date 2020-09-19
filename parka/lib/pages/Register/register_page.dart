@@ -1,12 +1,10 @@
 import 'package:ParkA/components/Buttons/transparent_button.dart';
 import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:ParkA/components/Inputs/parka_input.dart';
-import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/pages/ProfilePic/profile_pic_page.dart';
 import 'package:flutter/material.dart';
 import "package:ParkA/components/Utils/styles/text.dart";
-import 'package:intl/intl.dart';
 
 class RegisterPage extends StatefulWidget {
   RegisterPage({Key key}) : super(key: key);
@@ -46,8 +44,6 @@ class _RegisterPageState extends State<RegisterPage> {
   String username, email, password, confirmpassword, phone;
   @override
   Widget build(BuildContext context) {
-    Size currentScreen = MediaQuery.of(context).size;
-
     return Scaffold(
       body: SafeArea(
         child: Column(
