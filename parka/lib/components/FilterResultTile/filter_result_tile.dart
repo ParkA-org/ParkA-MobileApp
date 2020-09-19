@@ -1,3 +1,4 @@
+import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:flutter/material.dart';
 
@@ -25,15 +26,15 @@ class FilterResultTile extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              width: 60,
-              height: 60,
+              width: 60.0,
+              height: 60.0,
               decoration: BoxDecoration(
-                color: Color(0xFFE9E9E9),
+                color: ParkaColors.parkaLightGrey,
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.local_parking,
-                color: Color(0xFF0B768C),
+                color: ParkaColors.parkaGreen,
                 size: 40.0,
               ),
             ),
@@ -59,8 +60,8 @@ class FilterResultTile extends StatelessWidget {
                     ),
                   ),
                   Divider(
-                    color: Color(0xFF0B768C),
-                    thickness: 2.0,
+                    color: ParkaColors.parkaGreen,
+                    thickness: 1.6,
                     endIndent: 0,
                   ),
                 ],
