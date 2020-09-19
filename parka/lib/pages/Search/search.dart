@@ -62,7 +62,11 @@ class SearchPage extends StatelessWidget {
                   flex: 3,
                   child: ListView(
                     children: [
-                      FilterResultTile(),
+                      FilterResultTile(
+                        streetAddress: 'Calle Puerto Rico #175',
+                        ownerName: 'Silvio Arzeno',
+                        parkingspace: '10 metros',
+                      ),
                     ],
                   ),
                 ),

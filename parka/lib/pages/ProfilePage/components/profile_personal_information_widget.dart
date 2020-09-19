@@ -28,6 +28,7 @@ class ProfilePersonalInformationWidget extends StatelessWidget {
               Expanded(
                 child: Container(
                   alignment: Alignment.bottomLeft,
+                  //TODO: Substitute with resizable text
                   child: Text(
                     "Sebastiano Faiella",
                     style: kParkaInputDefaultSyle.copyWith(color: this.color),

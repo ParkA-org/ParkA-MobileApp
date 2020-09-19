@@ -4,41 +4,55 @@ import 'package:flutter/material.dart';
 final kParkaTextBaseStyle = TextStyle(
   color: ParkaColors.parkaGreen,
   fontFamily: "Montserrat",
+);
+
+final kParkaTextBaseStyleBold = TextStyle(
+  color: ParkaColors.parkaGreen,
+  fontFamily: "Montserrat",
   fontWeight: FontWeight.bold,
 );
 
-final kParkaInputDefaultSyle = kParkaTextBaseStyle.copyWith(
+final kParkaInputDefaultSyle = kParkaTextBaseStyleBold.copyWith(
   fontSize: 16,
   color: Colors.white,
 );
 
-final kParkaInputTextStyle = kParkaTextBaseStyle.copyWith(
+final kParkaInputTextStyle = kParkaTextBaseStyleBold.copyWith(
   fontSize: 16,
   color: Colors.black,
 );
 
-final kParkaButtonTextStyle = kParkaTextBaseStyle.copyWith(
+final kParkaInputTextStyleGrey = kParkaTextBaseStyle.copyWith(
+  color: ParkaColors.parkaGrey,
+);
+
+final kParkaButtonTextStyle = kParkaTextBaseStyleBold.copyWith(
   fontSize: 20.0,
 );
 
-final kParkaBigButtonTextStyle = kParkaTextBaseStyle.copyWith(
+final kParkaTextStyleGrey = kParkaTextBaseStyle.copyWith(
+  color: ParkaColors.parkaGreen,
+  fontSize: 20.0,
+);
+
+final kParkaBigButtonTextStyle = kParkaTextBaseStyleBold.copyWith(
   color: Colors.white,
   fontSize: 22.0,
 );
 
-final kParkaPageTitleTextStyle = kParkaTextBaseStyle.copyWith(
+final kParkaPageTitleTextStyle = kParkaTextBaseStyleBold.copyWith(
   fontSize: 32.0,
 );
 
-final kParkaBigTitleTextStyle = kParkaTextBaseStyle.copyWith(
+final kParkaBigTitleTextStyle = kParkaTextBaseStyleBold.copyWith(
   fontSize: 48.0,
 );
 
-final kParkaPaymentFormStyle = kParkaTextBaseStyle.copyWith(
+final kParkaPaymentFormStyle = kParkaTextBaseStyleBold.copyWith(
   fontSize: 18.0,
 );
 
-final kParkaInputDefaultStyleBlue = kParkaTextBaseStyle.copyWith(
+final kParkaInputDefaultStyleBlue = kParkaTextBaseStyleBold.copyWith(
   fontSize: 16,
   color: ParkaColors.parkaGreen,
 );

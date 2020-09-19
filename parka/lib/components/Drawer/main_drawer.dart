@@ -2,7 +2,7 @@ import 'package:ParkA/components/MenuItem/parka_menu_item.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/ProfilePage/components/profile_personal_information_widget.dart';
-import 'package:auto_size_text/auto_size_text.dart';
+import 'package:ParkA/pages/ProfilePage/profile_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../pages/Login/login_screen.dart';
@@ -25,8 +25,13 @@ class MainDrawer extends StatelessWidget {
                 child: Column(
                   children: [
                     Expanded(
-                      child: ProfilePersonalInformationWidget(
-                        color: Colors.white,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, ProfileScreen.routeName);
+                        },
+                        child: ProfilePersonalInformationWidget(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                     Padding(
@@ -117,6 +122,7 @@ class MainDrawer extends StatelessWidget {
                       child: ParkAMenuItem(
                         label: "Salir",
                         itemStyle: kParkaInputDefaultStyleBlue,
+                        navigateTo: LoginScreen.routeName,
                       ),
                     ),
                   ],
@@ -139,107 +145,5 @@ class MainDrawer extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class UserData extends StatelessWidget {
-  const UserData({
-    Key key,
-    @required this.screenSize,
-  }) : super(key: key);
-
-  final Size screenSize;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(children: [
-      Container(
-        color: ParkaColors.parkaGreen,
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-            Container(
-              margin: EdgeInsets.only(bottom: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, LoginScreen.routeName);
-                    },
-                    child: Icon(
-                      Icons.account_circle,
-                      color: Colors.white,
-                      size: 50,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 6.5),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: screenSize.width * 0.46,
-                          child: AutoSizeText(
-                            "David",
-                            style:
-                                kParkaInputDefaultSyle.copyWith(fontSize: 22),
-                            softWrap: false,
-                            overflow: TextOverflow.clip,
-                            maxLines: 1,
-                            minFontSize: 16,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              "4.20",
-                              style: kParkaInputDefaultSyle.copyWith(
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 2),
-                              child: Icon(Icons.star_border,
-                                  color: Colors.white, size: 20),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Divider(
-              thickness: 1,
-              color: Colors.grey,
-              indent: 15,
-              endIndent: 15,
-            ),
-          ]),
-        ),
-      ),
-      ParkAMenuItem(
-        label: "Mis Reservas",
-      ),
-      ParkAMenuItem(
-        label: "Mis Parqueos",
-      ),
-      ParkAMenuItem(
-        label: "Mis Vehiculos",
-      ),
-      ParkAMenuItem(
-        label: "Favoritos",
-      ),
-    ]);
   }
 }

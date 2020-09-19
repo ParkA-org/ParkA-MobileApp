@@ -45,7 +45,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   Text(
                     "Simplificando la busqueda y alquiler de parqueos",
-                    style: kParkaTextBaseStyle,
+                    style: kParkaTextBaseStyleBold,
                   ),
                   RoundedButton(
                     color: ParkaColors.parkaFacebookBlue,
@@ -64,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                   TransparentButton(
                     label: "Iniciar Sesion con Correo",
                     color: ParkaColors.parkaGreen,
-                    buttonTextStyle: kParkaTextBaseStyle,
+                    buttonTextStyle: kParkaTextBaseStyleBold,
                     onTapHandler: () {
                       Navigator.pushNamed(context, EmailLogin.routeName);
                     },
@@ -72,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                   TransparentButton(
                     label: "Registrarse",
                     color: ParkaColors.parkaGreen,
-                    buttonTextStyle: kParkaTextBaseStyle,
+                    buttonTextStyle: kParkaTextBaseStyleBold,
                     onTapHandler: () {
                       Navigator.pushNamed(context, RegisterPage.routeName);
                     },

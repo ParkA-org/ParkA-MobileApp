@@ -23,7 +23,7 @@ class ParkaServiceHistoryWidget extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "Se estaciono en",
-                  style: kParkaTextBaseStyle,
+                  style: kParkaTextBaseStyleBold,
                 ),
               ),
             ),
@@ -65,10 +65,10 @@ class ParkaServiceHistoryWidget extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Fecha", style: kParkaTextBaseStyle),
+                              Text("Fecha", style: kParkaTextBaseStyleBold),
                               Text(
                                 "Ago 16,2020",
-                                style: kParkaTextBaseStyle.copyWith(
+                                style: kParkaTextBaseStyleBold.copyWith(
                                   fontWeight: FontWeight.normal,
                                 ),
                               ),
@@ -79,10 +79,10 @@ class ParkaServiceHistoryWidget extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Vehiculo", style: kParkaTextBaseStyle),
+                              Text("Vehiculo", style: kParkaTextBaseStyleBold),
                               Text(
                                 "Tesla Model 3",
-                                style: kParkaTextBaseStyle.copyWith(
+                                style: kParkaTextBaseStyleBold.copyWith(
                                   fontWeight: FontWeight.normal,
                                 ),
                               ),
@@ -93,10 +93,10 @@ class ParkaServiceHistoryWidget extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Tiempo", style: kParkaTextBaseStyle),
+                              Text("Tiempo", style: kParkaTextBaseStyleBold),
                               Text(
                                 "3 Horas",
-                                style: kParkaTextBaseStyle.copyWith(
+                                style: kParkaTextBaseStyleBold.copyWith(
                                   fontWeight: FontWeight.normal,
                                 ),
                               ),
