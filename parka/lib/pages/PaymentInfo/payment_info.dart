@@ -1,6 +1,5 @@
 import 'package:ParkA/components/Buttons/transparent_button.dart';
 import 'package:ParkA/components/Headers/parka_header.dart';
-import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/MapPage/maps_page.dart';
@@ -25,6 +24,7 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
   String creditCardYear = "--";
   String creditCardCvv;
   Map formHandlers;
+  Map<String, dynamic> createAccount;
 
   @override
   void initState() {
@@ -75,13 +75,33 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
         );
       },
     };
+
+    createAccount = ModalRoute.of(context).settings.arguments;
+  }
+
+  Future<void> sumbmitForm(bool _omit) async {
+    if (_omit) {
+      createAccount["paymentpage"]["digit"] = 0;
+    } else {
+      createAccount["paymentpage"]["digit"] = creditCardNumber1 +
+          creditCardNumber2 +
+          creditCardNumber3 +
+          creditCardNumber4;
+      createAccount["paymentpage"]["name"] = fullName;
+      createAccount["paymentpage"]["expirationdate"] =
+          "20" + creditCardYear + "-" + creditCardMonth + "-01";
+    }
+    await createUser(createAccount);
+
+    Navigator.pushNamed(
+      context,
+      MapPage.routeName,
+      arguments: createAccount,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> createAccount =
-        ModalRoute.of(context).settings.arguments;
-
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: SafeArea(
@@ -131,25 +151,8 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
                           buttonTextStyle: kParkaButtonTextStyle,
                           color: Colors.white,
                           trailingIconData: Icons.arrow_forward_ios,
-                          onTapHandler: () async => {
-                            createAccount["paymentpage"]["digit"] =
-                                creditCardNumber1 +
-                                    creditCardNumber2 +
-                                    creditCardNumber3 +
-                                    creditCardNumber4,
-                            createAccount["paymentpage"]["name"] = fullName,
-                            createAccount["paymentpage"]["expirationdate"] =
-                                "20" +
-                                    creditCardYear +
-                                    "-" +
-                                    creditCardMonth +
-                                    "-01",
-                            await createUser(createAccount),
-                            // Navigator.pushNamed(
-                            //   context,
-                            //   PaymentInfoScreen.routeName,
-                            //   arguments: createAccount,
-                            // )
+                          onTapHandler: () async {
+                            sumbmitForm(false);
                           },
                         ),
                       ),
@@ -158,14 +161,8 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
                           buttonTextStyle: kParkaButtonTextStyle,
                           label: "Omitir",
                           color: ParkaColors.parkaLightGreen,
-                          onTapHandler: () async => {
-                            createAccount["paymentpage"]["digit"] = 0,
-                            await createUser(createAccount),
-                            // Navigator.pushNamed(
-                            //   context,
-                            //   PaymentInfoScreen.routeName,
-                            //   arguments: createAccount,
-                            // )
+                          onTapHandler: () async {
+                            sumbmitForm(true);
                           },
                         ),
                       ),

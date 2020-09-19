@@ -2,7 +2,6 @@ import 'package:ParkA/components/Inputs/parka_input.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/pages/ForgotPassword/forgot_password_screen.dart';
-import 'package:ParkA/pages/GraphQlTest/graphql_test_page.dart';
 import 'package:ParkA/pages/Login/utils/utils.dart';
 import 'package:ParkA/pages/MapPage/maps_page.dart';
 import 'package:flutter/material.dart';

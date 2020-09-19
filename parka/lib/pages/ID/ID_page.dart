@@ -1,12 +1,9 @@
-import 'dart:convert';
-
 import 'package:ParkA/components/Buttons/transparent_button.dart';
 import 'package:ParkA/components/Cards/ID_card.dart';
 import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:ParkA/components/Inputs/parka_datepicker.dart';
 import 'package:ParkA/components/Inputs/parka_dropdown.dart';
 import 'package:ParkA/components/Inputs/parka_input.dart';
-import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/PaymentInfo/payment_info.dart';
