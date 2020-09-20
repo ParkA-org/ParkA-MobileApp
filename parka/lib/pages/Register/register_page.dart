@@ -47,9 +47,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            //Header Column
+          children: [
             Expanded(
               flex: 0,
               child: ParkaHeader(
@@ -57,154 +55,211 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 42.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.account_circle,
-                      size: 70,
-                      color: ParkaColors.parkaGreen,
-                    ),
-                    Spacer(),
-                    Text(
-                      "Crear Cuenta",
-                      textAlign: TextAlign.center,
-                      style: kParkaPageTitleTextStyle,
-                    ),
-                    Spacer(
-                      flex: 3,
-                    )
-                  ],
-                ),
-              ),
-            ),
-            //Login Column
-            Expanded(
-              flex: 6,
-              // fit: FlexFit.tight,
-              child: Container(
-                padding: EdgeInsets.fromLTRB(42, 0, 42, 0),
-                decoration: BoxDecoration(
-                  color: Color(0xFF0B768C),
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(16.0),
-                  ),
-                ),
-                child: LayoutBuilder(
-                  builder: (BuildContext context, BoxConstraints constraints) {
-                    return SingleChildScrollView(
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                          minHeight: constraints.maxHeight,
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            ParkAInput(
-                              icon: 'WhiteProfileIcon.svg',
-                              text: 'Nombres',
-                              onChanged: (username) {
-                                setState(
-                                  () {
-                                    createAccount["registerpage"]["username"] =
-                                        username;
-                                  },
-                                );
-                              },
+              child: LayoutBuilder(
+                builder:
+                    (BuildContext context, BoxConstraints viewportConstraints) {
+                  return Column(
+                    children: [
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(
+                              minHeight: viewportConstraints.maxHeight,
                             ),
-                            ParkAInput(
-                              icon: 'WhiteProfileIcon.svg',
-                              text: 'Apellidos',
-                              onChanged: (lastname) {
-                                setState(
-                                  () {
-                                    createAccount["registerpage"]["lastname"] =
-                                        lastname;
-                                  },
-                                );
-                              },
+                            child: IntrinsicHeight(
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Expanded(
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 42.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Icon(
+                                                  Icons.account_circle,
+                                                  size: 70,
+                                                  color: ParkaColors.parkaGreen,
+                                                ),
+                                                Spacer(),
+                                                Text(
+                                                  "Crear Cuenta",
+                                                  textAlign: TextAlign.center,
+                                                  style:
+                                                      kParkaPageTitleTextStyle,
+                                                ),
+                                                Spacer(
+                                                  flex: 3,
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 6,
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 40.0,
+                                                vertical: 8.0),
+                                            decoration: BoxDecoration(
+                                              color: ParkaColors.parkaGreen,
+                                              borderRadius:
+                                                  BorderRadius.vertical(
+                                                top: Radius.circular(16.0),
+                                              ),
+                                            ),
+                                            child: Column(
+                                              children: [
+                                                Expanded(
+                                                  child: ParkAInput(
+                                                    icon:
+                                                        'WhiteProfileIcon.svg',
+                                                    text: 'Nombres',
+                                                    onChanged: (username) {
+                                                      setState(
+                                                        () {
+                                                          createAccount[
+                                                                      "registerpage"]
+                                                                  ["username"] =
+                                                              username;
+                                                        },
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: ParkAInput(
+                                                    icon:
+                                                        'WhiteProfileIcon.svg',
+                                                    text: 'Apellidos',
+                                                    onChanged: (lastname) {
+                                                      setState(
+                                                        () {
+                                                          createAccount[
+                                                                      "registerpage"]
+                                                                  ["lastname"] =
+                                                              lastname;
+                                                        },
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: ParkAInput(
+                                                    icon: 'Mail.svg',
+                                                    text: 'Correo/Usuario',
+                                                    keyboardType: TextInputType
+                                                        .emailAddress,
+                                                    onChanged: (email) {
+                                                      setState(
+                                                        () {
+                                                          createAccount[
+                                                                  "registerpage"]
+                                                              ["email"] = email;
+                                                        },
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: ParkAInput(
+                                                    icon: 'WhiteLockIcon.svg',
+                                                    text: 'Contraseña',
+                                                    isPassword: true,
+                                                    keyboardType: TextInputType
+                                                        .visiblePassword,
+                                                    onChanged: (password) {
+                                                      setState(
+                                                        () {
+                                                          createAccount[
+                                                                      "registerpage"]
+                                                                  ["password"] =
+                                                              password;
+                                                        },
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: ParkAInput(
+                                                    icon: 'Lockcheck.svg',
+                                                    text:
+                                                        'Confirmar contraseña',
+                                                    isPassword: true,
+                                                    keyboardType: TextInputType
+                                                        .visiblePassword,
+                                                    onChanged:
+                                                        (confirmpassword) {
+                                                      setState(
+                                                        () {
+                                                          this.confirmpassword =
+                                                              confirmpassword;
+                                                        },
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: ParkAInput(
+                                                    icon: 'Phone.svg',
+                                                    text: 'Numero de Telefono',
+                                                    keyboardType:
+                                                        TextInputType.phone,
+                                                    onChanged: (phone) {
+                                                      setState(
+                                                        () {
+                                                          createAccount[
+                                                                  "registerpage"]
+                                                              ["phone"] = phone;
+                                                        },
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: TransparentButton(
+                                                    label: 'Continuar',
+                                                    buttonTextStyle:
+                                                        kParkaButtonTextStyle,
+                                                    trailingIconData:
+                                                        Icons.arrow_forward_ios,
+                                                    color: Colors.white,
+                                                    onTapHandler: () async {
+                                                      // This part in future is for validate email are exists
+                                                      // var result = await createUser(this.username,
+                                                      //     this.lastname, this.email, this.password);
+                                                      Navigator.pushNamed(
+                                                        context,
+                                                        ProfilePicPage
+                                                            .routeName,
+                                                        arguments:
+                                                            createAccount,
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                            ParkAInput(
-                              icon: 'Mail.svg',
-                              text: 'Correo/Usuario',
-                              keyboardType: TextInputType.emailAddress,
-                              onChanged: (email) {
-                                setState(
-                                  () {
-                                    createAccount["registerpage"]["email"] =
-                                        email;
-                                  },
-                                );
-                              },
-                            ),
-                            ParkAInput(
-                              icon: 'WhiteLockIcon.svg',
-                              text: 'Contraseña',
-                              isPassword: true,
-                              keyboardType: TextInputType.visiblePassword,
-                              onChanged: (password) {
-                                setState(
-                                  () {
-                                    createAccount["registerpage"]["password"] =
-                                        password;
-                                  },
-                                );
-                              },
-                            ),
-                            ParkAInput(
-                              icon: 'Lockcheck.svg',
-                              text: 'Confirmar contraseña',
-                              isPassword: true,
-                              keyboardType: TextInputType.visiblePassword,
-                              onChanged: (confirmpassword) {
-                                setState(
-                                  () {
-                                    this.confirmpassword = confirmpassword;
-                                  },
-                                );
-                              },
-                            ),
-                            ParkAInput(
-                              icon: 'Phone.svg',
-                              text: 'Numero de Telefono',
-                              keyboardType: TextInputType.phone,
-                              onChanged: (phone) {
-                                setState(
-                                  () {
-                                    createAccount["registerpage"]["phone"] =
-                                        phone;
-                                  },
-                                );
-                              },
-                            ),
-                            SizedBox(
-                              height: 6,
-                            ),
-                            TransparentButton(
-                              label: 'Continuar',
-                              buttonTextStyle: kParkaButtonTextStyle,
-                              trailingIconData: Icons.arrow_forward_ios,
-                              color: Colors.white,
-                              onTapHandler: () async {
-                                // This part in future is for validate email are exists
-                                // var result = await createUser(this.username,
-                                //     this.lastname, this.email, this.password);
-                                Navigator.pushNamed(
-                                  context,
-                                  ProfilePicPage.routeName,
-                                  arguments: createAccount,
-                                );
-                              },
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                    );
-                  },
-                ),
+                    ],
+                  );
+                },
               ),
             ),
           ],
