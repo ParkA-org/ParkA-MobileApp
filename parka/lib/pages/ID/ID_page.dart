@@ -86,7 +86,8 @@ class _IDPageState extends State<IDPage> {
               Expanded(
                 flex: 2,
                 child: Container(
-                  padding: EdgeInsets.all(15.0),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 36.0),
                   decoration: BoxDecoration(
                     color: ParkaColors.parkaGreen,
                     borderRadius: BorderRadius.only(
