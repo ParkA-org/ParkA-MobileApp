@@ -75,13 +75,11 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
         );
       },
     };
-
-    createAccount = ModalRoute.of(context).settings.arguments;
   }
 
   Future<void> sumbmitForm(bool _omit) async {
     if (_omit) {
-      createAccount["paymentpage"]["digit"] = 0;
+      createAccount["paymentpage"]["digit"] = "0";
     } else {
       createAccount["paymentpage"]["digit"] = creditCardNumber1 +
           creditCardNumber2 +
@@ -93,6 +91,8 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
     }
     await createUser(createAccount);
 
+    print("done");
+
     Navigator.pushNamed(
       context,
       MapPage.routeName,
@@ -102,6 +102,7 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    createAccount = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: SafeArea(

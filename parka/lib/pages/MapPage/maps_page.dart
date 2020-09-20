@@ -36,8 +36,9 @@ class _MapPageState extends State<MapPage> {
       () {
         userLocation = currentUserLocation;
         initialCameraPosition = CameraPosition(
-            target: LatLng(userLocation.latitude, userLocation.longitude),
-            zoom: 15.5);
+          target: LatLng(userLocation.latitude, userLocation.longitude),
+          zoom: 15.5,
+        );
       },
     );
   }
@@ -50,9 +51,11 @@ class _MapPageState extends State<MapPage> {
         CameraPosition(target: LatLng(18.487876, -69.9644807), zoom: 15.5);
     getCurrentLocation();
 
-    rootBundle.loadString('resources/styles/map_style.txt').then((string) {
-      _mapStyle = string;
-    });
+    rootBundle.loadString('resources/styles/map_style.txt').then(
+      (string) {
+        _mapStyle = string;
+      },
+    );
   }
 
   @override

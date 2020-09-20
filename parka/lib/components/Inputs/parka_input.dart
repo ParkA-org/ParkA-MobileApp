@@ -67,21 +67,24 @@ class ParkAInput extends StatelessWidget {
             height: currentScreen.height * 0.005,
           ),
           Container(
-            decoration: BoxDecoration(boxShadow: [
-              BoxShadow(
-                blurRadius: 5,
-                offset: Offset(0, 10),
-                color: Color(0x40000000),
-              )
-            ]),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 5,
+                  offset: Offset(0, 10),
+                  color: Color(0x40000000),
+                )
+              ],
+            ),
             height: inputHeight ?? currentScreen.height * 0.06,
             width: inputWidth ?? currentScreen.height * 0.5,
             child: TextFormField(
-                onChanged: onChanged ?? (value) {},
-                style: kParkaInputTextStyle,
-                obscureText: isPassword ?? false,
-                keyboardType: keyboardType ?? TextInputType.emailAddress,
-                decoration: kParkaInputTextFieldDefaultStyle),
+              onChanged: onChanged ?? (value) {},
+              style: kParkaInputTextStyle,
+              obscureText: isPassword ?? false,
+              keyboardType: keyboardType ?? TextInputType.emailAddress,
+              decoration: kParkaInputTextFieldDefaultStyle,
+            ),
           ),
         ],
       ),
