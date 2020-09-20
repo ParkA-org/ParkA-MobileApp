@@ -30,7 +30,6 @@ class ParkaIdCardField extends StatelessWidget {
               fontSize: 12.0,
               fontWeight: FontWeight.bold,
             ),
-            textAlign: TextAlign.center,
           ),
           this.dataToDisplay == null || this.dataToDisplay.isEmpty
               ? ParkAPlaceholder(
@@ -39,7 +38,6 @@ class ParkaIdCardField extends StatelessWidget {
                 )
               : AutoSizeText(
                   "${this.dataToDisplay}",
-                  textAlign: TextAlign.center,
                   maxLines: 1,
                   style: TextStyle(
                     fontFamily: 'Montserrat',
