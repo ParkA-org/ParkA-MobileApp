@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:ParkA/components/Buttons/main_fab.dart';
 import 'package:ParkA/components/Drawer/main_drawer.dart';
 import 'package:ParkA/pages/MapPage/Components/dummy_search.dart';

@@ -72,6 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         padding: const EdgeInsets.only(top: 16.0),
                         child: ProfilePersonalInformationWidget(
                           color: Colors.white,
+                          showLocation: true,
                         ),
                       ),
                     ),

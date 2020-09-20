@@ -52,7 +52,6 @@ class IDCard extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 3,
-                  //TODO: convert this in a reusable widget
                   child: ParkaIdCardField(
                     dataToDisplay: docNumber,
                     screenSize: screenSize,

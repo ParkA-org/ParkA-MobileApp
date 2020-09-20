@@ -1,13 +1,16 @@
 import 'package:ParkA/pages/ProfilePage/components/parka_circle_avatar_widget.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import "package:flutter/material.dart";
 import "package:ParkA/components/Utils/styles/text.dart";
 
 class ProfilePersonalInformationWidget extends StatelessWidget {
   final Color color;
+  final bool showLocation;
 
   const ProfilePersonalInformationWidget({
     Key key,
     this.color,
+    @required this.showLocation,
   }) : super(key: key);
 
   @override
@@ -28,31 +31,40 @@ class ProfilePersonalInformationWidget extends StatelessWidget {
               Expanded(
                 child: Container(
                   alignment: Alignment.bottomLeft,
-                  //TODO: Substitute with resizable text
-                  child: Text(
+                  child: AutoSizeText(
                     "Sebastiano Faiella",
-                    style: kParkaInputDefaultSyle.copyWith(color: this.color),
+                    maxLines: 1,
+                    minFontSize: 14.0,
+                    style: kParkaTextBaseStyleBold.copyWith(
+                      color: this.color,
+                    ),
                   ),
                 ),
               ),
               Expanded(
                 child: Row(
                   children: [
-                    Icon(
-                      Icons.location_on,
-                      color: this.color,
-                    ),
-                    Text(
-                      "Santo Domingo",
-                      style: kParkaInputDefaultSyle.copyWith(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 12.0,
-                      ),
-                    ),
-                    VerticalDivider(
-                      thickness: 1.0,
-                      color: Color(0xFF949494),
-                    ),
+                    this.showLocation
+                        ? Row(
+                            children: [
+                              Icon(
+                                Icons.location_on,
+                                color: this.color,
+                              ),
+                              Text(
+                                "Santo Domingo",
+                                style: kParkaInputDefaultSyle.copyWith(
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 12.0,
+                                ),
+                              ),
+                              VerticalDivider(
+                                thickness: 1.0,
+                                color: Color(0xFF949494),
+                              ),
+                            ],
+                          )
+                        : Container(),
                     Icon(
                       Icons.star,
                       color: this.color,

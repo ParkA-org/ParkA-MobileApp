@@ -31,6 +31,7 @@ class MainDrawer extends StatelessWidget {
                         },
                         child: ProfilePersonalInformationWidget(
                           color: Colors.white,
+                          showLocation: false,
                         ),
                       ),
                     ),
