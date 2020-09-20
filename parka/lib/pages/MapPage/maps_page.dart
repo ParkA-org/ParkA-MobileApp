@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:ParkA/components/Buttons/main_fab.dart';
 import 'package:ParkA/components/Drawer/main_drawer.dart';
 import 'package:ParkA/pages/MapPage/Components/dummy_search.dart';
@@ -21,6 +23,7 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> {
   String _mapStyle;
   bool _fabIsVisible;
+  bool _loading;
   LocationData userLocation;
   CameraPosition initialCameraPosition;
 
@@ -30,11 +33,13 @@ class _MapPageState extends State<MapPage> {
     });
   }
 
-  void getCurrentLocation() async {
+  Future<void> getCurrentLocation() async {
     final LocationData currentUserLocation = await Location().getLocation();
     setState(
       () {
         userLocation = currentUserLocation;
+        this._loading = false;
+        print('THIS HAS LOADED  $_loading');
         initialCameraPosition = CameraPosition(
           target: LatLng(userLocation.latitude, userLocation.longitude),
           zoom: 15.5,
@@ -47,6 +52,7 @@ class _MapPageState extends State<MapPage> {
   void initState() {
     super.initState();
     _fabIsVisible = true;
+    _loading = true;
     initialCameraPosition =
         CameraPosition(target: LatLng(18.487876, -69.9644807), zoom: 15.5);
     getCurrentLocation();
@@ -75,7 +81,7 @@ class _MapPageState extends State<MapPage> {
       body: SafeArea(
         child: ModalProgressHUD(
           color: ParkaColors.parkaGreen,
-          inAsyncCall: currentUserLocation == null,
+          inAsyncCall: this._loading,
           opacity: 0.2,
           child: Stack(
             alignment: Alignment.bottomCenter,
