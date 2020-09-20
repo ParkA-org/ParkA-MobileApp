@@ -3,9 +3,11 @@ import 'package:ParkA/components/Inputs/parka_input.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
 import 'package:ParkA/components/Utils/functions.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
+import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/ForgotPassword/forgot_password_screen.dart';
 import 'package:ParkA/pages/Login/utils/utils.dart';
 import 'package:ParkA/pages/MapPage/maps_page.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql/client.dart';
 
@@ -28,8 +30,16 @@ class _LoginFormState extends State<LoginForm> {
       return buildShowDialog(
         context,
         BaseAlertWidget(
-          child: Text(
-              '${this.user == null || this.user.length == 0 ? 'Ingresa tu correo' : 'Ingresa tu password'}'),
+          child: Container(
+            height: 120.0,
+            width: 120.0,
+            child: Center(
+              child: Text(
+                '${this.user == null || this.user.length == 0 ? 'Ingresa tu correo' : 'Ingresa tu password'}',
+                style: kParkaButtonTextStyle,
+              ),
+            ),
+          ),
         ),
       );
     }
@@ -39,7 +49,17 @@ class _LoginFormState extends State<LoginForm> {
       return buildShowDialog(
         context,
         BaseAlertWidget(
-          child: Text('Email o password incorrecto'),
+          child: Container(
+            width: 120.0,
+            height: 120.0,
+            child: Center(
+              child: AutoSizeText(
+                'Email o password incorrecto',
+                style: kParkaButtonTextStyle,
+                maxLines: 1,
+              ),
+            ),
+          ),
         ),
       );
     }
