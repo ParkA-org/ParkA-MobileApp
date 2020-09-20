@@ -1,4 +1,4 @@
-import 'package:ParkA/components/Placeholders/parka_placeholder.dart';
+import 'package:ParkA/pages/ID/components/parka_id_card_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
@@ -42,40 +42,22 @@ class IDCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Container(
-                  // margin: EdgeInsets.fromLTRB(23, 15, 10, 14),
-                  child:
-                      SvgPicture.asset('resources/images/BlueProfileIcon.svg'),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    // margin: EdgeInsets.fromLTRB(23, 15, 10, 14),
+                    child: SvgPicture.asset(
+                        'resources/images/BlueProfileIcon.svg'),
+                  ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      "No. de Documento",
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        color: Color(0xFF0B768C),
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    docNumber == null || docNumber.isEmpty
-                        ? ParkAPlaceholder(
-                            height: screenSize.height * 0.025,
-                            width: screenSize.width * 0.6,
-                          )
-                        : Text(
-                            "$docNumber",
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              color: Colors.black,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                  ],
+                Expanded(
+                  flex: 3,
+                  //TODO: convert this in a reusable widget
+                  child: ParkaIdCardField(
+                    dataToDisplay: docNumber,
+                    screenSize: screenSize,
+                    label: "No. de Documento",
+                  ),
                 ),
               ],
             ),
@@ -84,65 +66,22 @@ class IDCard extends StatelessWidget {
             child: Container(
               // margin: EdgeInsets.fromLTRB(23, 0, 18, 13),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Fecha de Nacimiento",
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          color: Color(0xFF0B768C),
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      dateOfBirth == null
-                          ? ParkAPlaceholder(
-                              height: screenSize.height * 0.025,
-                              width: screenSize.width * 0.35,
-                            )
-                          : Text(
-                              "$formattedDate",
-                              style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                color: Colors.black,
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                    ],
+                  Expanded(
+                    child: ParkaIdCardField(
+                      screenSize: screenSize,
+                      label: "Fecha de Nacimiento",
+                      dataToDisplay: formattedDate,
+                    ),
+                    //
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Nacionalidad",
-                        style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            color: Color(0xFF0B768C),
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                      nationality == null || nationality.isEmpty
-                          ? ParkAPlaceholder(
-                              height: screenSize.height * 0.025,
-                              width: screenSize.width * 0.35,
-                            )
-                          : Text(
-                              "$nationality",
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                    ],
+                  Expanded(
+                    child: ParkaIdCardField(
+                      screenSize: screenSize,
+                      label: "Nacionalidad",
+                      dataToDisplay: nationality,
+                    ),
                   )
                 ],
               ),
@@ -154,62 +93,19 @@ class IDCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Lugar de Nacimiento",
-                        style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            color: Color(0xFF0B768C),
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                      placeOfBirth == null || placeOfBirth.isEmpty
-                          ? ParkAPlaceholder(
-                              height: screenSize.height * 0.025,
-                              width: screenSize.width * 0.35,
-                            )
-                          : Text(
-                              "$placeOfBirth",
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                    ],
+                  Expanded(
+                    child: ParkaIdCardField(
+                      screenSize: screenSize,
+                      label: "Lugar de Nacimiento",
+                      dataToDisplay: placeOfBirth,
+                    ),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Tipo de documento",
-                        style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            color: Color(0xFF0B768C),
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                      docType == null || docType.isEmpty
-                          ? ParkAPlaceholder(
-                              height: screenSize.height * 0.025,
-                              width: screenSize.width * 0.35,
-                            )
-                          : Text(
-                              "$docType",
-                              style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                color: Colors.black,
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                    ],
+                  Expanded(
+                    child: ParkaIdCardField(
+                      dataToDisplay: docType,
+                      label: "Tipo de documento",
+                      screenSize: screenSize,
+                    ),
                   )
                 ],
               ),
