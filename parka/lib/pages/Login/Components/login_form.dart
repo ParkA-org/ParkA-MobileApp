@@ -64,7 +64,7 @@ class _LoginFormState extends State<LoginForm> {
       );
     }
 
-    // Navigator.pushNamed(context, MapPage.routeName);
+    Navigator.pushNamed(context, MapPage.routeName);
   }
 
   @override
