@@ -1,3 +1,4 @@
+import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import "package:flutter/material.dart";
 
 class PriceSliderWidget extends StatelessWidget {
@@ -23,7 +24,7 @@ class PriceSliderWidget extends StatelessWidget {
             child: Text(
               "Precio",
               style: TextStyle(
-                color: Color(0xFF0B768C),
+                color: ParkaColors.parkaGreen,
                 fontSize: 28.0,
                 fontWeight: FontWeight.bold,
               ),

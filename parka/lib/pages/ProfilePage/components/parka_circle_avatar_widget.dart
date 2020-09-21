@@ -25,7 +25,6 @@ class ParkaCircleAvatarWidget extends StatelessWidget {
             shape: BoxShape.circle,
             image: DecorationImage(
               fit: BoxFit.fill,
-              //TODO: sustitute with fade in Image
               image: NetworkImage(
                 'http://www.naviearmatori.net/albums/userpics/10187/DSCF5546.JPG',
               ),

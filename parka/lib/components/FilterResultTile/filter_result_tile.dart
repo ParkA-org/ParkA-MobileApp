@@ -1,31 +1,40 @@
+import 'package:ParkA/components/Utils/styles/parka_colors.dart';
+import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:flutter/material.dart';
 
 class FilterResultTile extends StatelessWidget {
-  const FilterResultTile({
+  final String streetAddress;
+  final String ownerName;
+  final String parkingspace;
+
+  FilterResultTile({
     Key key,
+    this.streetAddress,
+    this.ownerName,
+    this.parkingspace,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(
-        vertical: 30.0,
-        horizontal: 30.0,
+        vertical: 8.0,
+        horizontal: 16.0,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: Container(
-              width: 60,
-              height: 60,
+              width: 60.0,
+              height: 60.0,
               decoration: BoxDecoration(
-                color: Color(0xFFE9E9E9),
+                color: ParkaColors.parkaLightGrey,
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.local_parking,
-                color: Color(0xFF0B768C),
+                color: ParkaColors.parkaGreen,
                 size: 40.0,
               ),
             ),
@@ -37,42 +46,22 @@ class FilterResultTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
-                    'Calle Puerto Rico #175',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      color: Color(0xFF0B768C),
-                      fontSize: 20.0,
-                    ),
-                  ),
+                  Text(this.streetAddress, style: kParkaTextStyleGrey),
                   Padding(
                     padding: const EdgeInsets.only(top: 14.0, bottom: 15.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text(
-                          'Silvio Arzeno',
-                          style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            color: Color(0xFF69858B),
-                            fontSize: 17.0,
-                          ),
-                        ),
-                        Text(
-                          '10 metros',
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            color: Color(0xFF69858B),
-                            fontSize: 17.0,
-                          ),
-                        ),
+                        Text(this.ownerName, style: kParkaInputTextStyleGrey),
+                        Text(this.parkingspace,
+                            textAlign: TextAlign.right,
+                            style: kParkaInputTextStyleGrey),
                       ],
                     ),
                   ),
                   Divider(
-                    color: Color(0xFF0B768C),
-                    thickness: 2,
+                    color: ParkaColors.parkaGreen,
+                    thickness: 1.6,
                     endIndent: 0,
                   ),
                 ],

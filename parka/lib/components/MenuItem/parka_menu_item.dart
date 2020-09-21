@@ -26,10 +26,13 @@ class ParkAMenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        child: Text(
-          "$label",
-          style: itemStyle ?? kParkaInputDefaultSyle,
-          textAlign: TextAlign.start,
+        child: Container(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            "$label",
+            style: itemStyle ?? kParkaInputDefaultSyle,
+            textAlign: TextAlign.start,
+          ),
         ),
         onTap: () {
           if (navigateTo == null || navigateTo.isEmpty) {

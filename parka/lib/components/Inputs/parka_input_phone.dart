@@ -16,7 +16,6 @@ import 'package:ParkA/components/Utils/styles/inputs.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ParkADobleInput extends StatelessWidget {
   const ParkADobleInput({

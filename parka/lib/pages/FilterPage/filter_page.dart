@@ -1,3 +1,5 @@
+import 'package:ParkA/components/Headers/parka_header.dart';
+import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/pages/FilterPage/components/filter_date_widget.dart';
 import 'package:ParkA/pages/FilterPage/components/buttons_reservation_type_widget.dart';
 import 'package:ParkA/pages/FilterPage/components/featureFilterWidget/feature_filter_widget.dart';
@@ -138,89 +140,118 @@ class _FilterPageState extends State<FilterPage> {
       body: SafeArea(
         child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints viewportConstraints) {
-            return SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: viewportConstraints.maxHeight,
+            return Column(
+              children: [
+                Expanded(
+                  flex: 0,
+                  child: ParkaHeader(
+                    color: ParkaColors.parkaGreen,
+                  ),
                 ),
-                child: IntrinsicHeight(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Expanded(
-                          flex: 0,
-                          child: FilterPageTopBar(
-                            onTapHandler: this.resetFilters,
-                          ),
-                        ),
-                        Expanded(
-                          child: StarRatingFilter(
-                            rating: this.parkingVoteFilter,
-                            rateHandler: this.changeParkingVoteFilter,
-                          ),
-                        ),
-                        Expanded(
-                          child: PriceSliderWidget(
-                            rentPriceFilter: rentPriceFilter,
-                            minSliderValue: this.minRentPriceFilter,
-                            maxSliderValue: this.maxRentPriceFilter,
-                            sliderChangeHandler: changeParkingPriceFilter,
-                          ),
-                        ),
-                        Expanded(
-                          child: ReserveTypeSelectorWidget(
-                            types: [
-                              "Horas",
-                              "Dias",
-                              "Semanas",
-                            ],
-                            selectedTypes: this.isSelectedParkingType,
-                            onPressedHandler: this.changeParkingTypeFilter,
-                          ),
-                        ),
-                        Expanded(
-                          child: FilterDatePicker(
-                            date: this.selectedDate,
-                            datePickerHandler: this.parseDate,
-                            minHourPickerHandler:
-                                this.changeParkingMinHourFilter,
-                            maxHourPickerHandler:
-                                this.changeParkingMaxHourFilter,
-                          ),
-                        ),
-                        FeatureSelectorFilter(
-                          renderAvaliableWidth: viewportConstraints.maxWidth,
-                          onTapHandler: this.changeParkingFeatureFilter,
-                          selectedFeatures: this.isSelectedParkingFeature,
-                          featureTypes: [
-                            "Camara de seguridad",
-                            "Control de acceso",
-                            "Vigilancia",
-                            "Car Wash",
-                            "Puerto de Carga",
-                            "Valet Parking"
-                          ],
-                          iconNames: this.iconNames,
-                        ),
-                        Expanded(
-                          flex: 0,
-                          child: Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0),
-                            child: Text(
-                              "Terminos y condiciones legales",
-                              style: TextStyle(
-                                color: Color(0xFF0B768C),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: viewportConstraints.maxHeight,
+                      ),
+                      child: IntrinsicHeight(
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20.0,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: <Widget>[
+                                    Expanded(
+                                      flex: 0,
+                                      child: FilterPageTopBar(
+                                        onTapHandler: this.resetFilters,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: StarRatingFilter(
+                                        rating: this.parkingVoteFilter,
+                                        rateHandler:
+                                            this.changeParkingVoteFilter,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: PriceSliderWidget(
+                                        rentPriceFilter: rentPriceFilter,
+                                        minSliderValue: this.minRentPriceFilter,
+                                        maxSliderValue: this.maxRentPriceFilter,
+                                        sliderChangeHandler:
+                                            changeParkingPriceFilter,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: ReserveTypeSelectorWidget(
+                                        types: [
+                                          "Horas",
+                                          "Dias",
+                                          "Semanas",
+                                        ],
+                                        selectedTypes:
+                                            this.isSelectedParkingType,
+                                        onPressedHandler:
+                                            this.changeParkingTypeFilter,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: FilterDatePicker(
+                                        date: this.selectedDate,
+                                        datePickerHandler: this.parseDate,
+                                        minHourPickerHandler:
+                                            this.changeParkingMinHourFilter,
+                                        maxHourPickerHandler:
+                                            this.changeParkingMaxHourFilter,
+                                      ),
+                                    ),
+                                    FeatureSelectorFilter(
+                                      renderAvaliableWidth:
+                                          viewportConstraints.maxWidth,
+                                      onTapHandler:
+                                          this.changeParkingFeatureFilter,
+                                      selectedFeatures:
+                                          this.isSelectedParkingFeature,
+                                      featureTypes: [
+                                        "Camara de seguridad",
+                                        "Control de acceso",
+                                        "Vigilancia",
+                                        "Car Wash",
+                                        "Puerto de Carga",
+                                        "Valet Parking"
+                                      ],
+                                      iconNames: this.iconNames,
+                                    ),
+                                    Expanded(
+                                      flex: 0,
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 8.0),
+                                        child: Text(
+                                          "Terminos y condiciones legales",
+                                          style: TextStyle(
+                                            color: ParkaColors.parkaGreen,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
-              ),
+              ],
             );
           },
         ),

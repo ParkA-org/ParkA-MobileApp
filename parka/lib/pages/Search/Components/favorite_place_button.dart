@@ -10,13 +10,20 @@ class FavoritePlaceButton extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: Container(
+        padding: EdgeInsets.symmetric(vertical: 8.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(offset: Offset(0, 5.0), color: Colors.black54),
+          ],
+        ),
         child: Row(
           children: [
             Expanded(
-              flex: 2,
+              flex: 1,
               child: Container(
-                width: 50,
-                height: 50,
+                width: 40.0,
+                height: 40.0,
                 decoration: BoxDecoration(
                   color: Color(0xFFE9E9E9),
                   shape: BoxShape.circle,
@@ -24,36 +31,32 @@ class FavoritePlaceButton extends StatelessWidget {
                 child: Icon(
                   Icons.star,
                   color: Color(0xFF0B768C),
-                  size: 40.0,
+                  size: 30.0,
                 ),
               ),
             ),
             Expanded(
                 flex: 5,
-                child: Text(
-                  'Lugares Favoritos',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    color: Color(0xFF077187),
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
+                child: Container(
+                  height: 40.0,
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Lugares Favoritos',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      color: Color(0xFF077187),
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 )),
             Expanded(
               child: Icon(
                 Icons.navigate_next,
                 color: Color(0xFF077187),
-                size: 60,
+                size: 40.0,
               ),
             )
-          ],
-        ),
-        height: 80.0,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15.0),
-          boxShadow: [
-            BoxShadow(offset: Offset(5.0, 5.0), color: Colors.black54),
           ],
         ),
       ),

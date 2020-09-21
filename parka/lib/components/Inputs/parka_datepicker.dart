@@ -81,7 +81,9 @@ class ParkADatePicker extends StatelessWidget {
                 BoxShadow(
                   blurRadius: 5,
                   offset: Offset(0, 10),
-                  color: Color(0x40000000),
+                  color: Color(
+                    0x40000000,
+                  ),
                 )
               ],
             ),
@@ -108,7 +110,7 @@ class ParkADatePicker extends StatelessWidget {
               onTap: () => showModalBottomSheet(
                 context: context,
                 builder: (context) => Container(
-                  height: currentScreen.height * 0.35,
+                  height: currentScreen.height * 0.40,
                   child: DatePickerWidget(
                     onConfirm: onChanged ?? {},
                     dateFormat: 'dd/MM/yyyy',
@@ -121,7 +123,9 @@ class ParkADatePicker extends StatelessWidget {
                         fontFamily: "Montserrat",
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF0B768C),
+                        color: Color(
+                          0xFF0B768C,
+                        ),
                       ),
                     ),
                   ),
