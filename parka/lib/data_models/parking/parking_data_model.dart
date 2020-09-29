@@ -1,10 +1,11 @@
-import 'package:ParkA/data_models/parking/parking_feature_data_model.dart';
+import 'package:ParkA/data_models/feature/parking_feature_data_model.dart';
 
 class Parking {
   final String id;
   final int parkingCount;
   final String latitude;
   final String longitude;
+  final String calendar;
   final double perHourPrice;
   final String mainPicture;
   final List<String> pictures;
@@ -22,6 +23,7 @@ class Parking {
     this.information,
     this.latitude,
     this.longitude,
+    this.calendar,
     this.mainPicture,
     this.parkingCount,
     this.perHourPrice,
