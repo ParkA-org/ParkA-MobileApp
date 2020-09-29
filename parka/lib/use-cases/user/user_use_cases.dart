@@ -1,4 +1,4 @@
-import 'package:ParkA/components/Utils/graphql/graphql_client.dart';
+import 'package:ParkA/utils/graphql/parka_graphql_client.dart';
 import 'package:graphql/client.dart';
 
 class UserUseCases {
@@ -25,6 +25,6 @@ class UserUseCases {
     );
 
     final QueryResult loginResult =
-        await ParkaGraphqlClient.graphQlClient.mutate(loginMutationOptions);
+        await ParkaBaseGraphqlClient.graphQlClient.mutate(loginMutationOptions);
   }
 }
