@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import "package:graphql/client.dart";
 
-class ParkaBaseAuthGraphqlClient {
+class AuthGraphqlClient {
   final String jwt;
   static GraphQLClient _client;
 
@@ -9,7 +9,7 @@ class ParkaBaseAuthGraphqlClient {
     return _client;
   }
 
-  ParkaBaseAuthGraphqlClient({
+  AuthGraphqlClient({
     @required this.jwt,
   }) {
     final HttpLink _httpLink = HttpLink(

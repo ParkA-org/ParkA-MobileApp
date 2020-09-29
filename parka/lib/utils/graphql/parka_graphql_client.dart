@@ -1,26 +1,20 @@
+import 'package:ParkA/utils/graphql/auth-client/parka_auth_graphql_client.dart';
+import 'package:ParkA/utils/graphql/public-client/parka_public_graphql_client.dart';
 import "package:graphql/client.dart";
 
-class ParkaBaseGraphqlClient {
-  static GraphQLClient _client;
+class ParkaGraphqlClient {
+  PublicGraphqlClient _publicClient;
+  AuthGraphqlClient _authClient;
 
-  static GraphQLClient get graphQlClient {
-    return _client;
+  PublicGraphqlClient get publicGraphQlClient {
+    return _publicClient;
   }
 
-  ParkaBaseGraphqlClient() {
-    final HttpLink _httpLink = HttpLink(
-      uri: 'http://localhost:3000/graphql',
-    );
+  AuthGraphqlClient get suthGraphqlClient {
+    return _authClient;
+  }
 
-    // final AuthLink _authLink = AuthLink(
-    //   getToken: () async => 'Bearer $YOUR_PERSONAL_ACCESS_TOKEN',
-    // );
-
-    // final Link _link = _authLink.concat(_httpLink);
-
-    _client = GraphQLClient(
-      cache: InMemoryCache(),
-      link: _httpLink,
-    );
+  ParkaGraphqlClient() {
+    _publicClient = new PublicGraphqlClient();
   }
 }

@@ -1,8 +1,8 @@
-import 'package:ParkA/utils/graphql/parka_graphql_client.dart';
+import 'package:ParkA/utils/graphql/public-client/parka_public_graphql_client.dart';
 import 'package:graphql/client.dart';
 
 class UserUseCases {
-  Future userLogin(String email, String password) async {
+  static Future userLogin(String email, String password) async {
     final loginInput = {
       "input": {"email": "seb97@gmail.com", "password": "1234567890"}
     };
@@ -25,6 +25,6 @@ class UserUseCases {
     );
 
     final QueryResult loginResult =
-        await ParkaBaseGraphqlClient.graphQlClient.mutate(loginMutationOptions);
+        await PublicGraphqlClient.graphQlClient.mutate(loginMutationOptions);
   }
 }
