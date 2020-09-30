@@ -4,7 +4,10 @@ import 'package:graphql/client.dart';
 class UserUseCases {
   static Future userLogin(String email, String password) async {
     final loginInput = {
-      "input": {"email": "seb97@gmail.com", "password": "1234567890"}
+      "input": {
+        "email": "seb97@gmail.com",
+        "password": "1234567890",
+      }
     };
 
     final String loginMutation = r'''
@@ -26,5 +29,7 @@ class UserUseCases {
 
     final QueryResult loginResult =
         await PublicGraphqlClient.graphQlClient.mutate(loginMutationOptions);
+
+    print(loginResult.data);
   }
 }

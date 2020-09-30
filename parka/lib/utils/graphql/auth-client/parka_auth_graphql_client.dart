@@ -13,7 +13,7 @@ class AuthGraphqlClient {
     @required this.jwt,
   }) {
     final HttpLink _httpLink = HttpLink(
-      uri: 'https://parka-api.herokuapp.com/graphql',
+      uri: 'http://10.0.0.134:3000/graphql',
     );
 
     final AuthLink _authLink = AuthLink(

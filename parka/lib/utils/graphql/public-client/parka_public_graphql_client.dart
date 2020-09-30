@@ -9,7 +9,7 @@ class PublicGraphqlClient {
 
   PublicGraphqlClient() {
     final HttpLink _httpLink = HttpLink(
-      uri: 'http://localhost:3000/graphql',
+      uri: 'http://10.0.0.134:3000/graphql',
     );
 
     _client = GraphQLClient(
