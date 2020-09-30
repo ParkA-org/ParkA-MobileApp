@@ -2,6 +2,7 @@ import 'package:ParkA/components/Utils/graphql/graphql_client.dart';
 import 'package:ParkA/pages/MapPage/maps_page.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'routes/routes.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'ParkA',
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
