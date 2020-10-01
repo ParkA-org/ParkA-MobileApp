@@ -1,5 +1,6 @@
 import 'package:ParkA/components/Buttons/main_fab.dart';
 import 'package:ParkA/components/Drawer/main_drawer.dart';
+import 'package:ParkA/components/Modals/parking_detail.dart';
 import 'package:ParkA/pages/MapPage/Components/dummy_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -54,7 +55,11 @@ class _MapPageState extends State<MapPage> {
     _loading = true;
     test = {
       Marker(
-          markerId: MarkerId("Hello"), position: LatLng(18.487876, -69.9644807))
+          markerId: MarkerId("Hello"),
+          position: LatLng(18.487876, -69.9644807),
+          onTap: () {
+            ParkingDetailModal();
+          })
     };
     initialCameraPosition =
         CameraPosition(target: LatLng(18.487876, -69.9644807), zoom: 15.5);
