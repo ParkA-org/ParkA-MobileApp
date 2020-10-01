@@ -1,13 +1,17 @@
+import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/pages/ProfilePage/components/parka_circle_avatar_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import "package:flutter/material.dart";
 import "package:ParkA/components/Utils/styles/text.dart";
+import 'package:get/get.dart';
 
 class ProfilePersonalInformationWidget extends StatelessWidget {
+  final UserController userController = Get.find();
+
   final Color color;
   final bool showLocation;
 
-  const ProfilePersonalInformationWidget({
+  ProfilePersonalInformationWidget({
     Key key,
     this.color,
     @required this.showLocation,
@@ -31,12 +35,14 @@ class ProfilePersonalInformationWidget extends StatelessWidget {
               Expanded(
                 child: Container(
                   alignment: Alignment.bottomLeft,
-                  child: AutoSizeText(
-                    "Sebastiano Faiella",
-                    maxLines: 1,
-                    minFontSize: 14.0,
-                    style: kParkaTextBaseStyleBold.copyWith(
-                      color: this.color,
+                  child: Obx(
+                    () => AutoSizeText(
+                      '${userController.user.value.name} ${userController.user.value.lastName}',
+                      maxLines: 1,
+                      minFontSize: 14.0,
+                      style: kParkaTextBaseStyleBold.copyWith(
+                        color: this.color,
+                      ),
                     ),
                   ),
                 ),
