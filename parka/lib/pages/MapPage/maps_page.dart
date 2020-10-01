@@ -1,5 +1,7 @@
 import 'package:ParkA/components/Buttons/main_fab.dart';
 import 'package:ParkA/components/Drawer/main_drawer.dart';
+import 'package:ParkA/components/Drawer/privateDrawer/private_drawer.dart';
+import 'package:ParkA/components/Drawer/publicDrawer/public_drawer.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/pages/MapPage/Components/dummy_search.dart';
 import 'package:flutter/material.dart';
@@ -74,7 +76,7 @@ class _MapPageState extends State<MapPage> {
     BuildContext mapPageContext = context;
 
     return Scaffold(
-      drawer: MainDrawer(),
+      drawer: user.user?.value == null ? PublicDrawer() : PrivateDrawer(),
       floatingActionButton: Visibility(
         visible: _fabIsVisible,
         child: MainFAB(),

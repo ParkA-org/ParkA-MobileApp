@@ -19,6 +19,10 @@ class ProfilePersonalInformationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final String userName = userController.user.value != null
+    //     ? '${userController.user.value.name} ${userController.user.value.lastName}'
+    //     : "login";
+
     return Row(
       children: [
         Expanded(
@@ -37,7 +41,9 @@ class ProfilePersonalInformationWidget extends StatelessWidget {
                   alignment: Alignment.bottomLeft,
                   child: Obx(
                     () => AutoSizeText(
-                      '${userController.user.value.name} ${userController.user.value.lastName}',
+                      userController.user.value != null
+                          ? '${userController.user.value.name} ${userController.user.value.lastName}'
+                          : "Iniciar sesion",
                       maxLines: 1,
                       minFontSize: 14.0,
                       style: kParkaTextBaseStyleBold.copyWith(
@@ -71,17 +77,23 @@ class ProfilePersonalInformationWidget extends StatelessWidget {
                             ],
                           )
                         : Container(),
-                    Icon(
-                      Icons.star,
-                      color: this.color,
-                    ),
-                    Text(
-                      "4.20",
-                      style: kParkaInputDefaultSyle.copyWith(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 12.0,
-                      ),
-                    )
+                    userController.user.value != null
+                        ? Row(
+                            children: [
+                              Icon(
+                                Icons.star,
+                                color: this.color,
+                              ),
+                              Text(
+                                "4.20",
+                                style: kParkaInputDefaultSyle.copyWith(
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 12.0,
+                                ),
+                              )
+                            ],
+                          )
+                        : Container(),
                   ],
                 ),
               )
