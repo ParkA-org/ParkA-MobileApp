@@ -28,7 +28,11 @@ class ProfilePersonalInformationWidget extends StatelessWidget {
         Expanded(
           flex: 1,
           child: Center(
-            child: ParkaCircleAvatarWidget(),
+            child: Obx(
+              () => ParkaCircleAvatarWidget(
+                imageUrl: userController.user.value?.profilePicture,
+              ),
+            ),
           ),
         ),
         Expanded(

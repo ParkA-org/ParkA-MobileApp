@@ -19,6 +19,7 @@ class UserUseCases {
           name
           email
           lastName
+          profilePicture
           }
         }
       }
@@ -34,10 +35,12 @@ class UserUseCases {
 
     if (loginResult.data != null) {
       final userData = loginResult.data["login"]['user'];
+      print(userData);
       return User(
         name: userData["name"],
         lastName: userData['lastName'],
         email: userData['email'],
+        profilePicture: userData["profilePicture"],
       );
     }
 

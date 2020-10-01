@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
+const parkaCircleAvatarWidgetDefaultBoxStyle = BoxDecoration(
+  shape: BoxShape.circle,
+);
+
 class ParkaCircleAvatarWidget extends StatelessWidget {
   final double pictureSizeDivider;
+  final String imageUrl;
 
   const ParkaCircleAvatarWidget({
     Key key,
+    this.imageUrl,
     this.pictureSizeDivider = 1,
   }) : super(key: key);
 
@@ -21,15 +27,23 @@ class ParkaCircleAvatarWidget extends StatelessWidget {
         return Container(
           width: circleAvatarSize,
           height: circleAvatarSize,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            image: DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(
-                'http://www.naviearmatori.net/albums/userpics/10187/DSCF5546.JPG',
-              ),
-            ),
-          ),
+          child: this.imageUrl == null
+              ? Icon(
+                  Icons.account_circle,
+                  size: circleAvatarSize,
+                  color: Colors.white,
+                )
+              : Container(),
+          decoration: this.imageUrl == null
+              ? parkaCircleAvatarWidgetDefaultBoxStyle
+              : parkaCircleAvatarWidgetDefaultBoxStyle.copyWith(
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: NetworkImage(
+                      this.imageUrl,
+                    ),
+                  ),
+                ),
         );
       },
     );
