@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
   final ParkaGraphqlClient parkaGraphqlClient = new ParkaGraphqlClient();
-  final userUseCase = new UserUseCases();
   final parka = new PublicGraphqlClient();
 
   @override

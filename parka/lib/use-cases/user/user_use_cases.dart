@@ -32,10 +32,15 @@ class UserUseCases {
     final QueryResult loginResult =
         await PublicGraphqlClient.graphQlClient.mutate(loginMutationOptions);
 
-    print(loginResult.data["login"]);
+    if (loginResult.data != null) {
+      final userData = loginResult.data["login"]['user'];
+      return User(
+        name: userData["name"],
+        lastName: userData['lastName'],
+        email: userData['email'],
+      );
+    }
 
-    final userData = loginResult.data["login"]['user'];
-
-    return User(name: userData["name"], lastName: userData['lastName']);
+    return null;
   }
 }

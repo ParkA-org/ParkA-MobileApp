@@ -11,7 +11,9 @@ import 'package:ParkA/pages/MapPage/maps_page.dart';
 import 'package:ParkA/use-cases/user/user_use_cases.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:get/state_manager.dart';
+import 'package:get/utils.dart';
 import 'package:graphql/client.dart';
 
 class LoginForm extends StatefulWidget {
@@ -26,50 +28,33 @@ class _LoginFormState extends State<LoginForm> {
   QueryResult result;
 
   Future loginHandler() async {
-    if (this.user == null ||
-        this.user.length == 0 ||
-        this.password == null ||
-        this.password.length == 0) {
-      return buildShowDialog(
-        context,
-        BaseAlertWidget(
-          child: Container(
-            height: 120.0,
-            width: 120.0,
-            child: Center(
-              child: Text(
-                '${this.user == null || this.user.length == 0 ? 'Ingresa tu correo' : 'Ingresa tu password'}',
-                style: kParkaButtonTextStyle,
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-    result = await login(this.user, this.password);
+    bool checkEmail = GetUtils.isEmail(this.user);
+    bool checkPassword = GetUtils.isLengthGreaterOrEqual(this.password, 8);
 
-    if (result.data == null) {
-      return buildShowDialog(
-        context,
-        BaseAlertWidget(
-          child: Container(
-            width: 120.0,
-            height: 120.0,
-            child: Center(
-              child: AutoSizeText(
-                'Email o password incorrecto',
-                style: kParkaButtonTextStyle,
-                maxLines: 1,
-              ),
-            ),
-          ),
-        ),
+    if (!checkEmail || !checkPassword) {
+      Get.snackbar(
+        "Error",
+        "Formato credenciales incorrecto",
+        margin: EdgeInsets.all(8.0),
+        backgroundColor: ParkaColors.parkaGoogleRed,
       );
+      return;
     }
 
-    Get.find<UserController>().loginUser(this.user, this.password);
+    bool loginCheck =
+        await Get.find<UserController>().loginUser(this.user, this.password);
 
-    Navigator.pushNamed(context, MapPage.routeName);
+    if (!loginCheck) {
+      Get.snackbar(
+        "Error",
+        "Credenciales incorrectas",
+        margin: EdgeInsets.all(8.0),
+        backgroundColor: ParkaColors.parkaGoogleRed,
+      );
+      return;
+    }
+
+    Get.toNamed(MapPage.routeName);
   }
 
   @override
