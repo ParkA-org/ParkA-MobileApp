@@ -24,6 +24,7 @@ class _MapPageState extends State<MapPage> {
   bool _loading;
   LocationData userLocation;
   CameraPosition initialCameraPosition;
+  Set<Marker> test;
 
   void toggleFloatingActionButton() {
     setState(() {
@@ -51,6 +52,10 @@ class _MapPageState extends State<MapPage> {
     super.initState();
     _fabIsVisible = true;
     _loading = true;
+    test = {
+      Marker(
+          markerId: MarkerId("Hello"), position: LatLng(18.487876, -69.9644807))
+    };
     initialCameraPosition =
         CameraPosition(target: LatLng(18.487876, -69.9644807), zoom: 15.5);
     getCurrentLocation();
@@ -65,7 +70,6 @@ class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     GoogleMapController mapController;
-    LocationData currentUserLocation = userLocation;
 
     BuildContext mapPageContext = context;
 
@@ -89,6 +93,7 @@ class _MapPageState extends State<MapPage> {
                   mapController = controller;
                   mapController.setMapStyle(_mapStyle);
                 },
+                markers: test,
                 myLocationButtonEnabled: true,
                 myLocationEnabled: true,
                 initialCameraPosition: initialCameraPosition,
