@@ -6,6 +6,7 @@ import 'package:ParkA/utils/graphql/public-client/parka_public_graphql_client.da
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'controllers/bindings/graphql_biding.dart';
 import 'routes/routes.dart';
 
 void main() {
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       getPages: get_pages,
+      initialBinding: GraphqlClientBiding(),
       initialRoute: MapPage.routeName,
     );
   }

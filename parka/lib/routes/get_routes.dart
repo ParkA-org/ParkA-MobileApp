@@ -21,7 +21,7 @@ List<GetPage> get_pages = [
   GetPage(
     name: EmailLogin.routeName,
     page: () => EmailLogin(),
-    binding: TestBinding(),
+    binding: UserBinding(),
   ),
   GetPage(
     name: IDPage.routeName,
@@ -46,7 +46,7 @@ List<GetPage> get_pages = [
   GetPage(
     name: MapPage.routeName,
     page: () => MapPage(),
-    binding: TestBinding(),
+    binding: UserBinding(),
   ),
   GetPage(
     name: GraphqlTestScreen.routeName,
