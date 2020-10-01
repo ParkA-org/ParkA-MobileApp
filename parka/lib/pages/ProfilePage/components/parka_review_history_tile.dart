@@ -1,3 +1,4 @@
+import 'package:ParkA/components/Rating/star_rating.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/ProfilePage/components/parka_circle_avatar_widget.dart';
@@ -12,12 +13,12 @@ class ParkaReviewHistoryTile extends StatelessWidget {
   }) : super(key: key);
 
   List<Widget> _ratingRowBuilder() {
-    List<Widget> ret = new List<Widget>();
+    List<Widget> starRating = new List<Widget>();
 
     for (int i = 1; i < 6; i++) {
       IconData iconData = this.rating >= i ? Icons.star : Icons.star_border;
 
-      ret.add(
+      starRating.add(
         Icon(
           iconData,
           size: 30.0,
@@ -26,7 +27,7 @@ class ParkaReviewHistoryTile extends StatelessWidget {
       );
     }
 
-    return ret;
+    return starRating;
   }
 
   @override
@@ -72,9 +73,9 @@ class ParkaReviewHistoryTile extends StatelessWidget {
                             fontSize: 22.0,
                           ),
                         ),
-                        Row(
-                          children: this._ratingRowBuilder(),
-                        )
+                        StarRating(
+                          rating: rating.toInt(),
+                        ),
                       ],
                     ),
                   )
