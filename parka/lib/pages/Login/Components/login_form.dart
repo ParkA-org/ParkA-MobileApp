@@ -1,15 +1,9 @@
-import 'package:ParkA/components/Alerts/parka_base_alert_widget.dart';
 import 'package:ParkA/components/Inputs/parka_input.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
-import 'package:ParkA/components/Utils/functions.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
-import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/pages/ForgotPassword/forgot_password_screen.dart';
-import 'package:ParkA/pages/Login/utils/utils.dart';
 import 'package:ParkA/pages/MapPage/maps_page.dart';
-import 'package:ParkA/use-cases/user/user_use_cases.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:get/state_manager.dart';

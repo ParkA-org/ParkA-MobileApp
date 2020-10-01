@@ -124,7 +124,10 @@ class PrivateDrawer extends StatelessWidget {
                       child: ParkAMenuItem(
                         label: "Salir",
                         itemStyle: kParkaInputDefaultStyleBlue,
-                        navigateTo: LoginScreen.routeName,
+                        onTapHandler: () {
+                          Get.find<UserController>().logout();
+                          Get.toNamed(LoginScreen.routeName);
+                        },
                       ),
                     ),
                   ],

@@ -80,17 +80,14 @@ class PublicDrawer extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: Padding(
-                padding: EdgeInsets.only(left: 24.0),
-                child: Container(
-                  alignment: Alignment.bottomLeft,
-                  margin: EdgeInsets.only(bottom: 10, left: 16.0),
-                  child: Text(
-                    "Terminos y condiciones legales",
-                    textAlign: TextAlign.left,
-                    style: kParkaInputDefaultStyleBlue.copyWith(
-                        fontWeight: FontWeight.normal, fontSize: 14),
-                  ),
+              child: Container(
+                alignment: Alignment.bottomLeft,
+                margin: EdgeInsets.only(bottom: 10, left: 16.0),
+                child: Text(
+                  "Terminos y condiciones legales",
+                  textAlign: TextAlign.left,
+                  style: kParkaInputDefaultStyleBlue.copyWith(
+                      fontWeight: FontWeight.normal, fontSize: 14),
                 ),
               ),
             ),

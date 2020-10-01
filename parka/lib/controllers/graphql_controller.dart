@@ -1,4 +1,3 @@
-import 'package:ParkA/utils/graphql/auth-client/parka_auth_graphql_client.dart';
 import 'package:ParkA/utils/graphql/parka_graphql_client.dart';
 import 'package:get/state_manager.dart';
 
