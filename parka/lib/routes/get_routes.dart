@@ -1,4 +1,4 @@
-import 'package:ParkA/controllers/bindings/test_binding.dart';
+import 'package:ParkA/controllers/bindings/user_binding.dart';
 import 'package:ParkA/pages/FilterPage/filter_page.dart';
 import 'package:ParkA/pages/ID/ID_page.dart';
 import 'package:ParkA/pages/ForgotPassword/forgot_password_screen.dart';

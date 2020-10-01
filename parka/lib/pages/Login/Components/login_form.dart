@@ -79,9 +79,9 @@ class _LoginFormState extends State<LoginForm> {
                 ParkAInput(
                   icon: 'WhiteProfileIcon.svg',
                   text: 'Correo / Usuario',
-                  onChanged: (user) {
+                  onChanged: (String user) {
                     setState(() {
-                      this.user = user;
+                      this.user = user.trim();
                     });
                   },
                 ),
@@ -93,9 +93,9 @@ class _LoginFormState extends State<LoginForm> {
                   text: 'Contraseña',
                   isPassword: true,
                   keyboardType: TextInputType.text,
-                  onChanged: (password) {
+                  onChanged: (String password) {
                     setState(() {
-                      this.password = password;
+                      this.password = password.trim();
                     });
                   },
                 ),
