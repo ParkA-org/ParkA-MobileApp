@@ -58,7 +58,7 @@ class _MapPageState extends State<MapPage> {
           markerId: MarkerId("Hello"),
           position: LatLng(18.487876, -69.9644807),
           onTap: () {
-            ParkingDetailModal();
+            return ParkingDetailModal();
           })
     };
     initialCameraPosition =
@@ -86,36 +86,31 @@ class _MapPageState extends State<MapPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
       body: SafeArea(
-        child: ModalProgressHUD(
-          color: ParkaColors.parkaGreen,
-          inAsyncCall: this._loading,
-          opacity: 0.2,
-          child: Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              GoogleMap(
-                onMapCreated: (GoogleMapController controller) {
-                  mapController = controller;
-                  mapController.setMapStyle(_mapStyle);
-                },
-                markers: test,
-                myLocationButtonEnabled: true,
-                myLocationEnabled: true,
-                initialCameraPosition: initialCameraPosition,
-                zoomControlsEnabled: false,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 60.0),
-                child: Builder(
-                  builder: (context) => DummySearch(
-                    // statusBarSize: MediaQuery.of(context).padding.top,
-                    mainContext: mapPageContext,
-                    buttonToggle: toggleFloatingActionButton,
-                  ),
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            GoogleMap(
+              onMapCreated: (GoogleMapController controller) {
+                mapController = controller;
+                mapController.setMapStyle(_mapStyle);
+              },
+              markers: test,
+              myLocationButtonEnabled: true,
+              myLocationEnabled: true,
+              initialCameraPosition: initialCameraPosition,
+              zoomControlsEnabled: false,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 60.0),
+              child: Builder(
+                builder: (context) => DummySearch(
+                  // statusBarSize: MediaQuery.of(context).padding.top,
+                  mainContext: mapPageContext,
+                  buttonToggle: toggleFloatingActionButton,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
