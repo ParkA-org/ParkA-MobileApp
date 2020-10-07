@@ -49,7 +49,7 @@ class ParkaReviewHistoryTile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Text(
-                          "David Putosa",
+                          "Sebastiano Faiella",
                           style: kParkaButtonTextStyle.copyWith(
                             fontSize: 22.0,
                           ),

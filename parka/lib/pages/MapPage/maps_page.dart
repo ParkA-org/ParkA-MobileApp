@@ -6,9 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
-
-import '../../components/Utils/styles/parka_colors.dart';
 
 class MapPage extends StatefulWidget {
   MapPage({Key key}) : super(key: key);
@@ -26,6 +23,7 @@ class _MapPageState extends State<MapPage> {
   LocationData userLocation;
   CameraPosition initialCameraPosition;
   Set<Marker> test;
+  BitmapDescriptor customIcon;
 
   void toggleFloatingActionButton() {
     setState(() {
@@ -51,16 +49,15 @@ class _MapPageState extends State<MapPage> {
   @override
   void initState() {
     super.initState();
+    BitmapDescriptor.fromAssetImage(
+            ImageConfiguration.empty, 'resources/images/green-parking-icon.png')
+        .then((onValue) {
+      customIcon = onValue;
+    });
+
     _fabIsVisible = true;
     _loading = true;
-    test = {
-      Marker(
-          markerId: MarkerId("Hello"),
-          position: LatLng(18.487876, -69.9644807),
-          onTap: () {
-            return ParkingDetailModal();
-          })
-    };
+    test = {};
     initialCameraPosition =
         CameraPosition(target: LatLng(18.487876, -69.9644807), zoom: 15.5);
     getCurrentLocation();
@@ -93,6 +90,42 @@ class _MapPageState extends State<MapPage> {
               onMapCreated: (GoogleMapController controller) {
                 mapController = controller;
                 mapController.setMapStyle(_mapStyle);
+                setState(() {
+                  test.addAll({
+                    Marker(
+                        icon: customIcon,
+                        markerId: MarkerId("Hello"),
+                        position: LatLng(18.487876, -69.9644807),
+                        onTap: () => showModalBottomSheet(
+                            context: context,
+                            builder: (context) =>
+                                ParkingDetailModal(parkingId: "Hello"))),
+                    Marker(
+                        icon: customIcon,
+                        markerId: MarkerId("Hello"),
+                        position: LatLng(18.487876, -69.9644808),
+                        onTap: () => showModalBottomSheet(
+                            context: context,
+                            builder: (context) =>
+                                ParkingDetailModal(parkingId: "Hello"))),
+                    Marker(
+                        icon: customIcon,
+                        markerId: MarkerId("Hello"),
+                        position: LatLng(18.487876, -69.9644806),
+                        onTap: () => showModalBottomSheet(
+                            context: context,
+                            builder: (context) =>
+                                ParkingDetailModal(parkingId: "Hello"))),
+                    Marker(
+                        icon: customIcon,
+                        markerId: MarkerId("Hello"),
+                        position: LatLng(18.487875, -69.9644807),
+                        onTap: () => showModalBottomSheet(
+                            context: context,
+                            builder: (context) =>
+                                ParkingDetailModal(parkingId: "Hello")))
+                  });
+                });
               },
               markers: test,
               myLocationButtonEnabled: true,

@@ -26,7 +26,7 @@ class ParkaCircleAvatarWidget extends StatelessWidget {
             image: DecorationImage(
               fit: BoxFit.fill,
               image: NetworkImage(
-                'http://www.naviearmatori.net/albums/userpics/10187/DSCF5546.JPG',
+                'https://www.jamsadr.com/images/neutrals/person-donald-900x1080.jpg',
               ),
             ),
           ),

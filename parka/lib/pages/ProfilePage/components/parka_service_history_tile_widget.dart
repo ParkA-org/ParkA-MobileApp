@@ -37,13 +37,10 @@ class ParkaServiceHistoryWidget extends StatelessWidget {
                         margin: EdgeInsets.fromLTRB(0, 8.0, 16.0, 8.0),
                         height: 100.0,
                         width: 100.0,
+                        child: Image.asset("resources/images/small_map.png"),
                         decoration: BoxDecoration(
-                          color: ParkaColors.parkaGreen,
+                          color: Colors.transparent,
                           borderRadius: BorderRadius.circular(15.0),
-                          border: Border.all(
-                            color: Color(0xFF949494),
-                            width: 1.0,
-                          ),
                         ),
                       ),
                     ),
