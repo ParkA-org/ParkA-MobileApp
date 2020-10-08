@@ -170,12 +170,23 @@ class ParkaTelephoneNumberInput extends StatelessWidget {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    maxLength: 3,
-                    decoration: kInputStyleSlim,
-                    onChanged: (String text) {
-                      this.telephoneNumberHandler(text, true);
-                    },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(3.0, 10.0),
+                            color: Colors.black38,
+                            blurRadius: 5.0,
+                          ),
+                        ]),
+                    child: TextField(
+                      maxLength: 3,
+                      decoration: kInputStyleSlim,
+                      onChanged: (String text) {
+                        this.telephoneNumberHandler(text, true);
+                      },
+                    ),
                   ),
                 ),
               ),
@@ -183,12 +194,23 @@ class ParkaTelephoneNumberInput extends StatelessWidget {
                 flex: 3,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    maxLength: 10,
-                    decoration: kInputStyleSlim,
-                    onChanged: (String text) {
-                      this.telephoneNumberHandler(text, false);
-                    },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(3.0, 10.0),
+                            color: Colors.black38,
+                            blurRadius: 5.0,
+                          ),
+                        ]),
+                    child: TextField(
+                      maxLength: 10,
+                      decoration: kInputStyleSlim,
+                      onChanged: (String text) {
+                        this.telephoneNumberHandler(text, false);
+                      },
+                    ),
                   ),
                 ),
               ),
