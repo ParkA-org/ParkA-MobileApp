@@ -1,4 +1,5 @@
 import 'package:ParkA/components/Utils/graphql/graphql_client.dart';
+import 'package:ParkA/pages/EditProfilePage/edit_profile_page.dart';
 import 'package:ParkA/pages/MapPage/maps_page.dart';
 
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: routes,
-      initialRoute: MapPage.routeName,
+      initialRoute: EditProfilePage.routeName,
     );
   }
 }
