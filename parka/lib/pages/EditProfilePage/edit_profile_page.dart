@@ -5,6 +5,9 @@ import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/ProfilePage/components/parka_circle_avatar_widget.dart';
 import "package:flutter/material.dart";
 
+import 'components/parka_edit_profile_tile.dart';
+import 'components/parka_telephone_number_input.dart';
+
 class EditProfilePage extends StatefulWidget {
   static String routeName = "/edit-profile";
 
@@ -123,147 +126,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
               )
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class ParkaTelephoneNumberInput extends StatelessWidget {
-  final Function telephoneNumberHandler;
-
-  const ParkaTelephoneNumberInput({
-    Key key,
-    this.telephoneNumberHandler,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                flex: 0,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.phone,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Numero de Telefono",
-                    style: kParkaBigButtonTextStyle,
-                  ),
-                ),
-              )
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(3.0, 10.0),
-                            color: Colors.black38,
-                            blurRadius: 5.0,
-                          ),
-                        ]),
-                    child: TextField(
-                      maxLength: 3,
-                      decoration: kInputStyleSlim,
-                      onChanged: (String text) {
-                        this.telephoneNumberHandler(text, true);
-                      },
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 3,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(3.0, 10.0),
-                            color: Colors.black38,
-                            blurRadius: 5.0,
-                          ),
-                        ]),
-                    child: TextField(
-                      maxLength: 10,
-                      decoration: kInputStyleSlim,
-                      onChanged: (String text) {
-                        this.telephoneNumberHandler(text, false);
-                      },
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ParkaEditProfileTile extends StatelessWidget {
-  final Color color;
-  final String label;
-  final IconData iconData;
-
-  ParkaEditProfileTile({
-    Key key,
-    @required this.color,
-    @required this.label,
-    @required this.iconData,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        print("tapped");
-      },
-      child: Container(
-        child: Row(
-          children: [
-            Expanded(
-              child: Icon(
-                this.iconData,
-                color: this.color ?? Colors.black,
-              ),
-            ),
-            Expanded(
-              flex: 3,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  this.label,
-                  style: TextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: 20.0,
-                    color: this.color ?? Colors.black,
-                  ),
-                ),
-              ),
-            )
-          ],
         ),
       ),
     );
