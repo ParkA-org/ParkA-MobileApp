@@ -23,10 +23,17 @@ class ParkaCircleAvatarWidget extends StatelessWidget {
           height: circleAvatarSize,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(3.0, 10.0),
+                color: Colors.black38,
+                blurRadius: 5.0,
+              ),
+            ],
             image: DecorationImage(
               fit: BoxFit.fill,
               image: NetworkImage(
-                'http://www.naviearmatori.net/albums/userpics/10187/DSCF5546.JPG',
+                'https://mangathrill.com/wp-content/uploads/2020/02/5432111-1.jpg',
               ),
             ),
           ),

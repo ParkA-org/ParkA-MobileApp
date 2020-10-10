@@ -1,3 +1,4 @@
+import 'package:ParkA/pages/EditProfilePage/edit_profile_page.dart';
 import 'package:ParkA/pages/FilterPage/filter_page.dart';
 import 'package:ParkA/pages/ID/ID_page.dart';
 import 'package:ParkA/pages/ForgotPassword/forgot_password_screen.dart';
@@ -24,4 +25,5 @@ Map<String, WidgetBuilder> routes = {
   GraphqlTestScreen.routeName: (BuildContext context) => GraphqlTestScreen(),
   FilterPage.routeName: (BuildContext context) => FilterPage(),
   ProfileScreen.routeName: (BuildContext context) => ProfileScreen(),
+  EditProfilePage.routeName: (BuildContext context) => EditProfilePage(),
 };
