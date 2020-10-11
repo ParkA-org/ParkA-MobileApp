@@ -3,6 +3,7 @@ import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:ParkA/components/Inputs/parka_input.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/pages/ProfilePic/profile_pic_page.dart';
+import 'package:ParkA/use-cases/user/dtos/user_registration_dto.dart';
 import 'package:flutter/material.dart';
 import "package:ParkA/components/Utils/styles/text.dart";
 
@@ -13,35 +14,58 @@ class RegisterPage extends StatefulWidget {
   _RegisterPageState createState() => _RegisterPageState();
 }
 
-var createAccount = <String, dynamic>{
-  "registerpage": {
-    "username": "",
-    "lastname": "",
-    "email": "",
-    "password": "",
-    "phone": "",
-  },
-  "profilepage": {
-    "pictures": "",
-  },
-  "idpage": {
-    "document": "",
-    "nationality": "",
-    "typeDocument": "",
-    "Placeofbirth": "",
-    "datebirth": "",
-  },
-  "paymentpage": {
-    "digit": "",
-    "name": "",
-    "expirationdate": "",
-  },
-  "typedocuments": [],
-  "countries": [],
-};
+// var createAccount = <String, dynamic>{
+//   "registerpage": {
+//     "username": "",
+//     "lastname": "",
+//     "email": "",
+//     "password": "",
+//     "phone": "",
+//   },
+//   "profilepage": {
+//     "pictures": "",
+//   },
+//   "idpage": {
+//     "document": "",
+//     "nationality": "",
+//     "typeDocument": "",
+//     "Placeofbirth": "",
+//     "datebirth": "",
+//   },
+//   "paymentpage": {
+//     "digit": "",
+//     "name": "",
+//     "expirationdate": "",
+//   },
+//   "typedocuments": [],
+//   "countries": [],
+// };
+
+UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
 
 class _RegisterPageState extends State<RegisterPage> {
-  String username, email, password, confirmpassword, phone;
+  String name;
+  String lastName;
+  String email;
+  String password;
+  String confirmpassword;
+  String telephonNumber;
+
+  void nextButtonHandler() {
+    userRegistrationForm.createUserDto.name = this.name;
+    userRegistrationForm.createUserDto.lastName = this.lastName;
+    userRegistrationForm.createUserDto.email = this.email;
+    userRegistrationForm.createUserDto.password = this.password;
+    userRegistrationForm.createUserInformationDto.telephonNumber =
+        this.telephonNumber;
+
+    Navigator.pushNamed(
+      context,
+      ProfilePicPage.routeName,
+      arguments: userRegistrationForm,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,14 +144,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                                   child: ParkAInput(
                                                     icon:
                                                         'WhiteProfileIcon.svg',
-                                                    text: 'Nombres',
-                                                    onChanged: (username) {
+                                                    text: 'Nombre',
+                                                    onChanged: (name) {
                                                       setState(
                                                         () {
-                                                          createAccount[
-                                                                      "registerpage"]
-                                                                  ["username"] =
-                                                              username;
+                                                          this.name = name;
                                                         },
                                                       );
                                                     },
@@ -137,14 +158,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                                   child: ParkAInput(
                                                     icon:
                                                         'WhiteProfileIcon.svg',
-                                                    text: 'Apellidos',
-                                                    onChanged: (lastname) {
+                                                    text: 'Apellido',
+                                                    onChanged: (lastName) {
                                                       setState(
                                                         () {
-                                                          createAccount[
-                                                                      "registerpage"]
-                                                                  ["lastname"] =
-                                                              lastname;
+                                                          this.lastName =
+                                                              lastName;
                                                         },
                                                       );
                                                     },
@@ -159,9 +178,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                                     onChanged: (email) {
                                                       setState(
                                                         () {
-                                                          createAccount[
-                                                                  "registerpage"]
-                                                              ["email"] = email;
+                                                          this.email = email;
                                                         },
                                                       );
                                                     },
@@ -177,9 +194,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                                     onChanged: (password) {
                                                       setState(
                                                         () {
-                                                          createAccount[
-                                                                      "registerpage"]
-                                                                  ["password"] =
+                                                          this.password =
                                                               password;
                                                         },
                                                       );
@@ -211,12 +226,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                                     text: 'Numero de Telefono',
                                                     keyboardType:
                                                         TextInputType.phone,
-                                                    onChanged: (phone) {
+                                                    onChanged:
+                                                        (telephonNumber) {
                                                       setState(
                                                         () {
-                                                          createAccount[
-                                                                  "registerpage"]
-                                                              ["phone"] = phone;
+                                                          this.telephonNumber =
+                                                              telephonNumber;
                                                         },
                                                       );
                                                     },
@@ -224,25 +239,14 @@ class _RegisterPageState extends State<RegisterPage> {
                                                 ),
                                                 Expanded(
                                                   child: TransparentButton(
-                                                    label: 'Continuar',
-                                                    buttonTextStyle:
-                                                        kParkaButtonTextStyle,
-                                                    trailingIconData:
-                                                        Icons.arrow_forward_ios,
-                                                    color: Colors.white,
-                                                    onTapHandler: () async {
-                                                      // This part in future is for validate email are exists
-                                                      // var result = await createUser(this.username,
-                                                      //     this.lastname, this.email, this.password);
-                                                      Navigator.pushNamed(
-                                                        context,
-                                                        ProfilePicPage
-                                                            .routeName,
-                                                        arguments:
-                                                            createAccount,
-                                                      );
-                                                    },
-                                                  ),
+                                                      label: 'Continuar',
+                                                      buttonTextStyle:
+                                                          kParkaButtonTextStyle,
+                                                      trailingIconData: Icons
+                                                          .arrow_forward_ios,
+                                                      color: Colors.white,
+                                                      onTapHandler:
+                                                          nextButtonHandler),
                                                 ),
                                               ],
                                             ),

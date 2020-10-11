@@ -1,5 +1,6 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data_models/user/user_data_model.dart';
+import 'package:ParkA/use-cases/user/dtos/user_registration_dto.dart';
 import 'package:get/get.dart';
 import 'package:graphql/client.dart';
 
@@ -57,7 +58,7 @@ class UserUseCases {
     return null;
   }
 
-  static Future createUser() async {
+  static Future createUser(CreateUserDto createUserDto) async {
     String createUserQuery = r"""
     mutation($data:createUserInput!){
       createUser(createUserInput:$data){
@@ -73,14 +74,14 @@ class UserUseCases {
 
     final createUserInput = {
       "data": {
-        "name": "Sebatiano",
-        "lastName": "Faiella",
+        "name": createUserDto.name,
+        "lastName": createUserDto.lastName,
         "origin": "mobile",
-        "email": "sebyfaiella97@gmail.com",
+        "email": createUserDto.email,
+        "password": createUserDto.password,
         "profilePicture":
             "https://mangathrill.com/wp-content/uploads/2020/02/5432111-1.jpg",
-        "password": "1234567890",
-        "userInformation": "f5ff06b9-6057-44ed-8404-6191d023a65c"
+        "userInformation": createUserDto.userInformation,
       }
     };
 
@@ -91,6 +92,8 @@ class UserUseCases {
         .parkaGraphqlClient.value.graphQlClient
         .mutate(mutationOptions);
 
+    print(createUserResult.data);
+
     if (createUserResult.data != null) {
       return createUserResult.data;
     }
@@ -98,7 +101,10 @@ class UserUseCases {
     return null;
   }
 
-  static Future createUserInformation() async {
+  static Future createUserInformation(
+      CreateUserInformationDto createUserInformationDto) async {
+    final graphqlClient = Get.find<GraphqlClientController>();
+
     String createUserInformation = r"""
     mutation($data:CreateUserInformationInpuType!) {
   createUserInformation(
@@ -121,12 +127,12 @@ class UserUseCases {
 
     final createUserInformationInput = {
       "data": {
-        "paymentInformation": "",
-        "documentNumber": "",
-        "telephoneNumber": "",
-        "birthDate": "",
-        "placeOfBirth": "",
-        "nationality": ""
+        "paymentInformation": "cc78a504-aafe-4917-afe9-f3a3ecee8b07",
+        "documentNumber": createUserInformationDto.documentNumber,
+        "telephoneNumber": createUserInformationDto.telephonNumber,
+        "birthDate": createUserInformationDto.birthDate,
+        "placeOfBirth": createUserInformationDto.placeOfBirth,
+        "nationality": createUserInformationDto.nationality,
       }
     };
 
@@ -137,12 +143,27 @@ class UserUseCases {
 
     final QueryResult createUserInformationResult = await graphqlClient
         .parkaGraphqlClient.value.graphQlClient
-        .mutate(mutationOptions);
+        .mutate(mutationOptions)
+        .catchError((error) => {print(error)});
+
+    print(createUserInformationResult.data);
+    print(createUserInformationResult.exception);
 
     if (createUserInformationResult.data != null) {
-      return createUserInformationResult.data;
+      return createUserInformationResult.data["createUserInformation"];
     }
 
     return null;
+  }
+
+  static Future registerUser(UserRegistrationForm userRegistrationForm) async {
+    final createUserInformationResult = await createUserInformation(
+        userRegistrationForm.createUserInformationDto);
+
+    userRegistrationForm.createUserDto.userInformation =
+        createUserInformationResult["id"];
+
+    final createUserResult =
+        await createUser(userRegistrationForm.createUserDto);
   }
 }

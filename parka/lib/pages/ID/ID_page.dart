@@ -8,9 +8,13 @@ import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/data_models/country/country_data_model.dart';
 import 'package:ParkA/data_models/nationality/nationality_data_model.dart';
+import 'package:ParkA/pages/MapPage/maps_page.dart';
 import 'package:ParkA/pages/PaymentInfo/payment_info.dart';
+import 'package:ParkA/pages/Register/register_page.dart';
 import 'package:ParkA/use-cases/country/country_use_cases.dart';
 import 'package:ParkA/use-cases/nationality/nationality_use_cases.dart';
+import 'package:ParkA/use-cases/user/dtos/user_registration_dto.dart';
+import 'package:ParkA/use-cases/user/user_use_cases.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
@@ -62,6 +66,14 @@ class _IDPageState extends State<IDPage> {
     });
   }
 
+  dynamic onChanged(DateTime value, List<int> index) {
+    userRegistrationForm.createUserInformationDto.birthDate =
+        value.toIso8601String();
+    setState(() {
+      this.dateOfBirth = value;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -75,15 +87,23 @@ class _IDPageState extends State<IDPage> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic onChanged(DateTime value, List<int> index) {
-      setState(() {
-        this.dateOfBirth = value;
-      });
-    }
-
-    Map<String, dynamic> createAccount =
+    UserRegistrationForm userRegistrationForm =
         ModalRoute.of(context).settings.arguments;
     Size currentScreen = MediaQuery.of(context).size;
+
+    void nextButtonHandler(bool _omit) {
+      userRegistrationForm.createUserInformationDto.documentNumber =
+          this.docNumber;
+      //doc number must be 11 digits
+      print(userRegistrationForm.createUserInformationDto.documentNumber);
+      print(userRegistrationForm.createUserInformationDto.birthDate);
+      print(userRegistrationForm.createUserInformationDto.nationality);
+      print(userRegistrationForm.createUserInformationDto.placeOfBirth);
+      print(userRegistrationForm.createUserInformationDto.telephonNumber);
+
+      UserUseCases.registerUser(userRegistrationForm);
+      Navigator.pushNamed(context, MapPage.routeName);
+    }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -146,7 +166,8 @@ class _IDPageState extends State<IDPage> {
                               return SingleChildScrollView(
                                 child: ConstrainedBox(
                                   constraints: BoxConstraints(
-                                      minHeight: constraints.maxHeight),
+                                    minHeight: constraints.maxHeight,
+                                  ),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
@@ -176,6 +197,9 @@ class _IDPageState extends State<IDPage> {
                                           setState(
                                             () {
                                               this.docNumber = value;
+                                              userRegistrationForm
+                                                  .createUserInformationDto
+                                                  .documentNumber = value;
                                             },
                                           );
                                         },
@@ -202,6 +226,10 @@ class _IDPageState extends State<IDPage> {
                                               this.nationality = this
                                                   .nationalities[value]
                                                   .name;
+                                              userRegistrationForm
+                                                      .createUserInformationDto
+                                                      .nationality =
+                                                  this.nationalities[value].id;
                                             },
                                           );
                                         },
@@ -218,6 +246,10 @@ class _IDPageState extends State<IDPage> {
                                             () {
                                               this.placeOfBirth =
                                                   this.countries[value].name;
+                                              userRegistrationForm
+                                                      .createUserInformationDto
+                                                      .placeOfBirth =
+                                                  this.countries[value].id;
                                             },
                                           );
                                         },
@@ -229,29 +261,16 @@ class _IDPageState extends State<IDPage> {
                                             Icons.arrow_forward_ios,
                                         buttonTextStyle:
                                             kParkaBigButtonTextStyle,
-                                        onTapHandler: () => {
-                                          print(dateOfBirth),
-                                          // createAccount["idpage"]["datebirth"] = this
-                                          //     .dateOfBirth
-                                          //     .toString()
-                                          //     .split(" ")[0],
-                                          Navigator.pushNamed(
-                                            context,
-                                            PaymentInfoScreen.routeName,
-                                            arguments: createAccount,
-                                          )
+                                        onTapHandler: () {
+                                          nextButtonHandler(true);
                                         },
                                       ),
                                       TransparentButton(
                                         label: "Omitir",
                                         color: ParkaColors.parkaLightGreen,
                                         buttonTextStyle: kParkaInputDefaultSyle,
-                                        onTapHandler: () => {
-                                          Navigator.pushNamed(
-                                            context,
-                                            PaymentInfoScreen.routeName,
-                                            arguments: createAccount,
-                                          )
+                                        onTapHandler: () {
+                                          nextButtonHandler(false);
                                         },
                                       )
                                     ],

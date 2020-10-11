@@ -5,6 +5,7 @@ import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/ID/ID_page.dart';
 import 'package:ParkA/pages/ProfilePic/utils/utils.dart';
+import 'package:ParkA/use-cases/user/dtos/user_registration_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
@@ -28,7 +29,7 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
     Size screenSize = MediaQuery.of(context).size;
     final picker = ImagePicker();
 
-    Map<String, dynamic> createAccount =
+    UserRegistrationForm userRegistrationForm =
         ModalRoute.of(context).settings.arguments;
     Future getImage() async {
       final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -40,13 +41,11 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
 
     Future nextStep() async {
       print(this._path);
-      createAccount["profilepage"]["pictures"] = this._path ?? "null";
-      // createAccount["countries"] = await getCountries();
-      // createAccount["typedocuments"] = await getTypeDocument();
+      userRegistrationForm.createUserDto.profilePicture = '';
       Navigator.pushNamed(
         context,
         IDPage.routeName,
-        arguments: createAccount,
+        arguments: userRegistrationForm,
       );
     }
 

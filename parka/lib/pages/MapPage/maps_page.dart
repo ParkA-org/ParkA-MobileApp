@@ -14,9 +14,6 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 import '../../components/Utils/styles/parka_colors.dart';
 
-final GraphqlClientController graphQlClient =
-    Get.find<GraphqlClientController>();
-
 class MapPage extends StatefulWidget {
   MapPage({Key key}) : super(key: key);
 
@@ -34,6 +31,7 @@ class _MapPageState extends State<MapPage> {
   CameraPosition initialCameraPosition;
 
   final UserController user = Get.find<UserController>();
+  final graphqlClient = Get.find<GraphqlClientController>();
 
   void toggleFloatingActionButton() {
     setState(() {
