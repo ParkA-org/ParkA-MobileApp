@@ -1,13 +1,9 @@
-import 'package:ParkA/utils/graphql/auth-client/parka_auth_graphql_client.dart';
-import 'package:ParkA/utils/graphql/public-client/parka_public_graphql_client.dart';
-import "package:graphql/client.dart";
-
 import "package:graphql/client.dart";
 
 class ParkaGraphqlClient {
   GraphQLClient client;
   final HttpLink _httpLink = HttpLink(
-    uri: 'http://10.0.0.134:3000/graphql',
+    uri: 'http://ec2-3-236-57-220.compute-1.amazonaws.com/graphql',
   );
 
   GraphQLClient get graphQlClient {

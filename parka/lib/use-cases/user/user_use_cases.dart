@@ -1,6 +1,5 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data_models/user/user_data_model.dart';
-import 'package:ParkA/utils/graphql/public-client/parka_public_graphql_client.dart';
 import 'package:get/get.dart';
 import 'package:graphql/client.dart';
 
@@ -32,21 +31,16 @@ class UserUseCases {
       variables: loginInput,
     );
 
-    // final QueryResult loginResult =
-    //     await PublicGraphqlClient.graphQlClient.mutate(loginMutationOptions);
-
     final graphqlClient = Get.find<GraphqlClientController>();
 
     final QueryResult loginResult = await graphqlClient
         .parkaGraphqlClient.value.graphQlClient
         .mutate(loginMutationOptions);
 
-    if (loginResult.data != null) {
-      // graphqlClient.jwt.update((val) {
-      //   val = loginResult.data["login"]["JWT"].obs;
-      //   print(graphqlClient.jwt.value);
-      // });
+    print(loginResult.data);
+    print(loginResult.exception);
 
+    if (loginResult.data != null) {
       graphqlClient
           .updateGraphqlClientwithJwt(loginResult.data["login"]["JWT"]);
 
