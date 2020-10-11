@@ -41,8 +41,8 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
     Future nextStep() async {
       print(this._path);
       createAccount["profilepage"]["pictures"] = this._path ?? "null";
-      createAccount["countries"] = await getCountries();
-      createAccount["typedocuments"] = await getTypeDocument();
+      // createAccount["countries"] = await getCountries();
+      // createAccount["typedocuments"] = await getTypeDocument();
       Navigator.pushNamed(
         context,
         IDPage.routeName,

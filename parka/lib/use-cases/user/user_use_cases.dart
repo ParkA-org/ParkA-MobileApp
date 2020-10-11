@@ -56,4 +56,93 @@ class UserUseCases {
 
     return null;
   }
+
+  static Future createUser() async {
+    String createUserQuery = r"""
+    mutation($data:createUserInput!){
+      createUser(createUserInput:$data){
+        name
+        lastName
+        email
+        profilePicture
+        confirmed
+        origin
+      }
+    }
+    """;
+
+    final createUserInput = {
+      "data": {
+        "name": "Sebatiano",
+        "lastName": "Faiella",
+        "origin": "mobile",
+        "email": "sebyfaiella97@gmail.com",
+        "profilePicture":
+            "https://mangathrill.com/wp-content/uploads/2020/02/5432111-1.jpg",
+        "password": "1234567890",
+        "userInformation": "f5ff06b9-6057-44ed-8404-6191d023a65c"
+      }
+    };
+
+    MutationOptions mutationOptions = MutationOptions(
+        documentNode: gql(createUserQuery), variables: createUserInput);
+
+    final QueryResult createUserResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .mutate(mutationOptions);
+
+    if (createUserResult.data != null) {
+      return createUserResult.data;
+    }
+
+    return null;
+  }
+
+  static Future createUserInformation() async {
+    String createUserInformation = r"""
+    mutation($data:CreateUserInformationInpuType!) {
+  createUserInformation(
+    createUserInformationInpuType: $data
+  ) {
+    id
+    documentNumber
+    telephoneNumber
+    birthDate
+    placeOfBirth {
+      name
+    }
+    nationality {
+      id
+      name
+    }
+  }
+}
+    """;
+
+    final createUserInformationInput = {
+      "data": {
+        "paymentInformation": "",
+        "documentNumber": "",
+        "telephoneNumber": "",
+        "birthDate": "",
+        "placeOfBirth": "",
+        "nationality": ""
+      }
+    };
+
+    MutationOptions mutationOptions = MutationOptions(
+      documentNode: gql(createUserInformation),
+      variables: createUserInformationInput,
+    );
+
+    final QueryResult createUserInformationResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .mutate(mutationOptions);
+
+    if (createUserInformationResult.data != null) {
+      return createUserInformationResult.data;
+    }
+
+    return null;
+  }
 }
