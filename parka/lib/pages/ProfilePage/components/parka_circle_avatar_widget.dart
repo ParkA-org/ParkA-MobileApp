@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 
 const parkaCircleAvatarWidgetDefaultBoxStyle = BoxDecoration(
   shape: BoxShape.circle,
+  boxShadow: [
+    BoxShadow(
+      offset: Offset(3.0, 10.0),
+      color: Colors.black38,
+      blurRadius: 5.0,
+    ),
+  ],
 );
 
 class ParkaCircleAvatarWidget extends StatelessWidget {

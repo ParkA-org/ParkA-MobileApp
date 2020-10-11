@@ -2,6 +2,7 @@ import 'package:ParkA/components/Buttons/main_fab.dart';
 import 'package:ParkA/components/Drawer/main_drawer.dart';
 import 'package:ParkA/components/Drawer/privateDrawer/private_drawer.dart';
 import 'package:ParkA/components/Drawer/publicDrawer/public_drawer.dart';
+import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/pages/MapPage/Components/dummy_search.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,9 @@ import 'package:location/location.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 import '../../components/Utils/styles/parka_colors.dart';
+
+final GraphqlClientController graphQlClient =
+    Get.find<GraphqlClientController>();
 
 class MapPage extends StatefulWidget {
   MapPage({Key key}) : super(key: key);

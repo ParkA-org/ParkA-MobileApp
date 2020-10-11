@@ -18,8 +18,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.find<GraphqlClientController>();
-
     return GetMaterialApp(
       title: 'ParkA',
       theme: ThemeData(
@@ -31,3 +29,20 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// decoration: BoxDecoration(
+//   shape: BoxShape.circle,
+//   boxShadow: [
+//     BoxShadow(
+//       offset: Offset(3.0, 10.0),
+//       color: Colors.black38,
+//       blurRadius: 5.0,
+//     ),
+//   ],
+//   image: DecorationImage(
+//     fit: BoxFit.fill,
+//     image: NetworkImage(
+//       'https://mangathrill.com/wp-content/uploads/2020/02/5432111-1.jpg',
+//     ),
+//   ),
+// ),
