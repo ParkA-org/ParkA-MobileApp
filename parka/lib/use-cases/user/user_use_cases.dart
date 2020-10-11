@@ -3,6 +3,8 @@ import 'package:ParkA/data_models/user/user_data_model.dart';
 import 'package:get/get.dart';
 import 'package:graphql/client.dart';
 
+final graphqlClient = Get.find<GraphqlClientController>();
+
 class UserUseCases {
   static Future userLogin(String email, String password) async {
     final loginInput = {
@@ -30,8 +32,6 @@ class UserUseCases {
       documentNode: gql(loginMutation),
       variables: loginInput,
     );
-
-    final graphqlClient = Get.find<GraphqlClientController>();
 
     final QueryResult loginResult = await graphqlClient
         .parkaGraphqlClient.value.graphQlClient

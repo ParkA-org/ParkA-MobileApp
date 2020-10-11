@@ -46,7 +46,7 @@ List<GetPage> get_pages = [
   GetPage(
     name: MapPage.routeName,
     page: () => MapPage(),
-    binding: UserBinding(),
+    bindings: [UserBinding()],
   ),
   GetPage(
     name: GraphqlTestScreen.routeName,
