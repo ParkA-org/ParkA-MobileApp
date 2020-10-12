@@ -6,6 +6,11 @@ final kParkaTextBaseStyle = TextStyle(
   fontFamily: "Montserrat",
 );
 
+final kParkaTextBaseStyleWhite = TextStyle(
+  color: Colors.white,
+  fontFamily: "Montserrat",
+);
+
 final kParkaTextBaseStyleBold = TextStyle(
   color: ParkaColors.parkaGreen,
   fontFamily: "Montserrat",

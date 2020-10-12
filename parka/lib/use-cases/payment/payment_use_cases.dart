@@ -20,13 +20,19 @@ class PaymentUseCases {
     }
     """;
 
+    print(createPaymentDto.cardHolder);
+    print(createPaymentDto.card);
+    print(createPaymentDto.expirationDate);
+    print(createPaymentDto.cvv);
+    print(createPaymentDto.digit);
+
     final createPaymentInput = {
       "data": {
-        "cardHolder": "Tu Jeva",
+        "cardHolder": createPaymentDto.cardHolder,
         "expirationDate": "2020-10-02T02:05:30.962Z",
-        "digit": "1234567816345671",
+        "digit": createPaymentDto.digit,
         "card": "",
-        "cvv": "123"
+        "cvv": createPaymentDto.cvv,
       }
     };
 
@@ -38,11 +44,14 @@ class PaymentUseCases {
     final createPaymentInputResult =
         await graphqlClient.mutate(mutationOptions);
 
+    print(createPaymentInputResult.data);
+    print(createPaymentInputResult.exception);
     if (createPaymentInputResult.data != null) {
-      return createPaymentInputResult.data;
+      print("created");
+      return true;
     }
 
-    return null;
+    return false;
   }
 
   static Future<List<Payment>> getAllUserPaymentMethods() async {

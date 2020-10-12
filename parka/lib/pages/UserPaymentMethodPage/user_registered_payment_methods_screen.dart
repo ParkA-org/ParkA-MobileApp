@@ -2,6 +2,7 @@ import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/pages/PaymentInfo/payment_info.dart';
+import 'package:ParkA/pages/UserPaymentMethodPage/components/card_preview_widget.dart';
 import 'package:ParkA/use-cases/payment/payment_use_cases.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
@@ -21,6 +22,7 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
   List userPaymentMethods;
 
   Future getAllUserPayment() async {
+    this.paymentsLoaded = false;
     this.userPaymentMethods = await PaymentUseCases.getAllUserPaymentMethods();
 
     setState(() {
@@ -28,10 +30,22 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
     });
   }
 
+  List<Widget> buildPaymentView() {
+    List<Widget> ret = new List<Widget>();
+
+    this.userPaymentMethods.forEach((element) {
+      ret.add(CardListTile(
+        payment: element,
+      ));
+    });
+
+    return ret;
+  }
+
   @override
   void initState() {
     super.initState();
-    this.paymentsLoaded = false;
+
     this.getAllUserPayment();
   }
 
@@ -90,10 +104,18 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
             ),
             Expanded(
               flex: 2,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 32.0),
-                child: this.paymentsLoaded ? ListView() : Container(),
-              ),
+              child: this.paymentsLoaded
+                  ? RefreshIndicator(
+                      onRefresh: this.getAllUserPayment,
+                      child: ListView(
+                        children: buildPaymentView(),
+                      ),
+                    )
+                  : Container(
+                      child: Center(
+                        child: Text("Todavia no tienes metodos de pago"),
+                      ),
+                    ),
             )
           ],
         ),

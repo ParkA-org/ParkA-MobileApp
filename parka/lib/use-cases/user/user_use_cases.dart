@@ -176,7 +176,11 @@ class UserUseCases {
     }""";
 
     final confirmUserEmailInput = {
-      "data": {"email": email, "origin": "mobile", "code": code}
+      "data": {
+        "email": email,
+        "origin": "mobile",
+        "code": code,
+      }
     };
 
     MutationOptions mutationOptions = MutationOptions(
