@@ -1,11 +1,13 @@
 import 'package:ParkA/components/Buttons/round_button.dart';
 import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
+import 'package:ParkA/pages/EditProfilePage/edit_profile_page.dart';
 import 'package:ParkA/pages/ProfilePage/components/informative_tab.dart';
 import 'package:ParkA/pages/ProfilePage/components/parka_review_history_tile.dart';
 import 'package:ParkA/pages/ProfilePage/components/parka_service_history_tile_widget.dart';
 import 'package:ParkA/pages/ProfilePage/components/profile_personal_information_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProfileScreen extends StatefulWidget {
   static String routeName = "/profileScreen";
@@ -61,6 +63,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: ParkaHeader(
                         color: Colors.white,
                         trailing: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, EditProfilePage.routeName);
+                          },
                           child: Icon(
                             Icons.edit,
                           ),

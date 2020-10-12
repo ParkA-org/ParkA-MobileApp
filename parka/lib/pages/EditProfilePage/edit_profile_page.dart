@@ -1,9 +1,12 @@
 import 'package:ParkA/components/Headers/parka_header.dart';
-import 'package:ParkA/components/Utils/styles/inputs.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
+import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/pages/ProfilePage/components/parka_circle_avatar_widget.dart';
+import 'package:ParkA/pages/UserPaymentMethodPage/user_registered_payment_methods_screen.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 
 import 'components/parka_edit_profile_tile.dart';
 import 'components/parka_telephone_number_input.dart';
@@ -35,6 +38,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final UserController userController = Get.find();
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: ParkaColors.parkaGreen,
@@ -55,10 +60,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         Navigator.pop(context);
                       },
                     ),
-                    trailing: Text(
-                      "Guardar",
-                      style: kParkaInputDefaultSyle,
-                    ),
+                    // trailing: Text(
+                    //   "Guardar",
+                    //   style: kParkaInputDefaultSyle,
+                    // ),
                   ),
                 ),
               ),
@@ -66,8 +71,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 flex: 0,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Sebastiano Gutierrez",
+                  child: AutoSizeText(
+                    "${userController.user.value?.name} ${userController.user.value?.lastName}",
                     style: kParkaPageTitleTextStyle.copyWith(
                       color: Colors.white,
                     ),
@@ -78,20 +83,29 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 flex: 2,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: ParkaCircleAvatarWidget(),
+                  child: ParkaCircleAvatarWidget(
+                    imageUrl: userController.user.value?.profilePicture,
+                  ),
                 ),
               ),
-              Expanded(
-                child: ParkaTelephoneNumberInput(
-                  telephoneNumberHandler: this.telephoneNumberHandler,
-                ),
-              ),
+              // Expanded(
+              //   child: ParkaTelephoneNumberInput(
+              //     telephoneNumberHandler: this.telephoneNumberHandler,
+              //   ),
+              // ),
               Expanded(
                 flex: 2,
                 child: Container(
                   padding: EdgeInsets.only(bottom: 32.0),
                   child: Column(
                     children: [
+                      Expanded(
+                        child: ParkaEditProfileTile(
+                          color: Colors.white,
+                          label: "Editar Perfil",
+                          iconData: Icons.account_circle,
+                        ),
+                      ),
                       Expanded(
                         child: ParkaEditProfileTile(
                           color: Colors.white,
@@ -104,6 +118,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           color: Colors.white,
                           label: "Metodos de Pago",
                           iconData: Icons.account_balance_wallet,
+                          onTapHandler: () {
+                            Get.toNamed(UserPaymentMethodsScreen.routeName);
+                          },
                         ),
                       ),
                       Expanded(
