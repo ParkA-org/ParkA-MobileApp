@@ -1,3 +1,4 @@
+import 'package:ParkA/controllers/bindings/graphql_biding.dart';
 import 'package:ParkA/controllers/bindings/user_binding.dart';
 import 'package:ParkA/pages/ConfirmAccountPage/confirm_account_page.dart';
 import 'package:ParkA/pages/FilterPage/filter_page.dart';
@@ -11,6 +12,7 @@ import 'package:ParkA/pages/ProfilePic/profile_pic_page.dart';
 import 'package:ParkA/pages/PaymentInfo/payment_info.dart';
 import 'package:ParkA/pages/Register/register_page.dart';
 import 'package:ParkA/pages/GraphQlTest/graphql_test_page.dart';
+import 'package:ParkA/pages/ResetPasswordPage/reset_password_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
@@ -47,7 +49,7 @@ List<GetPage> get_pages = [
   GetPage(
     name: MapPage.routeName,
     page: () => MapPage(),
-    bindings: [UserBinding()],
+    bindings: [UserBinding(), GraphqlClientBiding()],
   ),
   GetPage(
     name: GraphqlTestScreen.routeName,
@@ -64,5 +66,10 @@ List<GetPage> get_pages = [
   GetPage(
     name: ConfirmAccountPage.routeName,
     page: () => ConfirmAccountPage(),
+  ),
+  GetPage(
+    name: ResetPasswordPage.routeName,
+    page: () => ResetPasswordPage(),
+    bindings: [GraphqlClientBiding()],
   ),
 ];

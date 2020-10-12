@@ -226,4 +226,78 @@ class UserUseCases {
 
     return false;
   }
+
+  static Future requestResetPassword({String email}) async {
+    String resetPasswordQuery = r"""
+    mutation($data:ResetPasswordInput!){
+      resetPassword(resetPasswordInput:$data){
+        email
+        origin
+      }
+    }
+    """;
+
+    final resetPasswordInput = {
+      "data": {
+        "email": email,
+        "origin": "mobile",
+      }
+    };
+
+    MutationOptions mutationOptions = MutationOptions(
+      documentNode: gql(resetPasswordQuery),
+      variables: resetPasswordInput,
+    );
+
+    final QueryResult resetPasswordResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .mutate(mutationOptions);
+
+    print(resetPasswordResult.data);
+    if (resetPasswordResult.data != null) {
+      return true;
+    }
+
+    return false;
+  }
+
+  static Future resetPassword({
+    String email,
+    String code,
+    String password,
+  }) async {
+    final resetPasswordQuery = r'''
+    mutation($data:ValidateResetPasswordCodeInput!){
+      validateResetPasswordCode(validateResetPasswordCodeInput:$data){
+        email
+        origin
+      }
+    }
+    ''';
+
+    final resetPasswordInput = {
+      "data": {
+        "email": email,
+        "origin": "mobile",
+        "code": code,
+        "newPassword": password,
+      }
+    };
+
+    MutationOptions mutationOptions = MutationOptions(
+      documentNode: gql(resetPasswordQuery),
+      variables: resetPasswordInput,
+    );
+
+    final QueryResult resetPasswordResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .mutate(mutationOptions);
+
+    print(resetPasswordResult.data);
+    if (resetPasswordResult.data != null) {
+      return true;
+    }
+
+    return false;
+  }
 }
