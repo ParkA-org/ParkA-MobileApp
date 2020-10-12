@@ -27,6 +27,11 @@ class ParkaGraphqlClient {
     this.client = GraphQLClient(
       cache: InMemoryCache(),
       link: _link,
+      defaultPolicies: DefaultPolicies(
+        query: Policies(
+          fetch: FetchPolicy.noCache,
+        ),
+      ),
     );
   }
 }

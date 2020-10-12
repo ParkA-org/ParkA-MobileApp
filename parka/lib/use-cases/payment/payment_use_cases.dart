@@ -1,4 +1,6 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
+import 'package:ParkA/data_models/payment/payment_data_model.dart';
+import 'package:ParkA/use-cases/user/dtos/user_registration_dto.dart';
 import 'package:get/get.dart';
 import 'package:graphql/client.dart';
 
@@ -6,7 +8,7 @@ final graphqlClient =
     Get.find<GraphqlClientController>().parkaGraphqlClient.value.graphQlClient;
 
 class PaymentUseCases {
-  static Future createPayment() async {
+  static Future createPayment(CreatePaymentDto createPaymentDto) async {
     String createPaymentQuery = r"""
     mutation($data:CreatePaymentInput!){
       createPayment(createPaymentInput:$data){
@@ -22,7 +24,7 @@ class PaymentUseCases {
       "data": {
         "cardHolder": "Tu Jeva",
         "expirationDate": "2020-10-02T02:05:30.962Z",
-        "digit": "1234567812345678",
+        "digit": "1234567816345671",
         "card": "",
         "cvv": "123"
       }
@@ -43,7 +45,7 @@ class PaymentUseCases {
     return null;
   }
 
-  static Future getAllUserPaymentMethods() async {
+  static Future<List<Payment>> getAllUserPaymentMethods() async {
     String getAllUserPaymentMethods = r""" 
         query{
       getUserInformationById{
@@ -65,9 +67,10 @@ class PaymentUseCases {
 
     final createPaymentInputResult = await graphqlClient.query(queryOptions);
 
+    print(createPaymentInputResult.data);
     if (createPaymentInputResult.data != null) {
-      return createPaymentInputResult.data["getUserInformationById"]
-          ["paymentInformation"];
+      return Payment.paymentsFromJson(createPaymentInputResult
+          .data["getUserInformationById"]["paymentInformation"]);
     }
 
     return [];

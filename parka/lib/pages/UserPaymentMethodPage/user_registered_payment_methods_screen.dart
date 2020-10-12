@@ -1,3 +1,4 @@
+import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/pages/PaymentInfo/payment_info.dart';
@@ -65,11 +66,25 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
                         blurRadius: 5.0,
                       ),
                     ]),
-                alignment: Alignment.centerLeft,
-                child: Icon(
-                  ParkaIcons.parkaCar,
-                  color: Colors.white,
-                  size: 130.0,
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 0,
+                      child: ParkaHeader(
+                        color: Colors.white,
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: Icon(
+                          ParkaIcons.parkaCar,
+                          color: Colors.white,
+                          size: 130.0,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
