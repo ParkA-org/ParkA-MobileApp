@@ -8,6 +8,7 @@ import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/data_models/country/country_data_model.dart';
 import 'package:ParkA/data_models/nationality/nationality_data_model.dart';
+import 'package:ParkA/pages/ConfirmAccountPage/confirm_account_page.dart';
 import 'package:ParkA/pages/MapPage/maps_page.dart';
 import 'package:ParkA/pages/PaymentInfo/payment_info.dart';
 import 'package:ParkA/pages/Register/register_page.dart';
@@ -102,7 +103,7 @@ class _IDPageState extends State<IDPage> {
       print(userRegistrationForm.createUserInformationDto.telephonNumber);
 
       UserUseCases.registerUser(userRegistrationForm);
-      Navigator.pushNamed(context, MapPage.routeName);
+      Navigator.pushNamed(context, ConfirmAccountPage.routeName);
     }
 
     return Scaffold(

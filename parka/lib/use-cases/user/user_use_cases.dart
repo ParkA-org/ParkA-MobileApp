@@ -143,8 +143,7 @@ class UserUseCases {
 
     final QueryResult createUserInformationResult = await graphqlClient
         .parkaGraphqlClient.value.graphQlClient
-        .mutate(mutationOptions)
-        .catchError((error) => {print(error)});
+        .mutate(mutationOptions);
 
     print(createUserInformationResult.data);
     print(createUserInformationResult.exception);
@@ -165,5 +164,66 @@ class UserUseCases {
 
     final createUserResult =
         await createUser(userRegistrationForm.createUserDto);
+  }
+
+  static Future confirmUserEmail({String email, String code}) async {
+    String confirmUserEmail = r"""
+    mutation($data:ValidateEmailCodeInput!){
+      validateEmailCode(validateEmailCodeInput:$data){
+        email
+        origin
+      }
+    }""";
+
+    final confirmUserEmailInput = {
+      "data": {"email": email, "origin": "mobile", "code": code}
+    };
+
+    MutationOptions mutationOptions = MutationOptions(
+      documentNode: gql(confirmUserEmail),
+      variables: confirmUserEmailInput,
+    );
+
+    final QueryResult confirmUserEmailResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .mutate(mutationOptions);
+
+    if (confirmUserEmailResult.data != null) {
+      return true;
+    }
+
+    return false;
+  }
+
+  static Future resendConfirmationCode({String email}) async {
+    String resendConfirmationCodeQuery = r"""
+    mutation($data:ValidateEmailCodeInput!){
+      validateEmailCode(validateEmailCodeInput:$data){
+        email
+        origin
+      }
+    }""";
+
+    final resendConfirmationInput = {
+      "data": {
+        "email": email,
+        "origin": "mobile",
+      }
+    };
+
+    MutationOptions mutationOptions = MutationOptions(
+      documentNode: gql(resendConfirmationCodeQuery),
+      variables: resendConfirmationInput,
+    );
+
+    final QueryResult resendConfirmationResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .mutate(mutationOptions);
+
+    if (resendConfirmationResult.data != null) {
+      return true;
+    }
+
+    return false;
   }
 }

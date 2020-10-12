@@ -1,4 +1,5 @@
 import 'package:ParkA/controllers/bindings/user_binding.dart';
+import 'package:ParkA/pages/ConfirmAccountPage/confirm_account_page.dart';
 import 'package:ParkA/pages/FilterPage/filter_page.dart';
 import 'package:ParkA/pages/ID/ID_page.dart';
 import 'package:ParkA/pages/ForgotPassword/forgot_password_screen.dart';
@@ -59,5 +60,9 @@ List<GetPage> get_pages = [
   GetPage(
     name: ProfileScreen.routeName,
     page: () => ProfileScreen(),
+  ),
+  GetPage(
+    name: ConfirmAccountPage.routeName,
+    page: () => ConfirmAccountPage(),
   ),
 ];

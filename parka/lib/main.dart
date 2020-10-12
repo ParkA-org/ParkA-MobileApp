@@ -1,5 +1,6 @@
 import 'package:ParkA/components/Utils/graphql/graphql_client.dart';
 import 'package:ParkA/controllers/graphql_controller.dart';
+import 'package:ParkA/pages/ConfirmAccountPage/confirm_account_page.dart';
 import 'package:ParkA/pages/MapPage/maps_page.dart';
 import 'package:ParkA/routes/get_routes.dart';
 
@@ -29,20 +30,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// decoration: BoxDecoration(
-//   shape: BoxShape.circle,
-//   boxShadow: [
-//     BoxShadow(
-//       offset: Offset(3.0, 10.0),
-//       color: Colors.black38,
-//       blurRadius: 5.0,
-//     ),
-//   ],
-//   image: DecorationImage(
-//     fit: BoxFit.fill,
-//     image: NetworkImage(
-//       'https://mangathrill.com/wp-content/uploads/2020/02/5432111-1.jpg',
-//     ),
-//   ),
-// ),
