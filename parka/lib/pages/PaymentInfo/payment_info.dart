@@ -78,19 +78,6 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
   }
 
   Future<void> sumbmitForm(bool _omit) async {
-    if (_omit) {
-      createAccount["paymentpage"]["digit"] = "0";
-    } else {
-      createAccount["paymentpage"]["digit"] = creditCardNumber1 +
-          creditCardNumber2 +
-          creditCardNumber3 +
-          creditCardNumber4;
-      createAccount["paymentpage"]["name"] = fullName;
-      createAccount["paymentpage"]["expirationdate"] =
-          "20" + creditCardYear + "-" + creditCardMonth + "-01";
-    }
-    await createUser(createAccount);
-
     print("done");
 
     Navigator.pushNamed(
@@ -102,7 +89,6 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    createAccount = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: SafeArea(
@@ -154,16 +140,6 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
                           trailingIconData: Icons.arrow_forward_ios,
                           onTapHandler: () async {
                             sumbmitForm(false);
-                          },
-                        ),
-                      ),
-                      Expanded(
-                        child: TransparentButton(
-                          buttonTextStyle: kParkaButtonTextStyle,
-                          label: "Omitir",
-                          color: ParkaColors.parkaLightGreen,
-                          onTapHandler: () async {
-                            sumbmitForm(true);
                           },
                         ),
                       ),

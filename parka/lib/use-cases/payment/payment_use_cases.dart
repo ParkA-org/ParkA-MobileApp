@@ -42,4 +42,34 @@ class PaymentUseCases {
 
     return null;
   }
+
+  static Future getAllUserPaymentMethods() async {
+    String getAllUserPaymentMethods = r""" 
+        query{
+      getUserInformationById{
+        id
+        paymentInformation{
+          id
+          cardHolder
+          expirationDate
+          digit
+          activated
+          
+        }
+      }
+    }
+    """;
+
+    QueryOptions queryOptions =
+        QueryOptions(documentNode: gql(getAllUserPaymentMethods));
+
+    final createPaymentInputResult = await graphqlClient.query(queryOptions);
+
+    if (createPaymentInputResult.data != null) {
+      return createPaymentInputResult.data["getUserInformationById"]
+          ["paymentInformation"];
+    }
+
+    return [];
+  }
 }

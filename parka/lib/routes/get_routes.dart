@@ -13,6 +13,7 @@ import 'package:ParkA/pages/PaymentInfo/payment_info.dart';
 import 'package:ParkA/pages/Register/register_page.dart';
 import 'package:ParkA/pages/GraphQlTest/graphql_test_page.dart';
 import 'package:ParkA/pages/ResetPasswordPage/reset_password_page.dart';
+import 'package:ParkA/pages/UserPaymentMethodPage/user_registered_payment_methods_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
@@ -70,6 +71,11 @@ List<GetPage> get_pages = [
   GetPage(
     name: ResetPasswordPage.routeName,
     page: () => ResetPasswordPage(),
+    bindings: [GraphqlClientBiding()],
+  ),
+  GetPage(
+    name: UserPaymentMethodsScreen.routeName,
+    page: () => UserPaymentMethodsScreen(),
     bindings: [GraphqlClientBiding()],
   ),
 ];

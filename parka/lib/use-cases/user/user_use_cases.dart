@@ -188,6 +188,7 @@ class UserUseCases {
         .parkaGraphqlClient.value.graphQlClient
         .mutate(mutationOptions);
 
+    print(confirmUserEmailResult.data);
     if (confirmUserEmailResult.data != null) {
       return true;
     }
