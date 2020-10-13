@@ -3,6 +3,7 @@ import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/pages/ProfilePage/components/parka_circle_avatar_widget.dart';
+import 'package:ParkA/pages/UpdatePasswordScreen/update_user_password_screen.dart';
 import 'package:ParkA/pages/UserPaymentMethodPage/user_registered_payment_methods_screen.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import "package:flutter/material.dart";
@@ -111,6 +112,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           color: Colors.white,
                           label: "Cambiar Contrasena",
                           iconData: Icons.lock_outline,
+                          onTapHandler: () {
+                            Get.toNamed(UpdateUserPasswordPage.routeName);
+                          },
                         ),
                       ),
                       Expanded(
