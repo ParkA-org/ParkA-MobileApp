@@ -33,7 +33,10 @@ class _EditUserProfileInformationPageState
   bool userInformationLoading;
   Information userInformation;
 
-  Future getUserProfile() async {
+  List nationalities;
+  List countries;
+
+  Future getViewData() async {
     this.userInformationLoading = true;
     this.userInformation = await UserUseCases.getUserInformation();
     setState(() {
@@ -44,7 +47,7 @@ class _EditUserProfileInformationPageState
   @override
   void initState() {
     super.initState();
-    getUserProfile();
+    getViewData();
   }
 
   //TODO: add updates for birthDate, Nationality and Country

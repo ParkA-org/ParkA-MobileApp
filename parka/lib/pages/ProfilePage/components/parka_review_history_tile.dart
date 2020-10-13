@@ -40,6 +40,8 @@ class ParkaReviewHistoryTile extends StatelessWidget {
                       height: imageContainerSize,
                       child: ParkaCircleAvatarWidget(
                         pictureSizeDivider: 2.0,
+                        imageUrl:
+                            "https://upload.wikimedia.org/wikipedia/commons/3/3f/TechCrunch_Disrupt_2019_%2848834434641%29_%28cropped%29.jpg",
                       ),
                     ),
                   ),
