@@ -101,9 +101,9 @@ class VehicleUseCases {
 
     print(createVehiclesResult.data);
     if (createVehiclesResult.data != null) {
-      return false;
+      return true;
     }
 
-    return true;
+    return false;
   }
 }
