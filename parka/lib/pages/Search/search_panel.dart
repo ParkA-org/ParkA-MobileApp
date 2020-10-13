@@ -68,6 +68,76 @@ class SearchPanel extends StatelessWidget {
                   ownerName: 'Silvio Arzeno',
                   parkingspace: '10 metros',
                 ),
+                FilterResultTile(
+                  streetAddress: 'Calle Bonaire #75',
+                  ownerName: 'David Bujosa',
+                  parkingspace: '15 metros',
+                ),
+                FilterResultTile(
+                  streetAddress: 'Agora Mall',
+                  ownerName: 'Sebastiano Faiella',
+                  parkingspace: '20 metros',
+                ),
+                FilterResultTile(
+                  streetAddress: 'Capotillo City',
+                  ownerName: 'Cesar Gonzalez',
+                  parkingspace: '25 metros',
+                ),
+                FilterResultTile(
+                  streetAddress: 'Parque Juan Pablo Duarte',
+                  ownerName: 'Tomas Familia',
+                  parkingspace: '30 metros',
+                ),
+                FilterResultTile(
+                  streetAddress: 'Calle Puerto Rico #175',
+                  ownerName: 'Silvio Arzeno',
+                  parkingspace: '10 metros',
+                ),
+                FilterResultTile(
+                  streetAddress: 'Calle Bonaire #75',
+                  ownerName: 'David Bujosa',
+                  parkingspace: '15 metros',
+                ),
+                FilterResultTile(
+                  streetAddress: 'Agora Mall',
+                  ownerName: 'Sebastiano Faiella',
+                  parkingspace: '20 metros',
+                ),
+                FilterResultTile(
+                  streetAddress: 'Capotillo City',
+                  ownerName: 'Cesar Gonzalez',
+                  parkingspace: '25 metros',
+                ),
+                FilterResultTile(
+                  streetAddress: 'Parque Juan Pablo Duarte',
+                  ownerName: 'Tomas Familia',
+                  parkingspace: '30 metros',
+                ),
+                FilterResultTile(
+                  streetAddress: 'Calle Puerto Rico #175',
+                  ownerName: 'Silvio Arzeno',
+                  parkingspace: '10 metros',
+                ),
+                FilterResultTile(
+                  streetAddress: 'Calle Bonaire #75',
+                  ownerName: 'David Bujosa',
+                  parkingspace: '15 metros',
+                ),
+                FilterResultTile(
+                  streetAddress: 'Agora Mall',
+                  ownerName: 'Sebastiano Faiella',
+                  parkingspace: '20 metros',
+                ),
+                FilterResultTile(
+                  streetAddress: 'Capotillo City',
+                  ownerName: 'Cesar Gonzalez',
+                  parkingspace: '25 metros',
+                ),
+                FilterResultTile(
+                  streetAddress: 'Parque Juan Pablo Duarte',
+                  ownerName: 'Tomas Familia',
+                  parkingspace: '30 metros',
+                ),
               ],
             ),
           ),

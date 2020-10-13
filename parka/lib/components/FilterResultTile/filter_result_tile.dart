@@ -18,7 +18,7 @@ class FilterResultTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(
-        vertical: 8.0,
+        vertical: 4.0,
         horizontal: 16.0,
       ),
       child: Row(
