@@ -99,7 +99,7 @@ class __VehiclePageState extends State<VehiclePage> {
             Expanded(
               flex: 2,
               child: this.vehiclesLoaded
-                  ? ListView()
+                  ? ListView( children: [Container(child: Column(children: [Image.network('https://www.diariomotor.com/imagenes/picscache/1920x1600c/tesla-model-s-p100d_1920x1600c.jpg'), Text('text')],),),],)
                   : Padding(
                       padding: const EdgeInsets.symmetric(vertical: 100.0),
                       child: Column(
