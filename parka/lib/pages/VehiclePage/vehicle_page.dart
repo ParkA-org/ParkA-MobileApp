@@ -1,7 +1,7 @@
-import 'package:ParkA/components/Buttons/transparent_button.dart';
+import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
-import 'package:ParkA/components/Utils/styles/text.dart';
 import "package:flutter/material.dart";
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../components/Utils/parkaIcons.dart';
 
@@ -20,7 +20,7 @@ class __VehiclePageState extends State<VehiclePage> {
   Future getAllUserVehicle() async {
     // this.userVehicles = await VehicleUseCases.getAllUserVehicles();
     setState(() {
-      this.vehiclesLoaded = true;
+      this.vehiclesLoaded = false;
     });
   }
 
@@ -37,11 +37,12 @@ class __VehiclePageState extends State<VehiclePage> {
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
         elevation: 10.0,
-        backgroundColor: ParkaColors.parkaGreen,
+        backgroundColor: Color(0xFF086174),
         child: Icon(
           Icons.add,
           size: 40,
         ),
+        highlightElevation: 20,
         // TO IMPLEMENT CREATE MY VEHICLE
         onPressed: () {},
         // onPressed: () {
@@ -72,14 +73,8 @@ class __VehiclePageState extends State<VehiclePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    TransparentButton(
-                      label: "Atras",
-                      buttonTextStyle: kParkaInputDefaultSyle,
+                    ParkaHeader(
                       color: Colors.white,
-                      leadingIconData: Icons.keyboard_arrow_left,
-                      onTapHandler: () {
-                        Navigator.pop(context);
-                      },
                     ),
                     Icon(
                       ParkaIcons.parkaCar,
@@ -105,7 +100,18 @@ class __VehiclePageState extends State<VehiclePage> {
               flex: 2,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32.0),
-                child: this.vehiclesLoaded ? ListView() : Container(),
+                child: this.vehiclesLoaded ? ListView() : Padding(
+                  padding: const EdgeInsets.symmetric(vertical:100.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset("resources/images/QuestionCar.svg", width: 160.0,), Padding(
+                        padding: const EdgeInsets.only(top:20.0),
+                        child: Text('No tienes vehiculos registrados', style: TextStyle(color: ParkaColors.parkaGreen, fontFamily: "Montserrat", fontSize: 35), textAlign: TextAlign.center,),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             )
           ],
