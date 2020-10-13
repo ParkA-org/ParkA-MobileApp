@@ -7,8 +7,7 @@ class VehiclePage extends StatefulWidget {
   static const String routeName = "/user-vehicles";
 
   @override
-  __VehiclePageState createState() =>
-      __VehiclePageState();
+  __VehiclePageState createState() => __VehiclePageState();
 }
 
 class __VehiclePageState extends State<VehiclePage> {
@@ -36,9 +35,12 @@ class __VehiclePageState extends State<VehiclePage> {
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
         backgroundColor: ParkaColors.parkaGreen,
-        child: Icon(Icons.add),
+        child: Icon(
+          Icons.add,
+          size: 10,
+        ),
         // TO IMPLEMENT CREATE MY VEHICLE
-        onPressed: (){},
+        onPressed: () {},
         // onPressed: () {
         //   Get.toNamed(PaymentInfoScreen.routeName);
         // },
@@ -64,10 +66,22 @@ class __VehiclePageState extends State<VehiclePage> {
                       ),
                     ]),
                 alignment: Alignment.centerLeft,
-                child: Icon(
-                  ParkaIcons.parkaCar,
-                  color: Colors.white,
-                  size: 130.0,
+                child: Column(
+                  children: [
+                    Icon(
+                      ParkaIcons.parkaCar,
+                      color: Colors.white,
+                      size: 150.0,
+                    ),
+                    Text(
+                      'Tus Vehiculos',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 45,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "Montserrat"),
+                    ),
+                  ],
                 ),
               ),
             ),
