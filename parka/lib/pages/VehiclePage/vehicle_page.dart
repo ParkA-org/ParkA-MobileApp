@@ -18,7 +18,7 @@ class __VehicleListScreenState extends State<VehicleListScreen> {
   List userVehicles;
 
   Future getAllUserVehicle() async {
-    this.userVehicles = await PaymentUseCases.getAllUserPaymentMethods();
+    this.userVehicles = await VehicleUseCases.getAllUserVehicles();
     setState(() {
       this.vehiclesLoaded = true;
     });
