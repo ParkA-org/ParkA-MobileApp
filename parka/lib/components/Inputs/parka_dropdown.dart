@@ -38,13 +38,17 @@ class ParkADropdown extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
     List<Widget> children = new List<Widget>();
     options.forEach((element) {
-      children.add(Text(element,
+      children.add(
+        Text(
+          element,
           style: TextStyle(
             fontFamily: "Montserrat",
             fontSize: 32,
             fontWeight: FontWeight.bold,
             color: Color(0xFF0B768C),
-          )));
+          ),
+        ),
+      );
     });
     return Container(
       child: Column(

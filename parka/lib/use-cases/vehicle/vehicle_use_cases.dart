@@ -1,3 +1,4 @@
+import 'package:ParkA/components/Utils/functions/upload_image.dart';
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data_models/vehicle/dto/create_vehicle_dto.dart';
 import 'package:ParkA/data_models/vehicle/vehicle_data_model.dart';
@@ -77,16 +78,27 @@ class VehicleUseCases {
     }
     """;
 
+    String imageUrl = await uploadImage(createVehicleDto.mainPicture);
+
+    print(createVehicleDto.model);
+    print(createVehicleDto.licensePlate);
+    print(createVehicleDto.colorExterior);
+    print(createVehicleDto.mainPicture);
+    print(imageUrl);
+    print(createVehicleDto.year);
+    print(createVehicleDto.alias);
+    print(createVehicleDto.bodyStyle);
+
     final createVehicleInput = {
       "data": {
-        "model": "62f7c63e-d637-4e05-a2c3-41df339dc33d",
-        "licensePlate": "1234567",
-        "colorExterior": "16532e68-b1bd-4506-9f6c-36d2e03bd014",
-        "mainPicture": "",
+        "model": createVehicleDto.model,
+        "licensePlate": createVehicleDto.licensePlate,
+        "colorExterior": createVehicleDto.colorExterior,
+        "mainPicture": imageUrl,
         "pictures": [],
-        "year": "2008",
-        "alias": "un nuevo carro",
-        "bodyStyle": "801a007d-4087-4a98-8ac2-3e39f47d6a7e"
+        "year": createVehicleDto.year,
+        "alias": createVehicleDto.alias,
+        "bodyStyle": createVehicleDto.bodyStyle,
       }
     };
 
