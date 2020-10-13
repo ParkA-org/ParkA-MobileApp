@@ -1,11 +1,10 @@
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
-import 'package:ParkA/pages/PaymentInfo/payment_info.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import '../../components/Utils/parkaIcons.dart';
 
 class VehicleListScreen extends StatefulWidget {
-  static const String routeName = "/user-payment-methods";
+  static const String routeName = "/user-vehicles";
 
   @override
   __VehicleListScreenState createState() =>
@@ -18,7 +17,7 @@ class __VehicleListScreenState extends State<VehicleListScreen> {
   List userVehicles;
 
   Future getAllUserVehicle() async {
-    this.userVehicles = await VehicleUseCases.getAllUserVehicles();
+    // this.userVehicles = await VehicleUseCases.getAllUserVehicles();
     setState(() {
       this.vehiclesLoaded = true;
     });
@@ -27,8 +26,8 @@ class __VehicleListScreenState extends State<VehicleListScreen> {
   @override
   void initState() {
     super.initState();
-    this.paymentsLoaded = false;
-    this.getAllUserPayment();
+    this.vehiclesLoaded = false;
+    this.getAllUserVehicle();
   }
 
   @override
@@ -38,9 +37,11 @@ class __VehicleListScreenState extends State<VehicleListScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: ParkaColors.parkaGreen,
         child: Icon(Icons.add),
-        onPressed: () {
-          Get.toNamed(PaymentInfoScreen.routeName);
-        },
+        // TO IMPLEMENT CREATE MY VEHICLE
+        onPressed: (){},
+        // onPressed: () {
+        //   Get.toNamed(PaymentInfoScreen.routeName);
+        // },
       ),
       body: SafeArea(
         child: Column(
