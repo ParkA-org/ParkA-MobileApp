@@ -25,8 +25,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   String email;
 
   void sendButtonHandler() async {
-    final bool resetPasswordResult = true;
-    // await UserUseCases.resetPassword(email: this.email);
+    final bool resetPasswordResult =
+        await UserUseCases.requestResetPassword(email: this.email);
 
     if (resetPasswordResult) {
       Get.snackbar(

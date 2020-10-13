@@ -2,17 +2,20 @@ import 'package:ParkA/utils/graphql/parka_graphql_client.dart';
 import 'package:get/state_manager.dart';
 
 class GraphqlClientController extends GetxController {
-  Rx<ParkaGraphqlClient> parkaGraphqlClient = ParkaGraphqlClient().obs;
+  Rx<ParkaGraphqlClient> parkaGraphqlClient = new ParkaGraphqlClient().obs;
 
   updateGraphqlClientwithJwt(String _jwt) {
-    this.parkaGraphqlClient.update((val) {
-      this.parkaGraphqlClient = ParkaGraphqlClient.fromJWT(_jwt).obs;
+    print(_jwt);
+    parkaGraphqlClient.update((val) {
+      this.parkaGraphqlClient = null.obs;
+      this.parkaGraphqlClient = new ParkaGraphqlClient.fromJWT(_jwt).obs;
     });
   }
 
   removeGraphqlClientJwt() {
-    this.parkaGraphqlClient.update((val) {
-      this.parkaGraphqlClient = ParkaGraphqlClient().obs;
+    parkaGraphqlClient.update((val) {
+      this.parkaGraphqlClient = null.obs;
+      this.parkaGraphqlClient = new ParkaGraphqlClient().obs;
     });
   }
 }

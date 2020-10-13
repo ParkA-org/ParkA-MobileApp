@@ -19,7 +19,7 @@ class UserController extends GetxController {
   }
 
   logout() async {
-    user.update((user) async {
+    user.update((user) {
       this.user = null.obs;
       Get.find<GraphqlClientController>().removeGraphqlClientJwt();
       print("Success");

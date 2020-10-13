@@ -130,7 +130,7 @@ class PrivateDrawer extends StatelessWidget {
                         itemStyle: kParkaInputDefaultStyleBlue,
                         onTapHandler: () {
                           Get.find<UserController>().logout();
-                          Get.toNamed(LoginScreen.routeName);
+                          Get.offAllNamed(LoginScreen.routeName);
                         },
                       ),
                     ),

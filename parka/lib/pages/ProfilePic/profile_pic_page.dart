@@ -1,14 +1,13 @@
 import 'dart:io';
 import 'package:ParkA/components/Buttons/transparent_button.dart';
 import 'package:ParkA/components/Headers/parka_header.dart';
+import 'package:ParkA/components/Utils/functions/pick_image.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/ID/ID_page.dart';
-import 'package:ParkA/pages/ProfilePic/utils/utils.dart';
 import 'package:ParkA/use-cases/user/dtos/user_registration_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:image_picker/image_picker.dart';
 
 // ignore: must_be_immutable
 class ProfilePicPage extends StatefulWidget {
@@ -27,21 +26,21 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    final picker = ImagePicker();
 
     UserRegistrationForm userRegistrationForm =
         ModalRoute.of(context).settings.arguments;
-    Future getImage() async {
-      final pickedFile = await picker.getImage(source: ImageSource.gallery);
-      this._path = pickedFile.path;
+
+    Future setImage() async {
+      this._path = await getImageFunction();
       setState(() {
-        _image = File(pickedFile.path);
+        this._image = File(this._path);
       });
     }
 
     Future nextStep() async {
       print(this._path);
-      userRegistrationForm.createUserDto.profilePicture = '';
+      userRegistrationForm.createUserDto.profilePicture = this._path;
+
       Navigator.pushNamed(
         context,
         IDPage.routeName,
@@ -82,7 +81,7 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
                 flex: 3,
                 child: Container(
                   child: GestureDetector(
-                    onTap: () => getImage(),
+                    onTap: () => setImage(),
                     child: _image != null
                         ? ClipOval(child: Image.file(_image))
                         : SvgPicture.asset(
