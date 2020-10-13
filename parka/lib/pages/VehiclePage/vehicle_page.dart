@@ -102,6 +102,8 @@ class __VehiclePageState extends State<VehiclePage> {
                   ? ListView(
                       children: [
                         VehicleTile(),
+                        VehicleTile(),
+                        VehicleTile(),
                       ],
                     )
                   : Padding(
@@ -149,7 +151,7 @@ class VehicleTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              height: 220,
+              height: 200,
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: NetworkImage(
@@ -195,22 +197,64 @@ class VehicleTile extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                      child: Container(
-                          alignment: Alignment.bottomLeft,
-                          height: 40,
-                          child: Text('Modelo 3',
-                              style: TextStyle(
-                                  color: Color(0xFF077187),
-                                  fontFamily: "Montserrat",
-                                  fontSize: 30))))
+                    child: Container(
+                      alignment: Alignment.bottomLeft,
+                      height: 40,
+                      child: Text(
+                        'Modelo 3',
+                        style: TextStyle(
+                            color: Color(0xFF077187),
+                            fontFamily: "Montserrat",
+                            fontSize: 26),
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
             Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: Row(
-                  children: [],
-                ))
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.bottomLeft,
+                      height: 30,
+                      child: Text(
+                        'A1758967',
+                        style: TextStyle(
+                            color: Color(0xFF077187),
+                            fontFamily: "Montserrat",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 28),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 30.0),
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.bottomLeft,
+                      height: 30,
+                      child: Text(
+                        '2018',
+                        style: TextStyle(
+                            color: Color(0xFF077187),
+                            fontFamily: "Montserrat",
+                            fontSize: 26),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0, left: 20, right: 20),
+              child: Divider(
+                color: Color(0xFFA9A5A5),
+                thickness: 1.6,
+                endIndent: 0,
+              ),
+            ),
           ],
         ),
       ),
