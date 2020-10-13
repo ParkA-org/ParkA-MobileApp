@@ -174,7 +174,8 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                                     });
                                   },
                                   child: ParkaEditInput(
-                                    value: "Imagen principal",
+                                    value:
+                                        this.mainPicture ?? "Imagen principal",
                                     isImagePicker: true,
                                   ),
                                 ),
