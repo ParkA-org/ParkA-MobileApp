@@ -3,15 +3,15 @@ import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import '../../components/Utils/parkaIcons.dart';
 
-class VehicleListScreen extends StatefulWidget {
+class VehiclePage extends StatefulWidget {
   static const String routeName = "/user-vehicles";
 
   @override
-  __VehicleListScreenState createState() =>
-      __VehicleListScreenState();
+  __VehiclePageState createState() =>
+      __VehiclePageState();
 }
 
-class __VehicleListScreenState extends State<VehicleListScreen> {
+class __VehiclePageState extends State<VehiclePage> {
   // final graphqlClient = Get.find<GraphqlClientController>();
   bool vehiclesLoaded;
   List userVehicles;
@@ -75,7 +75,7 @@ class __VehicleListScreenState extends State<VehicleListScreen> {
               flex: 2,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32.0),
-                child: this.paymentsLoaded ? ListView() : Container(),
+                child: this.vehiclesLoaded ? ListView() : Container(),
               ),
             )
           ],
