@@ -2,6 +2,7 @@ import 'package:ParkA/controllers/bindings/graphql_biding.dart';
 import 'package:ParkA/controllers/bindings/user_binding.dart';
 import 'package:ParkA/pages/ConfirmAccountPage/confirm_account_page.dart';
 import 'package:ParkA/pages/EditProfilePage/edit_profile_page.dart';
+import 'package:ParkA/pages/EditUserProfilePage/edit_user_profile_page.dart';
 import 'package:ParkA/pages/FilterPage/filter_page.dart';
 import 'package:ParkA/pages/ID/ID_page.dart';
 import 'package:ParkA/pages/ForgotPassword/forgot_password_screen.dart';
@@ -88,6 +89,11 @@ List<GetPage> getRoutePages = [
   GetPage(
     name: UpdateUserPasswordPage.routeName,
     page: () => UpdateUserPasswordPage(),
+    bindings: [GraphqlClientBiding()],
+  ),
+  GetPage(
+    name: EditUserProfileInformationPage.routeName,
+    page: () => EditUserProfileInformationPage(),
     bindings: [GraphqlClientBiding()],
   ),
 ];

@@ -18,6 +18,21 @@ class UserController extends GetxController {
     return false;
   }
 
+  Future updateUser(String name, String lastName) async {
+    User updatedUser = await UserUseCases.updateUser(
+      name: name,
+      lastName: lastName,
+    );
+
+    if (updatedUser != null) {
+      user.update((user) async {
+        this.user = updatedUser.obs;
+      });
+      return true;
+    }
+    return false;
+  }
+
   logout() async {
     user.update((user) {
       this.user = null.obs;

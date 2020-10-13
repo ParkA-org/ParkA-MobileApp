@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ParkA/controllers/graphql_controller.dart';
+import 'package:ParkA/data_models/information/information_data_model.dart';
 import 'package:ParkA/data_models/user/user_data_model.dart';
 import 'package:ParkA/use-cases/user/dtos/user_registration_dto.dart';
 import 'package:flutter/cupertino.dart';
@@ -375,6 +376,180 @@ class UserUseCases {
 
     print(updateUserPasswordResult.data);
     if (updateUserPasswordResult.data != null) {
+      return true;
+    }
+
+    return false;
+  }
+
+  static Future<User> updateUser({
+    String name,
+    String lastName,
+  }) async {
+    final graphqlClient = Get.find<GraphqlClientController>();
+
+    String updateUserMutation = r'''
+     mutation($data:UpdateUserInput!){
+      updateUser(updateUserInput:$data){
+        name
+        lastName
+        email
+        profilePicture
+        confirmed
+        origin
+      }
+    }''';
+
+    final updateUserInput = {
+      "data": {
+        "origin": "mobile",
+      }
+    };
+
+    if (name != null) {
+      updateUserInput["data"]["name"] = name;
+    }
+
+    if (lastName != null) {
+      updateUserInput["data"]["lastName"] = lastName;
+    }
+
+    MutationOptions mutationOptions = MutationOptions(
+      documentNode: gql(updateUserMutation),
+      variables: updateUserInput,
+    );
+
+    QueryResult updateUserResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .mutate(mutationOptions);
+
+    if (updateUserResult.data != null) {
+      final userUpdatedData = updateUserResult.data['updateUser'];
+      print(userUpdatedData);
+      return User(
+        name: userUpdatedData["name"],
+        lastName: userUpdatedData['lastName'],
+        email: userUpdatedData['email'],
+        profilePicture: userUpdatedData["profilePicture"],
+      );
+    }
+
+    return null;
+  }
+
+  static Future<Information> getUserInformation() async {
+    final graphqlClient = Get.find<GraphqlClientController>();
+
+    String getUserInformationQuery = r"""
+      query{
+        getUserInformationById{
+          id
+          documentNumber
+          telephoneNumber
+          birthDate
+          placeOfBirth{
+            name
+          }
+          nationality{
+            name
+          }
+        }
+      }
+      """;
+
+    QueryOptions queryOptions =
+        QueryOptions(documentNode: gql(getUserInformationQuery));
+
+    QueryResult queryResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .query(queryOptions);
+
+    print(queryResult.data);
+    if (queryResult.data != null) {
+      final userInformationData = queryResult.data["getUserInformationById"];
+
+      return Information(
+        id: userInformationData["id"],
+        document: userInformationData["documentNumber"],
+        telephoneNumber: userInformationData["telephoneNumber"],
+        dateBirth: userInformationData["birthDate"],
+        placeOfBirth: userInformationData["placeOfBirth"]["name"],
+        nationality: userInformationData["nationality"]["name"],
+      );
+    }
+
+    return null;
+  }
+
+  static Future<bool> updateUserInformation(
+    String documentNumber,
+    String birthDate,
+    String placeOfBirth,
+    String nationality,
+  ) async {
+    final graphqlClient = Get.find<GraphqlClientController>();
+
+    final String updateUserInformationMutation = r"""
+    mutation($data:updateUserInformationInput!){
+      updateUserInformation(updateUserInformationInput:$data){
+        documentNumber
+        telephoneNumber
+        birthDate
+        placeOfBirth{
+          name
+        }
+        nationality{
+          name
+        }
+      }
+    }
+    """;
+
+    final updateUserInformationInput = {
+      "data": {
+        "paymentInformation": "1f6273ac-a3f0-432c-8876-8ae8881668d0",
+      }
+    };
+
+    if (documentNumber != null) {
+      updateUserInformationInput["data"]['documentNumber'] = documentNumber;
+    }
+
+    if (birthDate != null) {
+      updateUserInformationInput["data"]['birthDate'] = birthDate;
+    }
+
+    if (placeOfBirth != null) {
+      updateUserInformationInput["data"]['placeOfBirth'] = placeOfBirth;
+    }
+
+    if (nationality != null) {
+      updateUserInformationInput["data"]['nationality'] = nationality;
+    }
+
+    MutationOptions mutationOptions = MutationOptions(
+      documentNode: gql(updateUserInformationMutation),
+      variables: updateUserInformationInput,
+    );
+
+    QueryResult updateUserInformationResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .mutate(mutationOptions);
+
+    if (updateUserInformationResult.data != null) {
+      final updateUserInformationData =
+          updateUserInformationResult.data['updateUserInformation'];
+      print(updateUserInformationData);
+
+      Information(
+        id: updateUserInformationData["id"],
+        document: updateUserInformationData["documentNumber"],
+        telephoneNumber: updateUserInformationData["telephoneNumber"],
+        dateBirth: updateUserInformationData["birthDate"],
+        placeOfBirth: updateUserInformationData["placeOfBirth"]["name"],
+        nationality: updateUserInformationData["nationality"]["name"],
+      );
+
       return true;
     }
 
