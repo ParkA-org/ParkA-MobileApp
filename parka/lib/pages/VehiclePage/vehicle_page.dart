@@ -34,10 +34,11 @@ class __VehiclePageState extends State<VehiclePage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
+        elevation: 10.0,
         backgroundColor: ParkaColors.parkaGreen,
         child: Icon(
           Icons.add,
-          size: 10,
+          size: 40,
         ),
         // TO IMPLEMENT CREATE MY VEHICLE
         onPressed: () {},
@@ -67,19 +68,24 @@ class __VehiclePageState extends State<VehiclePage> {
                     ]),
                 alignment: Alignment.centerLeft,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Icon(
                       ParkaIcons.parkaCar,
                       color: Colors.white,
-                      size: 150.0,
+                      size: 145.0,
                     ),
-                    Text(
-                      'Tus Vehiculos',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 45,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Montserrat"),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30.0),
+                      child: Text(
+                        'Tus Vehiculos',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 45,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Montserrat"),
+                      ),
                     ),
                   ],
                 ),
