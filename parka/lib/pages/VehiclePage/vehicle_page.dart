@@ -99,7 +99,11 @@ class __VehiclePageState extends State<VehiclePage> {
             Expanded(
               flex: 2,
               child: this.vehiclesLoaded
-                  ? ListView( children: [Container(child: Column(children: [Image.network('https://www.diariomotor.com/imagenes/picscache/1920x1600c/tesla-model-s-p100d_1920x1600c.jpg'), Text('text')],),),],)
+                  ? ListView(
+                      children: [
+                        VehicleTile(),
+                      ],
+                    )
                   : Padding(
                       padding: const EdgeInsets.symmetric(vertical: 100.0),
                       child: Column(
@@ -124,6 +128,65 @@ class __VehiclePageState extends State<VehiclePage> {
                       ),
                     ),
             )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class VehicleTile extends StatelessWidget {
+  const VehicleTile({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 14.0),
+      child: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              height: 220,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(
+                          'https://www.diariomotor.com/imagenes/picscache/1920x1600c/tesla-model-s-p100d_1920x1600c.jpg'),
+                      fit: BoxFit.fill),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(15.0),
+                    bottomRight: Radius.circular(15.0),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(3.0, 14.0),
+                      color: Colors.black38,
+                      blurRadius: 5.0,
+                    ),
+                  ]),
+              child: Container(),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: Row(
+                children: [
+                  Image.network(
+                      'https://parka-api-bucket-aws.s3.amazonaws.com/pngwave_0e69969129.png',
+                      height: 50.0,
+                      width: 50.0),
+                  Text(
+                    'Tesla',
+                    style: TextStyle(
+                        color: Color(0xFF077187),
+                        fontFamily: "Montserrat",
+                        fontWeight: FontWeight.bold,
+                        fontSize: 50),
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),
