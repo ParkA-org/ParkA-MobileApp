@@ -172,21 +172,45 @@ class VehicleTile extends StatelessWidget {
               padding: const EdgeInsets.only(top: 16.0),
               child: Row(
                 children: [
-                  Image.network(
-                      'https://parka-api-bucket-aws.s3.amazonaws.com/pngwave_0e69969129.png',
-                      height: 50.0,
-                      width: 50.0),
-                  Text(
-                    'Tesla',
-                    style: TextStyle(
-                        color: Color(0xFF077187),
-                        fontFamily: "Montserrat",
-                        fontWeight: FontWeight.bold,
-                        fontSize: 50),
-                  )
+                  Container(
+                    height: 50,
+                    child: Image.network(
+                        'https://parka-api-bucket-aws.s3.amazonaws.com/pngwave_0e69969129.png',
+                        height: 40.0,
+                        width: 40.0),
+                  ),
+                  SizedBox(width: 12),
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.bottomLeft,
+                      height: 50,
+                      child: Text(
+                        'Tesla',
+                        style: TextStyle(
+                            color: Color(0xFF077187),
+                            fontFamily: "Montserrat",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 40),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      child: Container(
+                          alignment: Alignment.bottomLeft,
+                          height: 40,
+                          child: Text('Modelo 3',
+                              style: TextStyle(
+                                  color: Color(0xFF077187),
+                                  fontFamily: "Montserrat",
+                                  fontSize: 30))))
                 ],
               ),
             ),
+            Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: Row(
+                  children: [],
+                ))
           ],
         ),
       ),
