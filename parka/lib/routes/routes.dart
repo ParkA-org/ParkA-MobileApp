@@ -1,3 +1,4 @@
+import 'package:ParkA/pages/EditProfilePage/edit_profile_page.dart';
 import 'package:ParkA/pages/FilterPage/filter_page.dart';
 import 'package:ParkA/pages/ID/ID_page.dart';
 import 'package:ParkA/pages/ForgotPassword/forgot_password_screen.dart';
@@ -9,6 +10,7 @@ import 'package:ParkA/pages/ProfilePic/profile_pic_page.dart';
 import 'package:ParkA/pages/PaymentInfo/payment_info.dart';
 import 'package:ParkA/pages/Register/register_page.dart';
 import 'package:ParkA/pages/GraphQlTest/graphql_test_page.dart';
+import 'package:ParkA/pages/VehiclePage/vehicle_page.dart';
 import 'package:flutter/material.dart';
 
 Map<String, WidgetBuilder> routes = {
@@ -24,4 +26,6 @@ Map<String, WidgetBuilder> routes = {
   GraphqlTestScreen.routeName: (BuildContext context) => GraphqlTestScreen(),
   FilterPage.routeName: (BuildContext context) => FilterPage(),
   ProfileScreen.routeName: (BuildContext context) => ProfileScreen(),
+  EditProfilePage.routeName: (BuildContext context) => EditProfilePage(),
+  VehiclePage.routeName : (BuildContext context) => VehiclePage(),
 };

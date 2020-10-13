@@ -23,10 +23,19 @@ class ParkaCircleAvatarWidget extends StatelessWidget {
           height: circleAvatarSize,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(3.0, 10.0),
+                color: Colors.black38,
+                blurRadius: 5.0,
+              ),
+            ],
             image: DecorationImage(
               fit: BoxFit.fill,
               image: NetworkImage(
+
                 'https://www.jamsadr.com/images/neutrals/person-donald-900x1080.jpg',
+
               ),
             ),
           ),
