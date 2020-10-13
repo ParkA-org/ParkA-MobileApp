@@ -1,4 +1,6 @@
+import 'package:ParkA/components/Buttons/transparent_button.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
+import 'package:ParkA/components/Utils/styles/text.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import '../../components/Utils/parkaIcons.dart';
@@ -66,11 +68,19 @@ class __VehiclePageState extends State<VehiclePage> {
                         blurRadius: 5.0,
                       ),
                     ]),
-                alignment: Alignment.centerLeft,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    TransparentButton(
+                      label: "Atras",
+                      buttonTextStyle: kParkaInputDefaultSyle,
+                      color: Colors.white,
+                      leadingIconData: Icons.keyboard_arrow_left,
+                      onTapHandler: () {
+                        Navigator.pop(context);
+                      },
+                    ),
                     Icon(
                       ParkaIcons.parkaCar,
                       color: Colors.white,
