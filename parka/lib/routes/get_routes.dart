@@ -19,7 +19,7 @@ import 'package:ParkA/pages/UserPaymentMethodPage/user_registered_payment_method
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
-List<GetPage> get_pages = [
+List<GetPage> getRoutePages = [
   GetPage(
     name: LoginScreen.routeName,
     page: () => LoginScreen(),

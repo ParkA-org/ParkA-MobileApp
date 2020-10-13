@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      getPages: get_pages,
+      getPages: getRoutePages,
       initialBinding: GraphqlClientBiding(),
       initialRoute: MapPage.routeName,
     );
