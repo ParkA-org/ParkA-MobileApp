@@ -33,7 +33,9 @@ class ParkaCircleAvatarWidget extends StatelessWidget {
             image: DecorationImage(
               fit: BoxFit.fill,
               image: NetworkImage(
-                'https://mangathrill.com/wp-content/uploads/2020/02/5432111-1.jpg',
+
+                'https://www.jamsadr.com/images/neutrals/person-donald-900x1080.jpg',
+
               ),
             ),
           ),

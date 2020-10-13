@@ -27,6 +27,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return ListView(
       children: [
         ParkaServiceHistoryWidget(),
+        ParkaServiceHistoryWidget(),
+        ParkaServiceHistoryWidget(),
+        ParkaServiceHistoryWidget(),
+        ParkaServiceHistoryWidget(),
+        ParkaServiceHistoryWidget(),
       ],
     );
   }
