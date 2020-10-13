@@ -20,7 +20,7 @@ class __VehiclePageState extends State<VehiclePage> {
   Future getAllUserVehicle() async {
     // this.userVehicles = await VehicleUseCases.getAllUserVehicles();
     setState(() {
-      this.vehiclesLoaded = false;
+      this.vehiclesLoaded = true;
     });
   }
 
@@ -98,21 +98,31 @@ class __VehiclePageState extends State<VehiclePage> {
             ),
             Expanded(
               flex: 2,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 32.0),
-                child: this.vehiclesLoaded ? ListView() : Padding(
-                  padding: const EdgeInsets.symmetric(vertical:100.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset("resources/images/QuestionCar.svg", width: 160.0,), Padding(
-                        padding: const EdgeInsets.only(top:20.0),
-                        child: Text('No tienes vehiculos registrados', style: TextStyle(color: ParkaColors.parkaGreen, fontFamily: "Montserrat", fontSize: 35), textAlign: TextAlign.center,),
+              child: this.vehiclesLoaded
+                  ? ListView()
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 100.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            "resources/images/QuestionCar.svg",
+                            width: 160.0,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20.0),
+                            child: Text(
+                              'No tienes vehiculos registrados',
+                              style: TextStyle(
+                                  color: ParkaColors.parkaGreen,
+                                  fontFamily: "Montserrat",
+                                  fontSize: 35),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-              ),
+                    ),
             )
           ],
         ),
