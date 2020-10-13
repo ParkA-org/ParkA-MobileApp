@@ -17,6 +17,7 @@ import 'package:ParkA/pages/GraphQlTest/graphql_test_page.dart';
 import 'package:ParkA/pages/ResetPasswordPage/reset_password_page.dart';
 import 'package:ParkA/pages/UpdatePasswordScreen/update_user_password_screen.dart';
 import 'package:ParkA/pages/UserPaymentMethodPage/user_registered_payment_methods_screen.dart';
+import 'package:ParkA/pages/VehiclePage/vehicle_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
@@ -94,6 +95,11 @@ List<GetPage> getRoutePages = [
   GetPage(
     name: EditUserProfileInformationPage.routeName,
     page: () => EditUserProfileInformationPage(),
+    bindings: [GraphqlClientBiding()],
+  ),
+  GetPage(
+    name: VehiclePage.routeName,
+    page: () => VehiclePage(),
     bindings: [GraphqlClientBiding()],
   ),
 ];

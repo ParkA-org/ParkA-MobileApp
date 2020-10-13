@@ -1,25 +1,49 @@
 class Vehicle {
-  final String vehicleId;
-  final String modelId;
+  final String id;
+  final String model;
   final String licensePlate;
   final String detail;
-  final String colorExteriorId;
+  final String color;
   final String mainPicture;
-  final List<String> pictures;
+  final List pictures;
   final int year;
   final String alias;
-  final vehicleTypeId;
+  final bodyStyle;
+  final bool verified;
 
   Vehicle({
-    this.vehicleId,
-    this.modelId,
+    this.id,
+    this.model,
     this.licensePlate,
     this.detail,
-    this.colorExteriorId,
+    this.color,
     this.mainPicture,
     this.pictures,
     this.year,
     this.alias,
-    this.vehicleTypeId,
+    this.bodyStyle,
+    this.verified,
   });
+
+  static vehiclesFromJason(List vehiclesData) {
+    List<Vehicle> ret = new List();
+
+    vehiclesData.forEach((vehicle) {
+      ret.add(Vehicle(
+        id: vehicle["id"],
+        licensePlate: vehicle["licensePlate"],
+        model: vehicle["model"]["name"],
+        verified: vehicle["verified"],
+        color: vehicle["colorExterior"]["name"],
+        mainPicture: vehicle["mainPicture"],
+        pictures: vehicle["pictures"],
+        year: vehicle["year"],
+        alias: vehicle["alias"],
+        bodyStyle: vehicle["bodyStyle"]["name"],
+        detail: vehicle["detail"],
+      ));
+    });
+
+    return ret;
+  }
 }

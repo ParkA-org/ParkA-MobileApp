@@ -6,6 +6,7 @@ import 'package:ParkA/pages/EditUserProfilePage/edit_user_profile_page.dart';
 import 'package:ParkA/pages/ProfilePage/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/pages/UpdatePasswordScreen/update_user_password_screen.dart';
 import 'package:ParkA/pages/UserPaymentMethodPage/user_registered_payment_methods_screen.dart';
+import 'package:ParkA/pages/VehiclePage/vehicle_page.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
@@ -142,6 +143,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           color: Colors.white,
                           label: "Vehiculos",
                           iconData: Icons.directions_car,
+                          onTapHandler: () {
+                            Get.toNamed(VehiclePage.routeName);
+                          },
                         ),
                       ),
                       Expanded(
