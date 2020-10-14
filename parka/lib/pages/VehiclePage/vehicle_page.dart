@@ -19,7 +19,7 @@ class VehiclePage extends StatefulWidget {
 
 class __VehiclePageState extends State<VehiclePage> {
   bool vehiclesLoaded;
-  List<Vehicle> userVehicles;
+  List<Vehicle> userVehicles = [];
 
   Future getAllUserVehicle() async {
     this.userVehicles = await VehicleUseCases.getAllUserVehicles();
@@ -114,9 +114,12 @@ class __VehiclePageState extends State<VehiclePage> {
             ),
             Expanded(
               flex: 2,
-              child: this.vehiclesLoaded
-                  ? ListView(
-                      children: vehicleListBuilder(),
+              child: this.vehiclesLoaded && this.userVehicles.length != 0
+                  ? RefreshIndicator(
+                      onRefresh: this.getAllUserVehicle,
+                      child: ListView(
+                        children: vehicleListBuilder(),
+                      ),
                     )
                   : VehicleListPlaceHolder(),
             )

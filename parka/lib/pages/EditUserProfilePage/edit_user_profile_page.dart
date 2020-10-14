@@ -1,9 +1,14 @@
 import 'package:ParkA/components/Headers/parka_header.dart';
+import 'package:ParkA/components/Inputs/parka_dropdown.dart';
 import 'package:ParkA/components/Utils/styles/inputs.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/controllers/user_controller.dart';
+import 'package:ParkA/data_models/country/country_data_model.dart';
 import 'package:ParkA/data_models/information/information_data_model.dart';
+import 'package:ParkA/data_models/nationality/nationality_data_model.dart';
+import 'package:ParkA/use-cases/country/country_use_cases.dart';
+import 'package:ParkA/use-cases/nationality/nationality_use_cases.dart';
 import 'package:ParkA/use-cases/user/user_use_cases.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,13 +38,28 @@ class _EditUserProfileInformationPageState
   bool userInformationLoading;
   Information userInformation;
 
-  List nationalities;
-  List countries;
+  List<Nationality> nationalities;
+  List<Country> countries;
+
+  String selectedNationality;
+  String selectedCountry;
+  List<String> nationalityOptions;
+  List<String> countriesOptions;
 
   Future getViewData() async {
     this.userInformationLoading = true;
     this.userInformation = await UserUseCases.getUserInformation();
+    this.nationalities = await NationalityUseCases.getAllNationalities();
+    this.countries = await CountryUseCases.getAllCountries();
+
+    this.nationalityOptions =
+        new List.from(this.nationalities.map((e) => e.name));
+    this.countriesOptions = new List.from(this.countries.map((e) => e.name));
+
+    this.countries = await CountryUseCases.getAllCountries();
     setState(() {
+      this.selectedCountry = this.userInformation.placeOfBirth;
+      this.selectedNationality = this.userInformation.nationality;
       this.userInformationLoading = false;
     });
   }
@@ -77,6 +97,8 @@ class _EditUserProfileInformationPageState
 
   @override
   Widget build(BuildContext context) {
+    Size currentScreen = MediaQuery.of(context).size;
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: ParkaColors.parkaGreen,
@@ -199,7 +221,7 @@ class _EditUserProfileInformationPageState
                                       .dateBirth
                                       .split("T")[0]
                                       .split("-")
-                                      .join(" "),
+                                      .join("/"),
                                   onChangedHandler: (String value) {
                                     setState(
                                       () {
@@ -208,21 +230,63 @@ class _EditUserProfileInformationPageState
                                     );
                                   },
                                 ),
-                                ParkaEditInput(
-                                  value: this.userInformation.placeOfBirth,
-                                  onChangedHandler: (String value) {
-                                    setState(() {
-                                      this.lastName = value;
-                                    });
-                                  },
+                                // ParkaEditInput(
+                                //   value: this.userInformation.placeOfBirth,
+                                //   onChangedHandler: (String value) {
+                                //     setState(() {
+                                //       this.lastName = value;
+                                //     });
+                                //   },
+                                // ),
+                                // ParkaEditInput(
+                                //   value: this.userInformation.nationality,
+                                //   onChangedHandler: (String value) {
+                                //     setState(() {
+                                //       this.lastName = value;
+                                //     });
+                                //   },
+                                // ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ParkADropdown(
+                                    text: "Nacionalidad",
+                                    textSize: 16.0,
+                                    selectedItem: this.selectedNationality,
+                                    options: this.nationalityOptions,
+                                    height: currentScreen.height * 0.03,
+                                    width: currentScreen.width * 0.8,
+                                    onChanged: (value) {
+                                      setState(
+                                        () {
+                                          this.selectedNationality =
+                                              this.nationalities[value].name;
+                                          this.nationality =
+                                              this.nationalities[value].id;
+                                        },
+                                      );
+                                    },
+                                  ),
                                 ),
-                                ParkaEditInput(
-                                  value: this.userInformation.nationality,
-                                  onChangedHandler: (String value) {
-                                    setState(() {
-                                      this.lastName = value;
-                                    });
-                                  },
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ParkADropdown(
+                                    text: "Pais",
+                                    textSize: 16.0,
+                                    selectedItem: this.selectedCountry,
+                                    options: this.countriesOptions,
+                                    height: currentScreen.height * 0.03,
+                                    width: currentScreen.width * 0.8,
+                                    onChanged: (value) {
+                                      setState(
+                                        () {
+                                          this.selectedCountry =
+                                              this.countries[value].name;
+                                          this.placeOfBirth =
+                                              this.countries[value].id;
+                                        },
+                                      );
+                                    },
+                                  ),
                                 ),
                               ],
                             ),

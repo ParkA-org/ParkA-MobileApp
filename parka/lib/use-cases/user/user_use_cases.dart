@@ -505,6 +505,9 @@ class UserUseCases {
     }
     """;
 
+    print(nationality);
+    print(placeOfBirth);
+
     final updateUserInformationInput = {
       "data": {
         "paymentInformation": "1f6273ac-a3f0-432c-8876-8ae8881668d0",
@@ -549,6 +552,8 @@ class UserUseCases {
         placeOfBirth: updateUserInformationData["placeOfBirth"]["name"],
         nationality: updateUserInformationData["nationality"]["name"],
       );
+
+      print("SENT");
 
       return true;
     }
