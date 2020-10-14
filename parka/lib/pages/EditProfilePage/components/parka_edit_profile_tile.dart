@@ -4,20 +4,20 @@ class ParkaEditProfileTile extends StatelessWidget {
   final Color color;
   final String label;
   final IconData iconData;
+  final Function onTapHandler;
 
   ParkaEditProfileTile({
     Key key,
     @required this.color,
     @required this.label,
     @required this.iconData,
+    this.onTapHandler,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        print("tapped");
-      },
+      onTap: this.onTapHandler,
       child: Container(
         child: Row(
           children: [

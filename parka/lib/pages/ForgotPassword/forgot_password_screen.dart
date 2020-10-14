@@ -6,8 +6,11 @@ import 'package:ParkA/components/Utils/styles/inputs.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/ForgotPassword/components/email_sent_confirmation_widget.dart';
+import 'package:ParkA/pages/ResetPasswordPage/reset_password_page.dart';
+import 'package:ParkA/use-cases/user/user_use_cases.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import '../../components/Alerts/parka_base_alert_widget.dart';
 
@@ -19,7 +22,29 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
-  String email = "";
+  String email;
+
+  void sendButtonHandler() async {
+    final bool resetPasswordResult =
+        await UserUseCases.requestResetPassword(email: this.email);
+
+    if (resetPasswordResult) {
+      Get.snackbar(
+        "",
+        "Correo enviado exitosamente",
+        backgroundColor: ParkaColors.parkaGreen,
+        colorText: Colors.white,
+      );
+      return Get.toNamed(ResetPasswordPage.routeName);
+    }
+
+    Get.snackbar(
+      "Error",
+      "Correo invalido",
+      backgroundColor: ParkaColors.parkaGoogleRed,
+      colorText: Colors.white,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,12 +108,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         hasShadow: true,
                         width: 150.0,
                         onTapHandler: () {
-                          return buildShowDialog(
-                            context,
-                            BaseAlertWidget(
-                              child: EmailSentConfirmationWidget(),
-                            ),
-                          );
+                          // return buildShowDialog(
+                          //   context,
+                          //   BaseAlertWidget(
+                          //     child: EmailSentConfirmationWidget(),
+                          //   ),
+                          // );
+                          sendButtonHandler();
                         },
                       ),
                       TransparentButton(

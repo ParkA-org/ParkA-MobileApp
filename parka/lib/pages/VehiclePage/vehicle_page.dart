@@ -1,5 +1,10 @@
 import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
+import 'package:ParkA/data_models/vehicle/vehicle_data_model.dart';
+import 'package:ParkA/pages/CreateVehiclePage/create_vehicle_page.dart';
+import 'package:ParkA/pages/VehiclePage/components/user_vehicle_placeholder.dart';
+import 'package:ParkA/pages/VehiclePage/components/user_vehicle_tile.dart';
+import 'package:ParkA/use-cases/vehicle/vehicle_use_cases.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -13,12 +18,12 @@ class VehiclePage extends StatefulWidget {
 }
 
 class __VehiclePageState extends State<VehiclePage> {
-  // final graphqlClient = Get.find<GraphqlClientController>();
   bool vehiclesLoaded;
-  List userVehicles;
+  List<Vehicle> userVehicles = [];
 
   Future getAllUserVehicle() async {
-    // this.userVehicles = await VehicleUseCases.getAllUserVehicles();
+    this.userVehicles = await VehicleUseCases.getAllUserVehicles();
+    print(this.userVehicles.length);
     setState(() {
       this.vehiclesLoaded = true;
     });
@@ -29,6 +34,18 @@ class __VehiclePageState extends State<VehiclePage> {
     super.initState();
     this.vehiclesLoaded = false;
     this.getAllUserVehicle();
+  }
+
+  List<Widget> vehicleListBuilder() {
+    List<Widget> ret = new List();
+
+    this.userVehicles.forEach((element) {
+      ret.add(VehicleTile(
+        vehicle: element,
+      ));
+    });
+
+    return ret;
   }
 
   @override
@@ -44,10 +61,9 @@ class __VehiclePageState extends State<VehiclePage> {
         ),
         highlightElevation: 20,
         // TO IMPLEMENT CREATE MY VEHICLE
-        onPressed: () {},
-        // onPressed: () {
-        //   Get.toNamed(PaymentInfoScreen.routeName);
-        // },
+        onPressed: () {
+          Get.toNamed(CreateVehiclePage.routeName);
+        },
       ),
       body: SafeArea(
         child: Column(
@@ -79,7 +95,7 @@ class __VehiclePageState extends State<VehiclePage> {
                     Icon(
                       ParkaIcons.parkaCar,
                       color: Colors.white,
-                      size: 145.0,
+                      size: 130.0,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 30.0),
@@ -98,163 +114,15 @@ class __VehiclePageState extends State<VehiclePage> {
             ),
             Expanded(
               flex: 2,
-              child: this.vehiclesLoaded
-                  ? ListView(
-                      children: [
-                        VehicleTile(),
-                        VehicleTile(),
-                        VehicleTile(),
-                      ],
+              child: this.vehiclesLoaded && this.userVehicles.length != 0
+                  ? RefreshIndicator(
+                      onRefresh: this.getAllUserVehicle,
+                      child: ListView(
+                        children: vehicleListBuilder(),
+                      ),
                     )
-                  : Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 100.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            "resources/images/QuestionCar.svg",
-                            width: 160.0,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20.0),
-                            child: Text(
-                              'No tienes vehiculos registrados',
-                              style: TextStyle(
-                                  color: ParkaColors.parkaGreen,
-                                  fontFamily: "Montserrat",
-                                  fontSize: 35),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                  : VehicleListPlaceHolder(),
             )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class VehicleTile extends StatelessWidget {
-  const VehicleTile({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 14.0),
-      child: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              height: 200,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          'https://www.diariomotor.com/imagenes/picscache/1920x1600c/tesla-model-s-p100d_1920x1600c.jpg'),
-                      fit: BoxFit.fill),
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(15.0),
-                    bottomRight: Radius.circular(15.0),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(3.0, 14.0),
-                      color: Colors.black38,
-                      blurRadius: 5.0,
-                    ),
-                  ]),
-              child: Container(),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: Row(
-                children: [
-                  Container(
-                    height: 50,
-                    child: Image.network(
-                        'https://parka-api-bucket-aws.s3.amazonaws.com/pngwave_0e69969129.png',
-                        height: 40.0,
-                        width: 40.0),
-                  ),
-                  SizedBox(width: 12),
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.bottomLeft,
-                      height: 50,
-                      child: Text(
-                        'Tesla',
-                        style: TextStyle(
-                            color: Color(0xFF077187),
-                            fontFamily: "Montserrat",
-                            fontWeight: FontWeight.bold,
-                            fontSize: 40),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.bottomLeft,
-                      height: 40,
-                      child: Text(
-                        'Modelo 3',
-                        style: TextStyle(
-                            color: Color(0xFF077187),
-                            fontFamily: "Montserrat",
-                            fontSize: 26),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.bottomLeft,
-                      height: 30,
-                      child: Text(
-                        'A1758967',
-                        style: TextStyle(
-                            color: Color(0xFF077187),
-                            fontFamily: "Montserrat",
-                            fontWeight: FontWeight.bold,
-                            fontSize: 28),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 30.0),
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.bottomLeft,
-                      height: 30,
-                      child: Text(
-                        '2018',
-                        style: TextStyle(
-                            color: Color(0xFF077187),
-                            fontFamily: "Montserrat",
-                            fontSize: 26),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0, left: 20, right: 20),
-              child: Divider(
-                color: Color(0xFFA9A5A5),
-                thickness: 1.6,
-                endIndent: 0,
-              ),
-            ),
           ],
         ),
       ),

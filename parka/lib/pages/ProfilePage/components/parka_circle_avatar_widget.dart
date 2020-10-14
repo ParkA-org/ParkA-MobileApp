@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 
+const parkaCircleAvatarWidgetDefaultBoxStyle = BoxDecoration(
+  shape: BoxShape.circle,
+  boxShadow: [
+    BoxShadow(
+      offset: Offset(3.0, 10.0),
+      color: Colors.black38,
+      blurRadius: 5.0,
+    ),
+  ],
+);
+
 class ParkaCircleAvatarWidget extends StatelessWidget {
   final double pictureSizeDivider;
+  final String imageUrl;
 
   const ParkaCircleAvatarWidget({
     Key key,
+    this.imageUrl,
     this.pictureSizeDivider = 1,
   }) : super(key: key);
 
@@ -21,24 +34,23 @@ class ParkaCircleAvatarWidget extends StatelessWidget {
         return Container(
           width: circleAvatarSize,
           height: circleAvatarSize,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                offset: Offset(3.0, 10.0),
-                color: Colors.black38,
-                blurRadius: 5.0,
-              ),
-            ],
-            image: DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(
-
-                'https://www.jamsadr.com/images/neutrals/person-donald-900x1080.jpg',
-
-              ),
-            ),
-          ),
+          child: this.imageUrl == null
+              ? Icon(
+                  Icons.account_circle,
+                  size: circleAvatarSize,
+                  color: Colors.white,
+                )
+              : Container(),
+          decoration: this.imageUrl == null
+              ? parkaCircleAvatarWidgetDefaultBoxStyle
+              : parkaCircleAvatarWidgetDefaultBoxStyle.copyWith(
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: NetworkImage(
+                      this.imageUrl,
+                    ),
+                  ),
+                ),
         );
       },
     );

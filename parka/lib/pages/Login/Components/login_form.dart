@@ -1,14 +1,13 @@
-import 'package:ParkA/components/Alerts/parka_base_alert_widget.dart';
 import 'package:ParkA/components/Inputs/parka_input.dart';
 import 'package:ParkA/components/Utils/curves_painter.dart';
-import 'package:ParkA/components/Utils/functions.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
-import 'package:ParkA/components/Utils/styles/text.dart';
+import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/pages/ForgotPassword/forgot_password_screen.dart';
-import 'package:ParkA/pages/Login/utils/utils.dart';
 import 'package:ParkA/pages/MapPage/maps_page.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
+import 'package:get/state_manager.dart';
+import 'package:get/utils.dart';
 import 'package:graphql/client.dart';
 
 class LoginForm extends StatefulWidget {
@@ -23,48 +22,33 @@ class _LoginFormState extends State<LoginForm> {
   QueryResult result;
 
   Future loginHandler() async {
-    if (this.user == null ||
-        this.user.length == 0 ||
-        this.password == null ||
-        this.password.length == 0) {
-      return buildShowDialog(
-        context,
-        BaseAlertWidget(
-          child: Container(
-            height: 120.0,
-            width: 120.0,
-            child: Center(
-              child: Text(
-                '${this.user == null || this.user.length == 0 ? 'Ingresa tu correo' : 'Ingresa tu password'}',
-                style: kParkaButtonTextStyle,
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-    result = await login(this.user, this.password);
+    bool checkEmail = GetUtils.isEmail(this.user);
+    bool checkPassword = GetUtils.isLengthGreaterOrEqual(this.password, 8);
 
-    if (result.data == null) {
-      return buildShowDialog(
-        context,
-        BaseAlertWidget(
-          child: Container(
-            width: 120.0,
-            height: 120.0,
-            child: Center(
-              child: AutoSizeText(
-                'Email o password incorrecto',
-                style: kParkaButtonTextStyle,
-                maxLines: 1,
-              ),
-            ),
-          ),
-        ),
+    if (!checkEmail || !checkPassword) {
+      Get.snackbar(
+        "Error",
+        "Formato credenciales incorrecto",
+        margin: EdgeInsets.all(8.0),
+        backgroundColor: ParkaColors.parkaGoogleRed,
       );
+      return;
     }
 
-    Navigator.pushNamed(context, MapPage.routeName);
+    bool loginCheck =
+        await Get.find<UserController>().loginUser(this.user, this.password);
+
+    if (!loginCheck) {
+      Get.snackbar(
+        "Error",
+        "Credenciales incorrectas",
+        margin: EdgeInsets.all(8.0),
+        backgroundColor: ParkaColors.parkaGoogleRed,
+      );
+      return;
+    }
+
+    Get.toNamed(MapPage.routeName);
   }
 
   @override
@@ -89,9 +73,9 @@ class _LoginFormState extends State<LoginForm> {
                 ParkAInput(
                   icon: 'WhiteProfileIcon.svg',
                   text: 'Correo / Usuario',
-                  onChanged: (user) {
+                  onChanged: (String user) {
                     setState(() {
-                      this.user = user;
+                      this.user = user.trim();
                     });
                   },
                 ),
@@ -103,9 +87,9 @@ class _LoginFormState extends State<LoginForm> {
                   text: 'Contraseña',
                   isPassword: true,
                   keyboardType: TextInputType.text,
-                  onChanged: (password) {
+                  onChanged: (String password) {
                     setState(() {
-                      this.password = password;
+                      this.password = password.trim();
                     });
                   },
                 ),

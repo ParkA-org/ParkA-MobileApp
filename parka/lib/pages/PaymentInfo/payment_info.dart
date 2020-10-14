@@ -5,7 +5,11 @@ import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/pages/MapPage/maps_page.dart';
 import 'package:ParkA/pages/PaymentInfo/Components/credit_card_complete_info_form.dart';
 import 'package:ParkA/pages/PaymentInfo/utils/createAccount.dart';
+import 'package:ParkA/pages/UserPaymentMethodPage/user_registered_payment_methods_screen.dart';
+import 'package:ParkA/use-cases/payment/payment_use_cases.dart';
+import 'package:ParkA/use-cases/user/dtos/user_registration_dto.dart';
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 
 class PaymentInfoScreen extends StatefulWidget {
   static String routeName = "/paymentInfoPage";
@@ -22,9 +26,10 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
   String creditCardNumber4 = "----";
   String creditCardMonth = "--";
   String creditCardYear = "--";
-  String creditCardCvv;
+  String creditCardCvv = "";
   Map formHandlers;
   Map<String, dynamic> createAccount;
+  CreatePaymentDto createPaymentDto = new CreatePaymentDto();
 
   @override
   void initState() {
@@ -77,32 +82,36 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
     };
   }
 
-  Future<void> sumbmitForm(bool _omit) async {
-    if (_omit) {
-      createAccount["paymentpage"]["digit"] = "0";
+  Future<void> sumbmitForm() async {
+    final expiration = new DateTime(2020, 8).toIso8601String();
+    print(expiration);
+
+    this.createPaymentDto.cardHolder = this.fullName;
+    this.createPaymentDto.digit = this.creditCardNumber1 +
+        this.creditCardNumber2 +
+        this.creditCardNumber3 +
+        this.creditCardNumber4;
+    this.createPaymentDto.cvv = this.creditCardCvv;
+    this.createPaymentDto.expirationDate = "2020-10-02T02:05:30.962Z";
+    this.createPaymentDto.card = "";
+    print("tapped");
+    final createPaymentResult =
+        await PaymentUseCases.createPayment(this.createPaymentDto);
+
+    if (createPaymentResult) {
+      print("created");
+      Navigator.pop(context);
     } else {
-      createAccount["paymentpage"]["digit"] = creditCardNumber1 +
-          creditCardNumber2 +
-          creditCardNumber3 +
-          creditCardNumber4;
-      createAccount["paymentpage"]["name"] = fullName;
-      createAccount["paymentpage"]["expirationdate"] =
-          "20" + creditCardYear + "-" + creditCardMonth + "-01";
+      Get.snackbar(
+        "Error",
+        "Se verifico un error",
+        backgroundColor: ParkaColors.parkaGoogleRed,
+      );
     }
-    await createUser(createAccount);
-
-    print("done");
-
-    Navigator.pushNamed(
-      context,
-      MapPage.routeName,
-      arguments: createAccount,
-    );
   }
 
   @override
   Widget build(BuildContext context) {
-    createAccount = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: SafeArea(
@@ -131,7 +140,7 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
                 ),
               ),
               Flexible(
-                flex: 2,
+                flex: 1,
                 child: Container(
                   decoration: BoxDecoration(
                     color: ParkaColors.parkaGreen,
@@ -148,22 +157,11 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
                     children: <Widget>[
                       Expanded(
                         child: TransparentButton(
-                          label: "Continuar",
+                          label: "Crear metodo de pago",
                           buttonTextStyle: kParkaButtonTextStyle,
                           color: Colors.white,
-                          trailingIconData: Icons.arrow_forward_ios,
                           onTapHandler: () async {
-                            sumbmitForm(false);
-                          },
-                        ),
-                      ),
-                      Expanded(
-                        child: TransparentButton(
-                          buttonTextStyle: kParkaButtonTextStyle,
-                          label: "Omitir",
-                          color: ParkaColors.parkaLightGreen,
-                          onTapHandler: () async {
-                            sumbmitForm(true);
+                            sumbmitForm();
                           },
                         ),
                       ),

@@ -1,9 +1,14 @@
 import 'package:ParkA/components/Buttons/main_fab.dart';
 import 'package:ParkA/components/Drawer/main_drawer.dart';
+import 'package:ParkA/components/Drawer/privateDrawer/private_drawer.dart';
+import 'package:ParkA/components/Drawer/publicDrawer/public_drawer.dart';
+import 'package:ParkA/controllers/graphql_controller.dart';
+import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/components/Modals/parking_detail.dart';
 import 'package:ParkA/pages/MapPage/Components/dummy_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
@@ -24,6 +29,9 @@ class _MapPageState extends State<MapPage> {
   CameraPosition initialCameraPosition;
   Set<Marker> test;
   BitmapDescriptor customIcon;
+
+  final UserController user = Get.find<UserController>();
+  final graphqlClient = Get.find<GraphqlClientController>();
 
   void toggleFloatingActionButton() {
     setState(() {
@@ -76,7 +84,7 @@ class _MapPageState extends State<MapPage> {
     BuildContext mapPageContext = context;
 
     return Scaffold(
-      drawer: MainDrawer(),
+      drawer: user.user?.value == null ? PublicDrawer() : PrivateDrawer(),
       floatingActionButton: Visibility(
         visible: _fabIsVisible,
         child: MainFAB(),
