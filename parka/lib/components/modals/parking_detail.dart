@@ -1,4 +1,4 @@
-import 'package:ParkA/components/Rating/star_rating.dart';
+import 'package:ParkA/components/rating/star_rating.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';

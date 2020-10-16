@@ -1,15 +1,16 @@
-import 'package:ParkA/components/MenuItem/parka_menu_item.dart';
+import 'package:ParkA/components/menu-item/parka_menu_item.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/pages/Login/login_screen.dart';
 import 'package:ParkA/pages/ProfilePage/components/profile_personal_information_widget.dart';
 import 'package:ParkA/pages/ProfilePage/profile_page.dart';
+import 'package:ParkA/pages/UserPaymentMethodPage/user_registered_payment_methods_screen.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PublicDrawer extends StatelessWidget {
-  PublicDrawer({Key key}) : super(key: key);
+class PrivateDrawer extends StatelessWidget {
+  PrivateDrawer({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class PublicDrawer extends StatelessWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, LoginScreen.routeName);
+                          Navigator.pushNamed(context, ProfileScreen.routeName);
                         },
                         child: ProfilePersonalInformationWidget(
                           color: Colors.white,
@@ -52,24 +53,24 @@ class PublicDrawer extends StatelessWidget {
                           children: [
                             Expanded(
                               child: ParkAMenuItem(
-                                label: "Buscar Parqueo",
+                                label: "Mis Reservas",
                               ),
                             ),
                             Expanded(
                               child: ParkAMenuItem(
-                                label: "Ayuda",
+                                label: "Mis Parqueos",
                               ),
                             ),
                             Expanded(
                               child: ParkAMenuItem(
-                                label: "",
+                                label: "Mis Vehiculos",
                               ),
                             ),
                             Expanded(
                               child: ParkAMenuItem(
-                                label: "",
+                                label: "Favoritos",
                               ),
-                            ),
+                            )
                           ],
                         ),
                       ),
@@ -80,8 +81,66 @@ class PublicDrawer extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
+              child: Padding(
+                padding: EdgeInsets.only(left: 24.0),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: ParkAMenuItem(
+                        label: "Metodos de pago",
+                        itemStyle: kParkaInputDefaultStyleBlue,
+                        onTapHandler: () {
+                          Get.toNamed(UserPaymentMethodsScreen.routeName);
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: ParkAMenuItem(
+                        label: "Chats",
+                        itemStyle: kParkaInputDefaultStyleBlue,
+                      ),
+                    ),
+                    Expanded(
+                      child: ParkAMenuItem(
+                        label: "Buscar Parqueo",
+                        itemStyle: kParkaInputDefaultStyleBlue,
+                      ),
+                    ),
+                    Expanded(
+                      child: ParkAMenuItem(
+                        label: "Registra tu Parqueo",
+                        itemStyle: kParkaInputDefaultStyleBlue,
+                      ),
+                    ),
+                    Expanded(
+                      child: ParkAMenuItem(
+                        label: "Ayuda",
+                        itemStyle: kParkaInputDefaultStyleBlue,
+                      ),
+                    ),
+                    Expanded(
+                      child: ParkAMenuItem(
+                        label: "Configuracion",
+                        itemStyle: kParkaInputDefaultStyleBlue,
+                      ),
+                    ),
+                    Expanded(
+                      child: ParkAMenuItem(
+                        label: "Salir",
+                        itemStyle: kParkaInputDefaultStyleBlue,
+                        onTapHandler: () {
+                          Get.find<UserController>().logout();
+                          Get.offAllNamed(LoginScreen.routeName);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 0,
               child: Container(
-                alignment: Alignment.bottomLeft,
                 margin: EdgeInsets.only(bottom: 10, left: 16.0),
                 child: Text(
                   "Terminos y condiciones legales",
@@ -90,7 +149,7 @@ class PublicDrawer extends StatelessWidget {
                       fontWeight: FontWeight.normal, fontSize: 14),
                 ),
               ),
-            ),
+            )
           ],
         ),
       ),

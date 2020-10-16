@@ -1,4 +1,4 @@
-import 'package:ParkA/components/Inputs/parka_input.dart';
+import 'package:ParkA/components/inputs/parka_input.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/pages/ForgotPassword/forgot_password_screen.dart';
 import 'package:ParkA/pages/MapPage/maps_page.dart';

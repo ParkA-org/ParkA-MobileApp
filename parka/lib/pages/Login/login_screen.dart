@@ -1,6 +1,5 @@
-import 'package:ParkA/components/Buttons/round_button.dart';
-import 'package:ParkA/components/Buttons/transparent_button.dart';
-
+import 'package:ParkA/components/buttons/round_button.dart';
+import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/pages/Login/email_login.dart';
 import 'package:ParkA/pages/Register/register_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';

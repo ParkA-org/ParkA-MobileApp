@@ -1,4 +1,4 @@
-import 'package:ParkA/components/Headers/parka_header.dart';
+import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/pages/EditUserProfilePage/edit_user_profile_page.dart';
 import 'package:ParkA/pages/ProfilePage/components/parka_circle_avatar_widget.dart';

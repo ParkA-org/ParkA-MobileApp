@@ -1,4 +1,4 @@
-import 'package:ParkA/components/Headers/parka_header.dart';
+import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/pages/FilterPage/components/filter_date_widget.dart';
 import 'package:ParkA/pages/FilterPage/components/buttons_reservation_type_widget.dart';
 import 'package:ParkA/pages/FilterPage/components/featureFilterWidget/feature_filter_widget.dart';

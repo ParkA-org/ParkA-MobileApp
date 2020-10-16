@@ -1,9 +1,9 @@
-import 'package:ParkA/components/Buttons/transparent_button.dart';
-import 'package:ParkA/components/Cards/ID_card.dart';
-import 'package:ParkA/components/Headers/parka_header.dart';
-import 'package:ParkA/components/Inputs/parka_datepicker.dart';
-import 'package:ParkA/components/Inputs/parka_dropdown.dart';
-import 'package:ParkA/components/Inputs/parka_input.dart';
+import 'package:ParkA/components/buttons/transparent_button.dart';
+import 'package:ParkA/components/cards/ID_card.dart';
+import 'package:ParkA/components/headers/parka_header.dart';
+import 'package:ParkA/components/inputs/parka_datepicker.dart';
+import 'package:ParkA/components/inputs/parka_dropdown.dart';
+import 'package:ParkA/components/inputs/parka_input.dart';
 import 'package:ParkA/data/data_models/country/country_data_model.dart';
 import 'package:ParkA/data/data_models/nationality/nationality_data_model.dart';
 import 'package:ParkA/data/use-cases/country/country_use_cases.dart';

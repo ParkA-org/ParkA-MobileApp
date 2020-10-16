@@ -12,7 +12,7 @@
 // -8/3/2020 Silvio Arzeno: Widget created
 //
 
-import 'package:ParkA/components/Placeholders/parka_placeholder.dart';
+import 'package:ParkA/components/place-holders/parka_placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 import 'package:flutter_svg/svg.dart';

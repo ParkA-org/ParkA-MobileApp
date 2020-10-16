@@ -1,5 +1,5 @@
 import 'package:ParkA/pages/MapPage/maps_page.dart';
-import 'package:ParkA/routes/get_routes.dart';
+import 'package:ParkA/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controllers/bindings/graphql_biding.dart';

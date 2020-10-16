@@ -1,6 +1,6 @@
-import 'package:ParkA/components/Buttons/transparent_button.dart';
-import 'package:ParkA/components/Headers/parka_header.dart';
-import 'package:ParkA/components/Inputs/parka_input.dart';
+import 'package:ParkA/components/buttons/transparent_button.dart';
+import 'package:ParkA/components/headers/parka_header.dart';
+import 'package:ParkA/components/inputs/parka_input.dart';
 
 import 'package:ParkA/data/use-cases/user/dtos/user_registration_dto.dart';
 import 'package:ParkA/pages/ProfilePic/profile_pic_page.dart';

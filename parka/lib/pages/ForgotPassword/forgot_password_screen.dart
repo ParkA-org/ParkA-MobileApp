@@ -1,5 +1,5 @@
-import 'package:ParkA/components/Buttons/round_button.dart';
-import 'package:ParkA/components/Buttons/transparent_button.dart';
+import 'package:ParkA/components/buttons/round_button.dart';
+import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
 import 'package:ParkA/pages/ForgotPassword/components/email_sent_confirmation_widget.dart';
 import 'package:ParkA/pages/ResetPasswordPage/reset_password_page.dart';
@@ -10,8 +10,6 @@ import 'package:ParkA/utils/curves_painter.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
-import '../../components/Alerts/parka_base_alert_widget.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   static const String routeName = "/forgotPassword";

@@ -1,4 +1,4 @@
-import 'package:ParkA/components/SearchBar/search_bar.dart';
+import 'package:ParkA/components/search-bar/search_bar.dart';
 import 'package:ParkA/pages/Search/search_panel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

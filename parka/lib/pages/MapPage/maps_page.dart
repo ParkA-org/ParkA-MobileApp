@@ -1,10 +1,10 @@
-import 'package:ParkA/components/Buttons/main_fab.dart';
-import 'package:ParkA/components/Drawer/main_drawer.dart';
-import 'package:ParkA/components/Drawer/privateDrawer/private_drawer.dart';
-import 'package:ParkA/components/Drawer/publicDrawer/public_drawer.dart';
+import 'package:ParkA/components/buttons/main_fab.dart';
+import 'package:ParkA/components/drawer/privateDrawer/private_drawer.dart';
+import 'package:ParkA/components/drawer/publicDrawer/public_drawer.dart';
+import 'package:ParkA/components/modals/parking_detail.dart';
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/controllers/user_controller.dart';
-import 'package:ParkA/components/Modals/parking_detail.dart';
+
 import 'package:ParkA/pages/MapPage/Components/dummy_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

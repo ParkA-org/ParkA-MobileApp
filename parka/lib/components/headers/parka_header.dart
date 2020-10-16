@@ -1,4 +1,4 @@
-import 'package:ParkA/components/Buttons/transparent_button.dart';
+import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/styles/text.dart';
 import "package:flutter/material.dart";
 

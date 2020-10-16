@@ -1,4 +1,4 @@
-import 'package:ParkA/components/SearchBar/search_bar.dart';
+import 'package:ParkA/components/search-bar/search_bar.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:flutter/material.dart';
 import '../../FilterPage/filter_page.dart';

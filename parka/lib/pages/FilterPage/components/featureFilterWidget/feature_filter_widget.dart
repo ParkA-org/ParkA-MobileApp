@@ -1,4 +1,4 @@
-import 'package:ParkA/components/Buttons/feature_select_button.dart';
+import 'package:ParkA/components/buttons/feature_select_button.dart';
 import "package:flutter/material.dart";
 
 class FeatureSelectorFilter extends StatelessWidget {

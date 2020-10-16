@@ -1,4 +1,4 @@
-import 'package:ParkA/components/Headers/parka_header.dart';
+import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/use-cases/payment/payment_use_cases.dart';
 import 'package:ParkA/pages/PaymentInfo/payment_info.dart';

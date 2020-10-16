@@ -1,16 +1,16 @@
-import 'package:ParkA/components/MenuItem/parka_menu_item.dart';
+import 'package:ParkA/components/menu-item/parka_menu_item.dart';
 import 'package:ParkA/controllers/user_controller.dart';
-import 'package:ParkA/pages/Login/login_screen.dart';
 import 'package:ParkA/pages/ProfilePage/components/profile_personal_information_widget.dart';
 import 'package:ParkA/pages/ProfilePage/profile_page.dart';
-import 'package:ParkA/pages/UserPaymentMethodPage/user_registered_payment_methods_screen.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PrivateDrawer extends StatelessWidget {
-  PrivateDrawer({Key key}) : super(key: key);
+import '../../pages/Login/login_screen.dart';
+
+class MainDrawer extends StatelessWidget {
+  MainDrawer({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -89,9 +89,6 @@ class PrivateDrawer extends StatelessWidget {
                       child: ParkAMenuItem(
                         label: "Metodos de pago",
                         itemStyle: kParkaInputDefaultStyleBlue,
-                        onTapHandler: () {
-                          Get.toNamed(UserPaymentMethodsScreen.routeName);
-                        },
                       ),
                     ),
                     Expanded(
@@ -128,10 +125,7 @@ class PrivateDrawer extends StatelessWidget {
                       child: ParkAMenuItem(
                         label: "Salir",
                         itemStyle: kParkaInputDefaultStyleBlue,
-                        onTapHandler: () {
-                          Get.find<UserController>().logout();
-                          Get.offAllNamed(LoginScreen.routeName);
-                        },
+                        navigateTo: LoginScreen.routeName,
                       ),
                     ),
                   ],

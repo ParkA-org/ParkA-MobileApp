@@ -1,4 +1,4 @@
-import 'package:ParkA/components/Placeholders/parka_placeholder.dart';
+import 'package:ParkA/components/place-holders/parka_placeholder.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import "package:flutter/material.dart";
 

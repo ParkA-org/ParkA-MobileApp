@@ -1,5 +1,5 @@
-import 'package:ParkA/components/Buttons/round_button.dart';
-import 'package:ParkA/components/Buttons/transparent_button.dart';
+import 'package:ParkA/components/buttons/round_button.dart';
+import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
 import 'package:ParkA/pages/MapPage/maps_page.dart';

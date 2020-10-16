@@ -1,5 +1,5 @@
-import 'package:ParkA/components/Headers/parka_header.dart';
-import 'package:ParkA/components/Inputs/parka_dropdown.dart';
+import 'package:ParkA/components/headers/parka_header.dart';
+import 'package:ParkA/components/inputs/parka_dropdown.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/data/data_models/country/country_data_model.dart';
 import 'package:ParkA/data/data_models/information/information_data_model.dart';
