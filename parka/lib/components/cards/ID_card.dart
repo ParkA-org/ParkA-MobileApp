@@ -1,4 +1,4 @@
-import 'package:ParkA/pages/ID/components/parka_id_card_field.dart';
+import 'package:ParkA/pages/create-user-information/components/parka_id_card_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
