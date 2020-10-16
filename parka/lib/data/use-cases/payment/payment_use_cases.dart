@@ -4,11 +4,12 @@ import 'package:ParkA/data/use-cases/user/dtos/user_registration_dto.dart';
 import 'package:get/get.dart';
 import 'package:graphql/client.dart';
 
-final graphqlClient =
-    Get.find<GraphqlClientController>().parkaGraphqlClient.value.graphQlClient;
-
 class PaymentUseCases {
   static Future createPayment(CreatePaymentDto createPaymentDto) async {
+    final graphqlClient = Get.find<GraphqlClientController>()
+        .parkaGraphqlClient
+        .value
+        .graphQlClient;
     String createPaymentQuery = r"""
     mutation($data:CreatePaymentInput!){
       createPayment(createPaymentInput:$data){
@@ -55,8 +56,13 @@ class PaymentUseCases {
   }
 
   static Future<List<Payment>> getAllUserPaymentMethods() async {
+    final graphqlClient = Get.find<GraphqlClientController>()
+        .parkaGraphqlClient
+        .value
+        .graphQlClient;
+
     String getAllUserPaymentMethods = r""" 
-        query{
+    query{
       getUserInformationById{
         id
         paymentInformation{
