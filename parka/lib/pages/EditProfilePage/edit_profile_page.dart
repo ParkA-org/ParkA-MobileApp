@@ -1,12 +1,12 @@
 import 'package:ParkA/components/Headers/parka_header.dart';
-import 'package:ParkA/components/Utils/styles/parka_colors.dart';
-import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/pages/EditUserProfilePage/edit_user_profile_page.dart';
 import 'package:ParkA/pages/ProfilePage/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/pages/UpdatePasswordScreen/update_user_password_screen.dart';
 import 'package:ParkA/pages/UserPaymentMethodPage/user_registered_payment_methods_screen.dart';
 import 'package:ParkA/pages/VehiclePage/vehicle_page.dart';
+import 'package:ParkA/styles/parka_colors.dart';
+import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';

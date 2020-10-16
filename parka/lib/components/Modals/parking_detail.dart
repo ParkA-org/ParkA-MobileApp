@@ -1,6 +1,6 @@
 import 'package:ParkA/components/Rating/star_rating.dart';
-import 'package:ParkA/components/Utils/styles/parka_colors.dart';
-import 'package:ParkA/components/Utils/styles/text.dart';
+import 'package:ParkA/styles/parka_colors.dart';
+import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

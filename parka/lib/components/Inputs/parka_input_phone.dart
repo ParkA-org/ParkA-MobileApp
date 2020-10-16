@@ -12,8 +12,8 @@
 // -8/3/2020 Silvio Arzeno: Widget created
 //
 
-import 'package:ParkA/components/Utils/styles/inputs.dart';
-import 'package:ParkA/components/Utils/styles/text.dart';
+import 'package:ParkA/styles/inputs.dart';
+import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

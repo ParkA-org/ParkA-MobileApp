@@ -1,5 +1,5 @@
+import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
-import "package:ParkA/components/Utils/styles/text.dart";
 
 class InformativeTab extends StatelessWidget {
   final String data;

@@ -1,6 +1,6 @@
-import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/data/data_models/payment/payment_data_model.dart';
-import 'package:ParkA/pages/PaymentInfo/utils/utils.dart';
+import 'package:ParkA/pages/PaymentInfo/Components/credit_card_complete_info_form.dart';
+import 'package:ParkA/styles/text.dart';
 import "package:flutter/material.dart";
 
 class CardListTile extends StatelessWidget {

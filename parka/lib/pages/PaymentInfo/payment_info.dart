@@ -1,13 +1,13 @@
 import 'package:ParkA/components/Buttons/transparent_button.dart';
 import 'package:ParkA/components/Headers/parka_header.dart';
-import 'package:ParkA/components/Utils/styles/parka_colors.dart';
-import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/data/use-cases/payment/payment_use_cases.dart';
 import 'package:ParkA/data/use-cases/user/dtos/user_registration_dto.dart';
 import 'package:ParkA/pages/MapPage/maps_page.dart';
 import 'package:ParkA/pages/PaymentInfo/Components/credit_card_complete_info_form.dart';
-import 'package:ParkA/pages/PaymentInfo/utils/createAccount.dart';
+
 import 'package:ParkA/pages/UserPaymentMethodPage/user_registered_payment_methods_screen.dart';
+import 'package:ParkA/styles/parka_colors.dart';
+import 'package:ParkA/styles/text.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 

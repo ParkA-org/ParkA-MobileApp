@@ -1,11 +1,12 @@
 import 'dart:io';
 import 'package:ParkA/components/Buttons/transparent_button.dart';
 import 'package:ParkA/components/Headers/parka_header.dart';
-import 'package:ParkA/components/Utils/functions/pick_image.dart';
-import 'package:ParkA/components/Utils/styles/parka_colors.dart';
-import 'package:ParkA/components/Utils/styles/text.dart';
+
 import 'package:ParkA/data/use-cases/user/dtos/user_registration_dto.dart';
 import 'package:ParkA/pages/ID/ID_page.dart';
+import 'package:ParkA/styles/parka_colors.dart';
+import 'package:ParkA/styles/text.dart';
+import 'package:ParkA/utils/functions/pick_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

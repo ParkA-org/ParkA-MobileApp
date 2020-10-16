@@ -1,10 +1,10 @@
 import 'package:ParkA/components/MenuItem/parka_menu_item.dart';
-import 'package:ParkA/components/Utils/styles/parka_colors.dart';
-import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/pages/Login/login_screen.dart';
 import 'package:ParkA/pages/ProfilePage/components/profile_personal_information_widget.dart';
 import 'package:ParkA/pages/ProfilePage/profile_page.dart';
+import 'package:ParkA/styles/parka_colors.dart';
+import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

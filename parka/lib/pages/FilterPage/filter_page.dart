@@ -1,9 +1,9 @@
 import 'package:ParkA/components/Headers/parka_header.dart';
-import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/pages/FilterPage/components/filter_date_widget.dart';
 import 'package:ParkA/pages/FilterPage/components/buttons_reservation_type_widget.dart';
 import 'package:ParkA/pages/FilterPage/components/featureFilterWidget/feature_filter_widget.dart';
 import 'package:ParkA/pages/FilterPage/components/top_bar.dart';
+import 'package:ParkA/styles/parka_colors.dart';
 import "package:flutter/material.dart";
 
 import 'components/slider_price_widget.dart';

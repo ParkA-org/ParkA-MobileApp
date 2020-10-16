@@ -1,11 +1,12 @@
 import 'package:ParkA/components/Buttons/transparent_button.dart';
 import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:ParkA/components/Inputs/parka_input.dart';
-import 'package:ParkA/components/Utils/styles/parka_colors.dart';
+
 import 'package:ParkA/data/use-cases/user/dtos/user_registration_dto.dart';
 import 'package:ParkA/pages/ProfilePic/profile_pic_page.dart';
+import 'package:ParkA/styles/parka_colors.dart';
+import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
-import "package:ParkA/components/Utils/styles/text.dart";
 
 class RegisterPage extends StatefulWidget {
   RegisterPage({Key key}) : super(key: key);
@@ -13,33 +14,6 @@ class RegisterPage extends StatefulWidget {
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
-
-// var createAccount = <String, dynamic>{
-//   "registerpage": {
-//     "username": "",
-//     "lastname": "",
-//     "email": "",
-//     "password": "",
-//     "phone": "",
-//   },
-//   "profilepage": {
-//     "pictures": "",
-//   },
-//   "idpage": {
-//     "document": "",
-//     "nationality": "",
-//     "typeDocument": "",
-//     "Placeofbirth": "",
-//     "datebirth": "",
-//   },
-//   "paymentpage": {
-//     "digit": "",
-//     "name": "",
-//     "expirationdate": "",
-//   },
-//   "typedocuments": [],
-//   "countries": [],
-// };
 
 UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
 

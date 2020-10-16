@@ -1,5 +1,6 @@
 import 'package:ParkA/components/Headers/parka_header.dart';
-import 'package:ParkA/components/Utils/styles/parka_colors.dart';
+
+import 'package:ParkA/styles/parka_colors.dart';
 import 'package:flutter/material.dart';
 
 import 'Components/login_form.dart';

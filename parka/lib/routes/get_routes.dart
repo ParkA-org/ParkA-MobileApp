@@ -14,7 +14,6 @@ import 'package:ParkA/pages/ProfilePage/profile_page.dart';
 import 'package:ParkA/pages/ProfilePic/profile_pic_page.dart';
 import 'package:ParkA/pages/PaymentInfo/payment_info.dart';
 import 'package:ParkA/pages/Register/register_page.dart';
-import 'package:ParkA/pages/GraphQlTest/graphql_test_page.dart';
 import 'package:ParkA/pages/ResetPasswordPage/reset_password_page.dart';
 import 'package:ParkA/pages/UpdatePasswordScreen/update_user_password_screen.dart';
 import 'package:ParkA/pages/UserPaymentMethodPage/user_registered_payment_methods_screen.dart';
@@ -56,10 +55,6 @@ List<GetPage> getRoutePages = [
     name: MapPage.routeName,
     page: () => MapPage(),
     bindings: [UserBinding(), GraphqlClientBiding()],
-  ),
-  GetPage(
-    name: GraphqlTestScreen.routeName,
-    page: () => GraphqlTestScreen(),
   ),
   GetPage(
     name: FilterPage.routeName,

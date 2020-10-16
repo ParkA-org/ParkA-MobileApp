@@ -1,13 +1,12 @@
 import 'package:ParkA/components/Buttons/round_button.dart';
 import 'package:ParkA/components/Buttons/transparent_button.dart';
-import 'package:ParkA/components/Utils/curves_painter.dart';
-import 'package:ParkA/components/Utils/functions.dart';
-import 'package:ParkA/components/Utils/styles/inputs.dart';
-import 'package:ParkA/components/Utils/styles/parka_colors.dart';
-import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
 import 'package:ParkA/pages/ForgotPassword/components/email_sent_confirmation_widget.dart';
 import 'package:ParkA/pages/ResetPasswordPage/reset_password_page.dart';
+import 'package:ParkA/styles/inputs.dart';
+import 'package:ParkA/styles/parka_colors.dart';
+import 'package:ParkA/styles/text.dart';
+import 'package:ParkA/utils/curves_painter.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';

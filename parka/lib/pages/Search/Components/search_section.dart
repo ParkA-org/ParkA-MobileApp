@@ -1,7 +1,6 @@
 import 'package:ParkA/components/SearchBar/search_bar.dart';
+import 'package:ParkA/styles/parka_colors.dart';
 import 'package:flutter/material.dart';
-
-import '../../../components/Utils/styles/parka_colors.dart';
 import '../../FilterPage/filter_page.dart';
 
 class SearchSection extends StatelessWidget {

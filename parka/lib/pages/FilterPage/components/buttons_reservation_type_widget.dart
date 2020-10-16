@@ -1,4 +1,4 @@
-import 'package:ParkA/components/Utils/styles/buttons.dart';
+import 'package:ParkA/styles/buttons.dart';
 import 'package:flutter/material.dart';
 
 class ReserveTypeSelectorWidget extends StatelessWidget {

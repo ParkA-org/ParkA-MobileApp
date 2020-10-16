@@ -1,13 +1,14 @@
 import 'package:ParkA/components/Buttons/round_button.dart';
 import 'package:ParkA/components/Buttons/transparent_button.dart';
-import 'package:ParkA/components/Utils/styles/parka_colors.dart';
-import 'package:ParkA/components/Utils/styles/text.dart';
+
 import 'package:ParkA/pages/Login/email_login.dart';
 import 'package:ParkA/pages/Register/register_page.dart';
+import 'package:ParkA/styles/parka_colors.dart';
+import 'package:ParkA/styles/text.dart';
+import 'package:ParkA/utils/curves_painter.dart';
+import 'package:ParkA/utils/parkaIcons.dart';
 import "package:flutter/material.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../components/Utils/parkaIcons.dart';
-import '../../components/Utils/curves_painter.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String routeName = "/";

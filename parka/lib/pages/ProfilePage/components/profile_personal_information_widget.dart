@@ -1,8 +1,8 @@
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/pages/ProfilePage/components/parka_circle_avatar_widget.dart';
+import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import "package:flutter/material.dart";
-import "package:ParkA/components/Utils/styles/text.dart";
 import 'package:get/get.dart';
 
 class ProfilePersonalInformationWidget extends StatelessWidget {

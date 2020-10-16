@@ -1,8 +1,9 @@
 import 'package:ParkA/components/FilterResultTile/filter_result_tile.dart';
-import 'package:ParkA/components/Utils/styles/text.dart';
+
+import 'package:ParkA/styles/parka_colors.dart';
+import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
 import '../../components/Headers/parka_header.dart';
-import '../../components/Utils/styles/parka_colors.dart';
 import 'Components/favorite_place_button.dart';
 import 'Components/search_section.dart';
 

@@ -1,13 +1,13 @@
 import 'package:ParkA/components/Buttons/round_button.dart';
 import 'package:ParkA/components/Buttons/transparent_button.dart';
-import 'package:ParkA/components/Utils/styles/inputs.dart';
-import 'package:ParkA/components/Utils/styles/parka_colors.dart';
-import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
+import 'package:ParkA/styles/inputs.dart';
+import 'package:ParkA/styles/parka_colors.dart';
+import 'package:ParkA/styles/text.dart';
+import 'package:ParkA/utils/parkaIcons.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
-import '../../components/Utils/parkaIcons.dart';
 
 class UpdateUserPasswordPage extends StatefulWidget {
   static const String routeName = "/update-user-password";

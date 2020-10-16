@@ -1,5 +1,5 @@
-import 'package:ParkA/components/Utils/styles/parka_colors.dart';
-import 'package:ParkA/components/Utils/styles/text.dart';
+import 'package:ParkA/styles/parka_colors.dart';
+import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
 
 class ParkaServiceHistoryWidget extends StatelessWidget {
