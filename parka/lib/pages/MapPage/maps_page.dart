@@ -1,6 +1,7 @@
 import 'package:ParkA/components/buttons/main_fab.dart';
-import 'package:ParkA/components/drawer/privateDrawer/private_drawer.dart';
-import 'package:ParkA/components/drawer/publicDrawer/public_drawer.dart';
+import 'package:ParkA/components/drawer/private-drawer/private_drawer.dart';
+import 'package:ParkA/components/drawer/public-drawer/public_drawer.dart';
+
 import 'package:ParkA/components/modals/parking_detail.dart';
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/controllers/user_controller.dart';

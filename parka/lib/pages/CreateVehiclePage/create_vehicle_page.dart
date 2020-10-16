@@ -1,10 +1,11 @@
 import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/components/inputs/parka_dropdown.dart';
-import 'package:ParkA/data/data_models/bodyStyle/body_style_data_model.dart';
-import 'package:ParkA/data/data_models/model/model_data_model.dart';
-import 'package:ParkA/data/data_models/color/color_data_model.dart';
-import 'package:ParkA/data/data_models/vehicle/dto/create_vehicle_dto.dart';
-import 'package:ParkA/data/use-cases/bodyStyle/body_style_use_cases.dart';
+import 'package:ParkA/data/data-models/body-style/body_style_data_model.dart';
+import 'package:ParkA/data/data-models/model/model_data_model.dart';
+import 'package:ParkA/data/data-models/vehicle/dto/create_vehicle_dto.dart';
+import 'package:ParkA/data/data-models/color/color_data_model.dart';
+import 'package:ParkA/data/use-cases/body-style/body_style_use_cases.dart';
+
 import 'package:ParkA/data/use-cases/color/color_use_cases.dart';
 import 'package:ParkA/data/use-cases/model/model_use_cases.dart';
 import 'package:ParkA/data/use-cases/vehicle/vehicle_use_cases.dart';

@@ -4,8 +4,9 @@ import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/components/inputs/parka_datepicker.dart';
 import 'package:ParkA/components/inputs/parka_dropdown.dart';
 import 'package:ParkA/components/inputs/parka_input.dart';
-import 'package:ParkA/data/data_models/country/country_data_model.dart';
-import 'package:ParkA/data/data_models/nationality/nationality_data_model.dart';
+import 'package:ParkA/data/data-models/country/country_data_model.dart';
+import 'package:ParkA/data/data-models/nationality/nationality_data_model.dart';
+
 import 'package:ParkA/data/use-cases/country/country_use_cases.dart';
 import 'package:ParkA/data/use-cases/nationality/nationality_use_cases.dart';
 import 'package:ParkA/data/use-cases/user/dtos/user_registration_dto.dart';

@@ -1,4 +1,4 @@
-import 'package:ParkA/data/data_models/vehicle/vehicle_data_model.dart';
+import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
 import 'package:flutter/material.dart';
 
 class VehicleTile extends StatelessWidget {

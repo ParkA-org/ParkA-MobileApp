@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:ParkA/controllers/graphql_controller.dart';
-import 'package:ParkA/data/data_models/information/information_data_model.dart';
-import 'package:ParkA/data/data_models/user/user_data_model.dart';
+import 'package:ParkA/data/data-models/information/information_data_model.dart';
+import 'package:ParkA/data/data-models/user/user_data_model.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:graphql/client.dart';

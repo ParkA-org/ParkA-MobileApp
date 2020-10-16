@@ -1,4 +1,4 @@
-import 'package:ParkA/data/data_models/message/message_data_model.dart';
+import 'package:ParkA/data/data-models/message/message_data_model.dart';
 
 class Chat {
   String id;

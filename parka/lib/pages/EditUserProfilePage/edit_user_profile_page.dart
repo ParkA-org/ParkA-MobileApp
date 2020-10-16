@@ -1,9 +1,9 @@
 import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/components/inputs/parka_dropdown.dart';
 import 'package:ParkA/controllers/user_controller.dart';
-import 'package:ParkA/data/data_models/country/country_data_model.dart';
-import 'package:ParkA/data/data_models/information/information_data_model.dart';
-import 'package:ParkA/data/data_models/nationality/nationality_data_model.dart';
+import 'package:ParkA/data/data-models/country/country_data_model.dart';
+import 'package:ParkA/data/data-models/information/information_data_model.dart';
+import 'package:ParkA/data/data-models/nationality/nationality_data_model.dart';
 import 'package:ParkA/data/use-cases/country/country_use_cases.dart';
 import 'package:ParkA/data/use-cases/nationality/nationality_use_cases.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';

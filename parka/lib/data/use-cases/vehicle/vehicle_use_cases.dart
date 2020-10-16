@@ -1,6 +1,7 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
-import 'package:ParkA/data/data_models/vehicle/dto/create_vehicle_dto.dart';
-import 'package:ParkA/data/data_models/vehicle/vehicle_data_model.dart';
+import 'package:ParkA/data/data-models/vehicle/dto/create_vehicle_dto.dart';
+import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
+
 import 'package:ParkA/utils/functions/upload_image.dart';
 import 'package:get/get.dart';
 import 'package:graphql/client.dart';

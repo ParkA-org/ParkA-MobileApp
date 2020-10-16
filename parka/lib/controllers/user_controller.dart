@@ -1,5 +1,6 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
-import 'package:ParkA/data/data_models/user/user_data_model.dart';
+import 'package:ParkA/data/data-models/user/user_data_model.dart';
+
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
 import 'package:get/state_manager.dart';
 

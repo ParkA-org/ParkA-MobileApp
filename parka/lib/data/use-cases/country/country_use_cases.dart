@@ -1,5 +1,6 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
-import 'package:ParkA/data/data_models/country/country_data_model.dart';
+import 'package:ParkA/data/data-models/country/country_data_model.dart';
+
 import 'package:get/get.dart';
 import 'package:graphql/client.dart';
 
