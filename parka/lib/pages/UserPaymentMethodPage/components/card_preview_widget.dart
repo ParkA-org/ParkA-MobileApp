@@ -1,5 +1,5 @@
 import 'package:ParkA/components/Utils/styles/text.dart';
-import 'package:ParkA/data_models/payment/payment_data_model.dart';
+import 'package:ParkA/data/data_models/payment/payment_data_model.dart';
 import 'package:ParkA/pages/PaymentInfo/utils/utils.dart';
 import "package:flutter/material.dart";
 

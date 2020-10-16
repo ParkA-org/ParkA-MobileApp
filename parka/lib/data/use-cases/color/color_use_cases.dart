@@ -1,5 +1,5 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
-import 'package:ParkA/data_models/color/color_data_model.dart';
+import 'package:ParkA/data/data_models/color/color_data_model.dart';
 import 'package:get/get.dart';
 import 'package:graphql/client.dart';
 

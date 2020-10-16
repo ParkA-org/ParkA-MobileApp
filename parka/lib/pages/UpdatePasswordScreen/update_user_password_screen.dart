@@ -4,7 +4,7 @@ import 'package:ParkA/components/Utils/styles/inputs.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
 import 'package:ParkA/components/Utils/styles/text.dart';
 import 'package:ParkA/controllers/graphql_controller.dart';
-import 'package:ParkA/use-cases/user/user_use_cases.dart';
+import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import '../../components/Utils/parkaIcons.dart';

@@ -1,13 +1,14 @@
 import 'dart:convert';
 
 import 'package:ParkA/controllers/graphql_controller.dart';
-import 'package:ParkA/data_models/information/information_data_model.dart';
-import 'package:ParkA/data_models/user/user_data_model.dart';
-import 'package:ParkA/use-cases/user/dtos/user_registration_dto.dart';
+import 'package:ParkA/data/data_models/information/information_data_model.dart';
+import 'package:ParkA/data/data_models/user/user_data_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:graphql/client.dart';
 import 'package:http/http.dart' as http;
+
+import 'dtos/user_registration_dto.dart';
 
 class UserUseCases {
   static Future userLogin(String email, String password) async {

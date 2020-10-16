@@ -1,10 +1,10 @@
 import 'package:ParkA/components/Headers/parka_header.dart';
 import 'package:ParkA/components/Utils/styles/parka_colors.dart';
-import 'package:ParkA/data_models/vehicle/vehicle_data_model.dart';
+import 'package:ParkA/data/data_models/vehicle/vehicle_data_model.dart';
+import 'package:ParkA/data/use-cases/vehicle/vehicle_use_cases.dart';
 import 'package:ParkA/pages/CreateVehiclePage/create_vehicle_page.dart';
 import 'package:ParkA/pages/VehiclePage/components/user_vehicle_placeholder.dart';
 import 'package:ParkA/pages/VehiclePage/components/user_vehicle_tile.dart';
-import 'package:ParkA/use-cases/vehicle/vehicle_use_cases.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';

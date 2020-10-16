@@ -1,4 +1,4 @@
-import 'package:ParkA/data_models/feature/parking_feature_data_model.dart';
+import 'package:ParkA/data/data_models/feature/parking_feature_data_model.dart';
 
 class Parking {
   final String id;
