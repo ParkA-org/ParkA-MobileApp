@@ -4,7 +4,7 @@ import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
 import 'package:ParkA/data/use-cases/vehicle/vehicle_use_cases.dart';
 import 'package:ParkA/pages/create-vehicle/create_vehicle_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
-import 'package:ParkA/utils/parkaIcons.dart';
+import 'package:ParkA/styles/parkaIcons.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';

@@ -5,7 +5,7 @@ import 'package:ParkA/pages/reset-password/reset_password_page.dart';
 import 'package:ParkA/styles/inputs.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
-import 'package:ParkA/utils/curves_painter.dart';
+import 'package:ParkA/components/curve-painter/curves_painter.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';

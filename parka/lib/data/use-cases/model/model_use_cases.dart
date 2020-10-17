@@ -25,8 +25,6 @@ class ModelUseCases {
         modelsData = [...modelsData, ...element["models"]];
       });
 
-      // print(modelsData);
-
       return Model.modelsFromJson(modelsData);
     }
 

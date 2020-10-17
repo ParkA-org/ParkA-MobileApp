@@ -4,11 +4,13 @@ import "package:ParkA/utils/graphql/queries/nationality_queries.dart";
 import 'package:get/get.dart';
 import 'package:graphql/client.dart';
 
-final graphqlClient =
-    Get.find<GraphqlClientController>().parkaGraphqlClient.value.graphQlClient;
-
 class NationalityUseCases {
   static Future<List<Nationality>> getAllNationalities() async {
+    final graphqlClient = Get.find<GraphqlClientController>()
+        .parkaGraphqlClient
+        .value
+        .graphQlClient;
+
     QueryOptions queryOptions =
         QueryOptions(documentNode: gql(getAllNationalitiesQuery));
 

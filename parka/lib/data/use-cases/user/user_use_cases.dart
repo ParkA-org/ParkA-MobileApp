@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/data-models/information/information_data_model.dart';
 import 'package:ParkA/data/data-models/user/user_data_model.dart';
+import 'package:ParkA/utils/functions/upload_image.dart';
 import 'package:ParkA/utils/graphql/mutations/user_mutations.dart';
 import 'package:ParkA/utils/graphql/queries/user_queries.dart';
 
@@ -11,7 +12,7 @@ import 'package:get/get.dart';
 import 'package:graphql/client.dart';
 import 'package:http/http.dart' as http;
 
-import 'dtos/user_registration_dto.dart';
+import '../../dtos/user/user_registration_dto.dart';
 
 class UserUseCases {
   static Future userLogin(String email, String password) async {
@@ -53,28 +54,6 @@ class UserUseCases {
     return null;
   }
 
-  static Future<String> uploadImage(String imagePath) async {
-    print("LOADING IMAGE");
-
-    final postUri = Uri.parse("https://parka-api.herokuapp.com/upload");
-
-    http.MultipartRequest request = http.MultipartRequest('POST', postUri);
-
-    http.MultipartFile multipartFile =
-        await http.MultipartFile.fromPath('files', imagePath);
-
-    request.files.add(multipartFile);
-    http.StreamedResponse stream = await request.send();
-    print(stream.statusCode);
-    http.Response response = await http.Response.fromStream(stream);
-
-    final responseJson = json.decode(response.body);
-    final url = responseJson[0]['url'];
-    print("SUCCESS ???");
-    print(url);
-    return url;
-  }
-
   static Future createUser(CreateUserDto createUserDto) async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
@@ -85,14 +64,13 @@ class UserUseCases {
         "origin": "mobile",
         "email": createUserDto.email,
         "password": createUserDto.password,
-        // "profilePicture": _imageUrl,
         "userInformation": createUserDto.userInformation,
       }
     };
 
     if (createUserDto.profilePicture != null) {
       createUserInput["data"]["profilePicture"] =
-          await UserUseCases.uploadImage(createUserDto.profilePicture);
+          await uploadImage(createUserDto.profilePicture);
     }
 
     MutationOptions mutationOptions = MutationOptions(

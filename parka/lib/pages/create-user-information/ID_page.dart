@@ -9,7 +9,7 @@ import 'package:ParkA/data/data-models/nationality/nationality_data_model.dart';
 
 import 'package:ParkA/data/use-cases/country/country_use_cases.dart';
 import 'package:ParkA/data/use-cases/nationality/nationality_use_cases.dart';
-import 'package:ParkA/data/use-cases/user/dtos/user_registration_dto.dart';
+import 'package:ParkA/data/dtos/user/user_registration_dto.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
 import 'package:ParkA/pages/map/maps_page.dart';
 import 'package:ParkA/pages/create-payment/payment_info.dart';

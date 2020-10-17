@@ -1,7 +1,6 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/data-models/body-style/body_style_data_model.dart';
 import 'package:ParkA/utils/graphql/queries/body_style_queries.dart';
-
 import 'package:get/get.dart';
 import 'package:graphql/client.dart';
 

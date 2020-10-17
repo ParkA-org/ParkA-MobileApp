@@ -3,8 +3,8 @@ import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/pages/register/register_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
-import 'package:ParkA/utils/curves_painter.dart';
-import 'package:ParkA/utils/parkaIcons.dart';
+import 'package:ParkA/components/curve-painter/curves_painter.dart';
+import 'package:ParkA/styles/parkaIcons.dart';
 import "package:flutter/material.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

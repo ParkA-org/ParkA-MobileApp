@@ -3,7 +3,7 @@ import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/pages/map/maps_page.dart';
 import 'package:ParkA/pages/forgot-password/forgot_password_screen.dart';
 import 'package:ParkA/styles/parka_colors.dart';
-import 'package:ParkA/utils/curves_painter.dart';
+import 'package:ParkA/components/curve-painter/curves_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:get/state_manager.dart';
