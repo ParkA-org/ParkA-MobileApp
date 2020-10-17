@@ -3,38 +3,17 @@ import 'package:ParkA/data/data-models/vehicle/dto/create_vehicle_dto.dart';
 import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
 
 import 'package:ParkA/utils/functions/upload_image.dart';
+import 'package:ParkA/utils/graphql/mutations/vehicle_mutations.dart';
+import 'package:ParkA/utils/graphql/queries/vehicle_queries.dart';
 import 'package:get/get.dart';
 import 'package:graphql/client.dart';
 
 class VehicleUseCases {
   static Future<List<Vehicle>> getAllUserVehicles() async {
     final graphqlClient = Get.find<GraphqlClientController>();
-    String getAllUserVehicles = r"""
-    query{
-      getAllUserVehicles{
-        id
-        licensePlate
-        model{
-          name
-        }
-        verified
-        detail
-        colorExterior{
-          name
-        }
-        mainPicture
-        pictures
-        year
-        alias
-        bodyStyle{
-          name
-        } 
-      }
-    }
-    """;
 
     QueryOptions queryOptions =
-        QueryOptions(documentNode: gql(getAllUserVehicles));
+        QueryOptions(documentNode: gql(getAllUserVehiclesQuery));
 
     final QueryResult getAllUserVehiclesResult = await graphqlClient
         .parkaGraphqlClient.value.graphQlClient
@@ -54,30 +33,6 @@ class VehicleUseCases {
 
   static Future<bool> createVehicle(CreateVehicleDto createVehicleDto) async {
     final graphqlClient = Get.find<GraphqlClientController>();
-    final String createVehicleMutation = r"""
-    mutation($data:createVehicleInput!){
-      createVehicle(createVehicleInput:$data){
-        id
-        model{
-          name
-        }
-        licensePlate
-        verified
-        detail
-        colorExterior{
-          name
-        }
-        mainPicture
-        pictures
-        year
-        alias
-        bodyStyle{
-          id
-          name
-        }
-      }
-    }
-    """;
 
     String imageUrl = await uploadImage(createVehicleDto.mainPicture);
 

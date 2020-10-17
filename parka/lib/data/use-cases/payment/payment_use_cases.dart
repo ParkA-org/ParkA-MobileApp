@@ -2,6 +2,8 @@ import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/data-models/payment/payment_data_model.dart';
 
 import 'package:ParkA/data/use-cases/user/dtos/user_registration_dto.dart';
+import 'package:ParkA/utils/graphql/mutations/payment_mutations.dart';
+import 'package:ParkA/utils/graphql/queries/payment_queries.dart';
 import 'package:get/get.dart';
 import 'package:graphql/client.dart';
 
@@ -11,16 +13,6 @@ class PaymentUseCases {
         .parkaGraphqlClient
         .value
         .graphQlClient;
-    String createPaymentQuery = r"""
-    mutation($data:CreatePaymentInput!){
-      createPayment(createPaymentInput:$data){
-        cardHolder
-        expirationDate
-        digit
-        activated  
-      }
-    }
-    """;
 
     print(createPaymentDto.cardHolder);
     print(createPaymentDto.card);
@@ -39,7 +31,7 @@ class PaymentUseCases {
     };
 
     MutationOptions mutationOptions = MutationOptions(
-      documentNode: gql(createPaymentQuery),
+      documentNode: gql(createPaymentMutation),
       variables: createPaymentInput,
     );
 
@@ -62,24 +54,8 @@ class PaymentUseCases {
         .value
         .graphQlClient;
 
-    String getAllUserPaymentMethods = r""" 
-    query{
-      getUserInformationById{
-        id
-        paymentInformation{
-          id
-          cardHolder
-          expirationDate
-          digit
-          activated
-          
-        }
-      }
-    }
-    """;
-
     QueryOptions queryOptions =
-        QueryOptions(documentNode: gql(getAllUserPaymentMethods));
+        QueryOptions(documentNode: gql(getAllUserPaymentMethodsQuery));
 
     final createPaymentInputResult = await graphqlClient.query(queryOptions);
 

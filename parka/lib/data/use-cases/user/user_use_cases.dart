@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/data-models/information/information_data_model.dart';
 import 'package:ParkA/data/data-models/user/user_data_model.dart';
+import 'package:ParkA/utils/graphql/mutations/user_mutations.dart';
+import 'package:ParkA/utils/graphql/queries/user_queries.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -21,20 +23,6 @@ class UserUseCases {
         "password": password,
       }
     };
-
-    final String loginMutation = r'''
-    mutation($input:LoginUserInput!){
-      login(loginUserInput:$input){
-        JWT,
-        user{
-          name
-          email
-          lastName
-          profilePicture
-          }
-        }
-      }
-    ''';
 
     MutationOptions loginMutationOptions = MutationOptions(
       documentNode: gql(loginMutation),
@@ -90,19 +78,6 @@ class UserUseCases {
   static Future createUser(CreateUserDto createUserDto) async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
-    String createUserQuery = r"""
-    mutation($data:createUserInput!){
-      createUser(createUserInput:$data){
-        name
-        lastName
-        email
-        profilePicture
-        confirmed
-        origin
-      }
-    }
-    """;
-
     final createUserInput = {
       "data": {
         "name": createUserDto.name,
@@ -121,7 +96,7 @@ class UserUseCases {
     }
 
     MutationOptions mutationOptions = MutationOptions(
-        documentNode: gql(createUserQuery), variables: createUserInput);
+        documentNode: gql(createUserMutation), variables: createUserInput);
 
     final QueryResult createUserResult = await graphqlClient
         .parkaGraphqlClient.value.graphQlClient
@@ -140,26 +115,6 @@ class UserUseCases {
       CreateUserInformationDto createUserInformationDto) async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
-    String createUserInformation = r"""
-    mutation($data:CreateUserInformationInpuType!) {
-  createUserInformation(
-    createUserInformationInpuType: $data
-  ) {
-    id
-    documentNumber
-    telephoneNumber
-    birthDate
-    placeOfBirth {
-      name
-    }
-    nationality {
-      id
-      name
-    }
-  }
-}
-    """;
-
     final createUserInformationInput = {
       "data": {
         "paymentInformation": "cc78a504-aafe-4917-afe9-f3a3ecee8b07",
@@ -172,7 +127,7 @@ class UserUseCases {
     };
 
     MutationOptions mutationOptions = MutationOptions(
-      documentNode: gql(createUserInformation),
+      documentNode: gql(createUserInformationMutation),
       variables: createUserInformationInput,
     );
 
@@ -203,13 +158,6 @@ class UserUseCases {
 
   static Future confirmUserEmail({String email, String code}) async {
     final graphqlClient = Get.find<GraphqlClientController>();
-    String confirmUserEmail = r"""
-    mutation($data:ValidateEmailCodeInput!){
-      validateEmailCode(validateEmailCodeInput:$data){
-        email
-        origin
-      }
-    }""";
 
     final confirmUserEmailInput = {
       "data": {
@@ -220,7 +168,7 @@ class UserUseCases {
     };
 
     MutationOptions mutationOptions = MutationOptions(
-      documentNode: gql(confirmUserEmail),
+      documentNode: gql(confirmUserEmailMutation),
       variables: confirmUserEmailInput,
     );
 
@@ -239,14 +187,6 @@ class UserUseCases {
   static Future resendConfirmationCode({String email}) async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
-    String resendConfirmationCodeQuery = r"""
-    mutation($data:ValidateEmailCodeInput!){
-      validateEmailCode(validateEmailCodeInput:$data){
-        email
-        origin
-      }
-    }""";
-
     final resendConfirmationInput = {
       "data": {
         "email": email,
@@ -255,7 +195,7 @@ class UserUseCases {
     };
 
     MutationOptions mutationOptions = MutationOptions(
-      documentNode: gql(resendConfirmationCodeQuery),
+      documentNode: gql(resendConfirmationCodeMutation),
       variables: resendConfirmationInput,
     );
 
@@ -273,15 +213,6 @@ class UserUseCases {
   static Future requestResetPassword({String email}) async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
-    String resetPasswordQuery = r"""
-    mutation($data:ResetPasswordInput!){
-      resetPassword(resetPasswordInput:$data){
-        email
-        origin
-      }
-    }
-    """;
-
     final resetPasswordInput = {
       "data": {
         "email": email,
@@ -290,7 +221,7 @@ class UserUseCases {
     };
 
     MutationOptions mutationOptions = MutationOptions(
-      documentNode: gql(resetPasswordQuery),
+      documentNode: gql(requestResetPasswordMutation),
       variables: resetPasswordInput,
     );
 
@@ -313,15 +244,6 @@ class UserUseCases {
   }) async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
-    final resetPasswordQuery = r'''
-    mutation($data:ValidateResetPasswordCodeInput!){
-      validateResetPasswordCode(validateResetPasswordCodeInput:$data){
-        email
-        origin
-      }
-    }
-    ''';
-
     final resetPasswordInput = {
       "data": {
         "email": email,
@@ -332,7 +254,7 @@ class UserUseCases {
     };
 
     MutationOptions mutationOptions = MutationOptions(
-      documentNode: gql(resetPasswordQuery),
+      documentNode: gql(resetPasswordMutation),
       variables: resetPasswordInput,
     );
 
@@ -351,14 +273,6 @@ class UserUseCases {
   static Future updateUserPassword(
       {String newPassword, String oldPassword}) async {
     final graphqlClient = Get.find<GraphqlClientController>();
-
-    String updateUserPasswordMutation = r"""
-    mutation($data:UpdateUserPasswordInput!){
-  updateUserPassword(updateUserPasswordInput:$data){
-    email
-  }
-}
-    """;
 
     final updateUserPasswordInput = {
       "data": {
@@ -389,18 +303,6 @@ class UserUseCases {
     String lastName,
   }) async {
     final graphqlClient = Get.find<GraphqlClientController>();
-
-    String updateUserMutation = r'''
-     mutation($data:UpdateUserInput!){
-      updateUser(updateUserInput:$data){
-        name
-        lastName
-        email
-        profilePicture
-        confirmed
-        origin
-      }
-    }''';
 
     final updateUserInput = {
       "data": {
@@ -442,23 +344,6 @@ class UserUseCases {
   static Future<Information> getUserInformation() async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
-    String getUserInformationQuery = r"""
-      query{
-        getUserInformationById{
-          id
-          documentNumber
-          telephoneNumber
-          birthDate
-          placeOfBirth{
-            name
-          }
-          nationality{
-            name
-          }
-        }
-      }
-      """;
-
     QueryOptions queryOptions =
         QueryOptions(documentNode: gql(getUserInformationQuery));
 
@@ -490,22 +375,6 @@ class UserUseCases {
     String nationality,
   ) async {
     final graphqlClient = Get.find<GraphqlClientController>();
-
-    final String updateUserInformationMutation = r"""
-    mutation($data:updateUserInformationInput!){
-      updateUserInformation(updateUserInformationInput:$data){
-        documentNumber
-        telephoneNumber
-        birthDate
-        placeOfBirth{
-          name
-        }
-        nationality{
-          name
-        }
-      }
-    }
-    """;
 
     print(nationality);
     print(placeOfBirth);

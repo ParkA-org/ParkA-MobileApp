@@ -1,6 +1,6 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/data-models/nationality/nationality_data_model.dart';
-
+import "package:ParkA/utils/graphql/queries/nationality_queries.dart";
 import 'package:get/get.dart';
 import 'package:graphql/client.dart';
 
@@ -9,17 +9,8 @@ final graphqlClient =
 
 class NationalityUseCases {
   static Future<List<Nationality>> getAllNationalities() async {
-    final String getAllNationalities = r"""
-      query{
-          getAllNationalities{
-            id
-            name
-          }
-        }
-    """;
-
     QueryOptions queryOptions =
-        QueryOptions(documentNode: gql(getAllNationalities));
+        QueryOptions(documentNode: gql(getAllNationalitiesQuery));
 
     final QueryResult getAllNationalitiesResult =
         await graphqlClient.query(queryOptions);
