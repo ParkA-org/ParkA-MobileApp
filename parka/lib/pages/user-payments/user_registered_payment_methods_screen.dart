@@ -1,3 +1,4 @@
+import 'package:ParkA/components/floating-action-button/parka_floating_action_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/use-cases/payment/payment_use_cases.dart';
@@ -54,10 +55,9 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: ParkaColors.parkaGreen,
-        child: Icon(Icons.add),
-        onPressed: () {
+      floatingActionButton: ParkaFloatingActionButton(
+        iconData: Icons.add,
+        onPressedHandler: () {
           Get.toNamed(PaymentInfoScreen.routeName);
         },
       ),

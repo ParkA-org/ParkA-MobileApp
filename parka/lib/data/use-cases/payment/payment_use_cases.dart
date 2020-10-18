@@ -1,7 +1,6 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/data-models/payment/payment_data_model.dart';
-
-import 'package:ParkA/data/dtos/user/user_registration_dto.dart';
+import 'package:ParkA/data/dtos/payment/create_payment_dto.dart';
 import 'package:ParkA/utils/graphql/mutations/payment_mutations.dart';
 import 'package:ParkA/utils/graphql/queries/payment_queries.dart';
 import 'package:get/get.dart';

@@ -1,0 +1,27 @@
+import 'package:ParkA/styles/parka_colors.dart';
+import 'package:flutter/material.dart';
+
+class ParkaFloatingActionButton extends StatelessWidget {
+  final IconData iconData;
+  final Function onPressedHandler;
+
+  const ParkaFloatingActionButton({
+    Key key,
+    this.iconData,
+    this.onPressedHandler,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      elevation: 10.0,
+      backgroundColor: ParkaColors.parkaGreen,
+      child: Icon(
+        this.iconData,
+        size: 40,
+      ),
+      highlightElevation: 20,
+      onPressed: this.onPressedHandler,
+    );
+  }
+}

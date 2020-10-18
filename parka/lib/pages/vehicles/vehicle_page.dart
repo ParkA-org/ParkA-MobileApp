@@ -1,3 +1,4 @@
+import 'package:ParkA/components/floating-action-button/parka_floating_action_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
 
@@ -6,7 +7,6 @@ import 'package:ParkA/pages/create-vehicle/create_vehicle_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/parkaIcons.dart';
 import "package:flutter/material.dart";
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import 'components/user_vehicle_placeholder.dart';
@@ -23,9 +23,9 @@ class __VehiclePageState extends State<VehiclePage> {
   bool vehiclesLoaded;
   List<Vehicle> userVehicles = [];
 
-  Future getAllUserVehicle() async {
+  Future<void> getAllUserVehicle() async {
     this.userVehicles = await VehicleUseCases.getAllUserVehicles();
-    print(this.userVehicles.length);
+
     setState(() {
       this.vehiclesLoaded = true;
     });
@@ -53,17 +53,9 @@ class __VehiclePageState extends State<VehiclePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      floatingActionButton: FloatingActionButton(
-        elevation: 10.0,
-        backgroundColor: Color(0xFF086174),
-        child: Icon(
-          Icons.add,
-          size: 40,
-        ),
-        highlightElevation: 20,
-        // TO IMPLEMENT CREATE MY VEHICLE
-        onPressed: () {
+      floatingActionButton: ParkaFloatingActionButton(
+        iconData: Icons.add,
+        onPressedHandler: () {
           Get.toNamed(CreateVehiclePage.routeName);
         },
       ),
@@ -104,10 +96,11 @@ class __VehiclePageState extends State<VehiclePage> {
                       child: Text(
                         'Tus Vehiculos',
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 45,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "Montserrat"),
+                          color: Colors.white,
+                          fontSize: 45,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "Montserrat",
+                        ),
                       ),
                     ),
                   ],

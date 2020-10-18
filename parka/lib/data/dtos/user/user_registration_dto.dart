@@ -1,3 +1,5 @@
+import 'package:ParkA/data/dtos/payment/create_payment_dto.dart';
+
 class UserRegistrationForm {
   CreateUserDto createUserDto;
   CreateUserInformationDto createUserInformationDto;
@@ -41,21 +43,5 @@ class CreateUserInformationDto {
     this.nationality,
     this.placeOfBirth,
     this.telephonNumber,
-  });
-}
-
-class CreatePaymentDto {
-  String cardHolder;
-  String expirationDate;
-  String digit;
-  String card;
-  String cvv;
-
-  CreatePaymentDto({
-    this.card,
-    this.cardHolder,
-    this.cvv,
-    this.digit,
-    this.expirationDate,
   });
 }
