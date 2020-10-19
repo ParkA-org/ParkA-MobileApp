@@ -1,5 +1,7 @@
+import 'package:ParkA/components/floating-action-button/parka_floating_action_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/components/inputs/parka_dropdown.dart';
+import 'package:ParkA/components/inputs/parka_edit_text_field.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/data/data-models/country/country_data_model.dart';
 import 'package:ParkA/data/data-models/information/information_data_model.dart';
@@ -7,7 +9,6 @@ import 'package:ParkA/data/data-models/nationality/nationality_data_model.dart';
 import 'package:ParkA/data/use-cases/country/country_use_cases.dart';
 import 'package:ParkA/data/use-cases/nationality/nationality_use_cases.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
-import 'package:ParkA/styles/inputs.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
@@ -100,12 +101,9 @@ class _EditUserProfileInformationPageState
     Size currentScreen = MediaQuery.of(context).size;
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: ParkaColors.parkaGreen,
-        child: Icon(Icons.autorenew),
-        onPressed: () {
-          this.updateUserProfile();
-        },
+      floatingActionButton: ParkaFloatingActionButton(
+        iconData: Icons.autorenew,
+        onPressedHandler: this.updateUserProfile,
       ),
       body: SafeArea(
         child: Column(
@@ -197,6 +195,7 @@ class _EditUserProfileInformationPageState
                                     style: kParkaTextStyleBoldWhite20),
                                 ParkaEditInput(
                                   value: this.userInformation.document,
+                                  textFieldMaxLength: 10,
                                   onChangedHandler: (String value) {
                                     setState(
                                       () {
@@ -207,6 +206,7 @@ class _EditUserProfileInformationPageState
                                 ),
                                 ParkaEditInput(
                                   value: this.userInformation.telephoneNumber,
+                                  textFieldMaxLength: 13,
                                   onChangedHandler: (String value) {
                                     setState(
                                       () {
@@ -230,22 +230,6 @@ class _EditUserProfileInformationPageState
                                     );
                                   },
                                 ),
-                                // ParkaEditInput(
-                                //   value: this.userInformation.placeOfBirth,
-                                //   onChangedHandler: (String value) {
-                                //     setState(() {
-                                //       this.lastName = value;
-                                //     });
-                                //   },
-                                // ),
-                                // ParkaEditInput(
-                                //   value: this.userInformation.nationality,
-                                //   onChangedHandler: (String value) {
-                                //     setState(() {
-                                //       this.lastName = value;
-                                //     });
-                                //   },
-                                // ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: ParkADropdown(
@@ -297,45 +281,6 @@ class _EditUserProfileInformationPageState
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class ParkaEditInput extends StatelessWidget {
-  final String label;
-  final String value;
-  final Function onChangedHandler;
-
-  const ParkaEditInput({
-    Key key,
-    this.label,
-    this.value,
-    this.onChangedHandler,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 8.0),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(
-            15.0,
-          ),
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(3.0, 10.0),
-              color: Colors.black38,
-              blurRadius: 5.0,
-            ),
-          ]),
-      child: TextField(
-        decoration: kInputStyleSlim.copyWith(
-          // labelText: this.label,
-
-          hintText: this.value,
-        ),
-        onChanged: this.onChangedHandler,
       ),
     );
   }
