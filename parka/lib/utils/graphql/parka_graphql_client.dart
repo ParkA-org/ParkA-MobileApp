@@ -9,7 +9,7 @@ class ParkaGraphqlClient {
 
   ParkaGraphqlClient() {
     final HttpLink _httpLink = HttpLink(
-      uri: 'http://206.189.201.90/graphql',
+      uri: 'http://parka-microservices.tech/graphql',
     );
     this.client = GraphQLClient(
       cache: InMemoryCache(),
@@ -22,7 +22,7 @@ class ParkaGraphqlClient {
       getToken: () => 'Bearer $jwt',
     );
     final HttpLink _httpLink = HttpLink(
-      uri: 'http://206.189.201.90/graphql',
+      uri: 'http://parka-microservices.tech/graphql',
     );
 
     final Link _link = _authLink.concat(_httpLink);
