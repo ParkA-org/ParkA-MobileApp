@@ -1,5 +1,5 @@
 const String createVehicleMutation = r"""
-    mutation($data:createVehicleInput!){
+    mutation($data:CreateVehicleInput!){
       createVehicle(createVehicleInput:$data){
         id
         model{

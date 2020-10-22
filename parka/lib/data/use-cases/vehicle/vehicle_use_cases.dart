@@ -68,6 +68,7 @@ class VehicleUseCases {
         .mutate(mutationOptions);
 
     print(createVehiclesResult.data);
+    print(createVehiclesResult.exception.toString());
     if (createVehiclesResult.data != null) {
       return true;
     }
