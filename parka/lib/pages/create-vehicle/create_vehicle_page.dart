@@ -237,6 +237,7 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                                           this.selectedModel =
                                               this.models[value].name;
                                           this.model = this.models[value].id;
+                                          print(this.model);
                                         },
                                       );
                                     },

@@ -16,6 +16,8 @@ class ModelUseCases {
         .parkaGraphqlClient.value.graphQlClient
         .query(queryOptions);
 
+    print(queryResult.data);
+
     if (queryResult != null) {
       print(queryResult.data["getAllMakes"]);
       final List tempList = queryResult.data["getAllMakes"];

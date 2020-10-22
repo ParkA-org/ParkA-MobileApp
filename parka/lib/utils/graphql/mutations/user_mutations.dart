@@ -13,7 +13,7 @@ const String loginMutation = r'''
     ''';
 
 const String createUserMutation = r"""
-    mutation($data:createUserInput!){
+    mutation($data:CreateUserInput!){
       createUser(createUserInput:$data){
         name
         lastName
@@ -100,7 +100,7 @@ const String updateUserMutation = r'''
     }''';
 
 const String updateUserInformationMutation = r"""
-    mutation($data:updateUserInformationInput!){
+    mutation($data:UpdateUserInformationInput!){
       updateUserInformation(updateUserInformationInput:$data){
         documentNumber
         telephoneNumber

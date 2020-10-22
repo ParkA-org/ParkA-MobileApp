@@ -1,13 +1,12 @@
 const String getAllModelsQuery = r"""
-    query{
-      getAllMakes{
-        icon
-        name
-        models{
-          id
-          make
-          name
-        }
-      }
+query{
+  getAllMakes{
+    id
+    name
+    models{
+      id
+      name
     }
+  }
+}
     """;
