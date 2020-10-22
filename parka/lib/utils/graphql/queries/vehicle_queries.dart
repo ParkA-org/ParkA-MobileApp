@@ -1,0 +1,23 @@
+const String getAllUserVehiclesQuery = r"""
+    query{
+      getAllUserVehicles{
+        id
+        licensePlate
+        model{
+          name
+        }
+        verified
+        detail
+        colorExterior{
+          name
+        }
+        mainPicture
+        pictures
+        year
+        alias
+        bodyStyle{
+          name
+        } 
+      }
+    }
+    """;
