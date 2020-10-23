@@ -13,7 +13,7 @@ class Make {
     this.name,
   });
 
-  static modelsFromJson(List makeData) {
+  static makesFromJson(List makeData) {
     List<Make> ret = new List<Make>();
 
     makeData.forEach(
