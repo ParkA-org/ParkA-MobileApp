@@ -2,11 +2,8 @@
 import 'package:ParkA/data/data-models/vehicle/dto/create_vehicle_dto.dart';
 
 bool createVehicleFormValidator(CreateVehicleDto createVehicleDto) {
-  print(createVehicleDto.licensePlate);
-
   if (createVehicleDto.licensePlate == null ||
       createVehicleDto.licensePlate.length != 7) {
-    print(createVehicleDto.licensePlate);
     return false;
   }
 

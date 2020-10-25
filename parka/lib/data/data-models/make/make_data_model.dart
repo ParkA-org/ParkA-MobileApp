@@ -4,7 +4,7 @@ class Make {
   String id;
   String name;
   String icon;
-  List models;
+  List<Model> models;
 
   Make({
     this.id,
