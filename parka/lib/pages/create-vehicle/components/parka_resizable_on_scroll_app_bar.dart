@@ -67,11 +67,14 @@ class ParkaResizableOnScrollAppBar extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        flex: childrenSpace > resizableSpace ? 1 : 0,
+                        flex: 0,
                         child: Center(
                           child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 16.0,
+                              vertical:
+                                  (childrenSpace > resizableSpace ? 8.0 : 0),
+                            ),
                             child: AutoSizeText(
                               "Agrega tu vehiculo",
                               textAlign: TextAlign.center,
