@@ -1,4 +1,3 @@
-//TODO: create function logic
 import 'package:ParkA/data/data-models/vehicle/dto/create_vehicle_dto.dart';
 
 bool createVehicleFormValidator(CreateVehicleDto createVehicleDto) {
