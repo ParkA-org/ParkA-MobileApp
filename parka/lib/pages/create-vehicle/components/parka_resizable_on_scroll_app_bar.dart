@@ -4,83 +4,88 @@ import 'package:ParkA/styles/parka_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import "package:flutter/material.dart";
 
-//TODO: clean this mess
 class ParkaResizableOnScrollAppBar extends StatelessWidget {
+  final appBarHeight;
+  final headerHeight = 36.0;
+  final minAppBarHeight = 56.0;
+
   const ParkaResizableOnScrollAppBar({
     Key key,
+    this.appBarHeight = 256.0,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
       pinned: true,
       backgroundColor: ParkaColors.parkaGreen,
-      expandedHeight: 256.0,
+      expandedHeight: this.appBarHeight,
       leading: Container(),
-      // title: Text("Agrega un Vehiculo"),
-      flexibleSpace: LayoutBuilder(
-        builder: (BuildContext contex, cons) {
-          return Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  flex: 0,
-                  child: Container(
-                    padding: EdgeInsets.only(
-                      bottom: (cons.maxHeight - 56.0 - 70.0) > 0 ? 16.0 : 0,
-                    ),
-                    child: ParkaHeader(
-                      color: Colors.white,
-                    ),
-                  ),
+      flexibleSpace: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              flex: 0,
+              child: Container(
+                height: this.headerHeight,
+                child: ParkaHeader(
+                  color: Colors.white,
                 ),
-                Container(
-                  alignment: Alignment.centerLeft,
-                  child: Icon(
-                    ParkaIcons.parkaCar,
-                    color: Color.fromRGBO(
-                        255,
-                        255,
-                        255,
-                        (cons.maxHeight - 56.0 - 70.0) / 130 == 1
-                            ? 1
-                            : ((cons.maxHeight - 56.0 - 70.0) > 0
-                                    ? (cons.maxHeight - 56.0 - 70.0)
-                                    : 0) /
-                                390),
-                    size: (cons.maxHeight - 56.0 - 70.0) > 0
-                        ? (cons.maxHeight - 56.0 - 70.0)
-                        : 0,
-                  ),
-                ),
-                Expanded(
-                    child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    child: LayoutBuilder(
-                      builder: (ctx, constraint) {
-                        // print(constr.maxHeight);
-                        return AutoSizeText(
-                          "Agrega tu vehiculo",
-                          textAlign: TextAlign.center,
-                          maxLines: 1,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: constraint.maxHeight * 0.5,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "Montserrat",
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ))
-              ],
+              ),
             ),
-          );
-        },
+            Expanded(child: LayoutBuilder(
+              builder: (ctx, constraints) {
+                print(constraints.maxHeight);
+                final childrenSpace = constraints.maxHeight / 2;
+                final carProportion = childrenSpace /
+                    ((this.appBarHeight - this.headerHeight) / 2);
+                final resizableSpace = (minAppBarHeight - headerHeight) / 2;
+
+                return Column(
+                  children: [
+                    Expanded(
+                      flex: childrenSpace > resizableSpace ? 1 : 0,
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        height: childrenSpace > resizableSpace
+                            ? childrenSpace
+                            : 0.0,
+                        child: Icon(
+                          ParkaIcons.parkaCar,
+                          size: childrenSpace > resizableSpace
+                              ? childrenSpace
+                              : 0.0,
+                          color: Color.fromRGBO(255, 255, 255,
+                              carProportion == 1 ? 1 : carProportion / 2),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: childrenSpace > resizableSpace ? 1 : 0,
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: AutoSizeText(
+                            "Agrega tu vehiculo",
+                            textAlign: TextAlign.center,
+                            maxLines: 1,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: constraints.maxHeight * 0.8,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Montserrat",
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ))
+          ],
+        ),
       ),
     );
   }
