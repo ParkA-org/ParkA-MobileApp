@@ -61,11 +61,11 @@ class ParkaImageCardWidget extends StatelessWidget {
                           child: GetUtils.isURL(this.image)
                               ? Image.network(
                                   this.image,
-                                  fit: BoxFit.fitHeight,
+                                  fit: BoxFit.cover,
                                 )
                               : Image.file(
                                   File(this.image),
-                                  fit: BoxFit.fitHeight,
+                                  fit: BoxFit.cover,
                                 ),
                         ),
                       )
