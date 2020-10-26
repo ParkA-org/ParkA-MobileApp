@@ -26,15 +26,14 @@ class ParkaImageCardWidget extends StatelessWidget {
         ),
         child: LayoutBuilder(
           builder: (BuildContext context, constraint) {
-            // print(constraint.maxWidth);
-
-            double cardWidth =
-                constraint.maxWidth > 350 ? 350 : constraint.maxWidth;
             const creditCardProp = 1.58;
 
-            print(
-              (cardWidth + 32.0) / creditCardProp,
-            );
+            final referenceDimension = constraint.maxWidth == double.infinity
+                ? constraint.maxHeight
+                : constraint.maxWidth * creditCardProp;
+
+            double cardWidth =
+                referenceDimension > 350 ? 350 : referenceDimension;
 
             return ConstrainedBox(
               constraints: constraint,
@@ -51,11 +50,6 @@ class ParkaImageCardWidget extends StatelessWidget {
                       blurRadius: 5.0,
                     ),
                   ],
-                  // image: DecorationImage(
-                  //   fit: BoxFit.fitHeight,
-                  //   image: NetworkImage(
-                  //       "https://st.motortrend.com/uploads/sites/5/2019/11/2020-Toyota-Corolla-Hybrid-LE-front-three-quarter-in-motion.jpg"),
-                  // ),
                 ),
                 child: this.image != null
                     ? (GetUtils.isURL(this.image)
@@ -64,7 +58,7 @@ class ParkaImageCardWidget extends StatelessWidget {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(16.0),
                               child: Image.network(
-                                "https://st.motortrend.com/uploads/sites/5/2019/11/2020-Toyota-Corolla-Hybrid-LE-front-three-quarter-in-motion.jpg",
+                                this.image,
                                 fit: BoxFit.fitHeight,
                               ),
                             ),

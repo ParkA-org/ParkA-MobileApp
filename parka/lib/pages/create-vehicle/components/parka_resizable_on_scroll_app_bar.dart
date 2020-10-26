@@ -6,7 +6,7 @@ import "package:flutter/material.dart";
 
 class ParkaResizableOnScrollAppBar extends StatelessWidget {
   final appBarHeight;
-  final headerHeight = 28.0;
+  final headerHeight = 36.0;
   final minAppBarHeight = 56.0;
 
   const ParkaResizableOnScrollAppBar({
@@ -62,18 +62,15 @@ class ParkaResizableOnScrollAppBar extends StatelessWidget {
                                 ? childrenSpace
                                 : 0.0,
                             color: Color.fromRGBO(255, 255, 255,
-                                carProportion == 1 ? 1 : carProportion / 2),
+                                carProportion > 0.9 ? 1 : carProportion / 2),
                           ),
                         ),
                       ),
                       Expanded(
-                        flex: 0,
                         child: Center(
                           child: Padding(
                             padding: EdgeInsets.symmetric(
                               horizontal: 16.0,
-                              vertical:
-                                  (childrenSpace > resizableSpace ? 8.0 : 0),
                             ),
                             child: AutoSizeText(
                               "Agrega tu vehiculo",

@@ -15,9 +15,11 @@ class ParkaAddImagesCarousel extends StatelessWidget {
     List<Widget> ret = new List();
 
     this.pictures.forEach((element) {
-      ret.add(ParkaImageCardWidget(
-        image: element,
-      ));
+      ret.add(
+        ParkaImageCardWidget(
+          image: element,
+        ),
+      );
       ret.add(
         SizedBox(
           width: 16.0,

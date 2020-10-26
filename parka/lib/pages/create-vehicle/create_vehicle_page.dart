@@ -119,11 +119,16 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                          child: ParkaImageCardWidget(
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        32.0,
+                        0,
+                        32.0,
+                        32.0,
+                      ),
+                      child: Column(
+                        children: [
+                          ParkaImageCardWidget(
                             image: this.createVehicleDto.mainPicture,
                             onTapHandler: () async {
                               String imagePath = await getImageFunction();
@@ -134,10 +139,7 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                               }
                             },
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 32.0),
-                          child: ParkaAddImagesCarousel(
+                          ParkaAddImagesCarousel(
                             pictures: this.createVehicleDto.pictures,
                             onTapHandler: () async {
                               String imagePath = await getImageFunction();
@@ -148,15 +150,7 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                               }
                             },
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(
-                            32.0,
-                            0,
-                            32.0,
-                            32.0,
-                          ),
-                          child: Column(
+                          Column(
                             children: [
                               ParkaEditInput(
                                 type: ParkaInputType.textField,
@@ -274,8 +268,8 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                               ),
                             ],
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     )
                   ],
                 ),
