@@ -19,6 +19,9 @@ class ParkaImageCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: this.onTapHandler,
+      onLongPress: () {
+        print("JEVA");
+      },
       child: Container(
         alignment: Alignment.center,
         margin: EdgeInsets.symmetric(
@@ -52,38 +55,34 @@ class ParkaImageCardWidget extends StatelessWidget {
                   ],
                 ),
                 child: this.image != null
-                    ? (GetUtils.isURL(this.image)
-                        ? Container(
-                            // padding: const EdgeInsets.all(16.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(16.0),
-                              child: Image.network(
-                                this.image,
-                                fit: BoxFit.fitHeight,
-                              ),
-                            ),
-                          )
-                        : Container(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(16.0),
-                              child: Image.file(
-                                File(this.image),
-                                fit: BoxFit.fitHeight,
-                              ),
-                            ),
-                          ))
+                    ? Container(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16.0),
+                          child: GetUtils.isURL(this.image)
+                              ? Image.network(
+                                  this.image,
+                                  fit: BoxFit.fitHeight,
+                                )
+                              : Image.file(
+                                  File(this.image),
+                                  fit: BoxFit.fitHeight,
+                                ),
+                        ),
+                      )
                     : Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SvgPicture.asset(
                             "resources/images/carPlaceHolder.svg",
+                            height: cardWidth / 6,
+                            width: cardWidth / 6,
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Icon(
                               Icons.add,
                               color: Colors.white,
-                              size: 40.0,
+                              size: cardWidth / 6,
                             ),
                           ),
                         ],
