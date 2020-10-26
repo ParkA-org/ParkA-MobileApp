@@ -22,7 +22,7 @@ class VehicleTile extends StatelessWidget {
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: NetworkImage(this.vehicle.mainPicture),
-                      fit: BoxFit.fill),
+                      fit: BoxFit.cover),
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(15.0),
                     bottomRight: Radius.circular(15.0),

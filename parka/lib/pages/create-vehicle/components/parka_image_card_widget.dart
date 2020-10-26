@@ -7,11 +7,15 @@ import 'package:get/get.dart';
 
 class ParkaImageCardWidget extends StatelessWidget {
   final Function onTapHandler;
+  final Function onLongPressHandler;
   final String image;
+  final int index;
 
   ParkaImageCardWidget({
     Key key,
+    this.index,
     this.onTapHandler,
+    this.onLongPressHandler,
     this.image,
   }) : super(key: key);
 
@@ -20,7 +24,9 @@ class ParkaImageCardWidget extends StatelessWidget {
     return GestureDetector(
       onTap: this.onTapHandler,
       onLongPress: () {
-        print("JEVA");
+        if (this.image != null) {
+          this.onLongPressHandler(index);
+        }
       },
       child: Container(
         alignment: Alignment.center,

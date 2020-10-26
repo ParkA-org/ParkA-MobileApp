@@ -1,3 +1,4 @@
+import 'package:ParkA/components/alerts/parka_base_alert_widget.dart';
 import 'package:ParkA/components/floating-action-button/parka_floating_action_button.dart';
 import 'package:ParkA/data/data-models/body-style/body_style_data_model.dart';
 import 'package:ParkA/data/data-models/make/make_data_model.dart';
@@ -11,9 +12,11 @@ import 'package:ParkA/data/use-cases/make/make_use_cases.dart';
 import 'package:ParkA/data/use-cases/model/model_use_cases.dart';
 import 'package:ParkA/data/use-cases/vehicle/vehicle_use_cases.dart';
 import 'package:ParkA/styles/parka_colors.dart';
+import 'package:ParkA/styles/text.dart';
 import 'package:ParkA/utils/form-validations/create_vehicle_form_validator.dart';
 import 'package:ParkA/utils/functions/get_year_list.dart';
 import 'package:ParkA/utils/functions/pick_image.dart';
+import 'package:ParkA/utils/functions/show_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -100,6 +103,18 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
     }
   }
 
+  Future removeVehicle(int index) {
+    return buildShowDialog(context, RemoveCarImageAlert(
+      removeImage: () {
+        print(index);
+        setState(() {
+          this.createVehicleDto.pictures.removeAt(index);
+        });
+        Get.back();
+      },
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,6 +164,7 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                                 });
                               }
                             },
+                            onLongPressHandler: this.removeVehicle,
                           ),
                           Column(
                             children: [
@@ -278,6 +294,39 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class RemoveCarImageAlert extends StatelessWidget {
+  final Function removeImage;
+
+  RemoveCarImageAlert({this.removeImage});
+
+  @override
+  Widget build(BuildContext context) {
+    return BaseAlertWidget(
+      child: Text(
+        "Quieres eliminar esta foto?",
+        style: kParkaBigButtonTextStyle.copyWith(
+          fontSize: 20.0,
+          color: ParkaColors.parkaGreen,
+        ),
+      ),
+      actions: [
+        FlatButton(
+            onPressed: this.removeImage,
+            child: Text(
+              "Eliminar",
+              style: kParkaTextBaseStyleBold,
+            )),
+        FlatButton(
+            onPressed: () => Get.back(),
+            child: Text(
+              "Ignorar",
+              style: kParkaTextBaseStyleBold,
+            )),
+      ],
     );
   }
 }

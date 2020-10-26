@@ -4,20 +4,25 @@ import "package:flutter/material.dart";
 class ParkaAddImagesCarousel extends StatelessWidget {
   final List<String> pictures;
   final Function onTapHandler;
+  final Function onLongPressHandler;
 
   const ParkaAddImagesCarousel({
     Key key,
     this.pictures,
     this.onTapHandler,
+    this.onLongPressHandler,
   }) : super(key: key);
 
   List<Widget> carouselBuilder() {
     List<Widget> ret = new List();
 
+    int index = 0;
     this.pictures.forEach((element) {
       ret.add(
         ParkaImageCardWidget(
           image: element,
+          index: index,
+          onLongPressHandler: this.onLongPressHandler,
         ),
       );
       ret.add(
@@ -25,6 +30,7 @@ class ParkaAddImagesCarousel extends StatelessWidget {
           width: 16.0,
         ),
       );
+      index++;
     });
 
     ret.add(
