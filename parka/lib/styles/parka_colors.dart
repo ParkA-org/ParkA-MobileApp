@@ -9,4 +9,5 @@ abstract class ParkaColors {
   static Color parkaGrey = Color(0xFF69858B);
   static Color parkaLightGrey = Color(0xFFE9E9E9);
   static Color parkaLightRed = Color(0xFFF45252);
+  static Color parkaInputGrey = Color(0xFFC4C4C4);
 }

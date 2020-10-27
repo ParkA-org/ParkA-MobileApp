@@ -2,10 +2,12 @@ import "package:flutter/material.dart";
 
 class BaseAlertWidget extends StatelessWidget {
   final Widget child;
+  final List<Widget> actions;
 
   const BaseAlertWidget({
     Key key,
     this.child,
+    this.actions,
   }) : super(key: key);
 
   @override
@@ -19,6 +21,7 @@ class BaseAlertWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.0),
       ),
       content: this.child,
+      actions: this.actions,
     );
   }
 }

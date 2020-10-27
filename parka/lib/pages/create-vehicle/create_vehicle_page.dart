@@ -1,21 +1,29 @@
-import 'package:ParkA/components/headers/parka_header.dart';
-import 'package:ParkA/components/inputs/parka_dropdown.dart';
+import 'package:ParkA/components/alerts/parka_base_alert_widget.dart';
+import 'package:ParkA/components/floating-action-button/parka_floating_action_button.dart';
 import 'package:ParkA/data/data-models/body-style/body_style_data_model.dart';
+import 'package:ParkA/data/data-models/make/make_data_model.dart';
 import 'package:ParkA/data/data-models/model/model_data_model.dart';
 import 'package:ParkA/data/data-models/vehicle/dto/create_vehicle_dto.dart';
-import 'package:ParkA/data/data-models/color/color_data_model.dart';
+import 'package:ParkA/data/data-models/color/color_data_model.dart'
+    as VehicleColor;
 import 'package:ParkA/data/use-cases/body-style/body_style_use_cases.dart';
-
 import 'package:ParkA/data/use-cases/color/color_use_cases.dart';
+import 'package:ParkA/data/use-cases/make/make_use_cases.dart';
 import 'package:ParkA/data/use-cases/model/model_use_cases.dart';
 import 'package:ParkA/data/use-cases/vehicle/vehicle_use_cases.dart';
-import 'package:ParkA/styles/inputs.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
+import 'package:ParkA/utils/form-validations/create_vehicle_form_validator.dart';
+import 'package:ParkA/utils/functions/get_year_list.dart';
 import 'package:ParkA/utils/functions/pick_image.dart';
+import 'package:ParkA/utils/functions/show_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'components/parka-input/parka_input.dart';
+import 'components/parka_add_images_carousel.dart';
+import 'components/parka_image_card_widget.dart';
+import 'components/parka_resizable_on_scroll_app_bar.dart';
 
 class CreateVehiclePage extends StatefulWidget {
   static String routeName = "create-vehicle";
@@ -25,26 +33,26 @@ class CreateVehiclePage extends StatefulWidget {
 }
 
 class _CreateVehiclePageState extends State<CreateVehiclePage> {
-  String model;
-  String licensePlate;
-  String colorExterior;
-  String mainPicture;
-  List<String> pictures;
-  String year;
-  String alias;
-  String bodyStyle;
+  CreateVehicleDto createVehicleDto = new CreateVehicleDto(
+    pictures: [],
+  );
 
   String selectedModel;
   String selectedColor;
   String selectedBodyStyle;
+  String selectedMake;
+  String selectedYear;
 
   bool dataLoading;
-  List<Color> colors;
+  List<VehicleColor.Color> colors;
   List<String> colorsOptions;
   List<BodyStyle> bodyStyles;
   List<String> bodyStyleOptions;
   List<Model> models;
   List<String> modelsOptions;
+  List<Make> makes;
+  List<String> makesOptions;
+  List<String> yearOptions;
 
   @override
   void initState() {
@@ -57,243 +65,268 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
     this.colors = await ColorUseCases.getAllColors();
     this.bodyStyles = await BodyStyleUseCases.getAllBodyStyles();
     this.models = await ModelUseCases.getAllModels();
+    this.makes = await MakeUseCases.getAllMakes();
 
     this.bodyStyleOptions = new List.from(this.bodyStyles.map((e) => e.name));
     this.colorsOptions = new List.from(this.colors.map((e) => e.name));
-    this.modelsOptions = new List.from(this.models.map((e) => e.name));
+    this.modelsOptions = new List.from(this.makes[0].models.map((e) => e.name));
+    this.makesOptions = new List.from(this.makes.map((e) => e.name));
+    this.yearOptions = getYearsList(DateTime.now().year);
+
     setState(() {
       this.dataLoading = false;
     });
   }
 
   void createVehicle() async {
-    bool createdResult = await VehicleUseCases.createVehicle(
-      new CreateVehicleDto(
-        alias: this.alias,
-        bodyStyle: this.bodyStyle,
-        colorExterior: this.colorExterior,
-        licensePlate: this.licensePlate,
-        mainPicture: this.mainPicture,
-        model: this.model,
-        pictures: [],
-        year: this.year,
-      ),
-    );
+    bool checkForm = createVehicleFormValidator(createVehicleDto);
+
+    if (!checkForm) {
+      Get.snackbar(
+        "Error",
+        "Llena todos los campos",
+        backgroundColor: ParkaColors.parkaGoogleRed,
+      );
+      return;
+    }
+
+    bool createdResult = await VehicleUseCases.createVehicle(createVehicleDto);
 
     if (createdResult) {
       Get.back();
+    } else {
+      Get.snackbar(
+        "Error",
+        "Ocurrio un error",
+        backgroundColor: ParkaColors.parkaGoogleRed,
+      );
     }
+  }
+
+  Future removeVehicle(int index) {
+    return buildShowDialog(context, RemoveCarImageAlert(
+      removeImage: () {
+        print(index);
+        setState(() {
+          this.createVehicleDto.pictures.removeAt(index);
+        });
+        Get.back();
+      },
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
-    Size currentScreen = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: ParkaColors.parkaGreen,
-        child: Icon(Icons.add),
-        onPressed: () {
+      floatingActionButton: ParkaFloatingActionButton(
+        iconData: Icons.add,
+        onPressedHandler: () async {
           this.createVehicle();
         },
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              flex: 0,
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: 8.0,
-                ),
-                decoration: BoxDecoration(
-                  color: ParkaColors.parkaGreen,
-                ),
-                child: ParkaHeader(color: Colors.white),
-              ),
-            ),
-            Expanded(
-              child: ModalProgressHUD(
-                inAsyncCall: this.dataLoading,
-                child: this.dataLoading
-                    ? Container()
-                    : ListView(
+        child: ModalProgressHUD(
+          inAsyncCall: this.dataLoading,
+          opacity: 0.5,
+          child: CustomScrollView(
+            slivers: [
+              ParkaResizableOnScrollAppBar(),
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        32.0,
+                        0,
+                        32.0,
+                        32.0,
+                      ),
+                      child: Column(
                         children: [
-                          Container(
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 16.0, vertical: 8.0),
-                            padding: EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              color: ParkaColors.parkaGreen,
-                              boxShadow: [
-                                BoxShadow(
-                                  offset: Offset(3.0, 7.0),
-                                  color: Colors.black38,
-                                  blurRadius: 5.0,
-                                ),
-                              ],
-                              borderRadius: BorderRadius.circular(
-                                10.0,
+                          ParkaImageCardWidget(
+                            image: this.createVehicleDto.mainPicture,
+                            onTapHandler: () async {
+                              String imagePath = await getImageFunction();
+                              if (imagePath != null) {
+                                setState(() {
+                                  this.createVehicleDto.mainPicture = imagePath;
+                                });
+                              }
+                            },
+                          ),
+                          ParkaAddImagesCarousel(
+                            pictures: this.createVehicleDto.pictures,
+                            onTapHandler: () async {
+                              String imagePath = await getImageFunction();
+                              if (imagePath != null) {
+                                setState(() {
+                                  this.createVehicleDto.pictures.add(imagePath);
+                                });
+                              }
+                            },
+                            onLongPressHandler: this.removeVehicle,
+                          ),
+                          Column(
+                            children: [
+                              ParkaEditInput(
+                                type: ParkaInputType.textField,
+                                label: "Placa del vehiculo",
+                                maxLength: 7,
+                                onChangedHandler: (String value) {
+                                  setState(() {
+                                    this.createVehicleDto.licensePlate =
+                                        value.substring(0, 7);
+                                  });
+                                },
                               ),
-                            ),
-                            child: Column(
-                              children: [
-                                Text(
-                                  "Agrega tu Vehiculo",
-                                  style: kParkaTextStyleBoldWhite20,
-                                ),
-                                ParkaEditInput(
-                                  value: "Placa del vehiculo",
-                                  onChangedHandler: (value) {
-                                    setState(() {
-                                      this.licensePlate = value;
-                                    });
-                                  },
-                                ),
-                                ParkaEditInput(
-                                  value: "Ano",
-                                  onChangedHandler: (value) {
-                                    setState(() {
-                                      this.year = value;
-                                    });
-                                  },
-                                ),
-                                ParkaEditInput(
-                                  value: "Alias",
-                                  onChangedHandler: (value) {
-                                    setState(() {
-                                      this.alias = value;
-                                    });
-                                  },
-                                ),
-                                GestureDetector(
-                                  onTap: () async {
-                                    print("tapped");
-                                    String imagePath = await getImageFunction();
-                                    print(imagePath);
-                                    setState(() {
-                                      this.mainPicture = imagePath;
-                                    });
-                                  },
-                                  child: ParkaEditInput(
-                                    value:
-                                        this.mainPicture ?? "Imagen principal",
-                                    isImagePicker: true,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: ParkADropdown(
-                                    text: "Tipo de Cuerpo",
-                                    textSize: 16.0,
-                                    selectedItem: this.selectedBodyStyle,
-                                    options: this.bodyStyleOptions,
-                                    height: currentScreen.height * 0.03,
-                                    width: currentScreen.width * 0.8,
-                                    onChanged: (value) {
-                                      setState(
-                                        () {
-                                          this.selectedBodyStyle =
-                                              this.bodyStyles[value].name;
-                                          this.bodyStyle =
-                                              this.bodyStyles[value].id;
-                                        },
-                                      );
+                              ParkaEditInput(
+                                type: ParkaInputType.textField,
+                                label: "Alias del vehiculo",
+                                maxLength: 25,
+                                onChangedHandler: (String value) {
+                                  setState(() {
+                                    this.createVehicleDto.alias =
+                                        value.substring(0, 7);
+                                  });
+                                },
+                              ),
+                              ParkaEditInput(
+                                type: ParkaInputType.dropDown,
+                                label: "Ano del vehiculo",
+                                dropDownOptions: yearOptions,
+                                value: this.selectedYear,
+                                onChangedHandler: (int index) {
+                                  FocusManager.instance.primaryFocus.unfocus();
+                                  setState(
+                                    () {
+                                      this.createVehicleDto.year =
+                                          this.yearOptions[index];
+                                      this.selectedYear =
+                                          this.yearOptions[index];
                                     },
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: ParkADropdown(
-                                    text: "Color",
-                                    textSize: 16.0,
-                                    selectedItem: this.selectedColor,
-                                    options: this.colorsOptions,
-                                    height: currentScreen.height * 0.03,
-                                    width: currentScreen.width * 0.8,
-                                    onChanged: (value) {
-                                      setState(
-                                        () {
-                                          this.selectedColor =
-                                              this.colors[value].name;
-                                          this.colorExterior =
-                                              this.colors[value].id;
-                                        },
-                                      );
+                                  );
+                                },
+                              ),
+                              ParkaEditInput(
+                                type: ParkaInputType.dropDown,
+                                label: "Color del vehiculo",
+                                dropDownOptions: colorsOptions,
+                                value: this.selectedColor,
+                                onChangedHandler: (int index) {
+                                  FocusManager.instance.primaryFocus.unfocus();
+                                  setState(
+                                    () {
+                                      this.createVehicleDto.colorExterior =
+                                          this.colors[index].id;
+                                      this.selectedColor =
+                                          this.colors[index].name;
                                     },
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: ParkADropdown(
-                                    text: "Modelo",
-                                    textSize: 16.0,
-                                    selectedItem: this.selectedModel,
-                                    options: this.modelsOptions,
-                                    height: currentScreen.height * 0.03,
-                                    width: currentScreen.width * 0.8,
-                                    onChanged: (value) {
-                                      setState(
-                                        () {
-                                          this.selectedModel =
-                                              this.models[value].name;
-                                          this.model = this.models[value].id;
-                                          print(this.model);
-                                        },
-                                      );
+                                  );
+                                },
+                              ),
+                              ParkaEditInput(
+                                type: ParkaInputType.dropDown,
+                                label: "Marca del vehiculo",
+                                dropDownOptions: makesOptions,
+                                value: this.selectedMake,
+                                onChangedHandler: (int index) {
+                                  FocusManager.instance.primaryFocus.unfocus();
+                                  setState(
+                                    () {
+                                      this.selectedMake =
+                                          this.makes[index].name;
+                                      this.modelsOptions = List.from(this
+                                          .makes[index]
+                                          .models
+                                          .map((e) => e.name));
+                                      this.selectedModel =
+                                          this.modelsOptions[0];
+                                      this.createVehicleDto.model =
+                                          this.makes[index].models[0].id;
+                                      this.models = this.makes[index].models;
                                     },
-                                  ),
-                                )
-                              ],
-                            ),
+                                  );
+                                },
+                              ),
+                              ParkaEditInput(
+                                type: ParkaInputType.dropDown,
+                                label: "Modelo del vehiculo",
+                                dropDownOptions: modelsOptions,
+                                value: this.selectedModel,
+                                onChangedHandler: (int index) {
+                                  FocusManager.instance.primaryFocus.unfocus();
+                                  setState(
+                                    () {
+                                      this.createVehicleDto.model =
+                                          this.models[index].id;
+                                      this.selectedModel =
+                                          this.models[index].name;
+                                    },
+                                  );
+                                },
+                              ),
+                              ParkaEditInput(
+                                type: ParkaInputType.dropDown,
+                                label: "Tipo de cuerpo",
+                                dropDownOptions: bodyStyleOptions,
+                                value: this.selectedBodyStyle,
+                                onChangedHandler: (int index) {
+                                  FocusManager.instance.primaryFocus.unfocus();
+                                  setState(
+                                    () {
+                                      this.createVehicleDto.bodyStyle =
+                                          this.bodyStyles[index].id;
+                                      this.selectedBodyStyle =
+                                          this.bodyStyles[index].name;
+                                    },
+                                  );
+                                },
+                              ),
+                            ],
                           ),
                         ],
                       ),
-              ),
-            ),
-          ],
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-class ParkaEditInput extends StatelessWidget {
-  final String label;
-  final String value;
-  final Function onChangedHandler;
-  final bool isImagePicker;
+class RemoveCarImageAlert extends StatelessWidget {
+  final Function removeImage;
 
-  const ParkaEditInput({
-    Key key,
-    this.label,
-    this.value,
-    this.onChangedHandler,
-    this.isImagePicker,
-  }) : super(key: key);
+  RemoveCarImageAlert({this.removeImage});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 8.0),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(
-            15.0,
-          ),
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(3.0, 10.0),
-              color: Colors.black38,
-              blurRadius: 5.0,
-            ),
-          ]),
-      child: TextField(
-        enabled: this.isImagePicker != null ? !this.isImagePicker : true,
-        decoration: kInputStyleSlim.copyWith(
-          // labelText: this.label,
-          hintText: this.value,
+    return BaseAlertWidget(
+      child: Text(
+        "Quieres eliminar esta foto?",
+        style: kParkaBigButtonTextStyle.copyWith(
+          fontSize: 20.0,
+          color: ParkaColors.parkaGreen,
         ),
-        onChanged: this.onChangedHandler,
       ),
+      actions: [
+        FlatButton(
+            onPressed: this.removeImage,
+            child: Text(
+              "Eliminar",
+              style: kParkaTextBaseStyleBold,
+            )),
+        FlatButton(
+            onPressed: () => Get.back(),
+            child: Text(
+              "Ignorar",
+              style: kParkaTextBaseStyleBold,
+            )),
+      ],
     );
   }
 }

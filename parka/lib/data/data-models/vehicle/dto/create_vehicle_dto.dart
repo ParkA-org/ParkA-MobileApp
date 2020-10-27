@@ -1,12 +1,12 @@
 class CreateVehicleDto {
-  final String model;
-  final String licensePlate;
-  final String colorExterior;
-  final String mainPicture;
-  final List<String> pictures;
-  final String year;
-  final String alias;
-  final String bodyStyle;
+  String model;
+  String licensePlate;
+  String colorExterior;
+  String mainPicture;
+  List<String> pictures;
+  String year;
+  String alias;
+  String bodyStyle;
 
   CreateVehicleDto({
     this.model,
