@@ -29,7 +29,7 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
     this.userPaymentMethods = await PaymentUseCases.getAllUserPaymentMethods();
 
     setState(() {
-      this.paymentsLoaded = true;
+      this.paymentsLoaded = false;
     });
   }
 
@@ -119,10 +119,14 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
                       ),
                     )
                   : Container(
-                      child: Center(
-                        child: SvgPicture.asset(
-                            '../../../resources/images/InitialMethod.svg',
-                            height: screenSize.height * 0.49),
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 40.0),
+                        child: Center(
+                          child: SvgPicture.asset(
+                            "resources/images/InitialMethod.svg",
+                            height: screenSize.height * 0.50,
+                          ),
+                        ),
                       ),
                     ),
             )
