@@ -29,7 +29,7 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
     this.userPaymentMethods = await PaymentUseCases.getAllUserPaymentMethods();
 
     setState(() {
-      this.paymentsLoaded = false;
+      this.paymentsLoaded = true;
     });
   }
 
