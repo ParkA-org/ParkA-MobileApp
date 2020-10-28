@@ -120,7 +120,7 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
                     )
                   : Container(
                       child: Padding(
-                        padding: const EdgeInsets.only(bottom: 40.0),
+                        padding: const EdgeInsets.only(bottom: 50.0),
                         child: Center(
                           child: SvgPicture.asset(
                             "resources/images/InitialMethod.svg",

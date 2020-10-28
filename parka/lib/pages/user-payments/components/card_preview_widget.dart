@@ -22,26 +22,11 @@ class CardListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String visible = this.payment.digit.substring(0, 4);
+    String visible = this.payment.digit.substring(12, 16);
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       padding: EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        gradient:
-            LinearGradient(colors: gradientGetter(this.payment.digit)["color"]),
-        boxShadow: [
-          BoxShadow(
-            offset: Offset(3.0, 7.0),
-            color: Colors.black38,
-            blurRadius: 5.0,
-          ),
-        ],
-        borderRadius: BorderRadius.circular(
-          10.0,
-        ),
-      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -50,18 +35,26 @@ class CardListTile extends StatelessWidget {
             child: Text(
               this.payment.cardHolder,
               style: kParkaTextBaseStyleWhite.copyWith(
-                fontWeight: FontWeight.w600,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 36.0,
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Text(
-              "$visible - **** - **** - ****",
-              style: kParkaTextBaseStyleWhite.copyWith(
-                fontWeight: FontWeight.w600,
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Text(
+                  "•••• $visible",
+                  style: kParkaTextBaseStyleWhite.copyWith(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
-            ),
+              Text("test"),
+            ],
           ),
         ],
       ),

@@ -8,6 +8,9 @@ const String getAllUserPaymentMethodsQuery = r"""
           expirationDate
           digit
           activated
+          card{
+            name
+          }
           
         }
       }
