@@ -77,6 +77,14 @@ flutter:
         - asset: resources/fonts/Montserrat-Bold.ttf
         - asset: resources/fonts/Montserrat-ExtraBold.ttf
         - asset: resources/fonts/montserrat-regular.ttf
+
+    - family: Cousine
+      fonts:
+        - asset: resources/fonts/Cousine-BoldItalic.ttf
+        - asset: resources/fonts/Cousine-Bold.ttf
+        - asset: resources/fonts/Cousine-Italic.ttf
+        - asset: resources/fonts/Cousine-Regular.ttf
+
     - family: ParkaIcons
       fonts:
         - asset: resources/images/carIcon.ttf
