@@ -6,13 +6,10 @@ import 'package:ParkA/components/inputs/parka_dropdown.dart';
 import 'package:ParkA/components/inputs/parka_input.dart';
 import 'package:ParkA/data/data-models/country/country_data_model.dart';
 import 'package:ParkA/data/data-models/nationality/nationality_data_model.dart';
-
 import 'package:ParkA/data/use-cases/country/country_use_cases.dart';
 import 'package:ParkA/data/use-cases/nationality/nationality_use_cases.dart';
 import 'package:ParkA/data/dtos/user/user_registration_dto.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
-import 'package:ParkA/pages/map/maps_page.dart';
-import 'package:ParkA/pages/create-payment/payment_info.dart';
 import 'package:ParkA/pages/register/register_page.dart';
 import 'package:ParkA/pages/confirm-account/confirm_account_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
