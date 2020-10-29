@@ -1,5 +1,6 @@
 import 'package:ParkA/data/data-models/payment/payment_data_model.dart';
 import 'package:ParkA/styles/text.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -22,8 +23,9 @@ class CardListTile extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 14.0),
-            child: Text(
-              this.payment.cardHolder,
+            child: AutoSizeText(
+              "${this.payment.cardHolder}",
+              maxLines: 1,
               style: kParkaTextBaseStyleWhite.copyWith(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,

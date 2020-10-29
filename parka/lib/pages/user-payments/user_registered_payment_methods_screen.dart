@@ -7,7 +7,6 @@ import 'package:ParkA/styles/parka_colors.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
 import 'components/card_preview_widget.dart';
 
 class UserPaymentMethodsScreen extends StatefulWidget {
