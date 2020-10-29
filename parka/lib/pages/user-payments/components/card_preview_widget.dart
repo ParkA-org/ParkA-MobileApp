@@ -2,7 +2,6 @@ import 'package:ParkA/data/data-models/payment/payment_data_model.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import "package:flutter/material.dart";
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CardListTile extends StatelessWidget {
   final Payment payment;
