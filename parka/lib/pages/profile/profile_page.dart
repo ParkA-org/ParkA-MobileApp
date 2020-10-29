@@ -1,6 +1,5 @@
 import 'package:ParkA/components/buttons/round_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
-
 import 'package:ParkA/pages/profile/components/informative_tab.dart';
 import 'package:ParkA/pages/profile/components/parka_review_history_tile.dart';
 import 'package:ParkA/pages/profile/components/parka_service_history_tile_widget.dart';
@@ -8,7 +7,6 @@ import 'package:ParkA/pages/profile/components/profile_personal_information_widg
 import 'package:ParkA/pages/edit-profile/edit_profile_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ProfileScreen extends StatefulWidget {
   static String routeName = "/profileScreen";

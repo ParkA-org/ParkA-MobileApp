@@ -1,17 +1,12 @@
-import 'dart:convert';
-
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/data-models/information/information_data_model.dart';
 import 'package:ParkA/data/data-models/user/user_data_model.dart';
 import 'package:ParkA/utils/functions/upload_image.dart';
 import 'package:ParkA/utils/graphql/mutations/user_mutations.dart';
 import 'package:ParkA/utils/graphql/queries/user_queries.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:graphql/client.dart';
-import 'package:http/http.dart' as http;
-
 import '../../dtos/user/user_registration_dto.dart';
 
 class UserUseCases {
