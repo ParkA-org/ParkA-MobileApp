@@ -50,38 +50,51 @@ class CardListTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    " • • • •  $visible",
+                    "• • • •  $visible",
                     style: kParkaTextBaseStyleWhite.copyWith(
                       color: Colors.black,
-                      fontFamily: "Montserrat",
-                      fontSize: 25.0,
-                      fontWeight: FontWeight.w500,
+                      fontFamily: "Cousine",
+                      fontSize: 32.0,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        "Estado: ",
-                        style: TextStyle(
-                          fontSize: 30.0,
-                          color: Color(0xff888383),
-                          fontWeight: FontWeight.w600,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Estado: ",
+                          style: TextStyle(
+                            fontSize: 30.0,
+                            color: Color(0xff888383),
+                            fontWeight: FontWeight.w300,
+                          ),
                         ),
-                      ),
-                      this.payment.activated == true
-                          ? Text("Aprobada",
-                              style: TextStyle(
-                                  color: Color(0xff0CBD3D),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 30.0))
-                          : Text("Declinada",
-                              style: TextStyle(
-                                  color: Color(0xffBD0C0C),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 30.0)),
-                    ],
+                        this.payment.activated == true
+                            ? Text("Aprobada",
+                                style: TextStyle(
+                                    color: Color(0xff0CBD3D),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 30.0))
+                            : Text("Declinada",
+                                style: TextStyle(
+                                    color: Color(0xffBD0C0C),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 30.0)),
+                      ],
+                    ),
                   ),
-                  Text("Banco Popular Dominicano")
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Text(
+                      "Banco Popular Dominicano",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Color(0xff888383),
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  )
                 ],
               ),
             ],

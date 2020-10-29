@@ -37,8 +37,11 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
     List<Widget> ret = new List<Widget>();
 
     this.userPaymentMethods.forEach((element) {
-      ret.add(CardListTile(
-        payment: element,
+      ret.add(RaisedButton(
+        child: CardListTile(
+          payment: element,
+        ),
+        onPressed: () => {},
       ));
     });
 
