@@ -15,8 +15,8 @@ class CardListTile extends StatelessWidget {
     String visible = this.payment.digit.substring(12, 16);
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 18.0, vertical: 2.0),
-      padding: EdgeInsets.all(8.0),
+      margin: EdgeInsets.symmetric(vertical: 2.0),
+      padding: EdgeInsets.all(4.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -100,11 +100,10 @@ class CardListTile extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15.0),
+            padding: const EdgeInsets.only(left: 25.0, right: 25.0, top: 15.0),
             child: Divider(
               color: Colors.black,
-              thickness: 0.9,
-              endIndent: 0,
+              thickness: 0.6,
             ),
           ),
         ],

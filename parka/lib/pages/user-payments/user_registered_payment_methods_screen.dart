@@ -4,7 +4,6 @@ import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/use-cases/payment/payment_use_cases.dart';
 import 'package:ParkA/pages/create-payment/payment_info.dart';
 import 'package:ParkA/styles/parka_colors.dart';
-import 'package:ParkA/styles/parkaIcons.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -41,6 +40,7 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
         child: CardListTile(
           payment: element,
         ),
+        color: Colors.white,
         onPressed: () => {},
       ));
     });
