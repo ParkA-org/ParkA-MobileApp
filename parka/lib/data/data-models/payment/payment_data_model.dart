@@ -3,6 +3,7 @@ class Payment {
   String cardHolder;
   String expirationDate;
   String digit;
+  String card;
   bool activated;
 
   Payment({
@@ -11,6 +12,7 @@ class Payment {
     this.activated,
     this.digit,
     this.expirationDate,
+    this.card,
   });
 
   static paymentsFromJson(List paymentsData) {
@@ -26,6 +28,7 @@ class Payment {
           cardHolder: payment["cardHolder"],
           digit: payment["digit"],
           expirationDate: payment["expirationDate"],
+          card: payment["card"]["name"],
         ),
       );
     }

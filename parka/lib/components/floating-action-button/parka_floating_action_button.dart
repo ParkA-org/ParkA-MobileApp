@@ -1,4 +1,3 @@
-import 'package:ParkA/styles/parka_colors.dart';
 import 'package:flutter/material.dart';
 
 class ParkaFloatingActionButton extends StatelessWidget {
@@ -15,7 +14,7 @@ class ParkaFloatingActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       elevation: 10.0,
-      backgroundColor: ParkaColors.parkaGreen,
+      backgroundColor: Color(0xff086174),
       child: Icon(
         this.iconData,
         size: 40,

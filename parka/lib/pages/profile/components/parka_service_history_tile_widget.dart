@@ -7,7 +7,6 @@ class ParkaServiceHistoryWidget extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
-  // TODO: Create dynamicity and props to accept data
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {

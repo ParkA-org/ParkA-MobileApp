@@ -11,9 +11,7 @@ import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
-
 import 'components/parka_edit_profile_tile.dart';
-import 'components/parka_telephone_number_input.dart';
 
 class EditProfilePage extends StatefulWidget {
   static String routeName = "/edit-profile";

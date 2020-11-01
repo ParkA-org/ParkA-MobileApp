@@ -4,10 +4,9 @@ import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/use-cases/payment/payment_use_cases.dart';
 import 'package:ParkA/pages/create-payment/payment_info.dart';
 import 'package:ParkA/styles/parka_colors.dart';
-import 'package:ParkA/styles/parkaIcons.dart';
 import "package:flutter/material.dart";
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
 import 'components/card_preview_widget.dart';
 
 class UserPaymentMethodsScreen extends StatefulWidget {
@@ -36,8 +35,12 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
     List<Widget> ret = new List<Widget>();
 
     this.userPaymentMethods.forEach((element) {
-      ret.add(CardListTile(
-        payment: element,
+      ret.add(RaisedButton(
+        child: CardListTile(
+          payment: element,
+        ),
+        color: Colors.white,
+        onPressed: () => {},
       ));
     });
 
@@ -47,12 +50,12 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
   @override
   void initState() {
     super.initState();
-
     this.getAllUserPayment();
   }
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       floatingActionButton: ParkaFloatingActionButton(
@@ -91,20 +94,25 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
                     ),
                     Expanded(
                       child: Container(
-                        alignment: Alignment.centerLeft,
-                        child: Icon(
-                          ParkaIcons.parkaCar,
-                          color: Colors.white,
-                          size: 130.0,
-                        ),
-                      ),
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Text(
+                              "Metodos de Pago",
+                              style: TextStyle(
+                                  fontFamily: "Montserrat",
+                                  color: Colors.white,
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          )),
                     ),
                   ],
                 ),
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 5,
               child: this.paymentsLoaded
                   ? RefreshIndicator(
                       onRefresh: this.getAllUserPayment,
@@ -113,8 +121,14 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
                       ),
                     )
                   : Container(
-                      child: Center(
-                        child: Text("Todavia no tienes metodos de pago"),
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 50.0),
+                        child: Center(
+                          child: SvgPicture.asset(
+                            "resources/images/InitialMethod.svg",
+                            height: screenSize.height * 0.50,
+                          ),
+                        ),
                       ),
                     ),
             )
