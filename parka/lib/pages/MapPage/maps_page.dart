@@ -95,7 +95,7 @@ class _MapPageState extends State<MapPage> {
                     Marker(
                         icon: customIcon,
                         markerId: MarkerId("Hello"),
-                        position: LatLng(18.487876, -69.9644807),
+                        position: LatLng(18.487876, -69.0644807),
                         onTap: () => showModalBottomSheet(
                             context: context,
                             builder: (context) =>
@@ -103,7 +103,7 @@ class _MapPageState extends State<MapPage> {
                     Marker(
                         icon: customIcon,
                         markerId: MarkerId("Hello"),
-                        position: LatLng(18.487876, -69.9644808),
+                        position: LatLng(18.487876, -69.8644808),
                         onTap: () => showModalBottomSheet(
                             context: context,
                             builder: (context) =>
@@ -111,7 +111,7 @@ class _MapPageState extends State<MapPage> {
                     Marker(
                         icon: customIcon,
                         markerId: MarkerId("Hello"),
-                        position: LatLng(18.487876, -69.9644806),
+                        position: LatLng(18.587876, -69.9644806),
                         onTap: () => showModalBottomSheet(
                             context: context,
                             builder: (context) =>
