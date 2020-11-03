@@ -1,7 +1,9 @@
+import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/controllers/create-parking-form/create_parking_form_controller.dart';
 import 'package:ParkA/data/data-models/feature/parking_feature_data_model.dart';
 import 'package:ParkA/data/use-cases/feature/feature_use_cases.dart';
+import 'package:ParkA/pages/create-parking/steps/parking_position_selector_page.dart';
 import 'package:ParkA/pages/create-vehicle/components/parka-input/parka_input.dart';
 import 'package:ParkA/pages/filter/components/featureFilterWidget/feature_filter_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
@@ -10,6 +12,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+
+import 'components/stepper_widget.dart';
 
 class CreateParkingPage extends StatefulWidget {
   static String routeName = 'create-parking-page';
@@ -54,7 +58,20 @@ class _CreateParkingPageState extends State<CreateParkingPage> {
                       flex: 0,
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 8.0),
-                        child: ParkaHeader(color: Colors.white),
+                        child: ParkaHeader(
+                          color: Colors.white,
+                          leading: TransparentButton(
+                            label: "Atras",
+                            buttonTextStyle: kParkaInputDefaultSyle,
+                            color: Colors.white,
+                            leadingIconData: Icons.keyboard_arrow_left,
+                            onTapHandler: () {
+                              Get.find<CreateParkingFormController>()
+                                  .decrement();
+                              Get.back();
+                            },
+                          ),
+                        ),
                         decoration: BoxDecoration(
                           color: ParkaColors.parkaGreen,
                           borderRadius: BorderRadius.vertical(
@@ -68,7 +85,9 @@ class _CreateParkingPageState extends State<CreateParkingPage> {
                         children: [
                           Padding(
                             padding: EdgeInsets.symmetric(
-                                vertical: 24.0, horizontal: 16.0),
+                              vertical: 24.0,
+                              horizontal: 16.0,
+                            ),
                             child: AutoSizeText(
                               "Hablanos sobre tu parqueo",
                               maxLines: 1,
@@ -124,100 +143,14 @@ class _CreateParkingPageState extends State<CreateParkingPage> {
                       flex: 0,
                       child: ParkaStepperWidget(
                         stepsNumber: 3,
-                        index: 1,
+                        onTapHandler: () {
+                          Get.find<CreateParkingFormController>().increment();
+                          Get.toNamed(ParkingPositionSelectorPage.routeName);
+                        },
                       ),
                     )
                   ],
                 ),
-        ),
-      ),
-    );
-  }
-}
-
-class ParkaStepperWidget extends StatelessWidget {
-  final int stepsNumber;
-  final int index;
-  final Function onTapHandler;
-
-  ParkaStepperWidget({
-    Key key,
-    @required this.stepsNumber,
-    @required this.index,
-    this.onTapHandler,
-  }) : super(key: key);
-
-  List<Widget> stepperBuilder() {
-    List<Widget> ret = new List();
-
-    for (int i = 0; i < this.stepsNumber; i++) {
-      ret.add(
-        Expanded(
-          child: Container(
-            width: 20.0,
-            height: 20.0,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: this.index > i ? ParkaColors.parkaGreen : Colors.white,
-              border: Border.all(
-                color: ParkaColors.parkaGreen,
-                width: 1.5,
-              ),
-            ),
-          ),
-        ),
-      );
-
-      ret.add(Expanded(
-        child: Divider(
-          thickness: 1.0,
-          // width: 50.0,
-          color: Color(0xFF949494),
-        ),
-      ));
-    }
-
-    ret.add(
-      Expanded(
-        child: GestureDetector(
-          onTap: () {
-            Get.find<CreateParkingFormController>().increment();
-          },
-          child: Container(
-            width: 30.0,
-            height: 30.0,
-            child: Center(
-              child: Icon(
-                Icons.arrow_forward_ios,
-                color: ParkaColors.parkaGreen,
-                size: 20.0,
-              ),
-            ),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              // color: ParkaColors.parkaGreen,
-              border: Border.all(
-                color: ParkaColors.parkaGreen,
-                width: 1.5,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-
-    return ret;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.amber,
-      padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
-      child: IntrinsicHeight(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: this.stepperBuilder(),
         ),
       ),
     );

@@ -2,6 +2,9 @@ import 'package:ParkA/controllers/bindings/graphql_biding.dart';
 import 'package:ParkA/controllers/bindings/user_binding.dart';
 import 'package:ParkA/pages/confirm-account/confirm_account_page.dart';
 import 'package:ParkA/pages/create-parking/create_parking_page.dart';
+import 'package:ParkA/pages/create-parking/steps/parking_calendar_creator_page.dart';
+import 'package:ParkA/pages/create-parking/steps/parking_image_selector_page.dart';
+import 'package:ParkA/pages/create-parking/steps/parking_position_selector_page.dart';
 import 'package:ParkA/pages/create-payment/payment_info.dart';
 import 'package:ParkA/pages/create-user-information/ID_page.dart';
 import 'package:ParkA/pages/create-vehicle/create_vehicle_page.dart';
@@ -112,6 +115,21 @@ List<GetPage> getRoutePages = [
   GetPage(
     name: CreateParkingPage.routeName,
     page: () => CreateParkingPage(),
+    bindings: [GraphqlClientBiding()],
+  ),
+  GetPage(
+    name: ParkingPositionSelectorPage.routeName,
+    page: () => ParkingPositionSelectorPage(),
+    bindings: [GraphqlClientBiding()],
+  ),
+  GetPage(
+    name: ParkingCalendarCreatorPage.routeName,
+    page: () => ParkingCalendarCreatorPage(),
+    bindings: [GraphqlClientBiding()],
+  ),
+  GetPage(
+    name: ParkingImageSelectorPage.routeName,
+    page: () => ParkingImageSelectorPage(),
     bindings: [GraphqlClientBiding()],
   ),
 ];

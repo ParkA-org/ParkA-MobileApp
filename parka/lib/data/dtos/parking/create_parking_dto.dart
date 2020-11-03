@@ -1,4 +1,4 @@
-class CreatePArkingDto {
+class CreateParkingDto {
   int countParking;
   String lastitude;
   String longitude;
