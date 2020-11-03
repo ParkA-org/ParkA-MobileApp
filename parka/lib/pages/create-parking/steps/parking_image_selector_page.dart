@@ -1,7 +1,10 @@
 import 'package:ParkA/components/buttons/round_button.dart';
 import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
+import 'package:ParkA/components/images/parka_add_images_carousel.dart';
+import 'package:ParkA/components/images/parka_image_card_widget.dart';
 import 'package:ParkA/controllers/create-parking-form/create_parking_form_controller.dart';
+import 'package:ParkA/data/enums/parking_place_holder_type.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -45,7 +48,7 @@ class ParkingImageSelectorPage extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: ListView(
+              child: Column(
                 children: [
                   Padding(
                     padding:
@@ -54,6 +57,37 @@ class ParkingImageSelectorPage extends StatelessWidget {
                       "Muestranos tu parqueo",
                       maxLines: 1,
                       style: kParkaPageTitleTextStyle,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Foto principal",
+                        style: kParkaTextBaseStyle.copyWith(fontSize: 16.0),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ParkaImageCardWidget(
+                      type: PlaceHolderType.Parking,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Fotos adicionales",
+                        style: kParkaTextBaseStyle.copyWith(fontSize: 16.0),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ParkaAddImagesCarousel(
+                      pictures: [],
+                      type: PlaceHolderType.Parking,
                     ),
                   ),
                 ],
