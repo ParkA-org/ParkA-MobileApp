@@ -180,7 +180,9 @@ class ParkaStepperWidget extends StatelessWidget {
     ret.add(
       Expanded(
         child: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Get.find<CreateParkingFormController>().increment();
+          },
           child: Container(
             width: 30.0,
             height: 30.0,
