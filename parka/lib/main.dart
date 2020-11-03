@@ -1,26 +1,23 @@
-import 'package:ParkA/components/Utils/graphql/graphql_client.dart';
-import 'package:ParkA/pages/MapPage/maps_page.dart';
-
+import 'package:ParkA/pages/map/maps_page.dart';
+import 'package:ParkA/routes/routes.dart';
 import 'package:flutter/material.dart';
-import 'routes/routes.dart';
+import 'package:get/get.dart';
+import 'controllers/bindings/graphql_biding.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ParkApp());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-
-  final ParkaGraphqlClient parkaGraphqlClient = new ParkaGraphqlClient();
-
+class ParkApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'ParkA',
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      routes: routes,
+      getPages: getRoutePages,
+      initialBinding: GraphqlClientBiding(),
       initialRoute: MapPage.routeName,
     );
   }
