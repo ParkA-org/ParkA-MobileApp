@@ -5,13 +5,12 @@ import 'package:ParkA/data/data-models/feature/parking_feature_data_model.dart';
 import 'package:ParkA/data/use-cases/feature/feature_use_cases.dart';
 import 'package:ParkA/pages/create-parking/steps/parking_position_selector_page.dart';
 import 'package:ParkA/pages/create-vehicle/components/parka-input/parka_input.dart';
-import 'package:ParkA/pages/filter/components/featureFilterWidget/feature_filter_widget.dart';
+
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 import 'components/stepper_widget.dart';
@@ -102,18 +101,33 @@ class _CreateParkingPageState extends State<CreateParkingPage> {
                                 ParkaEditInput(
                                   type: ParkaInputType.textField,
                                   label: "Nombre del parqueo",
+                                  onChangedHandler: (String value) {
+                                    createParkingFormController
+                                        .setParkingName(value);
+                                  },
                                 ),
-                                ParkaEditInput(
-                                  type: ParkaInputType.textField,
+                                ParkaTextField(
+                                  inputType: TextInputType.number,
                                   label: "Numero de parqueos",
+                                  onChangedHandler: (String number) {
+                                    createParkingFormController
+                                        .setParkingCount(int.tryParse(number));
+                                  },
                                 ),
-                                ParkaEditInput(
-                                  type: ParkaInputType.textField,
+                                ParkaTextField(
+                                  inputType: TextInputType.number,
                                   label: "Precio por hora",
+                                  onChangedHandler: (String numbers) {
+                                    createParkingFormController.setParkingPrice(
+                                        double.tryParse(numbers));
+                                  },
                                 ),
-                                ParkaEditInput(
-                                  type: ParkaInputType.textField,
+                                ParkaTextField(
                                   label: "Detalles adicionales",
+                                  onChangedHandler: (String value) {
+                                    createParkingFormController
+                                        .setParkingDetails(value);
+                                  },
                                 ),
                                 ExpansionTile(
                                   title: Text(
@@ -136,7 +150,7 @@ class _CreateParkingPageState extends State<CreateParkingPage> {
                                 )
                               ],
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),

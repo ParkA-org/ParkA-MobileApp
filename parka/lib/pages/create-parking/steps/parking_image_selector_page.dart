@@ -5,8 +5,11 @@ import 'package:ParkA/components/images/parka_add_images_carousel.dart';
 import 'package:ParkA/components/images/parka_image_card_widget.dart';
 import 'package:ParkA/controllers/create-parking-form/create_parking_form_controller.dart';
 import 'package:ParkA/data/enums/parking_place_holder_type.dart';
+import 'package:ParkA/pages/create-vehicle/create_vehicle_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
+import 'package:ParkA/utils/functions/pick_image.dart';
+import 'package:ParkA/utils/functions/show_alert_dialog.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +18,18 @@ class ParkingImageSelectorPage extends StatelessWidget {
   static String routeName = 'parking-image-selector-page';
 
   final createParkingFormController = Get.find<CreateParkingFormController>();
+
+  Future removeVehicle(int index) {
+    return Get.dialog(RemoveCarImageAlert(
+      removeImage: () {
+        print(index);
+
+        createParkingFormController.removeSecondaryPicture(index);
+
+        Get.back();
+      },
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +85,20 @@ class ParkingImageSelectorPage extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: ParkaImageCardWidget(
-                      type: PlaceHolderType.Parking,
+                    child: Obx(
+                      () => ParkaImageCardWidget(
+                        image: createParkingFormController
+                            .createPArkingDto.value.mainPicture,
+                        type: PlaceHolderType.Parking,
+                        onTapHandler: () async {
+                          String imagePath = await getImageFunction();
+                          if (imagePath != null) {
+                            createParkingFormController
+                                .setMainPicture(imagePath);
+                          }
+                        },
+                        onLongPressHandler: this.removeVehicle,
+                      ),
                     ),
                   ),
                   Expanded(
@@ -85,9 +112,20 @@ class ParkingImageSelectorPage extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: ParkaAddImagesCarousel(
-                      pictures: [],
-                      type: PlaceHolderType.Parking,
+                    child: Obx(
+                      () => ParkaAddImagesCarousel(
+                        pictures: createParkingFormController
+                            .createPArkingDto.value.pictures,
+                        type: PlaceHolderType.Parking,
+                        onTapHandler: () async {
+                          String imagePath = await getImageFunction();
+                          if (imagePath != null) {
+                            createParkingFormController
+                                .addSecondaryPicture(imagePath);
+                          }
+                        },
+                        onLongPressHandler: this.removeVehicle,
+                      ),
                     ),
                   ),
                 ],

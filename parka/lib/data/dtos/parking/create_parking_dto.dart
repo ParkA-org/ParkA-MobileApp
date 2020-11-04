@@ -4,7 +4,7 @@ class CreateParkingDto {
   String longitude;
   String parkingName;
   double priceHours;
-  List<String> pictures;
+  List<String> pictures = [];
   String mainPicture;
   String sector;
   String direccion;

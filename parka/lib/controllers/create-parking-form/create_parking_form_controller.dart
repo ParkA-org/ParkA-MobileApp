@@ -1,3 +1,4 @@
+import 'package:ParkA/data/data-models/position/position_data_model.dart';
 import 'package:ParkA/data/dtos/parking/create_parking_dto.dart';
 import 'package:get/state_manager.dart';
 
@@ -6,16 +7,61 @@ class CreateParkingFormController extends GetxController {
   Rx<CreateParkingDto> createPArkingDto = CreateParkingDto().obs;
 
   void increment() {
-    step.value++;
+    step++;
   }
 
   void decrement() {
-    step.value--;
+    step--;
+  }
+
+  void setParkingName(String _parkingName) {
+    createPArkingDto.update((_instance) {
+      _instance.parkingName = _parkingName;
+    });
   }
 
   void setParkingCount(int number) {
     createPArkingDto.value.countParking = number;
   }
 
-  void setPosition() {}
+  void setParkingPrice(double _parkingPrice) {
+    createPArkingDto.update((_instance) {
+      _instance.priceHours = _parkingPrice;
+    });
+  }
+
+  void setParkingDetails(String _parkingDetails) {
+    createPArkingDto.update((_instance) {
+      _instance.information = _parkingDetails;
+    });
+  }
+
+  void setPosition(
+    Position _position,
+  ) {
+    createPArkingDto.update((_instance) {
+      _instance.lastitude = _position.latitude;
+      _instance.longitude = _position.longitude;
+      _instance.sector = _position.sector;
+      _instance.direccion = _position.direction;
+    });
+  }
+
+  void setMainPicture(String _imagePath) {
+    createPArkingDto.update((_instance) {
+      _instance.mainPicture = _imagePath;
+    });
+  }
+
+  void addSecondaryPicture(String _imagePath) {
+    createPArkingDto.update((_instance) {
+      _instance.pictures.add(_imagePath);
+    });
+  }
+
+  void removeSecondaryPicture(int _index) {
+    createPArkingDto.update((_instance) {
+      _instance.pictures.removeAt(_index);
+    });
+  }
 }

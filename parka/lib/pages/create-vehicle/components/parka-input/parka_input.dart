@@ -175,16 +175,20 @@ class ParkaDropDownField extends StatelessWidget {
 class ParkaTextField extends StatelessWidget {
   const ParkaTextField({
     Key key,
+    this.value,
+    this.inputType,
+    this.maxLength,
+    this.enabled,
     @required this.label,
-    @required this.maxLength,
-    @required this.value,
     @required this.onChangedHandler,
   }) : super(key: key);
 
   final String label;
+  final bool enabled;
   final int maxLength;
   final String value;
   final Function onChangedHandler;
+  final TextInputType inputType;
 
   @override
   Widget build(BuildContext context) {
@@ -222,6 +226,8 @@ class ParkaTextField extends StatelessWidget {
             ),
             child: TextField(
               maxLength: this.maxLength ?? TextField.noMaxLength,
+              keyboardType: this.inputType ?? TextInputType.text,
+              enabled: this.enabled ?? true,
               decoration: kInputStyleSlim.copyWith(
                 // labelText: this.label,
                 hintText: this.value,
