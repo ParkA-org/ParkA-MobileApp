@@ -6,6 +6,7 @@ import 'package:ParkA/pages/create-parking/steps/parking_calendar_creator_page.d
 import 'package:ParkA/pages/create-vehicle/components/parka-input/parka_input.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
+import 'package:ParkA/utils/functions/reverse_geocode.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -102,6 +103,8 @@ class ParkingPositionSelectorPage extends StatelessWidget {
   }
 }
 
+//https://api.tomtom.com/search/2/reverseGeocode/37.8328,-122.27669.json?key=0ohHjbjOShhcUfGhd61gionzeCLVmCv5
+
 class PositionPickerWidget extends StatelessWidget {
   const PositionPickerWidget({
     Key key,
@@ -142,6 +145,7 @@ class PositionPickerWidget extends StatelessWidget {
                 ),
                 onTap: (LatLng position) {
                   print("tapped");
+                  getLocationData(position);
                 },
                 gestureRecognizers: Set()
                   ..add(Factory<EagerGestureRecognizer>(

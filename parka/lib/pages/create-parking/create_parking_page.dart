@@ -162,11 +162,19 @@ class FeatureTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(8.0),
-      color: Colors.red,
-      height: 100,
-      width: 100,
-      child: Column(),
+      alignment: Alignment.center,
+      child: LayoutBuilder(builder: (ctx, constr) {
+        return Container(
+          margin: EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16.0),
+            color: Colors.red,
+          ),
+          height: 100,
+          width: 100,
+          child: Column(),
+        );
+      }),
     );
   }
 }

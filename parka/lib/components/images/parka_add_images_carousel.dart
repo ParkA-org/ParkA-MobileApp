@@ -59,16 +59,20 @@ class ParkaAddImagesCarousel extends StatelessWidget {
       builder: (BuildContext context, constraints) {
         // print(constraints.maxWidth - 32.0);
 
-        double cardWidth = constraints.maxWidth - 32.0 > 350
-            ? 350
-            : constraints.maxWidth - 32.0;
         const creditCardProp = 1.58;
+
+        final referenceDimension = constraints.maxWidth == double.infinity ||
+                constraints.maxWidth > 350
+            ? constraints.maxHeight * creditCardProp
+            : constraints.maxWidth * creditCardProp;
+
+        double cardWidth = referenceDimension > 350 ? 350 : referenceDimension;
 
         return ConstrainedBox(
           constraints: constraints,
           child: this.pictures.length > 0
               ? Container(
-                  height: (cardWidth + 32.0) / creditCardProp,
+                  height: (cardWidth) / creditCardProp,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: carouselBuilder(),

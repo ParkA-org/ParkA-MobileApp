@@ -45,10 +45,6 @@ class ParkaImageCardWidget extends StatelessWidget {
                 ? constraint.maxHeight * creditCardProp
                 : constraint.maxWidth * creditCardProp;
 
-            print(constraint.maxWidth);
-            print(constraint.maxHeight);
-            print(referenceDimension);
-
             double cardWidth =
                 referenceDimension > 350 ? 350 : referenceDimension;
 
