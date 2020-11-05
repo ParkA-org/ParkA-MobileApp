@@ -6,6 +6,7 @@ import 'package:ParkA/data/data-models/model/model_data_model.dart';
 import 'package:ParkA/data/data-models/vehicle/dto/create_vehicle_dto.dart';
 import 'package:ParkA/data/data-models/color/color_data_model.dart'
     as VehicleColor;
+import 'package:ParkA/data/enums/parking_place_holder_type.dart';
 import 'package:ParkA/data/use-cases/body-style/body_style_use_cases.dart';
 import 'package:ParkA/data/use-cases/color/color_use_cases.dart';
 import 'package:ParkA/data/use-cases/make/make_use_cases.dart';
@@ -21,9 +22,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'components/parka-input/parka_input.dart';
-import 'components/parka_add_images_carousel.dart';
-import 'components/parka_image_card_widget.dart';
+
 import 'components/parka_resizable_on_scroll_app_bar.dart';
+import 'package:ParkA/components/images/parka_add_images_carousel.dart';
+import 'package:ParkA/components/images/parka_image_card_widget.dart';
 
 class CreateVehiclePage extends StatefulWidget {
   static String routeName = "create-vehicle";
@@ -144,6 +146,7 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                       child: Column(
                         children: [
                           ParkaImageCardWidget(
+                            type: PlaceHolderType.Car,
                             image: this.createVehicleDto.mainPicture,
                             onTapHandler: () async {
                               String imagePath = await getImageFunction();
@@ -155,6 +158,7 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                             },
                           ),
                           ParkaAddImagesCarousel(
+                            type: PlaceHolderType.Car,
                             pictures: this.createVehicleDto.pictures,
                             onTapHandler: () async {
                               String imagePath = await getImageFunction();
