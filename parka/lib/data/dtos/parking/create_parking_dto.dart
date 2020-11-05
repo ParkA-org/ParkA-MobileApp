@@ -9,7 +9,7 @@ class CreateParkingDto {
   String sector;
   String direccion;
   String information;
-  List<String> features;
+  List<String> features = [];
   Map calendar = {
     'monday': [],
     'tuesday': [],

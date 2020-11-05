@@ -64,4 +64,19 @@ class CreateParkingFormController extends GetxController {
       _instance.pictures.removeAt(_index);
     });
   }
+
+  void addFeature(String _featureId) {
+    createPArkingDto.update((_instance) {
+      _instance.features.add(_featureId);
+      print("add");
+      print(_instance.features);
+    });
+  }
+
+  void removeFeature(String _featureId) {
+    createPArkingDto.update((_instance) {
+      _instance.features.remove(_featureId);
+      print(_instance.features);
+    });
+  }
 }

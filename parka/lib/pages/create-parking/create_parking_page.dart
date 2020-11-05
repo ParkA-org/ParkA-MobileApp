@@ -8,8 +8,10 @@ import 'package:ParkA/pages/create-vehicle/components/parka-input/parka_input.da
 
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
+import 'package:ParkA/utils/functions/get_feature_icon.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
@@ -41,6 +43,29 @@ class _CreateParkingPageState extends State<CreateParkingPage> {
     super.initState();
     this._loadingData = true;
     getFormData();
+  }
+
+  List<Widget> featureGridBuilder() {
+    List<Widget> ret = new List();
+
+    this.features.forEach((element) {
+      bool check = createParkingFormController.createPArkingDto.value.features
+              .indexOf(element.id) !=
+          -1;
+
+      ret.add(FeatureTab(
+        feature: element,
+        selected: check,
+        onTapHanlder: (bool _selected) {
+          if (!_selected)
+            createParkingFormController.addFeature(element.id);
+          else
+            createParkingFormController.removeFeature(element.id);
+        },
+      ));
+    });
+
+    return ret;
   }
 
   @override
@@ -129,24 +154,17 @@ class _CreateParkingPageState extends State<CreateParkingPage> {
                                         .setParkingDetails(value);
                                   },
                                 ),
-                                ExpansionTile(
-                                  title: Text(
-                                    "Caracteristicas",
-                                    style: TextStyle(
-                                        color: Color(0xFF0B768C),
-                                        fontSize: 28.0,
-                                        fontWeight: FontWeight.bold),
+                                Obx(
+                                  () => ExpansionTile(
+                                    title: Text(
+                                      "Caracteristicas",
+                                      style: TextStyle(
+                                          color: Color(0xFF0B768C),
+                                          fontSize: 28.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    children: featureGridBuilder(),
                                   ),
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        FeatureTab(),
-                                        FeatureTab(),
-                                      ],
-                                    )
-                                  ],
                                 )
                               ],
                             ),
@@ -173,22 +191,64 @@ class _CreateParkingPageState extends State<CreateParkingPage> {
 }
 
 class FeatureTab extends StatelessWidget {
+  final Feature feature;
+  final bool selected;
+  final Function onTapHanlder;
+
+  FeatureTab({
+    this.feature,
+    this.selected,
+    this.onTapHanlder,
+  });
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: LayoutBuilder(builder: (ctx, constr) {
-        return Container(
-          margin: EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.0),
-            color: Colors.red,
-          ),
-          height: 100,
-          width: 100,
-          child: Column(),
-        );
-      }),
+    final backGroundColor =
+        this.selected ? ParkaColors.parkaGreen : Color(0xFFE5E4E4);
+    final itemsColor = this.selected ? Colors.white : ParkaColors.parkaGreen;
+
+    return GestureDetector(
+      onTap: () {
+        this.onTapHanlder(this.selected);
+      },
+      child: Container(
+        alignment: Alignment.center,
+        child: LayoutBuilder(builder: (ctx, constr) {
+          return Container(
+            margin: EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16.0),
+              color: backGroundColor,
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(0, 7.0),
+                  color: Colors.black38,
+                  blurRadius: 5.0,
+                ),
+              ],
+            ),
+            height: 100,
+            width: 100,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SvgPicture.asset(
+                  getFeatureIcon(
+                    this.feature.name,
+                  ),
+                  color: itemsColor,
+                ),
+                Text(
+                  this.feature.name,
+                  style: TextStyle(
+                    color: itemsColor,
+                  ),
+                ),
+              ],
+            ),
+          );
+        }),
+      ),
     );
   }
 }
