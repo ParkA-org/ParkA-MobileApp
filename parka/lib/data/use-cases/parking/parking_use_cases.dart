@@ -1,5 +1,7 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/dtos/parking/create_parking_dto.dart';
+import 'package:ParkA/utils/functions/upload_image.dart';
+import 'package:ParkA/utils/graphql/mutations/parking_mutations.dart';
 import 'package:get/get.dart';
 import 'package:graphql/client.dart';
 
@@ -10,15 +12,9 @@ class ParkingUseCases {
         .value
         .graphQlClient;
 
-    const String createParkingMutation = r"""
-    mutation ($data:CreateParkingInput!){
-      createParking(
-        createParkingInput: $data
-      ) {
-        id
-      }
-    }
-    """;
+    String imageUrl = await uploadImage(createParkingDto.mainPicture);
+    List<String> imagesUrls =
+        await uploadMultipleImages(createParkingDto.pictures);
 
     final createParkingInput = {
       "data": {
@@ -38,9 +34,8 @@ class ParkingUseCases {
           "sunday": []
         },
         "priceHours": createParkingDto.priceHours,
-        "pictures": createParkingDto.pictures,
-        "mainPicture":
-            "https://parka-api-bucket-aws.s3.amazonaws.com/parqueo2_89e234acd5.png",
+        "pictures": imagesUrls,
+        "mainPicture": imageUrl,
         "sector": createParkingDto.sector,
         "direction": createParkingDto.direccion,
         "information": createParkingDto.information,
