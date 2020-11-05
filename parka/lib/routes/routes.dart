@@ -20,6 +20,7 @@ import 'package:ParkA/pages/profile-picture/profile_pic_page.dart';
 import 'package:ParkA/pages/profile/profile_page.dart';
 import 'package:ParkA/pages/register/register_page.dart';
 import 'package:ParkA/pages/reset-password/reset_password_page.dart';
+import 'package:ParkA/pages/splash-screen/splash_screen.dart';
 import 'package:ParkA/pages/update-password/update_user_password_screen.dart';
 import 'package:ParkA/pages/user-payments/user_registered_payment_methods_screen.dart';
 import 'package:ParkA/pages/vehicles/vehicle_page.dart';
@@ -132,4 +133,9 @@ List<GetPage> getRoutePages = [
     page: () => ParkingImageSelectorPage(),
     bindings: [GraphqlClientBiding()],
   ),
+  GetPage(
+    bindings: [GraphqlClientBiding()],
+    name: SplashScreen.routeName,
+    page: () => SplashScreen(),
+  )
 ];
