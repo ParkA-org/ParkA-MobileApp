@@ -94,7 +94,7 @@ class ParkingPositionSelectorPage extends StatelessWidget {
                             enabled: false,
                             label: "Posicion",
                             value:
-                                "${createParkingFormController.createPArkingDto.value.lastitude} ${createParkingFormController.createPArkingDto.value.longitude}",
+                                "${createParkingFormController.createPArkingDto.value.lastitude ?? ""} ${createParkingFormController.createPArkingDto.value.longitude ?? ""}",
                           ),
                         ],
                       ),

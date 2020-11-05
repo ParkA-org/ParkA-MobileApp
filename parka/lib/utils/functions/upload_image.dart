@@ -24,12 +24,12 @@ Future<String> uploadImage(String imagePath) async {
 }
 
 Future<List> uploadMultipleImages(List<String> imagesPath) async {
-  List<String> ret = [];
+  List<String> ret = new List();
 
-  imagesPath.forEach((element) async {
-    String imagePath = await uploadImage(element);
+  for (String image in imagesPath) {
+    String imagePath = await uploadImage(image);
     ret.add(imagePath);
-  });
+  }
 
   return ret;
 }

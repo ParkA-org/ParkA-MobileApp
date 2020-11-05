@@ -1,20 +1,17 @@
 import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
+import 'package:ParkA/components/tabs/feature_tab.dart';
 import 'package:ParkA/controllers/create-parking-form/create_parking_form_controller.dart';
 import 'package:ParkA/data/data-models/feature/parking_feature_data_model.dart';
 import 'package:ParkA/data/use-cases/feature/feature_use_cases.dart';
 import 'package:ParkA/pages/create-parking/steps/parking_position_selector_page.dart';
 import 'package:ParkA/pages/create-vehicle/components/parka-input/parka_input.dart';
-
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
-import 'package:ParkA/utils/functions/get_feature_icon.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-
 import 'components/stepper_widget.dart';
 
 class CreateParkingPage extends StatefulWidget {
@@ -45,7 +42,7 @@ class _CreateParkingPageState extends State<CreateParkingPage> {
     getFormData();
   }
 
-  List<Widget> featureGridBuilder() {
+  List<Widget> featureListBuilder() {
     List<Widget> ret = new List();
 
     this.features.forEach((element) {
@@ -163,7 +160,13 @@ class _CreateParkingPageState extends State<CreateParkingPage> {
                                           fontSize: 28.0,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    children: featureGridBuilder(),
+                                    children: [
+                                      GridView.count(
+                                        crossAxisCount: 2,
+                                        children: featureListBuilder(),
+                                        shrinkWrap: true,
+                                      )
+                                    ],
                                   ),
                                 )
                               ],
@@ -185,69 +188,6 @@ class _CreateParkingPageState extends State<CreateParkingPage> {
                   ],
                 ),
         ),
-      ),
-    );
-  }
-}
-
-class FeatureTab extends StatelessWidget {
-  final Feature feature;
-  final bool selected;
-  final Function onTapHanlder;
-
-  FeatureTab({
-    this.feature,
-    this.selected,
-    this.onTapHanlder,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final backGroundColor =
-        this.selected ? ParkaColors.parkaGreen : Color(0xFFE5E4E4);
-    final itemsColor = this.selected ? Colors.white : ParkaColors.parkaGreen;
-
-    return GestureDetector(
-      onTap: () {
-        this.onTapHanlder(this.selected);
-      },
-      child: Container(
-        alignment: Alignment.center,
-        child: LayoutBuilder(builder: (ctx, constr) {
-          return Container(
-            margin: EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16.0),
-              color: backGroundColor,
-              boxShadow: [
-                BoxShadow(
-                  offset: Offset(0, 7.0),
-                  color: Colors.black38,
-                  blurRadius: 5.0,
-                ),
-              ],
-            ),
-            height: 100,
-            width: 100,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SvgPicture.asset(
-                  getFeatureIcon(
-                    this.feature.name,
-                  ),
-                  color: itemsColor,
-                ),
-                Text(
-                  this.feature.name,
-                  style: TextStyle(
-                    color: itemsColor,
-                  ),
-                ),
-              ],
-            ),
-          );
-        }),
       ),
     );
   }

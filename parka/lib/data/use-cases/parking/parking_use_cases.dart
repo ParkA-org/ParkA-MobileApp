@@ -16,6 +16,9 @@ class ParkingUseCases {
     List<String> imagesUrls =
         await uploadMultipleImages(createParkingDto.pictures);
 
+    print(createParkingDto.pictures);
+    print(imagesUrls);
+
     final createParkingInput = {
       "data": {
         "countParking": createParkingDto.countParking,
