@@ -19,6 +19,7 @@ class TimeSelectorPillWidget extends StatelessWidget {
         showModalBottomSheet(
           builder: (BuildContext context) => Container(
             child: Scaffold(
+              backgroundColor: Colors.white,
               appBar: AppBar(
                 backgroundColor: Colors.white,
                 automaticallyImplyLeading: false,

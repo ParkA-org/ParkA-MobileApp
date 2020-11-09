@@ -25,7 +25,7 @@ class TimeScheduleSelectorWidget extends StatelessWidget {
     this.schedules.forEach((element) {
       ret.add(
         TimeSelectorWidget(
-          key: Key(i.toString()),
+          key: Key(DateTime.now().toIso8601String()),
           showAddSign: i < 2 && this.schedules.length < 2,
           schedule: element,
           index: i,
