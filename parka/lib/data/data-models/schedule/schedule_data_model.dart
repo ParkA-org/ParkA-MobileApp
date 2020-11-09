@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class Schedule {
   int start;
   int finish;
