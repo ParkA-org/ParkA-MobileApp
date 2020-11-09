@@ -157,19 +157,24 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                               }
                             },
                           ),
-                          ParkaAddImagesCarousel(
-                            type: PlaceHolderType.Car,
-                            pictures: this.createVehicleDto.pictures,
-                            onTapHandler: () async {
-                              String imagePath = await getImageFunction();
-                              if (imagePath != null) {
-                                setState(() {
-                                  this.createVehicleDto.pictures.add(imagePath);
-                                });
-                              }
-                            },
-                            onLongPressHandler: this.removeVehicle,
-                          ),
+                          this.createVehicleDto.pictures.length != 0
+                              ? ParkaAddImagesCarousel(
+                                  type: PlaceHolderType.Car,
+                                  pictures: this.createVehicleDto.pictures,
+                                  onTapHandler: () async {
+                                    String imagePath = await getImageFunction();
+                                    if (imagePath != null) {
+                                      setState(() {
+                                        this
+                                            .createVehicleDto
+                                            .pictures
+                                            .add(imagePath);
+                                      });
+                                    }
+                                  },
+                                  onLongPressHandler: this.removeVehicle,
+                                )
+                              : Container(),
                           Column(
                             children: [
                               ParkaEditInput(

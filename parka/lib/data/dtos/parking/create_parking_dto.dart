@@ -1,3 +1,6 @@
+import 'package:ParkA/data/data-models/calendar/calendar_data_model.dart';
+import 'package:ParkA/data/data-models/schedule/schedule_data_model.dart';
+
 class CreateParkingDto {
   int countParking;
   String lastitude;
@@ -10,13 +13,13 @@ class CreateParkingDto {
   String direccion;
   String information;
   List<String> features = [];
-  Map calendar = {
-    'monday': [],
-    'tuesday': [],
-    'wednesday': [],
-    'thursday': [],
+  Map<String, List<Schedule>> calendar = {
     'friday': [],
+    'monday': [],
     'saturday': [],
     'sunday': [],
+    'thursday': [],
+    'tuesday': [],
+    'wednesday': [],
   };
 }

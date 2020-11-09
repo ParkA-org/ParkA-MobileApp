@@ -1,4 +1,5 @@
 import 'package:ParkA/data/data-models/position/position_data_model.dart';
+import 'package:ParkA/data/data-models/schedule/schedule_data_model.dart';
 import 'package:ParkA/data/dtos/parking/create_parking_dto.dart';
 import 'package:get/state_manager.dart';
 
@@ -77,6 +78,22 @@ class CreateParkingFormController extends GetxController {
     createPArkingDto.update((_instance) {
       _instance.features.remove(_featureId);
       print(_instance.features);
+    });
+  }
+
+  void addSchedule(String _weekDay, Schedule _schedule, int _index) {
+    createPArkingDto.update((_instance) {
+      if (_instance.calendar[_weekDay].length == _index) {
+        _instance.calendar[_weekDay].add(_schedule);
+      } else {
+        _instance.calendar[_weekDay][_index] = _schedule;
+      }
+    });
+  }
+
+  void removeSchedule(String _weekDay, int _index) {
+    createPArkingDto.update((_instance) {
+      _instance.calendar[_weekDay].removeAt(_index);
     });
   }
 }
