@@ -1,17 +1,14 @@
 import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
+import 'package:ParkA/components/inputs/parka_time_selector_widget/time_schedule_selector_widget.dart';
 import 'package:ParkA/controllers/create-parking-form/create_parking_form_controller.dart';
-import 'package:ParkA/data/data-models/calendar/calendar_data_model.dart';
 import 'package:ParkA/data/data-models/schedule/schedule_data_model.dart';
-import 'package:ParkA/pages/create-parking/components/parka_time_selector_widget.dart';
 import 'package:ParkA/pages/create-parking/components/stepper_widget.dart';
 import 'package:ParkA/pages/create-parking/steps/parking_image_selector_page.dart';
-import 'package:ParkA/pages/create-parking/steps/parking_position_selector_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 import 'package:get/get.dart';
 
 class ParkingCalendarCreatorPage extends StatelessWidget {
@@ -19,6 +16,40 @@ class ParkingCalendarCreatorPage extends StatelessWidget {
 
   final CreateParkingFormController createParkingFormController =
       Get.find<CreateParkingFormController>();
+
+  final Map<String, String> _weekDays = {
+    'monday': "Lunes",
+    'tuesday': "Martes",
+    'wednesday': "Miercoles",
+    'thursday': "Jueves",
+    'friday': "Viernes",
+    'saturday': "Sabado",
+    'sunday': "Domingo",
+  };
+
+  List<Widget> _calendarBuilder() {
+    List<Widget> ret = new List();
+
+    for (var key in _weekDays.keys) {
+      ret.add(
+        Obx(
+          () => TimeScheduleSelectorWidget(
+            label: this._weekDays[key],
+            schedules: createParkingFormController
+                .createPArkingDto.value.calendar[key],
+            onChange: (Schedule _schedule, int _index) {
+              createParkingFormController.addSchedule(key, _schedule, _index);
+            },
+            onRemove: (int _index) {
+              createParkingFormController.removeSchedule(key, _index);
+            },
+          ),
+        ),
+      );
+    }
+
+    return ret;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,29 +87,30 @@ class ParkingCalendarCreatorPage extends StatelessWidget {
                 shrinkWrap: true,
                 children: [
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
-                    child: AutoSizeText(
-                      "Cual es tu tu disponibilidad?",
-                      maxLines: 1,
-                      style: kParkaPageTitleTextStyle,
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: AutoSizeText(
+                            "Disponibilidad",
+                            maxLines: 1,
+                            style: kParkaPageTitleTextStyle,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: AutoSizeText(
+                            "Selecciona los dias y las horas",
+                            maxLines: 1,
+                            style: kParkaTextBaseStyle.copyWith(fontSize: 18.0),
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                  Obx(
-                    () => TimeScheduleSelectorWidget(
-                      label: "Lunes",
-                      schedules: createParkingFormController
-                          .createPArkingDto.value.calendar['monday'],
-                      onChange: (Schedule _schedule, int _index) {
-                        print("IM CHANGING");
-                        createParkingFormController.addSchedule(
-                            "monday", _schedule, _index);
-                      },
-                      onRemove: (int _index) {
-                        createParkingFormController.removeSchedule(
-                            "monday", _index);
-                      },
-                    ),
+                  Column(
+                    children: _calendarBuilder(),
                   ),
                 ],
               ),
@@ -95,96 +127,6 @@ class ParkingCalendarCreatorPage extends StatelessWidget {
             )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class TimeScheduleSelectorWidget extends StatelessWidget {
-  final String label;
-  final List<Schedule> schedules;
-  final Function onChange;
-  final Function onRemove;
-
-  const TimeScheduleSelectorWidget({
-    Key key,
-    @required this.label,
-    @required this.schedules,
-    this.onChange,
-    this.onRemove,
-  }) : super(key: key);
-
-  List<Widget> selectorBuilder() {
-    List<Widget> ret = new List();
-
-    int i = 0;
-    print(this.schedules);
-    this.schedules.forEach((element) {
-      ret.add(TimeSelectorWidget(
-        showAddSign: i < 2 && this.schedules.length < 2,
-        schedule: element,
-        index: i,
-        onChangeHadler: this.onChange,
-        onRemoveHadler: this.onRemove,
-      ));
-      i++;
-    });
-
-    if (ret.length < 2) {
-      print("ADDING");
-
-      ret.add(TimeSelectorWidget(
-        key: Key(ret.length.toString()),
-        onChangeHadler: this.onChange,
-        index: ret.length,
-      ));
-    }
-
-    return ret;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 24.0,
-        vertical: 16.0,
-      ),
-      child: Column(
-        children: [
-          Stack(
-            alignment: Alignment.topLeft,
-            children: [
-              Container(
-                margin: EdgeInsets.only(left: 24.0),
-                // padding: EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  color: ParkaColors.parkaLightGrey,
-                  borderRadius: BorderRadius.circular(24.0),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 28.0),
-                  child: Column(
-                    children: this.selectorBuilder(),
-                  ),
-                ),
-              ),
-              Container(
-                child: Text(
-                  this.label.substring(0, 2),
-                  style: kParkaBigButtonTextStyle,
-                ),
-                height: 50.0,
-                width: 50.0,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: ParkaColors.parkaGreen,
-                  shape: BoxShape.circle,
-                ),
-              ),
-            ],
-          )
-        ],
       ),
     );
   }

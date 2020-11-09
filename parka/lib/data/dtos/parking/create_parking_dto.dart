@@ -1,4 +1,3 @@
-import 'package:ParkA/data/data-models/calendar/calendar_data_model.dart';
 import 'package:ParkA/data/data-models/schedule/schedule_data_model.dart';
 
 class CreateParkingDto {

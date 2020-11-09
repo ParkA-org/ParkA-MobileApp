@@ -83,6 +83,9 @@ class CreateParkingFormController extends GetxController {
 
   void addSchedule(String _weekDay, Schedule _schedule, int _index) {
     createPArkingDto.update((_instance) {
+      print(_weekDay);
+      print(_instance.calendar[_weekDay]);
+      print("ADDING");
       if (_instance.calendar[_weekDay].length == _index) {
         _instance.calendar[_weekDay].add(_schedule);
       } else {
@@ -93,6 +96,9 @@ class CreateParkingFormController extends GetxController {
 
   void removeSchedule(String _weekDay, int _index) {
     createPArkingDto.update((_instance) {
+      print(_weekDay);
+      print(_instance.calendar[_weekDay]);
+      print("REMOVING");
       _instance.calendar[_weekDay].removeAt(_index);
     });
   }
