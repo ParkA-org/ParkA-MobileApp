@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:ParkA/controllers/graphql_controller.dart';
+import 'package:ParkA/data/data-models/schedule/schedule_data_model.dart';
 import 'package:ParkA/data/dtos/parking/create_parking_dto.dart';
 import 'package:ParkA/utils/functions/upload_image.dart';
 import 'package:ParkA/utils/graphql/mutations/parking_mutations.dart';
@@ -26,15 +29,16 @@ class ParkingUseCases {
         "longitude": createParkingDto.longitude,
         "parkingName": createParkingDto.parkingName,
         "calendar": {
-          "monday": [
-            {"start": 1500, "finish": 1600}
-          ],
-          "tuesday": [],
-          "wednesday": [],
-          "thursday": [],
-          "friday": [],
-          "saturday": [],
-          "sunday": []
+          "monday": Schedule.toJsonArray(createParkingDto.calendar['monday']),
+          "tuesday": Schedule.toJsonArray(createParkingDto.calendar['tuesday']),
+          "wednesday":
+              Schedule.toJsonArray(createParkingDto.calendar['wednesday']),
+          "thursday":
+              Schedule.toJsonArray(createParkingDto.calendar['thursday']),
+          "friday": Schedule.toJsonArray(createParkingDto.calendar['friday']),
+          "saturday":
+              Schedule.toJsonArray(createParkingDto.calendar['saturday']),
+          "sunday": Schedule.toJsonArray(createParkingDto.calendar['sunday'])
         },
         "priceHours": createParkingDto.priceHours,
         "pictures": imagesUrls,

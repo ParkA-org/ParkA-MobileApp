@@ -86,6 +86,7 @@ class CreateParkingFormController extends GetxController {
       print(_weekDay);
       print(_instance.calendar[_weekDay]);
       print("ADDING");
+
       if (_instance.calendar[_weekDay].length == _index) {
         _instance.calendar[_weekDay].add(_schedule);
       } else {
