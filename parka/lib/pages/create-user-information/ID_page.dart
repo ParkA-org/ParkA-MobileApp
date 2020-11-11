@@ -10,7 +10,7 @@ import 'package:ParkA/data/use-cases/country/country_use_cases.dart';
 import 'package:ParkA/data/use-cases/nationality/nationality_use_cases.dart';
 import 'package:ParkA/data/dtos/user/user_registration_dto.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
-import 'package:ParkA/pages/Register/register_page.dart';
+import 'package:ParkA/pages/register/register_page.dart';
 import 'package:ParkA/pages/confirm-account/confirm_account_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
