@@ -1,10 +1,12 @@
 class Schedule {
   int start;
   int finish;
+  bool is24h;
 
   Schedule({
     this.start,
     this.finish,
+    this.is24h,
   });
 
   Map<String, dynamic> toJson() => {
@@ -16,7 +18,9 @@ class Schedule {
     List ret = new List();
 
     _schedules.forEach((element) {
-      ret.add(element.toJson());
+      if (element != null) {
+        ret.add(element.toJson());
+      }
     });
 
     return ret;

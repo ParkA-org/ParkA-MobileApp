@@ -43,6 +43,13 @@ class ParkingCalendarCreatorPage extends StatelessWidget {
             onRemove: (int _index) {
               createParkingFormController.removeSchedule(key, _index);
             },
+            onLabelTap: (bool _clear) {
+              if (_clear) {
+                createParkingFormController.clearSchedule(key);
+              } else {
+                createParkingFormController.set24hSchedule(key);
+              }
+            },
           ),
         ),
       );
@@ -54,6 +61,7 @@ class ParkingCalendarCreatorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [

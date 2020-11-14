@@ -101,6 +101,30 @@ class CreateParkingFormController extends GetxController {
       print(_instance.calendar[_weekDay]);
       print("REMOVING");
       _instance.calendar[_weekDay].removeAt(_index);
+      if (_instance.calendar[_weekDay].length == 1) {
+        if (_instance.calendar[_weekDay][0] == null) {
+          _instance.calendar[_weekDay].clear();
+        }
+      }
+    });
+  }
+
+  void set24hSchedule(String _weekDay) {
+    createPArkingDto.update((_instance) {
+      Schedule _schedule = new Schedule(
+        finish: 2400,
+        start: 0,
+        is24h: true,
+      );
+      _instance.calendar[_weekDay].clear();
+
+      _instance.calendar[_weekDay].add(_schedule);
+    });
+  }
+
+  void clearSchedule(String _weekDay) {
+    createPArkingDto.update((_instance) {
+      _instance.calendar[_weekDay].clear();
     });
   }
 }

@@ -9,6 +9,7 @@ class TimeScheduleSelectorWidget extends StatelessWidget {
   final List<Schedule> schedules;
   final Function onChange;
   final Function onRemove;
+  final Function onLabelTap;
 
   const TimeScheduleSelectorWidget({
     Key key,
@@ -16,6 +17,7 @@ class TimeScheduleSelectorWidget extends StatelessWidget {
     @required this.schedules,
     this.onChange,
     this.onRemove,
+    this.onLabelTap,
   }) : super(key: key);
 
   List<Widget> selectorBuilder() {
@@ -23,10 +25,13 @@ class TimeScheduleSelectorWidget extends StatelessWidget {
 
     int i = 0;
     this.schedules.forEach((element) {
+      print(i < 2 && this.schedules.length < 2);
+      print(!(element?.is24h ?? false));
       ret.add(
         TimeSelectorWidget(
           key: Key(DateTime.now().toIso8601String()),
-          showAddSign: i < 2 && this.schedules.length < 2,
+          showAddSign: (i < 2 && this.schedules.length < 2),
+          is24h: element?.is24h ?? false,
           schedule: element,
           index: i,
           onChangeHadler: this.onChange,
@@ -36,7 +41,7 @@ class TimeScheduleSelectorWidget extends StatelessWidget {
       i++;
     });
 
-    if (ret.length < 2) {
+    if (ret.length == 0) {
       ret.add(
         TimeSelectorWidget(
           key: Key((ret.length + 5).toString()),
@@ -77,25 +82,28 @@ class TimeScheduleSelectorWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                child: Text(
-                  this.label.substring(0, 2),
-                  style: this.schedules.length == 0
-                      ? kParkaBigButtonTextStyleGreen22
-                      : kParkaBigButtonTextStyle,
-                ),
-                height: 50.0,
-                width: 50.0,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: this.schedules.length == 0
-                      ? Colors.white
-                      : ParkaColors.parkaGreen,
-                  border: Border.all(
-                    color: ParkaColors.parkaGreen,
-                    width: 2.0,
+              GestureDetector(
+                onTap: () => this.onLabelTap(this.schedules.length != 0),
+                child: Container(
+                  child: Text(
+                    this.label.substring(0, 2),
+                    style: this.schedules.length == 0
+                        ? kParkaBigButtonTextStyleGreen22
+                        : kParkaBigButtonTextStyle,
                   ),
-                  shape: BoxShape.circle,
+                  height: 50.0,
+                  width: 50.0,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: this.schedules.length == 0
+                        ? Colors.white
+                        : ParkaColors.parkaGreen,
+                    border: Border.all(
+                      color: ParkaColors.parkaGreen,
+                      width: 2.0,
+                    ),
+                    shape: BoxShape.circle,
+                  ),
                 ),
               ),
             ],
