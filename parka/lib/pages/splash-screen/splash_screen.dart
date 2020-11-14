@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:ParkA/pages/map/maps_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:flare_flutter/flare_actor.dart';
