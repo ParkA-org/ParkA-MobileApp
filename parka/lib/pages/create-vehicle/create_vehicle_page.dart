@@ -157,7 +157,7 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                               }
                             },
                           ),
-                          this.createVehicleDto.pictures.length != 0
+                          this.createVehicleDto.mainPicture != null
                               ? ParkaAddImagesCarousel(
                                   type: PlaceHolderType.Car,
                                   pictures: this.createVehicleDto.pictures,
