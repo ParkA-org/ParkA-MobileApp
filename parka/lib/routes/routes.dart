@@ -1,8 +1,6 @@
-import 'package:ParkA/components/pending-reservations/pending_reservation_page.dart';
-import 'package:ParkA/components/reservation-as-owner/reservation_as_owner.dart';
-import 'package:ParkA/components/reservations-as-client/reservation_as_client.dart';
 import 'package:ParkA/controllers/bindings/graphql_biding.dart';
 import 'package:ParkA/controllers/bindings/user_binding.dart';
+import 'package:ParkA/pages/chats/chats_page.dart';
 import 'package:ParkA/pages/confirm-account/confirm_account_page.dart';
 import 'package:ParkA/pages/create-parking/create_parking_page.dart';
 import 'package:ParkA/pages/create-parking/steps/parking_calendar_creator_page.dart';
@@ -19,10 +17,14 @@ import 'package:ParkA/pages/login/email_login.dart';
 import 'package:ParkA/pages/login/login_screen.dart';
 import 'package:ParkA/pages/map/maps_page.dart';
 import 'package:ParkA/pages/parkings/parking_page.dart';
+import 'package:ParkA/pages/pending-reservations/pending_reservation_page.dart';
 import 'package:ParkA/pages/profile-picture/profile_pic_page.dart';
 import 'package:ParkA/pages/profile/profile_page.dart';
 import 'package:ParkA/pages/register/register_page.dart';
+import 'package:ParkA/pages/reservation-as-owner/reservation_as_owner.dart';
+import 'package:ParkA/pages/reservations-as-client/reservation_as_client.dart';
 import 'package:ParkA/pages/reset-password/reset_password_page.dart';
+import 'package:ParkA/pages/search/search_panel.dart';
 import 'package:ParkA/pages/splash-screen/splash_screen.dart';
 import 'package:ParkA/pages/update-password/update_user_password_screen.dart';
 import 'package:ParkA/pages/user-payments/user_registered_payment_methods_screen.dart';
@@ -155,5 +157,15 @@ List<GetPage> getRoutePages = [
     bindings: [GraphqlClientBiding()],
     name: PendingReservationsPage.routeName,
     page: () => PendingReservationsPage(),
+  ),
+  GetPage(
+    bindings: [GraphqlClientBiding()],
+    name: SearchPanel.routeName,
+    page: () => SearchPanel(),
+  ),
+  GetPage(
+    bindings: [GraphqlClientBiding()],
+    name: ChatsPage.routeName,
+    page: () => ChatsPage(),
   ),
 ];

@@ -1,14 +1,16 @@
 import 'package:ParkA/components/menu-item/parka_menu_item.dart';
-import 'package:ParkA/components/pending-reservations/pending_reservation_page.dart';
-import 'package:ParkA/components/reservation-as-owner/reservation_as_owner.dart';
-import 'package:ParkA/components/reservations-as-client/reservation_as_client.dart';
 import 'package:ParkA/controllers/user_controller.dart';
+import 'package:ParkA/pages/chats/chats_page.dart';
 import 'package:ParkA/pages/edit-profile/edit_profile_page.dart';
 import 'package:ParkA/pages/parkings/parking_page.dart';
+import 'package:ParkA/pages/pending-reservations/pending_reservation_page.dart';
 
 import 'package:ParkA/pages/profile/components/profile_personal_information_widget.dart';
 import 'package:ParkA/pages/profile/profile_page.dart';
 import 'package:ParkA/pages/login/login_screen.dart';
+import 'package:ParkA/pages/reservation-as-owner/reservation_as_owner.dart';
+import 'package:ParkA/pages/reservations-as-client/reservation_as_client.dart';
+import 'package:ParkA/pages/search/search_panel.dart';
 import 'package:ParkA/pages/user-payments/user_registered_payment_methods_screen.dart';
 import 'package:ParkA/pages/vehicles/vehicle_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
@@ -149,18 +151,22 @@ class PrivateDrawer extends StatelessWidget {
                       child: ParkAMenuItem(
                         label: "Chats",
                         itemStyle: kParkaInputDefaultStyleBlue,
+                        onTapHandler: () => Get.toNamed(ChatsPage.routeName),
                       ),
                     ),
                     Expanded(
                       child: ParkAMenuItem(
                         label: "Buscar Parqueo",
                         itemStyle: kParkaInputDefaultStyleBlue,
+                        onTapHandler: () => Get.toNamed(SearchPanel.routeName),
                       ),
                     ),
                     Expanded(
                       child: ParkAMenuItem(
                         label: "Configuracion",
                         itemStyle: kParkaInputDefaultStyleBlue,
+                        onTapHandler: () =>
+                            Get.toNamed(EditProfilePage.routeName),
                       ),
                     ),
                     Expanded(
@@ -217,14 +223,17 @@ class ParkaUserReservationInfoWidget extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          flex: 1,
-          child: Text(
-            this.value ?? "0",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 26.0,
-              fontWeight: FontWeight.w600,
-              fontFamily: "Montserrat",
+          flex: 0,
+          child: Padding(
+            padding: EdgeInsets.only(right: 24.0),
+            child: Text(
+              this.value ?? "0",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24.0,
+                fontWeight: FontWeight.w600,
+                fontFamily: "Montserrat",
+              ),
             ),
           ),
         ),
