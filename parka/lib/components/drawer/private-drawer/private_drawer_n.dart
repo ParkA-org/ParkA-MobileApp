@@ -1,4 +1,7 @@
 import 'package:ParkA/components/menu-item/parka_menu_item.dart';
+import 'package:ParkA/components/pending-reservations/pending_reservation_page.dart';
+import 'package:ParkA/components/reservation-as-owner/reservation_as_owner.dart';
+import 'package:ParkA/components/reservations-as-client/reservation_as_client.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/pages/edit-profile/edit_profile_page.dart';
 import 'package:ParkA/pages/parkings/parking_page.dart';
@@ -34,7 +37,7 @@ class PrivateDrawer extends StatelessWidget {
               flex: 2,
               child: Container(
                 color: ParkaColors.parkaGreen,
-                padding: EdgeInsets.symmetric(vertical: 8.0),
+                padding: EdgeInsets.symmetric(vertical: 16.0),
                 child: Column(
                   children: [
                     Expanded(
@@ -51,7 +54,7 @@ class PrivateDrawer extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 8.0),
+                          horizontal: 24.0, vertical: 8.0),
                       child: Divider(
                         thickness: 1.0,
                         color: Color(0xFF949494),
@@ -64,17 +67,42 @@ class PrivateDrawer extends StatelessWidget {
                             horizontal: 24.0, vertical: 8.0),
                         child: Column(
                           children: [
-                            ParkaUserReservationInfoWidget(
-                              value: this.reservationsAsCLientCount.toString(),
-                              label: "Reservaciones como cliente",
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  Get.toNamed(
+                                      ReservationAsClientPage.routeName);
+                                },
+                                child: ParkaUserReservationInfoWidget(
+                                  value:
+                                      this.reservationsAsCLientCount.toString(),
+                                  label: "Reservaciones como cliente",
+                                ),
+                              ),
                             ),
-                            ParkaUserReservationInfoWidget(
-                              value: this.reservationsAsOwnerCount.toString(),
-                              label: "Reservaciones como anfitrion",
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  Get.toNamed(ReservationAsOwnerPage.routeName);
+                                },
+                                child: ParkaUserReservationInfoWidget(
+                                  value:
+                                      this.reservationsAsOwnerCount.toString(),
+                                  label: "Reservaciones como anfitrion",
+                                ),
+                              ),
                             ),
-                            ParkaUserReservationInfoWidget(
-                              value: null,
-                              label: "Reservas pendientes",
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  Get.toNamed(
+                                      PendingReservationsPage.routeName);
+                                },
+                                child: ParkaUserReservationInfoWidget(
+                                  value: null,
+                                  label: "Reservas pendientes",
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -195,7 +223,7 @@ class ParkaUserReservationInfoWidget extends StatelessWidget {
             style: TextStyle(
               color: Colors.white,
               fontSize: 26.0,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w600,
               fontFamily: "Montserrat",
             ),
           ),
@@ -207,7 +235,7 @@ class ParkaUserReservationInfoWidget extends StatelessWidget {
             style: TextStyle(
               color: Colors.white,
               fontSize: 14.0,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.normal,
               fontFamily: "Montserrat",
             ),
           ),

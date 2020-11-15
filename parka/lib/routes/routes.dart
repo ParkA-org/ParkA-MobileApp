@@ -1,3 +1,6 @@
+import 'package:ParkA/components/pending-reservations/pending_reservation_page.dart';
+import 'package:ParkA/components/reservation-as-owner/reservation_as_owner.dart';
+import 'package:ParkA/components/reservations-as-client/reservation_as_client.dart';
 import 'package:ParkA/controllers/bindings/graphql_biding.dart';
 import 'package:ParkA/controllers/bindings/user_binding.dart';
 import 'package:ParkA/pages/confirm-account/confirm_account_page.dart';
@@ -137,5 +140,20 @@ List<GetPage> getRoutePages = [
     bindings: [GraphqlClientBiding()],
     name: SplashScreen.routeName,
     page: () => SplashScreen(),
-  )
+  ),
+  GetPage(
+    bindings: [GraphqlClientBiding()],
+    name: ReservationAsClientPage.routeName,
+    page: () => ReservationAsClientPage(),
+  ),
+  GetPage(
+    bindings: [GraphqlClientBiding()],
+    name: ReservationAsOwnerPage.routeName,
+    page: () => ReservationAsOwnerPage(),
+  ),
+  GetPage(
+    bindings: [GraphqlClientBiding()],
+    name: PendingReservationsPage.routeName,
+    page: () => PendingReservationsPage(),
+  ),
 ];
