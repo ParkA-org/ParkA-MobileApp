@@ -1,6 +1,11 @@
 import 'package:ParkA/controllers/bindings/graphql_biding.dart';
 import 'package:ParkA/controllers/bindings/user_binding.dart';
+import 'package:ParkA/pages/chats/chats_page.dart';
 import 'package:ParkA/pages/confirm-account/confirm_account_page.dart';
+import 'package:ParkA/pages/create-parking/create_parking_page.dart';
+import 'package:ParkA/pages/create-parking/steps/parking_calendar_creator_page.dart';
+import 'package:ParkA/pages/create-parking/steps/parking_image_selector_page.dart';
+import 'package:ParkA/pages/create-parking/steps/parking_position_selector_page.dart';
 import 'package:ParkA/pages/create-payment/payment_info.dart';
 import 'package:ParkA/pages/create-user-information/ID_page.dart';
 import 'package:ParkA/pages/create-vehicle/create_vehicle_page.dart';
@@ -11,10 +16,15 @@ import 'package:ParkA/pages/forgot-password/forgot_password_screen.dart';
 import 'package:ParkA/pages/login/email_login.dart';
 import 'package:ParkA/pages/login/login_screen.dart';
 import 'package:ParkA/pages/map/maps_page.dart';
+import 'package:ParkA/pages/parkings/parking_page.dart';
+import 'package:ParkA/pages/pending-reservations/pending_reservation_page.dart';
 import 'package:ParkA/pages/profile-picture/profile_pic_page.dart';
 import 'package:ParkA/pages/profile/profile_page.dart';
 import 'package:ParkA/pages/register/register_page.dart';
+import 'package:ParkA/pages/reservation-as-owner/reservation_as_owner.dart';
+import 'package:ParkA/pages/reservations-as-client/reservation_as_client.dart';
 import 'package:ParkA/pages/reset-password/reset_password_page.dart';
+import 'package:ParkA/pages/search/search_panel.dart';
 import 'package:ParkA/pages/splash-screen/splash_screen.dart';
 import 'package:ParkA/pages/update-password/update_user_password_screen.dart';
 import 'package:ParkA/pages/user-payments/user_registered_payment_methods_screen.dart';
@@ -104,7 +114,58 @@ List<GetPage> getRoutePages = [
     bindings: [GraphqlClientBiding()],
   ),
   GetPage(
+    name: ParkingPage.routeName,
+    page: () => ParkingPage(),
+    bindings: [GraphqlClientBiding()],
+  ),
+  GetPage(
+    name: CreateParkingPage.routeName,
+    page: () => CreateParkingPage(),
+    bindings: [GraphqlClientBiding()],
+  ),
+  GetPage(
+    name: ParkingPositionSelectorPage.routeName,
+    page: () => ParkingPositionSelectorPage(),
+    bindings: [GraphqlClientBiding()],
+  ),
+  GetPage(
+    name: ParkingCalendarCreatorPage.routeName,
+    page: () => ParkingCalendarCreatorPage(),
+    bindings: [GraphqlClientBiding()],
+  ),
+  GetPage(
+    name: ParkingImageSelectorPage.routeName,
+    page: () => ParkingImageSelectorPage(),
+    bindings: [GraphqlClientBiding()],
+  ),
+  GetPage(
+    bindings: [GraphqlClientBiding()],
     name: SplashScreen.routeName,
     page: () => SplashScreen(),
+  ),
+  GetPage(
+    bindings: [GraphqlClientBiding()],
+    name: ReservationAsClientPage.routeName,
+    page: () => ReservationAsClientPage(),
+  ),
+  GetPage(
+    bindings: [GraphqlClientBiding()],
+    name: ReservationAsOwnerPage.routeName,
+    page: () => ReservationAsOwnerPage(),
+  ),
+  GetPage(
+    bindings: [GraphqlClientBiding()],
+    name: PendingReservationsPage.routeName,
+    page: () => PendingReservationsPage(),
+  ),
+  GetPage(
+    bindings: [GraphqlClientBiding()],
+    name: SearchPanel.routeName,
+    page: () => SearchPanel(),
+  ),
+  GetPage(
+    bindings: [GraphqlClientBiding()],
+    name: ChatsPage.routeName,
+    page: () => ChatsPage(),
   ),
 ];

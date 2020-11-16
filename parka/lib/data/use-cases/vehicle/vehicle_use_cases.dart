@@ -36,6 +36,7 @@ class VehicleUseCases {
 
     String imageUrl = await uploadImage(createVehicleDto.mainPicture);
 
+//TODO: add funtion to upload mutiple images
     print(createVehicleDto.model);
     print(createVehicleDto.licensePlate);
     print(createVehicleDto.colorExterior);
