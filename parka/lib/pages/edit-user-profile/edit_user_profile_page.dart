@@ -1,5 +1,5 @@
 import 'package:ParkA/components/floating-action-button/parka_floating_action_button.dart';
-import 'package:ParkA/components/headers/parka_header.dart';
+import 'package:ParkA/components/headers/parka_header_symbol.dart';
 import 'package:ParkA/components/inputs/parka_dropdown.dart';
 import 'package:ParkA/components/inputs/parka_edit_text_field.dart';
 import 'package:ParkA/controllers/user_controller.dart';
@@ -71,7 +71,6 @@ class _EditUserProfileInformationPageState
     getViewData();
   }
 
-  //TODO: add updates for birthDate, Nationality and Country
   Future updateUserProfile() async {
     bool updateUserCheck = await userController.updateUser(
       this.name,
@@ -112,12 +111,12 @@ class _EditUserProfileInformationPageState
               flex: 0,
               child: Container(
                 padding: EdgeInsets.symmetric(
-                  vertical: 8.0,
+                  vertical: 140.0,
                 ),
                 decoration: BoxDecoration(
                   color: ParkaColors.parkaGreen,
                 ),
-                child: ParkaHeader(color: Colors.white),
+                child: ParkaHeaderSymbol(color: Colors.white),
               ),
             ),
             Expanded(
