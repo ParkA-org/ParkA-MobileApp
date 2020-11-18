@@ -108,18 +108,35 @@ class _EditUserProfileInformationPageState
         child: Column(
           children: [
             Expanded(
-              flex: 0,
+              flex: 1,
               child: Container(
                 padding: EdgeInsets.symmetric(
-                  vertical: 140.0,
+                  vertical: 8.0,
+                  horizontal: 20.0,
                 ),
                 decoration: BoxDecoration(
                   color: ParkaColors.parkaGreen,
                 ),
-                child: ParkaHeaderSymbol(color: Colors.white),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ParkaHeaderSymbol(color: Colors.white),
+                    Text(
+                      "Editar Perfil",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: "Montserrat",
+                        fontSize: 50.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Expanded(
+              flex: 2,
               child: ModalProgressHUD(
                 inAsyncCall: this.userInformationLoading,
                 child: this.userInformationLoading
