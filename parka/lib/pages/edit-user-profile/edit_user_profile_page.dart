@@ -9,6 +9,7 @@ import 'package:ParkA/data/data-models/nationality/nationality_data_model.dart';
 import 'package:ParkA/data/use-cases/country/country_use_cases.dart';
 import 'package:ParkA/data/use-cases/nationality/nationality_use_cases.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
+import 'package:ParkA/pages/profile/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
@@ -108,7 +109,7 @@ class _EditUserProfileInformationPageState
         child: Column(
           children: [
             Expanded(
-              flex: 1,
+              flex: 3,
               child: Container(
                 padding: EdgeInsets.symmetric(
                   vertical: 8.0,
@@ -123,12 +124,35 @@ class _EditUserProfileInformationPageState
                   children: [
                     ParkaHeaderSymbol(color: Colors.white),
                     Text(
-                      "Editar Perfil",
+                      " Editar Perfil",
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: "Montserrat",
                         fontSize: 50.0,
                         fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Expanded(
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 9.0, top: 9.0, bottom: 9.0),
+                              child: ParkaCircleAvatarWidget(
+                                imageUrl:
+                                    userController.user.value?.profilePicture,
+                              ),
+                            ),
+                            ParkaFloatingActionButton(
+                              color: Colors.white,
+                              iconData: Icons.create,
+                              onPressedHandler: this.updateUserProfile,
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   ],
@@ -136,7 +160,7 @@ class _EditUserProfileInformationPageState
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 4,
               child: ModalProgressHUD(
                 inAsyncCall: this.userInformationLoading,
                 child: this.userInformationLoading
