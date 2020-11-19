@@ -264,6 +264,42 @@ class _EditUserProfileInformationPageState
                                     );
                                   },
                                 ),
+                                ParkADropdownProfile(
+                                  text: "Pais",
+                                  textSize: 24.0,
+                                  selectedItem: this.selectedCountry,
+                                  options: this.countriesOptions,
+                                  height: currentScreen.height * 0.07,
+                                  width: currentScreen.width,
+                                  onChanged: (value) {
+                                    setState(
+                                      () {
+                                        this.selectedCountry =
+                                            this.countries[value].name;
+                                        this.placeOfBirth =
+                                            this.countries[value].id;
+                                      },
+                                    );
+                                  },
+                                ),
+                                ParkADropdownProfile(
+                                  text: "Nacionalidad",
+                                  textSize: 24.0,
+                                  selectedItem: this.selectedNationality,
+                                  options: this.nationalityOptions,
+                                  height: currentScreen.height * 0.07,
+                                  width: currentScreen.width,
+                                  onChanged: (value) {
+                                    setState(
+                                      () {
+                                        this.selectedNationality =
+                                            this.nationalities[value].name;
+                                        this.nationality =
+                                            this.nationalities[value].id;
+                                      },
+                                    );
+                                  },
+                                ),
                               ],
                             ),
                           ),
@@ -298,48 +334,6 @@ class _EditUserProfileInformationPageState
                                       },
                                     );
                                   },
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: ParkADropdownProfile(
-                                    text: "Nacionalidad",
-                                    textSize: 16.0,
-                                    selectedItem: this.selectedNationality,
-                                    options: this.nationalityOptions,
-                                    height: currentScreen.height * 0.03,
-                                    width: currentScreen.width * 0.8,
-                                    onChanged: (value) {
-                                      setState(
-                                        () {
-                                          this.selectedNationality =
-                                              this.nationalities[value].name;
-                                          this.nationality =
-                                              this.nationalities[value].id;
-                                        },
-                                      );
-                                    },
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: ParkADropdownProfile(
-                                    text: "Pais",
-                                    textSize: 16.0,
-                                    selectedItem: this.selectedCountry,
-                                    options: this.countriesOptions,
-                                    height: currentScreen.height * 0.03,
-                                    width: currentScreen.width * 0.8,
-                                    onChanged: (value) {
-                                      setState(
-                                        () {
-                                          this.selectedCountry =
-                                              this.countries[value].name;
-                                          this.placeOfBirth =
-                                              this.countries[value].id;
-                                        },
-                                      );
-                                    },
-                                  ),
                                 ),
                               ],
                             ),
