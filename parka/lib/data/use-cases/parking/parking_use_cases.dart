@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/data-models/schedule/schedule_data_model.dart';
 import 'package:ParkA/data/dtos/parking/create_parking_dto.dart';
