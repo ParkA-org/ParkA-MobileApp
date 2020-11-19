@@ -1,8 +1,6 @@
 import 'package:ParkA/components/floating-action-button/parka_floating_action_button.dart';
 import 'package:ParkA/components/headers/parka_header_symbol.dart';
-import 'package:ParkA/components/inputs/parka_dropdown.dart';
 import 'package:ParkA/components/inputs/parka_dropdown_profile.dart';
-import 'package:ParkA/components/inputs/parka_edit_text_field.dart';
 import 'package:ParkA/components/inputs/parka_edit_text_field_profile.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/data/data-models/country/country_data_model.dart';
@@ -16,7 +14,6 @@ import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class EditUserProfileInformationPage extends StatefulWidget {
@@ -231,6 +228,21 @@ class _EditUserProfileInformationPageState
                                   },
                                 ),
                                 Text(
+                                  "Telefono",
+                                  style: kParkaTextStyleBoldWhite24,
+                                ),
+                                ParkaEditInputText(
+                                  value: this.userInformation.telephoneNumber,
+                                  textFieldMaxLength: 13,
+                                  onChangedHandler: (String value) {
+                                    setState(
+                                      () {
+                                        this.telephoneNumber = value;
+                                      },
+                                    );
+                                  },
+                                ),
+                                Text(
                                   "Documento",
                                   style: kParkaTextStyleBoldWhite24,
                                 ),
@@ -296,41 +308,6 @@ class _EditUserProfileInformationPageState
                                             this.nationalities[value].name;
                                         this.nationality =
                                             this.nationalities[value].id;
-                                      },
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 16.0, vertical: 8.0),
-                            padding: EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              color: ParkaColors.parkaGreen,
-                              boxShadow: [
-                                BoxShadow(
-                                  offset: Offset(3.0, 7.0),
-                                  color: Colors.black38,
-                                  blurRadius: 5.0,
-                                ),
-                              ],
-                              borderRadius: BorderRadius.circular(
-                                10.0,
-                              ),
-                            ),
-                            child: Column(
-                              children: [
-                                Text("Editar Datos personales",
-                                    style: kParkaTextStyleBoldWhite20),
-                                ParkaEditInput(
-                                  value: this.userInformation.telephoneNumber,
-                                  textFieldMaxLength: 13,
-                                  onChangedHandler: (String value) {
-                                    setState(
-                                      () {
-                                        this.telephoneNumber = value;
                                       },
                                     );
                                   },

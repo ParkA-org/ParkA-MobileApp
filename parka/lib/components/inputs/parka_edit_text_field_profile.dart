@@ -41,6 +41,8 @@ class ParkaEditInputText extends StatelessWidget {
           fillColor: Colors.white,
           hintText: this.value,
         ),
+        style: TextStyle(
+            fontSize: 20.0, color: Colors.black, fontFamily: "Montserrat"),
         onChanged: this.onChangedHandler,
       ),
     );
