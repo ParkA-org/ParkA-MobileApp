@@ -13,7 +13,7 @@ class Parking {
   final String sector;
   final String direction;
   final String information;
-  final List<ParkingFeature> features;
+  final List<Feature> features;
   final bool verified;
 
   Parking({

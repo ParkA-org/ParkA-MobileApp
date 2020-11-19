@@ -1,0 +1,4 @@
+enum PlaceHolderType {
+  Parking,
+  Car,
+}
