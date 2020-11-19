@@ -9,6 +9,31 @@ import 'package:get/get.dart';
 import 'package:graphql/client.dart';
 
 class VehicleUseCases {
+  static Future<Vehicle> getVehicleById(String id) async {
+    final graphqlClient = Get.find<GraphqlClientController>();
+
+    final queryVariables = {
+      "input": {"id": id}
+    };
+
+    QueryOptions queryOptions = QueryOptions(
+        documentNode: gql(getVehicleByIdQuery), variables: queryVariables);
+
+    final QueryResult getVehiclebyIdResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .query(queryOptions);
+
+    print(getVehiclebyIdResult.data);
+    print(getVehiclebyIdResult.exception);
+
+    if (getVehiclebyIdResult.data != null) {
+      final vehicleData = getVehiclebyIdResult.data["getVehicleById"];
+      return Vehicle.vehiclefromJson(vehicleData);
+    }
+
+    return null;
+  }
+
   static Future<List<Vehicle>> getAllUserVehicles() async {
     final graphqlClient = Get.find<GraphqlClientController>();
 

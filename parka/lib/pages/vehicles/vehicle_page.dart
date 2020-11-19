@@ -4,6 +4,7 @@ import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
 
 import 'package:ParkA/data/use-cases/vehicle/vehicle_use_cases.dart';
 import 'package:ParkA/pages/create-vehicle/create_vehicle_page.dart';
+import 'package:ParkA/pages/vehicle-detail/vehicle_detail_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/parkaIcons.dart';
 import "package:flutter/material.dart";
@@ -44,6 +45,13 @@ class __VehiclePageState extends State<VehiclePage> {
     this.userVehicles.forEach((element) {
       ret.add(VehicleTile(
         vehicle: element,
+        onTapHandler: () {
+          Get.to(
+            VehicleDetailPage(
+              vehicleId: element.id,
+            ),
+          );
+        },
       ));
     });
 
