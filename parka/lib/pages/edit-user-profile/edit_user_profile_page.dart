@@ -2,6 +2,7 @@ import 'package:ParkA/components/floating-action-button/parka_floating_action_bu
 import 'package:ParkA/components/headers/parka_header_symbol.dart';
 import 'package:ParkA/components/inputs/parka_dropdown_profile.dart';
 import 'package:ParkA/components/inputs/parka_edit_text_field_profile.dart';
+import 'package:ParkA/components/inputs/parka_phone_edit_field.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/data/data-models/country/country_data_model.dart';
 import 'package:ParkA/data/data-models/information/information_data_model.dart';
@@ -190,17 +191,13 @@ class _EditUserProfileInformationPageState
                         children: [
                           Container(
                             margin: EdgeInsets.symmetric(
-                              horizontal: 16.0,
-                            ),
-                            padding: EdgeInsets.only(
-                              left: 8.0,
-                              right: 8.0,
-                              bottom: 8.0,
+                              horizontal: 25.0,
                             ),
                             decoration: BoxDecoration(
                               color: Color(0xff0A7B93),
                             ),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
@@ -231,7 +228,7 @@ class _EditUserProfileInformationPageState
                                   "Telefono",
                                   style: kParkaTextStyleBoldWhite24,
                                 ),
-                                ParkaEditInputText(
+                                ParkaPhoneEdit(
                                   value: this.userInformation.telephoneNumber,
                                   textFieldMaxLength: 13,
                                   onChangedHandler: (String value) {
@@ -248,7 +245,7 @@ class _EditUserProfileInformationPageState
                                 ),
                                 ParkaEditInputText(
                                   value: this.userInformation.document,
-                                  textFieldMaxLength: 10,
+                                  textFieldMaxLength: 11,
                                   onChangedHandler: (String value) {
                                     setState(
                                       () {
@@ -271,7 +268,7 @@ class _EditUserProfileInformationPageState
                                   onChangedHandler: (String value) {
                                     setState(
                                       () {
-                                        this.lastName = value;
+                                        this.birthDate = value;
                                       },
                                     );
                                   },
