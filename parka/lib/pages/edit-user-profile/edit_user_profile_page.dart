@@ -1,7 +1,9 @@
 import 'package:ParkA/components/floating-action-button/parka_floating_action_button.dart';
 import 'package:ParkA/components/headers/parka_header_symbol.dart';
 import 'package:ParkA/components/inputs/parka_dropdown.dart';
+import 'package:ParkA/components/inputs/parka_dropdown_profile.dart';
 import 'package:ParkA/components/inputs/parka_edit_text_field.dart';
+import 'package:ParkA/components/inputs/parka_edit_text_field_profile.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/data/data-models/country/country_data_model.dart';
 import 'package:ParkA/data/data-models/information/information_data_model.dart';
@@ -208,7 +210,7 @@ class _EditUserProfileInformationPageState
                                   "Nombre",
                                   style: kParkaTextStyleBoldWhite24,
                                 ),
-                                ParkaEditInput(
+                                ParkaEditInputText(
                                   value: userController.user.value.name,
                                   onChangedHandler: (String value) {
                                     setState(() {
@@ -216,12 +218,50 @@ class _EditUserProfileInformationPageState
                                     });
                                   },
                                 ),
-                                ParkaEditInput(
+                                Text(
+                                  "Apellido",
+                                  style: kParkaTextStyleBoldWhite24,
+                                ),
+                                ParkaEditInputText(
                                   value: userController.user.value.lastName,
                                   onChangedHandler: (String value) {
                                     setState(() {
                                       this.lastName = value;
                                     });
+                                  },
+                                ),
+                                Text(
+                                  "Documento",
+                                  style: kParkaTextStyleBoldWhite24,
+                                ),
+                                ParkaEditInputText(
+                                  value: this.userInformation.document,
+                                  textFieldMaxLength: 10,
+                                  onChangedHandler: (String value) {
+                                    setState(
+                                      () {
+                                        this.documentNumber = value;
+                                      },
+                                    );
+                                  },
+                                ),
+                                Text(
+                                  "Fecha de nacimiento",
+                                  style: kParkaTextStyleBoldWhite24,
+                                ),
+                                ParkaEditInputText(
+                                  value: this
+                                      .userInformation
+                                      .dateBirth
+                                      .split("T")[0]
+                                      .split("-")
+                                      .join("/"),
+                                  onChangedHandler: (String value) {
+                                    setState(
+                                      () {
+                                        this.lastName = value;
+                                      },
+                                    );
                                   },
                                 ),
                               ],
@@ -249,17 +289,6 @@ class _EditUserProfileInformationPageState
                                 Text("Editar Datos personales",
                                     style: kParkaTextStyleBoldWhite20),
                                 ParkaEditInput(
-                                  value: this.userInformation.document,
-                                  textFieldMaxLength: 10,
-                                  onChangedHandler: (String value) {
-                                    setState(
-                                      () {
-                                        this.documentNumber = value;
-                                      },
-                                    );
-                                  },
-                                ),
-                                ParkaEditInput(
                                   value: this.userInformation.telephoneNumber,
                                   textFieldMaxLength: 13,
                                   onChangedHandler: (String value) {
@@ -270,24 +299,9 @@ class _EditUserProfileInformationPageState
                                     );
                                   },
                                 ),
-                                ParkaEditInput(
-                                  value: this
-                                      .userInformation
-                                      .dateBirth
-                                      .split("T")[0]
-                                      .split("-")
-                                      .join("/"),
-                                  onChangedHandler: (String value) {
-                                    setState(
-                                      () {
-                                        this.lastName = value;
-                                      },
-                                    );
-                                  },
-                                ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: ParkADropdown(
+                                  child: ParkADropdownProfile(
                                     text: "Nacionalidad",
                                     textSize: 16.0,
                                     selectedItem: this.selectedNationality,
@@ -308,7 +322,7 @@ class _EditUserProfileInformationPageState
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: ParkADropdown(
+                                  child: ParkADropdownProfile(
                                     text: "Pais",
                                     textSize: 16.0,
                                     selectedItem: this.selectedCountry,
