@@ -14,6 +14,7 @@ import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class EditUserProfileInformationPage extends StatefulWidget {
@@ -103,8 +104,11 @@ class _EditUserProfileInformationPageState
     return Scaffold(
       floatingActionButton: ParkaFloatingActionButton(
         iconData: Icons.autorenew,
+        color: Colors.white,
+        iconColor: ParkaColors.parkaGreen,
         onPressedHandler: this.updateUserProfile,
       ),
+      backgroundColor: Color(0xff0A7B93),
       body: SafeArea(
         child: Column(
           children: [
@@ -116,7 +120,7 @@ class _EditUserProfileInformationPageState
                   horizontal: 20.0,
                 ),
                 decoration: BoxDecoration(
-                  color: ParkaColors.parkaGreen,
+                  color: Color(0xff0A7B93),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -128,28 +132,46 @@ class _EditUserProfileInformationPageState
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: "Montserrat",
-                        fontSize: 50.0,
+                        fontSize: 40.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Expanded(
                       child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                        child: Stack(
+                          alignment: Alignment.bottomRight,
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(
-                                  left: 9.0, top: 9.0, bottom: 9.0),
+                                  left: 9.0, top: 9.0, bottom: 6.0),
                               child: ParkaCircleAvatarWidget(
                                 imageUrl:
                                     userController.user.value?.profilePicture,
                               ),
                             ),
-                            ParkaFloatingActionButton(
-                              color: Colors.white,
-                              iconData: Icons.create,
-                              onPressedHandler: this.updateUserProfile,
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 6.0),
+                              child: InkWell(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      shape: BoxShape.circle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          offset: Offset(3.0, 10.0),
+                                          color: Colors.black38,
+                                          blurRadius: 5.0,
+                                        )
+                                      ]),
+                                  child: Icon(
+                                    Icons.create,
+                                    color: Color(0xff086174),
+                                    size: 35.0,
+                                  ),
+                                  padding: EdgeInsets.all(15.0),
+                                ),
+                                onTap: () {},
+                              ),
                             ),
                           ],
                         ),
@@ -169,29 +191,22 @@ class _EditUserProfileInformationPageState
                         children: [
                           Container(
                             margin: EdgeInsets.symmetric(
-                                horizontal: 16.0, vertical: 8.0),
-                            padding: EdgeInsets.all(8.0),
+                              horizontal: 16.0,
+                            ),
+                            padding: EdgeInsets.only(
+                              left: 8.0,
+                              right: 8.0,
+                              bottom: 8.0,
+                            ),
                             decoration: BoxDecoration(
-                              color: ParkaColors.parkaGreen,
-                              boxShadow: [
-                                BoxShadow(
-                                  offset: Offset(3.0, 7.0),
-                                  color: Colors.black38,
-                                  blurRadius: 5.0,
-                                ),
-                              ],
-                              borderRadius: BorderRadius.circular(
-                                10.0,
-                              ),
+                              color: Color(0xff0A7B93),
                             ),
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    "Editar Nombre de Cuenta",
-                                    style: kParkaTextStyleBoldWhite20,
-                                  ),
+                                Text(
+                                  "Nombre",
+                                  style: kParkaTextStyleBoldWhite24,
                                 ),
                                 ParkaEditInput(
                                   value: userController.user.value.name,

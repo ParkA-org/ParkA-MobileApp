@@ -18,7 +18,7 @@ class SymbolButton extends StatelessWidget {
       onTap: this.onTapHandler,
       child: Icon(
         this.leadingIconData,
-        size: 65.0,
+        size: 50.0,
         color: this.color,
       ),
     );

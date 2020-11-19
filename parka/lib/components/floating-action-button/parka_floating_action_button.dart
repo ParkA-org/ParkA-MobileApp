@@ -22,7 +22,7 @@ class ParkaFloatingActionButton extends StatelessWidget {
       child: Icon(
         this.iconData,
         size: 40,
-        color: iconColor ?? Color(0xff086174),
+        color: iconColor ?? Colors.white,
       ),
       highlightElevation: 20,
       onPressed: this.onPressedHandler,
