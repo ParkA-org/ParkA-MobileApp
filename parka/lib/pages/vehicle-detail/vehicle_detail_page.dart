@@ -3,10 +3,12 @@ import 'package:ParkA/components/images/parka_add_images_carousel.dart';
 import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
 import 'package:ParkA/data/enums/parking_place_holder_type.dart';
 import 'package:ParkA/data/use-cases/vehicle/vehicle_use_cases.dart';
+import 'package:ParkA/pages/edit-vehicle/edit_vehicle_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class VehicleDetailPage extends StatefulWidget {
   static String routeName = "vehicle-detail-page";
@@ -47,6 +49,13 @@ class _VehicleDetailPageState extends State<VehicleDetailPage> {
     return Scaffold(
       floatingActionButton: ParkaFloatingActionButton(
         iconData: Icons.edit,
+        onPressedHandler: () {
+          Get.to(
+            EditVehiclePage(
+              vehicle: this._vehicle,
+            ),
+          );
+        },
       ),
       body: SafeArea(
         child: this._loading
@@ -91,7 +100,9 @@ class _VehicleDetailPageState extends State<VehicleDetailPage> {
                                 labelLeft: "Ano",
                                 labelRight: "Estatus",
                                 valueLeft: this._vehicle.year.toString(),
-                                valueRight: "Tu jeva esta verificada",
+                                valueRight: this._vehicle.verified
+                                    ? "Verificado"
+                                    : "No Verificado",
                               ),
                               VehicleDataTabWidget(
                                 labelLeft: "Marca",
@@ -109,7 +120,6 @@ class _VehicleDetailPageState extends State<VehicleDetailPage> {
                             ],
                           ),
                         ),
-
                         // Container(
                         //   height: 10000,
                         //   width: 100,
