@@ -45,6 +45,44 @@ class PaymentUseCases {
     return false;
   }
 
+  static Future updatePayment(CreatePaymentDto createPaymentDto) async {
+    final graphqlClient = Get.find<GraphqlClientController>()
+        .parkaGraphqlClient
+        .value
+        .graphQlClient;
+
+    print(createPaymentDto.cardHolder);
+    print(createPaymentDto.card);
+    print(createPaymentDto.expirationDate);
+    print(createPaymentDto.cvv);
+    print(createPaymentDto.digit);
+
+    final createPaymentInput = {
+      "data": {
+        "cardHolder": createPaymentDto.cardHolder,
+        "expirationDate": "2020-10-02T02:05:30.962Z",
+        "digit": createPaymentDto.digit,
+        "card": "",
+        "cvv": createPaymentDto.cvv,
+      }
+    };
+
+    MutationOptions mutationOptions = MutationOptions(
+      documentNode: gql(createPaymentMutation),
+      variables: createPaymentInput,
+    );
+
+    final createPaymentInputResult =
+        await graphqlClient.mutate(mutationOptions);
+
+    if (createPaymentInputResult.data != null) {
+      print("created");
+      return true;
+    }
+
+    return false;
+  }
+
   static Future<List<Payment>> getAllUserPaymentMethods() async {
     final graphqlClient = Get.find<GraphqlClientController>()
         .parkaGraphqlClient
