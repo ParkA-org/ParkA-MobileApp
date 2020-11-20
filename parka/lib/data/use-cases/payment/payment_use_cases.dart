@@ -55,7 +55,6 @@ class PaymentUseCases {
     print(updatePaymentDto.cardHolder);
     print(updatePaymentDto.card);
     print(updatePaymentDto.expirationDate);
-    print(updatePaymentDto.cvv);
     print(updatePaymentDto.digit);
 
     final updatePaymentInput = {
@@ -64,7 +63,6 @@ class PaymentUseCases {
         "expirationDate": updatePaymentDto.expirationDate + "T00:00:00.000Z",
         "digit": updatePaymentDto.digit,
         "card": "",
-        "cvv": updatePaymentDto.cvv,
       }
     };
 

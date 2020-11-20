@@ -41,8 +41,10 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
           payment: element,
         ),
         color: Colors.white,
-        onPressed: () =>
-            {Get.toNamed(EditPaymentScreen.routeName, arguments: element)},
+        onPressed: () => {
+          Navigator.of(context)
+              .pushNamed(EditPaymentScreen.routeName, arguments: element)
+        },
       ));
     });
 

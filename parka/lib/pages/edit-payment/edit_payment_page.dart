@@ -17,16 +17,16 @@ class EditPaymentScreen extends StatefulWidget {
 }
 
 class _EditPaymentScreenState extends State<EditPaymentScreen> {
-  final Payment payment = Get.find();
   String fullName = "Nombre del titular";
-  String creditCardNumber1;
-  String creditCardNumber2;
-  String creditCardNumber3;
-  String creditCardNumber4;
-  String creditCardMonth;
-  String creditCardYear;
+  String creditCardNumber1 = "----";
+  String creditCardNumber2 = "----";
+  String creditCardNumber3 = "----";
+  String creditCardNumber4 = "----";
+  String creditCardMonth = "--";
+  String creditCardYear = "--";
   String creditCardCvv;
   String expirationDate;
+  String card;
   Map formHandlers;
   UpdatePaymentDto updatePaymentDto = new UpdatePaymentDto();
 
@@ -82,16 +82,15 @@ class _EditPaymentScreenState extends State<EditPaymentScreen> {
   }
 
   Future<void> sumbmitForm() async {
-    final expiration = new DateTime(2020, 8).toIso8601String();
-    print(expiration);
-
     this.updatePaymentDto.cardHolder = this.fullName;
+    this.updatePaymentDto.card = this.card;
     this.updatePaymentDto.digit = this.creditCardNumber1 +
         this.creditCardNumber2 +
         this.creditCardNumber3 +
         this.creditCardNumber4;
     this.updatePaymentDto.cvv = this.creditCardCvv;
-    this.updatePaymentDto.expirationDate = this.expirationDate;
+    this.updatePaymentDto.expirationDate =
+        "20" + this.creditCardYear + "-" + this.creditCardMonth + "-01";
     this.updatePaymentDto.card = "";
     print("tapped");
     final updatePaymentResult =
@@ -111,6 +110,15 @@ class _EditPaymentScreenState extends State<EditPaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Payment payment = ModalRoute.of(context).settings.arguments;
+    this.fullName = payment.cardHolder;
+    this.card = payment.card;
+    this.creditCardNumber1 = payment.digit.substring(0, 4);
+    this.creditCardNumber2 = payment.digit.substring(4, 8);
+    this.creditCardNumber3 = payment.digit.substring(8, 12);
+    this.creditCardNumber4 = payment.digit.substring(12, 16);
+    this.creditCardYear = payment.expirationDate.substring(2, 4);
+    this.creditCardMonth = payment.expirationDate.substring(5, 7);
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: SafeArea(
