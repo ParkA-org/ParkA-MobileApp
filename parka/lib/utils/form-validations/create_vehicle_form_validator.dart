@@ -6,6 +6,10 @@ bool createVehicleFormValidator(CreateVehicleDto createVehicleDto) {
     return false;
   }
 
+  if (createVehicleDto.detail == null) {
+    return false;
+  }
+
   if (createVehicleDto.alias == null) {
     return false;
   }

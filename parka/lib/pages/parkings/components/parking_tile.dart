@@ -1,4 +1,3 @@
-import 'package:ParkA/components/Rating/star_rating.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
