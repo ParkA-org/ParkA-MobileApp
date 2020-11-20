@@ -8,8 +8,10 @@ class ParkingTile extends StatelessWidget {
   const ParkingTile({
     Key key,
     this.parking,
+    this.onTapHandler,
   }) : super(key: key);
   final Parking parking;
+  final Function onTapHandler;
 
   @override
   Widget build(BuildContext context) {
