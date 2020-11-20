@@ -1,11 +1,10 @@
-import 'dart:convert';
-
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/data-models/schedule/schedule_data_model.dart';
 import 'package:ParkA/data/dtos/parking/create_parking_dto.dart';
 import 'package:ParkA/utils/functions/upload_image.dart';
 import 'package:ParkA/utils/graphql/mutations/parking_mutations.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:graphql/client.dart';
 
 class ParkingUseCases {
@@ -65,5 +64,12 @@ class ParkingUseCases {
     }
 
     return false;
+  }
+
+  static Future getNearParkings(LatLng userLocation) async {
+
+    final graphqlClient = Get.find<GraphqlClientController>();
+
+    QueryOptions queryOptions = QueryOptions(documentNode: gql(getNearbyParkingsQuery))
   }
 }

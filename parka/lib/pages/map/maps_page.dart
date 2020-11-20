@@ -6,6 +6,8 @@ import 'package:ParkA/components/drawer/public-drawer/public_drawer.dart';
 import 'package:ParkA/components/modals/parking_detail.dart';
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/controllers/user_controller.dart';
+import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
+import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
 
 import 'package:ParkA/pages/map/components/dummy_search.dart';
@@ -51,12 +53,11 @@ class _MapPageState extends State<MapPage> {
         userLocation = currentUserLocation;
         this._loading = false;
         print('THIS HAS LOADED  $_loading');
-        setState(() {
-          initialCameraPosition = CameraPosition(
-            target: LatLng(userLocation.latitude, userLocation.longitude),
-            zoom: 15.5,
-          );
-        });
+
+        initialCameraPosition = CameraPosition(
+          target: LatLng(userLocation.latitude, userLocation.longitude),
+          zoom: 15.5,
+        );
       },
     );
   }
@@ -92,6 +93,10 @@ class _MapPageState extends State<MapPage> {
     this._reservationsAsOwnerCount =
         await ReservationUseCases.getAllReservationsAsOwnerCount();
     setState(() {});
+  }
+
+  void getNearParkings() async{
+    List<Parking> nearParkings = await ParkingUseCases.
   }
 
   @override
