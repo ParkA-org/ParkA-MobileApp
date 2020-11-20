@@ -26,7 +26,7 @@ class _EditPaymentScreenState extends State<EditPaymentScreen> {
   String creditCardYear = "--";
   String creditCardCvv;
   String expirationDate;
-  String card;
+  String card = "";
   Map formHandlers;
   UpdatePaymentDto updatePaymentDto = new UpdatePaymentDto();
 
@@ -91,7 +91,6 @@ class _EditPaymentScreenState extends State<EditPaymentScreen> {
     this.updatePaymentDto.cvv = this.creditCardCvv;
     this.updatePaymentDto.expirationDate =
         "20" + this.creditCardYear + "-" + this.creditCardMonth + "-01";
-    this.updatePaymentDto.card = "";
     print("tapped");
     final updatePaymentResult =
         await PaymentUseCases.updatePayment(this.updatePaymentDto);
@@ -111,6 +110,7 @@ class _EditPaymentScreenState extends State<EditPaymentScreen> {
   @override
   Widget build(BuildContext context) {
     final Payment payment = ModalRoute.of(context).settings.arguments;
+
     this.fullName = payment.cardHolder;
     this.card = payment.cardId;
     this.creditCardNumber1 = payment.digit.substring(0, 4);

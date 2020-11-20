@@ -62,7 +62,7 @@ class PaymentUseCases {
         "cardHolder": updatePaymentDto.cardHolder,
         "expirationDate": updatePaymentDto.expirationDate + "T00:00:00.000Z",
         "digit": updatePaymentDto.digit,
-        "card": "",
+        "card": updatePaymentDto.card,
       }
     };
 
