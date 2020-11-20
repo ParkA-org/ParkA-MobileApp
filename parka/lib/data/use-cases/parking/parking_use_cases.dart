@@ -71,8 +71,33 @@ class ParkingUseCases {
   static Future getNearParkings(LatLng userLocation) async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
-    QueryOptions queryOptions =
-        QueryOptions(documentNode: gql(getNearbyParkingsQuery));
+    final userLocationInput = {
+      "userLocation": {
+        "where": {
+          "position_near": {
+            "latitude": userLocation.latitude,
+            "longitude": userLocation.longitude
+          }
+        }
+      }
+    };
+
+    QueryOptions queryOptions = QueryOptions(
+        documentNode: gql(getNearbyParkingsQuery),
+        variables: userLocationInput);
+
+    QueryResult getNearbyParkingsResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .query(queryOptions);
+
+    if (getNearbyParkingsResult.data != null &&
+        getNearbyParkingsResult.data["getAllParkings"] != null) {
+      final List<Parking> parkingData = Parking.parkingsFromJson(
+          getNearbyParkingsResult.data["getAllParkings"]);
+      return parkingData;
+    }
+
+    return [];
   }
 
   static Future<List<Parking>> getAllUserParkings() async {

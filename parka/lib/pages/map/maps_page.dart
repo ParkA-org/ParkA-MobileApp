@@ -1,9 +1,9 @@
+import 'package:ParkA/components/Modals/parking_detail.dart';
 import 'package:ParkA/components/buttons/main_fab.dart';
 import 'package:ParkA/components/drawer/private-drawer/private_drawer_n.dart';
 
 import 'package:ParkA/components/drawer/public-drawer/public_drawer.dart';
 
-import 'package:ParkA/components/modals/parking_detail.dart';
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
@@ -34,7 +34,7 @@ class _MapPageState extends State<MapPage> {
   int _reservationsAsOwnerCount;
   LocationData userLocation;
   CameraPosition initialCameraPosition;
-  Set<Marker> test;
+  Set<Marker> nearbyParkings;
   BitmapDescriptor customIcon;
 
   final UserController user = Get.find<UserController>();
@@ -66,16 +66,9 @@ class _MapPageState extends State<MapPage> {
   void initState() {
     super.initState();
 
-    this.getUserReservationsCount();
-    BitmapDescriptor.fromAssetImage(
-            ImageConfiguration.empty, 'resources/images/green-parking-icon.png')
-        .then((onValue) {
-      customIcon = onValue;
-    });
-
     _fabIsVisible = true;
     _loading = true;
-    test = {};
+    nearbyParkings = {};
     getCurrentLocation();
     initialCameraPosition =
         CameraPosition(target: LatLng(18.487876, -69.9644807), zoom: 15.5);
@@ -85,6 +78,14 @@ class _MapPageState extends State<MapPage> {
         _mapStyle = string;
       },
     );
+
+    this.getNearParkings(LatLng(userLocation.latitude, userLocation.longitude));
+    this.getUserReservationsCount();
+    BitmapDescriptor.fromAssetImage(
+            ImageConfiguration.empty, 'resources/images/green-parking-icon.png')
+        .then((onValue) {
+      customIcon = onValue;
+    });
   }
 
   void getUserReservationsCount() async {
@@ -95,8 +96,26 @@ class _MapPageState extends State<MapPage> {
     setState(() {});
   }
 
-  void getNearParkings() async{
-    List<Parking> nearParkings = await ParkingUseCases.
+  void getNearParkings(LatLng userLocation) async {
+    Set<Marker> parkingPins = {};
+    List<Parking> nearParkings =
+        await ParkingUseCases.getNearParkings(userLocation);
+
+    if (nearParkings != null && nearParkings.length > 0) {
+      nearParkings.forEach((parking) {
+        parkingPins.add(Marker(
+            markerId: MarkerId("${parking.id}"),
+            position: LatLng(parking.latitude, parking.longitude),
+            icon: customIcon,
+            onTap: () => showModalBottomSheet(
+                context: context,
+                builder: (context) => ParkingDetailModal(parking: parking))));
+      });
+    }
+
+    setState(() {
+      nearbyParkings = parkingPins;
+    });
   }
 
   @override
@@ -131,6 +150,7 @@ class _MapPageState extends State<MapPage> {
               myLocationEnabled: true,
               initialCameraPosition: initialCameraPosition,
               zoomControlsEnabled: false,
+              markers: nearbyParkings,
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 60.0),
