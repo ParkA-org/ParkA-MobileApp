@@ -30,7 +30,6 @@ class _VehicleDetailPageState extends State<VehicleDetailPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     this._loading = true;
     this._vehicleId = this.widget.vehicleId;
