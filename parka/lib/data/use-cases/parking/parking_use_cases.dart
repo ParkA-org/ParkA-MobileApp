@@ -80,8 +80,12 @@ class ParkingUseCases {
         .query(queryOptions);
 
     print(getAllUserParkingsResult.data);
-    if(getAllUserParkingsResult.data != null){
-      final List<Parking> parkingsData = Parking
+    if (getAllUserParkingsResult.data != null) {
+      final List<Parking> parkingsData = Parking.parkingsFromJson(
+          getAllUserParkingsResult.data["getAllUserVehicles"]);
+
+      return parkingsData;
     }
+    return [];
   }
 }

@@ -6,6 +6,9 @@ const String getAllUserParkingQuery = r"""
     mainPicture
     parkingName
     information
+    latitude
+    longitude
+    countParking
     user{
       id
     }

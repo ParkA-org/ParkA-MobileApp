@@ -5,6 +5,8 @@ import 'package:ParkA/pages/create-parking/create_parking_page.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 
+import 'components/parking_tile.dart';
+
 class ParkingPage extends StatefulWidget {
   static String routeName = 'parking-page';
 
@@ -16,8 +18,27 @@ class _ParkingPageState extends State<ParkingPage> {
   bool parkingsLoaded;
   List<Parking> userParkings = [];
 
-  Future<void> getAllUserParkings() async{
-    this.userParkings = await ParkingUseCases.
+  Future<void> getAllUserParkings() async {
+    this.userParkings = await ParkingUseCases.getAllUserParkings();
+
+    setState(() {
+      this.parkingsLoaded = true;
+    });
+  }
+
+  List<Widget> parkingListBuilder() {
+    List<Widget> parkingList = new List();
+
+    this.userParkings.forEach((parking) {
+      parkingList.add(ParkingTile(parking: parking));
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    this.parkingsLoaded = false;
+    this.getAllUserParkings();
   }
 
   @override

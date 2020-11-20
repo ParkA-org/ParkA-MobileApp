@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:ParkA/data/data-models/feature/parking_feature_data_model.dart';
 
 class Parking {
@@ -16,8 +18,10 @@ class Parking {
   final String information;
   final List<Feature> features;
   final bool verified;
+  final Float rating;
 
   Parking({
+    this.rating,
     this.parkingName,
     this.id,
     this.direction,
@@ -44,7 +48,11 @@ class Parking {
           parkingCount: parking["countParking"],
           latitude: parking["latitude"],
           longitude: parking["longitude"],
-          parkingName: parking["parkingName"]));
+          parkingName: parking["parkingName"],
+          mainPicture: parking["mainPicture"],
+          pictures: parking["pictures"],
+          perHourPrice: parking["priceHours"],
+          rating: parking["rating"]));
     });
   }
 }
