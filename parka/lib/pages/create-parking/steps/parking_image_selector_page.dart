@@ -117,9 +117,10 @@ class ParkingImageSelectorPage extends StatelessWidget {
                   Expanded(
                     child: Obx(
                       () => ParkaAddImagesCarousel(
+                        carouselType: CarouselType.Form,
                         pictures: createParkingFormController
                             .createPArkingDto.value.pictures,
-                        type: PlaceHolderType.Parking,
+                        placeholderType: PlaceHolderType.Parking,
                         onTapHandler: () async {
                           String imagePath = await getImageFunction();
                           if (imagePath != null) {

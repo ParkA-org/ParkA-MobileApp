@@ -91,7 +91,8 @@ class _VehicleDetailPageState extends State<VehicleDetailPage> {
                               Container(
                                 height: 150,
                                 child: ParkaAddImagesCarousel(
-                                  type: PlaceHolderType.Car,
+                                  carouselType: CarouselType.Gallery,
+                                  placeholderType: PlaceHolderType.Car,
                                   pictures: this._vehicle.pictures,
                                 ),
                               ),
@@ -106,7 +107,7 @@ class _VehicleDetailPageState extends State<VehicleDetailPage> {
                               VehicleDataTabWidget(
                                 labelLeft: "Marca",
                                 labelRight: "Modelo",
-                                valueLeft: this._vehicle.year.toString(),
+                                valueLeft: this._vehicle.model.make.name,
                                 valueRight: this._vehicle.model.name,
                               ),
                               VehicleDataTabWidget(
@@ -119,10 +120,6 @@ class _VehicleDetailPageState extends State<VehicleDetailPage> {
                             ],
                           ),
                         ),
-                        // Container(
-                        //   height: 10000,
-                        //   width: 100,
-                        // )
                       ],
                     ),
                   )

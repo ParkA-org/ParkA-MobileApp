@@ -6,8 +6,7 @@ import 'package:ParkA/data/use-cases/vehicle/vehicle_use_cases.dart';
 import 'package:ParkA/pages/create-vehicle/components/parka_resizable_on_scroll_app_bar.dart';
 import 'package:ParkA/pages/create-vehicle/create_vehicle_page.dart';
 import 'package:ParkA/pages/vehicle-detail/vehicle_detail_page.dart';
-import 'package:ParkA/styles/parka_colors.dart';
-import 'package:ParkA/styles/parkaIcons.dart';
+
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';

@@ -108,35 +108,34 @@ class VehicleUseCases {
   static Future<bool> updateVehicle(UpdateVehicleDto _updateVehicleDto) async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
-    bool checkMainPicture = GetUtils.isURL(_updateVehicleDto.mainPicture);
-    String _imageUrl = _updateVehicleDto.mainPicture;
+    bool _isPath = !(GetUtils.isURL(_updateVehicleDto.mainPicture));
+    String _vehicleMainPicture = _updateVehicleDto.mainPicture;
 
-    if (!checkMainPicture) {
-      _imageUrl = await uploadImage(_updateVehicleDto.mainPicture);
+    if (_isPath) {
+      _vehicleMainPicture = await uploadImage(_updateVehicleDto.mainPicture);
+    }
+
+    List<String> _vehiclePictures = List();
+
+    for (String _picture in _updateVehicleDto.pictures) {
+      _isPath = !(GetUtils.isURL(_picture));
+      String picture = _picture;
+      if (_isPath) {
+        picture = await uploadImage(picture);
+      }
+      _vehiclePictures.add(picture);
     }
 
 //TODO: add funtion to upload mutiple images
     print(_updateVehicleDto.model);
     print(_updateVehicleDto.licensePlate);
     print(_updateVehicleDto.colorExterior);
-    print(_updateVehicleDto.mainPicture);
-    print(_imageUrl);
+    print(_vehicleMainPicture);
+    print(_vehicleMainPicture);
     print(_updateVehicleDto.year);
     print(_updateVehicleDto.alias);
     print(_updateVehicleDto.bodyStyle);
-
-    // final _updateVehicleInput = {
-    //   "data": {
-    //     "model": _updateVehicleDto.model,
-    //     "licensePlate": _updateVehicleDto.licensePlate,
-    //     "colorExterior": _updateVehicleDto.colorExterior,
-    //     "mainPicture": _imageUrl,
-    //     "pictures": [],
-    //     "year": _updateVehicleDto.year,
-    //     "alias": _updateVehicleDto.alias,
-    //     "bodyStyle": _updateVehicleDto.bodyStyle,
-    //   }
-    // };
+    print(_vehiclePictures);
 
     final _updateVehicleInput = {
       "input": {
@@ -148,14 +147,11 @@ class VehicleUseCases {
           "colorExterior": _updateVehicleDto.colorExterior,
           "detail": "",
           "licensePlate": _updateVehicleDto.licensePlate,
-          "mainPicture": _updateVehicleDto.mainPicture,
+          "mainPicture": _vehicleMainPicture,
           "model": _updateVehicleDto.model,
           "bodyStyle": _updateVehicleDto.bodyStyle,
           "year": _updateVehicleDto.year,
-          "pictures": [
-            "https://upload.wikimedia.org/wikipedia/commons/f/f1/2018_Toyota_Corolla_%28MZEA12R%29_Ascent_Sport_hatchback_%282018-11-02%29_01.jpg",
-            "https://st.motortrend.com/uploads/sites/5/2019/11/2020-Toyota-Corolla-Hybrid-LE-front-three-quarter-in-motion.jpg"
-          ]
+          "pictures": _vehiclePictures,
         }
       }
     };

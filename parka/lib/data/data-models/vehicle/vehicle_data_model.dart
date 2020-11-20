@@ -63,19 +63,21 @@ class Vehicle {
         carPictures.add(element);
       });
 
-      ret.add(Vehicle(
-        id: vehicle["id"],
-        licensePlate: vehicle["licensePlate"],
-        model: Model.modelFromJson(vehicle["model"]),
-        verified: vehicle["verified"],
-        color: Color.colorFromJson(vehicle["colorExterior"]),
-        mainPicture: vehicle["mainPicture"],
-        pictures: carPictures,
-        year: vehicle["year"],
-        alias: vehicle["alias"],
-        bodyStyle: BodyStyle.bodyStyleFromJson(vehicle["bodyStyle"]),
-        detail: vehicle["detail"],
-      ));
+      ret.add(
+        Vehicle(
+          id: vehicle["id"],
+          licensePlate: vehicle["licensePlate"],
+          model: Model.modelFromJson(vehicle["model"]),
+          verified: vehicle["verified"],
+          color: Color.colorFromJson(vehicle["colorExterior"]),
+          mainPicture: vehicle["mainPicture"],
+          pictures: carPictures,
+          year: vehicle["year"],
+          alias: vehicle["alias"],
+          bodyStyle: BodyStyle.bodyStyleFromJson(vehicle["bodyStyle"]),
+          detail: vehicle["detail"],
+        ),
+      );
     });
 
     return ret;

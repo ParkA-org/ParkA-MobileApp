@@ -159,7 +159,8 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                           ),
                           this.createVehicleDto.mainPicture != null
                               ? ParkaAddImagesCarousel(
-                                  type: PlaceHolderType.Car,
+                                  carouselType: CarouselType.Form,
+                                  placeholderType: PlaceHolderType.Car,
                                   pictures: this.createVehicleDto.pictures,
                                   onTapHandler: () async {
                                     String imagePath = await getImageFunction();
