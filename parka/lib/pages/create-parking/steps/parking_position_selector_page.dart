@@ -83,18 +83,21 @@ class ParkingPositionSelectorPage extends StatelessWidget {
                             label: "Sector",
                             value: createParkingFormController
                                 .createPArkingDto.value.sector,
+                            onChangedHandler: null,
                           ),
                           ParkaTextField(
                             enabled: false,
                             label: "Direccion",
                             value: createParkingFormController
                                 .createPArkingDto.value.direccion,
+                            onChangedHandler: null,
                           ),
                           ParkaTextField(
                             enabled: false,
                             label: "Posicion",
                             value:
                                 "${createParkingFormController.createPArkingDto.value.lastitude ?? ""} ${createParkingFormController.createPArkingDto.value.longitude ?? ""}",
+                            onChangedHandler: null,
                           ),
                         ],
                       ),

@@ -32,4 +32,10 @@ class Parking {
     this.status,
     this.verified,
   });
+
+  static parkingsFromJson(List parkingData) {
+    List<Parking> userParkings = new List();
+
+    parkingData.forEach((parking) {userParkings.add(Parking(id: parking["id"]))});
+  }
 }

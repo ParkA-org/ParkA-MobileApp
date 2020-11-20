@@ -11,6 +11,9 @@ class ParkingPage extends StatefulWidget {
 }
 
 class _ParkingPageState extends State<ParkingPage> {
+  bool parkingsLoaded;
+  List<Parking> userParkings = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
