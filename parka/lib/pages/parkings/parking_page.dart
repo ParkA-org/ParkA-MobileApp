@@ -32,6 +32,7 @@ class _ParkingPageState extends State<ParkingPage> {
     this.userParkings.forEach((parking) {
       parkingList.add(ParkingTile(parking: parking));
     });
+    return parkingList;
   }
 
   @override
@@ -51,10 +52,9 @@ class _ParkingPageState extends State<ParkingPage> {
         },
       ),
       body: SafeArea(
-        child: Center(
-          child: Text("Aqui va el listado de parqueo"),
-        ),
-      ),
+          child: ListView(
+        children: parkingListBuilder(),
+      )),
     );
   }
 }
