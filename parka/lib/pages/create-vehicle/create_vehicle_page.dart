@@ -195,14 +195,23 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                                 maxLength: 25,
                                 onChangedHandler: (String value) {
                                   setState(() {
-                                    this.createVehicleDto.alias =
-                                        value.substring(0, 7);
+                                    this.createVehicleDto.alias = value;
+                                  });
+                                },
+                              ),
+                              ParkaEditInput(
+                                type: ParkaInputType.textField,
+                                label: "Detalles del vehiculo",
+                                maxLength: 25,
+                                onChangedHandler: (String value) {
+                                  setState(() {
+                                    this.createVehicleDto.detail = value;
                                   });
                                 },
                               ),
                               ParkaEditInput(
                                 type: ParkaInputType.dropDown,
-                                label: "Ano del vehiculo",
+                                label: "Año del vehiculo",
                                 dropDownOptions: yearOptions,
                                 value: this.selectedYear,
                                 onChangedHandler: (int index) {

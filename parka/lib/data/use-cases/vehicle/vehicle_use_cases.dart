@@ -63,7 +63,9 @@ class VehicleUseCases {
 
     String imageUrl = await uploadImage(createVehicleDto.mainPicture);
 
-//TODO: add funtion to upload mutiple images
+    List<String> _vehiclePictures =
+        await uploadMultipleImages(createVehicleDto.pictures);
+
     print(createVehicleDto.model);
     print(createVehicleDto.licensePlate);
     print(createVehicleDto.colorExterior);
@@ -79,8 +81,8 @@ class VehicleUseCases {
         "licensePlate": createVehicleDto.licensePlate,
         "colorExterior": createVehicleDto.colorExterior,
         "mainPicture": imageUrl,
-        "detail": "",
-        "pictures": [],
+        "detail": createVehicleDto.detail,
+        "pictures": _vehiclePictures,
         "year": createVehicleDto.year,
         "alias": createVehicleDto.alias,
         "bodyStyle": createVehicleDto.bodyStyle,
@@ -126,7 +128,6 @@ class VehicleUseCases {
       _vehiclePictures.add(picture);
     }
 
-//TODO: add funtion to upload mutiple images
     print(_updateVehicleDto.model);
     print(_updateVehicleDto.licensePlate);
     print(_updateVehicleDto.colorExterior);
@@ -136,6 +137,7 @@ class VehicleUseCases {
     print(_updateVehicleDto.alias);
     print(_updateVehicleDto.bodyStyle);
     print(_vehiclePictures);
+    print(_updateVehicleDto.detail);
 
     final _updateVehicleInput = {
       "input": {
@@ -145,7 +147,7 @@ class VehicleUseCases {
         "updateVehiclePayload": {
           "alias": _updateVehicleDto.alias,
           "colorExterior": _updateVehicleDto.colorExterior,
-          "detail": "",
+          "detail": _updateVehicleDto.detail,
           "licensePlate": _updateVehicleDto.licensePlate,
           "mainPicture": _vehicleMainPicture,
           "model": _updateVehicleDto.model,

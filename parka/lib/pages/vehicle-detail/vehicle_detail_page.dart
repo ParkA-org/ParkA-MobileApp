@@ -89,7 +89,9 @@ class _VehicleDetailPageState extends State<VehicleDetailPage> {
                           child: Column(
                             children: [
                               Container(
-                                height: 150,
+                                height: this._vehicle.pictures.length == 0
+                                    ? 0
+                                    : 150,
                                 child: ParkaAddImagesCarousel(
                                   carouselType: CarouselType.Gallery,
                                   placeholderType: PlaceHolderType.Car,

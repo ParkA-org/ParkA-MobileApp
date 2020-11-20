@@ -43,6 +43,7 @@ class ParkaAddImagesCarousel extends StatelessWidget {
     });
 
     if (this.carouselType == CarouselType.Form) {
+      print("SI SOY UN FORM");
       ret.add(
         Container(
           margin: EdgeInsets.symmetric(horizontal: 16.0),
@@ -77,17 +78,18 @@ class ParkaAddImagesCarousel extends StatelessWidget {
 
         return ConstrainedBox(
           constraints: constraints,
-          child: this.pictures.length > 0
-              ? Container(
+          child: this.pictures.length == 0 &&
+                  this.carouselType == CarouselType.Form
+              ? ParkaImageCardWidget(
+                  type: this.placeholderType,
+                  onTapHandler: this.onTapHandler,
+                )
+              : Container(
                   height: (cardWidth) / creditCardProp,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: carouselBuilder(),
                   ),
-                )
-              : ParkaImageCardWidget(
-                  type: this.placeholderType,
-                  onTapHandler: this.onTapHandler,
                 ),
         );
       },

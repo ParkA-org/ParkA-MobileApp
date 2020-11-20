@@ -69,7 +69,6 @@ class _EditVehiclePageState extends State<EditVehiclePage> {
     super.initState();
     this._vehicle = this.widget.vehicle;
     this._updateVehicleDto = new UpdateVehicleDto(
-      //TODO: update vehicle model
       id: this._vehicle.id,
       alias: this._vehicle.alias,
       bodyStyle: this._vehicle.bodyStyle.id,
@@ -78,6 +77,7 @@ class _EditVehiclePageState extends State<EditVehiclePage> {
       mainPicture: this._vehicle.mainPicture,
       model: this._vehicle.model.id,
       pictures: this._vehicle.pictures,
+      detail: this._vehicle.detail,
       year: this._vehicle.year.toString(),
     );
     this.dataLoading = true;
@@ -89,7 +89,6 @@ class _EditVehiclePageState extends State<EditVehiclePage> {
     this.bodyStyles = await BodyStyleUseCases.getAllBodyStyles();
     this.models = await ModelUseCases.getAllModels();
     this.makes = await MakeUseCases.getAllMakes();
-
     this.bodyStyleOptions = new List.from(this.bodyStyles.map((e) => e.name));
     this.colorsOptions = new List.from(this.colors.map((e) => e.name));
     this.modelsOptions = new List.from(this.makes[0].models.map((e) => e.name));
@@ -223,6 +222,17 @@ class _EditVehiclePageState extends State<EditVehiclePage> {
                                   setState(() {
                                     this._updateVehicleDto.alias =
                                         value.substring(0, 7);
+                                  });
+                                },
+                              ),
+                              ParkaEditInput(
+                                type: ParkaInputType.textField,
+                                value: this._updateVehicleDto.detail,
+                                label: "Detalles del vehiculo",
+                                maxLength: 25,
+                                onChangedHandler: (String value) {
+                                  setState(() {
+                                    this._updateVehicleDto.detail = value;
                                   });
                                 },
                               ),
