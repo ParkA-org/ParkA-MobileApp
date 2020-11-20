@@ -10,6 +10,10 @@ bool updateVehicleFormValidator(UpdateVehicleDto _updateVehicleDto) {
     return false;
   }
 
+  if (_updateVehicleDto.detail == null) {
+    return false;
+  }
+
   if (_updateVehicleDto.bodyStyle == null) {
     return false;
   }

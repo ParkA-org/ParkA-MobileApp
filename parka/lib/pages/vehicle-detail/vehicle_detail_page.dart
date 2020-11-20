@@ -9,6 +9,7 @@ import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class VehicleDetailPage extends StatefulWidget {
   static String routeName = "vehicle-detail-page";
@@ -57,8 +58,13 @@ class _VehicleDetailPageState extends State<VehicleDetailPage> {
         },
       ),
       body: SafeArea(
+          child: ModalProgressHUD(
+        color: ParkaColors.parkaGreen,
+        inAsyncCall: this._loading,
         child: this._loading
-            ? Container()
+            ? Container(
+                color: ParkaColors.parkaGreen,
+              )
             : CustomScrollView(
                 slivers: [
                   SliverAppBar(
@@ -91,7 +97,7 @@ class _VehicleDetailPageState extends State<VehicleDetailPage> {
                               Container(
                                 height: this._vehicle.pictures.length == 0
                                     ? 0
-                                    : 150,
+                                    : 125,
                                 child: ParkaAddImagesCarousel(
                                   carouselType: CarouselType.Gallery,
                                   placeholderType: PlaceHolderType.Car,
@@ -127,7 +133,7 @@ class _VehicleDetailPageState extends State<VehicleDetailPage> {
                   )
                 ],
               ),
-      ),
+      )),
     );
   }
 }
