@@ -3,10 +3,12 @@ import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
 import 'package:ParkA/pages/create-parking/create_parking_page.dart';
+import 'package:ParkA/pages/create-vehicle/components/parka_resizable_on_scroll_app_bar.dart';
 import 'package:ParkA/styles/parkaIcons.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 import 'components/parking_list_placeholder.dart';
 import 'components/parking_tile.dart';
@@ -19,14 +21,14 @@ class ParkingPage extends StatefulWidget {
 }
 
 class _ParkingPageState extends State<ParkingPage> {
-  bool parkingsLoaded;
+  bool _loading;
   List<Parking> userParkings = [];
 
   Future<void> getAllUserParkings() async {
     this.userParkings = await ParkingUseCases.getAllUserParkings();
 
     setState(() {
-      this.parkingsLoaded = true;
+      this._loading = false;
     });
   }
 
@@ -42,7 +44,7 @@ class _ParkingPageState extends State<ParkingPage> {
   @override
   void initState() {
     super.initState();
-    this.parkingsLoaded = false;
+    this._loading = true;
     this.getAllUserParkings();
   }
 
@@ -56,66 +58,34 @@ class _ParkingPageState extends State<ParkingPage> {
         },
       ),
       body: SafeArea(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: Container(
-              decoration: BoxDecoration(
-                  color: ParkaColors.parkaGreen,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(15.0),
-                    bottomRight: Radius.circular(15.0),
+        child: SafeArea(
+          child: ModalProgressHUD(
+            inAsyncCall: this._loading,
+            opacity: 0.5,
+            child: RefreshIndicator(
+              onRefresh: this.getAllUserParkings,
+              child: CustomScrollView(
+                slivers: [
+                  ParkaResizableOnScrollAppBar(
+                    title: "Tus Parqueos",
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(3.0, 7.0),
-                      color: Colors.black38,
-                      blurRadius: 5.0,
+                  SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        !this._loading && this.userParkings.length != 0
+                            ? Column(
+                                children: parkingListBuilder(),
+                              )
+                            : ParkingListPlaceholder()
+                      ],
                     ),
-                  ]),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ParkaHeader(
-                    color: Colors.white,
-                  ),
-                  Icon(
-                    ParkaIcons.parkaCar,
-                    color: Colors.white,
-                    size: 130.0,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 30.0),
-                    child: Text(
-                      'Tus Parqueos',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 45,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "Montserrat",
-                      ),
-                    ),
-                  ),
+                  )
                 ],
               ),
             ),
           ),
-          Expanded(
-            flex: 2,
-            child: this.parkingsLoaded && this.userParkings.length != 0
-                ? RefreshIndicator(
-                    onRefresh: this.getAllUserParkings,
-                    child: ListView(
-                      children: parkingListBuilder(),
-                    ),
-                  )
-                : ParkingListPlaceholder(),
-          )
-        ],
-      )),
+        ),
+      ),
     );
   }
 }

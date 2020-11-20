@@ -89,4 +89,31 @@ class ParkingUseCases {
     }
     return [];
   }
+
+  static Future<Parking> getParkingById(String id) async {
+    final graphqlClient = Get.find<GraphqlClientController>();
+
+    Map<String, String> getParkingByIdInput = {
+      "data": id,
+    };
+
+    QueryOptions queryOptions = QueryOptions(
+      documentNode: gql(getParkingByIdQuery),
+      variables: getParkingByIdInput,
+    );
+
+    final QueryResult getParkingByIdResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .query(queryOptions);
+
+    print(getParkingByIdResult.data);
+    if (getParkingByIdResult.data != null) {
+      //Create PArking from Json Method
+      final Parking parkingsData =
+          Parking.parkingsFromJson(getParkingByIdResult.data["getParkingById"]);
+
+      return parkingsData;
+    }
+    return null;
+  }
 }
