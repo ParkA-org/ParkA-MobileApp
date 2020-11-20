@@ -11,14 +11,14 @@ class Parking {
   final String calendar;
   final double perHourPrice;
   final String mainPicture;
-  final List<String> pictures;
+  final List pictures;
   final bool status;
   final String sector;
   final String direction;
   final String information;
   final List<Feature> features;
   final bool verified;
-  final Float rating;
+  final double rating;
 
   Parking({
     this.rating,
@@ -45,14 +45,16 @@ class Parking {
     parkingData.forEach((parking) {
       userParkings.add(Parking(
           id: parking["id"],
-          parkingCount: parking["countParking"],
+          parkingCount: int.parse(parking["countParking"].toString()),
           latitude: parking["latitude"],
           longitude: parking["longitude"],
           parkingName: parking["parkingName"],
           mainPicture: parking["mainPicture"],
           pictures: parking["pictures"],
-          perHourPrice: parking["priceHours"],
-          rating: parking["rating"]));
+          perHourPrice: double.parse(parking["priceHours"]),
+          rating: parking["rating"].toDouble()));
     });
+
+    return userParkings;
   }
 }

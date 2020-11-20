@@ -81,9 +81,9 @@ class ParkingUseCases {
 
     print(getAllUserParkingsResult.data);
     if (getAllUserParkingsResult.data != null &&
-        getAllUserParkingsResult.data["getAllUserVehicles"] != null) {
+        getAllUserParkingsResult.data["getAllUserParkings"] != null) {
       final List<Parking> parkingsData = Parking.parkingsFromJson(
-          getAllUserParkingsResult.data["getAllUserVehicles"]);
+          getAllUserParkingsResult.data["getAllUserParkings"]);
 
       return parkingsData;
     }
