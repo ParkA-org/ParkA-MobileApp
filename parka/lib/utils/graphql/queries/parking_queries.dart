@@ -1,0 +1,19 @@
+const String getAllUserParkingQuery = r"""
+  query{
+  getAllUserParkings{
+    id
+    rating
+    pictures
+    mainPicture
+    parkingName
+    information
+    latitude
+    longitude
+    priceHours
+    countParking
+    user{
+      id
+    }
+  }
+}
+""";
