@@ -1,6 +1,7 @@
 import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/data/dtos/payment/create_payment_dto.dart';
+import 'package:ParkA/data/dtos/payment/update_payment_dto.dart';
 import 'package:ParkA/data/use-cases/payment/payment_use_cases.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
@@ -9,25 +10,25 @@ import 'package:get/get.dart';
 
 import 'components/credit_card_complete_info_form.dart';
 
-class PaymentInfoScreen extends StatefulWidget {
-  static String routeName = "/paymentInfoPage";
+class EditPaymentScreen extends StatefulWidget {
+  static String routeName = "/editPaymentScreen";
   // Object arguments;
   @override
-  _PaymentInfoScreenState createState() => _PaymentInfoScreenState();
+  _EditPaymentScreenState createState() => _EditPaymentScreenState();
 }
 
-class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
+class _EditPaymentScreenState extends State<EditPaymentScreen> {
   String fullName = "Nombre del titular";
-  String creditCardNumber1 = "----";
-  String creditCardNumber2 = "----";
-  String creditCardNumber3 = "----";
-  String creditCardNumber4 = "----";
-  String creditCardMonth = "--";
-  String creditCardYear = "--";
-  String creditCardCvv = "";
+  String creditCardNumber1;
+  String creditCardNumber2;
+  String creditCardNumber3;
+  String creditCardNumber4;
+  String creditCardMonth;
+  String creditCardYear;
+  String creditCardCvv;
+  String expirationDate;
   Map formHandlers;
-  Map<String, dynamic> createAccount;
-  CreatePaymentDto createPaymentDto = new CreatePaymentDto();
+  UpdatePaymentDto updatePaymentDto = new UpdatePaymentDto();
 
   @override
   void initState() {
@@ -84,20 +85,20 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
     final expiration = new DateTime(2020, 8).toIso8601String();
     print(expiration);
 
-    this.createPaymentDto.cardHolder = this.fullName;
-    this.createPaymentDto.digit = this.creditCardNumber1 +
+    this.updatePaymentDto.cardHolder = this.fullName;
+    this.updatePaymentDto.digit = this.creditCardNumber1 +
         this.creditCardNumber2 +
         this.creditCardNumber3 +
         this.creditCardNumber4;
-    this.createPaymentDto.cvv = this.creditCardCvv;
-    this.createPaymentDto.expirationDate = "2020-10-02T02:05:30.962Z";
-    this.createPaymentDto.card = "";
+    this.updatePaymentDto.cvv = this.creditCardCvv;
+    this.updatePaymentDto.expirationDate = this.expirationDate;
+    this.updatePaymentDto.card = "";
     print("tapped");
-    final createPaymentResult =
-        await PaymentUseCases.createPayment(this.createPaymentDto);
+    final updatePaymentResult =
+        await PaymentUseCases.updatePayment(this.updatePaymentDto);
 
-    if (createPaymentResult) {
-      print("created");
+    if (updatePaymentResult) {
+      print("updated");
       Navigator.pop(context);
     } else {
       Get.snackbar(
