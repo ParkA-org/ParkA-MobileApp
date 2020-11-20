@@ -55,6 +55,9 @@ final kParkaBigButtonTextStyle = kParkaTextBaseStyleBold.copyWith(
   fontSize: 22.0,
 );
 
+final kParkaBigButtonTextStyleGreen22 =
+    kParkaBigButtonTextStyle.copyWith(color: ParkaColors.parkaGreen);
+
 final kParkaPageTitleTextStyle = kParkaTextBaseStyleBold.copyWith(
   fontSize: 32.0,
 );

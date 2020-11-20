@@ -1,4 +1,3 @@
-import 'package:ParkA/pages/map/maps_page.dart';
 import 'package:ParkA/pages/splash-screen/splash_screen.dart';
 import 'package:ParkA/routes/routes.dart';
 import 'package:flutter/material.dart';

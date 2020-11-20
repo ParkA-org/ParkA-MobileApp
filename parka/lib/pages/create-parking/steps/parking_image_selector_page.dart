@@ -5,9 +5,13 @@ import 'package:ParkA/components/images/parka_add_images_carousel.dart';
 import 'package:ParkA/components/images/parka_image_card_widget.dart';
 import 'package:ParkA/controllers/create-parking-form/create_parking_form_controller.dart';
 import 'package:ParkA/data/enums/parking_place_holder_type.dart';
+import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
 import 'package:ParkA/pages/create-vehicle/create_vehicle_page.dart';
+import 'package:ParkA/pages/edit-profile/edit_profile_page.dart';
+import 'package:ParkA/pages/parkings/parking_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
+import 'package:ParkA/utils/form-validations/create_parking_form_validation.dart';
 import 'package:ParkA/utils/functions/pick_image.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -139,6 +143,36 @@ class ParkingImageSelectorPage extends StatelessWidget {
                   color: ParkaColors.parkaGreen,
                   hasIcon: false,
                   hasShadow: false,
+                  onTapHandler: () async {
+                    final formCheck = createParkingFormValidator(
+                        createParkingFormController.createPArkingDto.value);
+
+                    if (!formCheck) {
+                      Get.snackbar(
+                        "Error",
+                        "Necesitas llenar todos los campos del formulario",
+                        backgroundColor: ParkaColors.parkaLightRed,
+                      );
+                      return;
+                    }
+
+                    final createdCheck = await ParkingUseCases.createParking(
+                        createParkingFormController.createPArkingDto.value);
+
+                    if (!createdCheck) {
+                      Get.snackbar(
+                        "Error",
+                        "Ocurrio un error creando tu parqueo",
+                        backgroundColor: ParkaColors.parkaLightRed,
+                      );
+                      return;
+                    }
+
+                    Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        ParkingPage.routeName,
+                        ModalRoute.withName(EditProfilePage.routeName));
+                  },
                 ),
               ),
             )

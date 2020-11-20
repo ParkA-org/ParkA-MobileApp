@@ -22,31 +22,26 @@ class ParkaAddImagesCarousel extends StatelessWidget {
     int index = 0;
     this.pictures.forEach((element) {
       ret.add(
-        ParkaImageCardWidget(
-          image: element,
-          index: index,
-          type: this.type,
-          onLongPressHandler: this.onLongPressHandler,
-        ),
-      );
-      ret.add(
-        SizedBox(
-          width: 16.0,
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 16.0),
+          child: ParkaImageCardWidget(
+            image: element,
+            index: index,
+            type: this.type,
+            onLongPressHandler: this.onLongPressHandler,
+          ),
         ),
       );
       index++;
     });
 
     ret.add(
-      ParkaImageCardWidget(
-        type: this.type,
-        onTapHandler: this.onTapHandler,
-      ),
-    );
-
-    ret.add(
-      SizedBox(
-        width: 16.0,
+      Container(
+        margin: EdgeInsets.symmetric(horizontal: 16.0),
+        child: ParkaImageCardWidget(
+          type: this.type,
+          onTapHandler: this.onTapHandler,
+        ),
       ),
     );
 
@@ -67,6 +62,9 @@ class ParkaAddImagesCarousel extends StatelessWidget {
             : constraints.maxWidth * creditCardProp;
 
         double cardWidth = referenceDimension > 350 ? 350 : referenceDimension;
+
+        print(MediaQuery.of(context).size.width);
+        print(cardWidth);
 
         return ConstrainedBox(
           constraints: constraints,

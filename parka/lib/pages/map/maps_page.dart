@@ -1,10 +1,12 @@
 import 'package:ParkA/components/buttons/main_fab.dart';
-import 'package:ParkA/components/drawer/private-drawer/private_drawer.dart';
+import 'package:ParkA/components/drawer/private-drawer/private_drawer_n.dart';
+
 import 'package:ParkA/components/drawer/public-drawer/public_drawer.dart';
 
 import 'package:ParkA/components/modals/parking_detail.dart';
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/controllers/user_controller.dart';
+import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
 
 import 'package:ParkA/pages/map/components/dummy_search.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +28,8 @@ class _MapPageState extends State<MapPage> {
   String _mapStyle;
   bool _fabIsVisible;
   bool _loading;
+  int _reservationsAsClientCount;
+  int _reservationsAsOwnerCount;
   LocationData userLocation;
   CameraPosition initialCameraPosition;
   Set<Marker> test;
@@ -58,6 +62,8 @@ class _MapPageState extends State<MapPage> {
   @override
   void initState() {
     super.initState();
+
+    this.getUserReservationsCount();
     BitmapDescriptor.fromAssetImage(
             ImageConfiguration.empty, 'resources/images/green-parking-icon.png')
         .then((onValue) {
@@ -78,6 +84,14 @@ class _MapPageState extends State<MapPage> {
     );
   }
 
+  void getUserReservationsCount() async {
+    this._reservationsAsClientCount =
+        await ReservationUseCases.getAllReservationsAsClientCount();
+    this._reservationsAsOwnerCount =
+        await ReservationUseCases.getAllReservationsAsOwnerCount();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     GoogleMapController mapController;
@@ -85,7 +99,12 @@ class _MapPageState extends State<MapPage> {
     BuildContext mapPageContext = context;
 
     return Scaffold(
-      drawer: user.user?.value == null ? PublicDrawer() : PrivateDrawer(),
+      drawer: user.user?.value == null
+          ? PublicDrawer()
+          : PrivateDrawer(
+              reservationsAsCLientCount: this._reservationsAsClientCount,
+              reservationsAsOwnerCount: this._reservationsAsOwnerCount,
+            ),
       floatingActionButton: Visibility(
         visible: _fabIsVisible,
         child: MainFAB(),
@@ -104,7 +123,7 @@ class _MapPageState extends State<MapPage> {
                     Marker(
                         icon: customIcon,
                         markerId: MarkerId("Hello"),
-                        position: LatLng(18.487876, -69.9644807),
+                        position: LatLng(18.487876, -69.0644807),
                         onTap: () => showModalBottomSheet(
                             context: context,
                             builder: (context) =>
@@ -112,7 +131,7 @@ class _MapPageState extends State<MapPage> {
                     Marker(
                         icon: customIcon,
                         markerId: MarkerId("Hello"),
-                        position: LatLng(18.487876, -69.9644808),
+                        position: LatLng(18.487876, -69.8644808),
                         onTap: () => showModalBottomSheet(
                             context: context,
                             builder: (context) =>
@@ -120,7 +139,7 @@ class _MapPageState extends State<MapPage> {
                     Marker(
                         icon: customIcon,
                         markerId: MarkerId("Hello"),
-                        position: LatLng(18.487876, -69.9644806),
+                        position: LatLng(18.587876, -69.9644806),
                         onTap: () => showModalBottomSheet(
                             context: context,
                             builder: (context) =>

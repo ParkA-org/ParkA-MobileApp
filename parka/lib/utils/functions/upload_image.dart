@@ -22,3 +22,14 @@ Future<String> uploadImage(String imagePath) async {
   print(url);
   return url;
 }
+
+Future<List> uploadMultipleImages(List<String> imagesPath) async {
+  List<String> ret = new List();
+
+  for (String image in imagesPath) {
+    String imagePath = await uploadImage(image);
+    ret.add(imagePath);
+  }
+
+  return ret;
+}
