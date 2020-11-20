@@ -3,6 +3,7 @@ import 'package:ParkA/data/data-models/feature/parking_feature_data_model.dart';
 class Parking {
   final String id;
   final int parkingCount;
+  final String parkingName;
   final String latitude;
   final String longitude;
   final String calendar;
@@ -17,6 +18,7 @@ class Parking {
   final bool verified;
 
   Parking({
+    this.parkingName,
     this.id,
     this.direction,
     this.features,
@@ -36,6 +38,13 @@ class Parking {
   static parkingsFromJson(List parkingData) {
     List<Parking> userParkings = new List();
 
-    parkingData.forEach((parking) {userParkings.add(Parking(id: parking["id"]))});
+    parkingData.forEach((parking) {
+      userParkings.add(Parking(
+          id: parking["id"],
+          parkingCount: parking["countParking"],
+          latitude: parking["latitude"],
+          longitude: parking["longitude"],
+          parkingName: parking["parkingName"]));
+    });
   }
 }

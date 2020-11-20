@@ -78,5 +78,10 @@ class ParkingUseCases {
     final QueryResult getAllUserParkingsResult = await graphqlClient
         .parkaGraphqlClient.value.graphQlClient
         .query(queryOptions);
+
+    print(getAllUserParkingsResult.data);
+    if(getAllUserParkingsResult.data != null){
+      final List<Parking> parkingsData = Parking
+    }
   }
 }
