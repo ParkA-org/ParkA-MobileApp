@@ -13,7 +13,7 @@ class CardListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String visible = this.payment.digit.substring(12, 16);
-
+    print(payment);
     return Container(
       margin: EdgeInsets.symmetric(vertical: 2.0),
       padding: EdgeInsets.all(4.0),

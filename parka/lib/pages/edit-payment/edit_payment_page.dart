@@ -112,7 +112,7 @@ class _EditPaymentScreenState extends State<EditPaymentScreen> {
   Widget build(BuildContext context) {
     final Payment payment = ModalRoute.of(context).settings.arguments;
     this.fullName = payment.cardHolder;
-    this.card = payment.card;
+    this.card = payment.cardId;
     this.creditCardNumber1 = payment.digit.substring(0, 4);
     this.creditCardNumber2 = payment.digit.substring(4, 8);
     this.creditCardNumber3 = payment.digit.substring(8, 12);

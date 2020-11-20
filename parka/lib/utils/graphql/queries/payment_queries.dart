@@ -9,6 +9,7 @@ const String getAllUserPaymentMethodsQuery = r"""
           digit
           activated
           card{
+            id
             name
           }
           
