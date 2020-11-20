@@ -22,7 +22,7 @@ class _ParkingPageState extends State<ParkingPage> {
       ),
       body: SafeArea(
         child: Center(
-          child: Text("Aqui va el listado de parqueos"),
+          child: Text("Aqui va el listado de parqueo"),
         ),
       ),
     );
