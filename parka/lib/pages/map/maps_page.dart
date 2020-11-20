@@ -101,6 +101,7 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
+    print("MAP BUILDED");
     GoogleMapController mapController;
 
     BuildContext mapPageContext = context;
