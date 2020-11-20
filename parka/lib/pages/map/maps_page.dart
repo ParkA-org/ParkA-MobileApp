@@ -51,10 +51,12 @@ class _MapPageState extends State<MapPage> {
         userLocation = currentUserLocation;
         this._loading = false;
         print('THIS HAS LOADED  $_loading');
-        initialCameraPosition = CameraPosition(
-          target: LatLng(userLocation.latitude, userLocation.longitude),
-          zoom: 15.5,
-        );
+        setState(() {
+          initialCameraPosition = CameraPosition(
+            target: LatLng(userLocation.latitude, userLocation.longitude),
+            zoom: 15.5,
+          );
+        });
       },
     );
   }
@@ -73,9 +75,9 @@ class _MapPageState extends State<MapPage> {
     _fabIsVisible = true;
     _loading = true;
     test = {};
+    getCurrentLocation();
     initialCameraPosition =
         CameraPosition(target: LatLng(18.487876, -69.9644807), zoom: 15.5);
-    getCurrentLocation();
 
     rootBundle.loadString('resources/styles/map_style.txt').then(
       (string) {
@@ -118,44 +120,7 @@ class _MapPageState extends State<MapPage> {
               onMapCreated: (GoogleMapController controller) {
                 mapController = controller;
                 mapController.setMapStyle(_mapStyle);
-                setState(() {
-                  test.addAll({
-                    Marker(
-                        icon: customIcon,
-                        markerId: MarkerId("Hello"),
-                        position: LatLng(18.487876, -69.0644807),
-                        onTap: () => showModalBottomSheet(
-                            context: context,
-                            builder: (context) =>
-                                ParkingDetailModal(parkingId: "Hello"))),
-                    Marker(
-                        icon: customIcon,
-                        markerId: MarkerId("Hello"),
-                        position: LatLng(18.487876, -69.8644808),
-                        onTap: () => showModalBottomSheet(
-                            context: context,
-                            builder: (context) =>
-                                ParkingDetailModal(parkingId: "Hello"))),
-                    Marker(
-                        icon: customIcon,
-                        markerId: MarkerId("Hello"),
-                        position: LatLng(18.587876, -69.9644806),
-                        onTap: () => showModalBottomSheet(
-                            context: context,
-                            builder: (context) =>
-                                ParkingDetailModal(parkingId: "Hello"))),
-                    Marker(
-                        icon: customIcon,
-                        markerId: MarkerId("Hello"),
-                        position: LatLng(18.487875, -69.9644807),
-                        onTap: () => showModalBottomSheet(
-                            context: context,
-                            builder: (context) =>
-                                ParkingDetailModal(parkingId: "Hello")))
-                  });
-                });
               },
-              markers: test,
               myLocationButtonEnabled: true,
               myLocationEnabled: true,
               initialCameraPosition: initialCameraPosition,
