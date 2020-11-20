@@ -1,23 +1,23 @@
 import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
-import 'package:ParkA/data/dtos/payment/create_payment_dto.dart';
+import 'package:ParkA/data/data-models/payment/payment_data_model.dart';
 import 'package:ParkA/data/dtos/payment/update_payment_dto.dart';
 import 'package:ParkA/data/use-cases/payment/payment_use_cases.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
-
 import 'components/credit_card_complete_info_form.dart';
 
 class EditPaymentScreen extends StatefulWidget {
   static String routeName = "/editPaymentScreen";
-  // Object arguments;
+
   @override
   _EditPaymentScreenState createState() => _EditPaymentScreenState();
 }
 
 class _EditPaymentScreenState extends State<EditPaymentScreen> {
+  final Payment payment = Get.find();
   String fullName = "Nombre del titular";
   String creditCardNumber1;
   String creditCardNumber2;
@@ -156,7 +156,7 @@ class _EditPaymentScreenState extends State<EditPaymentScreen> {
                     children: <Widget>[
                       Expanded(
                         child: TransparentButton(
-                          label: "Crear metodo de pago",
+                          label: "Actualizar metodo de pago",
                           buttonTextStyle: kParkaButtonTextStyle,
                           color: Colors.white,
                           onTapHandler: () {
