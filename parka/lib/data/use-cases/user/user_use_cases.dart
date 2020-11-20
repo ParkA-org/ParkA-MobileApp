@@ -352,18 +352,17 @@ class UserUseCases {
     print(nationality);
     print(placeOfBirth);
 
-    final updateUserInformationInput = {
-      "data": {
-        "paymentInformation": "1f6273ac-a3f0-432c-8876-8ae8881668d0",
-      }
-    };
+    final updateUserInformationInput = {"data": {}};
 
     if (documentNumber != null) {
       updateUserInformationInput["data"]['documentNumber'] = documentNumber;
     }
 
     if (birthDate != null) {
-      updateUserInformationInput["data"]['birthDate'] = birthDate;
+      birthDate = birthDate.replaceAll("/", "-");
+      birthDate = birthDate.replaceAll(".", "-");
+      updateUserInformationInput["data"]['birthDate'] =
+          birthDate + "T00:00:00Z";
     }
 
     if (placeOfBirth != null) {

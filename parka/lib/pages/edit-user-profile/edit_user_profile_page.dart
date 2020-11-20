@@ -1,7 +1,8 @@
 import 'package:ParkA/components/floating-action-button/parka_floating_action_button.dart';
-import 'package:ParkA/components/headers/parka_header.dart';
-import 'package:ParkA/components/inputs/parka_dropdown.dart';
-import 'package:ParkA/components/inputs/parka_edit_text_field.dart';
+import 'package:ParkA/components/headers/parka_header_symbol.dart';
+import 'package:ParkA/components/inputs/parka_dropdown_profile.dart';
+import 'package:ParkA/components/inputs/parka_edit_text_field_profile.dart';
+import 'package:ParkA/components/inputs/parka_phone_edit_field.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/data/data-models/country/country_data_model.dart';
 import 'package:ParkA/data/data-models/information/information_data_model.dart';
@@ -9,6 +10,7 @@ import 'package:ParkA/data/data-models/nationality/nationality_data_model.dart';
 import 'package:ParkA/data/use-cases/country/country_use_cases.dart';
 import 'package:ParkA/data/use-cases/nationality/nationality_use_cases.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
+import 'package:ParkA/pages/profile/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +73,6 @@ class _EditUserProfileInformationPageState
     getViewData();
   }
 
-  //TODO: add updates for birthDate, Nationality and Country
   Future updateUserProfile() async {
     bool updateUserCheck = await userController.updateUser(
       this.name,
@@ -103,24 +104,85 @@ class _EditUserProfileInformationPageState
     return Scaffold(
       floatingActionButton: ParkaFloatingActionButton(
         iconData: Icons.autorenew,
+        color: Colors.white,
+        iconColor: ParkaColors.parkaGreen,
         onPressedHandler: this.updateUserProfile,
       ),
+      backgroundColor: Color(0xff0A7B93),
       body: SafeArea(
         child: Column(
           children: [
             Expanded(
-              flex: 0,
+              flex: 3,
               child: Container(
                 padding: EdgeInsets.symmetric(
                   vertical: 8.0,
+                  horizontal: 20.0,
                 ),
                 decoration: BoxDecoration(
-                  color: ParkaColors.parkaGreen,
+                  color: Color(0xff0A7B93),
                 ),
-                child: ParkaHeader(color: Colors.white),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ParkaHeaderSymbol(color: Colors.white),
+                    Text(
+                      " Editar Perfil",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: "Montserrat",
+                        fontSize: 40.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Expanded(
+                      child: Center(
+                        child: Stack(
+                          alignment: Alignment.bottomRight,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 9.0, top: 9.0, bottom: 6.0),
+                              child: ParkaCircleAvatarWidget(
+                                imageUrl:
+                                    userController.user.value?.profilePicture,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 6.0),
+                              child: InkWell(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      shape: BoxShape.circle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          offset: Offset(3.0, 10.0),
+                                          color: Colors.black38,
+                                          blurRadius: 5.0,
+                                        )
+                                      ]),
+                                  child: Icon(
+                                    Icons.create,
+                                    color: Color(0xff086174),
+                                    size: 35.0,
+                                  ),
+                                  padding: EdgeInsets.all(15.0),
+                                ),
+                                onTap: () {},
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Expanded(
+              flex: 4,
               child: ModalProgressHUD(
                 inAsyncCall: this.userInformationLoading,
                 child: this.userInformationLoading
@@ -129,31 +191,20 @@ class _EditUserProfileInformationPageState
                         children: [
                           Container(
                             margin: EdgeInsets.symmetric(
-                                horizontal: 16.0, vertical: 8.0),
-                            padding: EdgeInsets.all(8.0),
+                              horizontal: 25.0,
+                            ),
                             decoration: BoxDecoration(
-                              color: ParkaColors.parkaGreen,
-                              boxShadow: [
-                                BoxShadow(
-                                  offset: Offset(3.0, 7.0),
-                                  color: Colors.black38,
-                                  blurRadius: 5.0,
-                                ),
-                              ],
-                              borderRadius: BorderRadius.circular(
-                                10.0,
-                              ),
+                              color: Color(0xff0A7B93),
                             ),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    "Editar Nombre de Cuenta",
-                                    style: kParkaTextStyleBoldWhite20,
-                                  ),
+                                Text(
+                                  "Nombre",
+                                  style: kParkaTextStyleBoldWhite24,
                                 ),
-                                ParkaEditInput(
+                                ParkaEditInputText(
                                   value: userController.user.value.name,
                                   onChangedHandler: (String value) {
                                     setState(() {
@@ -161,7 +212,11 @@ class _EditUserProfileInformationPageState
                                     });
                                   },
                                 ),
-                                ParkaEditInput(
+                                Text(
+                                  "Apellido",
+                                  style: kParkaTextStyleBoldWhite24,
+                                ),
+                                ParkaEditInputText(
                                   value: userController.user.value.lastName,
                                   onChangedHandler: (String value) {
                                     setState(() {
@@ -169,42 +224,11 @@ class _EditUserProfileInformationPageState
                                     });
                                   },
                                 ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 16.0, vertical: 8.0),
-                            padding: EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              color: ParkaColors.parkaGreen,
-                              boxShadow: [
-                                BoxShadow(
-                                  offset: Offset(3.0, 7.0),
-                                  color: Colors.black38,
-                                  blurRadius: 5.0,
+                                Text(
+                                  "Telefono",
+                                  style: kParkaTextStyleBoldWhite24,
                                 ),
-                              ],
-                              borderRadius: BorderRadius.circular(
-                                10.0,
-                              ),
-                            ),
-                            child: Column(
-                              children: [
-                                Text("Editar Datos personales",
-                                    style: kParkaTextStyleBoldWhite20),
-                                ParkaEditInput(
-                                  value: this.userInformation.document,
-                                  textFieldMaxLength: 10,
-                                  onChangedHandler: (String value) {
-                                    setState(
-                                      () {
-                                        this.documentNumber = value;
-                                      },
-                                    );
-                                  },
-                                ),
-                                ParkaEditInput(
+                                ParkaPhoneEdit(
                                   value: this.userInformation.telephoneNumber,
                                   textFieldMaxLength: 13,
                                   onChangedHandler: (String value) {
@@ -215,7 +239,26 @@ class _EditUserProfileInformationPageState
                                     );
                                   },
                                 ),
-                                ParkaEditInput(
+                                Text(
+                                  "Documento",
+                                  style: kParkaTextStyleBoldWhite24,
+                                ),
+                                ParkaEditInputText(
+                                  value: this.userInformation.document,
+                                  textFieldMaxLength: 11,
+                                  onChangedHandler: (String value) {
+                                    setState(
+                                      () {
+                                        this.documentNumber = value;
+                                      },
+                                    );
+                                  },
+                                ),
+                                Text(
+                                  "Fecha de nacimiento",
+                                  style: kParkaTextStyleBoldWhite24,
+                                ),
+                                ParkaEditInputText(
                                   value: this
                                       .userInformation
                                       .dateBirth
@@ -225,52 +268,46 @@ class _EditUserProfileInformationPageState
                                   onChangedHandler: (String value) {
                                     setState(
                                       () {
-                                        this.lastName = value;
+                                        this.birthDate = value;
                                       },
                                     );
                                   },
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: ParkADropdown(
-                                    text: "Nacionalidad",
-                                    textSize: 16.0,
-                                    selectedItem: this.selectedNationality,
-                                    options: this.nationalityOptions,
-                                    height: currentScreen.height * 0.03,
-                                    width: currentScreen.width * 0.8,
-                                    onChanged: (value) {
-                                      setState(
-                                        () {
-                                          this.selectedNationality =
-                                              this.nationalities[value].name;
-                                          this.nationality =
-                                              this.nationalities[value].id;
-                                        },
-                                      );
-                                    },
-                                  ),
+                                ParkADropdownProfile(
+                                  text: "Pais",
+                                  textSize: 24.0,
+                                  selectedItem: this.selectedCountry,
+                                  options: this.countriesOptions,
+                                  height: currentScreen.height * 0.07,
+                                  width: currentScreen.width,
+                                  onChanged: (value) {
+                                    setState(
+                                      () {
+                                        this.selectedCountry =
+                                            this.countries[value].name;
+                                        this.placeOfBirth =
+                                            this.countries[value].id;
+                                      },
+                                    );
+                                  },
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: ParkADropdown(
-                                    text: "Pais",
-                                    textSize: 16.0,
-                                    selectedItem: this.selectedCountry,
-                                    options: this.countriesOptions,
-                                    height: currentScreen.height * 0.03,
-                                    width: currentScreen.width * 0.8,
-                                    onChanged: (value) {
-                                      setState(
-                                        () {
-                                          this.selectedCountry =
-                                              this.countries[value].name;
-                                          this.placeOfBirth =
-                                              this.countries[value].id;
-                                        },
-                                      );
-                                    },
-                                  ),
+                                ParkADropdownProfile(
+                                  text: "Nacionalidad",
+                                  textSize: 24.0,
+                                  selectedItem: this.selectedNationality,
+                                  options: this.nationalityOptions,
+                                  height: currentScreen.height * 0.07,
+                                  width: currentScreen.width,
+                                  onChanged: (value) {
+                                    setState(
+                                      () {
+                                        this.selectedNationality =
+                                            this.nationalities[value].name;
+                                        this.nationality =
+                                            this.nationalities[value].id;
+                                      },
+                                    );
+                                  },
                                 ),
                               ],
                             ),
