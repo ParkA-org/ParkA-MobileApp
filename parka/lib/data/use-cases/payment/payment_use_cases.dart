@@ -57,7 +57,7 @@ class PaymentUseCases {
     print(createPaymentDto.cvv);
     print(createPaymentDto.digit);
 
-    final createPaymentInput = {
+    final updatePaymentInput = {
       "data": {
         "cardHolder": createPaymentDto.cardHolder,
         "expirationDate": "2020-10-02T02:05:30.962Z",
@@ -68,15 +68,15 @@ class PaymentUseCases {
     };
 
     MutationOptions mutationOptions = MutationOptions(
-      documentNode: gql(createPaymentMutation),
-      variables: createPaymentInput,
+      documentNode: gql(updatePaymentMutation),
+      variables: updatePaymentInput,
     );
 
-    final createPaymentInputResult =
+    final updatePaymentInputResult =
         await graphqlClient.mutate(mutationOptions);
 
-    if (createPaymentInputResult.data != null) {
-      print("created");
+    if (updatePaymentInputResult.data != null) {
+      print("updated");
       return true;
     }
 
