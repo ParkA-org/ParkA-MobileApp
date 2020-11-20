@@ -1,3 +1,5 @@
+import 'package:ParkA/data/data-models/body-style/body_style_data_model.dart';
+import 'package:ParkA/data/data-models/color/color_data_model.dart';
 import 'package:ParkA/data/data-models/model/model_data_model.dart';
 
 class Vehicle {
@@ -5,12 +7,12 @@ class Vehicle {
   final Model model;
   final String licensePlate;
   final String detail;
-  final String color;
+  final Color color;
   final String mainPicture;
   final List<String> pictures;
   final int year;
   final String alias;
-  final bodyStyle;
+  final BodyStyle bodyStyle;
   final bool verified;
 
   Vehicle({
@@ -39,12 +41,14 @@ class Vehicle {
       licensePlate: vehicleData["licensePlate"],
       model: Model.modelFromJson(vehicleData["model"]),
       verified: vehicleData["verified"],
-      color: vehicleData["colorExterior"]["name"],
+      color: Color.colorFromJson(
+        vehicleData["colorExterior"],
+      ),
       mainPicture: vehicleData["mainPicture"],
       pictures: carPictures,
       year: vehicleData["year"],
       alias: vehicleData["alias"],
-      bodyStyle: vehicleData["bodyStyle"]["name"],
+      bodyStyle: BodyStyle.bodyStyleFromJson(vehicleData["bodyStyle"]),
       detail: vehicleData["detail"],
     );
   }
@@ -64,12 +68,12 @@ class Vehicle {
         licensePlate: vehicle["licensePlate"],
         model: Model.modelFromJson(vehicle["model"]),
         verified: vehicle["verified"],
-        color: vehicle["colorExterior"]["name"],
+        color: Color.colorFromJson(vehicle["colorExterior"]),
         mainPicture: vehicle["mainPicture"],
         pictures: carPictures,
         year: vehicle["year"],
         alias: vehicle["alias"],
-        bodyStyle: vehicle["bodyStyle"]["name"],
+        bodyStyle: BodyStyle.bodyStyleFromJson(vehicle["bodyStyle"]),
         detail: vehicle["detail"],
       ));
     });

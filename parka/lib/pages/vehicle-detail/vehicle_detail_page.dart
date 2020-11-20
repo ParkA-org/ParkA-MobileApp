@@ -97,7 +97,7 @@ class _VehicleDetailPageState extends State<VehicleDetailPage> {
                                 ),
                               ),
                               VehicleDataTabWidget(
-                                labelLeft: "Ano",
+                                labelLeft: "Año",
                                 labelRight: "Estatus",
                                 valueLeft: this._vehicle.year.toString(),
                                 valueRight: this._vehicle.verified
@@ -113,7 +113,7 @@ class _VehicleDetailPageState extends State<VehicleDetailPage> {
                               VehicleDataTabWidget(
                                 labelLeft: "Tipo",
                                 labelRight: "Placa",
-                                valueLeft: this._vehicle.bodyStyle,
+                                valueLeft: this._vehicle.bodyStyle.name,
                                 valueRight:
                                     this._vehicle.licensePlate.toUpperCase(),
                               ),

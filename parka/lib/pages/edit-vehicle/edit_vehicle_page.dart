@@ -19,6 +19,7 @@ import 'package:ParkA/pages/create-vehicle/components/parka_resizable_on_scroll_
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:ParkA/utils/form-validations/create_vehicle_form_validator.dart';
+import 'package:ParkA/utils/form-validations/update_vehicle_from_validation.dart';
 import 'package:ParkA/utils/functions/get_year_list.dart';
 import 'package:ParkA/utils/functions/pick_image.dart';
 import 'package:ParkA/utils/functions/show_alert_dialog.dart';
@@ -43,9 +44,6 @@ class EditVehiclePage extends StatefulWidget {
 
 class _EditVehiclePageState extends State<EditVehiclePage> {
   Vehicle _vehicle;
-  // CreateVehicleDto createVehicleDto = new CreateVehicleDto(
-  //   pictures: [],
-  // );
 
   UpdateVehicleDto _updateVehicleDto;
 
@@ -72,9 +70,10 @@ class _EditVehiclePageState extends State<EditVehiclePage> {
     this._vehicle = this.widget.vehicle;
     this._updateVehicleDto = new UpdateVehicleDto(
       //TODO: update vehicle model
+      id: this._vehicle.id,
       alias: this._vehicle.alias,
-      bodyStyle: this._vehicle.bodyStyle,
-      colorExterior: this._vehicle.color,
+      bodyStyle: this._vehicle.bodyStyle.id,
+      colorExterior: this._vehicle.color.id,
       licensePlate: this._vehicle.licensePlate,
       mainPicture: this._vehicle.mainPicture,
       model: this._vehicle.model.id,
@@ -102,29 +101,29 @@ class _EditVehiclePageState extends State<EditVehiclePage> {
     });
   }
 
-  void createVehicle() async {
-    // bool checkForm = createVehicleFormValidator(createVehicleDto);
+  void updateVehicle() async {
+    bool checkForm = updateVehicleFormValidator(_updateVehicleDto);
 
-    // if (!checkForm) {
-    //   Get.snackbar(
-    //     "Error",
-    //     "Llena todos los campos",
-    //     backgroundColor: ParkaColors.parkaGoogleRed,
-    //   );
-    //   return;
-    // }
+    if (!checkForm) {
+      Get.snackbar(
+        "Error",
+        "Se verifico un error",
+        backgroundColor: ParkaColors.parkaGoogleRed,
+      );
+      return;
+    }
 
-    // bool createdResult = await VehicleUseCases.createVehicle(createVehicleDto);
+    bool createdResult = await VehicleUseCases.updateVehicle(_updateVehicleDto);
 
-    // if (createdResult) {
-    //   Get.back();
-    // } else {
-    //   Get.snackbar(
-    //     "Error",
-    //     "Ocurrio un error",
-    //     backgroundColor: ParkaColors.parkaGoogleRed,
-    //   );
-    // }
+    if (createdResult) {
+      Get.back();
+    } else {
+      Get.snackbar(
+        "Error",
+        "Ocurrio un error",
+        backgroundColor: ParkaColors.parkaGoogleRed,
+      );
+    }
   }
 
   Future removeVehicle(int index) {
@@ -145,7 +144,7 @@ class _EditVehiclePageState extends State<EditVehiclePage> {
       floatingActionButton: ParkaFloatingActionButton(
         iconData: Icons.done,
         onPressedHandler: () async {
-          this.createVehicle();
+          this.updateVehicle();
         },
       ),
       body: SafeArea(
@@ -228,7 +227,7 @@ class _EditVehiclePageState extends State<EditVehiclePage> {
                               ),
                               ParkaEditInput(
                                 type: ParkaInputType.dropDown,
-                                label: "Ano del vehiculo",
+                                label: "Año del vehiculo",
                                 dropDownOptions: yearOptions,
                                 value: this.selectedYear ??
                                     this._vehicle.year.toString(),
@@ -248,8 +247,8 @@ class _EditVehiclePageState extends State<EditVehiclePage> {
                                 type: ParkaInputType.dropDown,
                                 label: "Color del vehiculo",
                                 dropDownOptions: colorsOptions,
-                                value:
-                                    this.selectedColor ?? this._vehicle.color,
+                                value: this.selectedColor ??
+                                    this._vehicle.color.name,
                                 onChangedHandler: (int index) {
                                   FocusManager.instance.primaryFocus.unfocus();
                                   setState(
@@ -310,7 +309,7 @@ class _EditVehiclePageState extends State<EditVehiclePage> {
                                 label: "Tipo de cuerpo",
                                 dropDownOptions: bodyStyleOptions,
                                 value: this.selectedBodyStyle ??
-                                    this._vehicle.bodyStyle,
+                                    this._vehicle.bodyStyle.name,
                                 onChangedHandler: (int index) {
                                   FocusManager.instance.primaryFocus.unfocus();
                                   setState(
