@@ -35,10 +35,42 @@ class _MapPageState extends State<MapPage> {
   LocationData userLocation;
   CameraPosition initialCameraPosition;
   Set<Marker> nearbyParkings;
-  BitmapDescriptor customIcon;
+  BitmapDescriptor _customPinIcon;
 
   final UserController user = Get.find<UserController>();
   final graphqlClient = Get.find<GraphqlClientController>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    this._fabIsVisible = true;
+    this._loading = true;
+    nearbyParkings = {};
+    initialCameraPosition =
+        CameraPosition(target: LatLng(18.487876, -69.9644807), zoom: 15.5);
+
+    this._getMapPageData();
+  }
+
+  // CHECKED
+  Future<BitmapDescriptor> _getCustomPin() async {
+    return BitmapDescriptor.fromAssetImage(
+        ImageConfiguration.empty, 'resources/images/green-parking-icon.png');
+  }
+
+  void _getUserReservationsCount() async {
+    this._reservationsAsClientCount =
+        await ReservationUseCases.getAllReservationsAsClientCount();
+    this._reservationsAsOwnerCount =
+        await ReservationUseCases.getAllReservationsAsOwnerCount();
+  }
+
+  Future<LocationData> _getCurrentLocation() async {
+    final LocationData currentUserLocation = await Location().getLocation();
+
+    return currentUserLocation;
+  }
 
   void toggleFloatingActionButton() {
     setState(() {
@@ -46,56 +78,16 @@ class _MapPageState extends State<MapPage> {
     });
   }
 
-  Future<void> getCurrentLocation() async {
-    final LocationData currentUserLocation = await Location().getLocation();
-    setState(
-      () {
-        userLocation = currentUserLocation;
-        this._loading = false;
-        print('THIS HAS LOADED  $_loading');
-
-        initialCameraPosition = CameraPosition(
-          target: LatLng(userLocation.latitude, userLocation.longitude),
-          zoom: 15.5,
-        );
-      },
-    );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    _fabIsVisible = true;
-    _loading = true;
-    nearbyParkings = {};
-    getCurrentLocation();
-    initialCameraPosition =
-        CameraPosition(target: LatLng(18.487876, -69.9644807), zoom: 15.5);
-
+  void getMapStyle() {
     rootBundle.loadString('resources/styles/map_style.txt').then(
       (string) {
         _mapStyle = string;
       },
     );
-
-    this.getUserReservationsCount();
-    BitmapDescriptor.fromAssetImage(
-            ImageConfiguration.empty, 'resources/images/green-parking-icon.png')
-        .then((onValue) {
-      customIcon = onValue;
-    });
   }
+  //Not checked
 
-  void getUserReservationsCount() async {
-    this._reservationsAsClientCount =
-        await ReservationUseCases.getAllReservationsAsClientCount();
-    this._reservationsAsOwnerCount =
-        await ReservationUseCases.getAllReservationsAsOwnerCount();
-    setState(() {});
-  }
-
-  void getNearParkings(LatLng userLocation) async {
+  Future<Set<Marker>> getNearParkings(LatLng userLocation) async {
     Set<Marker> parkingPins = {};
     List<Parking> nearParkings =
         await ParkingUseCases.getNearParkings(userLocation);
@@ -105,27 +97,46 @@ class _MapPageState extends State<MapPage> {
         parkingPins.add(Marker(
             markerId: MarkerId("${parking.id}"),
             position: LatLng(parking.latitude, parking.longitude),
-            icon: customIcon,
+            icon: _customPinIcon,
             onTap: () => showModalBottomSheet(
                 context: context,
                 builder: (context) => ParkingDetailModal(parking: parking))));
       });
     }
+
     if (!nearbyParkings.containsAll(parkingPins) &&
         nearbyParkings.length != parkingPins.length) {
-      setState(() {
-        nearbyParkings = parkingPins;
-      });
+      return parkingPins;
     }
+
+    return new Set();
+  }
+
+  void _getMapPageData() async {
+    this.getMapStyle();
+    this._customPinIcon = await this._getCustomPin();
+    this._getUserReservationsCount();
+
+    this.userLocation = await this._getCurrentLocation();
+    this.initialCameraPosition = CameraPosition(
+      target: LatLng(userLocation.latitude, userLocation.longitude),
+      zoom: 15.5,
+    );
+
+    if (this.userLocation != null) {
+      this.nearbyParkings = await this.getNearParkings(
+          LatLng(userLocation.latitude, userLocation.longitude));
+    }
+
+    setState(() {
+      this._loading = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     print("MAP BUILDED");
-    if (userLocation != null) {
-      this.getNearParkings(
-          LatLng(userLocation.latitude, userLocation.longitude));
-    }
+
     GoogleMapController mapController;
 
     BuildContext mapPageContext = context;

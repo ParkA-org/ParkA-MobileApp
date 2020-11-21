@@ -91,7 +91,7 @@ class ParkingUseCases {
         .query(queryOptions);
 
     print(getNearbyParkingsResult.data);
-// TODO:FIX THIS
+
     if (getNearbyParkingsResult.data != null &&
         getNearbyParkingsResult.data["getAllParkings"] != null) {
       final parkingData = getNearbyParkingsResult.data["getAllParkings"];
