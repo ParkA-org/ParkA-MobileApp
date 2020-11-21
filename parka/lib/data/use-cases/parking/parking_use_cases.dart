@@ -139,9 +139,8 @@ class ParkingUseCases {
 
     print(getParkingByIdResult.data);
     if (getParkingByIdResult.data != null) {
-      //Create PArking from Json Method
       final Parking parkingsData =
-          Parking.parkingsFromJson(getParkingByIdResult.data["getParkingById"]);
+          Parking.parkingFromJson(getParkingByIdResult.data["getParkingById"]);
 
       return parkingsData;
     }
