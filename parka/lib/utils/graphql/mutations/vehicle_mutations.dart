@@ -22,3 +22,11 @@ const String createVehicleMutation = r"""
       }
     }
     """;
+
+const String updateVehicleMutation = r"""
+mutation($input:UpdateVehicleInput!){
+  updateVehicle(updateVehicleInput:$input){
+    id
+  }
+}
+""";

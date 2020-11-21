@@ -7,6 +7,13 @@ class BodyStyle {
     this.name,
   });
 
+  static bodyStyleFromJson(Map<String, dynamic> bodyStyleData) {
+    return BodyStyle(
+      id: bodyStyleData["id"],
+      name: bodyStyleData["name"],
+    );
+  }
+
   static bodyStylesFromJson(List bodyStyleData) {
     List<BodyStyle> ret = new List<BodyStyle>();
 

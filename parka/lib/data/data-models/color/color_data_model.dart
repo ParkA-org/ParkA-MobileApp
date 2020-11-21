@@ -7,6 +7,13 @@ class Color {
     this.name,
   });
 
+  static colorFromJson(Map<String, dynamic> colorData) {
+    return Color(
+      id: colorData["id"],
+      name: colorData["name"],
+    );
+  }
+
   static colorsFromJson(List colorsData) {
     List<Color> ret = new List<Color>();
 
