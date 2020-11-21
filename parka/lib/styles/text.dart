@@ -63,6 +63,9 @@ final kParkaBigButtonTextStyle = kParkaTextBaseStyleBold.copyWith(
 final kParkaBigButtonTextStyleGreen22 =
     kParkaBigButtonTextStyle.copyWith(color: ParkaColors.parkaGreen);
 
+final kParkaBigButtonTextStyleGreen20 = kParkaBigButtonTextStyle.copyWith(
+    color: ParkaColors.parkaGreen, fontSize: 20.0);
+
 final kParkaPageTitleTextStyle = kParkaTextBaseStyleBold.copyWith(
   fontSize: 32.0,
 );
@@ -73,6 +76,16 @@ final kParkaBigTitleTextStyle = kParkaTextBaseStyleBold.copyWith(
 
 final kParkaPaymentFormStyle = kParkaTextBaseStyleBold.copyWith(
   fontSize: 18.0,
+);
+
+final kParkaTextStyleBoldGreen18 = kParkaTextBaseStyleBold.copyWith(
+  fontSize: 18.0,
+);
+
+final kParkaTextStyleBlack18 = kParkaTextBaseStyleBold.copyWith(
+  color: Colors.black,
+  fontSize: 18.0,
+  fontWeight: FontWeight.normal,
 );
 
 final kParkaInputDefaultStyleBlue = kParkaTextBaseStyleBold.copyWith(

@@ -1,5 +1,7 @@
 import 'package:ParkA/components/floating-action-button/parka_floating_action_button.dart';
 import 'package:ParkA/components/images/parka_add_images_carousel.dart';
+import 'package:ParkA/components/map/position_viewer_card.dart';
+import 'package:ParkA/data/data-models/calendar/calendar_data_model.dart';
 import 'package:ParkA/data/data-models/feature/parking_feature_data_model.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
@@ -14,6 +16,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class OwnerParkingDetailPage extends StatefulWidget {
@@ -33,12 +36,19 @@ class _OwnerParkingDetailPageState extends State<OwnerParkingDetailPage> {
   String _parkingId;
   Parking _parking;
   bool _loading;
+  BitmapDescriptor _markerIcon;
 
   @override
   void initState() {
     super.initState();
     this._loading = true;
     this._parkingId = this.widget.parkingId;
+
+    BitmapDescriptor.fromAssetImage(
+            ImageConfiguration.empty, 'resources/images/green-parking-icon.png')
+        .then((onValue) {
+      _markerIcon = onValue;
+    });
 
     getParking();
   }
@@ -110,18 +120,17 @@ class _OwnerParkingDetailPageState extends State<OwnerParkingDetailPage> {
                                   pictures: this._parking.pictures,
                                 ),
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Text("Precio por hora"),
-                                  Text(
-                                      '\$RD ${this._parking.perHourPrice}/Hora')
-                                ],
-                              ),
+                              ParkingPriceWidgetTab(parking: _parking),
                               ShowParkingFeaturesWidget(
                                 features: this._parking.features,
                               ),
-                              WeekScheduleViewerWidget(parking: _parking),
+                              WeekScheduleViewerWidget(
+                                  calendar: this._parking.calendar),
+                              PositionTabWidget(
+                                marker: _markerIcon,
+                                parkingId: _parkingId,
+                                parking: _parking,
+                              )
                             ],
                           ),
                         ),
@@ -135,8 +144,51 @@ class _OwnerParkingDetailPageState extends State<OwnerParkingDetailPage> {
   }
 }
 
-class WeekScheduleViewerWidget extends StatelessWidget {
-  const WeekScheduleViewerWidget({
+class PositionTabWidget extends StatelessWidget {
+  const PositionTabWidget({
+    Key key,
+    @required marker,
+    @required String parkingId,
+    @required Parking parking,
+  })  : _parkingId = parkingId,
+        _parking = parking,
+        _marker = marker,
+        super(key: key);
+
+  final String _parkingId;
+  final Parking _parking;
+  final _marker;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Text(
+              "Posicion",
+              style: kParkaTextStyleBoldGreen18,
+            ),
+          ),
+          PositionViewerWidget(
+            parkingId: this._parkingId,
+            markerIcon: this._marker,
+            position: LatLng(
+              this._parking.latitude,
+              this._parking.longitude,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ParkingPriceWidgetTab extends StatelessWidget {
+  const ParkingPriceWidgetTab({
     Key key,
     @required Parking parking,
   })  : _parking = parking,
@@ -149,9 +201,83 @@ class WeekScheduleViewerWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text("Calendario"),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Text(
+            "Precio por hora",
+            style: kParkaTextStyleBoldGreen18,
+          ),
+        ),
+        Text(
+          '\$RD ${this._parking.perHourPrice}/Hora',
+          style: kParkaTextStyleBlack18,
+        )
+      ],
+    );
+  }
+}
+
+class WeekScheduleViewerWidget extends StatelessWidget {
+  const WeekScheduleViewerWidget({
+    Key key,
+    @required Calendar calendar,
+  })  : _calendar = calendar,
+        super(key: key);
+
+  final Calendar _calendar;
+
+  List<Widget> _viewBuilder() {
+    List<Widget> ret = new List();
+
+    weekDaysList.forEach((element) {
+      WeekDay _weekDay = weekDays[element];
+      List _schedules = this._calendar.getDaySchedule(_weekDay);
+
+      ret.add(
+        Expanded(
+          child: Container(
+            child: Text(
+              element.substring(0, 2).capitalizeFirst,
+              style: _schedules.length == 0
+                  ? kParkaBigButtonTextStyleGreen20
+                  : kParkaTextStyleBoldWhite20,
+            ),
+            height: 40.0,
+            width: 40.0,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: _schedules.length == 0
+                  ? Colors.white
+                  : ParkaColors.parkaGreen,
+              border: Border.all(
+                color: ParkaColors.parkaGreen,
+                width: 2.0,
+              ),
+              shape: BoxShape.circle,
+            ),
+          ),
+        ),
+      );
+    });
+
+    return ret;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Text(
+            "Calendario",
+            style: kParkaTextStyleBoldGreen18,
+          ),
+        ),
         Row(
-          children: [],
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: this._viewBuilder(),
         )
       ],
     );
@@ -170,16 +296,19 @@ class ShowParkingFeaturesWidget extends StatelessWidget {
     List<Widget> ret = List();
 
     this.features.forEach((_feature) {
-      ret.add(
+      ret.addAll([
         SvgPicture.asset(
           getFeatureIcon(
             _feature.name,
           ),
           color: ParkaColors.parkaGreen,
-          height: 50.0,
-          width: 50.0,
+          height: 40.0,
+          width: 40.0,
         ),
-      );
+        SizedBox(
+          width: 8.0,
+        ),
+      ]);
     });
 
     return ret;
@@ -190,7 +319,13 @@ class ShowParkingFeaturesWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text("Caracteristicas"),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Text(
+            "Caracteristicas",
+            style: kParkaTextStyleBoldGreen18,
+          ),
+        ),
         Container(
           height: 50.0,
           child: ListView(
