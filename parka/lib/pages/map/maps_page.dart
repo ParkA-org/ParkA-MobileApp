@@ -16,6 +16,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class MapPage extends StatefulWidget {
   MapPage({Key key}) : super(key: key);
@@ -53,7 +54,6 @@ class _MapPageState extends State<MapPage> {
     this._getMapPageData();
   }
 
-  // CHECKED
   Future<BitmapDescriptor> _getCustomPin() async {
     return BitmapDescriptor.fromAssetImage(
         ImageConfiguration.empty, 'resources/images/green-parking-icon.png');
@@ -85,7 +85,6 @@ class _MapPageState extends State<MapPage> {
       },
     );
   }
-  //Not checked
 
   Future<Set<Marker>> getNearParkings(LatLng userLocation) async {
     Set<Marker> parkingPins = {};
@@ -116,8 +115,9 @@ class _MapPageState extends State<MapPage> {
     this.getMapStyle();
     this._customPinIcon = await this._getCustomPin();
     this._getUserReservationsCount();
-
+    print("USER LOCATION IS  ${this.userLocation}");
     this.userLocation = await this._getCurrentLocation();
+    print("USER LOCATION NOW IS  ${this.userLocation}");
     this.initialCameraPosition = CameraPosition(
       target: LatLng(userLocation.latitude, userLocation.longitude),
       zoom: 15.5,
@@ -154,31 +154,34 @@ class _MapPageState extends State<MapPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
       body: SafeArea(
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            GoogleMap(
-              onMapCreated: (GoogleMapController controller) {
-                mapController = controller;
-                mapController.setMapStyle(_mapStyle);
-              },
-              myLocationButtonEnabled: true,
-              myLocationEnabled: true,
-              initialCameraPosition: initialCameraPosition,
-              zoomControlsEnabled: false,
-              markers: nearbyParkings,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 60.0),
-              child: Builder(
-                builder: (context) => DummySearch(
-                  // statusBarSize: MediaQuery.of(context).padding.top,
-                  mainContext: mapPageContext,
-                  buttonToggle: toggleFloatingActionButton,
+        child: ModalProgressHUD(
+          inAsyncCall: this._loading,
+          child: Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              GoogleMap(
+                onMapCreated: (GoogleMapController controller) {
+                  mapController = controller;
+                  mapController.setMapStyle(_mapStyle);
+                },
+                myLocationButtonEnabled: true,
+                myLocationEnabled: true,
+                initialCameraPosition: initialCameraPosition,
+                zoomControlsEnabled: false,
+                markers: nearbyParkings,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 60.0),
+                child: Builder(
+                  builder: (context) => DummySearch(
+                    // statusBarSize: MediaQuery.of(context).padding.top,
+                    mainContext: mapPageContext,
+                    buttonToggle: toggleFloatingActionButton,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
