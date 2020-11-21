@@ -88,9 +88,47 @@ class _OwnerParkingDetailPageState extends State<OwnerParkingDetailPage> {
                     expandedHeight: 250.0,
                     backgroundColor: ParkaColors.parkaGreen,
                     flexibleSpace: FlexibleSpaceBar(
-                      title: AutoSizeText(
-                        this._parking.parkingName,
-                        maxLines: 1,
+                      title: Container(
+                        margin: EdgeInsets.only(right: 8.0),
+                        padding: EdgeInsets.all(4.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.0),
+                          color: Color(0x99C4C4C4),
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: AutoSizeText(
+                                this._parking.parkingName,
+                                maxLines: 1,
+                                style: kParkaTextStyleBold16,
+                              ),
+                            ),
+                            Expanded(
+                              flex: 0,
+                              child: Container(
+                                margin: EdgeInsets.symmetric(horizontal: 2.0),
+                                child: Row(
+                                  children: [
+                                    AutoSizeText(
+                                      '${this._parking.rating.toPrecision(2)}',
+                                      maxLines: 1,
+                                      style: kParkaTextStyleBold16,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: Icon(
+                                        Icons.star,
+                                        color: Colors.white,
+                                        size: 16.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                       background: Image(
                         fit: BoxFit.cover,

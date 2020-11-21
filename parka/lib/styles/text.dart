@@ -22,6 +22,12 @@ final kParkaInputDefaultSyle = kParkaTextBaseStyleBold.copyWith(
   color: Colors.white,
 );
 
+final kParkaTextStyleBold16 = kParkaTextBaseStyleBold.copyWith(
+  fontSize: 16.0,
+  fontWeight: FontWeight.normal,
+  color: Colors.white,
+);
+
 final kParkaInputTextStyle = kParkaTextBaseStyleBold.copyWith(
   fontSize: 16,
   color: Colors.black,
@@ -37,6 +43,12 @@ final kParkaButtonTextStyle = kParkaTextBaseStyleBold.copyWith(
 
 final kParkaTextStyleBoldWhite20 = kParkaTextBaseStyleBold.copyWith(
   fontSize: 20.0,
+  color: Colors.white,
+);
+
+final kParkaTextStyleBold20 = kParkaTextBaseStyleBold.copyWith(
+  fontSize: 20.0,
+  fontWeight: FontWeight.normal,
   color: Colors.white,
 );
 

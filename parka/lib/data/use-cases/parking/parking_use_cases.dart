@@ -90,14 +90,16 @@ class ParkingUseCases {
         .parkaGraphqlClient.value.graphQlClient
         .query(queryOptions);
 
-    if (getNearbyParkingsResult.data != null &&
-        getNearbyParkingsResult.data["getAllParkings"] != null) {
-      final List<Parking> parkingData = Parking.parkingsFromJson(
-          getNearbyParkingsResult.data["getAllParkings"]);
-      return parkingData;
-    }
+    print(getNearbyParkingsResult.data);
+// TODO:FIX THIS
+    // if (getNearbyParkingsResult.data != null &&
+    //     getNearbyParkingsResult.data["getAllParkings"] != null) {
+    //   final List<Parking> parkingData = Parking.parkingsFromJson(
+    //       getNearbyParkingsResult.data["getAllParkings"]);
+    //   return parkingData;
+    // }
 
-    return [];
+    return new List<Parking>();
   }
 
   static Future<List<Parking>> getAllUserParkings() async {
