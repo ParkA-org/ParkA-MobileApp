@@ -17,3 +17,26 @@ const String getAllUserParkingQuery = r"""
   }
 }
 """;
+
+const String getNearbyParkingsQuery = r"""
+query($userLocation: FilterInput!) {
+	getAllParkings(
+	input:$userLocation
+	) 
+  {
+		id
+		latitude
+		longitude
+		mainPicture
+		parkingName
+		priceHours
+    rating
+		verified
+		features {
+		id
+		name
+		}
+	}
+}
+
+""";

@@ -63,6 +63,7 @@ class VehicleUseCases {
 
     String imageUrl = await uploadImage(createVehicleDto.mainPicture);
 
+
     List<String> _vehiclePictures =
         await uploadMultipleImages(createVehicleDto.pictures);
 
