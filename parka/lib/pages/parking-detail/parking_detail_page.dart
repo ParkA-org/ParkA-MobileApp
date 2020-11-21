@@ -41,8 +41,11 @@ class _OwnerParkingDetailPageState extends State<OwnerParkingDetailPage> {
 
   Future getVehicle() async {
     // TODO: use get parking by id use case
-    this._parking = Parking();
-    this._loading = false;
+    this._parking = null;
+    if (this._parking != null) {
+      this._loading = false;
+    }
+
     setState(() {});
   }
 
@@ -52,6 +55,7 @@ class _OwnerParkingDetailPageState extends State<OwnerParkingDetailPage> {
       floatingActionButton: ParkaFloatingActionButton(
         iconData: Icons.edit,
         onPressedHandler: () {
+          //TODO: ADD route to edit parking
           // Get.to(
           // );
         },
@@ -72,7 +76,7 @@ class _OwnerParkingDetailPageState extends State<OwnerParkingDetailPage> {
                     backgroundColor: ParkaColors.parkaGreen,
                     flexibleSpace: FlexibleSpaceBar(
                       title: AutoSizeText(
-                        this._parking.parkingName,
+                        'this._parking.parkingName',
                         maxLines: 1,
                       ),
                       background: Image(

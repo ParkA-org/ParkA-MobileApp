@@ -16,9 +16,7 @@ class ParkingTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        //TODO: Navigate to the Parking Detail
-      },
+      onTap: this.onTapHandler,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
         child: Container(

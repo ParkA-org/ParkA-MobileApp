@@ -4,6 +4,7 @@ import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
 import 'package:ParkA/pages/create-parking/create_parking_page.dart';
 import 'package:ParkA/pages/create-vehicle/components/parka_resizable_on_scroll_app_bar.dart';
+import 'package:ParkA/pages/parking-detail/parking_detail_page.dart';
 import 'package:ParkA/styles/parkaIcons.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import "package:flutter/material.dart";
@@ -36,7 +37,16 @@ class _ParkingPageState extends State<ParkingPage> {
     List<Widget> parkingList = new List();
 
     this.userParkings.forEach((parking) {
-      parkingList.add(ParkingTile(parking: parking));
+      parkingList.add(
+        ParkingTile(
+          parking: parking,
+          onTapHandler: () => Get.to(
+            OwnerParkingDetailPage(
+              parkingId: parking.id,
+            ),
+          ),
+        ),
+      );
     });
     return parkingList;
   }
