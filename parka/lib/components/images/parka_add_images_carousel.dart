@@ -2,8 +2,14 @@ import 'package:ParkA/components/images/parka_image_card_widget.dart';
 import 'package:ParkA/data/enums/parking_place_holder_type.dart';
 import "package:flutter/material.dart";
 
+enum CarouselType {
+  Form,
+  Gallery,
+}
+
 class ParkaAddImagesCarousel extends StatelessWidget {
-  final PlaceHolderType type;
+  final CarouselType carouselType;
+  final PlaceHolderType placeholderType;
   final List<String> pictures;
   final Function onTapHandler;
   final Function onLongPressHandler;
@@ -13,7 +19,8 @@ class ParkaAddImagesCarousel extends StatelessWidget {
     this.pictures,
     this.onTapHandler,
     this.onLongPressHandler,
-    @required this.type,
+    @required this.carouselType,
+    @required this.placeholderType,
   }) : super(key: key);
 
   List<Widget> carouselBuilder() {
@@ -27,7 +34,7 @@ class ParkaAddImagesCarousel extends StatelessWidget {
           child: ParkaImageCardWidget(
             image: element,
             index: index,
-            type: this.type,
+            type: this.placeholderType,
             onLongPressHandler: this.onLongPressHandler,
           ),
         ),
@@ -35,15 +42,18 @@ class ParkaAddImagesCarousel extends StatelessWidget {
       index++;
     });
 
-    ret.add(
-      Container(
-        margin: EdgeInsets.symmetric(horizontal: 16.0),
-        child: ParkaImageCardWidget(
-          type: this.type,
-          onTapHandler: this.onTapHandler,
+    if (this.carouselType == CarouselType.Form) {
+      print("SI SOY UN FORM");
+      ret.add(
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 16.0),
+          child: ParkaImageCardWidget(
+            type: this.placeholderType,
+            onTapHandler: this.onTapHandler,
+          ),
         ),
-      ),
-    );
+      );
+    }
 
     return ret;
   }
@@ -68,17 +78,18 @@ class ParkaAddImagesCarousel extends StatelessWidget {
 
         return ConstrainedBox(
           constraints: constraints,
-          child: this.pictures.length > 0
-              ? Container(
+          child: this.pictures.length == 0 &&
+                  this.carouselType == CarouselType.Form
+              ? ParkaImageCardWidget(
+                  type: this.placeholderType,
+                  onTapHandler: this.onTapHandler,
+                )
+              : Container(
                   height: (cardWidth) / creditCardProp,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: carouselBuilder(),
                   ),
-                )
-              : ParkaImageCardWidget(
-                  type: this.type,
-                  onTapHandler: this.onTapHandler,
                 ),
         );
       },

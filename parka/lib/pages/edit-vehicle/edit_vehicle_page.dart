@@ -6,38 +6,46 @@ import 'package:ParkA/data/data-models/model/model_data_model.dart';
 import 'package:ParkA/data/data-models/vehicle/dto/create_vehicle_dto.dart';
 import 'package:ParkA/data/data-models/color/color_data_model.dart'
     as VehicleColor;
+import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
+import 'package:ParkA/data/dtos/vehicle/update_vehicle_dto.dart';
 import 'package:ParkA/data/enums/parking_place_holder_type.dart';
 import 'package:ParkA/data/use-cases/body-style/body_style_use_cases.dart';
 import 'package:ParkA/data/use-cases/color/color_use_cases.dart';
 import 'package:ParkA/data/use-cases/make/make_use_cases.dart';
 import 'package:ParkA/data/use-cases/model/model_use_cases.dart';
 import 'package:ParkA/data/use-cases/vehicle/vehicle_use_cases.dart';
+import 'package:ParkA/pages/create-vehicle/components/parka-input/parka_input.dart';
+import 'package:ParkA/pages/create-vehicle/components/parka_resizable_on_scroll_app_bar.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:ParkA/utils/form-validations/create_vehicle_form_validator.dart';
+import 'package:ParkA/utils/form-validations/update_vehicle_from_validation.dart';
 import 'package:ParkA/utils/functions/get_year_list.dart';
 import 'package:ParkA/utils/functions/pick_image.dart';
 import 'package:ParkA/utils/functions/show_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'components/parka-input/parka_input.dart';
-
-import 'components/parka_resizable_on_scroll_app_bar.dart';
 import 'package:ParkA/components/images/parka_add_images_carousel.dart';
 import 'package:ParkA/components/images/parka_image_card_widget.dart';
 
-class CreateVehiclePage extends StatefulWidget {
-  static String routeName = "create-vehicle";
+class EditVehiclePage extends StatefulWidget {
+  static String routeName = "edit-vehicle";
+
+  final Vehicle vehicle;
+
+  EditVehiclePage({
+    @required this.vehicle,
+  });
 
   @override
-  _CreateVehiclePageState createState() => _CreateVehiclePageState();
+  _EditVehiclePageState createState() => _EditVehiclePageState();
 }
 
-class _CreateVehiclePageState extends State<CreateVehiclePage> {
-  CreateVehicleDto createVehicleDto = new CreateVehicleDto(
-    pictures: [],
-  );
+class _EditVehiclePageState extends State<EditVehiclePage> {
+  Vehicle _vehicle;
+
+  UpdateVehicleDto _updateVehicleDto;
 
   String selectedModel;
   String selectedColor;
@@ -59,6 +67,19 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
   @override
   void initState() {
     super.initState();
+    this._vehicle = this.widget.vehicle;
+    this._updateVehicleDto = new UpdateVehicleDto(
+      id: this._vehicle.id,
+      alias: this._vehicle.alias,
+      bodyStyle: this._vehicle.bodyStyle.id,
+      colorExterior: this._vehicle.color.id,
+      licensePlate: this._vehicle.licensePlate,
+      mainPicture: this._vehicle.mainPicture,
+      model: this._vehicle.model.id,
+      pictures: this._vehicle.pictures,
+      detail: this._vehicle.detail,
+      year: this._vehicle.year.toString(),
+    );
     this.dataLoading = true;
     getFormData();
   }
@@ -68,7 +89,6 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
     this.bodyStyles = await BodyStyleUseCases.getAllBodyStyles();
     this.models = await ModelUseCases.getAllModels();
     this.makes = await MakeUseCases.getAllMakes();
-
     this.bodyStyleOptions = new List.from(this.bodyStyles.map((e) => e.name));
     this.colorsOptions = new List.from(this.colors.map((e) => e.name));
     this.modelsOptions = new List.from(this.makes[0].models.map((e) => e.name));
@@ -80,19 +100,19 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
     });
   }
 
-  void createVehicle() async {
-    bool checkForm = createVehicleFormValidator(createVehicleDto);
+  void updateVehicle() async {
+    bool checkForm = updateVehicleFormValidator(_updateVehicleDto);
 
     if (!checkForm) {
       Get.snackbar(
         "Error",
-        "Llena todos los campos",
+        "Se verifico un error",
         backgroundColor: ParkaColors.parkaGoogleRed,
       );
       return;
     }
 
-    bool createdResult = await VehicleUseCases.createVehicle(createVehicleDto);
+    bool createdResult = await VehicleUseCases.updateVehicle(_updateVehicleDto);
 
     if (createdResult) {
       Get.back();
@@ -110,7 +130,7 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
       removeImage: () {
         print(index);
         setState(() {
-          this.createVehicleDto.pictures.removeAt(index);
+          this._updateVehicleDto.pictures.removeAt(index);
         });
         Get.back();
       },
@@ -121,9 +141,9 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: ParkaFloatingActionButton(
-        iconData: Icons.add,
+        iconData: Icons.done,
         onPressedHandler: () async {
-          this.createVehicle();
+          this.updateVehicle();
         },
       ),
       body: SafeArea(
@@ -132,7 +152,9 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
           opacity: 0.5,
           child: CustomScrollView(
             slivers: [
-              ParkaResizableOnScrollAppBar(),
+              ParkaResizableOnScrollAppBar(
+                title: "Edita tu vehiculo",
+              ),
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
@@ -147,27 +169,28 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                         children: [
                           ParkaImageCardWidget(
                             type: PlaceHolderType.Car,
-                            image: this.createVehicleDto.mainPicture,
+                            image: this._updateVehicleDto.mainPicture,
                             onTapHandler: () async {
                               String imagePath = await getImageFunction();
                               if (imagePath != null) {
                                 setState(() {
-                                  this.createVehicleDto.mainPicture = imagePath;
+                                  this._updateVehicleDto.mainPicture =
+                                      imagePath;
                                 });
                               }
                             },
                           ),
-                          this.createVehicleDto.mainPicture != null
+                          this._updateVehicleDto.mainPicture != null
                               ? ParkaAddImagesCarousel(
                                   carouselType: CarouselType.Form,
                                   placeholderType: PlaceHolderType.Car,
-                                  pictures: this.createVehicleDto.pictures,
+                                  pictures: this._updateVehicleDto.pictures,
                                   onTapHandler: () async {
                                     String imagePath = await getImageFunction();
                                     if (imagePath != null) {
                                       setState(() {
                                         this
-                                            .createVehicleDto
+                                            ._updateVehicleDto
                                             .pictures
                                             .add(imagePath);
                                       });
@@ -181,10 +204,11 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                               ParkaEditInput(
                                 type: ParkaInputType.textField,
                                 label: "Placa del vehiculo",
+                                value: this._vehicle.licensePlate,
                                 maxLength: 7,
                                 onChangedHandler: (String value) {
                                   setState(() {
-                                    this.createVehicleDto.licensePlate =
+                                    this._updateVehicleDto.licensePlate =
                                         value.substring(0, 7);
                                   });
                                 },
@@ -192,20 +216,23 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                               ParkaEditInput(
                                 type: ParkaInputType.textField,
                                 label: "Alias del vehiculo",
+                                value: this._vehicle.alias,
                                 maxLength: 25,
                                 onChangedHandler: (String value) {
                                   setState(() {
-                                    this.createVehicleDto.alias = value;
+                                    this._updateVehicleDto.alias =
+                                        value.substring(0, 7);
                                   });
                                 },
                               ),
                               ParkaEditInput(
                                 type: ParkaInputType.textField,
+                                value: this._updateVehicleDto.detail,
                                 label: "Detalles del vehiculo",
                                 maxLength: 25,
                                 onChangedHandler: (String value) {
                                   setState(() {
-                                    this.createVehicleDto.detail = value;
+                                    this._updateVehicleDto.detail = value;
                                   });
                                 },
                               ),
@@ -213,12 +240,13 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                                 type: ParkaInputType.dropDown,
                                 label: "Año del vehiculo",
                                 dropDownOptions: yearOptions,
-                                value: this.selectedYear,
+                                value: this.selectedYear ??
+                                    this._vehicle.year.toString(),
                                 onChangedHandler: (int index) {
                                   FocusManager.instance.primaryFocus.unfocus();
                                   setState(
                                     () {
-                                      this.createVehicleDto.year =
+                                      this._updateVehicleDto.year =
                                           this.yearOptions[index];
                                       this.selectedYear =
                                           this.yearOptions[index];
@@ -230,12 +258,13 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                                 type: ParkaInputType.dropDown,
                                 label: "Color del vehiculo",
                                 dropDownOptions: colorsOptions,
-                                value: this.selectedColor,
+                                value: this.selectedColor ??
+                                    this._vehicle.color.name,
                                 onChangedHandler: (int index) {
                                   FocusManager.instance.primaryFocus.unfocus();
                                   setState(
                                     () {
-                                      this.createVehicleDto.colorExterior =
+                                      this._updateVehicleDto.colorExterior =
                                           this.colors[index].id;
                                       this.selectedColor =
                                           this.colors[index].name;
@@ -247,7 +276,8 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                                 type: ParkaInputType.dropDown,
                                 label: "Marca del vehiculo",
                                 dropDownOptions: makesOptions,
-                                value: this.selectedMake,
+                                value: this.selectedMake ??
+                                    this._vehicle.model.make.name,
                                 onChangedHandler: (int index) {
                                   FocusManager.instance.primaryFocus.unfocus();
                                   setState(
@@ -260,7 +290,7 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                                           .map((e) => e.name));
                                       this.selectedModel =
                                           this.modelsOptions[0];
-                                      this.createVehicleDto.model =
+                                      this._updateVehicleDto.model =
                                           this.makes[index].models[0].id;
                                       this.models = this.makes[index].models;
                                     },
@@ -271,12 +301,13 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                                 type: ParkaInputType.dropDown,
                                 label: "Modelo del vehiculo",
                                 dropDownOptions: modelsOptions,
-                                value: this.selectedModel,
+                                value: this.selectedModel ??
+                                    this._vehicle.model.name,
                                 onChangedHandler: (int index) {
                                   FocusManager.instance.primaryFocus.unfocus();
                                   setState(
                                     () {
-                                      this.createVehicleDto.model =
+                                      this._updateVehicleDto.model =
                                           this.models[index].id;
                                       this.selectedModel =
                                           this.models[index].name;
@@ -288,12 +319,13 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                                 type: ParkaInputType.dropDown,
                                 label: "Tipo de cuerpo",
                                 dropDownOptions: bodyStyleOptions,
-                                value: this.selectedBodyStyle,
+                                value: this.selectedBodyStyle ??
+                                    this._vehicle.bodyStyle.name,
                                 onChangedHandler: (int index) {
                                   FocusManager.instance.primaryFocus.unfocus();
                                   setState(
                                     () {
-                                      this.createVehicleDto.bodyStyle =
+                                      this._updateVehicleDto.bodyStyle =
                                           this.bodyStyles[index].id;
                                       this.selectedBodyStyle =
                                           this.bodyStyles[index].name;

@@ -1,9 +1,12 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
+import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/schedule/schedule_data_model.dart';
 import 'package:ParkA/data/dtos/parking/create_parking_dto.dart';
 import 'package:ParkA/utils/functions/upload_image.dart';
 import 'package:ParkA/utils/graphql/mutations/parking_mutations.dart';
+import 'package:ParkA/utils/graphql/queries/parking_queries.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:graphql/client.dart';
 
 class ParkingUseCases {
@@ -63,5 +66,58 @@ class ParkingUseCases {
     }
 
     return false;
+  }
+
+  static Future getNearParkings(LatLng userLocation) async {
+    final graphqlClient = Get.find<GraphqlClientController>();
+
+    final userLocationInput = {
+      "userLocation": {
+        "where": {
+          "position_near": {
+            "latitude": userLocation.latitude,
+            "longitude": userLocation.longitude
+          }
+        }
+      }
+    };
+
+    QueryOptions queryOptions = QueryOptions(
+        documentNode: gql(getNearbyParkingsQuery),
+        variables: userLocationInput);
+
+    QueryResult getNearbyParkingsResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .query(queryOptions);
+
+    if (getNearbyParkingsResult.data != null &&
+        getNearbyParkingsResult.data["getAllParkings"] != null) {
+      final List<Parking> parkingData = Parking.parkingsFromJson(
+          getNearbyParkingsResult.data["getAllParkings"]);
+      return parkingData;
+    }
+
+    return [];
+  }
+
+  static Future<List<Parking>> getAllUserParkings() async {
+    final graphqlClient = Get.find<GraphqlClientController>();
+
+    QueryOptions queryOptions =
+        QueryOptions(documentNode: gql(getAllUserParkingQuery));
+
+    final QueryResult getAllUserParkingsResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .query(queryOptions);
+
+    print(getAllUserParkingsResult.data);
+    if (getAllUserParkingsResult.data != null &&
+        getAllUserParkingsResult.data["getAllUserParkings"] != null) {
+      final List<Parking> parkingsData = Parking.parkingsFromJson(
+          getAllUserParkingsResult.data["getAllUserParkings"]);
+
+      return parkingsData;
+    }
+    return [];
   }
 }
