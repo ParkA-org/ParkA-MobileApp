@@ -30,6 +30,7 @@ query($userLocation: FilterInput!) {
 		mainPicture
 		parkingName
 		priceHours
+    rating
 		verified
 		features {
 		id

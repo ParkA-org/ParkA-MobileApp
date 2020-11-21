@@ -79,7 +79,6 @@ class _MapPageState extends State<MapPage> {
       },
     );
 
-    this.getNearParkings(LatLng(userLocation.latitude, userLocation.longitude));
     this.getUserReservationsCount();
     BitmapDescriptor.fromAssetImage(
             ImageConfiguration.empty, 'resources/images/green-parking-icon.png')
@@ -112,15 +111,21 @@ class _MapPageState extends State<MapPage> {
                 builder: (context) => ParkingDetailModal(parking: parking))));
       });
     }
-
-    setState(() {
-      nearbyParkings = parkingPins;
-    });
+    if (!nearbyParkings.containsAll(parkingPins) &&
+        nearbyParkings.length != parkingPins.length) {
+      setState(() {
+        nearbyParkings = parkingPins;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     print("MAP BUILDED");
+    if (userLocation != null) {
+      this.getNearParkings(
+          LatLng(userLocation.latitude, userLocation.longitude));
+    }
     GoogleMapController mapController;
 
     BuildContext mapPageContext = context;
