@@ -6,8 +6,8 @@ class Parking {
   final String id;
   final int parkingCount;
   final String parkingName;
-  final String latitude;
-  final String longitude;
+  final double latitude;
+  final double longitude;
   final String calendar;
   final double perHourPrice;
   final String mainPicture;
@@ -45,14 +45,14 @@ class Parking {
     parkingData.forEach((parking) {
       userParkings.add(Parking(
           id: parking["id"],
-          parkingCount: int.parse(parking["countParking"].toString()),
-          latitude: parking["latitude"],
-          longitude: parking["longitude"],
+          parkingCount: int.tryParse(parking["countParking"].toString()),
+          latitude: double.parse(parking["latitude"]),
+          longitude: double.parse(parking["longitude"]),
           parkingName: parking["parkingName"],
           mainPicture: parking["mainPicture"],
           pictures: parking["pictures"],
           perHourPrice: double.parse(parking["priceHours"]),
-          rating: parking["rating"].toDouble()));
+          rating: double.tryParse(parking["rating"].toString())));
     });
 
     return userParkings;
