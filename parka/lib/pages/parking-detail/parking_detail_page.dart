@@ -93,7 +93,6 @@ class _OwnerParkingDetailPageState extends State<OwnerParkingDetailPage> {
                         padding: EdgeInsets.all(4.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12.0),
-                          color: Color(0x99C4C4C4),
                         ),
                         child: Row(
                           children: [
@@ -130,9 +129,25 @@ class _OwnerParkingDetailPageState extends State<OwnerParkingDetailPage> {
                           ],
                         ),
                       ),
-                      background: Image(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(_parking.mainPicture),
+                      background: Stack(
+                        alignment: Alignment.center,
+                        fit: StackFit.expand,
+                        children: [
+                          Image(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(_parking.mainPicture),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 190.0),
+                                color: Colors.black54,
+                                blurRadius: 18.0,
+                                spreadRadius: 15.0,
+                              ),
+                            ]),
+                          )
+                        ],
                       ),
                     ),
                   ),

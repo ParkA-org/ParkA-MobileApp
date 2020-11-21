@@ -92,12 +92,12 @@ class ParkingUseCases {
 
     print(getNearbyParkingsResult.data);
 // TODO:FIX THIS
-    // if (getNearbyParkingsResult.data != null &&
-    //     getNearbyParkingsResult.data["getAllParkings"] != null) {
-    //   final List<Parking> parkingData = Parking.parkingsFromJson(
-    //       getNearbyParkingsResult.data["getAllParkings"]);
-    //   return parkingData;
-    // }
+    if (getNearbyParkingsResult.data != null &&
+        getNearbyParkingsResult.data["getAllParkings"] != null) {
+      final parkingData = getNearbyParkingsResult.data["getAllParkings"];
+      final List<Parking> parkings = Parking.parkingsFromJson(parkingData);
+      return parkings;
+    }
 
     return new List<Parking>();
   }

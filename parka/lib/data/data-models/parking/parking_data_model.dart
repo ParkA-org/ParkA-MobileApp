@@ -62,7 +62,7 @@ class Parking {
     List<Parking> userParkings = new List();
 
     parkingData.forEach((parking) {
-      List<String> _pictures = new List.from(parking["pictures"]);
+      List<String> _pictures = new List.from(parking["pictures"] ?? []);
       userParkings.add(
         Parking(
           id: parking["id"],
