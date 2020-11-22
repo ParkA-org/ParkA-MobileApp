@@ -373,7 +373,7 @@ class ShowParkingFeaturesWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Text(
             "Caracteristicas",
-            style: kParkaTextStyleBoldGreen18,
+            style: kParkaTextStyleBoldGreen20,
           ),
         ),
         Container(

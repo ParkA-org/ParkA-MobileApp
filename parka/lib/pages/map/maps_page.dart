@@ -1,4 +1,4 @@
-import 'package:ParkA/components/modals/parking_detail.dart';
+import 'package:ParkA/components/modals/parking_detail_modal.dart';
 import 'package:ParkA/components/buttons/main_fab.dart';
 import 'package:ParkA/components/drawer/private-drawer/private_drawer_n.dart';
 import 'package:ParkA/components/drawer/public-drawer/public_drawer.dart';

@@ -1,5 +1,6 @@
 import 'package:ParkA/components/rating/star_rating.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
+import 'package:ParkA/pages/parking-detail/parking_detail_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
@@ -21,38 +22,18 @@ class ParkingDetailModal extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text("${parking.parkingName}",
+                  overflow: TextOverflow.clip,
                   style: kParkaTextStyleGrey.copyWith(
                       color: Colors.black, fontWeight: FontWeight.bold)),
-              StarRating(rating: parking.rating.toInt()),
-              Text("Disponible",
-                  style: kParkaTextStyleGrey.copyWith(
-                      color: ParkaColors.parkaGreen,
-                      fontWeight: FontWeight.bold)),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Icon(
-                    Icons.directions_car,
-                    color: Color(0xFFA6A6A6),
-                  ),
-                  Text(
-                    "13 Mins",
-                    style: kParkaTextBaseStyle.copyWith(
-                        fontSize: 16, color: Colors.grey[800]),
-                  ),
-                  SizedBox(
-                    width: 150,
-                  ),
-                  SvgPicture.asset(
-                    "resources/images/car.svg",
-                    height: 30,
-                  ),
-                  SvgPicture.asset(
-                    "resources/images/cctv4.svg",
-                    height: 30,
-                  ),
+                  StarRating(rating: parking.rating.toInt()),
+                  Text("(${parking.rating})",
+                      style: kParkaTextStyleGrey.copyWith(
+                          color: ParkaColors.parkaGreen))
                 ],
               ),
+              ShowParkingFeaturesWidget(features: parking.features),
               Divider(
                 thickness: 1.0,
                 color: Color(0xFF949494),
