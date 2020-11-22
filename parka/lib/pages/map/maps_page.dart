@@ -97,7 +97,7 @@ class _MapPageState extends State<MapPage> {
                 context: context,
                 builder: (context) {
                   _mapController.animateCamera(CameraUpdate.newLatLng(
-                      LatLng(parking.latitude + 0.00001, parking.longitude)));
+                      LatLng(parking.latitude - 0.003, parking.longitude)));
                   return ParkingDetailModal(parking: parking);
                 })));
       });

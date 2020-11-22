@@ -9,10 +9,16 @@ void main() {
   runApp(ParkApp());
 }
 
-class ParkApp extends StatelessWidget {
+class ParkApp extends StatelessWidget with WidgetsBindingObserver {
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+  }
+
   @override
   Widget build(BuildContext context) {
     new SharedPreferenciesUtil();
+    WidgetsBinding.instance.addObserver(this);
 
     return GetMaterialApp(
       title: 'ParkA',

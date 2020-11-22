@@ -5,16 +5,11 @@ import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ParkingDetailModal extends StatefulWidget {
+class ParkingDetailModal extends StatelessWidget {
   final Parking parking;
 
   ParkingDetailModal({Key key, @required this.parking}) : super(key: key);
 
-  @override
-  _ParkingDetailModalState createState() => _ParkingDetailModalState();
-}
-
-class _ParkingDetailModalState extends State<ParkingDetailModal> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,10 +20,10 @@ class _ParkingDetailModalState extends State<ParkingDetailModal> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text("Calle Puerto Rico #175",
+              Text("${parking.parkingName}",
                   style: kParkaTextStyleGrey.copyWith(
                       color: Colors.black, fontWeight: FontWeight.bold)),
-              StarRating(rating: 4),
+              StarRating(rating: parking.rating.toInt()),
               Text("Disponible",
                   style: kParkaTextStyleGrey.copyWith(
                       color: ParkaColors.parkaGreen,
