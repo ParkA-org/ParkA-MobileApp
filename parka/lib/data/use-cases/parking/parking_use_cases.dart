@@ -2,6 +2,7 @@ import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/schedule/schedule_data_model.dart';
 import 'package:ParkA/data/dtos/parking/create_parking_dto.dart';
+import 'package:ParkA/data/dtos/parking/update_parking_dto.dart';
 import 'package:ParkA/utils/functions/upload_image.dart';
 import 'package:ParkA/utils/graphql/mutations/parking_mutations.dart';
 import 'package:ParkA/utils/graphql/queries/parking_queries.dart';
@@ -62,6 +63,77 @@ class ParkingUseCases {
     print(createParkingResult.exception);
     if (createParkingResult.data != null) {
       print("created");
+      return true;
+    }
+
+    return false;
+  }
+
+  static Future updateParking(UpdateParkingDto _updateParkingDto) async {
+    final graphqlClient = Get.find<GraphqlClientController>()
+        .parkaGraphqlClient
+        .value
+        .graphQlClient;
+
+    String imageUrl = _updateParkingDto.mainPicture;
+
+    bool _isPath = !(GetUtils.isURL(imageUrl));
+
+    List<String> _parkingPictures = new List();
+
+    if (_isPath) {
+      imageUrl = await uploadImage(_updateParkingDto.mainPicture);
+    }
+
+    for (String _picture in _updateParkingDto.pictures) {
+      _isPath = !(GetUtils.isURL(_picture));
+      String picture = _picture;
+      if (_isPath) {
+        picture = await uploadImage(picture);
+      }
+      _parkingPictures.add(picture);
+    }
+
+    print(_updateParkingDto.pictures);
+    print(_parkingPictures);
+
+    final updateParkingInput = {
+      "data": {
+        "id": _updateParkingDto.parkingId,
+        "countParking": _updateParkingDto.countParking,
+        "parkingName": _updateParkingDto.parkingName,
+        "calendar": {
+          "monday": Schedule.toJsonArray(_updateParkingDto.calendar['monday']),
+          "tuesday":
+              Schedule.toJsonArray(_updateParkingDto.calendar['tuesday']),
+          "wednesday":
+              Schedule.toJsonArray(_updateParkingDto.calendar['wednesday']),
+          "thursday":
+              Schedule.toJsonArray(_updateParkingDto.calendar['thursday']),
+          "friday": Schedule.toJsonArray(_updateParkingDto.calendar['friday']),
+          "saturday":
+              Schedule.toJsonArray(_updateParkingDto.calendar['saturday']),
+          "sunday": Schedule.toJsonArray(_updateParkingDto.calendar['sunday'])
+        },
+        "priceHours": _updateParkingDto.priceHours.toString(),
+        "pictures": _parkingPictures,
+        "mainPicture": imageUrl,
+        "information": _updateParkingDto.information,
+        "features": _updateParkingDto.features
+      }
+    };
+
+    MutationOptions mutationOptions = MutationOptions(
+      documentNode: gql(updateParkingMutation),
+      variables: updateParkingInput,
+    );
+
+    final _updateParkingResult = await graphqlClient.mutate(mutationOptions);
+
+    print(_updateParkingResult.data);
+    print(_updateParkingResult.exception);
+    if (_updateParkingResult.data != null) {
+      print("UPDATED");
       return true;
     }
 

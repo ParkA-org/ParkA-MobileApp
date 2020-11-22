@@ -8,8 +8,6 @@ class UpdateParkingDto {
   double priceHours;
   List<String> pictures = [];
   String mainPicture;
-  String sector;
-  String direccion;
   String information;
   List<String> features = [];
   Map<String, List<Schedule>> calendar = {
@@ -25,7 +23,6 @@ class UpdateParkingDto {
   UpdateParkingDto({
     this.calendar,
     this.countParking,
-    this.direccion,
     this.features,
     this.information,
     this.mainPicture,
@@ -33,6 +30,5 @@ class UpdateParkingDto {
     this.parkingName,
     this.pictures,
     this.priceHours,
-    this.sector,
   });
 }

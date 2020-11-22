@@ -18,22 +18,22 @@ class UpdateParkingFormController extends GetxController {
       'wednesday': parking.calendar.wednesday,
     };
 
+    print(parking.information);
+
     this._updateParkingDto = UpdateParkingDto(
       parkingId: parking.id,
       calendar: _calendar,
       countParking: parking.parkingCount,
-      direccion: parking.direction,
       features: new List.from(parking.features.map((e) => e.id)),
       information: parking.information,
       mainPicture: parking.mainPicture,
       parkingName: parking.parkingName,
       pictures: parking.pictures,
       priceHours: parking.perHourPrice,
-      sector: parking.sector,
     ).obs;
   }
 
-  get updateParkingDto => this._updateParkingDto;
+  UpdateParkingDto get updateParkingDto => this._updateParkingDto.value;
 
   void increment() {
     step++;

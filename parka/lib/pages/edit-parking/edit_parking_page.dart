@@ -7,6 +7,7 @@ import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/use-cases/feature/feature_use_cases.dart';
 import 'package:ParkA/pages/create-parking/components/stepper_widget.dart';
 import 'package:ParkA/pages/create-vehicle/components/parka-input/parka_input.dart';
+import 'package:ParkA/pages/edit-parking/steps/edit_parking_calendar.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -55,7 +56,7 @@ class _EditParkingPageState extends State<EditParkingPage> {
     List<Widget> ret = new List();
 
     this.features.forEach((element) {
-      bool check = _updateParkingController.updateParkingDto.value.features
+      bool check = _updateParkingController.updateParkingDto.features
               .indexOf(element.id) !=
           -1;
 
@@ -138,6 +139,7 @@ class _EditParkingPageState extends State<EditParkingPage> {
                                 ParkaEditInput(
                                   type: ParkaInputType.textField,
                                   label: "Nombre del parqueo",
+                                  value: this._parking.parkingName,
                                   onChangedHandler: (String value) {
                                     _updateParkingController
                                         .setParkingName(value);
@@ -146,6 +148,7 @@ class _EditParkingPageState extends State<EditParkingPage> {
                                 ParkaTextField(
                                   inputType: TextInputType.number,
                                   label: "Numero de parqueos",
+                                  value: this._parking.parkingCount.toString(),
                                   onChangedHandler: (String number) {
                                     _updateParkingController
                                         .setParkingCount(int.tryParse(number));
@@ -154,6 +157,7 @@ class _EditParkingPageState extends State<EditParkingPage> {
                                 ParkaTextField(
                                   inputType: TextInputType.number,
                                   label: "Precio por hora",
+                                  value: this._parking.perHourPrice.toString(),
                                   onChangedHandler: (String numbers) {
                                     _updateParkingController.setParkingPrice(
                                         double.tryParse(numbers));
@@ -161,6 +165,7 @@ class _EditParkingPageState extends State<EditParkingPage> {
                                 ),
                                 ParkaTextField(
                                   label: "Detalles adicionales",
+                                  value: this._parking.information,
                                   onChangedHandler: (String value) {
                                     _updateParkingController
                                         .setParkingDetails(value);
@@ -193,12 +198,12 @@ class _EditParkingPageState extends State<EditParkingPage> {
                     Expanded(
                       flex: 0,
                       child: ParkaStepperWidget(
-                        stepsNumber: 3,
+                        stepsNumber: 2,
                         index:
                             Get.find<UpdateParkingFormController>().step.value,
                         onTapHandler: () {
                           Get.find<UpdateParkingFormController>().increment();
-                          // Get.toNamed();
+                          Get.toNamed(ParkingCalendarEditorPage.routeName);
                         },
                       ),
                     )
