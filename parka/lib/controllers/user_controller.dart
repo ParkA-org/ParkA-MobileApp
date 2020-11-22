@@ -1,5 +1,6 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/data-models/user/user_data_model.dart';
+import 'package:ParkA/data/dtos/login/user_login_dto.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
 import 'package:get/state_manager.dart';
@@ -13,8 +14,14 @@ class UserController extends GetxController {
     this._sharedPreferencies = await SharedPreferences.getInstance();
     String jwt = this._sharedPreferencies.getString("jwt");
 
-    if (jwt == null) {
-      print("NOT FOUND");
+    if (jwt != null) {
+      User _loggedUser = await UserUseCases.getLoggedUser();
+
+      if (_loggedUser != null) {
+        user.update((user) async {
+          this.user = _loggedUser.obs;
+        });
+      }
     }
   }
 
@@ -23,9 +30,14 @@ class UserController extends GetxController {
   }
 
   Future<bool> loginUser(String email, String password) async {
-    User loggedUser = await UserUseCases.userLogin(email, password);
+    UserLoginDto _userLoginDto = await UserUseCases.userLogin(email, password);
 
-    if (loggedUser != null) {
+    User loggedUser = _userLoginDto.user;
+    String _jwt = _userLoginDto.jwt;
+
+    if (_userLoginDto != null) {
+      this._sharedPreferencies.setString("jwt", _jwt);
+
       user.update((user) async {
         this.user = loggedUser.obs;
       });
@@ -51,6 +63,8 @@ class UserController extends GetxController {
   }
 
   logout() async {
+    await this._sharedPreferencies.remove("jwt");
+    print("REMOVED");
     user.update((user) {
       this.user = null.obs;
       Get.find<GraphqlClientController>().removeGraphqlClientJwt();
