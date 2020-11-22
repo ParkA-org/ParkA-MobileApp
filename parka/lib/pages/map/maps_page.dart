@@ -59,11 +59,13 @@ class _MapPageState extends State<MapPage> {
         ImageConfiguration.empty, 'resources/images/green-parking-icon.png');
   }
 
-  void _getUserReservationsCount() async {
+  Future<void> _getUserReservationsCount() async {
     this._reservationsAsClientCount =
         await ReservationUseCases.getAllReservationsAsClientCount();
     this._reservationsAsOwnerCount =
         await ReservationUseCases.getAllReservationsAsOwnerCount();
+    print(this._reservationsAsClientCount);
+    print(this._reservationsAsOwnerCount);
   }
 
   Future<LocationData> _getCurrentLocation() async {
@@ -78,12 +80,8 @@ class _MapPageState extends State<MapPage> {
     });
   }
 
-  void getMapStyle() {
-    rootBundle.loadString('resources/styles/map_style.txt').then(
-      (string) {
-        _mapStyle = string;
-      },
-    );
+  Future<String> getMapStyle() async {
+    return await rootBundle.loadString('resources/styles/map_style.txt');
   }
 
   Future<Set<Marker>> getNearParkings(LatLng userLocation) async {
@@ -112,9 +110,9 @@ class _MapPageState extends State<MapPage> {
   }
 
   void _getMapPageData() async {
-    this.getMapStyle();
+    this._mapStyle = await this.getMapStyle();
     this._customPinIcon = await this._getCustomPin();
-    this._getUserReservationsCount();
+    await this._getUserReservationsCount();
     print("USER LOCATION IS  ${this.userLocation}");
     this.userLocation = await this._getCurrentLocation();
     print("USER LOCATION NOW IS  ${this.userLocation}");
