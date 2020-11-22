@@ -110,6 +110,7 @@ class ParkingPositionSelectorPage extends StatelessWidget {
               flex: 0,
               child: ParkaStepperWidget(
                 stepsNumber: 3,
+                index: Get.find<CreateParkingFormController>().step.value,
                 onTapHandler: () {
                   Get.find<CreateParkingFormController>().increment();
                   Get.toNamed(ParkingCalendarCreatorPage.routeName);

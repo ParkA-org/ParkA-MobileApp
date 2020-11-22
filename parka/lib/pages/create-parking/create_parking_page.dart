@@ -179,6 +179,8 @@ class _CreateParkingPageState extends State<CreateParkingPage> {
                       flex: 0,
                       child: ParkaStepperWidget(
                         stepsNumber: 3,
+                        index:
+                            Get.find<CreateParkingFormController>().step.value,
                         onTapHandler: () {
                           Get.find<CreateParkingFormController>().increment();
                           Get.toNamed(ParkingPositionSelectorPage.routeName);

@@ -69,7 +69,6 @@ class _OwnerParkingDetailPageState extends State<OwnerParkingDetailPage> {
       floatingActionButton: ParkaFloatingActionButton(
         iconData: Icons.edit,
         onPressedHandler: () {
-          //TODO: ADD route to edit parking
           Get.to(EditParkingPage(
             parking: this._parking,
           ));

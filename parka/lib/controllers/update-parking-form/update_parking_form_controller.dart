@@ -1,11 +1,39 @@
-import 'package:ParkA/data/data-models/position/position_data_model.dart';
+import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/schedule/schedule_data_model.dart';
 import 'package:ParkA/data/dtos/parking/update_parking_dto.dart';
 import 'package:get/state_manager.dart';
 
 class UpdateParkingFormController extends GetxController {
   RxInt step = 1.obs;
-  Rx<UpdateParkingDto> _updateParkingDto = UpdateParkingDto().obs;
+  Rx<UpdateParkingDto> _updateParkingDto = new UpdateParkingDto().obs;
+
+  void initParkingDto(Parking parking) {
+    Map<String, List<Schedule>> _calendar = {
+      'friday': parking.calendar.friday,
+      'monday': parking.calendar.monday,
+      'saturday': parking.calendar.saturday,
+      'sunday': parking.calendar.sunday,
+      'thursday': parking.calendar.thursday,
+      'tuesday': parking.calendar.tuesday,
+      'wednesday': parking.calendar.wednesday,
+    };
+
+    this._updateParkingDto = UpdateParkingDto(
+      parkingId: parking.id,
+      calendar: _calendar,
+      countParking: parking.parkingCount,
+      direccion: parking.direction,
+      features: new List.from(parking.features.map((e) => e.id)),
+      information: parking.information,
+      mainPicture: parking.mainPicture,
+      parkingName: parking.parkingName,
+      pictures: parking.pictures,
+      priceHours: parking.perHourPrice,
+      sector: parking.sector,
+    ).obs;
+  }
+
+  get updateParkingDto => this._updateParkingDto;
 
   void increment() {
     step++;
@@ -34,17 +62,6 @@ class UpdateParkingFormController extends GetxController {
   void setParkingDetails(String _parkingDetails) {
     _updateParkingDto.update((_instance) {
       _instance.information = _parkingDetails;
-    });
-  }
-
-  void setPosition(
-    Position _position,
-  ) {
-    _updateParkingDto.update((_instance) {
-      _instance.lastitude = _position.latitude;
-      _instance.longitude = _position.longitude;
-      _instance.sector = _position.sector;
-      _instance.direccion = _position.direction;
     });
   }
 

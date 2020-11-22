@@ -1,7 +1,6 @@
 import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/components/tabs/feature_tab.dart';
-import 'package:ParkA/controllers/create-parking-form/create_parking_form_controller.dart';
 import 'package:ParkA/controllers/update-parking-form/update_parking_form_controller.dart';
 import 'package:ParkA/data/data-models/feature/parking_feature_data_model.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
@@ -28,7 +27,9 @@ class EditParkingPage extends StatefulWidget {
 
 class _EditParkingPageState extends State<EditParkingPage> {
   Parking _parking;
-  final _updateParkingController = Get.put(UpdateParkingFormController());
+  final UpdateParkingFormController _updateParkingController = Get.put(
+    UpdateParkingFormController(),
+  );
 
   List<Feature> features;
   bool _loadingData;
@@ -46,6 +47,7 @@ class _EditParkingPageState extends State<EditParkingPage> {
     super.initState();
     this._loadingData = true;
     this._parking = this.widget.parking;
+    this._updateParkingController.initParkingDto(this._parking);
     this.getFormData();
   }
 
@@ -53,7 +55,7 @@ class _EditParkingPageState extends State<EditParkingPage> {
     List<Widget> ret = new List();
 
     this.features.forEach((element) {
-      bool check = _updateParkingController.createPArkingDto.value.features
+      bool check = _updateParkingController.updateParkingDto.value.features
               .indexOf(element.id) !=
           -1;
 
@@ -95,8 +97,14 @@ class _EditParkingPageState extends State<EditParkingPage> {
                             color: Colors.white,
                             leadingIconData: Icons.keyboard_arrow_left,
                             onTapHandler: () {
-                              Get.find<CreateParkingFormController>()
-                                  .decrement();
+                              if (Get.find<UpdateParkingFormController>()
+                                      .step
+                                      .value !=
+                                  1) {
+                                Get.find<UpdateParkingFormController>()
+                                    .decrement();
+                              }
+
                               Get.back();
                             },
                           ),
@@ -186,8 +194,10 @@ class _EditParkingPageState extends State<EditParkingPage> {
                       flex: 0,
                       child: ParkaStepperWidget(
                         stepsNumber: 3,
+                        index:
+                            Get.find<UpdateParkingFormController>().step.value,
                         onTapHandler: () {
-                          Get.find<CreateParkingFormController>().increment();
+                          Get.find<UpdateParkingFormController>().increment();
                           // Get.toNamed();
                         },
                       ),

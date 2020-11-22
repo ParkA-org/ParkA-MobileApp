@@ -5,12 +5,13 @@ import 'package:get/get.dart';
 
 class ParkaStepperWidget extends StatelessWidget {
   final int stepsNumber;
-  final int index = Get.find<CreateParkingFormController>().step.value;
+  final int index;
   final Function onTapHandler;
 
   ParkaStepperWidget({
     Key key,
     @required this.stepsNumber,
+    @required this.index = 1,
     this.onTapHandler,
   }) : super(key: key);
 
