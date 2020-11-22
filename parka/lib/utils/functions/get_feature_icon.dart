@@ -10,5 +10,5 @@ Map<String, String> iconNames = {
 String getFeatureIcon(String slug) {
   String baseString = "resources/images/features/";
 
-  return "${baseString}${iconNames[slug.trim()]}";
+  return "$baseString${iconNames[slug.trim()]}";
 }

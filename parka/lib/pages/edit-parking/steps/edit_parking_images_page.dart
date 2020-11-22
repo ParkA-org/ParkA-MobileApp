@@ -7,7 +7,6 @@ import 'package:ParkA/controllers/update-parking-form/update_parking_form_contro
 import 'package:ParkA/data/enums/parking_place_holder_type.dart';
 import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
 import 'package:ParkA/pages/create-vehicle/create_vehicle_page.dart';
-import 'package:ParkA/pages/map/maps_page.dart';
 import 'package:ParkA/pages/parking-detail/parking_detail_page.dart';
 import 'package:ParkA/pages/parkings/parking_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';

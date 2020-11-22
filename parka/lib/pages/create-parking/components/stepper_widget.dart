@@ -1,7 +1,5 @@
-import 'package:ParkA/controllers/create-parking-form/create_parking_form_controller.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ParkaStepperWidget extends StatelessWidget {
   final int stepsNumber;
@@ -11,7 +9,7 @@ class ParkaStepperWidget extends StatelessWidget {
   ParkaStepperWidget({
     Key key,
     @required this.stepsNumber,
-    @required this.index = 1,
+    @required this.index,
     this.onTapHandler,
   }) : super(key: key);
 
