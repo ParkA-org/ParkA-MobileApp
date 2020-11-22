@@ -370,25 +370,27 @@ class ShowParkingFeaturesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(
-            "Caracteristicas",
-            style: kParkaTextStyleBoldGreen18,
-          ),
-        ),
-        Container(
-          height: 50.0,
-          child: ListView(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            children: this._viewBuilder(),
-          ),
-        )
-      ],
-    );
+    return this.features.length == 0
+        ? Container()
+        : Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Text(
+                  "Caracteristicas",
+                  style: kParkaTextStyleBoldGreen18,
+                ),
+              ),
+              Container(
+                height: 50.0,
+                child: ListView(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  children: this._viewBuilder(),
+                ),
+              )
+            ],
+          );
   }
 }
