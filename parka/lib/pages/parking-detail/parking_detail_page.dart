@@ -8,6 +8,7 @@ import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
 import 'package:ParkA/data/enums/parking_place_holder_type.dart';
 import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
 import 'package:ParkA/data/use-cases/vehicle/vehicle_use_cases.dart';
+import 'package:ParkA/pages/edit-parking/edit_parking_page.dart';
 import 'package:ParkA/pages/edit-vehicle/edit_vehicle_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
@@ -69,8 +70,9 @@ class _OwnerParkingDetailPageState extends State<OwnerParkingDetailPage> {
         iconData: Icons.edit,
         onPressedHandler: () {
           //TODO: ADD route to edit parking
-          // Get.to(
-          // );
+          Get.to(EditParkingPage(
+            parking: this._parking,
+          ));
         },
       ),
       body: SafeArea(
