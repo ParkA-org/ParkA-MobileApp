@@ -8,9 +8,11 @@ class ParkaResizableOnScrollAppBar extends StatelessWidget {
   final appBarHeight;
   final headerHeight = 36.0;
   final minAppBarHeight = 56.0;
+  final title;
 
   const ParkaResizableOnScrollAppBar({
     Key key,
+    this.title = "Agrega tu vehiculo",
     this.appBarHeight = 256.0,
   }) : super(key: key);
   @override
@@ -73,7 +75,7 @@ class ParkaResizableOnScrollAppBar extends StatelessWidget {
                               horizontal: 16.0,
                             ),
                             child: AutoSizeText(
-                              "Agrega tu vehiculo",
+                              this.title,
                               textAlign: TextAlign.center,
                               maxLines: 1,
                               style: TextStyle(

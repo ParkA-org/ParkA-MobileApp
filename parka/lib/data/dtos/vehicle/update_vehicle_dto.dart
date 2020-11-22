@@ -1,4 +1,7 @@
-class CreateVehicleDto {
+import 'package:flutter/cupertino.dart';
+
+class UpdateVehicleDto {
+  final id;
   String model;
   String licensePlate;
   String colorExterior;
@@ -9,7 +12,8 @@ class CreateVehicleDto {
   String bodyStyle;
   String detail;
 
-  CreateVehicleDto({
+  UpdateVehicleDto({
+    @required this.id,
     this.model,
     this.licensePlate,
     this.alias,

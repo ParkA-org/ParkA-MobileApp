@@ -9,6 +9,23 @@ class Schedule {
     this.is24h,
   });
 
+  static scheduleFromJson(Map<String, dynamic> scheduleData) {
+    return Schedule(
+      finish: scheduleData["finish"],
+      start: scheduleData["start"],
+    );
+  }
+
+  static List<Schedule> schedulesFromJson(List schedulesData) {
+    List<Schedule> ret = new List();
+
+    schedulesData.forEach((element) {
+      ret.add(Schedule.scheduleFromJson(element));
+    });
+
+    return ret;
+  }
+
   Map<String, dynamic> toJson() => {
         'start': this.start,
         'finish': this.finish,

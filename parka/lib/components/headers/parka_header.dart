@@ -34,7 +34,7 @@ class ParkaHeader extends StatelessWidget {
                 color: this.color,
                 leadingIconData: Icons.keyboard_arrow_left,
                 onTapHandler: () {
-                  Navigator.pop(context);
+                  Navigator.of(context).pop();
                 },
               ),
           this.central ?? Container(),

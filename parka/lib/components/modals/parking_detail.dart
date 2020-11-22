@@ -1,13 +1,14 @@
 import 'package:ParkA/components/rating/star_rating.dart';
+import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ParkingDetailModal extends StatefulWidget {
-  final String parkingId;
+  final Parking parking;
 
-  ParkingDetailModal({Key key, @required this.parkingId}) : super(key: key);
+  ParkingDetailModal({Key key, @required this.parking}) : super(key: key);
 
   @override
   _ParkingDetailModalState createState() => _ParkingDetailModalState();

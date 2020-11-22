@@ -13,6 +13,13 @@ class Make {
     this.name,
   });
 
+  static makeFromJson(Map<String, dynamic> makeData) {
+    return Make(
+      id: makeData["id"],
+      name: makeData["name"],
+    );
+  }
+
   static makesFromJson(List makeData) {
     List<Make> ret = new List<Make>();
 
