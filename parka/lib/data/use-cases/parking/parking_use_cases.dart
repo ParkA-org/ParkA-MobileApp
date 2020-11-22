@@ -90,14 +90,16 @@ class ParkingUseCases {
         .parkaGraphqlClient.value.graphQlClient
         .query(queryOptions);
 
+    print(getNearbyParkingsResult.data);
+
     if (getNearbyParkingsResult.data != null &&
         getNearbyParkingsResult.data["getAllParkings"] != null) {
-      final List<Parking> parkingData = Parking.parkingsFromJson(
-          getNearbyParkingsResult.data["getAllParkings"]);
-      return parkingData;
+      final parkingData = getNearbyParkingsResult.data["getAllParkings"];
+      final List<Parking> parkings = Parking.parkingsFromJson(parkingData);
+      return parkings;
     }
 
-    return [];
+    return new List<Parking>();
   }
 
   static Future<List<Parking>> getAllUserParkings() async {
@@ -119,5 +121,31 @@ class ParkingUseCases {
       return parkingsData;
     }
     return [];
+  }
+
+  static Future<Parking> getParkingById(String id) async {
+    final graphqlClient = Get.find<GraphqlClientController>();
+
+    Map<String, String> getParkingByIdInput = {
+      "data": id,
+    };
+
+    QueryOptions queryOptions = QueryOptions(
+      documentNode: gql(getParkingByIdQuery),
+      variables: getParkingByIdInput,
+    );
+
+    final QueryResult getParkingByIdResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .query(queryOptions);
+
+    print(getParkingByIdResult.data);
+    if (getParkingByIdResult.data != null) {
+      final Parking parkingsData =
+          Parking.parkingFromJson(getParkingByIdResult.data["getParkingById"]);
+
+      return parkingsData;
+    }
+    return null;
   }
 }
