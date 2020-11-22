@@ -8,6 +8,7 @@ import 'package:ParkA/data/enums/parking_place_holder_type.dart';
 import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
 import 'package:ParkA/pages/create-vehicle/create_vehicle_page.dart';
 import 'package:ParkA/pages/edit-profile/edit_profile_page.dart';
+import 'package:ParkA/pages/parking-detail/parking_detail_page.dart';
 import 'package:ParkA/pages/parkings/parking_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
@@ -88,6 +89,7 @@ class ParkingImageSelectorPage extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: Obx(
                       () => ParkaImageCardWidget(
                         image: createParkingFormController
@@ -160,7 +162,7 @@ class ParkingImageSelectorPage extends StatelessWidget {
                     final createdCheck = await ParkingUseCases.createParking(
                         createParkingFormController.createPArkingDto.value);
 
-                    if (!createdCheck) {
+                    if (createdCheck == null) {
                       Get.snackbar(
                         "Error",
                         "Ocurrio un error creando tu parqueo",
@@ -169,10 +171,14 @@ class ParkingImageSelectorPage extends StatelessWidget {
                       return;
                     }
 
-                    Navigator.pushNamedAndRemoveUntil(
+                    Navigator.pushAndRemoveUntil(
                         context,
-                        ParkingPage.routeName,
-                        ModalRoute.withName(EditProfilePage.routeName));
+                        MaterialPageRoute(
+                          builder: (ctx) => OwnerParkingDetailPage(
+                            parkingId: createdCheck,
+                          ),
+                        ),
+                        ModalRoute.withName(ParkingPage.routeName));
                   },
                 ),
               ),

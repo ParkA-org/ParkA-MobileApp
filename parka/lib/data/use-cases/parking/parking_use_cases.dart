@@ -11,7 +11,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:graphql/client.dart';
 
 class ParkingUseCases {
-  static Future createParking(CreateParkingDto createParkingDto) async {
+  static Future<String> createParking(CreateParkingDto createParkingDto) async {
     final graphqlClient = Get.find<GraphqlClientController>()
         .parkaGraphqlClient
         .value
@@ -63,10 +63,10 @@ class ParkingUseCases {
     print(createParkingResult.exception);
     if (createParkingResult.data != null) {
       print("created");
-      return true;
+      return createParkingResult.data["createParking"]["id"];
     }
 
-    return false;
+    return null;
   }
 
   static Future updateParking(UpdateParkingDto _updateParkingDto) async {
