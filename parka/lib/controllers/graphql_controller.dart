@@ -1,14 +1,12 @@
 import 'package:ParkA/utils/graphql/parka_graphql_client.dart';
+import 'package:ParkA/utils/prefs/shared_preferencies.dart';
 import 'package:get/state_manager.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class GraphqlClientController extends GetxController {
-  SharedPreferences _sharedPreferencies;
   Rx<ParkaGraphqlClient> parkaGraphqlClient;
 
   void _initSharedPreferencies() async {
-    this._sharedPreferencies = await SharedPreferences.getInstance();
-    String _jwt = this._sharedPreferencies.getString("jwt");
+    String _jwt = SharedPreferenciesUtil.storage.getString("jwt");
 
     this.parkaGraphqlClient = _jwt != null
         ? new ParkaGraphqlClient.fromJWT(_jwt).obs

@@ -39,7 +39,10 @@ List<GetPage> getRoutePages = [
   GetPage(
     name: EmailLogin.routeName,
     page: () => EmailLogin(),
-    binding: UserBinding(),
+    bindings: [
+      UserBinding(),
+      GraphqlClientBiding(),
+    ],
   ),
   GetPage(
     name: IDPage.routeName,
