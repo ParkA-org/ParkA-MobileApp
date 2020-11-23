@@ -11,7 +11,6 @@ import 'package:ParkA/pages/parking-detail/parking_detail_page.dart';
 import 'package:ParkA/pages/parkings/parking_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
-import 'package:ParkA/utils/form-validations/update_parking_form_validation.dart';
 import 'package:ParkA/utils/functions/pick_image.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
