@@ -7,3 +7,11 @@ mutation ($data:CreateParkingInput!){
   }
 }
 """;
+
+const String updateParkingMutation = r"""
+mutation($data: UpdateParkingInput!) {
+  updateParking(updateParkingInput: $data) {
+    id
+  }
+}
+""";

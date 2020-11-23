@@ -12,7 +12,7 @@ Future getLocationData(LatLng position) async {
   final apiKey = jsonDecode(apiKeyJson)["api_key"];
 
   final apiUrl =
-      'https://api.tomtom.com/search/2/reverseGeocode/${position.latitude},${position.longitude}.json?key=${apiKey}';
+      'https://api.tomtom.com/search/2/reverseGeocode/${position.latitude},${position.longitude}.json?key=$apiKey';
 
   http.Response positionRawData =
       await http.get(apiUrl, headers: {'Content-Type': 'application/json'});

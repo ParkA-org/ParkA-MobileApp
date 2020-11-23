@@ -3,36 +3,58 @@ import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/components/images/parka_add_images_carousel.dart';
 import 'package:ParkA/components/images/parka_image_card_widget.dart';
-import 'package:ParkA/controllers/create-parking-form/create_parking_form_controller.dart';
+import 'package:ParkA/controllers/update-parking-form/update_parking_form_controller.dart';
 import 'package:ParkA/data/enums/parking_place_holder_type.dart';
 import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
 import 'package:ParkA/pages/create-vehicle/create_vehicle_page.dart';
-
 import 'package:ParkA/pages/parking-detail/parking_detail_page.dart';
 import 'package:ParkA/pages/parkings/parking_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
-import 'package:ParkA/utils/form-validations/create_parking_form_validation.dart';
+import 'package:ParkA/utils/form-validations/update_parking_form_validation.dart';
 import 'package:ParkA/utils/functions/pick_image.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ParkingImageSelectorPage extends StatelessWidget {
-  static String routeName = 'parking-image-selector-page';
+class ParkingImageEditorPage extends StatelessWidget {
+  static String routeName = 'parking-image-editor-page';
 
-  final createParkingFormController = Get.find<CreateParkingFormController>();
+  final _updateParkingFormController = Get.find<UpdateParkingFormController>();
 
   Future removeVehicle(int index) {
     return Get.dialog(RemoveCarImageAlert(
       removeImage: () {
         print(index);
 
-        createParkingFormController.removeSecondaryPicture(index);
+        _updateParkingFormController.removeSecondaryPicture(index);
 
         Get.back();
       },
     ));
+  }
+
+  void _updateParking(BuildContext ctx) async {
+    final createdCheck = await ParkingUseCases.updateParking(
+        _updateParkingFormController.updateParkingDto);
+
+    if (!createdCheck) {
+      Get.snackbar(
+        "Error",
+        "Ocurrio un error actualizando tu parqueo revisa los datos ingresados",
+        backgroundColor: ParkaColors.parkaLightRed,
+      );
+      return;
+    }
+
+    Navigator.pushAndRemoveUntil(
+        ctx,
+        MaterialPageRoute(
+          builder: (ctx) => OwnerParkingDetailPage(
+            parkingId: _updateParkingFormController.updateParkingDto.parkingId,
+          ),
+        ),
+        ModalRoute.withName(ParkingPage.routeName));
   }
 
   @override
@@ -53,7 +75,7 @@ class ParkingImageSelectorPage extends StatelessWidget {
                     color: Colors.white,
                     leadingIconData: Icons.keyboard_arrow_left,
                     onTapHandler: () {
-                      Get.find<CreateParkingFormController>().decrement();
+                      Get.find<UpdateParkingFormController>().decrement();
                       Get.back();
                     },
                   ),
@@ -92,13 +114,13 @@ class ParkingImageSelectorPage extends StatelessWidget {
                     flex: 2,
                     child: Obx(
                       () => ParkaImageCardWidget(
-                        image: createParkingFormController
-                            .createPArkingDto.value.mainPicture,
+                        image: _updateParkingFormController
+                            .updateParkingDto.mainPicture,
                         type: PlaceHolderType.Parking,
                         onTapHandler: () async {
                           String imagePath = await getImageFunction();
                           if (imagePath != null) {
-                            createParkingFormController
+                            _updateParkingFormController
                                 .setMainPicture(imagePath);
                           }
                         },
@@ -120,13 +142,13 @@ class ParkingImageSelectorPage extends StatelessWidget {
                     child: Obx(
                       () => ParkaAddImagesCarousel(
                         carouselType: CarouselType.Form,
-                        pictures: createParkingFormController
-                            .createPArkingDto.value.pictures,
+                        pictures: _updateParkingFormController
+                            .updateParkingDto.pictures,
                         placeholderType: PlaceHolderType.Parking,
                         onTapHandler: () async {
                           String imagePath = await getImageFunction();
                           if (imagePath != null) {
-                            createParkingFormController
+                            _updateParkingFormController
                                 .addSecondaryPicture(imagePath);
                           }
                         },
@@ -146,39 +168,8 @@ class ParkingImageSelectorPage extends StatelessWidget {
                   color: ParkaColors.parkaGreen,
                   hasIcon: false,
                   hasShadow: false,
-                  onTapHandler: () async {
-                    final formCheck = createParkingFormValidator(
-                        createParkingFormController.createPArkingDto.value);
-
-                    if (!formCheck) {
-                      Get.snackbar(
-                        "Error",
-                        "Necesitas llenar todos los campos del formulario",
-                        backgroundColor: ParkaColors.parkaLightRed,
-                      );
-                      return;
-                    }
-
-                    final createdCheck = await ParkingUseCases.createParking(
-                        createParkingFormController.createPArkingDto.value);
-
-                    if (createdCheck == null) {
-                      Get.snackbar(
-                        "Error",
-                        "Ocurrio un error creando tu parqueo",
-                        backgroundColor: ParkaColors.parkaLightRed,
-                      );
-                      return;
-                    }
-
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (ctx) => OwnerParkingDetailPage(
-                            parkingId: createdCheck,
-                          ),
-                        ),
-                        ModalRoute.withName(ParkingPage.routeName));
+                  onTapHandler: () {
+                    this._updateParking(context);
                   },
                 ),
               ),

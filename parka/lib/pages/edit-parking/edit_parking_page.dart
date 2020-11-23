@@ -1,28 +1,36 @@
 import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/components/tabs/feature_tab.dart';
-import 'package:ParkA/controllers/create-parking-form/create_parking_form_controller.dart';
+import 'package:ParkA/controllers/update-parking-form/update_parking_form_controller.dart';
 import 'package:ParkA/data/data-models/feature/parking_feature_data_model.dart';
+import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/use-cases/feature/feature_use_cases.dart';
-import 'package:ParkA/pages/create-parking/steps/parking_position_selector_page.dart';
+import 'package:ParkA/pages/create-parking/components/stepper_widget.dart';
 import 'package:ParkA/pages/create-vehicle/components/parka-input/parka_input.dart';
+import 'package:ParkA/pages/edit-parking/steps/edit_parking_calendar.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'components/stepper_widget.dart';
 
-class CreateParkingPage extends StatefulWidget {
-  static String routeName = 'create-parking-page';
+class EditParkingPage extends StatefulWidget {
+  static String routeName = "/edit-parking-page";
+
+  final Parking parking;
+
+  EditParkingPage({@required this.parking});
 
   @override
-  _CreateParkingPageState createState() => _CreateParkingPageState();
+  _EditParkingPageState createState() => _EditParkingPageState();
 }
 
-class _CreateParkingPageState extends State<CreateParkingPage> {
-  final createParkingFormController = Get.put(CreateParkingFormController());
+class _EditParkingPageState extends State<EditParkingPage> {
+  Parking _parking;
+  final UpdateParkingFormController _updateParkingController = Get.put(
+    UpdateParkingFormController(),
+  );
 
   List<Feature> features;
   bool _loadingData;
@@ -39,14 +47,16 @@ class _CreateParkingPageState extends State<CreateParkingPage> {
   void initState() {
     super.initState();
     this._loadingData = true;
-    getFormData();
+    this._parking = this.widget.parking;
+    this._updateParkingController.initParkingDto(this._parking);
+    this.getFormData();
   }
 
   List<Widget> featureListBuilder() {
     List<Widget> ret = new List();
 
     this.features.forEach((element) {
-      bool check = createParkingFormController.createPArkingDto.value.features
+      bool check = _updateParkingController.updateParkingDto.features
               .indexOf(element.id) !=
           -1;
 
@@ -55,9 +65,9 @@ class _CreateParkingPageState extends State<CreateParkingPage> {
         selected: check,
         onTapHanlder: (bool _selected) {
           if (!_selected)
-            createParkingFormController.addFeature(element.id);
+            _updateParkingController.addFeature(element.id);
           else
-            createParkingFormController.removeFeature(element.id);
+            _updateParkingController.removeFeature(element.id);
         },
       ));
     });
@@ -88,8 +98,14 @@ class _CreateParkingPageState extends State<CreateParkingPage> {
                             color: Colors.white,
                             leadingIconData: Icons.keyboard_arrow_left,
                             onTapHandler: () {
-                              Get.find<CreateParkingFormController>()
-                                  .decrement();
+                              if (Get.find<UpdateParkingFormController>()
+                                      .step
+                                      .value !=
+                                  1) {
+                                Get.find<UpdateParkingFormController>()
+                                    .decrement();
+                              }
+
                               Get.back();
                             },
                           ),
@@ -123,31 +139,35 @@ class _CreateParkingPageState extends State<CreateParkingPage> {
                                 ParkaEditInput(
                                   type: ParkaInputType.textField,
                                   label: "Nombre del parqueo",
+                                  value: this._parking.parkingName,
                                   onChangedHandler: (String value) {
-                                    createParkingFormController
+                                    _updateParkingController
                                         .setParkingName(value);
                                   },
                                 ),
                                 ParkaTextField(
                                   inputType: TextInputType.number,
                                   label: "Numero de parqueos",
+                                  value: this._parking.parkingCount.toString(),
                                   onChangedHandler: (String number) {
-                                    createParkingFormController
+                                    _updateParkingController
                                         .setParkingCount(int.tryParse(number));
                                   },
                                 ),
                                 ParkaTextField(
                                   inputType: TextInputType.number,
                                   label: "Precio por hora",
+                                  value: this._parking.perHourPrice.toString(),
                                   onChangedHandler: (String numbers) {
-                                    createParkingFormController.setParkingPrice(
+                                    _updateParkingController.setParkingPrice(
                                         double.tryParse(numbers));
                                   },
                                 ),
                                 ParkaTextField(
                                   label: "Detalles adicionales",
+                                  value: this._parking.information,
                                   onChangedHandler: (String value) {
-                                    createParkingFormController
+                                    _updateParkingController
                                         .setParkingDetails(value);
                                   },
                                 ),
@@ -178,12 +198,12 @@ class _CreateParkingPageState extends State<CreateParkingPage> {
                     Expanded(
                       flex: 0,
                       child: ParkaStepperWidget(
-                        stepsNumber: 3,
+                        stepsNumber: 2,
                         index:
-                            Get.find<CreateParkingFormController>().step.value,
+                            Get.find<UpdateParkingFormController>().step.value,
                         onTapHandler: () {
-                          Get.find<CreateParkingFormController>().increment();
-                          Get.toNamed(ParkingPositionSelectorPage.routeName);
+                          Get.find<UpdateParkingFormController>().increment();
+                          Get.toNamed(ParkingCalendarEditorPage.routeName);
                         },
                       ),
                     )

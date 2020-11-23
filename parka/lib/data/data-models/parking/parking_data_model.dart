@@ -44,8 +44,8 @@ class Parking {
     return Parking(
       id: parking["id"],
       parkingCount: int.tryParse(parking["countParking"].toString()),
-      latitude: double.parse(parking["latitude"]),
-      longitude: double.parse(parking["longitude"]),
+      latitude: parking["latitude"],
+      longitude: parking["longitude"],
       parkingName: parking["parkingName"],
       mainPicture: parking["mainPicture"],
       pictures: _pictures,
@@ -55,6 +55,7 @@ class Parking {
       rating: double.tryParse(
         parking["rating"].toString(),
       ),
+      information: parking["information"],
     );
   }
 
@@ -67,8 +68,8 @@ class Parking {
         Parking(
           id: parking["id"],
           parkingCount: int.tryParse(parking["countParking"].toString()),
-          latitude: double.parse(parking["latitude"]),
-          longitude: double.parse(parking["longitude"]),
+          latitude: parking["latitude"],
+          longitude: parking["longitude"],
           parkingName: parking["parkingName"],
           mainPicture: parking["mainPicture"],
           pictures: _pictures,

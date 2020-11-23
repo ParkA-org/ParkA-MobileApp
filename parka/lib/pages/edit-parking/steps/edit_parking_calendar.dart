@@ -1,21 +1,21 @@
 import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/components/inputs/parka_time_selector_widget/time_schedule_selector_widget.dart';
-import 'package:ParkA/controllers/create-parking-form/create_parking_form_controller.dart';
+import 'package:ParkA/controllers/update-parking-form/update_parking_form_controller.dart';
 import 'package:ParkA/data/data-models/schedule/schedule_data_model.dart';
 import 'package:ParkA/pages/create-parking/components/stepper_widget.dart';
-import 'package:ParkA/pages/create-parking/steps/parking_image_selector_page.dart';
+import 'package:ParkA/pages/edit-parking/steps/edit_parking_images_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ParkingCalendarCreatorPage extends StatelessWidget {
-  static String routeName = 'calendar-creator-page';
+class ParkingCalendarEditorPage extends StatelessWidget {
+  static String routeName = 'calendar-editor-page';
 
-  final CreateParkingFormController createParkingFormController =
-      Get.find<CreateParkingFormController>();
+  final UpdateParkingFormController _updateParkingFormController =
+      Get.find<UpdateParkingFormController>();
 
   final Map<String, String> _weekDays = {
     'monday': "Lunes",
@@ -35,19 +35,19 @@ class ParkingCalendarCreatorPage extends StatelessWidget {
         Obx(
           () => TimeScheduleSelectorWidget(
             label: this._weekDays[key],
-            schedules: createParkingFormController
-                .createPArkingDto.value.calendar[key],
+            schedules:
+                _updateParkingFormController.updateParkingDto.calendar[key],
             onChange: (Schedule _schedule, int _index) {
-              createParkingFormController.addSchedule(key, _schedule, _index);
+              _updateParkingFormController.addSchedule(key, _schedule, _index);
             },
             onRemove: (int _index) {
-              createParkingFormController.removeSchedule(key, _index);
+              _updateParkingFormController.removeSchedule(key, _index);
             },
             onLabelTap: (bool _clear) {
               if (_clear) {
-                createParkingFormController.clearSchedule(key);
+                _updateParkingFormController.clearSchedule(key);
               } else {
-                createParkingFormController.set24hSchedule(key);
+                _updateParkingFormController.set24hSchedule(key);
               }
             },
           ),
@@ -77,7 +77,7 @@ class ParkingCalendarCreatorPage extends StatelessWidget {
                     color: Colors.white,
                     leadingIconData: Icons.keyboard_arrow_left,
                     onTapHandler: () {
-                      Get.find<CreateParkingFormController>().decrement();
+                      Get.find<UpdateParkingFormController>().decrement();
                       Get.back();
                     },
                   ),
@@ -126,11 +126,11 @@ class ParkingCalendarCreatorPage extends StatelessWidget {
             Expanded(
               flex: 0,
               child: ParkaStepperWidget(
-                stepsNumber: 3,
-                index: Get.find<CreateParkingFormController>().step.value,
+                stepsNumber: 2,
+                index: Get.find<UpdateParkingFormController>().step.value,
                 onTapHandler: () {
-                  Get.find<CreateParkingFormController>().increment();
-                  Get.toNamed(ParkingImageSelectorPage.routeName);
+                  Get.find<UpdateParkingFormController>().increment();
+                  Get.toNamed(ParkingImageEditorPage.routeName);
                 },
               ),
             )

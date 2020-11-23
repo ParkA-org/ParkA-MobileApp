@@ -84,5 +84,6 @@ class Calendar {
       case WeekDay.Sunday:
         return this.sunday;
     }
+    return new List();
   }
 }
