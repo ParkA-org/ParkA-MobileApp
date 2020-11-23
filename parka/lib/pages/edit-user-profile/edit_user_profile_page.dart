@@ -102,6 +102,7 @@ class _EditUserProfileInformationPageState
     Size currentScreen = MediaQuery.of(context).size;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       floatingActionButton: ParkaFloatingActionButton(
         iconData: Icons.autorenew,
         color: Colors.white,
