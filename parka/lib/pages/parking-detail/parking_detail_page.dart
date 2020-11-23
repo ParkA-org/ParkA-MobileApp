@@ -6,10 +6,7 @@ import 'package:ParkA/data/data-models/feature/parking_feature_data_model.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/enums/parking_place_holder_type.dart';
 import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
-<<<<<<< HEAD
-=======
 import 'package:ParkA/pages/edit-parking/edit_parking_page.dart';
->>>>>>> dev
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:ParkA/utils/functions/get_feature_icon.dart';
@@ -370,28 +367,6 @@ class ShowParkingFeaturesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(
-            "Caracteristicas",
-            style: kParkaTextStyleBoldGreen20,
-          ),
-        ),
-        Container(
-          height: 50.0,
-          child: ListView(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            children: this._viewBuilder(),
-          ),
-        )
-      ],
-    );
-=======
     return this.features.length == 0
         ? Container()
         : Column(
@@ -414,6 +389,5 @@ class ShowParkingFeaturesWidget extends StatelessWidget {
               )
             ],
           );
->>>>>>> dev
   }
 }
