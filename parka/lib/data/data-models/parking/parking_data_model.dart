@@ -55,6 +55,7 @@ class Parking {
       rating: double.tryParse(
         parking["rating"].toString(),
       ),
+      information: parking["information"],
     );
   }
 
