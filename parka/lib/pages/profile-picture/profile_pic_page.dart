@@ -84,7 +84,24 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
                   child: GestureDetector(
                     onTap: () => setImage(),
                     child: _image != null
-                        ? ClipOval(child: Image.file(_image))
+                        ? Padding(
+                            padding: const EdgeInsets.all(40.0),
+                            child: Container(
+                                height: 100,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(color: Colors.black38),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          offset: Offset(1.0, 15.0),
+                                          blurRadius: 10.0,
+                                          color: Colors.grey[700])
+                                    ],
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: FileImage(_image),
+                                    ))),
+                          )
                         : SvgPicture.asset(
                             'resources/images/BlueProfileIcon.svg',
                             height: screenSize.height * 0.4,

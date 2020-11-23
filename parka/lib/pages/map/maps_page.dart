@@ -1,4 +1,4 @@
-import 'package:ParkA/components/modals/parking_detail.dart';
+import 'package:ParkA/components/modals/parking_detail_modal.dart';
 import 'package:ParkA/components/buttons/main_fab.dart';
 import 'package:ParkA/components/drawer/private-drawer/private_drawer_n.dart';
 import 'package:ParkA/components/drawer/public-drawer/public_drawer.dart';
@@ -34,6 +34,7 @@ class _MapPageState extends State<MapPage> {
   CameraPosition initialCameraPosition;
   Set<Marker> nearbyParkings;
   BitmapDescriptor _customPinIcon;
+  GoogleMapController _mapController;
 
   final UserController user = Get.find<UserController>();
   final graphqlClient = Get.find<GraphqlClientController>();
@@ -89,12 +90,18 @@ class _MapPageState extends State<MapPage> {
     if (nearParkings != null && nearParkings.length > 0) {
       nearParkings.forEach((parking) {
         parkingPins.add(Marker(
-            markerId: MarkerId("${parking.id}"),
-            position: LatLng(parking.latitude, parking.longitude),
-            icon: _customPinIcon,
-            onTap: () => showModalBottomSheet(
-                context: context,
-                builder: (context) => ParkingDetailModal(parking: parking))));
+          markerId: MarkerId("${parking.id}"),
+          position: LatLng(parking.latitude, parking.longitude),
+          icon: _customPinIcon,
+          onTap: () => showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (context) {
+                _mapController.animateCamera(CameraUpdate.newLatLng(
+                    LatLng(parking.latitude - 0.003, parking.longitude)));
+                return ParkingDetailModal(parking: parking);
+              }),
+        ));
       });
     }
 
@@ -113,10 +120,8 @@ class _MapPageState extends State<MapPage> {
     print("USER LOCATION IS  ${this.userLocation}");
     this.userLocation = await this._getCurrentLocation();
     print("USER LOCATION NOW IS  ${this.userLocation}");
-    this.initialCameraPosition = CameraPosition(
-      target: LatLng(userLocation.latitude, userLocation.longitude),
-      zoom: 15.5,
-    );
+    _mapController.animateCamera(CameraUpdate.newLatLng(
+        LatLng(userLocation.latitude, userLocation.longitude)));
 
     if (this.userLocation != null) {
       this.nearbyParkings = await this.getNearParkings(
@@ -131,8 +136,6 @@ class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     print("MAP BUILDED");
-
-    GoogleMapController mapController;
 
     BuildContext mapPageContext = context;
 
@@ -156,8 +159,8 @@ class _MapPageState extends State<MapPage> {
             children: [
               GoogleMap(
                 onMapCreated: (GoogleMapController controller) {
-                  mapController = controller;
-                  mapController.setMapStyle(_mapStyle);
+                  _mapController = controller;
+                  _mapController.setMapStyle(_mapStyle);
                 },
                 myLocationButtonEnabled: true,
                 myLocationEnabled: true,
