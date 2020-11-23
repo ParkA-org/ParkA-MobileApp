@@ -8,11 +8,24 @@ import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ParkingDetailModal extends StatelessWidget {
   final Parking parking;
 
   ParkingDetailModal({Key key, @required this.parking}) : super(key: key);
+
+  _launchMapsURL() async {
+    String url =
+        "https://www.google.com/maps/search/?api=1&query=${parking.latitude},${parking.longitude}";
+    final String encodedURL = Uri.encodeFull(url);
+
+    if (await canLaunch(encodedURL)) {
+      await launch(encodedURL);
+    } else {
+      throw 'Could not launch URL';
+    }
+  }
 
   List<Widget> _pictureGalleryBuilder(List<String> pictures) {
     if (!pictures.contains(parking.mainPicture)) {
@@ -74,22 +87,25 @@ class ParkingDetailModal extends StatelessWidget {
                   ),
                   SizedBox(
                     height: 90,
-                    child: Row(children: [
-                      CircleButton(
-                        onTap: () {
-                          //TODO: Reservation Page//
-                        },
-                      ),
-                      CircleButton(
-                        fillColor: Colors.white,
-                        text: "Direcciones",
-                        icon: Icon(
-                          Icons.directions,
-                          color: ParkaColors.parkaGreen,
-                          size: 35,
-                        ),
-                      )
-                    ]),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          CircleButton(
+                            onTap: () {
+                              //TODO: Reservation Page//
+                            },
+                          ),
+                          CircleButton(
+                            onTap: _launchMapsURL,
+                            fillColor: Colors.white,
+                            text: "Direcciones",
+                            icon: Icon(
+                              Icons.directions,
+                              color: ParkaColors.parkaGreen,
+                              size: 35,
+                            ),
+                          )
+                        ]),
                   ),
                   Divider(
                     thickness: 1.0,
