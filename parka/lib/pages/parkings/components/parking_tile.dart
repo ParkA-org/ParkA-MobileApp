@@ -8,15 +8,15 @@ class ParkingTile extends StatelessWidget {
   const ParkingTile({
     Key key,
     this.parking,
+    this.onTapHandler,
   }) : super(key: key);
   final Parking parking;
+  final Function onTapHandler;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        //TODO: Navigate to the Parking Detail
-      },
+      onTap: this.onTapHandler,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
         child: Container(
@@ -43,26 +43,34 @@ class ParkingTile extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
                 child: Row(
                   children: [
-                    AutoSizeText(
-                      "${parking.parkingName}",
-                      maxFontSize: 24,
-                      minFontSize: 16,
-                      style: kParkaTextBaseStyle.copyWith(
-                          fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                    Spacer(
-                      flex: 15,
-                    ),
-                    Text("${parking.rating}",
+                    Expanded(
+                      child: AutoSizeText(
+                        "${parking.parkingName}",
+                        maxFontSize: 24,
+                        minFontSize: 16,
+                        overflow: TextOverflow.ellipsis,
                         style: kParkaTextBaseStyle.copyWith(
-                          fontSize: 24,
-                        )),
-                    Spacer(),
-                    Icon(
-                      Icons.star,
-                      color: ParkaColors.parkaGreen,
-                      size: 30.0,
-                    )
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 0,
+                      child: Row(
+                        children: [
+                          Text(
+                            "${parking.rating}",
+                            style: kParkaTextBaseStyle.copyWith(
+                              fontSize: 24,
+                            ),
+                          ),
+                          Icon(
+                            Icons.star,
+                            color: ParkaColors.parkaGreen,
+                            size: 30.0,
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),

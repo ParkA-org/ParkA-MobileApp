@@ -3,31 +3,17 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class PositionPickerWidget extends StatefulWidget {
-  final Function onTapHandler;
+class PositionViewerWidget extends StatelessWidget {
+  final LatLng position;
+  final String parkingId;
+  final BitmapDescriptor markerIcon;
 
-  const PositionPickerWidget({
+  const PositionViewerWidget({
     Key key,
-    this.onTapHandler,
+    this.parkingId,
+    this.position,
+    this.markerIcon,
   }) : super(key: key);
-
-  @override
-  _PositionPickerWidgetState createState() => _PositionPickerWidgetState();
-}
-
-class _PositionPickerWidgetState extends State<PositionPickerWidget> {
-  Set<Marker> markers = {};
-  BitmapDescriptor markerIcon;
-
-  @override
-  void initState() {
-    super.initState();
-    BitmapDescriptor.fromAssetImage(
-            ImageConfiguration.empty, 'resources/images/green-parking-icon.png')
-        .then((onValue) {
-      markerIcon = onValue;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,23 +44,17 @@ class _PositionPickerWidgetState extends State<PositionPickerWidget> {
                 myLocationButtonEnabled: true,
                 myLocationEnabled: true,
                 zoomControlsEnabled: false,
-                markers: this.markers,
+                markers: {
+                  Marker(
+                    icon: this.markerIcon ?? BitmapDescriptor.defaultMarker,
+                    markerId: MarkerId(this.parkingId),
+                    position: this.position,
+                  )
+                },
                 initialCameraPosition: CameraPosition(
-                  target: LatLng(18.487876, -69.9644807),
+                  target: this.position,
                   zoom: 15.5,
                 ),
-                onTap: (LatLng position) {
-                  this.widget.onTapHandler(position);
-                  setState(() {
-                    this.markers = {
-                      Marker(
-                        icon: markerIcon,
-                        markerId: MarkerId("Hello"),
-                        position: position,
-                      )
-                    };
-                  });
-                },
                 gestureRecognizers: Set()
                   ..add(Factory<EagerGestureRecognizer>(
                       () => EagerGestureRecognizer())),

@@ -3,7 +3,6 @@ import 'package:ParkA/components/floating-action-button/parka_floating_action_bu
 import 'package:ParkA/data/data-models/body-style/body_style_data_model.dart';
 import 'package:ParkA/data/data-models/make/make_data_model.dart';
 import 'package:ParkA/data/data-models/model/model_data_model.dart';
-import 'package:ParkA/data/data-models/vehicle/dto/create_vehicle_dto.dart';
 import 'package:ParkA/data/data-models/color/color_data_model.dart'
     as VehicleColor;
 import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
@@ -18,7 +17,6 @@ import 'package:ParkA/pages/create-vehicle/components/parka-input/parka_input.da
 import 'package:ParkA/pages/create-vehicle/components/parka_resizable_on_scroll_app_bar.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
-import 'package:ParkA/utils/form-validations/create_vehicle_form_validator.dart';
 import 'package:ParkA/utils/form-validations/update_vehicle_from_validation.dart';
 import 'package:ParkA/utils/functions/get_year_list.dart';
 import 'package:ParkA/utils/functions/pick_image.dart';

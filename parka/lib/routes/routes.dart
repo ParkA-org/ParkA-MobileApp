@@ -9,7 +9,9 @@ import 'package:ParkA/pages/create-parking/steps/parking_position_selector_page.
 import 'package:ParkA/pages/create-payment/payment_info.dart';
 import 'package:ParkA/pages/create-user-information/ID_page.dart';
 import 'package:ParkA/pages/create-vehicle/create_vehicle_page.dart';
-import 'package:ParkA/pages/edit-payment/edit_payment_page.dart';
+import 'package:ParkA/pages/edit-parking/edit_parking_page.dart';
+import 'package:ParkA/pages/edit-parking/steps/edit_parking_calendar.dart';
+import 'package:ParkA/pages/edit-parking/steps/edit_parking_images_page.dart';
 import 'package:ParkA/pages/edit-profile/edit_profile_page.dart';
 import 'package:ParkA/pages/edit-user-profile/edit_user_profile_page.dart';
 import 'package:ParkA/pages/filter/filter_page.dart';
@@ -40,7 +42,10 @@ List<GetPage> getRoutePages = [
   GetPage(
     name: EmailLogin.routeName,
     page: () => EmailLogin(),
-    binding: UserBinding(),
+    bindings: [
+      UserBinding(),
+      GraphqlClientBiding(),
+    ],
   ),
   GetPage(
     name: IDPage.routeName,
@@ -170,8 +175,18 @@ List<GetPage> getRoutePages = [
     page: () => ChatsPage(),
   ),
   GetPage(
-    name: EditPaymentScreen.routeName,
-    page: () => EditPaymentScreen(),
+    name: EditParkingPage.routeName,
+    page: () => EditParkingPage(),
+    bindings: [GraphqlClientBiding()],
+  ),
+  GetPage(
+    name: ParkingCalendarEditorPage.routeName,
+    page: () => ParkingCalendarEditorPage(),
+    bindings: [GraphqlClientBiding()],
+  ),
+  GetPage(
+    name: ParkingImageEditorPage.routeName,
+    page: () => ParkingImageEditorPage(),
     bindings: [GraphqlClientBiding()],
   ),
 ];
