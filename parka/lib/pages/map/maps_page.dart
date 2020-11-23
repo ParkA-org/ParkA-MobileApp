@@ -90,16 +90,18 @@ class _MapPageState extends State<MapPage> {
     if (nearParkings != null && nearParkings.length > 0) {
       nearParkings.forEach((parking) {
         parkingPins.add(Marker(
-            markerId: MarkerId("${parking.id}"),
-            position: LatLng(parking.latitude, parking.longitude),
-            icon: _customPinIcon,
-            onTap: () => showModalBottomSheet(
-                context: context,
-                builder: (context) {
-                  _mapController.animateCamera(CameraUpdate.newLatLng(
-                      LatLng(parking.latitude - 0.003, parking.longitude)));
-                  return ParkingDetailModal(parking: parking);
-                })));
+          markerId: MarkerId("${parking.id}"),
+          position: LatLng(parking.latitude, parking.longitude),
+          icon: _customPinIcon,
+          onTap: () => showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (context) {
+                _mapController.animateCamera(CameraUpdate.newLatLng(
+                    LatLng(parking.latitude - 0.003, parking.longitude)));
+                return ParkingDetailModal(parking: parking);
+              }),
+        ));
       });
     }
 
