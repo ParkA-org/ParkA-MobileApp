@@ -100,8 +100,6 @@ class ParkingUseCases {
     final updateParkingInput = {
       "data": {
         "id": _updateParkingDto.parkingId,
-        "countParking": _updateParkingDto.countParking,
-        "parkingName": _updateParkingDto.parkingName,
         "calendar": {
           "monday": Schedule.toJsonArray(_updateParkingDto.calendar['monday']),
           "tuesday":
@@ -115,13 +113,33 @@ class ParkingUseCases {
               Schedule.toJsonArray(_updateParkingDto.calendar['saturday']),
           "sunday": Schedule.toJsonArray(_updateParkingDto.calendar['sunday'])
         },
-        "priceHours": _updateParkingDto.priceHours.toString(),
+        "features": _updateParkingDto.features,
         "pictures": _parkingPictures,
         "mainPicture": imageUrl,
-        "information": _updateParkingDto.information,
-        "features": _updateParkingDto.features
       }
     };
+
+    if (_updateParkingDto.information != null &&
+        _updateParkingDto.information.isNotEmpty) {
+      updateParkingInput["data"]["information"] = _updateParkingDto.information;
+    }
+
+    if (_updateParkingDto.parkingName != null &&
+        _updateParkingDto.parkingName.isNotEmpty) {
+      updateParkingInput["data"]["parkingName"] = _updateParkingDto.parkingName;
+    }
+
+    if (_updateParkingDto.countParking != null &&
+        _updateParkingDto.countParking != 0) {
+      updateParkingInput["data"]["countParking"] =
+          _updateParkingDto.countParking;
+    }
+
+    if (_updateParkingDto.priceHours != null &&
+        _updateParkingDto.priceHours != 0) {
+      updateParkingInput["data"]["priceHours"] =
+          _updateParkingDto.priceHours.toString();
+    }
 
     MutationOptions mutationOptions = MutationOptions(
       documentNode: gql(updateParkingMutation),

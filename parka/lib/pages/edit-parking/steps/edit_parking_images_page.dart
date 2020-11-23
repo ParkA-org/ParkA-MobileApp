@@ -35,25 +35,13 @@ class ParkingImageEditorPage extends StatelessWidget {
   }
 
   void _updateParking(BuildContext ctx) async {
-    final formCheck = updateParkingFormValidator(
-        _updateParkingFormController.updateParkingDto);
-
-    if (!formCheck) {
-      Get.snackbar(
-        "Error",
-        "Formato de algunos campos invalido",
-        backgroundColor: ParkaColors.parkaLightRed,
-      );
-      return;
-    }
-
     final createdCheck = await ParkingUseCases.updateParking(
         _updateParkingFormController.updateParkingDto);
 
     if (!createdCheck) {
       Get.snackbar(
         "Error",
-        "Ocurrio un error actualizando tu parqueo",
+        "Ocurrio un error actualizando tu parqueo revisa los datos ingresados",
         backgroundColor: ParkaColors.parkaLightRed,
       );
       return;
