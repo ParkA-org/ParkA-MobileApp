@@ -1,3 +1,4 @@
+import 'package:ParkA/components/Buttons/circle_button.dart';
 import 'package:ParkA/components/Buttons/round_button.dart';
 import 'package:ParkA/components/place-holders/no_image_placeholder.dart';
 import 'package:ParkA/components/rating/star_rating.dart';
@@ -44,7 +45,7 @@ class ParkingDetailModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
       expand: false,
-      maxChildSize: 0.65,
+      maxChildSize: 0.75,
       builder: (context, scrollController) =>
           ListView(controller: scrollController, children: [
         Padding(
@@ -72,15 +73,23 @@ class ParkingDetailModal extends StatelessWidget {
                     color: Color(0xFF949494),
                   ),
                   SizedBox(
-                    height: 40,
-                    child: Row(
-                      children: [
-                        RoundedButton(
-                          hasShadow: true,
-                          hasIcon: true,
-                        )
-                      ],
-                    ),
+                    height: 90,
+                    child: Row(children: [
+                      CircleButton(
+                        onTap: () {
+                          //TODO: Reservation Page//
+                        },
+                      ),
+                      CircleButton(
+                        fillColor: Colors.white,
+                        text: "Direcciones",
+                        icon: Icon(
+                          Icons.directions,
+                          color: ParkaColors.parkaGreen,
+                          size: 35,
+                        ),
+                      )
+                    ]),
                   ),
                   Divider(
                     thickness: 1.0,
