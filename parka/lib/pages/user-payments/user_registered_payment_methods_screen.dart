@@ -5,6 +5,7 @@ import 'package:ParkA/data/use-cases/payment/payment_use_cases.dart';
 import 'package:ParkA/pages/create-payment/payment_info.dart';
 import 'package:ParkA/pages/edit-payment/edit_payment_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -101,12 +102,14 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: const EdgeInsets.only(left: 16.0),
-                            child: Text(
+                            child: AutoSizeText(
                               "Metodos de Pago",
+                              maxLines: 1,
+                              maxFontSize: 40,
+                              minFontSize: 30,
                               style: TextStyle(
                                   fontFamily: "Montserrat",
                                   color: Colors.white,
-                                  fontSize: 40,
                                   fontWeight: FontWeight.bold),
                             ),
                           )),
