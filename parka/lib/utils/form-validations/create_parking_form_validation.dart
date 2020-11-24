@@ -34,9 +34,5 @@ bool createParkingFormValidator(CreateParkingDto createParkingDto) {
     return false;
   }
 
-  if (createParkingDto.sector == null) {
-    return false;
-  }
-
   return true;
 }
