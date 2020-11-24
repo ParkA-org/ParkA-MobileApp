@@ -18,19 +18,8 @@ class ChatListPlaceHolder extends StatelessWidget {
           Column(
             children: [
               SvgPicture.asset(
-                "resources/images/QuestionCar.svg",
-                width: 160.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: Text(
-                  'No tienes vehiculos registrados',
-                  style: TextStyle(
-                      color: ParkaColors.parkaGreen,
-                      fontFamily: "Montserrat",
-                      fontSize: 28.0),
-                  textAlign: TextAlign.center,
-                ),
+                "resources/images/Messages.svg",
+                height: 400.0,
               ),
             ],
           ),
