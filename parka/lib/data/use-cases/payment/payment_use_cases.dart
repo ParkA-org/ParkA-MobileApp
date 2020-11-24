@@ -51,18 +51,14 @@ class PaymentUseCases {
         .parkaGraphqlClient
         .value
         .graphQlClient;
-
-    print(updatePaymentDto.cardHolder);
-    print(updatePaymentDto.card);
-    print(updatePaymentDto.expirationDate);
-    print(updatePaymentDto.digit);
+    if (updatePaymentDto.expirationDate.length <= 10) {
+      updatePaymentDto.expirationDate += "T00:00:00.000Z";
+    }
 
     final updatePaymentInput = {
       "data": {
-        "cardHolder": updatePaymentDto.cardHolder,
-        "expirationDate": updatePaymentDto.expirationDate + "T00:00:00.000Z",
-        "digit": updatePaymentDto.digit,
-        "card": updatePaymentDto.card,
+        "id": updatePaymentDto.id,
+        "expirationDate": updatePaymentDto.expirationDate,
       }
     };
 
@@ -75,7 +71,6 @@ class PaymentUseCases {
         await graphqlClient.mutate(mutationOptions);
 
     if (updatePaymentInputResult.data != null) {
-      print("updated");
       return true;
     }
 
