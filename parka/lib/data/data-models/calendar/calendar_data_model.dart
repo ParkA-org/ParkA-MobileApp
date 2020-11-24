@@ -83,6 +83,8 @@ class Calendar {
         return this.saturday;
       case WeekDay.Sunday:
         return this.sunday;
+      default:
+        return this.friday; // Cause I rather it always be friday
     }
     return new List();
   }

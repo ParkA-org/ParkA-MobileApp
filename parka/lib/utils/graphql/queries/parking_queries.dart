@@ -90,6 +90,7 @@ query($userLocation: FilterInput!) {
 		latitude
 		longitude
 		mainPicture
+    pictures
 		parkingName
 		priceHours
     rating

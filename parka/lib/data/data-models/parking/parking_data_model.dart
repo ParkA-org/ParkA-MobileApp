@@ -63,6 +63,9 @@ class Parking {
     List<Parking> userParkings = new List();
 
     parkingData.forEach((parking) {
+      List<Feature> _features = new List.from(parking["features"] != null
+          ? Feature.featuresFromJson(parking["features"])
+          : []);
       List<String> _pictures = new List.from(parking["pictures"] ?? []);
       userParkings.add(
         Parking(
@@ -72,6 +75,7 @@ class Parking {
           longitude: parking["longitude"],
           parkingName: parking["parkingName"],
           mainPicture: parking["mainPicture"],
+          features: _features,
           pictures: _pictures,
           perHourPrice: double.parse(parking["priceHours"]),
           rating: double.tryParse(
