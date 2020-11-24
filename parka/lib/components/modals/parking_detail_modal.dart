@@ -1,5 +1,4 @@
 import 'package:ParkA/components/Buttons/circle_button.dart';
-import 'package:ParkA/components/Buttons/round_button.dart';
 import 'package:ParkA/components/place-holders/no_image_placeholder.dart';
 import 'package:ParkA/components/rating/star_rating.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
@@ -7,7 +6,6 @@ import 'package:ParkA/pages/parking-detail/parking_detail_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ParkingDetailModal extends StatelessWidget {
