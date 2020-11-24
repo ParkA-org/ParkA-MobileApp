@@ -21,7 +21,6 @@ class _PositionPickerWidgetState extends State<PositionPickerWidget> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     BitmapDescriptor.fromAssetImage(
             ImageConfiguration.empty, 'resources/images/green-parking-icon.png')

@@ -90,6 +90,10 @@ final kParkaPaymentFormStyle = kParkaTextBaseStyleBold.copyWith(
   fontSize: 18.0,
 );
 
+final kParkaTextStyleBoldGreen20 = kParkaTextBaseStyleBold.copyWith(
+  fontSize: 20.0,
+);
+
 final kParkaTextStyleBoldGreen18 = kParkaTextBaseStyleBold.copyWith(
   fontSize: 18.0,
 );

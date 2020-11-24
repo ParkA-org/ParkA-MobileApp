@@ -44,8 +44,8 @@ class Parking {
     return Parking(
       id: parking["id"],
       parkingCount: int.tryParse(parking["countParking"].toString()),
-      latitude: double.parse(parking["latitude"]),
-      longitude: double.parse(parking["longitude"]),
+      latitude: parking["latitude"],
+      longitude: parking["longitude"],
       parkingName: parking["parkingName"],
       mainPicture: parking["mainPicture"],
       pictures: _pictures,
@@ -55,6 +55,7 @@ class Parking {
       rating: double.tryParse(
         parking["rating"].toString(),
       ),
+      information: parking["information"],
     );
   }
 
@@ -62,15 +63,19 @@ class Parking {
     List<Parking> userParkings = new List();
 
     parkingData.forEach((parking) {
+      List<Feature> _features = new List.from(parking["features"] != null
+          ? Feature.featuresFromJson(parking["features"])
+          : []);
       List<String> _pictures = new List.from(parking["pictures"] ?? []);
       userParkings.add(
         Parking(
           id: parking["id"],
           parkingCount: int.tryParse(parking["countParking"].toString()),
-          latitude: double.parse(parking["latitude"]),
-          longitude: double.parse(parking["longitude"]),
+          latitude: parking["latitude"],
+          longitude: parking["longitude"],
           parkingName: parking["parkingName"],
           mainPicture: parking["mainPicture"],
+          features: _features,
           pictures: _pictures,
           perHourPrice: double.parse(parking["priceHours"]),
           rating: double.tryParse(

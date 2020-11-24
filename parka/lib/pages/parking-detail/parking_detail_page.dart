@@ -4,11 +4,9 @@ import 'package:ParkA/components/map/position_viewer_card.dart';
 import 'package:ParkA/data/data-models/calendar/calendar_data_model.dart';
 import 'package:ParkA/data/data-models/feature/parking_feature_data_model.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
-import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
 import 'package:ParkA/data/enums/parking_place_holder_type.dart';
 import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
-import 'package:ParkA/data/use-cases/vehicle/vehicle_use_cases.dart';
-import 'package:ParkA/pages/edit-vehicle/edit_vehicle_page.dart';
+import 'package:ParkA/pages/edit-parking/edit_parking_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:ParkA/utils/functions/get_feature_icon.dart';
@@ -68,9 +66,9 @@ class _OwnerParkingDetailPageState extends State<OwnerParkingDetailPage> {
       floatingActionButton: ParkaFloatingActionButton(
         iconData: Icons.edit,
         onPressedHandler: () {
-          //TODO: ADD route to edit parking
-          // Get.to(
-          // );
+          Get.to(EditParkingPage(
+            parking: this._parking,
+          ));
         },
       ),
       body: SafeArea(
@@ -369,25 +367,27 @@ class ShowParkingFeaturesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(
-            "Caracteristicas",
-            style: kParkaTextStyleBoldGreen18,
-          ),
-        ),
-        Container(
-          height: 50.0,
-          child: ListView(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            children: this._viewBuilder(),
-          ),
-        )
-      ],
-    );
+    return this.features.length == 0
+        ? Container()
+        : Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Text(
+                  "Caracteristicas",
+                  style: kParkaTextStyleBoldGreen18,
+                ),
+              ),
+              Container(
+                height: 50.0,
+                child: ListView(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  children: this._viewBuilder(),
+                ),
+              )
+            ],
+          );
   }
 }
