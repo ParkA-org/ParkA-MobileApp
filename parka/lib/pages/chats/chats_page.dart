@@ -116,6 +116,9 @@ class ___ChatsPageState extends State<ChatsPage> {
                     preferredSize: Size.fromHeight(100),
                   ),
                   backgroundColor: Color(0xff0B768C),
+                  shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.vertical(bottom: Radius.circular(20))),
                 ),
                 SliverList(
                   delegate: SliverChildListDelegate(
