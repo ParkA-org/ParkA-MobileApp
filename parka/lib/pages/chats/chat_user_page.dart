@@ -1,9 +1,10 @@
 import 'package:ParkA/components/headers/parka_header.dart';
-import 'package:ParkA/components/search-bar/search_bar.dart';
 import 'package:ParkA/data/data-models/chat/chat_data_model.dart';
 import 'package:ParkA/data/data-models/message/message_data_model.dart';
+import 'package:ParkA/pages/edit-payment/components/parka_input_test.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'components/user_chat_tile.dart';
 
@@ -53,7 +54,33 @@ class ___ChatUserPageState extends State<ChatUserPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      floatingActionButton: Container(
+        color: Colors.transparent,
+        height: screenSize.height * 0.09,
+        width: screenSize.width * 1,
+        alignment: Alignment.bottomLeft,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 32.0, bottom: 20.0),
+          child: Row(
+            children: [
+              Text("Prueba"),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 9.0),
+                child: InkWell(
+                  child: SvgPicture.asset(
+                    "resources/images/SendButtom.svg",
+                    width: 45,
+                  ),
+                  onTap: () {},
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
       body: SafeArea(
         child: ModalProgressHUD(
           inAsyncCall: this._loading,
@@ -142,7 +169,7 @@ class ___ChatUserPageState extends State<ChatUserPage> {
                       )
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
