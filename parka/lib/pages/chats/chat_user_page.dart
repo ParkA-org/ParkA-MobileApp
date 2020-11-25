@@ -47,37 +47,6 @@ class ___ChatUserPageState extends State<ChatUserPage> {
         // Get.to();
       },
     ));
-    ret.add(ChatTile(
-      chat: new Chat(),
-      onTapHandler: () {
-        // Get.to();
-      },
-    ));
-    ret.add(ChatTile(
-      chat: new Chat(),
-      onTapHandler: () {
-        // Get.to();
-      },
-    ));
-    ret.add(ChatTile(
-      chat: new Chat(),
-      onTapHandler: () {
-        // Get.to();
-      },
-    ));
-    ret.add(ChatTile(
-      chat: new Chat(),
-      onTapHandler: () {
-        // Get.to();
-      },
-    ));
-    ret.add(ChatTile(
-      chat: new Chat(),
-      onTapHandler: () {
-        // Get.to();
-      },
-    ));
-    // });
 
     return ret;
   }
@@ -95,7 +64,7 @@ class ___ChatUserPageState extends State<ChatUserPage> {
               slivers: [
                 SliverAppBar(
                   pinned: true,
-                  expandedHeight: 182,
+                  expandedHeight: 325,
                   centerTitle: false,
                   leading: Padding(
                     padding: const EdgeInsets.only(left: 19.0),
@@ -118,23 +87,43 @@ class ___ChatUserPageState extends State<ChatUserPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 18.0),
+                          padding: const EdgeInsets.only(bottom: 20.0),
+                          child: Container(
+                            child: CircleAvatar(
+                              radius: 75.0,
+                              backgroundImage: NetworkImage(
+                                'https://parka-api-bucket-aws.s3.amazonaws.com/pp_857565fdc3.jfif',
+                              ),
+                              backgroundColor: Colors.transparent,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.transparent.withOpacity(0.3),
+                                  spreadRadius: 0,
+                                  blurRadius: 7,
+                                  offset: Offset(
+                                      0, 20), // changes position of shadow
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 40.0),
                           child: AutoSizeText(
-                            "Chats",
+                            "Francisco Tarjetero",
+                            maxFontSize: 40,
                             maxLines: 1,
-                            maxFontSize: 36,
-                            minFontSize: 34,
+                            minFontSize: 36,
                             style: TextStyle(
                               fontFamily: "Montserrat",
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 8.0),
-                          child: SearchBar(),
                         ),
                       ],
                     ),
