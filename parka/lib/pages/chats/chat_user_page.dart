@@ -8,9 +8,9 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'components/user_chat_tile.dart';
 
 class ChatUserPage extends StatefulWidget {
-  static const String routeName = "/chats-page";
+  static const String routeName = "/chat-user-page";
   final Chat chat;
-  ChatUserPage({@required this.chat});
+  ChatUserPage({this.chat});
 
   @override
   ___ChatUserPageState createState() => ___ChatUserPageState();
