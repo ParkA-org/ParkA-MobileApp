@@ -13,15 +13,14 @@ class ChatListPlaceHolder extends StatelessWidget {
       // padding: const EdgeInsets.only(top: 100.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Column(
-            children: [
-              SvgPicture.asset(
-                "resources/images/Messages.svg",
-                height: 400.0,
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.only(top: 100.0),
+            child: SvgPicture.asset(
+              "resources/images/Messages.svg",
+              height: 400.0,
+            ),
           ),
         ],
       ),

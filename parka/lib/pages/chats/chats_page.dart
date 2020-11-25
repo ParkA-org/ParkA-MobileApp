@@ -68,6 +68,20 @@ class ___ChatsPageState extends State<ChatsPage> {
             onRefresh: this.getAllUserChats,
             child: CustomScrollView(
               slivers: [
+                SliverAppBar(
+                  title: Text(
+                    "Chats",
+                    style: TextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  expandedHeight: 200,
+                  actions: [
+                    SearchBar(enabled: true,),
+                  ],
+                  backgroundColor: Color(0xff0B768C),
+                ),
                 // Column(
                 //   children: <Widget>[
                 //     // ParkaHeader(
