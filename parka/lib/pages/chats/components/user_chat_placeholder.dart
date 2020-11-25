@@ -16,7 +16,7 @@ class ChatListPlaceHolder extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 100.0),
+            padding: const EdgeInsets.only(top: 110.0),
             child: SvgPicture.asset(
               "resources/images/Messages.svg",
               height: 400.0,

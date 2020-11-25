@@ -6,6 +6,7 @@ import 'package:ParkA/pages/search/components/search_section.dart';
 import 'package:ParkA/pages/vehicle-detail/vehicle_detail_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -69,40 +70,53 @@ class ___ChatsPageState extends State<ChatsPage> {
             child: CustomScrollView(
               slivers: [
                 SliverAppBar(
-                  title: Text(
-                    "Chats",
-                    style: TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold),
+                  expandedHeight: 182,
+                  centerTitle: false,
+                  leading: Padding(
+                    padding: const EdgeInsets.only(left: 19.0),
+                    child: ParkaHeader(
+                      color: Colors.white,
+                      leading: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          size: 35,
+                        ),
+                      ),
+                    ),
                   ),
-                  expandedHeight: 200,
-                  actions: [
-                    SearchBar(enabled: true,),
-                  ],
+                  bottom: PreferredSize(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 18.0),
+                          child: AutoSizeText(
+                            "Chats",
+                            maxLines: 1,
+                            maxFontSize: 36,
+                            minFontSize: 34,
+                            style: TextStyle(
+                              fontFamily: "Montserrat",
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 8.0),
+                          child: SearchBar(),
+                        ),
+                      ],
+                    ),
+                    preferredSize: Size.fromHeight(100),
+                  ),
                   backgroundColor: Color(0xff0B768C),
                 ),
-                // Column(
-                //   children: <Widget>[
-                //     // ParkaHeader(
-                //     //   color: Colors.white,
-                //     //   leading: GestureDetector(
-                //     //     onTap: () {
-                //     //       Navigator.pop(context);
-                //     //     },
-                //     //     child: Icon(
-                //     //       Icons.arrow_back_ios,
-                //     //     ),
-                //     //   ),
-                //     //   trailing: Icon(
-                //     //     Icons.arrow_back_ios,
-                //     //     color: Colors.transparent,
-                //     //   ),
-                //     // ),
-                //     // SearchBar(),
-                //     Text('Prueba'),
-                //   ],
-                // ),
                 SliverList(
                   delegate: SliverChildListDelegate(
                     [
