@@ -1,14 +1,8 @@
 import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/components/search-bar/search_bar.dart';
 import 'package:ParkA/data/data-models/chat/chat_data_model.dart';
-import 'package:ParkA/pages/create-vehicle/components/parka_resizable_on_scroll_app_bar.dart';
-import 'package:ParkA/pages/search/components/search_section.dart';
-import 'package:ParkA/pages/vehicle-detail/vehicle_detail_page.dart';
-import 'package:ParkA/styles/parka_colors.dart';
-import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'components/user_chat_placeholder.dart';
 import 'components/user_chat_tile.dart';
