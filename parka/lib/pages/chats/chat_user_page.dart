@@ -9,6 +9,8 @@ import 'components/user_chat_tile.dart';
 
 class ChatUserPage extends StatefulWidget {
   static const String routeName = "/chats-page";
+  final Chat chat;
+  ChatUserPage({@required this.chat});
 
   @override
   ___ChatUserPageState createState() => ___ChatUserPageState();
@@ -16,10 +18,11 @@ class ChatUserPage extends StatefulWidget {
 
 class ___ChatUserPageState extends State<ChatUserPage> {
   bool _loading;
+  Chat _chat;
   List<Message> userMessages = [];
 
   Future<void> getAllMessages() async {
-    // this.userChats = await VehicleUseCases.getAllUserVehicles();
+    // this.userMessages = await VehicleUseCases.getAllUserVehicles();
 
     setState(() {
       this._loading = false;
@@ -29,6 +32,7 @@ class ___ChatUserPageState extends State<ChatUserPage> {
   @override
   void initState() {
     super.initState();
+    this._chat = this.widget.chat;
     this._loading = true;
     this.getAllMessages();
   }
