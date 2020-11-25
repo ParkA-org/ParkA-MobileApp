@@ -9,7 +9,7 @@ import 'components/user_chat_tile.dart';
 
 class ChatUserPage extends StatefulWidget {
   static const String routeName = "/chat-user-page";
-  final Chat chat;
+  final String chat;
   ChatUserPage({this.chat});
 
   @override
@@ -18,7 +18,7 @@ class ChatUserPage extends StatefulWidget {
 
 class ___ChatUserPageState extends State<ChatUserPage> {
   bool _loading;
-  Chat _chat;
+  String _chat;
   List<Message> userMessages = [];
 
   Future<void> getAllMessages() async {
