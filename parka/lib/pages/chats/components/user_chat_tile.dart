@@ -16,7 +16,7 @@ class ChatTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 8.0, top: 14.0),
-      child: GestureDetector(
+      child: InkWell(
         onTap: this.onTapHandler,
         child: Container(
           child: Column(
