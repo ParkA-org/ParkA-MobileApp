@@ -42,18 +42,44 @@ class ___ChatsPageState extends State<ChatsPage> {
   List<Widget> chatListBuilder() {
     List<Widget> ret = new List();
 
-    this.userChats.forEach((element) {
-      ret.add(ChatTile(
-        chat: element,
-        onTapHandler: () {
-          Get.to(
-            VehicleDetailPage(
-              vehicleId: element.id,
-            ),
-          );
-        },
-      ));
-    });
+    // this.userChats.forEach((element) {
+    ret.add(ChatTile(
+      chat: new Chat(),
+      onTapHandler: () {
+        // Get.to();
+      },
+    ));
+    ret.add(ChatTile(
+      chat: new Chat(),
+      onTapHandler: () {
+        // Get.to();
+      },
+    ));
+    ret.add(ChatTile(
+      chat: new Chat(),
+      onTapHandler: () {
+        // Get.to();
+      },
+    ));
+    ret.add(ChatTile(
+      chat: new Chat(),
+      onTapHandler: () {
+        // Get.to();
+      },
+    ));
+    ret.add(ChatTile(
+      chat: new Chat(),
+      onTapHandler: () {
+        // Get.to();
+      },
+    ));
+    ret.add(ChatTile(
+      chat: new Chat(),
+      onTapHandler: () {
+        // Get.to();
+      },
+    ));
+    // });
 
     return ret;
   }
@@ -70,6 +96,7 @@ class ___ChatsPageState extends State<ChatsPage> {
             child: CustomScrollView(
               slivers: [
                 SliverAppBar(
+                  pinned: true,
                   expandedHeight: 182,
                   centerTitle: false,
                   leading: Padding(
@@ -123,7 +150,7 @@ class ___ChatsPageState extends State<ChatsPage> {
                 SliverList(
                   delegate: SliverChildListDelegate(
                     [
-                      !this._loading && this.userChats.length != 0
+                      !this._loading && this.userChats.length != 1
                           ? Column(
                               children: chatListBuilder(),
                             )
