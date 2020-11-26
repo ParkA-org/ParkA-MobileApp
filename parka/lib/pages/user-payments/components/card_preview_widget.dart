@@ -25,10 +25,11 @@ class CardListTile extends StatelessWidget {
             child: AutoSizeText(
               "${this.payment.cardHolder}",
               maxLines: 1,
+              maxFontSize: 30,
+              minFontSize: 26,
               style: kParkaTextBaseStyleWhite.copyWith(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
-                fontSize: 36.0,
               ),
             ),
           ),
@@ -50,12 +51,14 @@ class CardListTile extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  AutoSizeText(
                     "• • • •  $visible",
+                    maxLines: 1,
+                    maxFontSize: 28,
+                    minFontSize: 24,
                     style: kParkaTextBaseStyleWhite.copyWith(
                       color: Colors.black,
                       fontFamily: "Cousine",
-                      fontSize: 32.0,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -63,34 +66,44 @@ class CardListTile extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Row(
                       children: [
-                        Text(
+                        AutoSizeText(
                           "Estado: ",
+                          maxLines: 1,
+                          maxFontSize: 25,
+                          minFontSize: 22,
                           style: TextStyle(
-                            fontSize: 30.0,
                             color: Color(0xff888383),
                             fontWeight: FontWeight.w300,
                           ),
                         ),
                         this.payment.activated == true
-                            ? Text("Aprobada",
+                            ? AutoSizeText("Aprobada",
+                                maxLines: 1,
+                                maxFontSize: 25,
+                                minFontSize: 22,
                                 style: TextStyle(
-                                    color: Color(0xff0CBD3D),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 30.0))
-                            : Text("Declinada",
+                                  color: Color(0xff0CBD3D),
+                                  fontWeight: FontWeight.bold,
+                                ))
+                            : AutoSizeText("Declinada",
+                                maxLines: 1,
+                                maxFontSize: 25,
+                                minFontSize: 22,
                                 style: TextStyle(
-                                    color: Color(0xffBD0C0C),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 30.0)),
+                                  color: Color(0xffBD0C0C),
+                                  fontWeight: FontWeight.bold,
+                                )),
                       ],
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
-                    child: Text(
+                    child: AutoSizeText(
                       "Banco Popular Dominicano",
+                      maxLines: 1,
+                      maxFontSize: 18,
+                      minFontSize: 17,
                       style: TextStyle(
-                        fontSize: 20.0,
                         color: Color(0xff888383),
                         fontWeight: FontWeight.w300,
                       ),

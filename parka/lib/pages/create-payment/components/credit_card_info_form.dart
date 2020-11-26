@@ -41,6 +41,7 @@ class CreditCardInfoForm extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           height: 50.0,
           child: TextField(
+            enabled: false,
             decoration: kInputStyleSlim,
             onChanged: this.creditCardNameHandler,
           ),
@@ -105,6 +106,7 @@ class CreditCardInfoForm extends StatelessWidget {
                     height: 50.0,
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
+                      enabled: false,
                       decoration: kInputStyleSlim,
                       keyboardType: TextInputType.number,
                       onChanged: this.creditCardCvvHandler,
