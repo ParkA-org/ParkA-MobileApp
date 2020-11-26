@@ -44,7 +44,7 @@ class MessagesTile extends StatelessWidget {
               ),
             )
           : Container(
-              alignment: Alignment.bottomLeft,
+              alignment: Alignment.bottomRight,
               child: Padding(
                 padding: const EdgeInsets.only(
                   top: 8.0,
