@@ -55,6 +55,38 @@ class ___ChatUserPageState extends State<ChatUserPage> {
       messages: "Por cierto, te raye el civic",
       type: false,
     ));
+
+    ret.add(MessagesTile(
+      messages: "Tu parqueo da asco",
+      type: false,
+    ));
+
+    ret.add(MessagesTile(
+      messages:
+          "El tuyo tambien esto es probando el tamano del card como estas viendo a continuacion",
+      type: true,
+    ));
+
+    ret.add(MessagesTile(
+      messages: "Por cierto, te raye el civic",
+      type: false,
+    ));
+
+    ret.add(MessagesTile(
+      messages: "Tu parqueo da asco",
+      type: false,
+    ));
+
+    ret.add(MessagesTile(
+      messages:
+          "El tuyo tambien esto es probando el tamano del card como estas viendo a continuacion",
+      type: true,
+    ));
+
+    ret.add(MessagesTile(
+      messages: "Por cierto, te raye el civic",
+      type: false,
+    ));
     // };
     return ret;
   }
@@ -63,9 +95,11 @@ class ___ChatUserPageState extends State<ChatUserPage> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomPadding: true,
+      backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
       floatingActionButton: Container(
-        color: Colors.transparent,
+        color: Colors.white,
         height: screenSize.height * 0.09,
         width: screenSize.width * 1,
         alignment: Alignment.bottomLeft,
@@ -188,7 +222,7 @@ class ___ChatUserPageState extends State<ChatUserPage> {
                   delegate: SliverChildListDelegate(
                     [
                       Padding(
-                        padding: const EdgeInsets.only(top: 9.0, bottom: 30.0),
+                        padding: const EdgeInsets.only(top: 9.0, bottom: 100.0),
                         child: Column(
                           children: messagesListBuilder(),
                         ),
