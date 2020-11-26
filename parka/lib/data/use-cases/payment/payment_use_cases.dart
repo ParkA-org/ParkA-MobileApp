@@ -14,18 +14,16 @@ class PaymentUseCases {
         .value
         .graphQlClient;
 
-    print(createPaymentDto.cardHolder);
-    print(createPaymentDto.card);
-    print(createPaymentDto.expirationDate);
-    print(createPaymentDto.cvv);
-    print(createPaymentDto.digit);
+    createPaymentDto.card = "3bfdb758-4ae7-4f83-bf0d-742aa34a7ebd";
+    if (createPaymentDto.digit.substring(0, 1) == "5")
+      createPaymentDto.card = "1eb995ef-3e68-4e7e-a8a3-d2127f2507c1";
 
     final createPaymentInput = {
       "data": {
         "cardHolder": createPaymentDto.cardHolder,
         "expirationDate": createPaymentDto.expirationDate + "T00:00:00.000Z",
         "digit": createPaymentDto.digit,
-        "card": "",
+        "card": createPaymentDto.card,
         "cvv": createPaymentDto.cvv,
       }
     };

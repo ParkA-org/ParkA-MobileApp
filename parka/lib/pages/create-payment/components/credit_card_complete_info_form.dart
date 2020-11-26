@@ -60,9 +60,9 @@ class PaymentInfoCompleteForm extends StatelessWidget {
   final Map formHandlers;
 
   Map<String, dynamic> gradientGetter() {
-    if (this.creditCardNumber1.length > 0 && this.creditCardNumber1[0] == "4")
+    if (this.creditCardNumber1.length > 0 && this.creditCardNumber1[0] == "4") {
       return CreditCardTypes.visa.gradient;
-    else if (this.creditCardNumber1.length > 1 &&
+    } else if (this.creditCardNumber1.length > 1 &&
         this.creditCardNumber1[0] == "5") {
       return CreditCardTypes.mastercard.gradient;
     }
