@@ -1,4 +1,5 @@
 import 'package:ParkA/components/headers/parka_header.dart';
+import 'package:ParkA/components/inputs/parka_edit_text_field_profile.dart';
 import 'package:ParkA/data/data-models/chat/chat_data_model.dart';
 import 'package:ParkA/data/data-models/message/message_data_model.dart';
 import 'package:ParkA/pages/edit-payment/components/parka_input_test.dart';
@@ -56,7 +57,7 @@ class ___ChatUserPageState extends State<ChatUserPage> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       floatingActionButton: Container(
         color: Colors.transparent,
         height: screenSize.height * 0.09,
@@ -66,7 +67,21 @@ class ___ChatUserPageState extends State<ChatUserPage> {
           padding: const EdgeInsets.only(left: 32.0, bottom: 20.0),
           child: Row(
             children: [
-              Text("Prueba"),
+              Container(
+                width: screenSize.width * 0.76,
+                child: TextField(
+                  onSubmitted: (value) => {},
+                  decoration: InputDecoration(
+                    alignLabelWithHint: true,
+                    hintMaxLines: 1,
+                    hintText: "Escribe Algo..",
+                  ),
+                  style: TextStyle(
+                    fontFamily: "Montserrat",
+                    fontSize: 20,
+                  ),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 9.0),
                 child: InkWell(
@@ -91,10 +106,9 @@ class ___ChatUserPageState extends State<ChatUserPage> {
               slivers: [
                 SliverAppBar(
                   pinned: true,
-                  expandedHeight: 325,
-                  centerTitle: false,
+                  expandedHeight: 70,
                   leading: Padding(
-                    padding: const EdgeInsets.only(left: 19.0),
+                    padding: const EdgeInsets.only(left: 19.0, top: 10.0),
                     child: ParkaHeader(
                       color: Colors.white,
                       leading: GestureDetector(
@@ -108,54 +122,57 @@ class ___ChatUserPageState extends State<ChatUserPage> {
                       ),
                     ),
                   ),
-                  bottom: PreferredSize(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 20.0),
-                          child: Container(
-                            child: CircleAvatar(
-                              radius: 75.0,
-                              backgroundImage: NetworkImage(
-                                'https://parka-api-bucket-aws.s3.amazonaws.com/pp_857565fdc3.jfif',
-                              ),
-                              backgroundColor: Colors.transparent,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.transparent.withOpacity(0.3),
-                                  spreadRadius: 0,
-                                  blurRadius: 7,
-                                  offset: Offset(
-                                      0, 20), // changes position of shadow
+                  actions: <Widget>[
+                    InkWell(
+                      onTap: () => {},
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 2.0, right: 25.0, top: 10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              child: CircleAvatar(
+                                radius: 30.0,
+                                backgroundImage: NetworkImage(
+                                  'https://parka-api-bucket-aws.s3.amazonaws.com/pp_857565fdc3.jfif',
                                 ),
-                              ],
+                                backgroundColor: Colors.transparent,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.transparent.withOpacity(0.3),
+                                    spreadRadius: 4,
+                                    blurRadius: 7,
+                                    offset: Offset(
+                                        0, 4), // changes position of shadow
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 40.0),
-                          child: AutoSizeText(
-                            "Francisco Tarjetero",
-                            maxFontSize: 40,
-                            maxLines: 1,
-                            minFontSize: 36,
-                            style: TextStyle(
-                              fontFamily: "Montserrat",
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: AutoSizeText(
+                                "Francisco Tarjetero",
+                                maxFontSize: 30,
+                                maxLines: 1,
+                                minFontSize: 26,
+                                style: TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                    preferredSize: Size.fromHeight(100),
-                  ),
+                  ],
                   backgroundColor: Color(0xff0B768C),
                   shape: RoundedRectangleBorder(
                       borderRadius:
