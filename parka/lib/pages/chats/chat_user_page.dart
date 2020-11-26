@@ -1,11 +1,10 @@
 import 'package:ParkA/components/headers/parka_header.dart';
-import 'package:ParkA/data/data-models/chat/chat_data_model.dart';
 import 'package:ParkA/data/data-models/message/message_data_model.dart';
+import 'package:ParkA/pages/chats/components/messages_tile.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'components/user_chat_tile.dart';
 
 class ChatUserPage extends StatefulWidget {
   static const String routeName = "/chat-user-page";
@@ -41,13 +40,21 @@ class ___ChatUserPageState extends State<ChatUserPage> {
     List<Widget> ret = new List();
 
     // this.userChats.forEach((element) {
-    ret.add(ChatTile(
-      chat: new Chat(),
-      onTapHandler: () {
-        // Get.to();
-      },
+    ret.add(MessagesTile(
+      messages: "Tu parqueo da asco",
+      type: false,
     ));
 
+    ret.add(MessagesTile(
+      messages: "El tuyo tambien",
+      type: true,
+    ));
+
+    ret.add(MessagesTile(
+      messages: "Por cierto, te raye el civic",
+      type: false,
+    ));
+    // };
     return ret;
   }
 

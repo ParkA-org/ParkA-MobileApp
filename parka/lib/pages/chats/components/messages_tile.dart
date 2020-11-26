@@ -7,14 +7,14 @@ class MessagesTile extends StatelessWidget {
 
   const MessagesTile({
     Key key,
-    this.messages,
-    this.type,
+    @required this.messages,
+    @required this.type,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       child: this.type == true
           ? Container(
               alignment: Alignment.bottomLeft,
