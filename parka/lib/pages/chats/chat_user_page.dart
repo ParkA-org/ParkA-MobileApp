@@ -186,8 +186,11 @@ class ___ChatUserPageState extends State<ChatUserPage> {
                 SliverList(
                   delegate: SliverChildListDelegate(
                     [
-                      Column(
-                        children: messagesListBuilder(),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 9.0, bottom: 30.0),
+                        child: Column(
+                          children: messagesListBuilder(),
+                        ),
                       )
                     ],
                   ),
