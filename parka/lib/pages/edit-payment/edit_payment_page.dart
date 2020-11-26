@@ -1,22 +1,22 @@
 import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
-import 'package:ParkA/data/dtos/payment/create_payment_dto.dart';
+import 'package:ParkA/data/data-models/payment/payment_data_model.dart';
+import 'package:ParkA/data/dtos/payment/update_payment_dto.dart';
 import 'package:ParkA/data/use-cases/payment/payment_use_cases.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
-
 import 'components/credit_card_complete_info_form.dart';
 
-class PaymentInfoScreen extends StatefulWidget {
-  static String routeName = "/paymentInfoPage";
-  // Object arguments;
+class EditPaymentScreen extends StatefulWidget {
+  static String routeName = "/editPaymentScreen";
+
   @override
-  _PaymentInfoScreenState createState() => _PaymentInfoScreenState();
+  _EditPaymentScreenState createState() => _EditPaymentScreenState();
 }
 
-class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
+class _EditPaymentScreenState extends State<EditPaymentScreen> {
   String fullName = "Nombre del titular";
   String creditCardNumber1 = "----";
   String creditCardNumber2 = "----";
@@ -24,10 +24,11 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
   String creditCardNumber4 = "----";
   String creditCardMonth = "--";
   String creditCardYear = "--";
-  String creditCardCvv = "";
+  String creditCardCvv;
+  String expirationDate;
+  String card = "";
   Map formHandlers;
-  Map<String, dynamic> createAccount;
-  CreatePaymentDto createPaymentDto = new CreatePaymentDto();
+  UpdatePaymentDto updatePaymentDto = new UpdatePaymentDto();
 
   @override
   void initState() {
@@ -81,24 +82,21 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
   }
 
   Future<void> sumbmitForm() async {
-    final expiration = new DateTime(2020, 8).toIso8601String();
-    print(expiration);
-
-    this.createPaymentDto.cardHolder = this.fullName;
-    this.createPaymentDto.digit = this.creditCardNumber1 +
+    this.updatePaymentDto.cardHolder = this.fullName;
+    this.updatePaymentDto.card = this.card;
+    this.updatePaymentDto.digit = this.creditCardNumber1 +
         this.creditCardNumber2 +
         this.creditCardNumber3 +
         this.creditCardNumber4;
-    this.createPaymentDto.cvv = this.creditCardCvv;
-    this.createPaymentDto.expirationDate =
+    this.updatePaymentDto.cvv = this.creditCardCvv;
+    this.updatePaymentDto.expirationDate =
         "20" + this.creditCardYear + "-" + this.creditCardMonth + "-01";
-    this.createPaymentDto.card = "";
     print("tapped");
-    final createPaymentResult =
-        await PaymentUseCases.createPayment(this.createPaymentDto);
+    final updatePaymentResult =
+        await PaymentUseCases.updatePayment(this.updatePaymentDto);
 
-    if (createPaymentResult) {
-      print("created");
+    if (updatePaymentResult) {
+      print("updated");
       Navigator.pop(context);
     } else {
       Get.snackbar(
@@ -111,6 +109,16 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Payment payment = ModalRoute.of(context).settings.arguments;
+
+    this.fullName = payment.cardHolder;
+    this.card = payment.cardId;
+    this.creditCardNumber1 = payment.digit.substring(0, 4);
+    this.creditCardNumber2 = payment.digit.substring(4, 8);
+    this.creditCardNumber3 = payment.digit.substring(8, 12);
+    this.creditCardNumber4 = payment.digit.substring(12, 16);
+    this.creditCardYear = payment.expirationDate.substring(2, 4);
+    this.creditCardMonth = payment.expirationDate.substring(5, 7);
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: SafeArea(
@@ -156,7 +164,7 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
                     children: <Widget>[
                       Expanded(
                         child: TransparentButton(
-                          label: "Crear metodo de pago",
+                          label: "Actualizar metodo de pago",
                           buttonTextStyle: kParkaButtonTextStyle,
                           color: Colors.white,
                           onTapHandler: () {

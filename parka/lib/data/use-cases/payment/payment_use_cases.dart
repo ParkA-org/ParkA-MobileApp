@@ -1,6 +1,7 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/data-models/payment/payment_data_model.dart';
 import 'package:ParkA/data/dtos/payment/create_payment_dto.dart';
+import 'package:ParkA/data/dtos/payment/update_payment_dto.dart';
 import 'package:ParkA/utils/graphql/mutations/payment_mutations.dart';
 import 'package:ParkA/utils/graphql/queries/payment_queries.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,7 @@ class PaymentUseCases {
     final createPaymentInput = {
       "data": {
         "cardHolder": createPaymentDto.cardHolder,
-        "expirationDate": "2020-10-02T02:05:30.962Z",
+        "expirationDate": createPaymentDto.expirationDate + "T00:00:00.000Z",
         "digit": createPaymentDto.digit,
         "card": "",
         "cvv": createPaymentDto.cvv,
@@ -39,6 +40,42 @@ class PaymentUseCases {
 
     if (createPaymentInputResult.data != null) {
       print("created");
+      return true;
+    }
+
+    return false;
+  }
+
+  static Future updatePayment(UpdatePaymentDto updatePaymentDto) async {
+    final graphqlClient = Get.find<GraphqlClientController>()
+        .parkaGraphqlClient
+        .value
+        .graphQlClient;
+
+    print(updatePaymentDto.cardHolder);
+    print(updatePaymentDto.card);
+    print(updatePaymentDto.expirationDate);
+    print(updatePaymentDto.digit);
+
+    final updatePaymentInput = {
+      "data": {
+        "cardHolder": updatePaymentDto.cardHolder,
+        "expirationDate": updatePaymentDto.expirationDate + "T00:00:00.000Z",
+        "digit": updatePaymentDto.digit,
+        "card": updatePaymentDto.card,
+      }
+    };
+
+    MutationOptions mutationOptions = MutationOptions(
+      documentNode: gql(updatePaymentMutation),
+      variables: updatePaymentInput,
+    );
+
+    final updatePaymentInputResult =
+        await graphqlClient.mutate(mutationOptions);
+
+    if (updatePaymentInputResult.data != null) {
+      print("updated");
       return true;
     }
 

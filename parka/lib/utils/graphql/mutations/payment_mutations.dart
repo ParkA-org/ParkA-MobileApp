@@ -8,3 +8,11 @@ const String createPaymentMutation = r"""
       }
     }
     """;
+
+const String updatePaymentMutation = r"""
+    mutation($data:UpdatePaymentInput!){
+      updatePayment(updatePaymentInput: $data){
+        cardHolder
+      }
+    }
+""";
