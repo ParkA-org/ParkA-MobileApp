@@ -46,7 +46,8 @@ class ___ChatUserPageState extends State<ChatUserPage> {
     ));
 
     ret.add(MessagesTile(
-      messages: "El tuyo tambien",
+      messages:
+          "El tuyo tambien esto es probando el tamano del card como estas viendo a continuacion",
       type: true,
     ));
 
