@@ -35,12 +35,12 @@ class MessagesTile extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: "Montserrat",
                     fontSize: 20.0,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
               ),
               decoration: BoxDecoration(
-                color: Color(0xff077187),
+                color: Color(0xffC4C4C4),
               ),
             )
           : Container(
