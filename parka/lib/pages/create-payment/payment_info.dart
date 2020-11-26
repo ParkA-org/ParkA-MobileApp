@@ -90,7 +90,8 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
         this.creditCardNumber3 +
         this.creditCardNumber4;
     this.createPaymentDto.cvv = this.creditCardCvv;
-    this.createPaymentDto.expirationDate = "2020-10-02T02:05:30.962Z";
+    this.createPaymentDto.expirationDate =
+        "20" + this.creditCardYear + "-" + this.creditCardMonth + "-01";
     this.createPaymentDto.card = "";
     print("tapped");
     final createPaymentResult =

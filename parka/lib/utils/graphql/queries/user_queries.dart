@@ -14,3 +14,16 @@ const String getUserInformationQuery = r"""
         }
       }
       """;
+
+const String getLoggedUserQuery = r"""
+query{
+  getLoggedUser{
+    id
+    name
+    lastName
+    email
+    profilePicture
+    confirmed
+  }
+}
+""";

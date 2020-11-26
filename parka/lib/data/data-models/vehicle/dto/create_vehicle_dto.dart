@@ -7,6 +7,7 @@ class CreateVehicleDto {
   String year;
   String alias;
   String bodyStyle;
+  String detail;
 
   CreateVehicleDto({
     this.model,
@@ -17,5 +18,6 @@ class CreateVehicleDto {
     this.mainPicture,
     this.pictures,
     this.year,
+    this.detail,
   });
 }

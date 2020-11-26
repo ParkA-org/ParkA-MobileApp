@@ -1,6 +1,7 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/data-models/information/information_data_model.dart';
 import 'package:ParkA/data/data-models/user/user_data_model.dart';
+import 'package:ParkA/data/dtos/login/user_login_dto.dart';
 import 'package:ParkA/utils/functions/upload_image.dart';
 import 'package:ParkA/utils/graphql/mutations/user_mutations.dart';
 import 'package:ParkA/utils/graphql/queries/user_queries.dart';
@@ -10,7 +11,7 @@ import 'package:graphql/client.dart';
 import '../../dtos/user/user_registration_dto.dart';
 
 class UserUseCases {
-  static Future userLogin(String email, String password) async {
+  static Future<UserLoginDto> userLogin(String email, String password) async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
     final loginInput = {
@@ -33,11 +34,38 @@ class UserUseCases {
     print(loginResult.exception);
 
     if (loginResult.data != null) {
-      graphqlClient
-          .updateGraphqlClientwithJwt(loginResult.data["login"]["JWT"]);
-
+      final String _jwt = loginResult.data["login"]["JWT"];
       final userData = loginResult.data["login"]['user'];
+      graphqlClient.updateGraphqlClientwithJwt(_jwt);
+
       print(userData);
+      return UserLoginDto(
+        jwt: _jwt,
+        user: User(
+          name: userData["name"],
+          lastName: userData['lastName'],
+          email: userData['email'],
+          profilePicture: userData["profilePicture"],
+        ),
+      );
+    }
+
+    return null;
+  }
+
+  static Future getLoggedUser() async {
+    final graphqlClient = Get.find<GraphqlClientController>();
+
+    QueryOptions _queryOptions =
+        new QueryOptions(documentNode: gql(getLoggedUserQuery));
+
+    final QueryResult _getLoggedUserResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .query(_queryOptions);
+
+    if (_getLoggedUserResult.data != null) {
+      final userData = _getLoggedUserResult.data["getLoggedUser"];
+
       return User(
         name: userData["name"],
         lastName: userData['lastName'],
@@ -352,18 +380,17 @@ class UserUseCases {
     print(nationality);
     print(placeOfBirth);
 
-    final updateUserInformationInput = {
-      "data": {
-        "paymentInformation": "1f6273ac-a3f0-432c-8876-8ae8881668d0",
-      }
-    };
+    final updateUserInformationInput = {"data": {}};
 
     if (documentNumber != null) {
       updateUserInformationInput["data"]['documentNumber'] = documentNumber;
     }
 
     if (birthDate != null) {
-      updateUserInformationInput["data"]['birthDate'] = birthDate;
+      birthDate = birthDate.replaceAll("/", "-");
+      birthDate = birthDate.replaceAll(".", "-");
+      updateUserInformationInput["data"]['birthDate'] =
+          birthDate + "T00:00:00Z";
     }
 
     if (placeOfBirth != null) {
