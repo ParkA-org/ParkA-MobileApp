@@ -38,6 +38,10 @@ class MessagesTile extends StatelessWidget {
                   ),
                 ),
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(17),
+                      topRight: Radius.circular(17)),
                   color: Color(0xffC4C4C4),
                 ),
               ),
@@ -64,6 +68,10 @@ class MessagesTile extends StatelessWidget {
                   ),
                 ),
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(17),
+                      topLeft: Radius.circular(17)),
                   color: Color(0xff077187),
                 ),
               ),
