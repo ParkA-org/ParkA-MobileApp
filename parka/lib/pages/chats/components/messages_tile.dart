@@ -3,16 +3,12 @@ import 'package:flutter/material.dart';
 
 class MessagesTile extends StatelessWidget {
   final String messages;
-  final String user;
   final bool type;
-  final Function onTapHandler;
 
   const MessagesTile({
     Key key,
     this.messages,
-    this.user,
     this.type,
-    this.onTapHandler,
   }) : super(key: key);
 
   @override
