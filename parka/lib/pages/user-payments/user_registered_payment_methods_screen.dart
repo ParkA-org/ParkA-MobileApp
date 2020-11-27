@@ -120,7 +120,7 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
             ),
             Expanded(
               flex: 5,
-              child: this.paymentsLoaded
+              child: this.paymentsLoaded && this.userPaymentMethods.length > 0
                   ? RefreshIndicator(
                       onRefresh: this.getAllUserPayment,
                       child: ListView(
