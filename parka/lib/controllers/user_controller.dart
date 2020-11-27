@@ -44,10 +44,11 @@ class UserController extends GetxController {
     return false;
   }
 
-  Future updateUser(String name, String lastName) async {
+  Future updateUser(String name, String lastName, String userPicture) async {
     User updatedUser = await UserUseCases.updateUser(
       name: name,
       lastName: lastName,
+      profilePicture: userPicture,
     );
 
     if (updatedUser != null) {
