@@ -1,4 +1,4 @@
-import 'package:ParkA/components/Buttons/circle_button.dart';
+import 'package:ParkA/components/buttons/circle_button.dart';
 import 'package:ParkA/components/place-holders/no_image_placeholder.dart';
 import 'package:ParkA/components/rating/star_rating.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';

@@ -4,7 +4,7 @@ class UpdateParkingDto {
   final String parkingId;
   int countParking;
   String parkingName;
-  double priceHours;
+  int priceHours;
   List<String> pictures = [];
   String mainPicture;
   String information;

@@ -13,6 +13,7 @@ import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
 import 'package:ParkA/pages/profile/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
+import 'package:ParkA/utils/functions/pick_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -37,6 +38,7 @@ class _EditUserProfileInformationPageState
   String nationality;
   String placeOfBirth;
   String telephoneNumber;
+  String userMainPicture;
 
   bool userInformationLoading;
   Information userInformation;
@@ -146,7 +148,7 @@ class _EditUserProfileInformationPageState
                               padding: const EdgeInsets.only(
                                   left: 9.0, top: 9.0, bottom: 6.0),
                               child: ParkaCircleAvatarWidget(
-                                imageUrl:
+                                imageUrl: this.userMainPicture ??
                                     userController.user.value?.profilePicture,
                               ),
                             ),
@@ -171,7 +173,14 @@ class _EditUserProfileInformationPageState
                                   ),
                                   padding: EdgeInsets.all(15.0),
                                 ),
-                                onTap: () {},
+                                onTap: () async {
+                                  String _image = await getImageFunction();
+                                  if (_image != null) {
+                                    setState(() {
+                                      this.userMainPicture = _image;
+                                    });
+                                  }
+                                },
                               ),
                             ),
                           ],
