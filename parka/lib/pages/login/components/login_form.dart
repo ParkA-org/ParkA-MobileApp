@@ -72,7 +72,7 @@ class _LoginFormState extends State<LoginForm> {
                 ),
                 ParkAInput(
                   icon: 'WhiteProfileIcon.svg',
-                  text: 'Correo / Usuario',
+                  text: 'Correo',
                   onChanged: (String user) {
                     setState(() {
                       this.user = user.trim();

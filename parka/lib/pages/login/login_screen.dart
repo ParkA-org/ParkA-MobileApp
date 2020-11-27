@@ -73,14 +73,6 @@ class LoginScreen extends StatelessWidget {
                       Navigator.pushNamed(context, EmailLogin.routeName);
                     },
                   ),
-                  // TransparentButton(
-                  //   label: "",
-                  //   color: ParkaColors.parkaGreen,
-                  //   buttonTextStyle: kParkaTextBaseStyleBold,
-                  //   onTapHandler: () {
-                  //     Navigator.pushNamed(context, EmailLogin.routeName);
-                  //   },
-                  // ),
                   TransparentButton(
                     label: "Registrate",
                     color: ParkaColors.parkaGreen,
