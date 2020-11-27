@@ -79,6 +79,7 @@ class _EditUserProfileInformationPageState
     bool updateUserCheck = await userController.updateUser(
       this.name,
       this.lastName,
+      this.userMainPicture,
     );
 
     bool updateUserInformationCheck = await UserUseCases.updateUserInformation(

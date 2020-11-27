@@ -302,6 +302,7 @@ class UserUseCases {
   static Future<User> updateUser({
     String name,
     String lastName,
+    String profilePicture,
   }) async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
@@ -317,6 +318,11 @@ class UserUseCases {
 
     if (lastName != null) {
       updateUserInput["data"]["lastName"] = lastName;
+    }
+
+    if (!(GetUtils.isURL(profilePicture))) {
+      updateUserInput["data"]["profilePicture"] =
+          await uploadImage(profilePicture);
     }
 
     MutationOptions mutationOptions = MutationOptions(
