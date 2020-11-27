@@ -1,5 +1,8 @@
 import 'package:ParkA/components/inputs/parka_input.dart';
 import 'package:ParkA/controllers/user_controller.dart';
+import 'package:ParkA/data/dtos/login/login_result_dto.dart';
+import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
+import 'package:ParkA/pages/confirm-account/confirm_account_page.dart';
 import 'package:ParkA/pages/map/maps_page.dart';
 import 'package:ParkA/pages/forgot-password/forgot_password_screen.dart';
 import 'package:ParkA/styles/parka_colors.dart';
@@ -35,10 +38,13 @@ class _LoginFormState extends State<LoginForm> {
       return;
     }
 
-    bool loginCheck =
+    LoginResult loginCheck =
         await Get.find<UserController>().loginUser(this.user, this.password);
 
-    if (!loginCheck) {
+    if (loginCheck.message != null) {
+      await UserUseCases.resendConfirmationCode(email: this.user);
+      return Get.toNamed(ConfirmAccountPage.routeName);
+    } else if (!loginCheck.status) {
       Get.snackbar(
         "Error",
         "Credenciales incorrectas",
