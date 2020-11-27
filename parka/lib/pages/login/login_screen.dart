@@ -1,5 +1,6 @@
 import 'package:ParkA/components/buttons/round_button.dart';
 import 'package:ParkA/components/buttons/transparent_button.dart';
+import 'package:ParkA/pages/map/maps_page.dart';
 import 'package:ParkA/pages/register/register_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
@@ -62,20 +63,38 @@ class LoginScreen extends StatelessWidget {
                     hasIcon: true,
                     hasShadow: false,
                   ),
-                  TransparentButton(
-                    label: "Iniciar Sesion con Correo",
+                  RoundedButton(
                     color: ParkaColors.parkaGreen,
-                    buttonTextStyle: kParkaTextBaseStyleBold,
+                    icon: FontAwesomeIcons.car,
+                    label: "Iniciar sesion con Correo",
+                    hasIcon: true,
+                    hasShadow: false,
                     onTapHandler: () {
                       Navigator.pushNamed(context, EmailLogin.routeName);
                     },
                   ),
+                  // TransparentButton(
+                  //   label: "",
+                  //   color: ParkaColors.parkaGreen,
+                  //   buttonTextStyle: kParkaTextBaseStyleBold,
+                  //   onTapHandler: () {
+                  //     Navigator.pushNamed(context, EmailLogin.routeName);
+                  //   },
+                  // ),
                   TransparentButton(
-                    label: "Registrarse",
+                    label: "Registrate",
                     color: ParkaColors.parkaGreen,
                     buttonTextStyle: kParkaTextBaseStyleBold,
                     onTapHandler: () {
                       Navigator.pushNamed(context, RegisterPage.routeName);
+                    },
+                  ),
+                  TransparentButton(
+                    label: " Explora la app",
+                    color: ParkaColors.parkaGreen,
+                    buttonTextStyle: kParkaTextBaseStyleBold,
+                    onTapHandler: () {
+                      Navigator.pushNamed(context, MapPage.routeName);
                     },
                   ),
                 ],
