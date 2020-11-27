@@ -36,9 +36,9 @@ class LoginScreen extends StatelessWidget {
           Expanded(
             flex: 7,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 32.0),
+              padding: EdgeInsets.fromLTRB(32.0, 0, 32.0, 16.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
                     "Bienvenido a ParkA",
