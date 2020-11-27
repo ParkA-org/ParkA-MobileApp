@@ -114,91 +114,94 @@ class _EditUserProfileInformationPageState
       ),
       backgroundColor: Color(0xff0A7B93),
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              flex: 3,
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: 8.0,
-                  horizontal: 20.0,
-                ),
-                decoration: BoxDecoration(
-                  color: Color(0xff0A7B93),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        child: ModalProgressHUD(
+          inAsyncCall: this.userInformationLoading,
+          child: this.userInformationLoading
+              ? Container()
+              : Column(
                   children: [
-                    ParkaHeaderSymbol(color: Colors.white),
-                    Text(
-                      " Editar Perfil",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: "Montserrat",
-                        fontSize: 40.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                     Expanded(
-                      child: Center(
-                        child: Stack(
-                          alignment: Alignment.bottomRight,
+                      flex: 3,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 8.0,
+                          horizontal: 20.0,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Color(0xff0A7B93),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 9.0, top: 9.0, bottom: 6.0),
-                              child: ParkaCircleAvatarWidget(
-                                imageUrl: this.userMainPicture ??
-                                    userController.user.value?.profilePicture,
+                            ParkaHeaderSymbol(color: Colors.white),
+                            Text(
+                              " Editar Perfil",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Montserrat",
+                                fontSize: 40.0,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 6.0),
-                              child: InkWell(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      shape: BoxShape.circle,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          offset: Offset(3.0, 10.0),
-                                          color: Colors.black38,
-                                          blurRadius: 5.0,
-                                        )
-                                      ]),
-                                  child: Icon(
-                                    Icons.create,
-                                    color: Color(0xff086174),
-                                    size: 35.0,
-                                  ),
-                                  padding: EdgeInsets.all(15.0),
+                            Expanded(
+                              child: Center(
+                                child: Stack(
+                                  alignment: Alignment.bottomRight,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 9.0, top: 9.0, bottom: 6.0),
+                                      child: ParkaCircleAvatarWidget(
+                                        imageUrl: this.userMainPicture ??
+                                            userController
+                                                .user.value?.profilePicture,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 6.0),
+                                      child: InkWell(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.circle,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  offset: Offset(3.0, 10.0),
+                                                  color: Colors.black38,
+                                                  blurRadius: 5.0,
+                                                )
+                                              ]),
+                                          child: Icon(
+                                            Icons.create,
+                                            color: Color(0xff086174),
+                                            size: 35.0,
+                                          ),
+                                          padding: EdgeInsets.all(15.0),
+                                        ),
+                                        onTap: () async {
+                                          String _image =
+                                              await getImageFunction();
+                                          if (_image != null) {
+                                            setState(() {
+                                              this.userMainPicture = _image;
+                                            });
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                onTap: () async {
-                                  String _image = await getImageFunction();
-                                  if (_image != null) {
-                                    setState(() {
-                                      this.userMainPicture = _image;
-                                    });
-                                  }
-                                },
                               ),
-                            ),
+                            )
                           ],
                         ),
                       ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 4,
-              child: ModalProgressHUD(
-                inAsyncCall: this.userInformationLoading,
-                child: this.userInformationLoading
-                    ? Container()
-                    : ListView(
+                    ),
+                    Expanded(
+                      flex: 4,
+                      child: ListView(
                         children: [
                           Container(
                             margin: EdgeInsets.symmetric(
@@ -325,9 +328,9 @@ class _EditUserProfileInformationPageState
                           ),
                         ],
                       ),
-              ),
-            ),
-          ],
+                    ),
+                  ],
+                ),
         ),
       ),
     );
