@@ -2,10 +2,12 @@ import 'package:ParkA/components/buttons/circle_button.dart';
 import 'package:ParkA/components/place-holders/no_image_placeholder.dart';
 import 'package:ParkA/components/rating/star_rating.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
+import 'package:ParkA/pages/create-reservation/create_reservation_page.dart';
 import 'package:ParkA/pages/parking-detail/parking_detail_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ParkingDetailModal extends StatelessWidget {
@@ -90,7 +92,11 @@ class ParkingDetailModal extends StatelessWidget {
                         children: [
                           CircleButton(
                             onTap: () {
-                              //TODO: Reservation Page//
+                              Get.to(
+                                CreateParkingReservationPage(
+                                  parkingId: this.parking.id,
+                                ),
+                              );
                             },
                           ),
                           CircleButton(
