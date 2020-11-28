@@ -3,8 +3,9 @@ import 'package:ParkA/data/data-models/message/message_data_model.dart';
 import 'package:ParkA/pages/chats/components/messages_tile.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+
+import 'components/sendMessages.dart';
 
 class ChatUserPage extends StatefulWidget {
   static const String routeName = "/chat-user-page";
@@ -98,44 +99,8 @@ class ___ChatUserPageState extends State<ChatUserPage> {
       resizeToAvoidBottomPadding: true,
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
-      floatingActionButton: Container(
-        color: Colors.white,
-        height: screenSize.height * 0.09,
-        width: screenSize.width * 1,
-        alignment: Alignment.bottomLeft,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 32.0, bottom: 20.0),
-          child: Row(
-            children: [
-              Container(
-                width: screenSize.width * 0.76,
-                child: TextField(
-                  onSubmitted: (value) => {},
-                  decoration: InputDecoration(
-                    alignLabelWithHint: true,
-                    hintMaxLines: 1,
-                    hintText: "Escribe Algo..",
-                  ),
-                  style: TextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 9.0),
-                child: InkWell(
-                  child: SvgPicture.asset(
-                    "resources/images/SendButtom.svg",
-                    width: 45,
-                  ),
-                  onTap: () {},
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      floatingActionButton:
+          SendMessages(screenSize: screenSize, hintText: "Escribe Algo.."),
       body: SafeArea(
         child: ModalProgressHUD(
           inAsyncCall: this._loading,
