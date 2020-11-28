@@ -65,7 +65,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   RoundedButton(
                     color: ParkaColors.parkaGreen,
-                    icon: FontAwesomeIcons.car,
+                    icon: FontAwesomeIcons.envelope,
                     label: "Iniciar sesion con Correo",
                     hasIcon: true,
                     hasShadow: false,

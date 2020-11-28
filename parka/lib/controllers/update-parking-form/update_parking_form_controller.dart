@@ -53,7 +53,7 @@ class UpdateParkingFormController extends GetxController {
     _updateParkingDto.value.countParking = number;
   }
 
-  void setParkingPrice(int _parkingPrice) {
+  void setParkingPrice(double _parkingPrice) {
     _updateParkingDto.update((_instance) {
       _instance.priceHours = _parkingPrice;
     });
