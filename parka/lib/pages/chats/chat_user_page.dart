@@ -96,106 +96,111 @@ class ___ChatUserPageState extends State<ChatUserPage> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      resizeToAvoidBottomPadding: true,
       backgroundColor: Colors.white,
-      resizeToAvoidBottomInset: true,
       floatingActionButton:
           SendMessages(screenSize: screenSize, hintText: "Escribe Algo.."),
       body: SafeArea(
-        child: ModalProgressHUD(
-          inAsyncCall: this._loading,
-          opacity: 0.5,
-          child: RefreshIndicator(
-            onRefresh: this.getAllMessages,
-            child: CustomScrollView(
-              slivers: [
-                SliverAppBar(
-                  pinned: true,
-                  expandedHeight: 70,
-                  leading: Padding(
-                    padding: const EdgeInsets.only(left: 19.0, top: 10.0),
-                    child: ParkaHeader(
-                      color: Colors.white,
-                      leading: GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Icon(
-                          Icons.arrow_back_ios,
-                          size: 35,
+        child: SingleChildScrollView(
+          child: Container(
+            height: screenSize.height * 0.9,
+            child: ModalProgressHUD(
+              inAsyncCall: this._loading,
+              opacity: 0.5,
+              child: RefreshIndicator(
+                onRefresh: this.getAllMessages,
+                child: CustomScrollView(
+                  slivers: [
+                    SliverAppBar(
+                      pinned: true,
+                      expandedHeight: 70,
+                      leading: Padding(
+                        padding: const EdgeInsets.only(left: 19.0, top: 10.0),
+                        child: ParkaHeader(
+                          color: Colors.white,
+                          leading: GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              size: 35,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  actions: <Widget>[
-                    InkWell(
-                      onTap: () => {},
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 2.0, right: 25.0, top: 10.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              child: CircleAvatar(
-                                radius: 30.0,
-                                backgroundImage: NetworkImage(
-                                  'https://parka-api-bucket-aws.s3.amazonaws.com/pp_857565fdc3.jfif',
-                                ),
-                                backgroundColor: Colors.transparent,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.transparent.withOpacity(0.3),
-                                    spreadRadius: 4,
-                                    blurRadius: 7,
-                                    offset: Offset(
-                                        0, 4), // changes position of shadow
+                      actions: <Widget>[
+                        InkWell(
+                          onTap: () => {},
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 2.0, right: 25.0, top: 10.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  child: CircleAvatar(
+                                    radius: 30.0,
+                                    backgroundImage: NetworkImage(
+                                      'https://parka-api-bucket-aws.s3.amazonaws.com/pp_857565fdc3.jfif',
+                                    ),
+                                    backgroundColor: Colors.transparent,
                                   ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: AutoSizeText(
-                                "Francisco Tarjetero",
-                                maxFontSize: 30,
-                                maxLines: 1,
-                                minFontSize: 26,
-                                style: TextStyle(
-                                  fontFamily: "Montserrat",
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            Colors.transparent.withOpacity(0.3),
+                                        spreadRadius: 4,
+                                        blurRadius: 7,
+                                        offset: Offset(
+                                            0, 4), // changes position of shadow
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: AutoSizeText(
+                                    "Francisco Tarjetero",
+                                    maxFontSize: 30,
+                                    maxLines: 1,
+                                    minFontSize: 26,
+                                    style: TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
+                      ],
+                      backgroundColor: Color(0xff0B768C),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                              bottom: Radius.circular(20))),
+                    ),
+                    SliverList(
+                      delegate: SliverChildListDelegate(
+                        [
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(top: 9.0, bottom: 100.0),
+                            child: Column(
+                              children: messagesListBuilder(),
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ],
-                  backgroundColor: Color(0xff0B768C),
-                  shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.vertical(bottom: Radius.circular(20))),
                 ),
-                SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 9.0, bottom: 100.0),
-                        child: Column(
-                          children: messagesListBuilder(),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
         ),
