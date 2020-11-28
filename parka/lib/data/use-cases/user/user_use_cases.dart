@@ -41,6 +41,7 @@ class UserUseCases {
       print(userData);
       return UserLoginDto(
         jwt: _jwt,
+        status: true,
         user: User(
           name: userData["name"],
           lastName: userData['lastName'],
@@ -50,7 +51,22 @@ class UserUseCases {
       );
     }
 
-    return null;
+    final String error = loginResult.exception.graphqlErrors[0].message;
+
+    print(error);
+
+    final String check = error.split(" ")[0];
+
+    if (check == "Confirm") {
+      return UserLoginDto(
+        status: false,
+        message: error,
+      );
+    }
+
+    return UserLoginDto(
+      status: false,
+    );
   }
 
   static Future getLoggedUser() async {
@@ -104,7 +120,7 @@ class UserUseCases {
         .mutate(mutationOptions);
 
     print(createUserResult.data);
-
+    print(createUserResult.exception.toString());
     if (createUserResult.data != null) {
       return createUserResult.data;
     }
@@ -146,7 +162,8 @@ class UserUseCases {
     return null;
   }
 
-  static Future registerUser(UserRegistrationForm userRegistrationForm) async {
+  static Future<bool> registerUser(
+      UserRegistrationForm userRegistrationForm) async {
     final createUserInformationResult = await createUserInformation(
         userRegistrationForm.createUserInformationDto);
 
@@ -155,6 +172,12 @@ class UserUseCases {
 
     final createUserResult =
         await createUser(userRegistrationForm.createUserDto);
+
+    if (createUserResult != null) {
+      return true;
+    }
+
+    return false;
   }
 
   static Future confirmUserEmail({String email, String code}) async {
@@ -196,7 +219,7 @@ class UserUseCases {
     };
 
     MutationOptions mutationOptions = MutationOptions(
-      documentNode: gql(resendConfirmationCodeMutation),
+      documentNode: gql(requestNewAccountConfirmationCode),
       variables: resendConfirmationInput,
     );
 

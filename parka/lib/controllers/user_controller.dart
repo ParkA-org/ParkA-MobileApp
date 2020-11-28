@@ -1,5 +1,6 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/data-models/user/user_data_model.dart';
+import 'package:ParkA/data/dtos/login/login_result_dto.dart';
 import 'package:ParkA/data/dtos/login/user_login_dto.dart';
 import 'package:ParkA/utils/prefs/shared_preferencies.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
@@ -26,8 +27,12 @@ class UserController extends GetxController {
     this._init();
   }
 
-  Future<bool> loginUser(String email, String password) async {
+  Future<LoginResult> loginUser(String email, String password) async {
     UserLoginDto _userLoginDto = await UserUseCases.userLogin(email, password);
+
+    if (_userLoginDto.status != null && !_userLoginDto.status) {
+      return LoginResult(status: false, message: _userLoginDto.message);
+    }
 
     User loggedUser = _userLoginDto.user;
     String _jwt = _userLoginDto.jwt;
@@ -38,10 +43,10 @@ class UserController extends GetxController {
       user.update((user) async {
         this.user = loggedUser.obs;
       });
-      return true;
+      return LoginResult(status: true);
     }
 
-    return false;
+    return LoginResult(status: false);
   }
 
   Future updateUser(String name, String lastName, String userPicture) async {

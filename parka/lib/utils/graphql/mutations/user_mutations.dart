@@ -114,3 +114,15 @@ const String updateUserInformationMutation = r"""
       }
     }
     """;
+
+const requestNewAccountConfirmationCode = r""" 
+mutation ($data:ConfirmEmailInput!){
+  confirmEmail(
+    confirmEmailInput: $data
+  ) {
+    email
+    origin
+  }
+}
+
+""";
