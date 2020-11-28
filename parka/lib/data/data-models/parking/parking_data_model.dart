@@ -8,7 +8,7 @@ class Parking {
   final double latitude;
   final double longitude;
   final Calendar calendar;
-  final int perHourPrice;
+  final double perHourPrice;
   final String mainPicture;
   final List pictures;
   final bool status;
@@ -51,7 +51,7 @@ class Parking {
       pictures: _pictures,
       calendar: Calendar.calendarFromJson(parking["calendar"]),
       features: Feature.featuresFromJson(parking["features"]),
-      perHourPrice: parking["priceHours"],
+      perHourPrice: double.tryParse(parking["priceHours"].toString()),
       rating: double.tryParse(
         parking["rating"].toString(),
       ),
@@ -77,7 +77,7 @@ class Parking {
           mainPicture: parking["mainPicture"],
           features: _features,
           pictures: _pictures,
-          perHourPrice: parking["priceHours"],
+          perHourPrice: double.tryParse(parking["priceHours"].toString()),
           rating: double.tryParse(
             parking["rating"].toString(),
           ),
