@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/utils.dart';
 
@@ -51,8 +53,8 @@ class ParkaCircleAvatarWidget extends StatelessWidget {
                         ? NetworkImage(
                             this.imageUrl,
                           )
-                        : AssetImage(
-                            this.imageUrl,
+                        : FileImage(
+                            File(this.imageUrl),
                           ),
                   ),
                 ),
