@@ -2,6 +2,8 @@ import 'package:ParkA/components/floating-action-button/parka_floating_action_bu
 import 'package:ParkA/components/inputs/parka_time_selector_widget/time_selector_pill_widget.dart';
 import 'package:ParkA/components/price/price_tab_widget.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
+import 'package:ParkA/data/data-models/payment/payment_data_model.dart';
+import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
 import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
 import 'package:ParkA/pages/edit-parking/edit_parking_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
@@ -69,170 +71,393 @@ class _CreateParkingReservationPageState
         },
       ),
       body: SafeArea(
-          child: ModalProgressHUD(
-        color: ParkaColors.parkaGreen,
-        inAsyncCall: this._loading,
-        child: this._loading
-            ? Container(
-                color: ParkaColors.parkaGreen,
-              )
-            : CustomScrollView(
-                slivers: [
-                  SliverAppBar(
-                    pinned: true,
-                    expandedHeight: 250.0,
-                    backgroundColor: ParkaColors.parkaGreen,
-                    flexibleSpace: FlexibleSpaceBar(
-                      title: Container(
-                        margin: EdgeInsets.only(right: 8.0),
-                        padding: EdgeInsets.all(4.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: AutoSizeText(
-                                this._parking.parkingName,
-                                maxLines: 1,
-                                style: kParkaTextStyleBold16,
-                              ),
-                            ),
-                            Expanded(
-                              flex: 0,
-                              child: Container(
-                                margin: EdgeInsets.symmetric(horizontal: 2.0),
-                                child: Row(
-                                  children: [
-                                    AutoSizeText(
-                                      '${this._parking.rating.toPrecision(2)}',
-                                      maxLines: 1,
-                                      style: kParkaTextStyleBold16,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(2.0),
-                                      child: Icon(
-                                        Icons.star,
-                                        color: Colors.white,
-                                        size: 16.0,
-                                      ),
-                                    ),
-                                  ],
+        child: ModalProgressHUD(
+          color: ParkaColors.parkaGreen,
+          inAsyncCall: this._loading,
+          child: this._loading
+              ? Container(
+                  color: ParkaColors.parkaGreen,
+                )
+              : CustomScrollView(
+                  slivers: [
+                    SliverAppBar(
+                      pinned: true,
+                      expandedHeight: 250.0,
+                      backgroundColor: ParkaColors.parkaGreen,
+                      flexibleSpace: FlexibleSpaceBar(
+                        title: Container(
+                          margin: EdgeInsets.only(right: 8.0),
+                          padding: EdgeInsets.all(4.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: AutoSizeText(
+                                  this._parking.parkingName,
+                                  maxLines: 1,
+                                  style: kParkaTextStyleBold16,
                                 ),
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                      background: Stack(
-                        alignment: Alignment.center,
-                        fit: StackFit.expand,
-                        children: [
-                          Image(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(_parking.mainPicture),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(boxShadow: [
-                              BoxShadow(
-                                offset: Offset(0, 190.0),
-                                color: Colors.black54,
-                                blurRadius: 18.0,
-                                spreadRadius: 15.0,
-                              ),
-                            ]),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  SliverList(
-                    delegate: SliverChildListDelegate(
-                      [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(
-                            24.0,
-                            0,
-                            24.0,
-                            24.0,
-                          ),
-                          child: Column(
-                            children: [
-                              ParkingPriceWidgetTab(
-                                parking: this._parking,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 8.0),
-                                    child: Text(
-                                      "Elige tu fecha de alquiler",
-                                      style: kParkaTextStyleBoldGreen18,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 8.0),
-                                    child: Text(
-                                      "Fecha",
-                                      style: kParkaTextStyleBoldGreen18,
-                                    ),
-                                  ),
-                                  Row(
+                              Expanded(
+                                flex: 0,
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 2.0),
+                                  child: Row(
                                     children: [
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 8.0),
-                                              child: Text(
-                                                "Desde",
-                                                style:
-                                                    kParkaTextStyleBoldGreen18,
-                                              ),
-                                            ),
-                                            TimeSelectorPillWidget()
-                                          ],
+                                      AutoSizeText(
+                                        '${this._parking.rating.toPrecision(2)}',
+                                        maxLines: 1,
+                                        style: kParkaTextStyleBold16,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: Icon(
+                                          Icons.star,
+                                          color: Colors.white,
+                                          size: 16.0,
                                         ),
                                       ),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 8.0),
-                                              child: Text(
-                                                "Hasta",
-                                                style:
-                                                    kParkaTextStyleBoldGreen18,
-                                              ),
-                                            ),
-                                            TimeSelectorPillWidget()
-                                          ],
-                                        ),
-                                      )
                                     ],
-                                  )
-                                ],
+                                  ),
+                                ),
                               )
                             ],
                           ),
                         ),
-                      ],
+                        background: Stack(
+                          alignment: Alignment.center,
+                          fit: StackFit.expand,
+                          children: [
+                            Image(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(_parking.mainPicture),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(boxShadow: [
+                                BoxShadow(
+                                  offset: Offset(0, 190.0),
+                                  color: Colors.black54,
+                                  blurRadius: 18.0,
+                                  spreadRadius: 15.0,
+                                ),
+                              ]),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
-                  )
-                ],
+                    SliverList(
+                      delegate: SliverChildListDelegate(
+                        [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(
+                              24.0,
+                              0,
+                              24.0,
+                              24.0,
+                            ),
+                            child: Column(
+                              children: [
+                                ParkingPriceWidgetTab(
+                                  parking: this._parking,
+                                ),
+                                DateTimeReservationPicker(),
+                                Divider(
+                                  thickness: 1.0,
+                                  color: Color(0xFF949494),
+                                ),
+                                PaymentMethodSelectorWidget(),
+                                Divider(
+                                  thickness: 1.0,
+                                  color: Color(0xFF949494),
+                                ),
+                                VehicleSelectorWidget(),
+                                Divider(
+                                  thickness: 1.0,
+                                  color: Color(0xFF949494),
+                                ),
+                                InfoLabelWidget(
+                                  label: "Total:",
+                                  value: "\$900 RD",
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+        ),
+      ),
+    );
+  }
+}
+
+class InfoLabelWidget extends StatelessWidget {
+  final String label;
+  final String value;
+
+  const InfoLabelWidget({
+    Key key,
+    @required this.label,
+    @required this.value,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 8.0,
+      ),
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: Text(
+              this.label,
+              style: kParkaTextStyleBoldGreen18,
+            ),
+          ),
+          Text(
+            this.value ?? "",
+            style: kParkaTextStyleBoldBlack18,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class VehicleSelectorWidget extends StatelessWidget {
+  final Vehicle vehicle;
+
+  const VehicleSelectorWidget({
+    Key key,
+    this.vehicle,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Text(
+            "Vehicle",
+            style: kParkaTextStyleBoldGreen18,
+          ),
+        ),
+        MiniVehicleListTile(vehicle: this.vehicle)
+      ],
+    );
+  }
+}
+
+class MiniVehicleListTile extends StatelessWidget {
+  const MiniVehicleListTile({
+    Key key,
+    @required this.vehicle,
+    this.onTapHandler,
+  }) : super(key: key);
+
+  final Vehicle vehicle;
+  final Function onTapHandler;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: this.onTapHandler,
+      child: Container(
+          height: 50.0,
+          child: Row(
+            children: [
+              Expanded(
+                child: this.vehicle == null
+                    ? Container(
+                        child: AutoSizeText(
+                          "Selecciona un vehiculo",
+                          maxLines: 1,
+                          style: kParkaTextStyleGrey18,
+                        ),
+                      )
+                    : Column(
+                        children: [],
+                      ),
               ),
-      )),
+              Expanded(
+                flex: 0,
+                child: Icon(
+                  Icons.keyboard_arrow_right,
+                  color: Color(0xFF949494),
+                ),
+              )
+            ],
+          )),
+    );
+  }
+}
+
+class PaymentMethodSelectorWidget extends StatelessWidget {
+  final Function onTapHandler;
+  final Payment payment;
+
+  const PaymentMethodSelectorWidget({
+    Key key,
+    this.payment,
+    this.onTapHandler,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Text(
+            "Metodo de pago",
+            style: kParkaTextStyleBoldGreen18,
+          ),
+        ),
+        PaymentCardTile(payment: payment),
+      ],
+    );
+  }
+}
+
+class PaymentCardTile extends StatelessWidget {
+  const PaymentCardTile({
+    Key key,
+    @required this.payment,
+    this.onTapHandler,
+  }) : super(key: key);
+
+  final Payment payment;
+  final Function onTapHandler;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: this.onTapHandler,
+      child: Container(
+          height: 50.0,
+          child: Row(
+            children: [
+              Expanded(
+                child: this.payment == null
+                    ? Container(
+                        child: AutoSizeText(
+                          "Selecciona un metodo de pago",
+                          maxLines: 1,
+                          style: kParkaTextStyleGrey18,
+                        ),
+                      )
+                    : Column(
+                        children: [
+                          Text(this.payment.cardHolder),
+                          Text(
+                            "• • • •  ${this.payment.digit}",
+                          )
+                        ],
+                      ),
+              ),
+              Expanded(
+                flex: 0,
+                child: Icon(
+                  Icons.keyboard_arrow_right,
+                  color: Color(0xFF949494),
+                ),
+              )
+            ],
+          )),
+    );
+  }
+}
+
+class DateTimeReservationPicker extends StatelessWidget {
+  const DateTimeReservationPicker({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Text(
+            "Elige tu fecha de alquiler",
+            style: kParkaTextStyleBoldGreen18,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Text(
+            "Fecha",
+            style: kParkaTextStyleGreen18,
+          ),
+        ),
+        Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: TimeSelectorPillWidget(),
+            ),
+            Expanded(
+              child: Container(),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        "Desde",
+                        style: kParkaTextStyleGreen18,
+                      ),
+                    ),
+                    TimeSelectorPillWidget()
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        "Hasta",
+                        style: kParkaTextStyleGreen18,
+                      ),
+                    ),
+                    TimeSelectorPillWidget(),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+        InfoLabelWidget(
+          label: "Horas:",
+          value: "6",
+        ),
+      ],
     );
   }
 }
