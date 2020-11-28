@@ -133,3 +133,11 @@ final kParkaBigButtonTextStyleBlack = kParkaTextBaseStyle.copyWith(
   color: Colors.black,
   fontSize: 22.0,
 );
+
+final kParkaTextStyleBoldGreen22 = kParkaTextBaseStyleBold.copyWith(
+  fontSize: 22.0,
+);
+
+final kParkaTextStyleBoldGreen24 = kParkaTextBaseStyleBold.copyWith(
+  fontSize: 24.0,
+);

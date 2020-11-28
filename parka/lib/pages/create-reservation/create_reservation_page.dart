@@ -5,6 +5,7 @@ import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/payment/payment_data_model.dart';
 import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
 import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
+import 'package:ParkA/pages/create-reservation/steps/select_payment_method_page.dart';
 import 'package:ParkA/pages/edit-parking/edit_parking_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
@@ -168,7 +169,15 @@ class _CreateParkingReservationPageState
                                   thickness: 1.0,
                                   color: Color(0xFF949494),
                                 ),
-                                PaymentMethodSelectorWidget(),
+                                PaymentMethodSelectorWidget(
+                                  onTapHandler: () {
+                                    Get.to(
+                                      SelectPaymentMethodPage(
+                                        parking: this._parking,
+                                      ),
+                                    );
+                                  },
+                                ),
                                 Divider(
                                   thickness: 1.0,
                                   color: Color(0xFF949494),
@@ -323,7 +332,10 @@ class PaymentMethodSelectorWidget extends StatelessWidget {
             style: kParkaTextStyleBoldGreen18,
           ),
         ),
-        PaymentCardTile(payment: payment),
+        PaymentCardTile(
+          payment: payment,
+          onTapHandler: this.onTapHandler,
+        ),
       ],
     );
   }
