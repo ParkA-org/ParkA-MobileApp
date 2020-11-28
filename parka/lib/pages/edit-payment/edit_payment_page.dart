@@ -1,22 +1,22 @@
 import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
-import 'package:ParkA/data/dtos/payment/create_payment_dto.dart';
+import 'package:ParkA/data/data-models/payment/payment_data_model.dart';
+import 'package:ParkA/data/dtos/payment/update_payment_dto.dart';
 import 'package:ParkA/data/use-cases/payment/payment_use_cases.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
-
 import 'components/credit_card_complete_info_form.dart';
 
-class PaymentInfoScreen extends StatefulWidget {
-  static String routeName = "/paymentInfoPage";
-  // Object arguments;
+class EditPaymentScreen extends StatefulWidget {
+  static String routeName = "/editPaymentScreen";
+
   @override
-  _PaymentInfoScreenState createState() => _PaymentInfoScreenState();
+  _EditPaymentScreenState createState() => _EditPaymentScreenState();
 }
 
-class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
+class _EditPaymentScreenState extends State<EditPaymentScreen> {
   String fullName = "Nombre del titular";
   String creditCardNumber1 = "----";
   String creditCardNumber2 = "----";
@@ -24,10 +24,12 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
   String creditCardNumber4 = "----";
   String creditCardMonth = "--";
   String creditCardYear = "--";
-  String creditCardCvv = "";
+  String id;
+  String creditCardCvv;
+  String expirationDate;
+  String card = "";
   Map formHandlers;
-  Map<String, dynamic> createAccount;
-  CreatePaymentDto createPaymentDto = new CreatePaymentDto();
+  UpdatePaymentDto updatePaymentDto = new UpdatePaymentDto();
 
   @override
   void initState() {
@@ -39,21 +41,6 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
         });
       },
       "creditCardNumberHandlers": [
-        (value) {
-          setState(() {
-            this.creditCardNumber1 = value;
-          });
-        },
-        (value) {
-          setState(() {
-            this.creditCardNumber2 = value;
-          });
-        },
-        (value) {
-          setState(() {
-            this.creditCardNumber3 = value;
-          });
-        },
         (value) {
           setState(() {
             this.creditCardNumber4 = value;
@@ -81,23 +68,22 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
   }
 
   Future<void> sumbmitForm() async {
-    final expiration = new DateTime(2020, 8).toIso8601String();
-    print(expiration);
+    this.updatePaymentDto.id = this.id;
+    if (this.creditCardMonth.substring(0, 1) != "-") {
+      if (this.creditCardMonth.length == 1) {
+        this.creditCardMonth = "0" + this.creditCardMonth.toString();
+      }
+      this.updatePaymentDto.expirationDate = "20" +
+          this.creditCardYear.toString() +
+          "-" +
+          this.creditCardMonth +
+          "-01";
+    }
+    final updatePaymentResult =
+        await PaymentUseCases.updatePayment(this.updatePaymentDto);
 
-    this.createPaymentDto.cardHolder = this.fullName;
-    this.createPaymentDto.digit = this.creditCardNumber1 +
-        this.creditCardNumber2 +
-        this.creditCardNumber3 +
-        this.creditCardNumber4;
-    this.createPaymentDto.cvv = this.creditCardCvv;
-    this.createPaymentDto.expirationDate =
-        "20" + this.creditCardYear + "-" + this.creditCardMonth + "-01";
-    print("tapped");
-    final createPaymentResult =
-        await PaymentUseCases.createPayment(this.createPaymentDto);
-
-    if (createPaymentResult) {
-      print("created");
+    if (updatePaymentResult) {
+      print("updated");
       Navigator.pop(context);
     } else {
       Get.snackbar(
@@ -110,6 +96,15 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Payment payment = ModalRoute.of(context).settings.arguments;
+
+    this.fullName = payment.cardHolder;
+    // this.creditCardMonth = payment.expirationDate.substring(5, 7);
+    // this.creditCardYear = payment.expirationDate.substring(2, 4);
+    this.creditCardNumber4 = payment.digit.substring(12, 16);
+    this.updatePaymentDto.expirationDate = payment.expirationDate;
+    this.id = payment.id;
+
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: SafeArea(
@@ -155,7 +150,7 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
                     children: <Widget>[
                       Expanded(
                         child: TransparentButton(
-                          label: "Crear metodo de pago",
+                          label: "Actualizar metodo de pago",
                           buttonTextStyle: kParkaButtonTextStyle,
                           color: Colors.white,
                           onTapHandler: () {

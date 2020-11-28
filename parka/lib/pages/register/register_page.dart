@@ -26,10 +26,10 @@ class _RegisterPageState extends State<RegisterPage> {
   String telephonNumber;
 
   void nextButtonHandler() {
-    userRegistrationForm.createUserDto.name = this.name;
-    userRegistrationForm.createUserDto.lastName = this.lastName;
-    userRegistrationForm.createUserDto.email = this.email;
-    userRegistrationForm.createUserDto.password = this.password;
+    userRegistrationForm.createUserDto.name = this.name.trim();
+    userRegistrationForm.createUserDto.lastName = this.lastName.trim();
+    userRegistrationForm.createUserDto.email = this.email.trim();
+    userRegistrationForm.createUserDto.password = this.password.trim();
     userRegistrationForm.createUserInformationDto.telephonNumber =
         this.telephonNumber;
 

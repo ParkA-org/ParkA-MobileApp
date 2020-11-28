@@ -1,5 +1,6 @@
 import 'package:ParkA/controllers/bindings/graphql_biding.dart';
 import 'package:ParkA/controllers/bindings/user_binding.dart';
+import 'package:ParkA/pages/chats/chat_user_page.dart';
 import 'package:ParkA/pages/chats/chats_page.dart';
 import 'package:ParkA/pages/confirm-account/confirm_account_page.dart';
 import 'package:ParkA/pages/create-parking/create_parking_page.dart';
@@ -9,6 +10,7 @@ import 'package:ParkA/pages/create-parking/steps/parking_position_selector_page.
 import 'package:ParkA/pages/create-payment/payment_info.dart';
 import 'package:ParkA/pages/create-user-information/ID_page.dart';
 import 'package:ParkA/pages/create-vehicle/create_vehicle_page.dart';
+import 'package:ParkA/pages/edit-payment/edit_payment_page.dart';
 import 'package:ParkA/pages/edit-parking/edit_parking_page.dart';
 import 'package:ParkA/pages/edit-parking/steps/edit_parking_calendar.dart';
 import 'package:ParkA/pages/edit-parking/steps/edit_parking_images_page.dart';
@@ -175,6 +177,10 @@ List<GetPage> getRoutePages = [
     page: () => ChatsPage(),
   ),
   GetPage(
+    name: EditPaymentScreen.routeName,
+    page: () => EditPaymentScreen(),
+  ),
+  GetPage(
     name: EditParkingPage.routeName,
     page: () => EditParkingPage(),
     bindings: [GraphqlClientBiding()],
@@ -187,6 +193,11 @@ List<GetPage> getRoutePages = [
   GetPage(
     name: ParkingImageEditorPage.routeName,
     page: () => ParkingImageEditorPage(),
+    bindings: [GraphqlClientBiding()],
+  ),
+  GetPage(
+    name: ChatUserPage.routeName,
+    page: () => ChatUserPage(),
     bindings: [GraphqlClientBiding()],
   ),
 ];

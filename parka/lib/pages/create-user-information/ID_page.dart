@@ -90,7 +90,7 @@ class _IDPageState extends State<IDPage> {
         ModalRoute.of(context).settings.arguments;
     Size currentScreen = MediaQuery.of(context).size;
 
-    void nextButtonHandler(bool _omit) {
+    void nextButtonHandler(bool _omit) async {
       userRegistrationForm.createUserInformationDto.documentNumber =
           this.docNumber;
       //doc number must be 11 digits
@@ -100,8 +100,12 @@ class _IDPageState extends State<IDPage> {
       print(userRegistrationForm.createUserInformationDto.placeOfBirth);
       print(userRegistrationForm.createUserInformationDto.telephonNumber);
 
-      UserUseCases.registerUser(userRegistrationForm);
-      Navigator.pushNamed(context, ConfirmAccountPage.routeName);
+      final userRegistrationResult =
+          await UserUseCases.registerUser(userRegistrationForm);
+
+      if (userRegistrationResult) {
+        Navigator.pushNamed(context, ConfirmAccountPage.routeName);
+      }
     }
 
     return Scaffold(

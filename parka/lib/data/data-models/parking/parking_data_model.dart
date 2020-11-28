@@ -51,7 +51,7 @@ class Parking {
       pictures: _pictures,
       calendar: Calendar.calendarFromJson(parking["calendar"]),
       features: Feature.featuresFromJson(parking["features"]),
-      perHourPrice: double.parse(parking["priceHours"]),
+      perHourPrice: double.tryParse(parking["priceHours"].toString()),
       rating: double.tryParse(
         parking["rating"].toString(),
       ),
@@ -77,7 +77,7 @@ class Parking {
           mainPicture: parking["mainPicture"],
           features: _features,
           pictures: _pictures,
-          perHourPrice: double.parse(parking["priceHours"]),
+          perHourPrice: double.tryParse(parking["priceHours"].toString()),
           rating: double.tryParse(
             parking["rating"].toString(),
           ),

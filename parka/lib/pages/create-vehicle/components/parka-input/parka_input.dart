@@ -180,7 +180,7 @@ class ParkaTextField extends StatelessWidget {
     this.maxLength,
     this.enabled,
     @required this.label,
-    @required this.onChangedHandler,
+    this.onChangedHandler,
   }) : super(key: key);
 
   final String label;
