@@ -1,5 +1,6 @@
 import 'package:ParkA/data/data-models/calendar/calendar_data_model.dart';
 import 'package:ParkA/data/data-models/feature/parking_feature_data_model.dart';
+import 'package:ParkA/data/data-models/user/user_data_model.dart';
 
 class Parking {
   final String id;
@@ -18,6 +19,7 @@ class Parking {
   final List<Feature> features;
   final bool verified;
   final double rating;
+  final User user;
 
   Parking({
     this.rating,
@@ -36,6 +38,7 @@ class Parking {
     this.sector,
     this.status,
     this.verified,
+    this.user,
   });
 
   static Parking parkingFromJson(Map<String, dynamic> parking) {
@@ -56,6 +59,7 @@ class Parking {
         parking["rating"].toString(),
       ),
       information: parking["information"],
+      user: User.userFromJson(parking['user']),
     );
   }
 

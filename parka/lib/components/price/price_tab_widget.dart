@@ -1,15 +1,19 @@
-import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
 
 class ParkingPriceWidgetTab extends StatelessWidget {
   const ParkingPriceWidgetTab({
     Key key,
-    @required Parking parking,
-  })  : _parking = parking,
-        super(key: key);
+    @required this.value,
+    this.valueStyle,
+    @required this.label,
+    this.labelStyle,
+  }) : super(key: key);
 
-  final Parking _parking;
+  final String label;
+  final TextStyle labelStyle;
+  final TextStyle valueStyle;
+  final String value;
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +23,13 @@ class ParkingPriceWidgetTab extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Text(
-            "Precio por hora",
+            this.label,
             style: kParkaTextStyleBoldGreen18,
           ),
         ),
         Text(
-          '\$RD ${this._parking.perHourPrice}/Hora',
-          style: kParkaTextStyleBlack18,
+          this.value,
+          style: this.valueStyle ?? kParkaTextStyleBlack18,
         )
       ],
     );

@@ -1,14 +1,19 @@
 import 'package:ParkA/styles/text.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class InfoLabelWidget extends StatelessWidget {
   final String label;
   final String value;
+  final TextStyle labelStyle;
+  final TextStyle valueStyle;
 
   const InfoLabelWidget({
     Key key,
     @required this.label,
     @required this.value,
+    this.labelStyle,
+    this.valueStyle,
   }) : super(key: key);
 
   @override
@@ -19,16 +24,22 @@ class InfoLabelWidget extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: Text(
-              this.label,
-              style: kParkaTextStyleBoldGreen18,
+          Expanded(
+            flex: 0,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: Text(
+                this.label,
+                style: this.labelStyle ?? kParkaTextStyleBoldGreen18,
+              ),
             ),
           ),
-          Text(
-            this.value ?? "",
-            style: kParkaTextStyleBoldBlack18,
+          Expanded(
+            child: AutoSizeText(
+              this.value ?? "",
+              maxLines: 1,
+              style: this.valueStyle ?? kParkaTextStyleBoldBlack18,
+            ),
           ),
         ],
       ),

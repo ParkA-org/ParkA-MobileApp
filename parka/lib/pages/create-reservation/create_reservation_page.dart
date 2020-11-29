@@ -1,25 +1,20 @@
 import 'package:ParkA/components/buttons/reservation_form_payment_selector.dart';
 import 'package:ParkA/components/buttons/reservation_form_vehicle_selector.dart';
-import 'package:ParkA/components/cards/credit_card_mini_tile.dart';
-import 'package:ParkA/components/cards/vehicle_mini_list_tile.dart';
 import 'package:ParkA/components/floating-action-button/parka_floating_action_button.dart';
 import 'package:ParkA/components/info/info_label.dart';
 import 'package:ParkA/components/inputs/parka_time_selector_widget/time_selector_pill_widget.dart';
 import 'package:ParkA/components/price/price_tab_widget.dart';
 import 'package:ParkA/controllers/create-reservation-form/create_reservation_controller.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
-import 'package:ParkA/data/data-models/payment/payment_data_model.dart';
-import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
 import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
+import 'package:ParkA/pages/create-reservation/steps/confirm_reservation_page.dart';
 import 'package:ParkA/pages/create-reservation/steps/select_payment_method_page.dart';
 import 'package:ParkA/pages/create-reservation/steps/select_vehile_page.dart';
-import 'package:ParkA/pages/edit-parking/edit_parking_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class CreateParkingReservationPage extends StatefulWidget {
@@ -72,9 +67,7 @@ class _CreateParkingReservationPageState
       floatingActionButton: ParkaFloatingActionButton(
         iconData: Icons.edit,
         onPressedHandler: () {
-          Get.to(EditParkingPage(
-            parking: this._parking,
-          ));
+          Get.to(ConfirmReservationPage());
         },
       ),
       body: SafeArea(
@@ -168,7 +161,9 @@ class _CreateParkingReservationPageState
                             child: Column(
                               children: [
                                 ParkingPriceWidgetTab(
-                                  parking: this._parking,
+                                  label: "Precio por hora",
+                                  value:
+                                      '\$RD ${this._parking.perHourPrice}/Hora',
                                 ),
                                 DateTimeReservationPicker(),
                                 Divider(

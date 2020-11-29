@@ -120,6 +120,17 @@ final kParkaTextStyleBlack18 = kParkaTextBaseStyleBold.copyWith(
   fontWeight: FontWeight.normal,
 );
 
+final kParkaTextStyleBlack16 = kParkaTextBaseStyleBold.copyWith(
+  color: Colors.black,
+  fontSize: 16.0,
+  fontWeight: FontWeight.normal,
+);
+
+final kParkaTextStyleBoldBlack16 = kParkaTextBaseStyleBold.copyWith(
+  color: Colors.black,
+  fontSize: 16.0,
+);
+
 final kParkaTextStyleBoldBlack18 = kParkaTextBaseStyleBold.copyWith(
   color: Colors.black,
   fontSize: 18.0,

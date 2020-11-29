@@ -8,7 +8,6 @@ class CreateReservationFormController extends GetxController {
   Rx<CreateReservationDto> _createReservationDto =
       new CreateReservationDto().obs;
 
-  // owner:"",
   // checkInDate:"",
   // checkOutDate:"",
   // total:90,
@@ -19,7 +18,8 @@ class CreateReservationFormController extends GetxController {
 
   void setParkingData(Parking _parkingData) {
     _createReservationDto.update((_instance) {
-      _instance.parking = _parkingData.id;
+      _instance.parking = _parkingData;
+      _instance.owner = _parkingData.user;
     });
   }
 

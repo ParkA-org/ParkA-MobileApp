@@ -76,6 +76,12 @@ query($data: String!) {
     }
     verified
     rating
+    user{
+      id
+      name
+      lastName
+      profilePicture
+    }
   }
 }
 """;
