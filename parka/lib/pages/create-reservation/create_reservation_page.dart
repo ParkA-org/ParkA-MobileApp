@@ -1,3 +1,4 @@
+import 'package:ParkA/components/cards/vehicle_mini_list_tile.dart';
 import 'package:ParkA/components/floating-action-button/parka_floating_action_button.dart';
 import 'package:ParkA/components/inputs/parka_time_selector_widget/time_selector_pill_widget.dart';
 import 'package:ParkA/components/price/price_tab_widget.dart';
@@ -6,6 +7,7 @@ import 'package:ParkA/data/data-models/payment/payment_data_model.dart';
 import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
 import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
 import 'package:ParkA/pages/create-reservation/steps/select_payment_method_page.dart';
+import 'package:ParkA/pages/create-reservation/steps/select_vehile_page.dart';
 import 'package:ParkA/pages/edit-parking/edit_parking_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
@@ -63,6 +65,7 @@ class _CreateParkingReservationPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       floatingActionButton: ParkaFloatingActionButton(
         iconData: Icons.edit,
         onPressedHandler: () {
@@ -182,10 +185,12 @@ class _CreateParkingReservationPageState
                                   thickness: 1.0,
                                   color: Color(0xFF949494),
                                 ),
-                                VehicleSelectorWidget(),
-                                Divider(
-                                  thickness: 1.0,
-                                  color: Color(0xFF949494),
+                                VehicleSelectorWidget(
+                                  onTapHandler: () {
+                                    Get.to(SelectVehiclePage(
+                                      parking: this._parking,
+                                    ));
+                                  },
                                 ),
                                 InfoLabelWidget(
                                   label: "Total:",
@@ -242,10 +247,12 @@ class InfoLabelWidget extends StatelessWidget {
 
 class VehicleSelectorWidget extends StatelessWidget {
   final Vehicle vehicle;
+  final Function onTapHandler;
 
   const VehicleSelectorWidget({
     Key key,
     this.vehicle,
+    this.onTapHandler,
   }) : super(key: key);
 
   @override
@@ -260,52 +267,11 @@ class VehicleSelectorWidget extends StatelessWidget {
             style: kParkaTextStyleBoldGreen18,
           ),
         ),
-        MiniVehicleListTile(vehicle: this.vehicle)
+        MiniVehicleListTile(
+          vehicle: this.vehicle,
+          onTapHandler: this.onTapHandler,
+        )
       ],
-    );
-  }
-}
-
-class MiniVehicleListTile extends StatelessWidget {
-  const MiniVehicleListTile({
-    Key key,
-    @required this.vehicle,
-    this.onTapHandler,
-  }) : super(key: key);
-
-  final Vehicle vehicle;
-  final Function onTapHandler;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: this.onTapHandler,
-      child: Container(
-          height: 50.0,
-          child: Row(
-            children: [
-              Expanded(
-                child: this.vehicle == null
-                    ? Container(
-                        child: AutoSizeText(
-                          "Selecciona un vehiculo",
-                          maxLines: 1,
-                          style: kParkaTextStyleGrey18,
-                        ),
-                      )
-                    : Column(
-                        children: [],
-                      ),
-              ),
-              Expanded(
-                flex: 0,
-                child: Icon(
-                  Icons.keyboard_arrow_right,
-                  color: Color(0xFF949494),
-                ),
-              )
-            ],
-          )),
     );
   }
 }
@@ -356,7 +322,7 @@ class PaymentCardTile extends StatelessWidget {
     return GestureDetector(
       onTap: this.onTapHandler,
       child: Container(
-          height: 50.0,
+          height: 60.0,
           child: Row(
             children: [
               Expanded(

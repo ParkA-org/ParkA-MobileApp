@@ -103,6 +103,11 @@ final kParkaTextStyleGreen18 = kParkaTextBaseStyleBold.copyWith(
   fontWeight: FontWeight.normal,
 );
 
+final kParkaTextStyleGreen14 = kParkaTextBaseStyleBold.copyWith(
+  fontSize: 14.0,
+  fontWeight: FontWeight.normal,
+);
+
 final kParkaTextStyleGrey18 = kParkaTextBaseStyleBold.copyWith(
   fontSize: 18.0,
   fontWeight: FontWeight.normal,
