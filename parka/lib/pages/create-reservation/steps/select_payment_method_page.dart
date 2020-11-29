@@ -1,4 +1,5 @@
 import 'package:ParkA/components/floating-action-button/parka_floating_action_button.dart';
+import 'package:ParkA/controllers/create-reservation-form/create_reservation_controller.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/use-cases/payment/payment_use_cases.dart';
 import 'package:ParkA/pages/user-payments/components/card_preview_widget.dart';
@@ -6,6 +7,7 @@ import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class SelectPaymentMethodPage extends StatefulWidget {
@@ -23,6 +25,9 @@ class SelectPaymentMethodPage extends StatefulWidget {
 }
 
 class _SelectPaymentMethodPageState extends State<SelectPaymentMethodPage> {
+  CreateReservationFormController _formController =
+      Get.find<CreateReservationFormController>();
+
   Parking _parking;
   bool _loading;
 
@@ -45,7 +50,10 @@ class _SelectPaymentMethodPageState extends State<SelectPaymentMethodPage> {
           payment: element,
         ),
         color: Colors.white,
-        onPressed: () => {},
+        onPressed: () {
+          _formController.setPaymentInfo(element);
+          Get.back();
+        },
       ));
     });
 

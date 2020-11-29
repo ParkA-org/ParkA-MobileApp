@@ -99,20 +99,21 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
                     ),
                     Expanded(
                       child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: AutoSizeText(
-                              "Metodos de Pago",
-                              maxLines: 1,
-                              maxFontSize: 40,
-                              minFontSize: 30,
-                              style: TextStyle(
-                                  fontFamily: "Montserrat",
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          )),
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 16.0),
+                          child: AutoSizeText(
+                            "Metodos de Pago",
+                            maxLines: 1,
+                            maxFontSize: 40,
+                            minFontSize: 30,
+                            style: TextStyle(
+                                fontFamily: "Montserrat",
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),

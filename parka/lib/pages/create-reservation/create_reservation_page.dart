@@ -1,7 +1,9 @@
+import 'package:ParkA/components/cards/credit_card_mini_tile.dart';
 import 'package:ParkA/components/cards/vehicle_mini_list_tile.dart';
 import 'package:ParkA/components/floating-action-button/parka_floating_action_button.dart';
 import 'package:ParkA/components/inputs/parka_time_selector_widget/time_selector_pill_widget.dart';
 import 'package:ParkA/components/price/price_tab_widget.dart';
+import 'package:ParkA/controllers/create-reservation-form/create_reservation_controller.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/payment/payment_data_model.dart';
 import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
@@ -33,6 +35,9 @@ class CreateParkingReservationPage extends StatefulWidget {
 
 class _CreateParkingReservationPageState
     extends State<CreateParkingReservationPage> {
+  CreateReservationFormController _formController =
+      Get.put(CreateReservationFormController());
+
   String _parkingId;
   Parking _parking;
   bool _loading;
@@ -172,25 +177,39 @@ class _CreateParkingReservationPageState
                                   thickness: 1.0,
                                   color: Color(0xFF949494),
                                 ),
-                                PaymentMethodSelectorWidget(
-                                  onTapHandler: () {
-                                    Get.to(
-                                      SelectPaymentMethodPage(
-                                        parking: this._parking,
-                                      ),
-                                    );
-                                  },
+                                Obx(
+                                  () => PaymentMethodSelectorWidget(
+                                    payment: this
+                                        ._formController
+                                        .createReservationDto
+                                        .paymentInfo,
+                                    onTapHandler: () {
+                                      Get.to(
+                                        SelectPaymentMethodPage(
+                                          parking: this._parking,
+                                        ),
+                                      );
+                                    },
+                                  ),
                                 ),
                                 Divider(
                                   thickness: 1.0,
                                   color: Color(0xFF949494),
                                 ),
-                                VehicleSelectorWidget(
-                                  onTapHandler: () {
-                                    Get.to(SelectVehiclePage(
-                                      parking: this._parking,
-                                    ));
-                                  },
+                                Obx(
+                                  () => VehicleSelectorWidget(
+                                    vehicle: this
+                                        ._formController
+                                        .createReservationDto
+                                        .vehicle,
+                                    onTapHandler: () {
+                                      Get.to(
+                                        SelectVehiclePage(
+                                          parking: this._parking,
+                                        ),
+                                      );
+                                    },
+                                  ),
                                 ),
                                 InfoLabelWidget(
                                   label: "Total:",
@@ -303,55 +322,6 @@ class PaymentMethodSelectorWidget extends StatelessWidget {
           onTapHandler: this.onTapHandler,
         ),
       ],
-    );
-  }
-}
-
-class PaymentCardTile extends StatelessWidget {
-  const PaymentCardTile({
-    Key key,
-    @required this.payment,
-    this.onTapHandler,
-  }) : super(key: key);
-
-  final Payment payment;
-  final Function onTapHandler;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: this.onTapHandler,
-      child: Container(
-          height: 60.0,
-          child: Row(
-            children: [
-              Expanded(
-                child: this.payment == null
-                    ? Container(
-                        child: AutoSizeText(
-                          "Selecciona un metodo de pago",
-                          maxLines: 1,
-                          style: kParkaTextStyleGrey18,
-                        ),
-                      )
-                    : Column(
-                        children: [
-                          Text(this.payment.cardHolder),
-                          Text(
-                            "• • • •  ${this.payment.digit}",
-                          )
-                        ],
-                      ),
-              ),
-              Expanded(
-                flex: 0,
-                child: Icon(
-                  Icons.keyboard_arrow_right,
-                  color: Color(0xFF949494),
-                ),
-              )
-            ],
-          )),
     );
   }
 }
