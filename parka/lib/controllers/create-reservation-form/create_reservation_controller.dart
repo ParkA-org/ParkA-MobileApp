@@ -2,6 +2,7 @@ import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/payment/payment_data_model.dart';
 import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
 import 'package:ParkA/data/dtos/reservation/create_reservation_dto.dart';
+import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
 import 'package:get/get.dart';
 
 class CreateReservationFormController extends GetxController {
@@ -33,5 +34,18 @@ class CreateReservationFormController extends GetxController {
     _createReservationDto.update((_instance) {
       _instance.paymentInfo = _payment;
     });
+  }
+
+  void setReservationDate(DateTime _datetime) {
+    _createReservationDto.update((_instance) {
+      _instance.rentDate = _datetime;
+    });
+  }
+
+  Future<bool> createReservation() async {
+    final result = await ReservationUseCases.createReservation(
+        this._createReservationDto.value);
+
+    return result;
   }
 }

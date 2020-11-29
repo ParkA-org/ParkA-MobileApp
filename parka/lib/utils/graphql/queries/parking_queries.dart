@@ -109,3 +109,16 @@ query($userLocation: FilterInput!) {
 }
 
 """;
+
+const String getParkingAvaliabilityQuery = r""" 
+query($data:GetParkingCalendarInput!){
+  getParkingAvaliability(getParkingCalendarInput:$data){
+    id
+    parking
+    schedules{
+      start
+      finish
+    }
+  }
+}
+""";

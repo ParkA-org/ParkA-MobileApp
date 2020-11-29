@@ -1,5 +1,6 @@
 import 'package:ParkA/components/buttons/reservation_form_payment_selector.dart';
 import 'package:ParkA/components/buttons/reservation_form_vehicle_selector.dart';
+import 'package:ParkA/components/buttons/round_button.dart';
 import 'package:ParkA/components/info/info_label.dart';
 import 'package:ParkA/components/price/price_tab_widget.dart';
 import 'package:ParkA/components/user/other_user_personal_information_widget.dart';
@@ -215,7 +216,7 @@ class ConfirmReservationPage extends StatelessWidget {
                             ParkingPriceWidgetTab(
                               label: "Precio por hora",
                               value:
-                                  '\$RD ${this._formController.createReservationDto.parking.perHourPrice}/Hora',
+                                  'RD\$ ${this._formController.createReservationDto.parking.perHourPrice}',
                               valueStyle: kParkaTextStyleBoldBlack16,
                             ),
                             Divider(
@@ -261,6 +262,24 @@ class ConfirmReservationPage extends StatelessWidget {
                                 "\$${this._formController.createReservationDto.total ?? 0} RD",
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: RoundedButton(
+                            hasShadow: false,
+                            hasIcon: false,
+                            label: "Confirmar reserva",
+                            color: ParkaColors.parkaGreen,
+                            onTapHandler: () async {
+                              final result = await this
+                                  ._formController
+                                  .createReservation();
+
+                              if (result) {
+                                print("OK");
+                              }
+                            },
+                          ),
+                        )
                       ],
                     ),
                   ),

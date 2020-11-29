@@ -11,5 +11,5 @@ class CreateReservationDto {
   Vehicle vehicle;
   Payment paymentInfo;
   double total;
-  String rentDate;
+  DateTime rentDate;
 }
