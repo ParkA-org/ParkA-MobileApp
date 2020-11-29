@@ -1,9 +1,7 @@
 import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/pages/login/components/login_form.dart';
-
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:flutter/material.dart';
-
 import 'components/login_header.dart';
 
 class EmailLogin extends StatelessWidget {
