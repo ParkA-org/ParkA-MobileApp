@@ -1,6 +1,9 @@
+import 'package:ParkA/components/buttons/reservation_form_payment_selector.dart';
+import 'package:ParkA/components/buttons/reservation_form_vehicle_selector.dart';
 import 'package:ParkA/components/cards/credit_card_mini_tile.dart';
 import 'package:ParkA/components/cards/vehicle_mini_list_tile.dart';
 import 'package:ParkA/components/floating-action-button/parka_floating_action_button.dart';
+import 'package:ParkA/components/info/info_label.dart';
 import 'package:ParkA/components/inputs/parka_time_selector_widget/time_selector_pill_widget.dart';
 import 'package:ParkA/components/price/price_tab_widget.dart';
 import 'package:ParkA/controllers/create-reservation-form/create_reservation_controller.dart';
@@ -41,7 +44,6 @@ class _CreateParkingReservationPageState
   String _parkingId;
   Parking _parking;
   bool _loading;
-  BitmapDescriptor _markerIcon;
 
   @override
   void initState() {
@@ -49,18 +51,14 @@ class _CreateParkingReservationPageState
     this._loading = true;
     this._parkingId = this.widget.parkingId;
 
-    BitmapDescriptor.fromAssetImage(
-            ImageConfiguration.empty, 'resources/images/green-parking-icon.png')
-        .then((onValue) {
-      _markerIcon = onValue;
-    });
-
     getParking();
   }
 
   Future getParking() async {
     this._parking = await ParkingUseCases.getParkingById(this._parkingId);
+
     if (this._parking != null) {
+      this._formController.setParkingData(this._parking);
       this._loading = false;
     }
 
@@ -211,9 +209,12 @@ class _CreateParkingReservationPageState
                                     },
                                   ),
                                 ),
-                                InfoLabelWidget(
-                                  label: "Total:",
-                                  value: "\$900 RD",
+                                Obx(
+                                  () => InfoLabelWidget(
+                                    label: "Total:",
+                                    value:
+                                        "\$${this._formController.createReservationDto.total ?? 0} RD",
+                                  ),
                                 ),
                               ],
                             ),
@@ -225,103 +226,6 @@ class _CreateParkingReservationPageState
                 ),
         ),
       ),
-    );
-  }
-}
-
-class InfoLabelWidget extends StatelessWidget {
-  final String label;
-  final String value;
-
-  const InfoLabelWidget({
-    Key key,
-    @required this.label,
-    @required this.value,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 8.0,
-      ),
-      child: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: Text(
-              this.label,
-              style: kParkaTextStyleBoldGreen18,
-            ),
-          ),
-          Text(
-            this.value ?? "",
-            style: kParkaTextStyleBoldBlack18,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class VehicleSelectorWidget extends StatelessWidget {
-  final Vehicle vehicle;
-  final Function onTapHandler;
-
-  const VehicleSelectorWidget({
-    Key key,
-    this.vehicle,
-    this.onTapHandler,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(
-            "Vehicle",
-            style: kParkaTextStyleBoldGreen18,
-          ),
-        ),
-        MiniVehicleListTile(
-          vehicle: this.vehicle,
-          onTapHandler: this.onTapHandler,
-        )
-      ],
-    );
-  }
-}
-
-class PaymentMethodSelectorWidget extends StatelessWidget {
-  final Function onTapHandler;
-  final Payment payment;
-
-  const PaymentMethodSelectorWidget({
-    Key key,
-    this.payment,
-    this.onTapHandler,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(
-            "Metodo de pago",
-            style: kParkaTextStyleBoldGreen18,
-          ),
-        ),
-        PaymentCardTile(
-          payment: payment,
-          onTapHandler: this.onTapHandler,
-        ),
-      ],
     );
   }
 }
