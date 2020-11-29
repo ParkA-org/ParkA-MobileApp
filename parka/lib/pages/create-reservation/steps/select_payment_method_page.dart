@@ -1,5 +1,4 @@
 import 'package:ParkA/controllers/create-reservation-form/create_reservation_controller.dart';
-import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/use-cases/payment/payment_use_cases.dart';
 import 'package:ParkA/pages/user-payments/components/card_preview_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
@@ -12,12 +11,6 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 class SelectPaymentMethodPage extends StatefulWidget {
   static String routeName = "select-payment-method-page";
 
-  final Parking parking;
-
-  SelectPaymentMethodPage({
-    @required this.parking,
-  });
-
   @override
   _SelectPaymentMethodPageState createState() =>
       _SelectPaymentMethodPageState();
@@ -27,7 +20,6 @@ class _SelectPaymentMethodPageState extends State<SelectPaymentMethodPage> {
   CreateReservationFormController _formController =
       Get.find<CreateReservationFormController>();
 
-  Parking _parking;
   bool _loading;
 
   List userPaymentMethods;
@@ -63,7 +55,7 @@ class _SelectPaymentMethodPageState extends State<SelectPaymentMethodPage> {
   void initState() {
     super.initState();
     this._loading = true;
-    this._parking = this.widget.parking;
+
     this.getAllUserPayment();
   }
 
@@ -95,7 +87,11 @@ class _SelectPaymentMethodPageState extends State<SelectPaymentMethodPage> {
                             children: [
                               Expanded(
                                 child: AutoSizeText(
-                                  this._parking.parkingName,
+                                  this
+                                      ._formController
+                                      .createReservationDto
+                                      .parking
+                                      .parkingName,
                                   maxLines: 1,
                                   style: kParkaTextStyleBold16,
                                 ),
@@ -107,7 +103,7 @@ class _SelectPaymentMethodPageState extends State<SelectPaymentMethodPage> {
                                   child: Row(
                                     children: [
                                       AutoSizeText(
-                                        '${this._parking.rating.toStringAsPrecision(2)}',
+                                        '${this._formController.createReservationDto.parking.rating.toStringAsPrecision(2)}',
                                         maxLines: 1,
                                         style: kParkaTextStyleBold16,
                                       ),
@@ -132,7 +128,11 @@ class _SelectPaymentMethodPageState extends State<SelectPaymentMethodPage> {
                           children: [
                             Image(
                               fit: BoxFit.cover,
-                              image: NetworkImage(_parking.mainPicture),
+                              image: NetworkImage(this
+                                  ._formController
+                                  .createReservationDto
+                                  .parking
+                                  .mainPicture),
                             ),
                             Container(
                               decoration: BoxDecoration(boxShadow: [

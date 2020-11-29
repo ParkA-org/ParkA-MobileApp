@@ -1,6 +1,5 @@
 import 'package:ParkA/components/cards/vehicle_mini_list_tile.dart';
 import 'package:ParkA/controllers/create-reservation-form/create_reservation_controller.dart';
-import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
 import 'package:ParkA/data/use-cases/vehicle/vehicle_use_cases.dart';
 import 'package:ParkA/styles/parka_colors.dart';
@@ -13,12 +12,6 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 class SelectVehiclePage extends StatefulWidget {
   static String routeName = "select-vehicle-page";
 
-  final Parking parking;
-
-  SelectVehiclePage({
-    @required this.parking,
-  });
-
   @override
   _SelectVehiclePageState createState() => _SelectVehiclePageState();
 }
@@ -27,7 +20,6 @@ class _SelectVehiclePageState extends State<SelectVehiclePage> {
   CreateReservationFormController _formController =
       Get.find<CreateReservationFormController>();
 
-  Parking _parking;
   bool _loading;
 
   List<Vehicle> userVehicles;
@@ -62,7 +54,7 @@ class _SelectVehiclePageState extends State<SelectVehiclePage> {
   void initState() {
     super.initState();
     this._loading = true;
-    this._parking = this.widget.parking;
+
     this.getAllUserPayment();
   }
 
@@ -95,7 +87,11 @@ class _SelectVehiclePageState extends State<SelectVehiclePage> {
                             children: [
                               Expanded(
                                 child: AutoSizeText(
-                                  this._parking.parkingName,
+                                  this
+                                      ._formController
+                                      .createReservationDto
+                                      .parking
+                                      .parkingName,
                                   maxLines: 1,
                                   style: kParkaTextStyleBold16,
                                 ),
@@ -107,7 +103,7 @@ class _SelectVehiclePageState extends State<SelectVehiclePage> {
                                   child: Row(
                                     children: [
                                       AutoSizeText(
-                                        '${this._parking.rating.toStringAsPrecision(2)}',
+                                        '${this._formController.createReservationDto.parking.rating.toStringAsPrecision(2)}',
                                         maxLines: 1,
                                         style: kParkaTextStyleBold16,
                                       ),
@@ -132,7 +128,11 @@ class _SelectVehiclePageState extends State<SelectVehiclePage> {
                           children: [
                             Image(
                               fit: BoxFit.cover,
-                              image: NetworkImage(_parking.mainPicture),
+                              image: NetworkImage(this
+                                  ._formController
+                                  .createReservationDto
+                                  .parking
+                                  .mainPicture),
                             ),
                             Container(
                               decoration: BoxDecoration(boxShadow: [

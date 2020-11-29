@@ -4,7 +4,6 @@ import 'package:ParkA/components/info/info_label.dart';
 import 'package:ParkA/components/price/price_tab_widget.dart';
 import 'package:ParkA/components/user/other_user_personal_information_widget.dart';
 import 'package:ParkA/controllers/create-reservation-form/create_reservation_controller.dart';
-import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/pages/create-reservation/steps/select_payment_method_page.dart';
 import 'package:ParkA/pages/create-reservation/steps/select_vehile_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
@@ -13,27 +12,11 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:modal_progress_hud/modal_progress_hud.dart';
-
-class ConfirmReservationPage extends StatefulWidget {
+class ConfirmReservationPage extends StatelessWidget {
   static String routeName = "confirm-reservation-page";
 
-  @override
-  _ConfirmReservationPageState createState() => _ConfirmReservationPageState();
-}
-
-class _ConfirmReservationPageState extends State<ConfirmReservationPage> {
-  CreateReservationFormController _formController =
+  final CreateReservationFormController _formController =
       Get.find<CreateReservationFormController>();
-
-  Parking _parking;
-  bool _loading;
-
-  @override
-  void initState() {
-    super.initState();
-    this._loading = false;
-  }
 
   String _formatDate(String _date) {
     // if (_date == null) return "";
@@ -68,230 +51,223 @@ class _ConfirmReservationPageState extends State<ConfirmReservationPage> {
 
   @override
   Widget build(BuildContext context) {
-    this._parking = this._formController.createReservationDto.parking;
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: ModalProgressHUD(
-          color: ParkaColors.parkaGreen,
-          inAsyncCall: this._loading,
-          child: this._loading
-              ? Container(
-                  color: ParkaColors.parkaGreen,
-                )
-              : CustomScrollView(
-                  slivers: [
-                    SliverAppBar(
-                      pinned: true,
-                      expandedHeight: 250.0,
-                      backgroundColor: ParkaColors.parkaGreen,
-                      flexibleSpace: FlexibleSpaceBar(
-                        title: Container(
-                          margin: EdgeInsets.only(right: 8.0),
-                          padding: EdgeInsets.all(4.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              pinned: true,
+              expandedHeight: 250.0,
+              backgroundColor: ParkaColors.parkaGreen,
+              flexibleSpace: FlexibleSpaceBar(
+                title: Container(
+                  margin: EdgeInsets.only(right: 8.0),
+                  padding: EdgeInsets.all(4.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: AutoSizeText(
+                          this
+                              ._formController
+                              .createReservationDto
+                              .parking
+                              .parkingName,
+                          maxLines: 1,
+                          style: kParkaTextStyleBold16,
+                        ),
+                      ),
+                      Expanded(
+                        flex: 0,
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 2.0),
                           child: Row(
                             children: [
-                              Expanded(
-                                child: AutoSizeText(
-                                  this._parking.parkingName,
-                                  maxLines: 1,
-                                  style: kParkaTextStyleBold16,
+                              AutoSizeText(
+                                '${this._formController.createReservationDto.parking.rating.toPrecision(2)}',
+                                maxLines: 1,
+                                style: kParkaTextStyleBold16,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: Icon(
+                                  Icons.star,
+                                  color: Colors.white,
+                                  size: 16.0,
                                 ),
                               ),
-                              Expanded(
-                                flex: 0,
-                                child: Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 2.0),
-                                  child: Row(
-                                    children: [
-                                      AutoSizeText(
-                                        '${this._parking.rating.toPrecision(2)}',
-                                        maxLines: 1,
-                                        style: kParkaTextStyleBold16,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(2.0),
-                                        child: Icon(
-                                          Icons.star,
-                                          color: Colors.white,
-                                          size: 16.0,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
                             ],
                           ),
                         ),
-                        background: Stack(
-                          alignment: Alignment.center,
-                          fit: StackFit.expand,
-                          children: [
-                            Image(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(_parking.mainPicture),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(boxShadow: [
-                                BoxShadow(
-                                  offset: Offset(0, 190.0),
-                                  color: Colors.black54,
-                                  blurRadius: 18.0,
-                                  spreadRadius: 15.0,
-                                ),
-                              ]),
-                            )
-                          ],
-                        ),
-                      ),
+                      )
+                    ],
+                  ),
+                ),
+                background: Stack(
+                  alignment: Alignment.center,
+                  fit: StackFit.expand,
+                  children: [
+                    Image(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(this
+                          ._formController
+                          .createReservationDto
+                          .parking
+                          .mainPicture),
                     ),
-                    SliverList(
-                      delegate: SliverChildListDelegate(
-                        [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(
-                              24.0,
-                              0,
-                              24.0,
-                              24.0,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Container(
-                                  color: Colors.white,
-                                  padding: const EdgeInsets.only(
-                                    top: 8.0,
-                                  ),
-                                  child: Text(
-                                    "Resumen de Reserva",
-                                    style: kParkaTextStyleBoldGreen22,
-                                  ),
-                                ),
-                                Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0),
-                                      child: Text(
-                                        "Propietario",
-                                        style: kParkaTextStyleBoldGreen18,
-                                      ),
-                                    ),
-                                    Obx(
-                                      () =>
-                                          OtherUserProfilePersonalInformationWidget(
-                                        user: this
-                                            ._formController
-                                            .createReservationDto
-                                            .parking
-                                            .user,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0),
-                                      child: Text(
-                                        "Fecha",
-                                        style: kParkaTextStyleBoldGreen18,
-                                      ),
-                                    ),
-                                    Obx(
-                                      () => InfoLabelWidget(
-                                        label: "Desde:",
-                                        labelStyle: kParkaTextStyleBoldBlack16,
-                                        valueStyle: kParkaTextStyleBlack16,
-                                        value: _formatDate(this
-                                            ._formController
-                                            .createReservationDto
-                                            .checkInDate),
-                                      ),
-                                    ),
-                                    Obx(
-                                      () => InfoLabelWidget(
-                                        label: "Hasta:",
-                                        labelStyle: kParkaTextStyleBoldBlack16,
-                                        valueStyle: kParkaTextStyleBlack16,
-                                        value: _formatDate(this
-                                            ._formController
-                                            .createReservationDto
-                                            .checkInDate),
-                                      ),
-                                    ),
-                                    ParkingPriceWidgetTab(
-                                      label: "Precio por hora",
-                                      value:
-                                          '\$RD ${this._parking.perHourPrice}/Hora',
-                                      valueStyle: kParkaTextStyleBoldBlack16,
-                                    ),
-                                    Divider(
-                                      thickness: 1.0,
-                                      color: Color(0xFF949494),
-                                    ),
-                                  ],
-                                ),
-                                Obx(
-                                  () => PaymentMethodSelectorWidget(
-                                    payment: this
-                                        ._formController
-                                        .createReservationDto
-                                        .paymentInfo,
-                                    onTapHandler: () {
-                                      Get.to(
-                                        SelectPaymentMethodPage(
-                                          parking: this._parking,
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                                Divider(
-                                  thickness: 1.0,
-                                  color: Color(0xFF949494),
-                                ),
-                                Obx(
-                                  () => VehicleSelectorWidget(
-                                    vehicle: this
-                                        ._formController
-                                        .createReservationDto
-                                        .vehicle,
-                                    onTapHandler: () {
-                                      Get.to(
-                                        SelectVehiclePage(
-                                          parking: this._parking,
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                                Obx(
-                                  () => InfoLabelWidget(
-                                    label: "Total a pagar:",
-                                    value:
-                                        "\$${this._formController.createReservationDto.total ?? 0} RD",
-                                  ),
-                                ),
-                              ],
-                            ),
+                    Container(
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(0, 190.0),
+                            color: Colors.black54,
+                            blurRadius: 18.0,
+                            spreadRadius: 15.0,
                           ),
                         ],
                       ),
                     )
                   ],
                 ),
+              ),
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(
+                      24.0,
+                      0,
+                      24.0,
+                      24.0,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Container(
+                          color: Colors.white,
+                          padding: const EdgeInsets.only(
+                            top: 8.0,
+                          ),
+                          child: Text(
+                            "Resumen de Reserva",
+                            style: kParkaTextStyleBoldGreen22,
+                          ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Text(
+                                "Propietario",
+                                style: kParkaTextStyleBoldGreen18,
+                              ),
+                            ),
+                            Obx(
+                              () => OtherUserProfilePersonalInformationWidget(
+                                user: this
+                                    ._formController
+                                    .createReservationDto
+                                    .parking
+                                    .user,
+                              ),
+                            )
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Text(
+                                "Fecha",
+                                style: kParkaTextStyleBoldGreen18,
+                              ),
+                            ),
+                            Obx(
+                              () => InfoLabelWidget(
+                                label: "Desde:",
+                                labelStyle: kParkaTextStyleBoldBlack16,
+                                valueStyle: kParkaTextStyleBlack16,
+                                value: _formatDate(this
+                                    ._formController
+                                    .createReservationDto
+                                    .checkInDate),
+                              ),
+                            ),
+                            Obx(
+                              () => InfoLabelWidget(
+                                label: "Hasta:",
+                                labelStyle: kParkaTextStyleBoldBlack16,
+                                valueStyle: kParkaTextStyleBlack16,
+                                value: _formatDate(this
+                                    ._formController
+                                    .createReservationDto
+                                    .checkInDate),
+                              ),
+                            ),
+                            ParkingPriceWidgetTab(
+                              label: "Precio por hora",
+                              value:
+                                  '\$RD ${this._formController.createReservationDto.parking.perHourPrice}/Hora',
+                              valueStyle: kParkaTextStyleBoldBlack16,
+                            ),
+                            Divider(
+                              thickness: 1.0,
+                              color: Color(0xFF949494),
+                            ),
+                          ],
+                        ),
+                        Obx(
+                          () => PaymentMethodSelectorWidget(
+                            payment: this
+                                ._formController
+                                .createReservationDto
+                                .paymentInfo,
+                            onTapHandler: () {
+                              Get.to(
+                                SelectPaymentMethodPage(),
+                              );
+                            },
+                          ),
+                        ),
+                        Divider(
+                          thickness: 1.0,
+                          color: Color(0xFF949494),
+                        ),
+                        Obx(
+                          () => VehicleSelectorWidget(
+                            vehicle: this
+                                ._formController
+                                .createReservationDto
+                                .vehicle,
+                            onTapHandler: () {
+                              Get.to(
+                                SelectVehiclePage(),
+                              );
+                            },
+                          ),
+                        ),
+                        Obx(
+                          () => InfoLabelWidget(
+                            label: "Total a pagar:",
+                            value:
+                                "\$${this._formController.createReservationDto.total ?? 0} RD",
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );

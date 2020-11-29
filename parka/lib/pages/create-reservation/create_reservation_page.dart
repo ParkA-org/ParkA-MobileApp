@@ -178,9 +178,7 @@ class _CreateParkingReservationPageState
                                         .paymentInfo,
                                     onTapHandler: () {
                                       Get.to(
-                                        SelectPaymentMethodPage(
-                                          parking: this._parking,
-                                        ),
+                                        SelectPaymentMethodPage(),
                                       );
                                     },
                                   ),
@@ -197,9 +195,7 @@ class _CreateParkingReservationPageState
                                         .vehicle,
                                     onTapHandler: () {
                                       Get.to(
-                                        SelectVehiclePage(
-                                          parking: this._parking,
-                                        ),
+                                        SelectVehiclePage(),
                                       );
                                     },
                                   ),
