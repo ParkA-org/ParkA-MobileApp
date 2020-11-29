@@ -88,16 +88,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 flex: 2,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: ParkaCircleAvatarWidget(
-                    imageUrl: userController.user.value?.profilePicture,
-                  ),
+                  child: Obx(() => ParkaCircleAvatarWidget(
+                        imageUrl: userController.user.value?.profilePicture,
+                      )),
                 ),
               ),
-              // Expanded(
-              //   child: ParkaTelephoneNumberInput(
-              //     telephoneNumberHandler: this.telephoneNumberHandler,
-              //   ),
-              // ),
               Expanded(
                 flex: 2,
                 child: Container(

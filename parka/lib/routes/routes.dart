@@ -1,5 +1,6 @@
 import 'package:ParkA/controllers/bindings/graphql_biding.dart';
 import 'package:ParkA/controllers/bindings/user_binding.dart';
+import 'package:ParkA/pages/chats/chat_user_page.dart';
 import 'package:ParkA/pages/chats/chats_page.dart';
 import 'package:ParkA/pages/confirm-account/confirm_account_page.dart';
 import 'package:ParkA/pages/create-parking/create_parking_page.dart';
@@ -192,6 +193,11 @@ List<GetPage> getRoutePages = [
   GetPage(
     name: ParkingImageEditorPage.routeName,
     page: () => ParkingImageEditorPage(),
+    bindings: [GraphqlClientBiding()],
+  ),
+  GetPage(
+    name: ChatUserPage.routeName,
+    page: () => ChatUserPage(),
     bindings: [GraphqlClientBiding()],
   ),
 ];

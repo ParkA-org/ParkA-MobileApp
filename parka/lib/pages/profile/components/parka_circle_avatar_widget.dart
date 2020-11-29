@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:get/utils.dart';
 
 const parkaCircleAvatarWidgetDefaultBoxStyle = BoxDecoration(
   shape: BoxShape.circle,
@@ -45,10 +48,14 @@ class ParkaCircleAvatarWidget extends StatelessWidget {
               ? parkaCircleAvatarWidgetDefaultBoxStyle
               : parkaCircleAvatarWidgetDefaultBoxStyle.copyWith(
                   image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: NetworkImage(
-                      this.imageUrl,
-                    ),
+                    fit: BoxFit.cover,
+                    image: GetUtils.isURL(this.imageUrl)
+                        ? NetworkImage(
+                            this.imageUrl,
+                          )
+                        : FileImage(
+                            File(this.imageUrl),
+                          ),
                   ),
                 ),
         );

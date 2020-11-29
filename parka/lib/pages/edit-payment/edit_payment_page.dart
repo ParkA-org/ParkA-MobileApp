@@ -24,6 +24,7 @@ class _EditPaymentScreenState extends State<EditPaymentScreen> {
   String creditCardNumber4 = "----";
   String creditCardMonth = "--";
   String creditCardYear = "--";
+  String id;
   String creditCardCvv;
   String expirationDate;
   String card = "";
@@ -40,21 +41,6 @@ class _EditPaymentScreenState extends State<EditPaymentScreen> {
         });
       },
       "creditCardNumberHandlers": [
-        (value) {
-          setState(() {
-            this.creditCardNumber1 = value;
-          });
-        },
-        (value) {
-          setState(() {
-            this.creditCardNumber2 = value;
-          });
-        },
-        (value) {
-          setState(() {
-            this.creditCardNumber3 = value;
-          });
-        },
         (value) {
           setState(() {
             this.creditCardNumber4 = value;
@@ -82,16 +68,17 @@ class _EditPaymentScreenState extends State<EditPaymentScreen> {
   }
 
   Future<void> sumbmitForm() async {
-    this.updatePaymentDto.cardHolder = this.fullName;
-    this.updatePaymentDto.card = this.card;
-    this.updatePaymentDto.digit = this.creditCardNumber1 +
-        this.creditCardNumber2 +
-        this.creditCardNumber3 +
-        this.creditCardNumber4;
-    this.updatePaymentDto.cvv = this.creditCardCvv;
-    this.updatePaymentDto.expirationDate =
-        "20" + this.creditCardYear + "-" + this.creditCardMonth + "-01";
-    print("tapped");
+    this.updatePaymentDto.id = this.id;
+    if (this.creditCardMonth.substring(0, 1) != "-") {
+      if (this.creditCardMonth.length == 1) {
+        this.creditCardMonth = "0" + this.creditCardMonth.toString();
+      }
+      this.updatePaymentDto.expirationDate = "20" +
+          this.creditCardYear.toString() +
+          "-" +
+          this.creditCardMonth +
+          "-01";
+    }
     final updatePaymentResult =
         await PaymentUseCases.updatePayment(this.updatePaymentDto);
 
@@ -112,13 +99,12 @@ class _EditPaymentScreenState extends State<EditPaymentScreen> {
     final Payment payment = ModalRoute.of(context).settings.arguments;
 
     this.fullName = payment.cardHolder;
-    this.card = payment.cardId;
-    this.creditCardNumber1 = payment.digit.substring(0, 4);
-    this.creditCardNumber2 = payment.digit.substring(4, 8);
-    this.creditCardNumber3 = payment.digit.substring(8, 12);
+    // this.creditCardMonth = payment.expirationDate.substring(5, 7);
+    // this.creditCardYear = payment.expirationDate.substring(2, 4);
     this.creditCardNumber4 = payment.digit.substring(12, 16);
-    this.creditCardYear = payment.expirationDate.substring(2, 4);
-    this.creditCardMonth = payment.expirationDate.substring(5, 7);
+    this.updatePaymentDto.expirationDate = payment.expirationDate;
+    this.id = payment.id;
+
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: SafeArea(

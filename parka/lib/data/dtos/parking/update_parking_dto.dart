@@ -1,5 +1,4 @@
 import 'package:ParkA/data/data-models/schedule/schedule_data_model.dart';
-import 'package:flutter/cupertino.dart';
 
 class UpdateParkingDto {
   final String parkingId;
@@ -26,7 +25,7 @@ class UpdateParkingDto {
     this.features,
     this.information,
     this.mainPicture,
-    @required this.parkingId,
+    this.parkingId,
     this.parkingName,
     this.pictures,
     this.priceHours,
