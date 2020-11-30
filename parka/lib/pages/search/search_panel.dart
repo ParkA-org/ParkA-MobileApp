@@ -92,23 +92,18 @@ class _SearchPanelState extends State<SearchPanel> {
               child: FavoritePlaceButton(),
             ),
             Expanded(
-              flex: 3,
-              child: GetX<MapController>(
-                builder: (controller) {
-                  return ListView.builder(
-                    itemCount: controller.filteredResults.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return FilterResultTile(
-                        parkingName:
-                            controller.filteredResults[index].parkingName,
-                        ownerName: "Silvio Arzeno",
-                        parkingspace: "10 M",
-                      );
-                    },
-                  );
-                },
-              ),
-            ),
+                flex: 3,
+                child: ListView.builder(
+                  itemCount: mapController.filteredResults.length.compareTo(0),
+                  itemBuilder: (BuildContext context, int index) {
+                    return FilterResultTile(
+                      parkingName:
+                          mapController.filteredResults[index].parkingName,
+                      ownerName: "Silvio Arzeno",
+                      parkingspace: "10 M",
+                    );
+                  },
+                )),
           ],
         ),
       ),

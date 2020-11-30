@@ -28,8 +28,9 @@ class MapController extends GetxController {
     searchQuery = searchQuery.toUpperCase();
     currentParkings.forEach((parking) {
       if (parking.parkingName.toUpperCase().contains(searchQuery) ||
-          parking.sector.toUpperCase().contains(searchQuery) ||
-          parking.information.toUpperCase().contains(searchQuery)) {
+          (parking.sector?.toUpperCase()?.contains(searchQuery) ?? false) ||
+          (parking.information?.toUpperCase()?.contains(searchQuery) ??
+              false)) {
         filteredResults.add(parking);
       }
     });
