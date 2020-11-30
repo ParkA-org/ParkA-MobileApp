@@ -4,8 +4,8 @@ import 'package:ParkA/components/map/position_viewer_card.dart';
 import 'package:ParkA/data/data-models/calendar/calendar_data_model.dart';
 import 'package:ParkA/data/data-models/feature/parking_feature_data_model.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
+import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/data/enums/parking_place_holder_type.dart';
-import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
 import 'package:ParkA/pages/edit-parking/edit_parking_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
@@ -33,7 +33,7 @@ class ReservationAsOwnerPage extends StatefulWidget {
 
 class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
   String _reservationId;
-  Parking _reservation;
+  Reservation _reservation;
   bool _loading;
   BitmapDescriptor _markerIcon;
 

@@ -42,7 +42,7 @@ class ReservationUseCases {
     return 0;
   }
 
-  static Future<Reservation> getReservationById() async {
+  static Future<Reservation> getReservationById(id) async {
     Reservation test = new Reservation();
     return test;
   }
