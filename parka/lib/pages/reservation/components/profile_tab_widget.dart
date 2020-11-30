@@ -3,8 +3,8 @@ import 'package:ParkA/pages/profile/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
 
-class ProfileWidgetTab extends StatelessWidget {
-  const ProfileWidgetTab({
+class ProfileTabWidget extends StatelessWidget {
+  const ProfileTabWidget({
     Key key,
     @required String name,
     @required Parking parking,

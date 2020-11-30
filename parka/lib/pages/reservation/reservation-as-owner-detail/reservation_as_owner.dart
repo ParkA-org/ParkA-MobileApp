@@ -2,7 +2,7 @@ import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
 import 'package:ParkA/pages/reservation/components/parking_price_tab_widget.dart';
-import 'package:ParkA/pages/reservation/components/profile_widget_tab.dart';
+import 'package:ParkA/pages/reservation/components/profile_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/time_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/vehicle_tab_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
@@ -148,7 +148,7 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
                               ),
                               child: Column(
                                 children: [
-                                  ProfileWidgetTab(
+                                  ProfileTabWidget(
                                       parking: a, name: "Propietario"),
                                   VehicleTabWidget(parking: a),
                                   ParkingPriceTabWidget(parking: a),
