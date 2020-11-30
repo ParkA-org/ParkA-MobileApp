@@ -3,6 +3,7 @@ import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
 import 'package:ParkA/pages/reservation/components/parking_price_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/profile_tab_widget.dart';
+import 'package:ParkA/pages/reservation/components/sliver_app_bar_reservation_detail.dart';
 import 'package:ParkA/pages/reservation/components/time_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/vehicle_tab_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
@@ -67,76 +68,7 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
                   height: screenSize.height * 0.9,
                   child: CustomScrollView(
                     slivers: [
-                      SliverAppBar(
-                        pinned: true,
-                        expandedHeight: 200.0,
-                        backgroundColor: ParkaColors.parkaGreen,
-                        flexibleSpace: FlexibleSpaceBar(
-                          title: Container(
-                            margin: EdgeInsets.only(right: 8.0),
-                            padding: EdgeInsets.all(4.0),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: AutoSizeText(
-                                    "Nombre del parqueo",
-                                    maxLines: 1,
-                                    style: kParkaTextStyleBold16,
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 0,
-                                  child: Container(
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 2.0),
-                                    child: Row(
-                                      children: [
-                                        AutoSizeText(
-                                          '5.0',
-                                          maxLines: 1,
-                                          style: kParkaTextStyleBold16,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(2.0),
-                                          child: Icon(
-                                            Icons.star,
-                                            color: Colors.white,
-                                            size: 16.0,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          background: Stack(
-                            alignment: Alignment.center,
-                            fit: StackFit.expand,
-                            children: [
-                              Image(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(
-                                    "https://parka-api-bucket-aws.s3.amazonaws.com/parqueo2_b70eba08da.png"),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0, 140.0),
-                                    color: Colors.black54,
-                                    blurRadius: 18.0,
-                                    spreadRadius: 15.0,
-                                  ),
-                                ]),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+                      SliverAppBarReservationDetail(),
                       SliverList(
                         delegate: SliverChildListDelegate(
                           [
