@@ -7,7 +7,6 @@ import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/data/enums/parking_place_holder_type.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
-import 'package:ParkA/pages/edit-parking/edit_parking_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:ParkA/utils/functions/get_feature_icon.dart';
@@ -65,14 +64,7 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: ParkaFloatingActionButton(
-        iconData: Icons.edit,
-        onPressedHandler: () {
-          Get.to(EditParkingPage(
-            parking: this._parking,
-          ));
-        },
-      ),
+      floatingActionButton: Container(),
       body: SafeArea(
           child: ModalProgressHUD(
         color: ParkaColors.parkaGreen,
@@ -98,7 +90,7 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
                           children: [
                             Expanded(
                               child: AutoSizeText(
-                                this._parking.parkingName,
+                                "Nombre del parqueo",
                                 maxLines: 1,
                                 style: kParkaTextStyleBold16,
                               ),
@@ -110,7 +102,7 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
                                 child: Row(
                                   children: [
                                     AutoSizeText(
-                                      '${this._parking.rating.toPrecision(2)}',
+                                      '5.0',
                                       maxLines: 1,
                                       style: kParkaTextStyleBold16,
                                     ),
@@ -135,7 +127,8 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
                         children: [
                           Image(
                             fit: BoxFit.cover,
-                            image: NetworkImage(_parking.mainPicture),
+                            image: NetworkImage(
+                                "https://parka-api-bucket-aws.s3.amazonaws.com/parqueo2_b70eba08da.png"),
                           ),
                           Container(
                             decoration: BoxDecoration(boxShadow: [
@@ -164,26 +157,18 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
                           child: Column(
                             children: [
                               Container(
-                                height: this._parking.pictures.length == 0
-                                    ? 0
-                                    : 125,
+                                height: 1 == 0 ? 0 : 125,
                                 child: ParkaAddImagesCarousel(
                                   carouselType: CarouselType.Gallery,
                                   placeholderType: PlaceHolderType.Car,
-                                  pictures: this._parking.pictures,
+                                  pictures: [
+                                    "https://parka-api-bucket-aws.s3.amazonaws.com/car3_8fa6a2b4bf.jpg",
+                                    "https://parka-api-bucket-aws.s3.amazonaws.com/car1_1f989362b2.jpg",
+                                    "https://parka-api-bucket-aws.s3.amazonaws.com/car21_b80e0af9ec.jpg"
+                                  ],
                                 ),
                               ),
                               ParkingPriceWidgetTab(parking: _parking),
-                              ShowParkingFeaturesWidget(
-                                features: this._parking.features,
-                              ),
-                              WeekScheduleViewerWidget(
-                                  calendar: this._parking.calendar),
-                              PositionTabWidget(
-                                marker: _markerIcon,
-                                parkingId: _parkingId,
-                                parking: _parking,
-                              )
                             ],
                           ),
                         ),
@@ -193,49 +178,6 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
                 ],
               ),
       )),
-    );
-  }
-}
-
-class PositionTabWidget extends StatelessWidget {
-  const PositionTabWidget({
-    Key key,
-    @required marker,
-    @required String parkingId,
-    @required Parking parking,
-  })  : _parkingId = parkingId,
-        _parking = parking,
-        _marker = marker,
-        super(key: key);
-
-  final String _parkingId;
-  final Parking _parking;
-  final _marker;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Text(
-              "Posicion",
-              style: kParkaTextStyleBoldGreen18,
-            ),
-          ),
-          PositionViewerWidget(
-            parkingId: this._parkingId,
-            markerIcon: this._marker,
-            position: LatLng(
-              this._parking.latitude,
-              this._parking.longitude,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
