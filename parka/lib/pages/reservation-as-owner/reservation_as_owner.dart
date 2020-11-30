@@ -65,61 +65,150 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
       floatingActionButton: Container(
         height: screenSize.height * 0.09,
         width: screenSize.width * 1,
-        alignment: Alignment.bottomLeft,
+        alignment: Alignment.bottomCenter,
         child: Padding(
-          padding: const EdgeInsets.only(left: 32.0, bottom: 10.0),
-          child: true != true
+          padding: const EdgeInsets.only(left: 32.0),
+          child: true != false
               ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      width: screenSize.width * 0.76,
-                      child: TextField(
-                        onSubmitted: (value) => {},
-                        decoration: InputDecoration(
-                          alignLabelWithHint: true,
-                          hintMaxLines: 1,
-                          hintText: "",
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xff077187),
+                          borderRadius: BorderRadius.circular(15.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.transparent.withOpacity(0.2),
+                              spreadRadius: 1,
+                              blurRadius: 7,
+                              offset:
+                                  Offset(0, 2), // changes position of shadow
+                            ),
+                          ],
                         ),
-                        style: TextStyle(
-                          fontFamily: "Montserrat",
-                          fontSize: 20,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 40, vertical: 12.0),
+                          child: AutoSizeText(
+                            "Confirmar",
+                            maxLines: 1,
+                            maxFontSize: 26,
+                            minFontSize: 18,
+                            style: TextStyle(
+                              fontFamily: "Montserrat",
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: InkWell(
+                        onTap: () {},
+                        child: Center(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Color(0xffF30F1D),
+                              borderRadius: BorderRadius.circular(15.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.transparent.withOpacity(0.2),
+                                  spreadRadius: 1,
+                                  blurRadius: 7,
+                                  offset: Offset(
+                                      0, 2), // changes position of shadow
+                                ),
+                              ],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 30, vertical: 12.0),
+                              child: AutoSizeText(
+                                "Cancelar",
+                                maxLines: 1,
+                                maxFontSize: 26,
+                                minFontSize: 18,
+                                style: TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
                   ],
                 )
               : InkWell(
                   onTap: () {},
                   child: Center(
-                      child: Container(
-                          decoration: BoxDecoration(
-                            color: Color(0xff077187),
-                            borderRadius: BorderRadius.circular(12.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.transparent.withOpacity(0.2),
-                                spreadRadius: 4,
-                                blurRadius: 7,
-                                offset:
-                                    Offset(0, 6), // changes position of shadow
+                      child: true != false
+                          ? Container(
+                              decoration: BoxDecoration(
+                                color: Color(0xff077187),
+                                borderRadius: BorderRadius.circular(12.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.transparent.withOpacity(0.2),
+                                    spreadRadius: 4,
+                                    blurRadius: 7,
+                                    offset: Offset(
+                                        0, 6), // changes position of shadow
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 60, vertical: 10.0),
-                            child: AutoSizeText(
-                              "Calificar",
-                              maxLines: 1,
-                              maxFontSize: 30,
-                              minFontSize: 30,
-                              style: TextStyle(
-                                fontFamily: "Montserrat",
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 60, vertical: 10.0),
+                                child: AutoSizeText(
+                                  "Calificar",
+                                  maxLines: 1,
+                                  maxFontSize: 30,
+                                  minFontSize: 30,
+                                  style: TextStyle(
+                                    fontFamily: "Montserrat",
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ))),
+                            )
+                          : Container(
+                              decoration: BoxDecoration(
+                                color: Color(0xff077187),
+                                borderRadius: BorderRadius.circular(12.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.transparent.withOpacity(0.2),
+                                    spreadRadius: 4,
+                                    blurRadius: 7,
+                                    offset: Offset(
+                                        0, 6), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 10.0),
+                                child: AutoSizeText(
+                                  "Editar Calificación",
+                                  maxLines: 1,
+                                  maxFontSize: 30,
+                                  minFontSize: 25,
+                                  style: TextStyle(
+                                    fontFamily: "Montserrat",
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            )),
                 ),
         ),
       ),
