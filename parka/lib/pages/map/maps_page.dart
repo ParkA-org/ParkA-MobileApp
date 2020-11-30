@@ -172,7 +172,6 @@ class _MapPageState extends State<MapPage> {
                 padding: const EdgeInsets.only(bottom: 60.0),
                 child: Builder(
                   builder: (context) => DummySearch(
-                    // statusBarSize: MediaQuery.of(context).padding.top,
                     mainContext: mapPageContext,
                     buttonToggle: toggleFloatingActionButton,
                   ),

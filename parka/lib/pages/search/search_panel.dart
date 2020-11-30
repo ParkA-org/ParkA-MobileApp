@@ -1,5 +1,6 @@
 import 'package:ParkA/components/filter-result-tile/filter_result_tile.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
+import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
@@ -9,9 +10,11 @@ import 'components/search_section.dart';
 
 class SearchPanel extends StatelessWidget {
   final BuildContext mainContext;
+  final List<Parking> currentParkings;
   const SearchPanel({
     Key key,
     this.mainContext,
+    this.currentParkings,
   }) : super(key: key);
   static const String routeName = "/SearchPage";
 
