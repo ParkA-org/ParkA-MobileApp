@@ -1,9 +1,9 @@
-import 'package:ParkA/components/images/parka_add_images_carousel.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
-import 'package:ParkA/data/enums/parking_place_holder_type.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
 import 'package:ParkA/pages/reservation/components/profile_widget_tab.dart';
+import 'package:ParkA/pages/reservation/components/time_tab_widget.dart';
+import 'package:ParkA/pages/reservation/components/vehicle_tab_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -149,9 +149,9 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
                                 children: [
                                   ProfileWidgetTab(
                                       parking: a, name: "Propietario"),
-                                  VehicleWidgetTab(parking: a),
-                                  ParkingPriceWidgetTab(parking: a),
-                                  StartAndEndTimeWidgetTab(parking: a),
+                                  VehicleTabWidget(parking: a),
+                                  ParkingPrice(parking: a),
+                                  TimeTabWidget(parking: a),
                                 ],
                               ),
                             ),
@@ -357,128 +357,6 @@ class ActionButtonsOwnerState extends StatelessWidget {
                 ),
               ),
       ),
-    );
-  }
-}
-
-class ParkingPriceWidgetTab extends StatelessWidget {
-  const ParkingPriceWidgetTab({
-    Key key,
-    @required Parking parking,
-  })  : _parking = parking,
-        super(key: key);
-
-  final Parking _parking;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(
-            "Precio por hora",
-            style: kParkaTextStyleBoldGreen18,
-          ),
-        ),
-        Text(
-          '\$RD ${this._parking.perHourPrice}/Hora',
-          style: kParkaTextStyleBlack18,
-        )
-      ],
-    );
-  }
-}
-
-class VehicleWidgetTab extends StatelessWidget {
-  const VehicleWidgetTab({
-    Key key,
-    @required Parking parking,
-  })  : _parking = parking,
-        super(key: key);
-
-  final Parking _parking;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(
-            "Vehiculo",
-            style: kParkaTextStyleBoldGreen18,
-          ),
-        ),
-        Text(
-          'Toyota Corolla',
-          style: kParkaTextStyleBlack18,
-        ),
-        Container(
-          height: 1 == 0 ? 0 : 125,
-          child: ParkaAddImagesCarousel(
-            carouselType: CarouselType.Gallery,
-            placeholderType: PlaceHolderType.Car,
-            pictures: [
-              "https://parka-api-bucket-aws.s3.amazonaws.com/car3_8fa6a2b4bf.jpg",
-              "https://parka-api-bucket-aws.s3.amazonaws.com/car1_1f989362b2.jpg",
-              "https://parka-api-bucket-aws.s3.amazonaws.com/car21_b80e0af9ec.jpg"
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class StartAndEndTimeWidgetTab extends StatelessWidget {
-  const StartAndEndTimeWidgetTab({
-    Key key,
-    @required Parking parking,
-  })  : _parking = parking,
-        super(key: key);
-
-  final Parking _parking;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: true != true
-                ? Text(
-                    "Empieza",
-                    style: kParkaTextStyleBoldGreen18,
-                  )
-                : Text(
-                    "Empezó",
-                    style: kParkaTextStyleBoldGreen18,
-                  )),
-        Text(
-          '11/13/2020 13:00 h',
-          style: kParkaTextStyleBlack18,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: true != true
-              ? Text(
-                  "Termina",
-                  style: kParkaTextStyleBoldGreen18,
-                )
-              : Text(
-                  "Termino",
-                  style: kParkaTextStyleBoldGreen18,
-                ),
-        ),
-        Text(
-          '11/13/2020 15:00 h',
-          style: kParkaTextStyleBlack18,
-        )
-      ],
     );
   }
 }

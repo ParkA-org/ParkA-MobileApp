@@ -2,6 +2,7 @@ import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
 import 'package:ParkA/pages/reservation/components/profile_widget_tab.dart';
+import 'package:ParkA/pages/reservation/components/time_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/vehicle_tab_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
@@ -150,7 +151,7 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
                                   ProfileWidgetTab(parking: a, name: "Cliente"),
                                   VehicleTabWidget(parking: a),
                                   ParkingPriceWidgetTab(parking: a),
-                                  StartAndEndTimeWidgetTab(parking: a),
+                                  TimeTabWidget(parking: a),
                                 ],
                               ),
                             ),
@@ -383,56 +384,6 @@ class ParkingPriceWidgetTab extends StatelessWidget {
         ),
         Text(
           '\$RD ${this._parking.perHourPrice}/Hora',
-          style: kParkaTextStyleBlack18,
-        )
-      ],
-    );
-  }
-}
-
-class StartAndEndTimeWidgetTab extends StatelessWidget {
-  const StartAndEndTimeWidgetTab({
-    Key key,
-    @required Parking parking,
-  })  : _parking = parking,
-        super(key: key);
-
-  final Parking _parking;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: true != true
-                ? Text(
-                    "Empieza",
-                    style: kParkaTextStyleBoldGreen18,
-                  )
-                : Text(
-                    "Empezó",
-                    style: kParkaTextStyleBoldGreen18,
-                  )),
-        Text(
-          '11/13/2020 13:00 h',
-          style: kParkaTextStyleBlack18,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: true != true
-              ? Text(
-                  "Termina",
-                  style: kParkaTextStyleBoldGreen18,
-                )
-              : Text(
-                  "Termino",
-                  style: kParkaTextStyleBoldGreen18,
-                ),
-        ),
-        Text(
-          '11/13/2020 15:00 h',
           style: kParkaTextStyleBlack18,
         )
       ],
