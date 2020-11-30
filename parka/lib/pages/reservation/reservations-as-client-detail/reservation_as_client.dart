@@ -1,6 +1,7 @@
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
+import 'package:ParkA/pages/reservation/components/parking_price_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/profile_widget_tab.dart';
 import 'package:ParkA/pages/reservation/components/time_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/vehicle_tab_widget.dart';
@@ -150,7 +151,7 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
                                 children: [
                                   ProfileWidgetTab(parking: a, name: "Cliente"),
                                   VehicleTabWidget(parking: a),
-                                  ParkingPriceWidgetTab(parking: a),
+                                  ParkingPriceTabWidget(parking: a),
                                   TimeTabWidget(parking: a),
                                 ],
                               ),
@@ -357,36 +358,6 @@ class ActionButtonsOwnerState extends StatelessWidget {
                 ),
               ),
       ),
-    );
-  }
-}
-
-class ParkingPriceWidgetTab extends StatelessWidget {
-  const ParkingPriceWidgetTab({
-    Key key,
-    @required Parking parking,
-  })  : _parking = parking,
-        super(key: key);
-
-  final Parking _parking;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(
-            "Precio por hora",
-            style: kParkaTextStyleBoldGreen18,
-          ),
-        ),
-        Text(
-          '\$RD ${this._parking.perHourPrice}/Hora',
-          style: kParkaTextStyleBlack18,
-        )
-      ],
     );
   }
 }
