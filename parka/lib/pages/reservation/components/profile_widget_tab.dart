@@ -6,10 +6,13 @@ import 'package:flutter/material.dart';
 class ProfileWidgetTab extends StatelessWidget {
   const ProfileWidgetTab({
     Key key,
+    @required String name,
     @required Parking parking,
   })  : _parking = parking,
+        _name = name,
         super(key: key);
 
+  final String _name;
   final Parking _parking;
 
   @override
@@ -20,7 +23,7 @@ class ProfileWidgetTab extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Text(
-            "Cliente",
+            this._name,
             style: kParkaTextStyleBoldGreen18,
           ),
         ),

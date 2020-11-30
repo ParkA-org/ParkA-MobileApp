@@ -155,7 +155,7 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
                               ),
                               child: Column(
                                 children: [
-                                  ProfileWidgetTab(parking: a),
+                                  ProfileWidgetTab(parking: a, name: "Owner"),
                                   VehicleWidgetTab(parking: a),
                                   ParkingPriceWidgetTab(parking: a),
                                   StartAndEndTimeWidgetTab(parking: a),
