@@ -8,6 +8,7 @@ import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -59,8 +60,46 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton: Container(),
+      floatingActionButton: Container(
+        color: Colors.white,
+        height: screenSize.height * 0.09,
+        width: screenSize.width * 1,
+        alignment: Alignment.bottomLeft,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 32.0, bottom: 10.0),
+          child: Row(
+            children: [
+              Container(
+                width: screenSize.width * 0.76,
+                child: TextField(
+                  onSubmitted: (value) => {},
+                  decoration: InputDecoration(
+                    alignLabelWithHint: true,
+                    hintMaxLines: 1,
+                    hintText: "",
+                  ),
+                  style: TextStyle(
+                    fontFamily: "Montserrat",
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 9.0),
+                child: InkWell(
+                  child: SvgPicture.asset(
+                    "resources/images/SendButtom.svg",
+                    width: screenSize.width * 0.1,
+                  ),
+                  onTap: () {},
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
       body: SafeArea(
         child: ModalProgressHUD(
           color: ParkaColors.parkaGreen,
@@ -69,100 +108,104 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
               ? Container(
                   color: ParkaColors.parkaGreen,
                 )
-              : CustomScrollView(
-                  slivers: [
-                    SliverAppBar(
-                      pinned: true,
-                      expandedHeight: 200.0,
-                      backgroundColor: ParkaColors.parkaGreen,
-                      flexibleSpace: FlexibleSpaceBar(
-                        title: Container(
-                          margin: EdgeInsets.only(right: 8.0),
-                          padding: EdgeInsets.all(4.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: AutoSizeText(
-                                  "Nombre del parqueo",
-                                  maxLines: 1,
-                                  style: kParkaTextStyleBold16,
-                                ),
-                              ),
-                              Expanded(
-                                flex: 0,
-                                child: Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 2.0),
-                                  child: Row(
-                                    children: [
-                                      AutoSizeText(
-                                        '5.0',
-                                        maxLines: 1,
-                                        style: kParkaTextStyleBold16,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(2.0),
-                                        child: Icon(
-                                          Icons.star,
-                                          color: Colors.white,
-                                          size: 16.0,
-                                        ),
-                                      ),
-                                    ],
+              : Container(
+                  height: screenSize.height * 0.9,
+                  child: CustomScrollView(
+                    slivers: [
+                      SliverAppBar(
+                        pinned: true,
+                        expandedHeight: 200.0,
+                        backgroundColor: ParkaColors.parkaGreen,
+                        flexibleSpace: FlexibleSpaceBar(
+                          title: Container(
+                            margin: EdgeInsets.only(right: 8.0),
+                            padding: EdgeInsets.all(4.0),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: AutoSizeText(
+                                    "Nombre del parqueo",
+                                    maxLines: 1,
+                                    style: kParkaTextStyleBold16,
                                   ),
                                 ),
+                                Expanded(
+                                  flex: 0,
+                                  child: Container(
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 2.0),
+                                    child: Row(
+                                      children: [
+                                        AutoSizeText(
+                                          '5.0',
+                                          maxLines: 1,
+                                          style: kParkaTextStyleBold16,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(2.0),
+                                          child: Icon(
+                                            Icons.star,
+                                            color: Colors.white,
+                                            size: 16.0,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          background: Stack(
+                            alignment: Alignment.center,
+                            fit: StackFit.expand,
+                            children: [
+                              Image(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(
+                                    "https://parka-api-bucket-aws.s3.amazonaws.com/parqueo2_b70eba08da.png"),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0, 140.0),
+                                    color: Colors.black54,
+                                    blurRadius: 18.0,
+                                    spreadRadius: 15.0,
+                                  ),
+                                ]),
                               )
                             ],
                           ),
                         ),
-                        background: Stack(
-                          alignment: Alignment.center,
-                          fit: StackFit.expand,
-                          children: [
-                            Image(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  "https://parka-api-bucket-aws.s3.amazonaws.com/parqueo2_b70eba08da.png"),
+                      ),
+                      SliverList(
+                        delegate: SliverChildListDelegate(
+                          [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                24.0,
+                                0,
+                                24.0,
+                                24.0,
+                              ),
+                              child: Column(
+                                children: [
+                                  ProfileWidgetTab(parking: a),
+                                  VehicleWidgetTab(parking: a),
+                                  ParkingPriceWidgetTab(parking: a),
+                                  StartAndEndTimeWidgetTab(parking: a),
+                                ],
+                              ),
                             ),
-                            Container(
-                              decoration: BoxDecoration(boxShadow: [
-                                BoxShadow(
-                                  offset: Offset(0, 140.0),
-                                  color: Colors.black54,
-                                  blurRadius: 18.0,
-                                  spreadRadius: 15.0,
-                                ),
-                              ]),
-                            )
                           ],
                         ),
-                      ),
-                    ),
-                    SliverList(
-                      delegate: SliverChildListDelegate(
-                        [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(
-                              24.0,
-                              0,
-                              24.0,
-                              24.0,
-                            ),
-                            child: Column(
-                              children: [
-                                ProfileWidgetTab(parking: a),
-                                VehicleWidgetTab(parking: a),
-                                ParkingPriceWidgetTab(parking: a),
-                                StartAndEndTimeWidgetTab(parking: a),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
         ),
       ),
