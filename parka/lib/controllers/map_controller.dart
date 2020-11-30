@@ -3,13 +3,13 @@ import 'package:get/state_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapController extends GetxController {
-  Rx<GoogleMapController> mapController;
-  List<Parking> currentParking = List<Parking>().obs;
+  Rx<GoogleMapController> mapController = Rx();
+  List<Parking> currentParkings = List<Parking>().obs;
 
   void setCurrentParkings(List<Parking> newParkings) {
     newParkings.forEach((parking) {
-      if (!currentParking.contains(parking)) {
-        currentParking = newParkings.obs;
+      if (!currentParkings.contains(parking)) {
+        currentParkings = newParkings.obs;
         return;
       }
     });
@@ -17,5 +17,6 @@ class MapController extends GetxController {
 
   void setMapController(GoogleMapController controller) {
     mapController = controller.obs;
+    return;
   }
 }
