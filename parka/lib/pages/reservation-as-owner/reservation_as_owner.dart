@@ -62,156 +62,7 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton: Container(
-        height: screenSize.height * 0.09,
-        width: screenSize.width * 1,
-        alignment: Alignment.bottomCenter,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 32.0),
-          child: true != false
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xff077187),
-                          borderRadius: BorderRadius.circular(15.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.transparent.withOpacity(0.2),
-                              spreadRadius: 1,
-                              blurRadius: 7,
-                              offset:
-                                  Offset(0, 2), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 40, vertical: 12.0),
-                          child: AutoSizeText(
-                            "Confirmar",
-                            maxLines: 1,
-                            maxFontSize: 26,
-                            minFontSize: 18,
-                            style: TextStyle(
-                              fontFamily: "Montserrat",
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: InkWell(
-                        onTap: () {},
-                        child: Center(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Color(0xffF30F1D),
-                              borderRadius: BorderRadius.circular(15.0),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.transparent.withOpacity(0.2),
-                                  spreadRadius: 1,
-                                  blurRadius: 7,
-                                  offset: Offset(
-                                      0, 2), // changes position of shadow
-                                ),
-                              ],
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 30, vertical: 12.0),
-                              child: AutoSizeText(
-                                "Cancelar",
-                                maxLines: 1,
-                                maxFontSize: 26,
-                                minFontSize: 18,
-                                style: TextStyle(
-                                  fontFamily: "Montserrat",
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                )
-              : InkWell(
-                  onTap: () {},
-                  child: Center(
-                      child: true != false
-                          ? Container(
-                              decoration: BoxDecoration(
-                                color: Color(0xff077187),
-                                borderRadius: BorderRadius.circular(12.0),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.transparent.withOpacity(0.2),
-                                    spreadRadius: 4,
-                                    blurRadius: 7,
-                                    offset: Offset(
-                                        0, 6), // changes position of shadow
-                                  ),
-                                ],
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 60, vertical: 10.0),
-                                child: AutoSizeText(
-                                  "Calificar",
-                                  maxLines: 1,
-                                  maxFontSize: 30,
-                                  minFontSize: 30,
-                                  style: TextStyle(
-                                    fontFamily: "Montserrat",
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            )
-                          : Container(
-                              decoration: BoxDecoration(
-                                color: Color(0xff077187),
-                                borderRadius: BorderRadius.circular(12.0),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.transparent.withOpacity(0.2),
-                                    spreadRadius: 4,
-                                    blurRadius: 7,
-                                    offset: Offset(
-                                        0, 6), // changes position of shadow
-                                  ),
-                                ],
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 10.0),
-                                child: AutoSizeText(
-                                  "Editar Calificación",
-                                  maxLines: 1,
-                                  maxFontSize: 30,
-                                  minFontSize: 25,
-                                  style: TextStyle(
-                                    fontFamily: "Montserrat",
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            )),
-                ),
-        ),
-      ),
+      floatingActionButton: ActionButtonsOwnerState(screenSize: screenSize),
       body: SafeArea(
         child: ModalProgressHUD(
           color: ParkaColors.parkaGreen,
@@ -320,6 +171,200 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
                   ),
                 ),
         ),
+      ),
+    );
+  }
+}
+
+class ActionButtonsOwnerState extends StatelessWidget {
+  const ActionButtonsOwnerState({
+    Key key,
+    @required this.screenSize,
+  }) : super(key: key);
+
+  final Size screenSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: screenSize.height * 0.09,
+      width: screenSize.width * 1,
+      alignment: Alignment.bottomCenter,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 32.0),
+        child: true != true
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: () {},
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Color(0xff077187),
+                        borderRadius: BorderRadius.circular(15.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.transparent.withOpacity(0.2),
+                            spreadRadius: 1,
+                            blurRadius: 7,
+                            offset: Offset(0, 2), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40, vertical: 12.0),
+                        child: AutoSizeText(
+                          "Confirmar",
+                          maxLines: 1,
+                          maxFontSize: 26,
+                          minFontSize: 18,
+                          style: TextStyle(
+                            fontFamily: "Montserrat",
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Center(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xffF30F1D),
+                            borderRadius: BorderRadius.circular(15.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.transparent.withOpacity(0.2),
+                                spreadRadius: 1,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 2), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 12.0),
+                            child: AutoSizeText(
+                              "Cancelar",
+                              maxLines: 1,
+                              maxFontSize: 26,
+                              minFontSize: 18,
+                              style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              )
+            : InkWell(
+                onTap: () {},
+                child: Center(
+                  child: true != true
+                      ? Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xff077187),
+                            borderRadius: BorderRadius.circular(12.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.transparent.withOpacity(0.2),
+                                spreadRadius: 4,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 6), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 60, vertical: 10.0),
+                            child: AutoSizeText(
+                              "Calificar",
+                              maxLines: 1,
+                              maxFontSize: 30,
+                              minFontSize: 30,
+                              style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        )
+                      : true != true
+                          ? Container(
+                              decoration: BoxDecoration(
+                                color: Color(0xff077187),
+                                borderRadius: BorderRadius.circular(12.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.transparent.withOpacity(0.2),
+                                    spreadRadius: 4,
+                                    blurRadius: 7,
+                                    offset: Offset(
+                                        0, 6), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 10.0),
+                                child: AutoSizeText(
+                                  "Editar Calificación",
+                                  maxLines: 1,
+                                  maxFontSize: 30,
+                                  minFontSize: 25,
+                                  style: TextStyle(
+                                    fontFamily: "Montserrat",
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Container(
+                              decoration: BoxDecoration(
+                                color: Color(0xff077187),
+                                borderRadius: BorderRadius.circular(12.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.transparent.withOpacity(0.2),
+                                    spreadRadius: 4,
+                                    blurRadius: 7,
+                                    offset: Offset(
+                                        0, 6), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 10.0),
+                                child: AutoSizeText(
+                                  "Mostrar Calificación",
+                                  maxLines: 1,
+                                  maxFontSize: 30,
+                                  minFontSize: 25,
+                                  style: TextStyle(
+                                    fontFamily: "Montserrat",
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                ),
+              ),
       ),
     );
   }
