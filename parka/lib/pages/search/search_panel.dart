@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'components/favorite_place_button.dart';
 import 'components/search_section.dart';
 
-class SearchPanel extends StatelessWidget {
+class SearchPanel extends StatefulWidget {
   final BuildContext mainContext;
   final List<Parking> currentParkings;
   const SearchPanel({
@@ -18,6 +18,11 @@ class SearchPanel extends StatelessWidget {
   }) : super(key: key);
   static const String routeName = "/SearchPage";
 
+  @override
+  _SearchPanelState createState() => _SearchPanelState();
+}
+
+class _SearchPanelState extends State<SearchPanel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,9 +37,9 @@ class SearchPanel extends StatelessWidget {
                 color: ParkaColors.parkaGreen,
                 child: Padding(
                   padding: EdgeInsets.only(
-                      top: this.mainContext == null
+                      top: this.widget.mainContext == null
                           ? 0
-                          : MediaQuery.of(this.mainContext).padding.top),
+                          : MediaQuery.of(this.widget.mainContext).padding.top),
                   child: ParkaHeader(
                     color: Colors.white,
                     leading: GestureDetector(
