@@ -8,7 +8,6 @@ import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class ReservationAsClientPage extends StatefulWidget {
