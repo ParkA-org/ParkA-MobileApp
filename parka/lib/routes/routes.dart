@@ -27,7 +27,7 @@ import 'package:ParkA/pages/profile-picture/profile_pic_page.dart';
 import 'package:ParkA/pages/profile/profile_page.dart';
 import 'package:ParkA/pages/register/register_page.dart';
 import 'package:ParkA/pages/reservation/reservation-as-owner/reservation_as_owner.dart';
-import 'package:ParkA/pages/reservations-as-client/reservation_as_client.dart';
+import 'package:ParkA/pages/reservation/reservations-as-client/reservation_as_client.dart';
 import 'package:ParkA/pages/reset-password/reset_password_page.dart';
 import 'package:ParkA/pages/search/search_panel.dart';
 import 'package:ParkA/pages/splash-screen/splash_screen.dart';
