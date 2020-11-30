@@ -3,7 +3,6 @@ import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/data/enums/parking_place_holder_type.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
-import 'package:ParkA/pages/profile/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/pages/reservation/components/profile_widget_tab.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
@@ -30,7 +29,6 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
   String _reservationId;
   Reservation _reservation;
   bool _loading;
-  BitmapDescriptor _markerIcon;
   Parking a = new Parking(perHourPrice: 100);
 
   @override
@@ -38,12 +36,6 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
     super.initState();
     this._loading = false;
     this._reservationId = this.widget.reservationId;
-
-    BitmapDescriptor.fromAssetImage(
-            ImageConfiguration.empty, 'resources/images/green-parking-icon.png')
-        .then((onValue) {
-      _markerIcon = onValue;
-    });
 
     getReservation();
   }

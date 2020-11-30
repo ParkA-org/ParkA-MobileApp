@@ -28,7 +28,6 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
   String _reservationId;
   Reservation _reservation;
   bool _loading;
-  BitmapDescriptor _markerIcon;
   Parking a = new Parking(perHourPrice: 100);
 
   @override
@@ -36,12 +35,6 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
     super.initState();
     this._loading = false;
     this._reservationId = this.widget.reservationId;
-
-    BitmapDescriptor.fromAssetImage(
-            ImageConfiguration.empty, 'resources/images/green-parking-icon.png')
-        .then((onValue) {
-      _markerIcon = onValue;
-    });
 
     getReservation();
   }
@@ -155,7 +148,8 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
                               ),
                               child: Column(
                                 children: [
-                                  ProfileWidgetTab(parking: a, name: "Owner"),
+                                  ProfileWidgetTab(
+                                      parking: a, name: "Propietario"),
                                   VehicleWidgetTab(parking: a),
                                   ParkingPriceWidgetTab(parking: a),
                                   StartAndEndTimeWidgetTab(parking: a),
