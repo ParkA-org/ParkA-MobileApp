@@ -42,52 +42,20 @@ class ___ChatUserPageState extends State<ChatUserPage> {
 
     // this.userChats.forEach((element) {
     ret.add(MessagesTile(
-      messages: "Tu parqueo da asco",
+      messages: "Buenos dias",
       type: false,
     ));
 
     ret.add(MessagesTile(
-      messages:
-          "El tuyo tambien esto es probando el tamano del card como estas viendo a continuacion",
+      messages: "Buenos dias Francisco",
       type: true,
     ));
 
     ret.add(MessagesTile(
-      messages: "Por cierto, te raye el civic",
+      messages: "Llegare 5 minutos tarde",
       type: false,
     ));
 
-    ret.add(MessagesTile(
-      messages: "Tu parqueo da asco",
-      type: false,
-    ));
-
-    ret.add(MessagesTile(
-      messages:
-          "El tuyo tambien esto es probando el tamano del card como estas viendo a continuacion",
-      type: true,
-    ));
-
-    ret.add(MessagesTile(
-      messages: "Por cierto, te raye el civic",
-      type: false,
-    ));
-
-    ret.add(MessagesTile(
-      messages: "Tu parqueo da asco",
-      type: false,
-    ));
-
-    ret.add(MessagesTile(
-      messages:
-          "El tuyo tambien esto es probando el tamano del card como estas viendo a continuacion",
-      type: true,
-    ));
-
-    ret.add(MessagesTile(
-      messages: "Por cierto, te raye el civic",
-      type: false,
-    ));
     // };
     return ret;
   }
