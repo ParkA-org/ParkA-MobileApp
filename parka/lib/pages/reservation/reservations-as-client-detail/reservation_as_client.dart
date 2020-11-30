@@ -184,7 +184,7 @@ class ActionButtonsOwnerState extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Padding(
         padding: const EdgeInsets.only(left: 32.0),
-        child: true != true
+        child: true != false
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -205,9 +205,9 @@ class ActionButtonsOwnerState extends StatelessWidget {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 40, vertical: 12.0),
+                            horizontal: 20, vertical: 12.0),
                         child: AutoSizeText(
-                          "Confirmar",
+                          "Editar Reserva",
                           maxLines: 1,
                           maxFontSize: 26,
                           minFontSize: 18,
