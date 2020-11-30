@@ -63,41 +63,64 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButton: Container(
-        color: Colors.white,
         height: screenSize.height * 0.09,
         width: screenSize.width * 1,
         alignment: Alignment.bottomLeft,
         child: Padding(
           padding: const EdgeInsets.only(left: 32.0, bottom: 10.0),
-          child: Row(
-            children: [
-              Container(
-                width: screenSize.width * 0.76,
-                child: TextField(
-                  onSubmitted: (value) => {},
-                  decoration: InputDecoration(
-                    alignLabelWithHint: true,
-                    hintMaxLines: 1,
-                    hintText: "",
-                  ),
-                  style: TextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 9.0),
-                child: InkWell(
-                  child: SvgPicture.asset(
-                    "resources/images/SendButtom.svg",
-                    width: screenSize.width * 0.1,
-                  ),
+          child: true != true
+              ? Row(
+                  children: [
+                    Container(
+                      width: screenSize.width * 0.76,
+                      child: TextField(
+                        onSubmitted: (value) => {},
+                        decoration: InputDecoration(
+                          alignLabelWithHint: true,
+                          hintMaxLines: 1,
+                          hintText: "",
+                        ),
+                        style: TextStyle(
+                          fontFamily: "Montserrat",
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              : InkWell(
                   onTap: () {},
+                  child: Center(
+                      child: Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xff077187),
+                            borderRadius: BorderRadius.circular(12.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.transparent.withOpacity(0.2),
+                                spreadRadius: 4,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 6), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 60, vertical: 10.0),
+                            child: AutoSizeText(
+                              "Calificar",
+                              maxLines: 1,
+                              maxFontSize: 30,
+                              minFontSize: 30,
+                              style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ))),
                 ),
-              ),
-            ],
-          ),
         ),
       ),
       body: SafeArea(
