@@ -2,7 +2,7 @@ import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
 import 'package:ParkA/pages/reservation/components/profile_widget_tab.dart';
-import 'package:ParkA/pages/reservation/components/vehicle_widget_tab.dart';
+import 'package:ParkA/pages/reservation/components/vehicle_tab_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -148,7 +148,7 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
                               child: Column(
                                 children: [
                                   ProfileWidgetTab(parking: a, name: "Cliente"),
-                                  VehicleWidgetTab(parking: a),
+                                  VehicleTabWidget(parking: a),
                                   ParkingPriceWidgetTab(parking: a),
                                   StartAndEndTimeWidgetTab(parking: a),
                                 ],

@@ -4,8 +4,8 @@ import 'package:ParkA/components/images/parka_add_images_carousel.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
 
-class VehicleWidgetTab extends StatelessWidget {
-  const VehicleWidgetTab({
+class VehicleTabWidget extends StatelessWidget {
+  const VehicleTabWidget({
     Key key,
     @required Parking parking,
   })  : _parking = parking,
