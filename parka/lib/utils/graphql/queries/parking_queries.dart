@@ -103,3 +103,66 @@ query($userLocation: FilterInput!) {
 }
 
 """;
+
+const getAllParkings = r"""
+query{
+  getAllParkings(input:{where:{}}){
+    id
+    countParking
+    latitude
+    longitude
+    published
+    priceHours
+    pictures
+    mainPicture
+    isAvailable
+    sector
+    direction
+    information
+    features{
+      name
+      id
+    }
+    verified
+    rating
+    parkingName
+     calendar {
+      id
+      parkingId
+      monday {
+        start
+        finish
+      }
+      monday {
+        start
+        finish
+      }
+      tuesday {
+        start
+        finish
+      }
+      wednesday {
+        start
+        finish
+      }
+      thursday {
+        start
+        finish
+      }
+      friday {
+        start
+        finish
+      }
+      saturday {
+        start
+        finish
+      }
+      sunday {
+        start
+        finish
+      }
+    }
+    
+  }
+}
+""";
