@@ -92,9 +92,13 @@ class ParkingDetailModal extends StatelessWidget {
                         children: [
                           CircleButton(
                             onTap: () {
-                              Get.to(
-                                CreateParkingReservationPage(
-                                  parkingId: this.parking.id,
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      CreateParkingReservationPage(
+                                    parkingId: this.parking.id,
+                                  ),
                                 ),
                               );
                             },

@@ -53,7 +53,7 @@ class _CreateParkingReservationPageState
   // NOT CHECKED
 
   Future getParkingAvalibility(DateTime date) async {
-    int dateDiff = date.difference(this.queryDateTime).inDays;
+    int dateDiff = date.difference(this.queryDateTime).inDays.abs();
 
     if (dateDiff >= 7 || this.parkingAvaliability == null) {
       this._lastQueryDate = _formatDate(date);
@@ -68,6 +68,8 @@ class _CreateParkingReservationPageState
       this._parking.calendar,
       this.parkingAvaliability,
     );
+
+    return;
   }
 
   List<String> dummyTimes() {
@@ -104,11 +106,12 @@ class _CreateParkingReservationPageState
     return ret;
   }
 
-  void _getParkingAvaliableSchedule(
+  List<Schedule> _getParkingAvaliableSchedule(
     DateTime _date,
     Calendar _parkingCalendar,
     List<PerDaySchedule> _parkingSchedule,
   ) {
+    List<Schedule> ret = new List();
     String filterDate = _formatDate(_date);
     List<Schedule> busySchedule = [];
 
@@ -120,6 +123,76 @@ class _CreateParkingReservationPageState
     if (idx != -1) {
       busySchedule = _parkingSchedule[idx].schedules;
     }
+
+    int dayIdx = _date.weekday - 1;
+
+    List<Schedule> _scheduleDay =
+        _parkingCalendar.getDaySchedule(weekDays[weekDaysList[dayIdx]]);
+    print("LEN IS ${_scheduleDay.length}");
+    print("DAY IS ${weekDaysList[dayIdx]}");
+
+    int pointer = 0;
+
+    if (busySchedule.length == 0) {
+      ret = _scheduleDay;
+    }
+
+    for (var _schedule in _scheduleDay) {
+      Schedule curr = _schedule;
+
+      while (pointer != busySchedule.length &&
+          curr.finish > busySchedule[pointer].start) {
+        if (busySchedule[pointer].start > curr.start &&
+            busySchedule[pointer].finish < curr.finish) {
+          ret.add(
+            Schedule(
+              finish: busySchedule[pointer].start,
+              start: curr.start,
+            ),
+          );
+          curr = Schedule(
+            finish: curr.finish,
+            start: busySchedule[pointer].finish,
+          );
+          pointer++;
+        } else if (busySchedule[pointer].start < curr.finish &&
+            busySchedule[pointer].finish == curr.finish) {
+          ret.add(
+            Schedule(
+              start: curr.start,
+              finish: busySchedule[pointer].start,
+            ),
+          );
+          pointer++;
+          break;
+        } else if (busySchedule[pointer].start == curr.start &&
+            busySchedule[pointer].finish < curr.finish) {
+          curr = Schedule(
+            start: busySchedule[pointer].finish,
+            finish: curr.finish,
+          );
+          pointer++;
+        } else if (curr.finish > busySchedule[pointer].start) {
+          pointer++;
+          break;
+        }
+      }
+    }
+
+    ret.forEach((element) {
+      print("SCHEDULE IS ${element.start} : ${element.finish}");
+    });
+
+    return ret;
+  }
+
+  void _dummySetTime(DateTime date) async {
+    bool check = date.isBefore(DateTime.now());
+
+    date = check ? DateTime.now() : date;
+
+    this._formController.setReservationDate(date);
+    await this.getParkingAvalibility(date);
   }
 
   // SURE
@@ -269,7 +342,7 @@ class _CreateParkingReservationPageState
                                           ._formController
                                           .createReservationDto
                                           .rentDate,
-                                      selectDate: (DateTime _datetime) {},
+                                      selectDate: this._dummySetTime,
                                       avaliableTimes: this.dummyTimes()),
                                 ),
                                 Divider(
@@ -366,7 +439,6 @@ class DateTimeReservationPicker extends StatelessWidget {
                 hourString: this.dateTime,
                 setHourString: (DateTime date, List<int> value) {
                   this.selectDate(date);
-                  return;
                 },
               ),
             ),
@@ -533,6 +605,30 @@ class DateTimeScheduleSelectorPill extends StatelessWidget {
     this.setHourString,
   }) : super(key: key);
 
+  String _formatDate() {
+    final List<String> months = [
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre",
+    ];
+
+    if (this.hourString == null) return "";
+    int day = this.hourString.day;
+    int year = this.hourString.year;
+    int month = this.hourString.month;
+
+    return "$day de ${months[month - 1]} $year";
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -566,13 +662,14 @@ class DateTimeScheduleSelectorPill extends StatelessWidget {
       ),
       child: Container(
         child: AutoSizeText(
-          this.hourString.toString(),
+          this._formatDate(),
           maxLines: 1,
         ),
         padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
         decoration: BoxDecoration(
-            color: Color(0xFFC4C4C4),
-            borderRadius: BorderRadius.circular(16.0)),
+          color: Color(0xFFC4C4C4),
+          borderRadius: BorderRadius.circular(16.0),
+        ),
       ),
     );
   }
