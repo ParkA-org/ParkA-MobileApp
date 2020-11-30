@@ -26,7 +26,7 @@ import 'package:ParkA/pages/pending-reservations/pending_reservation_page.dart';
 import 'package:ParkA/pages/profile-picture/profile_pic_page.dart';
 import 'package:ParkA/pages/profile/profile_page.dart';
 import 'package:ParkA/pages/register/register_page.dart';
-import 'package:ParkA/pages/reservation-as-owner/reservation_as_owner.dart';
+import 'package:ParkA/pages/reservation/reservation-as-owner/reservation_as_owner.dart';
 import 'package:ParkA/pages/reservations-as-client/reservation_as_client.dart';
 import 'package:ParkA/pages/reset-password/reset_password_page.dart';
 import 'package:ParkA/pages/search/search_panel.dart';
@@ -154,12 +154,16 @@ List<GetPage> getRoutePages = [
   GetPage(
     bindings: [GraphqlClientBiding()],
     name: ReservationAsClientPage.routeName,
-    page: () => ReservationAsClientPage(),
+    page: () => ReservationAsClientPage(
+      reservationId: "",
+    ),
   ),
   GetPage(
     bindings: [GraphqlClientBiding()],
     name: ReservationAsOwnerPage.routeName,
-    page: () => ReservationAsOwnerPage(),
+    page: () => ReservationAsOwnerPage(
+      reservationId: "",
+    ),
   ),
   GetPage(
     bindings: [GraphqlClientBiding()],
