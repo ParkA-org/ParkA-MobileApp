@@ -1,4 +1,6 @@
+import 'package:ParkA/controllers/map_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SearchBar extends StatelessWidget {
   final double width;
@@ -16,6 +18,8 @@ class SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mapController = Get.find<MapController>();
+
     return Container(
       height: 40.0,
       margin: EdgeInsets.all(8.0),
@@ -33,6 +37,9 @@ class SearchBar extends StatelessWidget {
       ),
       child: TextField(
         enabled: enabled ?? true,
+        onSubmitted: (value) {
+          mapController.searchParkings(value);
+        },
         decoration: InputDecoration(
           border: InputBorder.none,
           hintStyle: TextStyle(

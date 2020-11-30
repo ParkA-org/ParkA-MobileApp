@@ -3,13 +3,13 @@ import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
 
 class FilterResultTile extends StatelessWidget {
-  final String streetAddress;
+  final String parkingName;
   final String ownerName;
   final String parkingspace;
 
   FilterResultTile({
     Key key,
-    this.streetAddress,
+    this.parkingName,
     this.ownerName,
     this.parkingspace,
   }) : super(key: key);
@@ -46,7 +46,7 @@ class FilterResultTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(this.streetAddress, style: kParkaTextStyleGrey),
+                  Text(this.parkingName, style: kParkaTextStyleGrey),
                   Padding(
                     padding: const EdgeInsets.only(top: 14.0, bottom: 15.0),
                     child: Row(

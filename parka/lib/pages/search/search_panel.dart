@@ -2,6 +2,7 @@ import 'package:ParkA/components/filter-result-tile/filter_result_tile.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/controllers/map_controller.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
+import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
 
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
@@ -28,10 +29,15 @@ class _SearchPanelState extends State<SearchPanel> {
 
   List<Parking> currentParkings = [];
 
+  void getAllParkings() async {
+    currentParkings = await ParkingUseCases.getAllParking();
+    mapController.setCurrentParkings(currentParkings);
+  }
+
   @override
   void initState() {
     super.initState();
-    currentParkings = mapController.currentParkings;
+    getAllParkings();
   }
 
   @override
@@ -51,24 +57,27 @@ class _SearchPanelState extends State<SearchPanel> {
                       top: this.widget.mainContext == null
                           ? 0
                           : MediaQuery.of(this.widget.mainContext).padding.top),
-                  child: ParkaHeader(
-                    color: Colors.white,
-                    leading: GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Icon(
-                        Icons.arrow_back_ios,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: ParkaHeader(
+                      color: Colors.white,
+                      leading: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                        ),
                       ),
-                    ),
-                    central: Text(
-                      'Buscar Parqueo',
-                      style: kParkaTextStyleBoldWhite20,
-                      textAlign: TextAlign.center,
-                    ),
-                    trailing: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.transparent,
+                      central: Text(
+                        'Buscar Parqueo',
+                        style: kParkaTextStyleBoldWhite22,
+                        textAlign: TextAlign.center,
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.transparent,
+                      ),
                     ),
                   ),
                 ),
@@ -84,84 +93,20 @@ class _SearchPanelState extends State<SearchPanel> {
             ),
             Expanded(
               flex: 3,
-              child: ListView(
-                children: [
-                  FilterResultTile(
-                    streetAddress: 'Calle Puerto Rico #175',
-                    ownerName: 'Silvio Arzeno',
-                    parkingspace: '10 metros',
-                  ),
-                  FilterResultTile(
-                    streetAddress: 'Calle Bonaire #75',
-                    ownerName: 'David Bujosa',
-                    parkingspace: '15 metros',
-                  ),
-                  FilterResultTile(
-                    streetAddress: 'Agora Mall',
-                    ownerName: 'Sebastiano Faiella',
-                    parkingspace: '20 metros',
-                  ),
-                  FilterResultTile(
-                    streetAddress: 'Capotillo City',
-                    ownerName: 'Cesar Gonzalez',
-                    parkingspace: '25 metros',
-                  ),
-                  FilterResultTile(
-                    streetAddress: 'Parque Juan Pablo Duarte',
-                    ownerName: 'Tomas Familia',
-                    parkingspace: '30 metros',
-                  ),
-                  FilterResultTile(
-                    streetAddress: 'Calle Puerto Rico #175',
-                    ownerName: 'Silvio Arzeno',
-                    parkingspace: '10 metros',
-                  ),
-                  FilterResultTile(
-                    streetAddress: 'Calle Bonaire #75',
-                    ownerName: 'David Bujosa',
-                    parkingspace: '15 metros',
-                  ),
-                  FilterResultTile(
-                    streetAddress: 'Agora Mall',
-                    ownerName: 'Sebastiano Faiella',
-                    parkingspace: '20 metros',
-                  ),
-                  FilterResultTile(
-                    streetAddress: 'Capotillo City',
-                    ownerName: 'Cesar Gonzalez',
-                    parkingspace: '25 metros',
-                  ),
-                  FilterResultTile(
-                    streetAddress: 'Parque Juan Pablo Duarte',
-                    ownerName: 'Tomas Familia',
-                    parkingspace: '30 metros',
-                  ),
-                  FilterResultTile(
-                    streetAddress: 'Calle Puerto Rico #175',
-                    ownerName: 'Silvio Arzeno',
-                    parkingspace: '10 metros',
-                  ),
-                  FilterResultTile(
-                    streetAddress: 'Calle Bonaire #75',
-                    ownerName: 'David Bujosa',
-                    parkingspace: '15 metros',
-                  ),
-                  FilterResultTile(
-                    streetAddress: 'Agora Mall',
-                    ownerName: 'Sebastiano Faiella',
-                    parkingspace: '20 metros',
-                  ),
-                  FilterResultTile(
-                    streetAddress: 'Capotillo City',
-                    ownerName: 'Cesar Gonzalez',
-                    parkingspace: '25 metros',
-                  ),
-                  FilterResultTile(
-                    streetAddress: 'Parque Juan Pablo Duarte',
-                    ownerName: 'Tomas Familia',
-                    parkingspace: '30 metros',
-                  ),
-                ],
+              child: GetX<MapController>(
+                builder: (controller) {
+                  return ListView.builder(
+                    itemCount: controller.filteredResults.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return FilterResultTile(
+                        parkingName:
+                            controller.filteredResults[index].parkingName,
+                        ownerName: "Silvio Arzeno",
+                        parkingspace: "10 M",
+                      );
+                    },
+                  );
+                },
               ),
             ),
           ],

@@ -104,7 +104,7 @@ query($userLocation: FilterInput!) {
 
 """;
 
-const getAllParkings = r"""
+const String getAllParkings = r"""
 query{
   getAllParkings(input:{where:{}}){
     id
