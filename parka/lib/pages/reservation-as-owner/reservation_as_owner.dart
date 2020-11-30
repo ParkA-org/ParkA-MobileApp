@@ -8,8 +8,6 @@ import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
@@ -558,22 +556,31 @@ class StartAndEndTimeWidgetTab extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(
-            "Empieza",
-            style: kParkaTextStyleBoldGreen18,
-          ),
-        ),
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: true != true
+                ? Text(
+                    "Empieza",
+                    style: kParkaTextStyleBoldGreen18,
+                  )
+                : Text(
+                    "Empezó",
+                    style: kParkaTextStyleBoldGreen18,
+                  )),
         Text(
           '11/13/2020 13:00 h',
           style: kParkaTextStyleBlack18,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(
-            "Termina",
-            style: kParkaTextStyleBoldGreen18,
-          ),
+          child: true != true
+              ? Text(
+                  "Termina",
+                  style: kParkaTextStyleBoldGreen18,
+                )
+              : Text(
+                  "Termino",
+                  style: kParkaTextStyleBoldGreen18,
+                ),
         ),
         Text(
           '11/13/2020 15:00 h',
