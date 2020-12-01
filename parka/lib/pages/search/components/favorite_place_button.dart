@@ -14,7 +14,8 @@ class FavoritePlaceButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
-            BoxShadow(offset: Offset(0, 5.0), color: Colors.black54),
+            BoxShadow(
+                offset: Offset(0, 2.0), color: Colors.black54, blurRadius: 8.0),
           ],
         ),
         child: Row(

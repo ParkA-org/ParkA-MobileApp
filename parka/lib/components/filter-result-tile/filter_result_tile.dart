@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 
 class FilterResultTile extends StatelessWidget {
   final String parkingName;
-  final String ownerName;
-  final String parkingspace;
+  final String parkingPrice;
+  final String rating;
 
   FilterResultTile({
     Key key,
     this.parkingName,
-    this.ownerName,
-    this.parkingspace,
+    this.parkingPrice,
+    this.rating,
   }) : super(key: key);
 
   @override
@@ -26,18 +26,16 @@ class FilterResultTile extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              width: 60.0,
-              height: 60.0,
-              decoration: BoxDecoration(
-                color: ParkaColors.parkaLightGrey,
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.local_parking,
-                color: ParkaColors.parkaGreen,
-                size: 40.0,
-              ),
-            ),
+                width: 60.0,
+                height: 60.0,
+                decoration: BoxDecoration(
+                  color: ParkaColors.parkaLightGrey,
+                  shape: BoxShape.circle,
+                ),
+                child: Image.asset(
+                  'resources/images/green-search-pin.png',
+                  scale: 2.5,
+                )),
           ),
           Expanded(
             flex: 7,
@@ -52,8 +50,9 @@ class FilterResultTile extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text(this.ownerName, style: kParkaInputTextStyleGrey),
-                        Text(this.parkingspace,
+                        Text(this.parkingPrice,
+                            style: kParkaInputTextStyleGrey),
+                        Text(this.rating,
                             textAlign: TextAlign.right,
                             style: kParkaInputTextStyleGrey),
                       ],

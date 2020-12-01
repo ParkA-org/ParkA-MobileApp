@@ -34,6 +34,18 @@ class _SearchPanelState extends State<SearchPanel> {
     mapController.setCurrentParkings(currentParkings);
   }
 
+  List<Widget> searchResultBuilder(List<Parking> filteredResults) {
+    List<Widget> searchResults = [];
+    filteredResults.forEach((parking) {
+      searchResults.add(FilterResultTile(
+        parkingName: parking.parkingName,
+        parkingPrice: "${parking.perHourPrice} RD Por Hora",
+        rating: "${parking.rating.toString()}",
+      ));
+    });
+    return searchResults;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -92,18 +104,11 @@ class _SearchPanelState extends State<SearchPanel> {
               child: FavoritePlaceButton(),
             ),
             Expanded(
-                flex: 3,
-                child: ListView.builder(
-                  itemCount: mapController.filteredResults.length.compareTo(0),
-                  itemBuilder: (BuildContext context, int index) {
-                    return FilterResultTile(
-                      parkingName:
-                          mapController.filteredResults[index].parkingName,
-                      ownerName: "Silvio Arzeno",
-                      parkingspace: "10 M",
-                    );
-                  },
-                )),
+              child: Obx(() => ListView(
+                    children:
+                        searchResultBuilder(mapController.filteredResults),
+                  )),
+            ),
           ],
         ),
       ),
