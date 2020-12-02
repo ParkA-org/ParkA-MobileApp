@@ -34,7 +34,7 @@ class MapController extends GetxController {
         filteredResults = RxList<Parking>();
 
         searchQuery = searchQuery.toUpperCase();
-        currentParkings.value.forEach((parking) {
+        currentParkings.forEach((parking) {
           if (parking.parkingName.toUpperCase().contains(searchQuery) ||
               (parking.sector?.toUpperCase()?.contains(searchQuery) ?? false) ||
               (parking.information?.toUpperCase()?.contains(searchQuery) ??
@@ -45,8 +45,8 @@ class MapController extends GetxController {
       });
     }
     searchResults = List<Widget>().obs;
-    filteredResults.value.forEach((parking) {
-      searchResults.value.add(FilterResultTile(
+    filteredResults.forEach((parking) {
+      searchResults.add(FilterResultTile(
         parkingName: parking.parkingName,
         parkingPrice: "${parking.perHourPrice} RD Por Hora",
         rating: "${parking.rating.toString()}",
