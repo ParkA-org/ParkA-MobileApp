@@ -4,6 +4,7 @@ import 'package:ParkA/components/floating-action-button/parka_floating_action_bu
 import 'package:ParkA/components/info/info_label.dart';
 import 'package:ParkA/components/inputs/parka_time_selector_widget/time_selector_pill_widget.dart';
 import 'package:ParkA/components/price/price_tab_widget.dart';
+import 'package:ParkA/components/reservation/date_time_reservation_selector.dart';
 import 'package:ParkA/controllers/create-reservation-form/create_reservation_controller.dart';
 import 'package:ParkA/data/data-models/calendar/calendar_data_model.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
@@ -13,6 +14,7 @@ import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
 import 'package:ParkA/pages/create-reservation/steps/confirm_reservation_page.dart';
 import 'package:ParkA/pages/create-reservation/steps/select_payment_method_page.dart';
 import 'package:ParkA/pages/create-reservation/steps/select_vehile_page.dart';
+import 'package:ParkA/pages/create-reservation/utils/generate_schedule_util.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -47,12 +49,26 @@ class _CreateParkingReservationPageState
   DateTime queryDateTime = new DateTime.now();
   String _lastQueryDate;
   List<PerDaySchedule> parkingAvaliability;
+  ReservationScheduleList _scheduleOptions;
 
   //CHECKED
 
   // NOT CHECKED
 
-  Future getParkingAvalibility(DateTime date) async {
+  bool _isTimeAfter(String _timeString, String _timeStringToCompare) {
+    return getIntTime(_timeString) > getIntTime(_timeStringToCompare);
+  }
+
+  int getIntTime(String _timeString) {
+    List _splittedTimeString = _timeString.split(":");
+
+    int ret =
+        int.tryParse("${_splittedTimeString[0]}${_splittedTimeString[1]}");
+
+    return ret;
+  }
+
+  Future<ReservationScheduleList> getParkingAvalibility(DateTime date) async {
     int dateDiff = date.difference(this.queryDateTime).inDays.abs();
 
     if (dateDiff >= 7 || this.parkingAvaliability == null) {
@@ -63,136 +79,55 @@ class _CreateParkingReservationPageState
       );
     }
 
-    _getParkingAvaliableSchedule(
+    ReservationScheduleList _parkingAvaiability = getParkingAvaliableSchedule(
       date,
       this._parking.calendar,
       this.parkingAvaliability,
     );
 
-    return;
+    return _parkingAvaiability;
   }
 
-  List<String> dummyTimes() {
-    List<String> ret = new List();
+  void _setStartTime(int idx) {
+    ReservationSchedule _start = this._scheduleOptions.start[idx];
+    String finish = this._formController.createReservationDto.checkOutDate;
 
-    String hour = "0000";
-    int pointer = 0;
+    if (finish == null || _isTimeAfter(_start.value, _getTime(finish))) {
+      String _finish =
+          this._scheduleOptions.finish[_start.maxRangeValueIdx].value;
 
-    while (pointer <= 2400) {
-      ret.add(hour);
-
-      String firstPart = hour.substring(0, 2);
-      String secondPart = hour.substring(2);
-
-      int sum2 = int.tryParse(secondPart);
-      int sum1 = int.tryParse(firstPart);
-      sum2 += 30;
-
-      if (sum2 == 60) {
-        sum1 += 1;
-        secondPart = "00";
-      } else {
-        secondPart = sum2.toString();
-      }
-
-      firstPart = sum1.toString();
-      firstPart = firstPart.length == 1 ? "0$firstPart" : firstPart;
-
-      hour = firstPart + secondPart;
-      // print(hour);
-      pointer = int.tryParse(hour);
+      this._formController.setStartTime(
+            _start.value,
+            finishTime: _finish,
+          );
     }
 
-    return ret;
+    this._formController.setStartTime(_start.value);
   }
 
-  List<Schedule> _getParkingAvaliableSchedule(
-    DateTime _date,
-    Calendar _parkingCalendar,
-    List<PerDaySchedule> _parkingSchedule,
-  ) {
-    List<Schedule> ret = new List();
-    String filterDate = _formatDate(_date);
-    List<Schedule> busySchedule = [];
+  void _setFinishTime(int idx) {
+    ReservationSchedule _finish = this._scheduleOptions.finish[idx];
+    String start = this._formController.createReservationDto.checkInDate;
 
-    int idx =
-        _parkingSchedule.indexWhere((element) => element.date == filterDate);
-    print(idx);
-    print(filterDate);
-
-    if (idx != -1) {
-      busySchedule = _parkingSchedule[idx].schedules;
+    if (start == null || _isTimeAfter(_getTime(start), _finish.value)) {
+      String _start =
+          this._scheduleOptions.start[_finish.minRangeValueIdx].value;
+      this._formController.setFinishTime(
+            _finish.value,
+            startTime: _start,
+          );
     }
 
-    int dayIdx = _date.weekday - 1;
-
-    List<Schedule> _scheduleDay =
-        _parkingCalendar.getDaySchedule(weekDays[weekDaysList[dayIdx]]);
-    print("LEN IS ${_scheduleDay.length}");
-    print("DAY IS ${weekDaysList[dayIdx]}");
-
-    int pointer = 0;
-
-    if (busySchedule.length == 0) {
-      ret = _scheduleDay;
-    }
-
-    for (var _schedule in _scheduleDay) {
-      Schedule curr = _schedule;
-
-      while (pointer != busySchedule.length &&
-          curr.finish > busySchedule[pointer].start) {
-        if (busySchedule[pointer].start > curr.start &&
-            busySchedule[pointer].finish < curr.finish) {
-          ret.add(
-            Schedule(
-              finish: busySchedule[pointer].start,
-              start: curr.start,
-            ),
-          );
-          curr = Schedule(
-            finish: curr.finish,
-            start: busySchedule[pointer].finish,
-          );
-          pointer++;
-        } else if (busySchedule[pointer].start < curr.finish &&
-            busySchedule[pointer].finish == curr.finish) {
-          ret.add(
-            Schedule(
-              start: curr.start,
-              finish: busySchedule[pointer].start,
-            ),
-          );
-          pointer++;
-          break;
-        } else if (busySchedule[pointer].start == curr.start &&
-            busySchedule[pointer].finish < curr.finish) {
-          curr = Schedule(
-            start: busySchedule[pointer].finish,
-            finish: curr.finish,
-          );
-          pointer++;
-        } else if (curr.finish > busySchedule[pointer].start) {
-          pointer++;
-          break;
-        }
-      }
-    }
-
-    ret.forEach((element) {
-      print("SCHEDULE IS ${element.start} : ${element.finish}");
-    });
-
-    return ret;
+    this._formController.setFinishTime(_finish.value);
   }
 
-  void _dummySetTime(DateTime date) async {
+  void _setReservationDate(DateTime date) async {
     bool check = date.isBefore(DateTime.now());
 
     date = check ? DateTime.now() : date;
 
     this._formController.setReservationDate(date);
-    await this.getParkingAvalibility(date);
+    this._scheduleOptions = await this.getParkingAvalibility(date);
   }
 
   // SURE
@@ -205,6 +140,17 @@ class _CreateParkingReservationPageState
     return new DateTime(year, month, day).toIso8601String();
   }
 
+  String _getTime(String _isoDate) {
+    if (_isoDate == null) {
+      return "";
+    }
+
+    String _time = _isoDate.split("T")[1];
+    List<String> _splittedTime = _time.split(":");
+
+    return "${_splittedTime[0]}:${_splittedTime[1]}";
+  }
+
   Future getParking() async {
     this._parking = await ParkingUseCases.getParkingById(this._parkingId);
 
@@ -215,7 +161,8 @@ class _CreateParkingReservationPageState
 
   void _getData() async {
     await getParking();
-    await this.getParkingAvalibility(this.queryDateTime);
+    this._scheduleOptions =
+        await this.getParkingAvalibility(this.queryDateTime);
 
     setState(() {
       this._loading = false;
@@ -338,12 +285,23 @@ class _CreateParkingReservationPageState
                                 ),
                                 Obx(
                                   () => DateTimeReservationPicker(
-                                      dateTime: this
-                                          ._formController
-                                          .createReservationDto
-                                          .rentDate,
-                                      selectDate: this._dummySetTime,
-                                      avaliableTimes: this.dummyTimes()),
+                                    dateTime: this
+                                        ._formController
+                                        .createReservationDto
+                                        .rentDate,
+                                    selectDate: this._setReservationDate,
+                                    avaliableTimes: this._scheduleOptions,
+                                    startTime: _getTime(this
+                                        ._formController
+                                        .createReservationDto
+                                        .checkInDate),
+                                    selectStartHour: this._setStartTime,
+                                    finishTIme: _getTime(this
+                                        ._formController
+                                        .createReservationDto
+                                        .checkOutDate),
+                                    selectFinishHour: this._setFinishTime,
+                                  ),
                                 ),
                                 Divider(
                                   thickness: 1.0,
@@ -403,14 +361,36 @@ class _CreateParkingReservationPageState
 class DateTimeReservationPicker extends StatelessWidget {
   final DateTime dateTime;
   final Function selectDate;
-  final List<String> avaliableTimes;
+  final Function selectStartHour;
+  final Function selectFinishHour;
+  final String startTime;
+  final String finishTIme;
+  final String reservationDuration;
+  final ReservationScheduleList avaliableTimes;
 
   const DateTimeReservationPicker({
     Key key,
     this.dateTime,
     this.selectDate,
     this.avaliableTimes,
+    this.selectStartHour,
+    this.selectFinishHour,
+    this.finishTIme,
+    this.startTime,
+    this.reservationDuration,
   }) : super(key: key);
+
+  List<String> _formatScheduleList(
+    List<ReservationSchedule> _schedule,
+  ) {
+    List<String> ret = new List();
+
+    _schedule.forEach((element) {
+      ret.add(element.value);
+    });
+
+    return ret;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -463,10 +443,11 @@ class DateTimeReservationPicker extends StatelessWidget {
                       ),
                     ),
                     TimeScheduleSelectorPill(
-                      pickerOptions: this.avaliableTimes,
-                      hourString: "",
+                      pickerOptions:
+                          this._formatScheduleList(this.avaliableTimes.start),
+                      hourString: this.startTime ?? "",
                       label: "",
-                      setHourString: (int val) {},
+                      setHourString: this.selectStartHour,
                     )
                   ],
                 ),
@@ -486,10 +467,11 @@ class DateTimeReservationPicker extends StatelessWidget {
                       ),
                     ),
                     TimeScheduleSelectorPill(
-                      pickerOptions: this.avaliableTimes,
-                      hourString: "",
+                      pickerOptions:
+                          this._formatScheduleList(this.avaliableTimes.finish),
+                      hourString: this.finishTIme ?? "",
                       label: "",
-                      setHourString: (int val) {},
+                      setHourString: this.selectFinishHour,
                     )
                   ],
                 ),
@@ -590,86 +572,6 @@ class TimeScheduleSelectorPill extends StatelessWidget {
         decoration: BoxDecoration(
             color: Color(0xFFC4C4C4),
             borderRadius: BorderRadius.circular(16.0)),
-      ),
-    );
-  }
-}
-
-class DateTimeScheduleSelectorPill extends StatelessWidget {
-  final DateTime hourString;
-  final Function setHourString;
-
-  const DateTimeScheduleSelectorPill({
-    Key key,
-    @required this.hourString,
-    this.setHourString,
-  }) : super(key: key);
-
-  String _formatDate() {
-    final List<String> months = [
-      "Enero",
-      "Febrero",
-      "Marzo",
-      "Abril",
-      "Mayo",
-      "Junio",
-      "Julio",
-      "Agosto",
-      "Septiembre",
-      "Octubre",
-      "Noviembre",
-      "Diciembre",
-    ];
-
-    if (this.hourString == null) return "";
-    int day = this.hourString.day;
-    int year = this.hourString.year;
-    int month = this.hourString.month;
-
-    return "$day de ${months[month - 1]} $year";
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => showModalBottomSheet(
-        context: context,
-        builder: (context) => Container(
-          child: DatePickerWidget(
-            onConfirm: setHourString ??
-                (DateTime date, List<int> value) {
-                  return;
-                },
-            dateFormat: 'dd/MM/yyyy',
-            initialDateTime: this.hourString,
-            onChange: setHourString ??
-                (DateTime date, List<int> value) {
-                  return;
-                },
-            minDateTime: DateTime(2020),
-            pickerTheme: DateTimePickerTheme(
-              itemTextStyle: TextStyle(
-                fontFamily: "Montserrat",
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Color(
-                  0xFF0B768C,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-      child: Container(
-        child: AutoSizeText(
-          this._formatDate(),
-          maxLines: 1,
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-        decoration: BoxDecoration(
-          color: Color(0xFFC4C4C4),
-          borderRadius: BorderRadius.circular(16.0),
-        ),
       ),
     );
   }
