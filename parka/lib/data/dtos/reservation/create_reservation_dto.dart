@@ -12,4 +12,5 @@ class CreateReservationDto {
   Payment paymentInfo;
   double total;
   DateTime rentDate;
+  double hours;
 }

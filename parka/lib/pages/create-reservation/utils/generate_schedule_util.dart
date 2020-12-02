@@ -26,7 +26,7 @@ class ReservationScheduleList {
   });
 }
 
-String _formatDate(DateTime date) {
+String formatDate(DateTime date) {
   int day = date.day;
   int month = date.month;
   int year = date.year;
@@ -40,14 +40,22 @@ ReservationScheduleList getParkingAvaliableSchedule(
   List<PerDaySchedule> _parkingSchedule,
 ) {
   List<Schedule> ret = new List();
-  String filterDate = _formatDate(_date);
+  String filterDate = '${formatDate(_date)}Z';
   List<Schedule> busySchedule = [];
 
   int idx =
       _parkingSchedule.indexWhere((element) => element.date == filterDate);
 
+  print(filterDate);
+  _parkingSchedule.forEach((element) {
+    print(element.date);
+  });
+
+  print("INDEX IS $idx");
+
   if (idx != -1) {
     busySchedule = _parkingSchedule[idx].schedules;
+    print(busySchedule.length);
   }
 
   int dayIdx = _date.weekday - 1;

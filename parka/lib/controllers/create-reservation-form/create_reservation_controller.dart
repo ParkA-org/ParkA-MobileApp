@@ -37,8 +37,11 @@ class CreateReservationFormController extends GetxController {
   }
 
   void setReservationDate(DateTime _datetime) {
+    print(_datetime);
     _createReservationDto.update((_instance) {
       _instance.rentDate = _datetime;
+      _instance.checkInDate = null;
+      _instance.checkOutDate = null;
     });
   }
 
@@ -70,6 +73,12 @@ class CreateReservationFormController extends GetxController {
           this.createReservationDto.rentDate,
         );
       }
+      this.createReservationDto.hours = _getTotalTime(
+          this.createReservationDto.checkInDate,
+          this.createReservationDto.checkOutDate);
+      this.createReservationDto.total =
+          this.createReservationDto.parking.perHourPrice *
+              this.createReservationDto.hours;
     });
   }
 
@@ -85,7 +94,27 @@ class CreateReservationFormController extends GetxController {
           this.createReservationDto.rentDate,
         );
       }
+      this.createReservationDto.hours = _getTotalTime(
+          this.createReservationDto.checkInDate,
+          this.createReservationDto.checkOutDate);
+      this.createReservationDto.total =
+          this.createReservationDto.parking.perHourPrice *
+              this.createReservationDto.hours;
     });
+  }
+
+  double _getTotalTime(String _start, String _finish) {
+    DateTime start = DateTime.parse(_start);
+    DateTime finish = DateTime.parse(_finish);
+
+    print(start);
+    print(finish);
+
+    int _diffInSeconds = start.difference(finish).inSeconds.abs();
+
+    double hours = (_diffInSeconds / 3600).toPrecision(1);
+
+    return hours;
   }
 
   Future<bool> createReservation() async {

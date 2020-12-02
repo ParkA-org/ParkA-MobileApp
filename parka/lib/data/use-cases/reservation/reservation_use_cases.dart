@@ -1,5 +1,6 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/dtos/reservation/create_reservation_dto.dart';
+import 'package:ParkA/pages/create-reservation/utils/generate_schedule_util.dart';
 import 'package:ParkA/utils/graphql/mutations/reservation_mutation.dart';
 import 'package:ParkA/utils/graphql/queries/reservation_queries.dart';
 import 'package:get/get.dart';
@@ -61,7 +62,7 @@ class ReservationUseCases {
         "vehicle": _createReservationDto.vehicle.id,
         "paymentInfo": _createReservationDto.paymentInfo.id,
         "total": _createReservationDto.total,
-        "rentDate": _createReservationDto.rentDate,
+        "rentDate": formatDate(_createReservationDto.rentDate),
       }
     };
 

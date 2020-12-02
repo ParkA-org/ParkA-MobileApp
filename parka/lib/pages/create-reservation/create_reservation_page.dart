@@ -301,6 +301,10 @@ class _CreateParkingReservationPageState
                                         .createReservationDto
                                         .checkOutDate),
                                     selectFinishHour: this._setFinishTime,
+                                    reservationDuration: this
+                                        ._formController
+                                        .createReservationDto
+                                        .hours,
                                   ),
                                 ),
                                 Divider(
@@ -365,7 +369,7 @@ class DateTimeReservationPicker extends StatelessWidget {
   final Function selectFinishHour;
   final String startTime;
   final String finishTIme;
-  final String reservationDuration;
+  final double reservationDuration;
   final ReservationScheduleList avaliableTimes;
 
   const DateTimeReservationPicker({
@@ -481,7 +485,7 @@ class DateTimeReservationPicker extends StatelessWidget {
         ),
         InfoLabelWidget(
           label: "Horas:",
-          value: "6",
+          value: '${this.reservationDuration ?? ""}',
         ),
       ],
     );

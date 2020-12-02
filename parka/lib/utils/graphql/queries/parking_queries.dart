@@ -114,6 +114,7 @@ const String getParkingAvaliabilityQuery = r"""
 query($data:GetParkingCalendarInput!){
   getParkingAvaliability(getParkingCalendarInput:$data){
     id
+    date
     parking
     schedules{
       start

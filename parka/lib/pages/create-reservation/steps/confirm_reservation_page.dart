@@ -7,6 +7,8 @@ import 'package:ParkA/components/user/other_user_personal_information_widget.dar
 import 'package:ParkA/controllers/create-reservation-form/create_reservation_controller.dart';
 import 'package:ParkA/pages/create-reservation/steps/select_payment_method_page.dart';
 import 'package:ParkA/pages/create-reservation/steps/select_vehile_page.dart';
+import 'package:ParkA/pages/map/maps_page.dart';
+import 'package:ParkA/pages/pending-reservations/pending_reservation_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -37,15 +39,13 @@ class ConfirmReservationPage extends StatelessWidget {
       "Diciembre",
     ];
 
-    String date = "2020-09-25T21:06:34.017Z";
-
-    List<String> split = date.split("T");
+    List<String> split = _date.split("T");
 
     List<String> spitteDate = split[0].split("-");
     List<String> splittedTime = split[1].split(":");
 
     final int monthIndex = int.tryParse(spitteDate[1]) - 1;
-    final month = months[monthIndex];
+    final month = months[monthIndex + 1];
 
     return "${spitteDate[2]} de $month ${spitteDate[0]} a las ${splittedTime[0]}:${splittedTime[1]}";
   }
@@ -210,7 +210,7 @@ class ConfirmReservationPage extends StatelessWidget {
                                 value: _formatDate(this
                                     ._formController
                                     .createReservationDto
-                                    .checkInDate),
+                                    .checkOutDate),
                               ),
                             ),
                             ParkingPriceWidgetTab(
@@ -275,7 +275,13 @@ class ConfirmReservationPage extends StatelessWidget {
                                   .createReservation();
 
                               if (result) {
-                                print("OK");
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (ctx) =>
+                                          PendingReservationsPage(),
+                                    ),
+                                    ModalRoute.withName(MapPage.routeName));
                               }
                             },
                           ),
