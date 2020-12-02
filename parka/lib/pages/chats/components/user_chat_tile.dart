@@ -53,7 +53,7 @@ class ChatTile extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           AutoSizeText(
-                            "Francisco Tarjetero",
+                            "Francisco Tejada",
                             maxLines: 1,
                             maxFontSize: 30,
                             minFontSize: 25,

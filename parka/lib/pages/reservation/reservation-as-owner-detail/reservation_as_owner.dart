@@ -1,0 +1,294 @@
+import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
+import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
+import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
+import 'package:ParkA/pages/reservation/components/parking_price_tab_widget.dart';
+import 'package:ParkA/pages/reservation/components/profile_tab_widget.dart';
+import 'package:ParkA/pages/reservation/components/sliver_app_bar_reservation_detail.dart';
+import 'package:ParkA/pages/reservation/components/time_tab_widget.dart';
+import 'package:ParkA/pages/reservation/components/vehicle_tab_widget.dart';
+import 'package:ParkA/styles/parka_colors.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
+
+class ReservationAsOwnerPage extends StatefulWidget {
+  static String routeName = "reservation-as-owner-page";
+
+  final String reservationId;
+
+  ReservationAsOwnerPage({
+    @required this.reservationId,
+  });
+
+  @override
+  _ReservationAsOwnerPageState createState() => _ReservationAsOwnerPageState();
+}
+
+class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
+  String _reservationId;
+  Reservation _reservation;
+  bool _loading;
+  Parking a = new Parking(perHourPrice: 100);
+
+  @override
+  void initState() {
+    super.initState();
+    this._loading = false;
+    this._reservationId = this.widget.reservationId;
+
+    getReservation();
+  }
+
+  Future getReservation() async {
+    this._reservation =
+        await ReservationUseCases.getReservationById(this._reservationId);
+    if (this._reservation != null) {
+      this._loading = false;
+    }
+
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    return Scaffold(
+      floatingActionButton: ActionButtonsOwnerState(screenSize: screenSize),
+      body: SafeArea(
+        child: ModalProgressHUD(
+          color: ParkaColors.parkaGreen,
+          inAsyncCall: this._loading,
+          child: this._loading
+              ? Container(
+                  color: ParkaColors.parkaGreen,
+                )
+              : Container(
+                  height: screenSize.height * 0.9,
+                  child: CustomScrollView(
+                    slivers: [
+                      SliverAppBarReservationDetail(),
+                      SliverList(
+                        delegate: SliverChildListDelegate(
+                          [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                24.0,
+                                0,
+                                24.0,
+                                24.0,
+                              ),
+                              child: Column(
+                                children: [
+                                  ProfileTabWidget(
+                                      parking: a, name: "Propietario"),
+                                  VehicleTabWidget(parking: a),
+                                  ParkingPriceTabWidget(parking: a),
+                                  TimeTabWidget(parking: a),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+        ),
+      ),
+    );
+  }
+}
+
+class ActionButtonsOwnerState extends StatelessWidget {
+  const ActionButtonsOwnerState({
+    Key key,
+    @required this.screenSize,
+  }) : super(key: key);
+
+  final Size screenSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: screenSize.height * 0.09,
+      width: screenSize.width * 1,
+      alignment: Alignment.bottomCenter,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 32.0),
+        child: true != true
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: () {},
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Color(0xff077187),
+                        borderRadius: BorderRadius.circular(15.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.transparent.withOpacity(0.2),
+                            spreadRadius: 1,
+                            blurRadius: 7,
+                            offset: Offset(0, 2), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40, vertical: 12.0),
+                        child: AutoSizeText(
+                          "Confirmar",
+                          maxLines: 1,
+                          maxFontSize: 26,
+                          minFontSize: 18,
+                          style: TextStyle(
+                            fontFamily: "Montserrat",
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Center(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xffF30F1D),
+                            borderRadius: BorderRadius.circular(15.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.transparent.withOpacity(0.2),
+                                spreadRadius: 1,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 2), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 12.0),
+                            child: AutoSizeText(
+                              "Cancelar",
+                              maxLines: 1,
+                              maxFontSize: 26,
+                              minFontSize: 18,
+                              style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              )
+            : InkWell(
+                onTap: () {},
+                child: Center(
+                  child: true != true
+                      ? Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xff077187),
+                            borderRadius: BorderRadius.circular(12.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.transparent.withOpacity(0.2),
+                                spreadRadius: 4,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 6), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 60, vertical: 10.0),
+                            child: AutoSizeText(
+                              "Calificar",
+                              maxLines: 1,
+                              maxFontSize: 30,
+                              minFontSize: 30,
+                              style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        )
+                      : true != true
+                          ? Container(
+                              decoration: BoxDecoration(
+                                color: Color(0xff077187),
+                                borderRadius: BorderRadius.circular(12.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.transparent.withOpacity(0.2),
+                                    spreadRadius: 4,
+                                    blurRadius: 7,
+                                    offset: Offset(
+                                        0, 6), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 10.0),
+                                child: AutoSizeText(
+                                  "Editar Calificación",
+                                  maxLines: 1,
+                                  maxFontSize: 30,
+                                  minFontSize: 25,
+                                  style: TextStyle(
+                                    fontFamily: "Montserrat",
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Container(
+                              decoration: BoxDecoration(
+                                color: Color(0xff077187),
+                                borderRadius: BorderRadius.circular(12.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.transparent.withOpacity(0.2),
+                                    spreadRadius: 4,
+                                    blurRadius: 7,
+                                    offset: Offset(
+                                        0, 6), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 10.0),
+                                child: AutoSizeText(
+                                  "Mostrar Calificación",
+                                  maxLines: 1,
+                                  maxFontSize: 30,
+                                  minFontSize: 25,
+                                  style: TextStyle(
+                                    fontFamily: "Montserrat",
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                ),
+              ),
+      ),
+    );
+  }
+}

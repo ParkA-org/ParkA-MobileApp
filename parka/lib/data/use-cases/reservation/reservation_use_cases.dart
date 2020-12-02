@@ -1,4 +1,5 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
+import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/utils/graphql/queries/reservation_queries.dart';
 import 'package:get/get.dart';
 import 'package:graphql/client.dart';
@@ -39,5 +40,10 @@ class ReservationUseCases {
     }
 
     return 0;
+  }
+
+  static Future<Reservation> getReservationById(id) async {
+    Reservation test = new Reservation();
+    return test;
   }
 }
