@@ -38,6 +38,7 @@ class _SearchPanelState extends State<SearchPanel> {
     List<Widget> searchResults = [];
     filteredResults.forEach((parking) {
       searchResults.add(FilterResultTile(
+        parkingId: parking.id,
         parkingName: parking.parkingName,
         parkingPrice: "${parking.perHourPrice} RD Por Hora",
         rating: "${parking.rating.toString()}",
