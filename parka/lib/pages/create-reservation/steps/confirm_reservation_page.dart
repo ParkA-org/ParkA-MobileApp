@@ -282,6 +282,13 @@ class ConfirmReservationPage extends StatelessWidget {
                                           PendingReservationsPage(),
                                     ),
                                     ModalRoute.withName(MapPage.routeName));
+                              } else {
+                                Get.snackbar(
+                                  "Error",
+                                  "Ocurrio un error crenado tu reserva",
+                                  margin: EdgeInsets.all(8.0),
+                                  backgroundColor: ParkaColors.parkaGoogleRed,
+                                );
                               }
                             },
                           ),
