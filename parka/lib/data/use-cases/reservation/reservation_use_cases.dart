@@ -2,6 +2,7 @@ import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/dtos/reservation/create_reservation_dto.dart';
 import 'package:ParkA/pages/create-reservation/utils/generate_schedule_util.dart';
 import 'package:ParkA/utils/graphql/mutations/reservation_mutation.dart';
+import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/utils/graphql/queries/reservation_queries.dart';
 import 'package:get/get.dart';
 import 'package:graphql/client.dart';
@@ -79,5 +80,10 @@ class ReservationUseCases {
     }
 
     return false;
+  }
+
+  static Future<Reservation> getReservationById(id) async {
+    Reservation test = new Reservation();
+    return test;
   }
 }
