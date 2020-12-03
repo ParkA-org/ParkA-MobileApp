@@ -45,7 +45,7 @@ class ConfirmReservationPage extends StatelessWidget {
     List<String> splittedTime = split[1].split(":");
 
     final int monthIndex = int.tryParse(spitteDate[1]) - 1;
-    final month = months[monthIndex + 1];
+    final month = months[monthIndex];
 
     return "${spitteDate[2]} de $month ${spitteDate[0]} a las ${splittedTime[0]}:${splittedTime[1]}";
   }

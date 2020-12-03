@@ -37,7 +37,7 @@ class CreateReservationFormController extends GetxController {
   }
 
   void setReservationDate(DateTime _datetime) {
-    print(_datetime);
+    // print(_datetime);
     _createReservationDto.update((_instance) {
       _instance.rentDate = _datetime;
       _instance.checkInDate = null;
@@ -46,7 +46,7 @@ class CreateReservationFormController extends GetxController {
   }
 
   String _generateISOStringFromTime(String _time, DateTime _datetime) {
-    print(_time);
+    // print(_time);
 
     List<String> _splittedTime = _time.split(":");
     int _hour = int.tryParse(_splittedTime[0]);
@@ -107,8 +107,8 @@ class CreateReservationFormController extends GetxController {
     DateTime start = DateTime.parse(_start);
     DateTime finish = DateTime.parse(_finish);
 
-    print(start);
-    print(finish);
+    // print(start);
+    // print(finish);
 
     int _diffInSeconds = start.difference(finish).inSeconds.abs();
 

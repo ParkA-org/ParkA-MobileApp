@@ -43,27 +43,28 @@ ReservationScheduleList getParkingAvaliableSchedule(
   String filterDate = '${formatDate(_date)}Z';
   List<Schedule> busySchedule = [];
 
+  // print("STARTS HERE");
+
   int idx =
       _parkingSchedule.indexWhere((element) => element.date == filterDate);
 
-  print(filterDate);
-  _parkingSchedule.forEach((element) {
-    print(element.date);
-  });
+  // print(filterDate);
+  // _parkingSchedule.forEach((element) {
+  //   print(element.date);
+  // });
 
-  print("INDEX IS $idx");
+  // print("INDEX IS $idx");
 
   if (idx != -1) {
     busySchedule = _parkingSchedule[idx].schedules;
-    print(busySchedule.length);
   }
 
   int dayIdx = _date.weekday - 1;
 
   List<Schedule> _scheduleDay =
       _parkingCalendar.getDaySchedule(weekDays[weekDaysList[dayIdx]]);
-  print("LEN IS ${_scheduleDay.length}");
-  print("DAY IS ${weekDaysList[dayIdx]}");
+  // print("LEN IS ${_scheduleDay.length}");
+  // print("DAY IS ${weekDaysList[dayIdx]}");
 
   ret = busySchedule.length == 0
       ? _scheduleDay
@@ -72,9 +73,9 @@ ReservationScheduleList getParkingAvaliableSchedule(
           busySchedule,
         );
 
-  ret.forEach((element) {
-    print("SCHEDULE IS ${element.start} : ${element.finish}");
-  });
+  // ret.forEach((element) {
+  //   print("SCHEDULE IS ${element.start} : ${element.finish}");
+  // });
 
   return _formatTimeSchedules(ret);
 }
@@ -84,48 +85,72 @@ List<Schedule> _getAvaliableSchedule(
   List<Schedule> _parkingBusyHours,
 ) {
   List<Schedule> ret = new List();
+
+  // print("PARKING SCHEDULE");
+  // for (Schedule _scheduleDay in _parkingScheduleDay) {
+  //   print("${_scheduleDay.start}  ${_scheduleDay.finish}");
+  // }
+
+  // print("PARKING OCCUPIED HOURS");
+  // for (Schedule _schedule in _parkingBusyHours) {
+  //   print("${_schedule.start}  ${_schedule.finish}");
+  // }
+
   int pointer = 0;
   for (Schedule _schedule in _parkingScheduleDay) {
-    Schedule curr = _schedule;
+    Schedule _curr = new Schedule(
+      finish: _schedule.finish,
+      start: _schedule.start,
+    );
 
-    while (pointer != _parkingBusyHours.length &&
-        curr.finish > _parkingBusyHours[pointer].start) {
-      if (_parkingBusyHours[pointer].start > curr.start &&
-          _parkingBusyHours[pointer].finish < curr.finish) {
-        ret.add(
-          Schedule(
-            finish: _parkingBusyHours[pointer].start,
-            start: curr.start,
-          ),
+    // print("LOOP STARTS HERE");
+    // print(_parkingBusyHours.length);
+    while (pointer != _parkingBusyHours.length) {
+      // print("RET LEN IS ${ret.length}");
+      // ret.forEach((element) {
+      //   print("FREE SCHEDULE IS ${element.start} - ${element.finish} ");
+      // });
+
+      Schedule _busySchedule = new Schedule(
+        finish: _parkingBusyHours[pointer].finish,
+        start: _parkingBusyHours[pointer].start,
+      );
+
+      // print("PARKING SCHEDULE");
+      // print("${_curr.start} ${_curr.finish}");
+      // print("PARKING OCCUPIED HOURS");
+      // print("${_busySchedule.start} ${_busySchedule.finish}");
+
+      if (_curr.start == _busySchedule.start &&
+          _curr.finish > _busySchedule.finish) {
+        // print("HERE");
+
+        _curr.start = _busySchedule.finish;
+      } else if (_curr.start < _busySchedule.start &&
+          _curr.finish > _busySchedule.finish) {
+        // print("HERE 2");
+        // print("PARKING SCHEDULE");
+
+        Schedule _toAdd = new Schedule(
+          start: _curr.start,
+          finish: _busySchedule.start,
         );
-        curr = Schedule(
-          finish: curr.finish,
-          start: _parkingBusyHours[pointer].finish,
-        );
-        pointer++;
-      } else if (_parkingBusyHours[pointer].start < curr.finish &&
-          _parkingBusyHours[pointer].finish == curr.finish) {
-        ret.add(
-          Schedule(
-            start: curr.start,
-            finish: _parkingBusyHours[pointer].start,
-          ),
-        );
-        pointer++;
-        break;
-      } else if (_parkingBusyHours[pointer].start == curr.start &&
-          _parkingBusyHours[pointer].finish < curr.finish) {
-        curr = Schedule(
-          start: _parkingBusyHours[pointer].finish,
-          finish: curr.finish,
-        );
-        pointer++;
-      } else if (curr.finish > _parkingBusyHours[pointer].start) {
-        pointer++;
+        // print("${_toAdd.start} ${_toAdd.finish}");
+
+        ret.add(_toAdd);
+
+        _curr.start = _busySchedule.finish;
+      } else {
+        // ret.add(_curr);
         break;
       }
+
+      pointer++;
     }
+    ret.add(_curr);
   }
+
+  // print("RET FINAL LENGTH ${ret.length}");
 
   return ret;
 }
@@ -143,11 +168,22 @@ ReservationScheduleList _formatTimeSchedules(List<Schedule> _schedules) {
   _schedules.forEach((element) {
     List<String> _range = _getRange(element);
     int idx = 0;
-    rangeMinIndex += rangeMaxIndex + _rangeIdx == 0 ? 0 : 1;
-    rangeMaxIndex += _range.length - 2;
+    rangeMinIndex += rangeMaxIndex + (_rangeIdx > 0 ? 1 : 0);
+    rangeMaxIndex += _range.length - 2 + (_rangeIdx > 0 ? 1 : 0);
 
-    print(rangeMinIndex);
-    print(rangeMaxIndex);
+    print("RANGE IS  $_rangeIdx");
+    print("SUM 1 ${_rangeIdx == 0}");
+    print("MIN IN RANGE IS $rangeMinIndex");
+    print("MAX IN RANGE IS $rangeMaxIndex");
+    print("RANGE LENGTH IS ${_range.length}");
+    // _range.forEach((element) {
+    //   print(element);
+    // });
+
+    // print(rangeMinIndex);
+    // print(rangeMaxIndex);
+    // print(_rangeIdx);
+    // print(_range.length);
     _range.forEach((element) {
       String _firstPart = element.substring(0, 2);
       String _secondPart = element.substring(2);
@@ -173,11 +209,11 @@ ReservationScheduleList _formatTimeSchedules(List<Schedule> _schedules) {
     });
     _rangeIdx++;
 
-    if (_range.length > 0) print(_finish[rangeMaxIndex].value);
+    // if (_range.length > 0) print(_finish[rangeMaxIndex].value);
   });
 
-  print(_startCheck);
-  print(_finishCheck);
+  // print(_startCheck);
+  // print(_finishCheck);
 
   return ReservationScheduleList(
     finish: _finish,

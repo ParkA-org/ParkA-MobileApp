@@ -2,14 +2,11 @@ import 'package:ParkA/components/buttons/reservation_form_payment_selector.dart'
 import 'package:ParkA/components/buttons/reservation_form_vehicle_selector.dart';
 import 'package:ParkA/components/floating-action-button/parka_floating_action_button.dart';
 import 'package:ParkA/components/info/info_label.dart';
-import 'package:ParkA/components/inputs/parka_time_selector_widget/time_selector_pill_widget.dart';
 import 'package:ParkA/components/price/price_tab_widget.dart';
 import 'package:ParkA/components/reservation/date_time_reservation_selector.dart';
 import 'package:ParkA/controllers/create-reservation-form/create_reservation_controller.dart';
-import 'package:ParkA/data/data-models/calendar/calendar_data_model.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/schedule/per_day_schedule_data_model.dart';
-import 'package:ParkA/data/data-models/schedule/schedule_data_model.dart';
 import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
 import 'package:ParkA/pages/create-reservation/steps/confirm_reservation_page.dart';
 import 'package:ParkA/pages/create-reservation/steps/select_payment_method_page.dart';
@@ -17,10 +14,10 @@ import 'package:ParkA/pages/create-reservation/steps/select_vehile_page.dart';
 import 'package:ParkA/pages/create-reservation/utils/generate_schedule_util.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
+import 'package:ParkA/utils/form-validations/create_rservation_form_validator.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
@@ -50,13 +47,15 @@ class _CreateParkingReservationPageState
   String _lastQueryDate;
   List<PerDaySchedule> parkingAvaliability;
   ReservationScheduleList _scheduleOptions;
+  int _startItemIndex;
+  int _finishItemIndex;
 
   //CHECKED
 
   // NOT CHECKED
 
   bool _isTimeAfter(String _timeString, String _timeStringToCompare) {
-    return getIntTime(_timeString) > getIntTime(_timeStringToCompare);
+    return getIntTime(_timeString) >= getIntTime(_timeStringToCompare);
   }
 
   int getIntTime(String _timeString) {
@@ -91,34 +90,48 @@ class _CreateParkingReservationPageState
   void _setStartTime(int idx) {
     ReservationSchedule _start = this._scheduleOptions.start[idx];
     String finish = this._formController.createReservationDto.checkOutDate;
+    String _finish =
+        this._scheduleOptions.finish[_start.maxRangeValueIdx].value;
+    this._startItemIndex = idx;
 
     if (finish == null || _isTimeAfter(_start.value, _getTime(finish))) {
-      String _finish =
-          this._scheduleOptions.finish[_start.maxRangeValueIdx].value;
-
       this._formController.setStartTime(
             _start.value,
             finishTime: _finish,
           );
+      this._finishItemIndex = _start.maxRangeValueIdx;
+    } else if (_isTimeAfter(_getTime(finish), _finish)) {
+      this._formController.setStartTime(
+            _start.value,
+            finishTime: _finish,
+          );
+      this._finishItemIndex = _start.maxRangeValueIdx;
+    } else {
+      this._formController.setStartTime(_start.value);
     }
-
-    this._formController.setStartTime(_start.value);
   }
 
   void _setFinishTime(int idx) {
     ReservationSchedule _finish = this._scheduleOptions.finish[idx];
     String start = this._formController.createReservationDto.checkInDate;
+    String _start = this._scheduleOptions.start[_finish.minRangeValueIdx].value;
+    this._finishItemIndex = idx;
 
     if (start == null || _isTimeAfter(_getTime(start), _finish.value)) {
-      String _start =
-          this._scheduleOptions.start[_finish.minRangeValueIdx].value;
       this._formController.setFinishTime(
             _finish.value,
             startTime: _start,
           );
+      this._startItemIndex = _finish.minRangeValueIdx;
+    } else if (_isTimeAfter(_start, _getTime(start))) {
+      this._formController.setFinishTime(
+            _finish.value,
+            startTime: _start,
+          );
+      this._startItemIndex = _finish.minRangeValueIdx;
+    } else {
+      this._formController.setFinishTime(_finish.value);
     }
-
-    this._formController.setFinishTime(_finish.value);
   }
 
   void _setReservationDate(DateTime date) async {
@@ -183,9 +196,19 @@ class _CreateParkingReservationPageState
     return Scaffold(
       backgroundColor: Colors.white,
       floatingActionButton: ParkaFloatingActionButton(
-        iconData: Icons.edit,
+        iconData: Icons.check,
         onPressedHandler: () {
-          Get.to(ConfirmReservationPage());
+          if (createReservationFormValidator(
+              this._formController.createReservationDto)) {
+            return Get.to(ConfirmReservationPage());
+          }
+
+          Get.snackbar(
+            "Error",
+            "Necesitas llenar todos los campos",
+            margin: EdgeInsets.all(8.0),
+            backgroundColor: ParkaColors.parkaGoogleRed,
+          );
         },
       ),
       body: SafeArea(
@@ -305,6 +328,8 @@ class _CreateParkingReservationPageState
                                         ._formController
                                         .createReservationDto
                                         .hours,
+                                    finishTImeIdx: this._finishItemIndex,
+                                    startTimeIdx: this._startItemIndex,
                                   ),
                                 ),
                                 Divider(
@@ -369,6 +394,8 @@ class DateTimeReservationPicker extends StatelessWidget {
   final Function selectFinishHour;
   final String startTime;
   final String finishTIme;
+  final int startTimeIdx;
+  final int finishTImeIdx;
   final double reservationDuration;
   final ReservationScheduleList avaliableTimes;
 
@@ -382,6 +409,8 @@ class DateTimeReservationPicker extends StatelessWidget {
     this.finishTIme,
     this.startTime,
     this.reservationDuration,
+    this.finishTImeIdx,
+    this.startTimeIdx,
   }) : super(key: key);
 
   List<String> _formatScheduleList(
@@ -451,6 +480,7 @@ class DateTimeReservationPicker extends StatelessWidget {
                           this._formatScheduleList(this.avaliableTimes.start),
                       hourString: this.startTime ?? "",
                       label: "",
+                      initialItemIndex: this.startTimeIdx,
                       setHourString: this.selectStartHour,
                     )
                   ],
@@ -475,6 +505,7 @@ class DateTimeReservationPicker extends StatelessWidget {
                           this._formatScheduleList(this.avaliableTimes.finish),
                       hourString: this.finishTIme ?? "",
                       label: "",
+                      initialItemIndex: this.finishTImeIdx,
                       setHourString: this.selectFinishHour,
                     )
                   ],
@@ -497,6 +528,7 @@ class TimeScheduleSelectorPill extends StatelessWidget {
   final Function setHourString;
   final String label;
   final List<String> pickerOptions;
+  final int initialItemIndex;
 
   const TimeScheduleSelectorPill({
     Key key,
@@ -504,6 +536,7 @@ class TimeScheduleSelectorPill extends StatelessWidget {
     this.hourString,
     this.setHourString,
     this.pickerOptions,
+    this.initialItemIndex,
   }) : super(key: key);
 
   List<Widget> optionsBuilder() {
@@ -556,7 +589,7 @@ class TimeScheduleSelectorPill extends StatelessWidget {
               body: CupertinoPicker(
                 backgroundColor: Colors.white,
                 scrollController: FixedExtentScrollController(
-                  initialItem: 0,
+                  initialItem: this.initialItemIndex ?? 0,
                 ),
                 itemExtent: 60,
                 onSelectedItemChanged: this.setHourString ?? (int value) {},
