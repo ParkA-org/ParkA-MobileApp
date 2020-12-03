@@ -3,6 +3,7 @@ const String loginMutation = r'''
       login(loginUserInput:$input){
         JWT,
         user{
+          id
           name
           email
           lastName

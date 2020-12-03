@@ -81,6 +81,7 @@ class Parking {
           mainPicture: parking["mainPicture"],
           features: _features,
           pictures: _pictures,
+          user: User.userFromJson(parking["user"]),
           perHourPrice: double.tryParse(parking["priceHours"].toString()),
           rating: double.tryParse(
             parking["rating"].toString(),

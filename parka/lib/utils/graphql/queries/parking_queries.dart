@@ -93,6 +93,9 @@ query($userLocation: FilterInput!) {
 	) 
   {
 		id
+    user{
+      id
+    }
 		latitude
 		longitude
 		mainPicture
