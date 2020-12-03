@@ -36,6 +36,8 @@ class CreateReservationFormController extends GetxController {
       _instance.rentDate = _datetime;
       _instance.checkInDate = null;
       _instance.checkOutDate = null;
+      _instance.total = 0;
+      _instance.hours = 0;
     });
   }
 
