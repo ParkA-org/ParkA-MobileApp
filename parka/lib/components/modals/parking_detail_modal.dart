@@ -94,9 +94,6 @@ class ParkingDetailModal extends StatelessWidget {
                         children: [
                           CircleButton(
                             onTap: () {
-                              print(_userController.user.value.id);
-                              print(this.parking.user.id);
-
                               if (_userController.user.value == null) {
                                 Get.snackbar(
                                   "Error",
