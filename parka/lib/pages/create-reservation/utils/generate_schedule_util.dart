@@ -119,11 +119,19 @@ ReservationScheduleList _formatTimeSchedules(List<Schedule> _schedules) {
   int _rangeIdx = 0;
   int rangeMaxIndex = 0;
   int rangeMinIndex = 0;
+  int _totalElements = 0;
   _schedules.forEach((element) {
     List<String> _range = _getRange(element);
     int idx = 0;
-    rangeMinIndex += rangeMaxIndex + (_rangeIdx > 0 ? 1 : 0);
-    rangeMaxIndex += _range.length - 2 + (_rangeIdx > 0 ? 1 : 0);
+    _totalElements += _range.length;
+    rangeMinIndex = rangeMaxIndex + (_rangeIdx > 0 ? 1 : 0);
+    rangeMaxIndex = _totalElements - (2 + _rangeIdx);
+
+    // print("RANGE INDEX IS $_rangeIdx");
+    // print("NUMBER OF ELEMENTS IN THIS RANGE IS ${_range.length}");
+    // print("MIN INDEX OF THIS RANGE $rangeMinIndex");
+    // print("MAX INDEX OF THIS RANGE $rangeMaxIndex");
+    // print("TOTAL NUMBER OF ELEMENTS TILL NOW IS $_totalElements");
 
     _range.forEach((element) {
       String _firstPart = element.substring(0, 2);
