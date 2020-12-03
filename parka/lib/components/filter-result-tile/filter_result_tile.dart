@@ -21,6 +21,7 @@ class FilterResultTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: () {
         Get.to(OwnerParkingDetailPage(
           parkingId: parkingId,

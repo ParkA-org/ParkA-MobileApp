@@ -15,7 +15,6 @@ class MapController extends GetxController {
       if (!currentParkings.contains(parking)) {
         currentParkings = newParkings.obs;
         filteredResults = newParkings.obs;
-        searchParkings(null);
         return;
       }
     });
@@ -28,7 +27,9 @@ class MapController extends GetxController {
 
   void searchParkings(String searchQuery) {
     if (searchQuery == null || (searchQuery?.isEmpty ?? true)) {
-      filteredResults = currentParkings;
+      filteredResults.update((value) {
+        filteredResults = currentParkings;
+      });
     } else {
       filteredResults.update((value) {
         filteredResults = RxList<Parking>();
@@ -44,15 +45,7 @@ class MapController extends GetxController {
         });
       });
     }
-    searchResults = List<Widget>().obs;
-    filteredResults.forEach((parking) {
-      searchResults.add(FilterResultTile(
-        parkingName: parking.parkingName,
-        parkingPrice: "${parking.perHourPrice} RD Por Hora",
-        rating: "${parking.rating.toString()}",
-      ));
-    });
-
+    update();
     return;
   }
 }
