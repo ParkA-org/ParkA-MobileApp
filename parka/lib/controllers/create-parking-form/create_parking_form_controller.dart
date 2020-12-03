@@ -112,7 +112,7 @@ class CreateParkingFormController extends GetxController {
   void set24hSchedule(String _weekDay) {
     createPArkingDto.update((_instance) {
       Schedule _schedule = new Schedule(
-        finish: 2400,
+        finish: 2359,
         start: 0,
         is24h: true,
       );
