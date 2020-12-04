@@ -7,11 +7,9 @@ class Review {
   int calification;
   String type;
   String title;
-  String detail;
 
   Review({
     this.calification,
-    this.detail,
     this.id,
     this.parkingId,
     this.reservationId,

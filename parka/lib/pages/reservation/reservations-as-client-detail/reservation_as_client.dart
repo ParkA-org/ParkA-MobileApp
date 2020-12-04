@@ -3,6 +3,7 @@ import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
 import 'package:ParkA/pages/reservation/components/parking_price_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/profile_tab_widget.dart';
+import 'package:ParkA/pages/reservation/components/review_dialog_widget.dart';
 import 'package:ParkA/pages/reservation/components/sliver_app_bar_reservation_detail.dart';
 import 'package:ParkA/pages/reservation/components/time_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/vehicle_tab_widget.dart';
@@ -116,7 +117,7 @@ class ActionButtonsOwnerState extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Padding(
         padding: const EdgeInsets.only(left: 32.0),
-        child: true != false
+        child: true != true
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -193,9 +194,15 @@ class ActionButtonsOwnerState extends StatelessWidget {
                 ],
               )
             : Center(
-                child: true != true
+                child: true != false
                     ? InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return ReviewDialog();
+                              });
+                        },
                         child: Container(
                           decoration: BoxDecoration(
                             color: Color(0xff077187),

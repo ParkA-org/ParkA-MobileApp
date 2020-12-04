@@ -1,4 +1,6 @@
 import 'package:ParkA/components/inputs/parka_input_test.dart';
+import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
+import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/pages/profile/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -7,6 +9,8 @@ import 'package:flutter/material.dart';
 class ReviewDialog extends StatefulWidget {
   const ReviewDialog({
     Key key,
+    Parking parking,
+    Reservation reservation,
   }) : super(key: key);
 
   @override
@@ -16,7 +20,8 @@ class ReviewDialog extends StatefulWidget {
 class _ReviewDialogState extends State<ReviewDialog> {
   int parkingVoteFilter = 4;
   String title;
-  String comment;
+  String review;
+  bool type = false;
 
   void changeParkingVoteFilter(int vote) {
     setState(() {

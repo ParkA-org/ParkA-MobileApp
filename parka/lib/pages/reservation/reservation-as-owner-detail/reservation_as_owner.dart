@@ -196,13 +196,7 @@ class ActionButtonsOwnerState extends StatelessWidget {
             : Center(
                 child: true != false
                     ? InkWell(
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return ReviewDialog();
-                              });
-                        },
+                        onTap: () {},
                         child: Container(
                           decoration: BoxDecoration(
                             color: Color(0xff077187),
@@ -219,12 +213,12 @@ class ActionButtonsOwnerState extends StatelessWidget {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 60, vertical: 10.0),
+                                horizontal: 12, vertical: 10.0),
                             child: AutoSizeText(
-                              "Calificar",
+                              "Aun no hay review",
                               maxLines: 1,
                               maxFontSize: 30,
-                              minFontSize: 30,
+                              minFontSize: 25,
                               style: TextStyle(
                                 fontFamily: "Montserrat",
                                 fontWeight: FontWeight.bold,
@@ -234,73 +228,39 @@ class ActionButtonsOwnerState extends StatelessWidget {
                           ),
                         ),
                       )
-                    : true != true
-                        ? InkWell(
-                            onTap: () {},
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Color(0xff077187),
-                                borderRadius: BorderRadius.circular(12.0),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.transparent.withOpacity(0.2),
-                                    spreadRadius: 4,
-                                    blurRadius: 7,
-                                    offset: Offset(
-                                        0, 6), // changes position of shadow
-                                  ),
-                                ],
+                    : InkWell(
+                        onTap: () {},
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xff077187),
+                            borderRadius: BorderRadius.circular(12.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.transparent.withOpacity(0.2),
+                                spreadRadius: 4,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 6), // changes position of shadow
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 10.0),
-                                child: AutoSizeText(
-                                  "Editar Calificación",
-                                  maxLines: 1,
-                                  maxFontSize: 30,
-                                  minFontSize: 25,
-                                  style: TextStyle(
-                                    fontFamily: "Montserrat",
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        : InkWell(
-                            onTap: () {},
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Color(0xff077187),
-                                borderRadius: BorderRadius.circular(12.0),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.transparent.withOpacity(0.2),
-                                    spreadRadius: 4,
-                                    blurRadius: 7,
-                                    offset: Offset(
-                                        0, 6), // changes position of shadow
-                                  ),
-                                ],
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 10.0),
-                                child: AutoSizeText(
-                                  "Mostrar Calificación",
-                                  maxLines: 1,
-                                  maxFontSize: 30,
-                                  minFontSize: 25,
-                                  style: TextStyle(
-                                    fontFamily: "Montserrat",
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
+                            ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 10.0),
+                            child: AutoSizeText(
+                              "Mostrar Calificación",
+                              maxLines: 1,
+                              maxFontSize: 30,
+                              minFontSize: 25,
+                              style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
                               ),
                             ),
                           ),
+                        ),
+                      ),
               ),
       ),
     );
