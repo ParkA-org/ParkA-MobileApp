@@ -1,4 +1,4 @@
-import 'package:ParkA/pages/create-payment/components/parka_input_test.dart';
+import 'package:ParkA/components/inputs/parka_input_test.dart';
 import 'package:ParkA/pages/profile/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';

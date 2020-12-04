@@ -18,6 +18,7 @@ class ChatUserPage extends StatefulWidget {
 
 class ___ChatUserPageState extends State<ChatUserPage> {
   bool _loading;
+  // ignore: unused_field
   String _chat;
   List<Message> userMessages = [];
 

@@ -9,6 +9,7 @@ class TimeTabWidget extends StatelessWidget {
   })  : _parking = parking,
         super(key: key);
 
+  // ignore: unused_field
   final Parking _parking;
 
   @override

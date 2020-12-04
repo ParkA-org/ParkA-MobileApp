@@ -6,6 +6,7 @@ class ParkaInputTest extends StatelessWidget {
   final bool enable;
   final int inputMaxLength;
   final TextInputType inputType;
+  // ignore: non_constant_identifier_names
   final bool enable_padding;
 
   const ParkaInputTest({
@@ -13,6 +14,7 @@ class ParkaInputTest extends StatelessWidget {
     this.handler,
     this.inputMaxLength,
     this.inputType,
+    // ignore: non_constant_identifier_names
     this.enable_padding,
     Key key,
   }) : super(key: key);
