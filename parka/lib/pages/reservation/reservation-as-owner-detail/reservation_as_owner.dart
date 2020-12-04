@@ -79,8 +79,7 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
                               ),
                               child: Column(
                                 children: [
-                                  ProfileTabWidget(
-                                      parking: a, name: "Propietario"),
+                                  ProfileTabWidget(parking: a, name: "Cliente"),
                                   VehicleTabWidget(parking: a),
                                   ParkingPriceTabWidget(parking: a),
                                   TimeTabWidget(parking: a),
@@ -192,7 +191,7 @@ class ActionButtonsOwnerState extends StatelessWidget {
                 ],
               )
             : Center(
-                child: true != true
+                child: true != false
                     ? InkWell(
                         onTap: () {},
                         child: Container(

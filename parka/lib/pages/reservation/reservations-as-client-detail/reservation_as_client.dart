@@ -81,7 +81,8 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
                               ),
                               child: Column(
                                 children: [
-                                  ProfileTabWidget(parking: a, name: "Cliente"),
+                                  ProfileTabWidget(
+                                      parking: a, name: "Propietario"),
                                   VehicleTabWidget(parking: a),
                                   ParkingPriceTabWidget(parking: a),
                                   TimeTabWidget(parking: a),
