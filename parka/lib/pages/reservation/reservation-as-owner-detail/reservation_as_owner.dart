@@ -11,7 +11,6 @@ import 'package:ParkA/styles/parka_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:flutter_custom_dialog/flutter_custom_dialog.dart';
 
 class ReservationAsOwnerPage extends StatefulWidget {
   static String routeName = "reservation-as-owner-page";
@@ -31,6 +30,7 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
   Reservation _reservation;
   bool _loading;
   Parking a = new Parking(perHourPrice: 100);
+  int parkingVoteFilter = 4;
 
   @override
   void initState() {
@@ -39,6 +39,12 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
     this._reservationId = this.widget.reservationId;
 
     getReservation();
+  }
+
+  void changeParkingVoteFilter(int vote) {
+    setState(() {
+      this.parkingVoteFilter = vote;
+    });
   }
 
   Future getReservation() async {
@@ -55,7 +61,11 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton: ActionButtonsOwnerState(screenSize: screenSize),
+      floatingActionButton: ActionButtonsOwnerState(
+        screenSize: screenSize,
+        rating: this.parkingVoteFilter,
+        rateHandler: this.changeParkingVoteFilter,
+      ),
       body: SafeArea(
         child: ModalProgressHUD(
           color: ParkaColors.parkaGreen,
@@ -104,8 +114,12 @@ class ActionButtonsOwnerState extends StatelessWidget {
   const ActionButtonsOwnerState({
     Key key,
     @required this.screenSize,
+    @required this.rating,
+    @required this.rateHandler,
   }) : super(key: key);
 
+  final int rating;
+  final Function rateHandler;
   final Size screenSize;
 
   @override
@@ -196,7 +210,11 @@ class ActionButtonsOwnerState extends StatelessWidget {
                 child: true != false
                     ? InkWell(
                         onTap: () {
-                          YYDialogDemo(context, screenSize);
+                          Review(
+                            context,
+                            rating,
+                            rateHandler,
+                          );
                         },
                         child: Container(
                           decoration: BoxDecoration(
