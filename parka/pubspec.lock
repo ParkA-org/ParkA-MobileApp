@@ -118,13 +118,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.26+2"
-  flutter_custom_dialog:
-    dependency: "direct main"
-    description:
-      name: flutter_custom_dialog
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.20"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:

@@ -3,22 +3,33 @@ import 'package:ParkA/pages/profile/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_dialog/flutter_custom_dialog.dart';
 
-// ignore: non_constant_identifier_names
-Future<YYDialog> Review(
-    BuildContext context, int rating, Function rateHandler) async {
+class ReviewDialog extends StatefulWidget {
+  const ReviewDialog({
+    Key key,
+    @required this.rating,
+    @required this.rateHandler,
+  }) : super(key: key);
+
+  final int rating;
+  final Function rateHandler;
+
+  @override
+  _ReviewDialogState createState() => _ReviewDialogState();
+}
+
+class _ReviewDialogState extends State<ReviewDialog> {
   List<Widget> _reviewStars() {
     List<Widget> ret = new List<Widget>();
 
     for (int i = 1; i <= 5; ++i) {
-      IconData _icon = rating >= i ? Icons.star : Icons.star_border;
+      IconData _icon = widget.rating >= i ? Icons.star : Icons.star_border;
 
       ret.add(
         Expanded(
           child: GestureDetector(
             onTap: () {
-              rateHandler(i);
+              widget.rateHandler(i);
             },
             child: Icon(
               _icon,
@@ -33,13 +44,13 @@ Future<YYDialog> Review(
     return ret;
   }
 
-  return YYDialog().build(context)
-    ..borderRadius = 30.0
-    ..widget(
-      Container(
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+      child: Container(
         height: 470,
         width: 350,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30.0),
           child: Column(
@@ -117,7 +128,9 @@ Future<YYDialog> Review(
                 child: Expanded(
                   flex: 2,
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
                     child: Container(
                       color: Color(0xff077187),
                       child: Padding(
@@ -142,6 +155,6 @@ Future<YYDialog> Review(
           ),
         ),
       ),
-    )
-    ..show();
+    );
+  }
 }
