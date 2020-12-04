@@ -30,7 +30,6 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
   Reservation _reservation;
   bool _loading;
   Parking a = new Parking(perHourPrice: 100);
-  int parkingVoteFilter = 4;
 
   @override
   void initState() {
@@ -39,12 +38,6 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
     this._reservationId = this.widget.reservationId;
 
     getReservation();
-  }
-
-  void changeParkingVoteFilter(int vote) {
-    setState(() {
-      this.parkingVoteFilter = vote;
-    });
   }
 
   Future getReservation() async {
@@ -63,8 +56,6 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
     return Scaffold(
       floatingActionButton: ActionButtonsOwnerState(
         screenSize: screenSize,
-        rating: this.parkingVoteFilter,
-        rateHandler: this.changeParkingVoteFilter,
       ),
       body: SafeArea(
         child: ModalProgressHUD(
@@ -114,12 +105,8 @@ class ActionButtonsOwnerState extends StatelessWidget {
   const ActionButtonsOwnerState({
     Key key,
     @required this.screenSize,
-    @required this.rating,
-    @required this.rateHandler,
   }) : super(key: key);
 
-  final int rating;
-  final Function rateHandler;
   final Size screenSize;
 
   @override
@@ -213,10 +200,7 @@ class ActionButtonsOwnerState extends StatelessWidget {
                           showDialog(
                               context: context,
                               builder: (context) {
-                                return ReviewDialog(
-                                  rating: rating,
-                                  rateHandler: rateHandler,
-                                );
+                                return ReviewDialog();
                               });
                         },
                         child: Container(

@@ -7,29 +7,33 @@ import 'package:flutter/material.dart';
 class ReviewDialog extends StatefulWidget {
   const ReviewDialog({
     Key key,
-    @required this.rating,
-    @required this.rateHandler,
   }) : super(key: key);
-
-  final int rating;
-  final Function rateHandler;
 
   @override
   _ReviewDialogState createState() => _ReviewDialogState();
 }
 
 class _ReviewDialogState extends State<ReviewDialog> {
+  int parkingVoteFilter = 4;
+
+  void changeParkingVoteFilter(int vote) {
+    setState(() {
+      this.parkingVoteFilter = vote;
+    });
+  }
+
   List<Widget> _reviewStars() {
     List<Widget> ret = new List<Widget>();
 
     for (int i = 1; i <= 5; ++i) {
-      IconData _icon = widget.rating >= i ? Icons.star : Icons.star_border;
+      IconData _icon =
+          this.parkingVoteFilter >= i ? Icons.star : Icons.star_border;
 
       ret.add(
         Expanded(
           child: GestureDetector(
             onTap: () {
-              widget.rateHandler(i);
+              this.changeParkingVoteFilter(i);
             },
             child: Icon(
               _icon,
@@ -40,6 +44,8 @@ class _ReviewDialogState extends State<ReviewDialog> {
         ),
       );
     }
+
+    setState(() {});
 
     return ret;
   }
