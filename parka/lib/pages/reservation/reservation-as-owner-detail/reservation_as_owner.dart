@@ -1,6 +1,7 @@
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
+import 'package:ParkA/pages/reservation/components/dialog_widget.dart';
 import 'package:ParkA/pages/reservation/components/parking_price_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/profile_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/sliver_app_bar_reservation_detail.dart';
@@ -10,6 +11,7 @@ import 'package:ParkA/styles/parka_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:flutter_custom_dialog/flutter_custom_dialog.dart';
 
 class ReservationAsOwnerPage extends StatefulWidget {
   static String routeName = "reservation-as-owner-page";
@@ -193,7 +195,9 @@ class ActionButtonsOwnerState extends StatelessWidget {
             : Center(
                 child: true != false
                     ? InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          YYDialogDemo(context, screenSize);
+                        },
                         child: Container(
                           decoration: BoxDecoration(
                             color: Color(0xff077187),
