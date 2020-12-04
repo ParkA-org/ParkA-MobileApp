@@ -15,6 +15,8 @@ class ReviewDialog extends StatefulWidget {
 
 class _ReviewDialogState extends State<ReviewDialog> {
   int parkingVoteFilter = 4;
+  String title;
+  String comment;
 
   void changeParkingVoteFilter(int vote) {
     setState(() {
