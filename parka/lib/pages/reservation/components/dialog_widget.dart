@@ -39,9 +39,7 @@ Future<YYDialog> Review(
       Container(
         height: 470,
         width: 350,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-        ),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30.0),
           child: Column(
