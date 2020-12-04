@@ -191,11 +191,11 @@ class ActionButtonsOwnerState extends StatelessWidget {
                   )
                 ],
               )
-            : InkWell(
-                onTap: () {},
-                child: Center(
-                  child: true != true
-                      ? Container(
+            : Center(
+                child: true != true
+                    ? InkWell(
+                        onTap: () {},
+                        child: Container(
                           decoration: BoxDecoration(
                             color: Color(0xff077187),
                             borderRadius: BorderRadius.circular(12.0),
@@ -224,9 +224,12 @@ class ActionButtonsOwnerState extends StatelessWidget {
                               ),
                             ),
                           ),
-                        )
-                      : true != true
-                          ? Container(
+                        ),
+                      )
+                    : true != true
+                        ? InkWell(
+                            onTap: () {},
+                            child: Container(
                               decoration: BoxDecoration(
                                 color: Color(0xff077187),
                                 borderRadius: BorderRadius.circular(12.0),
@@ -255,8 +258,11 @@ class ActionButtonsOwnerState extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                            )
-                          : Container(
+                            ),
+                          )
+                        : InkWell(
+                            onTap: () {},
+                            child: Container(
                               decoration: BoxDecoration(
                                 color: Color(0xff077187),
                                 borderRadius: BorderRadius.circular(12.0),
@@ -286,7 +292,7 @@ class ActionButtonsOwnerState extends StatelessWidget {
                                 ),
                               ),
                             ),
-                ),
+                          ),
               ),
       ),
     );
