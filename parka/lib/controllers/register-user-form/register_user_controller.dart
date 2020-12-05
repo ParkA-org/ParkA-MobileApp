@@ -7,6 +7,8 @@ class RegisterUSerController extends GetxController {
   Rx<UserRegistrationForm> _userRegistrationForm =
       new UserRegistrationForm().obs;
 
+  UserRegistrationForm get registrationForm => _userRegistrationForm.value;
+
   CreateUserDto get createUserDto =>
       this._userRegistrationForm.value.createUserDto;
 
@@ -33,7 +35,7 @@ class RegisterUSerController extends GetxController {
 
   void setPassword(String _password) {
     _userRegistrationForm.update((_instance) {
-      this.createUserDto.name = _password.trim();
+      this.createUserDto.password = _password.trim();
     });
   }
 
@@ -50,7 +52,6 @@ class RegisterUSerController extends GetxController {
   }
 
   void setDocumentNumber(String _documentNumber) {
-    print(_documentNumber);
     _userRegistrationForm.update((_instance) {
       this.createUserInformationDto.documentNumber = _documentNumber.trim();
     });
@@ -69,7 +70,6 @@ class RegisterUSerController extends GetxController {
   }
 
   void setPhoneNumber(String _phone) {
-    print(_phone);
     _userRegistrationForm.update((_instance) {
       this.createUserInformationDto.telephonNumber = _phone.trim();
     });

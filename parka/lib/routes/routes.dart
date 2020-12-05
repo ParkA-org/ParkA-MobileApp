@@ -1,4 +1,5 @@
 import 'package:ParkA/controllers/bindings/graphql_biding.dart';
+import 'package:ParkA/controllers/bindings/login_binding.dart';
 import 'package:ParkA/controllers/bindings/registration_controller_binding.dart';
 import 'package:ParkA/controllers/bindings/user_binding.dart';
 import 'package:ParkA/pages/chats/chat_user_page.dart';
@@ -50,6 +51,7 @@ List<GetPage> getRoutePages = [
     bindings: [
       UserBinding(),
       GraphqlClientBiding(),
+      LoginBinding(),
     ],
   ),
   GetPage(
@@ -77,7 +79,11 @@ List<GetPage> getRoutePages = [
   GetPage(
     name: UserInformationPage.routeName,
     page: () => UserInformationPage(),
-    binding: RegistrationFormBinding(),
+    bindings: [
+      GraphqlClientBiding(),
+      RegistrationFormBinding(),
+      LoginBinding(),
+    ],
   ),
   GetPage(
     name: ChatUserPage.routeName,
@@ -100,6 +106,10 @@ List<GetPage> getRoutePages = [
   GetPage(
     name: ConfirmAccountPage.routeName,
     page: () => ConfirmAccountPage(),
+    bindings: [
+      GraphqlClientBiding(),
+      LoginBinding(),
+    ],
   ),
   GetPage(
     name: ResetPasswordPage.routeName,

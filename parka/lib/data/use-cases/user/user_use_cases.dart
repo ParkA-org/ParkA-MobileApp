@@ -98,6 +98,12 @@ class UserUseCases {
   static Future createUser(CreateUserDto createUserDto) async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
+    print(createUserDto.name);
+    print(createUserDto.lastName);
+    print(createUserDto.password);
+    print(createUserDto.email);
+    print(createUserDto.userInformation);
+
     final createUserInput = {
       "data": {
         "name": createUserDto.name,
@@ -139,9 +145,9 @@ class UserUseCases {
         "paymentInformation": "cc78a504-aafe-4917-afe9-f3a3ecee8b07",
         "documentNumber": createUserInformationDto.documentNumber,
         "telephoneNumber": createUserInformationDto.telephonNumber,
-        "birthDate": createUserInformationDto.birthDate,
-        "placeOfBirth": createUserInformationDto.placeOfBirth,
-        "nationality": createUserInformationDto.nationality,
+        "birthDate": createUserInformationDto.birthDate.toIso8601String(),
+        "placeOfBirth": createUserInformationDto.placeOfBirth.id,
+        "nationality": createUserInformationDto.nationality.id
       }
     };
 
@@ -155,7 +161,7 @@ class UserUseCases {
         .mutate(mutationOptions);
 
     print(createUserInformationResult.data);
-    print(createUserInformationResult.exception);
+    print(createUserInformationResult.exception?.graphqlErrors.toString());
 
     if (createUserInformationResult.data != null) {
       return createUserInformationResult.data["createUserInformation"];
@@ -168,6 +174,10 @@ class UserUseCases {
       UserRegistrationForm userRegistrationForm) async {
     final createUserInformationResult = await createUserInformation(
         userRegistrationForm.createUserInformationDto);
+
+    if (createUserInformationResult == null) {
+      return false;
+    }
 
     userRegistrationForm.createUserDto.userInformation =
         createUserInformationResult["id"];

@@ -4,16 +4,18 @@ import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/components/inputs/parka_datepicker.dart';
 import 'package:ParkA/components/inputs/parka_dropdown.dart';
 import 'package:ParkA/components/inputs/parka_input.dart';
+import 'package:ParkA/controllers/graphql_controller.dart';
+import 'package:ParkA/controllers/login/login_controller.dart';
 import 'package:ParkA/controllers/register-user-form/register_user_controller.dart';
 import 'package:ParkA/data/data-models/country/country_data_model.dart';
 import 'package:ParkA/data/data-models/nationality/nationality_data_model.dart';
 import 'package:ParkA/data/use-cases/country/country_use_cases.dart';
 import 'package:ParkA/data/use-cases/nationality/nationality_use_cases.dart';
-import 'package:ParkA/data/dtos/user/user_registration_dto.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
 import 'package:ParkA/pages/confirm-account/confirm_account_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
+import 'package:ParkA/utils/form-validations/register_validation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -27,8 +29,10 @@ class UserInformationPage extends StatefulWidget {
 }
 
 class _UserInformationPageState extends State<UserInformationPage> {
-  final RegisterUSerController _registerUSerController =
-      Get.find<RegisterUSerController>();
+  final _registerUSerController = Get.find<RegisterUSerController>();
+  final _gqlClient = Get.find<GraphqlClientController>();
+
+  final LoginController _loginController = Get.find<LoginController>();
 
   String docType;
   bool _loading;
@@ -72,12 +76,35 @@ class _UserInformationPageState extends State<UserInformationPage> {
   }
 
   void nextButtonHandler(bool _omit) async {
-    // final userRegistrationResult =
-    //     await UserUseCases.registerUser(userRegistrationForm);
+    final _check =
+        validateUserInformation(_registerUSerController.registrationForm);
 
-    // if (userRegistrationResult) {
-    //   Navigator.pushNamed(context, ConfirmAccountPage.routeName);
-    // }
+    if (!_check) {
+      Get.snackbar(
+        "Error",
+        "Verifica tus datos",
+        margin: EdgeInsets.all(8.0),
+        backgroundColor: ParkaColors.parkaGoogleRed,
+      );
+      return;
+    }
+
+    final userRegistrationResult = await UserUseCases.registerUser(
+        _registerUSerController.registrationForm);
+
+    if (userRegistrationResult) {
+      _loginController
+          .setPassword(_registerUSerController.createUserDto.password);
+      Navigator.pushNamed(context, ConfirmAccountPage.routeName);
+    } else {
+      Get.snackbar(
+        "Error",
+        "Revisa los datos ingresados",
+        margin: EdgeInsets.all(8.0),
+        backgroundColor: ParkaColors.parkaGoogleRed,
+      );
+      return;
+    }
   }
 
   @override
@@ -122,9 +149,9 @@ class _UserInformationPageState extends State<UserInformationPage> {
                                   .createUserInformationDto.birthDate,
                               docType: this.docType,
                               nationality: _registerUSerController
-                                  .createUserInformationDto.nationality.name,
+                                  .createUserInformationDto.nationality?.name,
                               placeOfBirth: _registerUSerController
-                                  .createUserInformationDto.placeOfBirth.name,
+                                  .createUserInformationDto.placeOfBirth?.name,
                             ),
                           ),
                         ),

@@ -5,6 +5,7 @@ import 'package:ParkA/controllers/register-user-form/register_user_controller.da
 import 'package:ParkA/pages/register/steps/profile_pic_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
+import 'package:ParkA/utils/form-validations/register_validation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +15,18 @@ class RegisterPage extends StatelessWidget {
       Get.find<RegisterUSerController>();
 
   void nextButtonHandler() {
+    final _check = validateRegister(_registerUSerController.registrationForm);
+
+    if (!_check) {
+      Get.snackbar(
+        "Error",
+        "Verifica tus datos",
+        margin: EdgeInsets.all(8.0),
+        backgroundColor: ParkaColors.parkaGoogleRed,
+      );
+      return;
+    }
+
     Get.toNamed(ProfilePicturePage.routeName);
   }
 
