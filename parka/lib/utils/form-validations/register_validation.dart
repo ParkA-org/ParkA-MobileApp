@@ -31,7 +31,7 @@ bool validateRegister(UserRegistrationForm _userRegistrationForm) {
 
 bool validateUserInformation(UserRegistrationForm _userRegistrationForm) {
   if (_userRegistrationForm.createUserInformationDto.documentNumber == null ||
-      _userRegistrationForm.createUserInformationDto.documentNumber.length ==
+      _userRegistrationForm.createUserInformationDto.documentNumber.length !=
           11) {
     return false;
   }

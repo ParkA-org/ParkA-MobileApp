@@ -21,7 +21,8 @@ class ProfilePicturePage extends StatelessWidget {
   }
 
   void nextStep(bool _omit) {
-    if (!_omit) {
+    if (!_omit &&
+        _registerUSerController.createUserDto.profilePicture == null) {
       Get.snackbar(
         "Error",
         "Agrega una imagen",
