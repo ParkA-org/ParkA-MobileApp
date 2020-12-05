@@ -1,3 +1,5 @@
+import 'package:ParkA/data/data-models/country/country_data_model.dart';
+import 'package:ParkA/data/data-models/nationality/nationality_data_model.dart';
 import 'package:ParkA/data/dtos/payment/create_payment_dto.dart';
 
 class UserRegistrationForm {
@@ -33,9 +35,9 @@ class CreateUserDto {
 class CreateUserInformationDto {
   String documentNumber;
   String telephonNumber;
-  String birthDate;
-  String placeOfBirth;
-  String nationality;
+  DateTime birthDate;
+  Country placeOfBirth;
+  Nationality nationality;
 
   CreateUserInformationDto({
     this.birthDate,
@@ -43,5 +45,7 @@ class CreateUserInformationDto {
     this.nationality,
     this.placeOfBirth,
     this.telephonNumber,
-  });
+  }) {
+    print("INICIA A TU JEVA");
+  }
 }

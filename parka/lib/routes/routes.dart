@@ -1,4 +1,5 @@
 import 'package:ParkA/controllers/bindings/graphql_biding.dart';
+import 'package:ParkA/controllers/bindings/registration_controller_binding.dart';
 import 'package:ParkA/controllers/bindings/user_binding.dart';
 import 'package:ParkA/pages/chats/chat_user_page.dart';
 import 'package:ParkA/pages/chats/chats_page.dart';
@@ -8,7 +9,7 @@ import 'package:ParkA/pages/create-parking/steps/parking_calendar_creator_page.d
 import 'package:ParkA/pages/create-parking/steps/parking_image_selector_page.dart';
 import 'package:ParkA/pages/create-parking/steps/parking_position_selector_page.dart';
 import 'package:ParkA/pages/create-payment/payment_info.dart';
-import 'package:ParkA/pages/create-user-information/ID_page.dart';
+
 import 'package:ParkA/pages/create-vehicle/create_vehicle_page.dart';
 import 'package:ParkA/pages/edit-payment/edit_payment_page.dart';
 import 'package:ParkA/pages/edit-parking/edit_parking_page.dart';
@@ -26,6 +27,8 @@ import 'package:ParkA/pages/pending-reservations/pending_reservation_page.dart';
 import 'package:ParkA/pages/profile-picture/profile_pic_page.dart';
 import 'package:ParkA/pages/profile/profile_page.dart';
 import 'package:ParkA/pages/register/register_page.dart';
+import 'package:ParkA/pages/register/steps/user_information_page.dart';
+import 'package:ParkA/pages/register/steps/profile_pic_page.dart';
 import 'package:ParkA/pages/reservation/reservation-as-owner-detail/reservation_as_owner.dart';
 import 'package:ParkA/pages/reservation/reservations-as-client-detail/reservation_as_client.dart';
 import 'package:ParkA/pages/reset-password/reset_password_page.dart';
@@ -50,10 +53,6 @@ List<GetPage> getRoutePages = [
     ],
   ),
   GetPage(
-    name: IDPage.routeName,
-    page: () => IDPage(),
-  ),
-  GetPage(
     name: ProfilePicPage.routeName,
     page: () => ProfilePicPage(),
   ),
@@ -68,6 +67,22 @@ List<GetPage> getRoutePages = [
   GetPage(
     name: RegisterPage.routeName,
     page: () => RegisterPage(),
+    binding: RegistrationFormBinding(),
+  ),
+  GetPage(
+    name: ProfilePicturePage.routeName,
+    page: () => ProfilePicturePage(),
+    binding: RegistrationFormBinding(),
+  ),
+  GetPage(
+    name: UserInformationPage.routeName,
+    page: () => UserInformationPage(),
+    binding: RegistrationFormBinding(),
+  ),
+  GetPage(
+    name: ChatUserPage.routeName,
+    page: () => ChatUserPage(),
+    bindings: [GraphqlClientBiding()],
   ),
   GetPage(
     name: MapPage.routeName,

@@ -3,7 +3,7 @@ import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
 
 import 'package:ParkA/data/dtos/user/user_registration_dto.dart';
-import 'package:ParkA/pages/create-user-information/ID_page.dart';
+
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:ParkA/utils/functions/pick_image.dart';
@@ -42,11 +42,11 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
       print(this._path);
       userRegistrationForm.createUserDto.profilePicture = this._path;
 
-      Navigator.pushNamed(
-        context,
-        IDPage.routeName,
-        arguments: userRegistrationForm,
-      );
+      // Navigator.pushNamed(
+      //   context,
+      //   IDPage.routeName,
+      //   arguments: userRegistrationForm,
+      // );
     }
 
     return Scaffold(
