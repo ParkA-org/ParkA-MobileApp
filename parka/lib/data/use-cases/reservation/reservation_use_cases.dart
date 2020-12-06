@@ -43,8 +43,6 @@ class ReservationUseCases {
   }
 
   static Future<Reservation> getReservationById(id) async {
-    Reservation test = new Reservation();
-
     final graphqlClient = Get.find<GraphqlClientController>()
         .parkaGraphqlClient
         .value
