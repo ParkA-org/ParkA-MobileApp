@@ -5,7 +5,7 @@ class Review {
   String reservationId;
   String review;
   int calification;
-  String type;
+  bool type;
   String title;
 
   Review({
