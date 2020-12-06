@@ -69,8 +69,10 @@ class PrivateDrawer extends StatelessWidget {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () {
-                                  Get.toNamed(
-                                      ReservationAsClientPage.routeName);
+                                  Get.to(ReservationAsClientPage(
+                                    reservationId:
+                                        "0c7e0dbe-c1a9-4cbb-9db6-d3ed04776af9",
+                                  ));
                                 },
                                 child: ParkaUserReservationInfoWidget(
                                   value:

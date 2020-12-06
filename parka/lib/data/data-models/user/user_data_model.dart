@@ -14,4 +14,14 @@ class User {
     this.profilePicture,
     this.informationId,
   });
+
+  static User userFromJson(Map<String, dynamic> user) {
+    return User(
+      id: user["id"],
+      email: user["email"],
+      lastName: user["lastName"],
+      profilePicture: user["profilePicture"],
+      informationId: user["userInformation"],
+    );
+  }
 }

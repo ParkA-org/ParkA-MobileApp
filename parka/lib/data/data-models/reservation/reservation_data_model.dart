@@ -30,4 +30,12 @@ class Reservation {
     this.vehicle,
     this.parking,
   });
+
+  static Reservation reservationFromJson(Map<String, dynamic> reservation) {
+    return Reservation(
+      id: reservation["id"],
+      client: User.,
+      vehicle: Vehicle.vehiclefromJson(reservation["vehicle"]),
+    );
+  }
 }
