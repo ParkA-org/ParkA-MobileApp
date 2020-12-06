@@ -1,4 +1,3 @@
-import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
 import 'package:ParkA/pages/reservation/components/parking_price_tab_widget.dart';
@@ -51,10 +50,12 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton: ActionButtonsOwnerState(
-        reservation: this._reservation,
-        screenSize: screenSize,
-      ),
+      floatingActionButton: this._loading != true
+          ? ActionButtonsOwnerState(
+              reservation: this._reservation,
+              screenSize: screenSize,
+            )
+          : Container(),
       body: SafeArea(
         child: ModalProgressHUD(
           color: ParkaColors.parkaGreen,
@@ -115,6 +116,15 @@ class ActionButtonsOwnerState extends StatelessWidget {
   final Reservation reservation;
   final Size screenSize;
 
+  Future<void> cancelReservation() async {
+    Reservation result =
+        await ReservationUseCases.getReservationById(reservation.id);
+    if (result != null) {
+    } else {
+      print("Something happened");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -123,7 +133,7 @@ class ActionButtonsOwnerState extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Padding(
         padding: const EdgeInsets.only(left: 32.0),
-        child: true != true
+        child: this.reservation.status == "Created"
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -162,7 +172,9 @@ class ActionButtonsOwnerState extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        this.cancelReservation();
+                      },
                       child: Center(
                         child: Container(
                           decoration: BoxDecoration(
