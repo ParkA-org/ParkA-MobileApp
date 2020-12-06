@@ -208,7 +208,9 @@ class ActionButtonsOwnerState extends StatelessWidget {
                           showDialog(
                               context: context,
                               builder: (context) {
-                                return ReviewDialog();
+                                return ReviewDialog(
+                                  reservation: this.reservation,
+                                );
                               });
                         },
                         child: Container(

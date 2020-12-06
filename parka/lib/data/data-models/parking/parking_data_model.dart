@@ -77,7 +77,7 @@ class Parking {
           mainPicture: parking["mainPicture"],
           features: _features,
           pictures: _pictures,
-          perHourPrice: double.tryParse(parking["priceHours"].toString()),
+          priceHours: double.tryParse(parking["priceHours"].toString()),
           rating: double.tryParse(
             parking["rating"].toString(),
           ),
