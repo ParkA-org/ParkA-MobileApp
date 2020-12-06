@@ -8,7 +8,7 @@ class Parking {
   final double latitude;
   final double longitude;
   final Calendar calendar;
-  final double perHourPrice;
+  final double priceHours;
   final String mainPicture;
   final List pictures;
   final bool status;
@@ -31,7 +31,7 @@ class Parking {
     this.calendar,
     this.mainPicture,
     this.parkingCount,
-    this.perHourPrice,
+    this.priceHours,
     this.pictures,
     this.sector,
     this.status,
@@ -51,7 +51,7 @@ class Parking {
       pictures: _pictures,
       calendar: Calendar.calendarFromJson(parking["calendar"]),
       features: Feature.featuresFromJson(parking["features"]),
-      perHourPrice: double.tryParse(parking["priceHours"].toString()),
+      priceHours: double.tryParse(parking["priceHours"].toString()),
       rating: double.tryParse(
         parking["rating"].toString(),
       ),

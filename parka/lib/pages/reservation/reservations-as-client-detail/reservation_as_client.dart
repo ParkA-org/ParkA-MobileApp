@@ -30,7 +30,7 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
   String _reservationId;
   Reservation _reservation;
   bool _loading;
-  Parking a = new Parking(perHourPrice: 100);
+  Parking a = new Parking(priceHours: 100);
 
   @override
   void initState() {
@@ -87,8 +87,10 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
                                   ProfileTabWidget(
                                       user: this._reservation.owner,
                                       name: "Propietario"),
-                                  VehicleTabWidget(parking: a),
-                                  ParkingPriceTabWidget(parking: a),
+                                  VehicleTabWidget(
+                                      vehicle: this._reservation.vehicle),
+                                  ParkingPriceTabWidget(
+                                      parking: this._reservation.parking),
                                   TimeTabWidget(parking: a),
                                 ],
                               ),

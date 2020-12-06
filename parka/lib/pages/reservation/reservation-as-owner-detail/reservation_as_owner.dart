@@ -28,7 +28,7 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
   String _reservationId;
   Reservation _reservation;
   bool _loading;
-  Parking a = new Parking(perHourPrice: 100);
+  Parking a = new Parking(priceHours: 100);
 
   @override
   void initState() {
