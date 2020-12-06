@@ -43,7 +43,6 @@ class ParkaAddImagesCarousel extends StatelessWidget {
     });
 
     if (this.carouselType == CarouselType.Form) {
-      print("SI SOY UN FORM");
       ret.add(
         Container(
           margin: EdgeInsets.symmetric(horizontal: 16.0),

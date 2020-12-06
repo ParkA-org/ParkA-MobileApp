@@ -1,53 +1,43 @@
 import 'dart:io';
 import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
-
-import 'package:ParkA/data/dtos/user/user_registration_dto.dart';
-
+import 'package:ParkA/controllers/register-user-form/register_user_controller.dart';
+import 'package:ParkA/pages/register/steps/user_information_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:ParkA/utils/functions/pick_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
-// ignore: must_be_immutable
-class ProfilePicPage extends StatefulWidget {
-  ProfilePicPage({Key key}) : super(key: key);
-  Object arguments;
-  static const String routeName = "/ProfilePicPage";
+class ProfilePicturePage extends StatelessWidget {
+  static const String routeName = "/ProfilePicturePage";
+  final RegisterUSerController _registerUSerController =
+      Get.find<RegisterUSerController>();
 
-  @override
-  _ProfilePicPageState createState() => _ProfilePicPageState();
-}
+  Future setImage() async {
+    final _imagePath = await getImageFunction();
+    _registerUSerController.setProfilePicture(_imagePath);
+  }
 
-class _ProfilePicPageState extends State<ProfilePicPage> {
-  File _image;
-  String _path;
+  void nextStep(bool _omit) {
+    if (!_omit &&
+        _registerUSerController.createUserDto.profilePicture == null) {
+      Get.snackbar(
+        "Error",
+        "Agrega una imagen",
+        margin: EdgeInsets.all(8.0),
+        backgroundColor: ParkaColors.parkaGoogleRed,
+      );
+      return;
+    }
+
+    Get.toNamed(UserInformationPage.routeName);
+  }
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-
-    UserRegistrationForm userRegistrationForm =
-        ModalRoute.of(context).settings.arguments;
-
-    Future setImage() async {
-      this._path = await getImageFunction();
-      setState(() {
-        this._image = File(this._path);
-      });
-    }
-
-    Future nextStep() async {
-      print(this._path);
-      userRegistrationForm.createUserDto.profilePicture = this._path;
-
-      // Navigator.pushNamed(
-      //   context,
-      //   IDPage.routeName,
-      //   arguments: userRegistrationForm,
-      // );
-    }
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -80,34 +70,42 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
               // Image container
               Expanded(
                 flex: 3,
-                child: Container(
-                  child: GestureDetector(
-                    onTap: () => setImage(),
-                    child: _image != null
-                        ? Padding(
-                            padding: const EdgeInsets.all(40.0),
-                            child: Container(
+                child: Obx(
+                  () => Container(
+                    child: GestureDetector(
+                      onTap: () => setImage(),
+                      child: _registerUSerController
+                                  .createUserDto.profilePicture !=
+                              null
+                          ? Padding(
+                              padding: const EdgeInsets.all(40.0),
+                              child: Container(
                                 height: 100,
                                 decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(color: Colors.black38),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          offset: Offset(1.0, 15.0),
-                                          blurRadius: 10.0,
-                                          color: Colors.grey[700])
-                                    ],
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: FileImage(_image),
-                                    ))),
-                          )
-                        : SvgPicture.asset(
-                            'resources/images/BlueProfileIcon.svg',
-                            height: screenSize.height * 0.4,
-                          ),
+                                  shape: BoxShape.circle,
+                                  border: Border.all(color: Colors.black38),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        offset: Offset(1.0, 15.0),
+                                        blurRadius: 10.0,
+                                        color: Colors.grey[700])
+                                  ],
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: FileImage(File(
+                                        _registerUSerController
+                                            .createUserDto.profilePicture)),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : SvgPicture.asset(
+                              'resources/images/BlueProfileIcon.svg',
+                              height: screenSize.height * 0.4,
+                            ),
+                    ),
+                    height: screenSize.height * 0.4,
                   ),
-                  height: screenSize.height * 0.4,
                 ),
               ),
               // Buttons
@@ -128,8 +126,8 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
                         color: Colors.white,
                         buttonTextStyle: kParkaBigButtonTextStyle,
                         trailingIconData: Icons.arrow_forward_ios,
-                        onTapHandler: () async {
-                          nextStep();
+                        onTapHandler: () {
+                          this.nextStep(false);
                         },
                       ),
                       TransparentButton(
@@ -138,8 +136,8 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
                         buttonTextStyle: kParkaBigButtonTextStyle.copyWith(
                           color: ParkaColors.parkaLimeGreen,
                         ),
-                        onTapHandler: () async {
-                          nextStep();
+                        onTapHandler: () {
+                          this.nextStep(true);
                         },
                       ),
                     ],
