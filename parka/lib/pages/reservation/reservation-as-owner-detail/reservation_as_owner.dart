@@ -68,7 +68,9 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
                   height: screenSize.height * 0.9,
                   child: CustomScrollView(
                     slivers: [
-                      SliverAppBarReservationDetail(),
+                      SliverAppBarReservationDetail(
+                        parking: this._reservation.parking,
+                      ),
                       SliverList(
                         delegate: SliverChildListDelegate(
                           [

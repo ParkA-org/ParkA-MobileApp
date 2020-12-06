@@ -61,14 +61,9 @@ class ReservationUseCases {
 
     if (_result.data != null) {
       final reservation = _result.data['getReservationById'];
-      print(reservation);
 
-      print("aqui");
       final Reservation reservationData =
           Reservation.reservationFromJson(reservation);
-
-      print("aca");
-      print(reservationData);
 
       return reservationData;
     }

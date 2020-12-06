@@ -44,8 +44,6 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
   Future getReservation() async {
     this._reservation =
         await ReservationUseCases.getReservationById(this._reservationId);
-    print("llegue aca");
-    print(this._reservation);
     if (this._reservation != null) {
       this._loading = false;
     }
@@ -75,7 +73,8 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
                   height: screenSize.height * 0.9,
                   child: CustomScrollView(
                     slivers: [
-                      SliverAppBarReservationDetail(),
+                      SliverAppBarReservationDetail(
+                          parking: this._reservation.parking),
                       SliverList(
                         delegate: SliverChildListDelegate(
                           [

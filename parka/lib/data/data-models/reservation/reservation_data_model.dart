@@ -32,14 +32,12 @@ class Reservation {
   });
 
   static Reservation reservationFromJson(Map<String, dynamic> reservation) {
-    print("llegue aca");
-    print(reservation);
     return Reservation(
       id: reservation["id"],
       client: User.userFromJson(reservation["client"]),
       owner: User.userFromJson(reservation["owner"]),
       parking: Parking.parkingFromJsonPersonlized(reservation["parking"]),
-      vehicle: Vehicle.vehiclefromJson(reservation["vehicle"]),
+      vehicle: Vehicle.vehiclefromJsonPersonalized(reservation["vehicle"]),
       checkInDate: reservation["checkInDate"],
       checkOutDate: reservation["checkOutDate"],
       status: reservation["status"],
