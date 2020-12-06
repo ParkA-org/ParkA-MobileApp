@@ -13,7 +13,6 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class ReservationAsOwnerPage extends StatefulWidget {
   static String routeName = "reservation-as-owner-page";
-
   final String reservationId;
 
   ReservationAsOwnerPage({
@@ -28,7 +27,6 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
   String _reservationId;
   Reservation _reservation;
   bool _loading;
-  Parking a = new Parking(priceHours: 100);
 
   @override
   void initState() {
@@ -54,6 +52,7 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButton: ActionButtonsOwnerState(
+        reservation: this._reservation,
         screenSize: screenSize,
       ),
       body: SafeArea(
@@ -109,9 +108,11 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
 class ActionButtonsOwnerState extends StatelessWidget {
   const ActionButtonsOwnerState({
     Key key,
+    @required this.reservation,
     @required this.screenSize,
   }) : super(key: key);
 
+  final Reservation reservation;
   final Size screenSize;
 
   @override
