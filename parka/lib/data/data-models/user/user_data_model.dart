@@ -20,6 +20,7 @@ class User {
       id: user["id"],
       email: user["email"],
       lastName: user["lastName"],
+      name: user["name"],
       profilePicture: user["profilePicture"],
       informationId: user["userInformation"],
     );
