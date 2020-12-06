@@ -10,13 +10,10 @@ import 'package:flutter/material.dart';
 class ReviewDialog extends StatefulWidget {
   const ReviewDialog({
     Key key,
-    @required Parking parking,
     @required Reservation reservation,
-  })  : _parking = parking,
-        _reservation = reservation,
+  })  : _reservation = reservation,
         super(key: key);
 
-  final Parking _parking;
   final Reservation _reservation;
 
   @override
@@ -29,15 +26,16 @@ class _ReviewDialogState extends State<ReviewDialog> {
   String review;
   String parkingId;
   String reservationId;
-  String
-      picture; // "https://parka-api-bucket-aws.s3.amazonaws.com/pp_857565fdc3.jfif"
+  String picture;
+  String parkingName;
   bool type = false;
 
   void initState() {
     super.initState();
-    this.parkingId = this.widget._parking.id;
+    this.parkingId = this.widget._reservation.parking.id;
     this.reservationId = this.widget._reservation.id;
-    this.picture = this.widget._parking.mainPicture;
+    this.picture = this.widget._reservation.parking.mainPicture;
+    this.parkingName = this.widget._reservation.parking.parkingName;
   }
 
   void sendReview() {
@@ -47,7 +45,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
     review.calification = parkingVoteFilter;
     review.title = title;
     review.type = type;
-    review.reservationId = "";
+    review.reservationId = this.reservationId;
     print(review);
   }
 
@@ -113,7 +111,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
               Padding(
                 padding: const EdgeInsets.only(top: 25.0),
                 child: AutoSizeText(
-                  "La casa de colon",
+                  this.parkingName,
                   maxLines: 1,
                   maxFontSize: 30,
                   minFontSize: 30,

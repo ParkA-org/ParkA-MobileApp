@@ -91,7 +91,7 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
                                       vehicle: this._reservation.vehicle),
                                   ParkingPriceTabWidget(
                                       parking: this._reservation.parking),
-                                  TimeTabWidget(parking: a),
+                                  TimeTabWidget(reservation: this._reservation),
                                 ],
                               ),
                             ),

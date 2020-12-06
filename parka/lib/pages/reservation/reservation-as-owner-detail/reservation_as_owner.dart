@@ -33,7 +33,7 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
   @override
   void initState() {
     super.initState();
-    this._loading = false;
+    this._loading = true;
     this._reservationId = this.widget.reservationId;
 
     getReservation();
@@ -81,10 +81,14 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
                               ),
                               child: Column(
                                 children: [
-                                  ProfileTabWidget(parking: a, name: "Cliente"),
-                                  VehicleTabWidget(parking: a),
-                                  ParkingPriceTabWidget(parking: a),
-                                  TimeTabWidget(parking: a),
+                                  ProfileTabWidget(
+                                      user: this._reservation.client,
+                                      name: "Cliente"),
+                                  VehicleTabWidget(
+                                      vehicle: this._reservation.vehicle),
+                                  ParkingPriceTabWidget(
+                                      parking: this._reservation.parking),
+                                  TimeTabWidget(reservation: this._reservation),
                                 ],
                               ),
                             ),
