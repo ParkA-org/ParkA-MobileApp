@@ -32,6 +32,8 @@ class Reservation {
   });
 
   static Reservation reservationFromJson(Map<String, dynamic> reservation) {
+    print("llegue aca");
+    print(reservation);
     return Reservation(
       id: reservation["id"],
       client: User.userFromJson(reservation["client"]),

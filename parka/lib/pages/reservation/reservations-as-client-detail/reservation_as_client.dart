@@ -44,6 +44,8 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
   Future getReservation() async {
     this._reservation =
         await ReservationUseCases.getReservationById(this._reservationId);
+    print("llegue aca");
+    print(this._reservation);
     if (this._reservation != null) {
       this._loading = false;
     }
@@ -55,10 +57,12 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton: ActionButtonsOwnerState(
-        screenSize: screenSize,
-        reservation: this._reservation,
-      ),
+      floatingActionButton: this._loading != true
+          ? ActionButtonsOwnerState(
+              screenSize: screenSize,
+              reservation: this._reservation,
+            )
+          : Container(),
       body: SafeArea(
         child: ModalProgressHUD(
           color: ParkaColors.parkaGreen,

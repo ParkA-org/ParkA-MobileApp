@@ -87,4 +87,19 @@ class Parking {
 
     return userParkings;
   }
+
+  static Parking parkingFromJsonPersonlized(Map<String, dynamic> parking) {
+    List<String> _pictures = new List.from(parking["pictures"]);
+
+    return Parking(
+      id: parking["id"],
+      parkingName: parking["parkingName"],
+      mainPicture: parking["mainPicture"],
+      pictures: _pictures,
+      priceHours: double.tryParse(parking["priceHours"].toString()),
+      rating: double.tryParse(
+        parking["rating"].toString(),
+      ),
+    );
+  }
 }

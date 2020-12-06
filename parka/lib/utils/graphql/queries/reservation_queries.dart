@@ -38,6 +38,7 @@ query($data: GetReservationById!){
       profilePicture
     }
     vehicle{
+      id
       pictures
       mainPicture
       alias
@@ -48,6 +49,7 @@ query($data: GetReservationById!){
       priceHours
       mainPicture
       rating
+      pictures
     }
     status
   }
