@@ -43,6 +43,7 @@ class UserUseCases {
         jwt: _jwt,
         status: true,
         user: User(
+          id: userData["id"],
           name: userData["name"],
           lastName: userData['lastName'],
           email: userData['email'],
@@ -83,6 +84,7 @@ class UserUseCases {
       final userData = _getLoggedUserResult.data["getLoggedUser"];
 
       return User(
+        id: userData["id"],
         name: userData["name"],
         lastName: userData['lastName'],
         email: userData['email'],

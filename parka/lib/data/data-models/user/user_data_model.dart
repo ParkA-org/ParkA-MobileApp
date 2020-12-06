@@ -15,14 +15,15 @@ class User {
     this.informationId,
   });
 
-  static User userFromJson(Map<String, dynamic> user) {
-    return User(
-      id: user["id"],
-      email: user["email"],
-      lastName: user["lastName"],
-      name: user["name"],
-      profilePicture: user["profilePicture"],
-      informationId: user["userInformation"],
+  static userFromJson(Map<String, dynamic> userData) {
+    if (userData == null) return new User();
+
+    return new User(
+      id: userData["id"],
+      email: userData["email"],
+      lastName: userData["lastName"],
+      name: userData["name"],
+      profilePicture: userData["profilePicture"],
     );
   }
 }

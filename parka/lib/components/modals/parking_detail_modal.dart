@@ -1,15 +1,19 @@
 import 'package:ParkA/components/buttons/circle_button.dart';
 import 'package:ParkA/components/place-holders/no_image_placeholder.dart';
 import 'package:ParkA/components/rating/star_rating.dart';
+import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
+import 'package:ParkA/pages/create-reservation/create_reservation_page.dart';
 import 'package:ParkA/pages/parking-detail/parking_detail_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ParkingDetailModal extends StatelessWidget {
   final Parking parking;
+  final UserController _userController = Get.find<UserController>();
 
   ParkingDetailModal({Key key, @required this.parking}) : super(key: key);
 
@@ -90,8 +94,31 @@ class ParkingDetailModal extends StatelessWidget {
                         children: [
                           CircleButton(
                             onTap: () {
-                              // ignore: todo
-                              //TODO: Reservation Page//
+                              if (_userController.user.value == null) {
+                                Get.snackbar(
+                                  "Error",
+                                  "Necesitas iniciar sesion para reservar",
+                                  margin: EdgeInsets.all(8.0),
+                                  backgroundColor: ParkaColors.parkaGoogleRed,
+                                );
+
+                                return;
+                              } else if (_userController.user.value.id ==
+                                  this.parking.user.id) {
+                                Get.snackbar(
+                                  "Error",
+                                  "No puedes alquilar tu parqueo",
+                                  margin: EdgeInsets.all(8.0),
+                                  backgroundColor: ParkaColors.parkaGoogleRed,
+                                );
+                                return;
+                              }
+
+                              Get.to(
+                                CreateParkingReservationPage(
+                                  parkingId: this.parking.id,
+                                ),
+                              );
                             },
                           ),
                           CircleButton(

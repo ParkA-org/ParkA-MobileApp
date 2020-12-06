@@ -67,7 +67,7 @@ class TimeSelectorPillWidget extends StatelessWidget {
       },
       child: Container(
         child: AutoSizeText(
-          this.hourString,
+          this.hourString ?? "",
           maxLines: 1,
         ),
         padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
