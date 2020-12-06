@@ -71,7 +71,7 @@ class CreateReservationFormController extends GetxController {
           this.createReservationDto.checkInDate,
           this.createReservationDto.checkOutDate);
       this.createReservationDto.total =
-          this.createReservationDto.parking.perHourPrice *
+          this.createReservationDto.parking.priceHours *
               this.createReservationDto.hours;
     });
   }
@@ -92,7 +92,7 @@ class CreateReservationFormController extends GetxController {
           this.createReservationDto.checkInDate,
           this.createReservationDto.checkOutDate);
       this.createReservationDto.total =
-          this.createReservationDto.parking.perHourPrice *
+          this.createReservationDto.parking.priceHours *
               this.createReservationDto.hours;
     });
   }
