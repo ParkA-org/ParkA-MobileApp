@@ -10,9 +10,14 @@ import 'package:flutter/material.dart';
 class ReviewDialog extends StatefulWidget {
   const ReviewDialog({
     Key key,
-    Parking parking,
-    Reservation reservation,
-  }) : super(key: key);
+    @required Parking parking,
+    @required Reservation reservation,
+  })  : _parking = parking,
+        _reservation = reservation,
+        super(key: key);
+
+  final Parking _parking;
+  final Reservation _reservation;
 
   @override
   _ReviewDialogState createState() => _ReviewDialogState();
@@ -23,16 +28,27 @@ class _ReviewDialogState extends State<ReviewDialog> {
   String title;
   String review;
   String parkingId;
+  String reservationId;
+  String
+      picture; // "https://parka-api-bucket-aws.s3.amazonaws.com/pp_857565fdc3.jfif"
   bool type = false;
+
+  void initState() {
+    super.initState();
+    this.parkingId = this.widget._parking.id;
+    this.reservationId = this.widget._reservation.id;
+    this.picture = this.widget._parking.mainPicture;
+  }
 
   void sendReview() {
     Review review = new Review();
     review.review = this.review;
-    review.parkingId = "";
+    review.parkingId = this.parkingId;
     review.calification = parkingVoteFilter;
     review.title = title;
     review.type = type;
     review.reservationId = "";
+    print(review);
   }
 
   void changeReview(value) {
@@ -111,8 +127,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
                 flex: 2,
                 child: Center(
                   child: ParkaCircleAvatarWidget(
-                    imageUrl:
-                        "https://parka-api-bucket-aws.s3.amazonaws.com/pp_857565fdc3.jfif",
+                    imageUrl: this.picture,
                   ),
                 ),
               ),
@@ -138,7 +153,10 @@ class _ReviewDialogState extends State<ReviewDialog> {
                 ),
               ),
               Expanded(
-                child: ParkaInputTest(enable_padding: true),
+                child: ParkaInputTest(
+                  enable_padding: true,
+                  handler: this.changeTitle,
+                ),
               ),
               Expanded(
                 child: AutoSizeText(
@@ -156,6 +174,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: ParkaInputTest(
+                    handler: this.changeReview,
                     enable_padding: true,
                   ),
                 ),

@@ -55,7 +55,10 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton: ActionButtonsOwnerState(screenSize: screenSize),
+      floatingActionButton: ActionButtonsOwnerState(
+        screenSize: screenSize,
+        reservation: this._reservation,
+      ),
       body: SafeArea(
         child: ModalProgressHUD(
           color: ParkaColors.parkaGreen,
@@ -105,8 +108,10 @@ class ActionButtonsOwnerState extends StatelessWidget {
   const ActionButtonsOwnerState({
     Key key,
     @required this.screenSize,
+    @required this.reservation,
   }) : super(key: key);
 
+  final Reservation reservation;
   final Size screenSize;
 
   @override
