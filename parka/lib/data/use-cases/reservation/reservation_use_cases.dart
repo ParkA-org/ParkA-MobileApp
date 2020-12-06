@@ -62,16 +62,11 @@ class ReservationUseCases {
     if (_result.data != null) {
       final reservation = _result.data['getReservationById'];
       print(reservation);
-      return Reservation(
-        id: reservation["id"],
-        checkInDate: reservation["checkInDate"],
-        checkOutDate: reservation["checkOutDate"],
-        client: reservation["client"],
-        owner: reservation["owner"],
-        vehicle: reservation["vehicle"],
-        parking: reservation["parking"],
-        status: reservation["status"],
-      );
+
+      final Reservation reservationData =
+          Reservation.reservationFromJson(reservation);
+
+      return reservationData;
     }
 
     return null;
