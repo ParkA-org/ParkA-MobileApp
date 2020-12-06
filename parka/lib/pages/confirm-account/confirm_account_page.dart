@@ -1,6 +1,9 @@
 import 'package:ParkA/components/buttons/round_button.dart';
 import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/controllers/graphql_controller.dart';
+import 'package:ParkA/controllers/login/login_controller.dart';
+import 'package:ParkA/controllers/register-user-form/register_user_controller.dart';
+import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
 import 'package:ParkA/pages/map/maps_page.dart';
 import 'package:ParkA/styles/inputs.dart';
@@ -18,9 +21,11 @@ class ConfirmAccountPage extends StatefulWidget {
 }
 
 class _ConfirmAccountPageState extends State<ConfirmAccountPage> {
+  final graphqlClient = Get.find<GraphqlClientController>();
+  final _loginController = Get.find<LoginController>();
+
   String email;
   String code;
-  final graphqlClient = Get.find<GraphqlClientController>();
 
   void nextButtonHandler(bool _omit) async {
     if (_omit) {
@@ -33,11 +38,10 @@ class _ConfirmAccountPageState extends State<ConfirmAccountPage> {
     );
 
     if (confirmUserResult) {
-      Get.snackbar(
-        "Cuenta Confirmada",
-        "",
-        margin: EdgeInsets.all(8.0),
-      );
+      String _userPassword = _loginController.password;
+
+      await Get.find<UserController>().loginUser(this.email, _userPassword);
+
       Get.toNamed(MapPage.routeName);
     } else {
       Get.snackbar(

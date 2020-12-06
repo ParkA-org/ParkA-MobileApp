@@ -43,9 +43,6 @@ class _TimeSelectorWidgetState extends State<TimeSelectorWidget> {
     this._index = this.widget.index;
     this._showAddSign = this.widget.showAddSign;
     this._is24h = this.widget?.is24h ?? false;
-
-    print(this._showAddSign);
-    print(this._schedule);
   }
 
   void _setStartTime(int hour) {
@@ -60,7 +57,6 @@ class _TimeSelectorWidgetState extends State<TimeSelectorWidget> {
       this._schedule.finish = this._schedule.start >= 2300 ? 2400 : hour + 100;
     }
 
-    print("CHECKING");
     this._schedule.is24h =
         this._schedule.start == 0 && this._schedule.finish == 2400;
 
@@ -83,7 +79,6 @@ class _TimeSelectorWidgetState extends State<TimeSelectorWidget> {
       this._schedule.start = this._schedule.finish <= 100 ? 0 : hour - 100;
     }
 
-    print("CHECKING");
     this._schedule.is24h =
         this._schedule.start == 0 && this._schedule.finish == 2400;
 
