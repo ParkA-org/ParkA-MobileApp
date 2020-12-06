@@ -35,6 +35,18 @@ class _ReviewDialogState extends State<ReviewDialog> {
     review.reservationId = "";
   }
 
+  void changeReview(value) {
+    setState(() {
+      this.review = value;
+    });
+  }
+
+  void changeTitle(value) {
+    setState(() {
+      this.title = value;
+    });
+  }
+
   void changeParkingVoteFilter(int vote) {
     setState(() {
       this.parkingVoteFilter = vote;
