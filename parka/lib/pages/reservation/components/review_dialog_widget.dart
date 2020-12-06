@@ -23,6 +23,8 @@ class _ReviewDialogState extends State<ReviewDialog> {
   String review;
   bool type = false;
 
+  void sendReview() {}
+
   void changeParkingVoteFilter(int vote) {
     setState(() {
       this.parkingVoteFilter = vote;
@@ -142,6 +144,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
                   flex: 2,
                   child: InkWell(
                     onTap: () {
+                      this.sendReview();
                       Navigator.pop(context);
                     },
                     child: Container(
