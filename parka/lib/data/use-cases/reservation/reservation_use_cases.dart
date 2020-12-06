@@ -44,6 +44,29 @@ class ReservationUseCases {
 
   static Future<Reservation> getReservationById(id) async {
     Reservation test = new Reservation();
+
+    final graphqlClient = Get.find<GraphqlClientController>()
+        .parkaGraphqlClient
+        .value
+        .graphQlClient;
+
+    final data = {
+      "data": {
+        "id": id,
+      }
+    };
+
+    QueryOptions _queryOptions = new QueryOptions(
+        documentNode: gql(getReservationByIdQuery), variables: data);
+
+    final _result = await graphqlClient.query(_queryOptions);
+
+    if (_result.data != null) {
+      final reservation = _result.data['getReservationById'];
+      print(reservation);
+      return Reservartion();
+    }
+
     return test;
   }
 }

@@ -19,7 +19,7 @@ query{
 }
 """;
 
-const String getReservationById = r"""
+const String getReservationByIdQuery = r"""
 query($data: GetReservationById!){
   getReservationById(getReservationByIdInput: $data){
     id
