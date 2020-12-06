@@ -35,9 +35,7 @@ class VehicleTabWidget extends StatelessWidget {
           child: ParkaAddImagesCarousel(
             carouselType: CarouselType.Gallery,
             placeholderType: PlaceHolderType.Car,
-            pictures: this._vehicle.pictures != null
-                ? this._vehicle.pictures
-                : this._vehicle.mainPicture,
+            pictures: this._vehicle.pictures,
           ),
         ),
       ],

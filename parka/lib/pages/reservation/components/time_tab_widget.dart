@@ -39,11 +39,11 @@ class TimeTabWidget extends StatelessWidget {
           child: this._reservation.status != "Created" &&
                   this._reservation.status != "IsProgress"
               ? Text(
-                  "Termina",
+                  "Termino",
                   style: kParkaTextStyleBoldGreen18,
                 )
               : Text(
-                  "Termino",
+                  "Termina",
                   style: kParkaTextStyleBoldGreen18,
                 ),
         ),
