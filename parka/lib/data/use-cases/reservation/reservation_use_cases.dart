@@ -64,7 +64,16 @@ class ReservationUseCases {
     if (_result.data != null) {
       final reservation = _result.data['getReservationById'];
       print(reservation);
-      return Reservartion();
+      return Reservation(
+        id: reservation["id"],
+        checkInDate: reservation["checkInDate"],
+        checkOutDate: reservation["checkOutDate"],
+        client: reservation["client"],
+        owner: reservation["owner"],
+        vehicle: reservation["vehicle"],
+        parking: reservation["parking"],
+        status: reservation["status"],
+      );
     }
 
     return test;
