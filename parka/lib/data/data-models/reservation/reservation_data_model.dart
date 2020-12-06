@@ -38,7 +38,7 @@ class Reservation {
       id: reservation["id"],
       client: User.userFromJson(reservation["client"]),
       owner: User.userFromJson(reservation["owner"]),
-      parking: Parking.parkingFromJson(reservation["parking"]),
+      parking: Parking.parkingFromJsonPersonlized(reservation["parking"]),
       vehicle: Vehicle.vehiclefromJson(reservation["vehicle"]),
       checkInDate: reservation["checkInDate"],
       checkOutDate: reservation["checkOutDate"],
