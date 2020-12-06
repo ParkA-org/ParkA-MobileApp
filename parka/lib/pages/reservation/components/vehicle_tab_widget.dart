@@ -1,4 +1,4 @@
-import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
+import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
 import 'package:ParkA/data/enums/parking_place_holder_type.dart';
 import 'package:ParkA/components/images/parka_add_images_carousel.dart';
 import 'package:ParkA/styles/text.dart';
@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 class VehicleTabWidget extends StatelessWidget {
   const VehicleTabWidget({
     Key key,
-    @required Parking parking,
-  })  : _parking = parking,
+    @required Vehicle vehicle,
+  })  : _vehicle = vehicle,
         super(key: key);
 
   // ignore: unused_field
-  final Parking _parking;
+  final Vehicle _vehicle;
 
   @override
   Widget build(BuildContext context) {
@@ -27,19 +27,17 @@ class VehicleTabWidget extends StatelessWidget {
           ),
         ),
         Text(
-          'Toyota Corolla',
+          this._vehicle.alias,
           style: kParkaTextStyleBlack18,
         ),
         Container(
-          height: 1 == 0 ? 0 : 125,
+          height: this._vehicle.pictures.length == 0 ? 0 : 125,
           child: ParkaAddImagesCarousel(
             carouselType: CarouselType.Gallery,
             placeholderType: PlaceHolderType.Car,
-            pictures: [
-              "https://parka-api-bucket-aws.s3.amazonaws.com/car3_8fa6a2b4bf.jpg",
-              "https://parka-api-bucket-aws.s3.amazonaws.com/car1_1f989362b2.jpg",
-              "https://parka-api-bucket-aws.s3.amazonaws.com/car21_b80e0af9ec.jpg"
-            ],
+            pictures: this._vehicle.pictures != null
+                ? this._vehicle.pictures
+                : this._vehicle.mainPicture,
           ),
         ),
       ],

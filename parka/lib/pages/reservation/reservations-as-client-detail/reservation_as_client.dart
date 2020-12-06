@@ -35,7 +35,7 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
   @override
   void initState() {
     super.initState();
-    this._loading = false;
+    this._loading = true;
     this._reservationId = this.widget.reservationId;
 
     getReservation();
@@ -85,7 +85,8 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
                               child: Column(
                                 children: [
                                   ProfileTabWidget(
-                                      parking: a, name: "Propietario"),
+                                      user: this._reservation.owner,
+                                      name: "Propietario"),
                                   VehicleTabWidget(parking: a),
                                   ParkingPriceTabWidget(parking: a),
                                   TimeTabWidget(parking: a),
