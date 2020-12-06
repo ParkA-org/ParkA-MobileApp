@@ -45,7 +45,10 @@ class _ReviewDialogState extends State<ReviewDialog> {
     review.title = title;
     review.type = type;
     review.reservationId = this.reservationId;
-    print(review);
+    print(review.calification);
+    print(review.title);
+    print(review.parkingId);
+    print(review.review);
   }
 
   void changeReview(value) {
@@ -108,12 +111,13 @@ class _ReviewDialogState extends State<ReviewDialog> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 25.0),
+                padding: const EdgeInsets.only(top: 25.0, bottom: 2.0),
                 child: AutoSizeText(
                   this.parkingName,
                   maxLines: 1,
                   maxFontSize: 30,
-                  minFontSize: 30,
+                  minFontSize: 25,
+                  locale: Locale.fromSubtags(),
                   style: TextStyle(
                       fontFamily: "Montserrat",
                       fontWeight: FontWeight.bold,
@@ -178,28 +182,25 @@ class _ReviewDialogState extends State<ReviewDialog> {
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
-                child: Expanded(
-                  flex: 2,
-                  child: InkWell(
-                    onTap: () {
-                      this.sendReview();
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      color: Color(0xff077187),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 6, horizontal: 20.0),
-                        child: AutoSizeText(
-                          "Enviar",
-                          maxLines: 1,
-                          maxFontSize: 20,
-                          minFontSize: 20,
-                          style: TextStyle(
-                              fontFamily: "Montserrat",
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
+                child: InkWell(
+                  onTap: () {
+                    this.sendReview();
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    color: Color(0xff077187),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 6, horizontal: 20.0),
+                      child: AutoSizeText(
+                        "Enviar",
+                        maxLines: 1,
+                        maxFontSize: 20,
+                        minFontSize: 20,
+                        style: TextStyle(
+                            fontFamily: "Montserrat",
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
