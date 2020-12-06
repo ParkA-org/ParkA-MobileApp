@@ -28,10 +28,11 @@ class _ReviewDialogState extends State<ReviewDialog> {
   void sendReview() {
     Review review = new Review();
     review.review = this.review;
-    review..parkingId = "";
+    review.parkingId = "";
     review.calification = parkingVoteFilter;
     review.title = title;
-    review.type = type as String;
+    review.type = type;
+    review.reservationId = "";
   }
 
   void changeParkingVoteFilter(int vote) {
