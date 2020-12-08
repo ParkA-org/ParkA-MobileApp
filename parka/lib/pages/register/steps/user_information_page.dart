@@ -30,6 +30,7 @@ class UserInformationPage extends StatefulWidget {
 
 class _UserInformationPageState extends State<UserInformationPage> {
   final _registerUSerController = Get.find<RegisterUSerController>();
+  // ignore: unused_field
   final _gqlClient = Get.find<GraphqlClientController>();
 
   final LoginController _loginController = Get.find<LoginController>();

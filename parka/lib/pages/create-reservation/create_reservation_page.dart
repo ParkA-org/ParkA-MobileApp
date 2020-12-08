@@ -304,7 +304,7 @@ class _CreateParkingReservationPageState
                                 ParkingPriceWidgetTab(
                                   label: "Precio por hora",
                                   value:
-                                      '\$RD ${this._parking.perHourPrice}/Hora',
+                                      '\$RD ${this._parking.priceHours}/Hora',
                                 ),
                                 Obx(
                                   () => DateTimeReservationPicker(

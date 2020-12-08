@@ -1,3 +1,4 @@
+import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -6,7 +7,11 @@ import 'package:flutter/material.dart';
 class SliverAppBarReservationDetail extends StatelessWidget {
   const SliverAppBarReservationDetail({
     Key key,
-  }) : super(key: key);
+    @required Parking parking,
+  })  : _parking = parking,
+        super(key: key);
+
+  final Parking _parking;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +30,7 @@ class SliverAppBarReservationDetail extends StatelessWidget {
             children: [
               Expanded(
                 child: AutoSizeText(
-                  "Nombre del parqueo",
+                  this._parking.parkingName,
                   maxLines: 1,
                   style: kParkaTextStyleBold16,
                 ),
@@ -37,7 +42,7 @@ class SliverAppBarReservationDetail extends StatelessWidget {
                   child: Row(
                     children: [
                       AutoSizeText(
-                        '5.0',
+                        this._parking.rating.toString(),
                         maxLines: 1,
                         style: kParkaTextStyleBold16,
                       ),
@@ -62,8 +67,7 @@ class SliverAppBarReservationDetail extends StatelessWidget {
           children: [
             Image(
               fit: BoxFit.cover,
-              image: NetworkImage(
-                  "https://parka-api-bucket-aws.s3.amazonaws.com/parqueo2_b70eba08da.png"),
+              image: NetworkImage(this._parking.mainPicture),
             ),
             Container(
               decoration: BoxDecoration(boxShadow: [

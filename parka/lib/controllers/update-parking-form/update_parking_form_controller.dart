@@ -29,7 +29,7 @@ class UpdateParkingFormController extends GetxController {
       mainPicture: parking.mainPicture,
       parkingName: parking.parkingName,
       pictures: parking.pictures,
-      priceHours: parking.perHourPrice,
+      priceHours: parking.priceHours,
     ).obs;
   }
 

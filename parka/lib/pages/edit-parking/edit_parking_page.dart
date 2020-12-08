@@ -157,7 +157,7 @@ class _EditParkingPageState extends State<EditParkingPage> {
                                 ParkaTextField(
                                   inputType: TextInputType.number,
                                   label: "Precio por hora",
-                                  value: this._parking.perHourPrice.toString(),
+                                  value: this._parking.priceHours.toString(),
                                   onChangedHandler: (String numbers) {
                                     _updateParkingController.setParkingPrice(
                                         double.tryParse(numbers));

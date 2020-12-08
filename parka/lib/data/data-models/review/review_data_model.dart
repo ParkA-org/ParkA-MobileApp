@@ -5,13 +5,11 @@ class Review {
   String reservationId;
   String review;
   int calification;
-  String type;
+  bool type;
   String title;
-  String detail;
 
   Review({
     this.calification,
-    this.detail,
     this.id,
     this.parkingId,
     this.reservationId,

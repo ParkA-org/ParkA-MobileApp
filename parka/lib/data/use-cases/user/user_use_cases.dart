@@ -355,9 +355,11 @@ class UserUseCases {
       updateUserInput["data"]["lastName"] = lastName;
     }
 
-    if (!(GetUtils.isURL(profilePicture))) {
-      updateUserInput["data"]["profilePicture"] =
-          await uploadImage(profilePicture);
+    if (profilePicture != null) {
+      if (!(GetUtils.isURL(profilePicture))) {
+        updateUserInput["data"]["profilePicture"] =
+            await uploadImage(profilePicture);
+      }
     }
 
     MutationOptions mutationOptions = MutationOptions(

@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'components/login_header.dart';
 
 class EmailLogin extends StatelessWidget {
+  // ignore: unused_field
   final LoginController _loginController = Get.find<LoginController>();
   EmailLogin({Key key}) : super(key: key);
   static const String routeName = "/EmailLogin";

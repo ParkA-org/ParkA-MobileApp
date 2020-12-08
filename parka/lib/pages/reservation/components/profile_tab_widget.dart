@@ -1,4 +1,4 @@
-import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
+import 'package:ParkA/data/data-models/user/user_data_model.dart';
 import 'package:ParkA/pages/profile/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
@@ -7,13 +7,14 @@ class ProfileTabWidget extends StatelessWidget {
   const ProfileTabWidget({
     Key key,
     @required String name,
-    @required Parking parking,
-  })  : _parking = parking,
+    @required User user,
+  })  : _user = user,
         _name = name,
         super(key: key);
 
   final String _name;
-  final Parking _parking;
+  // ignore: unused_field
+  final User _user;
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +36,9 @@ class ProfileTabWidget extends StatelessWidget {
                 flex: 1,
                 child: Center(
                   child: ParkaCircleAvatarWidget(
-                    imageUrl:
-                        "https://parka-api-bucket-aws.s3.amazonaws.com/pp_857565fdc3.jfif",
+                    imageUrl: this._user.profilePicture != null
+                        ? this._user.profilePicture
+                        : "https://parka-api-bucket-aws.s3.amazonaws.com/avatars_000437232558_yuo0mv_t500x500_de6a11e027.jpg",
                   ),
                 ),
               ),
@@ -51,7 +53,7 @@ class ProfileTabWidget extends StatelessWidget {
                       Container(
                         alignment: Alignment.bottomLeft,
                         child: Text(
-                          'David Bujosa',
+                          this._user.name + " " + this._user.lastName,
                           style: kParkaTextStyleBlack18,
                         ),
                       ),

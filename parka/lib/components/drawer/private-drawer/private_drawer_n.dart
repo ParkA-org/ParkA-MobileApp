@@ -69,8 +69,10 @@ class PrivateDrawer extends StatelessWidget {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () {
-                                  Get.toNamed(
-                                      ReservationAsClientPage.routeName);
+                                  Get.to(ReservationAsClientPage(
+                                    reservationId:
+                                        "e9e6ba15-d7f4-43d4-adbc-85f13b7a0bdf",
+                                  ));
                                 },
                                 child: ParkaUserReservationInfoWidget(
                                   value:
@@ -82,7 +84,10 @@ class PrivateDrawer extends StatelessWidget {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () {
-                                  Get.toNamed(ReservationAsOwnerPage.routeName);
+                                  Get.to(ReservationAsOwnerPage(
+                                    reservationId:
+                                        "1578d06d-5eb0-452c-8457-10ee8ce45ba0",
+                                  ));
                                 },
                                 child: ParkaUserReservationInfoWidget(
                                   value:

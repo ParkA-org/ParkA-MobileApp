@@ -1,15 +1,16 @@
-import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
+import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
 
 class TimeTabWidget extends StatelessWidget {
   const TimeTabWidget({
     Key key,
-    @required Parking parking,
-  })  : _parking = parking,
+    @required Reservation reservation,
+  })  : _reservation = reservation,
         super(key: key);
 
-  final Parking _parking;
+  // ignore: unused_field
+  final Reservation _reservation;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class TimeTabWidget extends StatelessWidget {
       children: [
         Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: true != true
+            child: this._reservation.status != "Completed"
                 ? Text(
                     "Empieza",
                     style: kParkaTextStyleBoldGreen18,
@@ -28,23 +29,28 @@ class TimeTabWidget extends StatelessWidget {
                     style: kParkaTextStyleBoldGreen18,
                   )),
         Text(
-          '11/13/2020 13:00 h',
+          this._reservation.checkInDate.split("T")[0] +
+              " " +
+              this._reservation.checkInDate.split("T")[1].substring(0, 5),
           style: kParkaTextStyleBlack18,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: true != true
+          child: this._reservation.status != "Created" &&
+                  this._reservation.status != "IsProgress"
               ? Text(
-                  "Termina",
+                  "Termino",
                   style: kParkaTextStyleBoldGreen18,
                 )
               : Text(
-                  "Termino",
+                  "Termina",
                   style: kParkaTextStyleBoldGreen18,
                 ),
         ),
         Text(
-          '11/13/2020 15:00 h',
+          this._reservation.checkOutDate.split("T")[0] +
+              " " +
+              this._reservation.checkOutDate.split("T")[1].substring(0, 5),
           style: kParkaTextStyleBlack18,
         )
       ],

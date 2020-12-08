@@ -1,15 +1,20 @@
+import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
+import 'package:ParkA/data/data-models/user/user_data_model.dart';
+import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
+
 class Reservation {
   final String id;
   final String rentalId;
   final String checkInDate;
   final String checkOutDate;
-  final String vehicleId;
+  final Vehicle vehicle;
   final String paymentInfoId;
   final String rentDate;
   final String total;
-  //to be changed
+  final Parking parking;
   final String status;
-  final String userId;
+  final User client;
+  final User owner;
 
   Reservation({
     this.checkInDate,
@@ -20,7 +25,22 @@ class Reservation {
     this.rentalId,
     this.status,
     this.total,
-    this.userId,
-    this.vehicleId,
+    this.client,
+    this.owner,
+    this.vehicle,
+    this.parking,
   });
+
+  static Reservation reservationFromJson(Map<String, dynamic> reservation) {
+    return Reservation(
+      id: reservation["id"],
+      client: User.userFromJson(reservation["client"]),
+      owner: User.userFromJson(reservation["owner"]),
+      parking: Parking.parkingFromJsonPersonlized(reservation["parking"]),
+      vehicle: Vehicle.vehiclefromJsonPersonalized(reservation["vehicle"]),
+      checkInDate: reservation["checkInDate"],
+      checkOutDate: reservation["checkOutDate"],
+      status: reservation["status"],
+    );
+  }
 }

@@ -3,11 +3,11 @@ import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
 import 'package:ParkA/pages/reservation/components/parking_price_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/profile_tab_widget.dart';
+import 'package:ParkA/pages/reservation/components/review_dialog_widget.dart';
 import 'package:ParkA/pages/reservation/components/sliver_app_bar_reservation_detail.dart';
 import 'package:ParkA/pages/reservation/components/time_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/vehicle_tab_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
-import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -30,12 +30,12 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
   String _reservationId;
   Reservation _reservation;
   bool _loading;
-  Parking a = new Parking(perHourPrice: 100);
+  Parking a = new Parking(priceHours: 100);
 
   @override
   void initState() {
     super.initState();
-    this._loading = false;
+    this._loading = true;
     this._reservationId = this.widget.reservationId;
 
     getReservation();
@@ -55,7 +55,12 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton: ActionButtonsOwnerState(screenSize: screenSize),
+      floatingActionButton: this._loading != true
+          ? ActionButtonsOwnerState(
+              screenSize: screenSize,
+              reservation: this._reservation,
+            )
+          : Container(),
       body: SafeArea(
         child: ModalProgressHUD(
           color: ParkaColors.parkaGreen,
@@ -68,7 +73,8 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
                   height: screenSize.height * 0.9,
                   child: CustomScrollView(
                     slivers: [
-                      SliverAppBarReservationDetail(),
+                      SliverAppBarReservationDetail(
+                          parking: this._reservation.parking),
                       SliverList(
                         delegate: SliverChildListDelegate(
                           [
@@ -81,10 +87,14 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
                               ),
                               child: Column(
                                 children: [
-                                  ProfileTabWidget(parking: a, name: "Cliente"),
-                                  VehicleTabWidget(parking: a),
-                                  ParkingPriceTabWidget(parking: a),
-                                  TimeTabWidget(parking: a),
+                                  ProfileTabWidget(
+                                      user: this._reservation.owner,
+                                      name: "Propietario"),
+                                  VehicleTabWidget(
+                                      vehicle: this._reservation.vehicle),
+                                  ParkingPriceTabWidget(
+                                      parking: this._reservation.parking),
+                                  TimeTabWidget(reservation: this._reservation),
                                 ],
                               ),
                             ),
@@ -104,8 +114,10 @@ class ActionButtonsOwnerState extends StatelessWidget {
   const ActionButtonsOwnerState({
     Key key,
     @required this.screenSize,
+    @required this.reservation,
   }) : super(key: key);
 
+  final Reservation reservation;
   final Size screenSize;
 
   @override
@@ -116,7 +128,7 @@ class ActionButtonsOwnerState extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Padding(
         padding: const EdgeInsets.only(left: 32.0),
-        child: true != false
+        child: true != true
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -192,11 +204,19 @@ class ActionButtonsOwnerState extends StatelessWidget {
                   )
                 ],
               )
-            : InkWell(
-                onTap: () {},
-                child: Center(
-                  child: true != true
-                      ? Container(
+            : Center(
+                child: true != false
+                    ? InkWell(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return ReviewDialog(
+                                  reservation: this.reservation,
+                                );
+                              });
+                        },
+                        child: Container(
                           decoration: BoxDecoration(
                             color: Color(0xff077187),
                             borderRadius: BorderRadius.circular(12.0),
@@ -225,9 +245,12 @@ class ActionButtonsOwnerState extends StatelessWidget {
                               ),
                             ),
                           ),
-                        )
-                      : true != true
-                          ? Container(
+                        ),
+                      )
+                    : true != true
+                        ? InkWell(
+                            onTap: () {},
+                            child: Container(
                               decoration: BoxDecoration(
                                 color: Color(0xff077187),
                                 borderRadius: BorderRadius.circular(12.0),
@@ -256,8 +279,11 @@ class ActionButtonsOwnerState extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                            )
-                          : Container(
+                            ),
+                          )
+                        : InkWell(
+                            onTap: () {},
+                            child: Container(
                               decoration: BoxDecoration(
                                 color: Color(0xff077187),
                                 borderRadius: BorderRadius.circular(12.0),
@@ -287,7 +313,7 @@ class ActionButtonsOwnerState extends StatelessWidget {
                                 ),
                               ),
                             ),
-                ),
+                          ),
               ),
       ),
     );

@@ -86,6 +86,5 @@ class Calendar {
       default:
         return this.friday; // Cause I rather it always be friday
     }
-    return new List();
   }
 }

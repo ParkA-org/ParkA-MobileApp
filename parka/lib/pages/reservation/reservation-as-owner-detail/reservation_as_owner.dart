@@ -1,4 +1,3 @@
-import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
 import 'package:ParkA/pages/reservation/components/parking_price_tab_widget.dart';
@@ -13,7 +12,6 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class ReservationAsOwnerPage extends StatefulWidget {
   static String routeName = "reservation-as-owner-page";
-
   final String reservationId;
 
   ReservationAsOwnerPage({
@@ -28,12 +26,11 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
   String _reservationId;
   Reservation _reservation;
   bool _loading;
-  Parking a = new Parking(perHourPrice: 100);
 
   @override
   void initState() {
     super.initState();
-    this._loading = false;
+    this._loading = true;
     this._reservationId = this.widget.reservationId;
 
     getReservation();
@@ -53,7 +50,12 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton: ActionButtonsOwnerState(screenSize: screenSize),
+      floatingActionButton: this._loading != true
+          ? ActionButtonsOwnerState(
+              reservation: this._reservation,
+              screenSize: screenSize,
+            )
+          : Container(),
       body: SafeArea(
         child: ModalProgressHUD(
           color: ParkaColors.parkaGreen,
@@ -66,7 +68,9 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
                   height: screenSize.height * 0.9,
                   child: CustomScrollView(
                     slivers: [
-                      SliverAppBarReservationDetail(),
+                      SliverAppBarReservationDetail(
+                        parking: this._reservation.parking,
+                      ),
                       SliverList(
                         delegate: SliverChildListDelegate(
                           [
@@ -80,10 +84,13 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
                               child: Column(
                                 children: [
                                   ProfileTabWidget(
-                                      parking: a, name: "Propietario"),
-                                  VehicleTabWidget(parking: a),
-                                  ParkingPriceTabWidget(parking: a),
-                                  TimeTabWidget(parking: a),
+                                      user: this._reservation.client,
+                                      name: "Cliente"),
+                                  VehicleTabWidget(
+                                      vehicle: this._reservation.vehicle),
+                                  ParkingPriceTabWidget(
+                                      parking: this._reservation.parking),
+                                  TimeTabWidget(reservation: this._reservation),
                                 ],
                               ),
                             ),
@@ -102,10 +109,21 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
 class ActionButtonsOwnerState extends StatelessWidget {
   const ActionButtonsOwnerState({
     Key key,
+    @required this.reservation,
     @required this.screenSize,
   }) : super(key: key);
 
+  final Reservation reservation;
   final Size screenSize;
+
+  Future<void> cancelReservation() async {
+    Reservation result =
+        await ReservationUseCases.getReservationById(reservation.id);
+    if (result != null) {
+    } else {
+      print("Something happened");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +133,7 @@ class ActionButtonsOwnerState extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Padding(
         padding: const EdgeInsets.only(left: 32.0),
-        child: true != true
+        child: this.reservation.status == "Created"
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -154,7 +172,9 @@ class ActionButtonsOwnerState extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        this.cancelReservation();
+                      },
                       child: Center(
                         child: Container(
                           decoration: BoxDecoration(
@@ -191,11 +211,11 @@ class ActionButtonsOwnerState extends StatelessWidget {
                   )
                 ],
               )
-            : InkWell(
-                onTap: () {},
-                child: Center(
-                  child: true != true
-                      ? Container(
+            : Center(
+                child: true != false
+                    ? InkWell(
+                        onTap: () {},
+                        child: Container(
                           decoration: BoxDecoration(
                             color: Color(0xff077187),
                             borderRadius: BorderRadius.circular(12.0),
@@ -211,12 +231,12 @@ class ActionButtonsOwnerState extends StatelessWidget {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 60, vertical: 10.0),
+                                horizontal: 12, vertical: 10.0),
                             child: AutoSizeText(
-                              "Calificar",
+                              "Aun no hay review",
                               maxLines: 1,
                               maxFontSize: 30,
-                              minFontSize: 30,
+                              minFontSize: 25,
                               style: TextStyle(
                                 fontFamily: "Montserrat",
                                 fontWeight: FontWeight.bold,
@@ -224,69 +244,41 @@ class ActionButtonsOwnerState extends StatelessWidget {
                               ),
                             ),
                           ),
-                        )
-                      : true != true
-                          ? Container(
-                              decoration: BoxDecoration(
-                                color: Color(0xff077187),
-                                borderRadius: BorderRadius.circular(12.0),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.transparent.withOpacity(0.2),
-                                    spreadRadius: 4,
-                                    blurRadius: 7,
-                                    offset: Offset(
-                                        0, 6), // changes position of shadow
-                                  ),
-                                ],
+                        ),
+                      )
+                    : InkWell(
+                        onTap: () {},
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xff077187),
+                            borderRadius: BorderRadius.circular(12.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.transparent.withOpacity(0.2),
+                                spreadRadius: 4,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 6), // changes position of shadow
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 10.0),
-                                child: AutoSizeText(
-                                  "Editar Calificación",
-                                  maxLines: 1,
-                                  maxFontSize: 30,
-                                  minFontSize: 25,
-                                  style: TextStyle(
-                                    fontFamily: "Montserrat",
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            )
-                          : Container(
-                              decoration: BoxDecoration(
-                                color: Color(0xff077187),
-                                borderRadius: BorderRadius.circular(12.0),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.transparent.withOpacity(0.2),
-                                    spreadRadius: 4,
-                                    blurRadius: 7,
-                                    offset: Offset(
-                                        0, 6), // changes position of shadow
-                                  ),
-                                ],
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 10.0),
-                                child: AutoSizeText(
-                                  "Mostrar Calificación",
-                                  maxLines: 1,
-                                  maxFontSize: 30,
-                                  minFontSize: 25,
-                                  style: TextStyle(
-                                    fontFamily: "Montserrat",
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
+                            ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 10.0),
+                            child: AutoSizeText(
+                              "Mostrar Calificación",
+                              maxLines: 1,
+                              maxFontSize: 30,
+                              minFontSize: 25,
+                              style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
                               ),
                             ),
-                ),
+                          ),
+                        ),
+                      ),
               ),
       ),
     );

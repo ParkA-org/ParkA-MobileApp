@@ -24,7 +24,7 @@ class ParkingPriceTabWidget extends StatelessWidget {
           ),
         ),
         Text(
-          '\$RD ${this._parking.perHourPrice}/Hora',
+          '\$RD ${this._parking.priceHours}/Hora',
           style: kParkaTextStyleBlack18,
         )
       ],

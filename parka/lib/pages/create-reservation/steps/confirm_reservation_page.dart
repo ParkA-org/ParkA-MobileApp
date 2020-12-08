@@ -216,7 +216,7 @@ class ConfirmReservationPage extends StatelessWidget {
                             ParkingPriceWidgetTab(
                               label: "Precio por hora",
                               value:
-                                  'RD\$ ${this._formController.createReservationDto.parking.perHourPrice}',
+                                  'RD\$ ${this._formController.createReservationDto.parking.priceHours}',
                               valueStyle: kParkaTextStyleBoldBlack16,
                             ),
                             Divider(

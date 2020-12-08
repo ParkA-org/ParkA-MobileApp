@@ -211,6 +211,7 @@ List<GetPage> getRoutePages = [
   ),
   GetPage(
     name: EditParkingPage.routeName,
+    // ignore: missing_required_param
     page: () => EditParkingPage(),
     bindings: [GraphqlClientBiding()],
   ),

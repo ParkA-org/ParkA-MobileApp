@@ -9,7 +9,7 @@ class Parking {
   final double latitude;
   final double longitude;
   final Calendar calendar;
-  final double perHourPrice;
+  final double priceHours;
   final String mainPicture;
   final List pictures;
   final bool status;
@@ -33,7 +33,7 @@ class Parking {
     this.calendar,
     this.mainPicture,
     this.parkingCount,
-    this.perHourPrice,
+    this.priceHours,
     this.pictures,
     this.sector,
     this.status,
@@ -54,7 +54,7 @@ class Parking {
       pictures: _pictures,
       calendar: Calendar.calendarFromJson(parking["calendar"]),
       features: Feature.featuresFromJson(parking["features"]),
-      perHourPrice: double.tryParse(parking["priceHours"].toString()),
+      priceHours: double.tryParse(parking["priceHours"].toString()),
       rating: double.tryParse(
         parking["rating"].toString(),
       ),
@@ -82,7 +82,7 @@ class Parking {
           features: _features,
           pictures: _pictures,
           user: User.userFromJson(parking["user"]),
-          perHourPrice: double.tryParse(parking["priceHours"].toString()),
+          priceHours: double.tryParse(parking["priceHours"].toString()),
           rating: double.tryParse(
             parking["rating"].toString(),
           ),
@@ -91,5 +91,20 @@ class Parking {
     });
 
     return userParkings;
+  }
+
+  static Parking parkingFromJsonPersonlized(Map<String, dynamic> parking) {
+    List<String> _pictures = new List.from(parking["pictures"]);
+
+    return Parking(
+      id: parking["id"],
+      parkingName: parking["parkingName"],
+      mainPicture: parking["mainPicture"],
+      pictures: _pictures,
+      priceHours: double.tryParse(parking["priceHours"].toString()),
+      rating: double.tryParse(
+        parking["rating"].toString(),
+      ),
+    );
   }
 }

@@ -137,7 +137,7 @@ class ParkingDetailModal extends StatelessWidget {
                     thickness: 1.0,
                     color: Color(0xFF949494),
                   ),
-                  Text("${parking.perHourPrice}" r" RD$ por hora",
+                  Text("${parking.priceHours}" r" RD$ por hora",
                       style: kParkaTextStyleGrey.copyWith(
                           color: ParkaColors.parkaGreen,
                           fontWeight: FontWeight.bold)),

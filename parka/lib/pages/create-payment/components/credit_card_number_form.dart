@@ -1,4 +1,4 @@
-import 'package:ParkA/pages/create-payment/components/parka_input_test.dart';
+import 'package:ParkA/components/inputs/parka_input_test.dart';
 import "package:flutter/material.dart";
 
 class CreditCardNumberForm extends StatelessWidget {
