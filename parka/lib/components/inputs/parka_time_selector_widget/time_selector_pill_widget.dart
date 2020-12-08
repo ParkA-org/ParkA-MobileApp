@@ -53,8 +53,7 @@ class TimeSelectorPillWidget extends StatelessWidget {
                       ? '0${timeArray[1]}'
                       : "${timeArray[1]}";
                   int hour = int.tryParse('${timeArray[0]}$minutes');
-                  // print(timeArray);
-                  // print(hour);
+
                   if (this.setHourString != null) {
                     this.setHourString(hour);
                   }
@@ -67,7 +66,7 @@ class TimeSelectorPillWidget extends StatelessWidget {
       },
       child: Container(
         child: AutoSizeText(
-          this.hourString,
+          this.hourString ?? "",
           maxLines: 1,
         ),
         padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),

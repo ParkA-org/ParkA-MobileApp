@@ -101,10 +101,42 @@ final kParkaTextStyleBoldGreen18 = kParkaTextBaseStyleBold.copyWith(
   fontSize: 18.0,
 );
 
+final kParkaTextStyleGreen18 = kParkaTextBaseStyleBold.copyWith(
+  fontSize: 18.0,
+  fontWeight: FontWeight.normal,
+);
+
+final kParkaTextStyleGreen14 = kParkaTextBaseStyleBold.copyWith(
+  fontSize: 14.0,
+  fontWeight: FontWeight.normal,
+);
+
+final kParkaTextStyleGrey18 = kParkaTextBaseStyleBold.copyWith(
+  fontSize: 18.0,
+  fontWeight: FontWeight.normal,
+  color: Color(0xFF949494),
+);
+
 final kParkaTextStyleBlack18 = kParkaTextBaseStyleBold.copyWith(
   color: Colors.black,
   fontSize: 18.0,
   fontWeight: FontWeight.normal,
+);
+
+final kParkaTextStyleBlack16 = kParkaTextBaseStyleBold.copyWith(
+  color: Colors.black,
+  fontSize: 16.0,
+  fontWeight: FontWeight.normal,
+);
+
+final kParkaTextStyleBoldBlack16 = kParkaTextBaseStyleBold.copyWith(
+  color: Colors.black,
+  fontSize: 16.0,
+);
+
+final kParkaTextStyleBoldBlack18 = kParkaTextBaseStyleBold.copyWith(
+  color: Colors.black,
+  fontSize: 18.0,
 );
 
 final kParkaInputDefaultStyleBlue = kParkaTextBaseStyleBold.copyWith(
@@ -119,4 +151,12 @@ final kParkaBigButtonTextStyleGreen = kParkaTextBaseStyleBold.copyWith(
 final kParkaBigButtonTextStyleBlack = kParkaTextBaseStyle.copyWith(
   color: Colors.black,
   fontSize: 22.0,
+);
+
+final kParkaTextStyleBoldGreen22 = kParkaTextBaseStyleBold.copyWith(
+  fontSize: 22.0,
+);
+
+final kParkaTextStyleBoldGreen24 = kParkaTextBaseStyleBold.copyWith(
+  fontSize: 24.0,
 );

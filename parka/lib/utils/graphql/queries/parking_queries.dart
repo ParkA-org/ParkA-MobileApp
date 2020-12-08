@@ -76,6 +76,12 @@ query($data: String!) {
     }
     verified
     rating
+    user{
+      id
+      name
+      lastName
+      profilePicture
+    }
   }
 }
 """;
@@ -87,6 +93,9 @@ query($userLocation: FilterInput!) {
 	) 
   {
 		id
+    user{
+      id
+    }
 		latitude
 		longitude
 		mainPicture
@@ -163,6 +172,16 @@ query{
       }
     }
     
+const String getParkingAvaliabilityQuery = r""" 
+query($data:GetParkingCalendarInput!){
+  getParkingAvaliability(getParkingCalendarInput:$data){
+    id
+    date
+    parking
+    schedules{
+      start
+      finish
+    }
   }
 }
 """;

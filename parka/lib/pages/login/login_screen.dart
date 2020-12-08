@@ -8,7 +8,6 @@ import 'package:ParkA/components/curve-painter/curves_painter.dart';
 import 'package:ParkA/styles/parkaIcons.dart';
 import "package:flutter/material.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'email_login.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -42,7 +41,6 @@ class LoginScreen extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     "Bienvenido a ParkA",
-                    // textAlign: TextAlign.center,
                     style: kParkaBigTitleTextStyle,
                   ),
                   Text(

@@ -82,4 +82,19 @@ class Vehicle {
 
     return ret;
   }
+
+  static vehiclefromJsonPersonalized(Map<String, dynamic> vehicleData) {
+    List<String> carPictures = new List();
+
+    vehicleData["pictures"].forEach((element) {
+      carPictures.add(element);
+    });
+
+    return Vehicle(
+      id: vehicleData["id"],
+      mainPicture: vehicleData["mainPicture"],
+      pictures: carPictures,
+      alias: vehicleData["alias"],
+    );
+  }
 }

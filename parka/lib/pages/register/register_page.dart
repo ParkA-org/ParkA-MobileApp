@@ -1,43 +1,33 @@
 import 'package:ParkA/components/buttons/transparent_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/components/inputs/parka_input.dart';
-
-import 'package:ParkA/data/dtos/user/user_registration_dto.dart';
-import 'package:ParkA/pages/profile-picture/profile_pic_page.dart';
+import 'package:ParkA/controllers/register-user-form/register_user_controller.dart';
+import 'package:ParkA/pages/register/steps/profile_pic_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
+import 'package:ParkA/utils/form-validations/register_validation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class RegisterPage extends StatefulWidget {
-  RegisterPage({Key key}) : super(key: key);
+class RegisterPage extends StatelessWidget {
   static const String routeName = "/RegisterPage";
-  @override
-  _RegisterPageState createState() => _RegisterPageState();
-}
-
-UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
-
-class _RegisterPageState extends State<RegisterPage> {
-  String name;
-  String lastName;
-  String email;
-  String password;
-  String confirmpassword;
-  String telephonNumber;
+  final RegisterUSerController _registerUSerController =
+      Get.find<RegisterUSerController>();
 
   void nextButtonHandler() {
-    userRegistrationForm.createUserDto.name = this.name.trim();
-    userRegistrationForm.createUserDto.lastName = this.lastName.trim();
-    userRegistrationForm.createUserDto.email = this.email.trim();
-    userRegistrationForm.createUserDto.password = this.password.trim();
-    userRegistrationForm.createUserInformationDto.telephonNumber =
-        this.telephonNumber;
+    final _check = validateRegister(_registerUSerController.registrationForm);
 
-    Navigator.pushNamed(
-      context,
-      ProfilePicPage.routeName,
-      arguments: userRegistrationForm,
-    );
+    if (!_check) {
+      Get.snackbar(
+        "Error",
+        "Verifica tus datos",
+        margin: EdgeInsets.all(8.0),
+        backgroundColor: ParkaColors.parkaGoogleRed,
+      );
+      return;
+    }
+
+    Get.toNamed(ProfilePicturePage.routeName);
   }
 
   @override
@@ -120,11 +110,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                                         'WhiteProfileIcon.svg',
                                                     text: 'Nombre',
                                                     onChanged: (name) {
-                                                      setState(
-                                                        () {
-                                                          this.name = name;
-                                                        },
-                                                      );
+                                                      _registerUSerController
+                                                          .setName(name);
                                                     },
                                                   ),
                                                 ),
@@ -134,12 +121,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                                         'WhiteProfileIcon.svg',
                                                     text: 'Apellido',
                                                     onChanged: (lastName) {
-                                                      setState(
-                                                        () {
-                                                          this.lastName =
-                                                              lastName;
-                                                        },
-                                                      );
+                                                      _registerUSerController
+                                                          .setLastName(
+                                                              lastName);
                                                     },
                                                   ),
                                                 ),
@@ -150,11 +134,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                                     keyboardType: TextInputType
                                                         .emailAddress,
                                                     onChanged: (email) {
-                                                      setState(
-                                                        () {
-                                                          this.email = email;
-                                                        },
-                                                      );
+                                                      _registerUSerController
+                                                          .setEmail(email);
                                                     },
                                                   ),
                                                 ),
@@ -166,12 +147,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                                     keyboardType: TextInputType
                                                         .visiblePassword,
                                                     onChanged: (password) {
-                                                      setState(
-                                                        () {
-                                                          this.password =
-                                                              password;
-                                                        },
-                                                      );
+                                                      _registerUSerController
+                                                          .setPassword(
+                                                              password);
                                                     },
                                                   ),
                                                 ),
@@ -183,15 +161,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                                     isPassword: true,
                                                     keyboardType: TextInputType
                                                         .visiblePassword,
-                                                    onChanged:
-                                                        (confirmpassword) {
-                                                      setState(
-                                                        () {
-                                                          this.confirmpassword =
-                                                              confirmpassword;
-                                                        },
-                                                      );
-                                                    },
+                                                    onChanged: (String
+                                                        confirmpassword) {},
                                                   ),
                                                 ),
                                                 Expanded(
@@ -202,25 +173,23 @@ class _RegisterPageState extends State<RegisterPage> {
                                                         TextInputType.phone,
                                                     onChanged:
                                                         (telephonNumber) {
-                                                      setState(
-                                                        () {
-                                                          this.telephonNumber =
-                                                              telephonNumber;
-                                                        },
-                                                      );
+                                                      _registerUSerController
+                                                          .setPhoneNumber(
+                                                              telephonNumber);
                                                     },
                                                   ),
                                                 ),
                                                 Expanded(
                                                   child: TransparentButton(
-                                                      label: 'Continuar',
-                                                      buttonTextStyle:
-                                                          kParkaButtonTextStyle,
-                                                      trailingIconData: Icons
-                                                          .arrow_forward_ios,
-                                                      color: Colors.white,
-                                                      onTapHandler:
-                                                          nextButtonHandler),
+                                                    label: 'Continuar',
+                                                    buttonTextStyle:
+                                                        kParkaButtonTextStyle,
+                                                    trailingIconData:
+                                                        Icons.arrow_forward_ios,
+                                                    color: Colors.white,
+                                                    onTapHandler:
+                                                        nextButtonHandler,
+                                                  ),
                                                 ),
                                               ],
                                             ),

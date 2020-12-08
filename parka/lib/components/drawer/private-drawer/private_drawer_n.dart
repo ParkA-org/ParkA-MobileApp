@@ -3,12 +3,10 @@ import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/pages/chats/chats_page.dart';
 import 'package:ParkA/pages/edit-profile/edit_profile_page.dart';
 import 'package:ParkA/pages/parkings/parking_page.dart';
-import 'package:ParkA/pages/pending-reservations/pending_reservation_page.dart';
-
 import 'package:ParkA/pages/profile/components/profile_personal_information_widget.dart';
 import 'package:ParkA/pages/login/login_screen.dart';
-import 'package:ParkA/pages/reservation-as-owner/reservation_as_owner.dart';
-import 'package:ParkA/pages/reservations-as-client/reservation_as_client.dart';
+import 'package:ParkA/pages/reservation/reservation-as-owner-detail/reservation_as_owner.dart';
+import 'package:ParkA/pages/reservation/reservations-as-client-detail/reservation_as_client.dart';
 import 'package:ParkA/pages/search/search_panel.dart';
 import 'package:ParkA/pages/user-payments/user_registered_payment_methods_screen.dart';
 import 'package:ParkA/pages/vehicles/vehicle_page.dart';
@@ -71,8 +69,10 @@ class PrivateDrawer extends StatelessWidget {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () {
-                                  Get.toNamed(
-                                      ReservationAsClientPage.routeName);
+                                  Get.to(ReservationAsClientPage(
+                                    reservationId:
+                                        "e9e6ba15-d7f4-43d4-adbc-85f13b7a0bdf",
+                                  ));
                                 },
                                 child: ParkaUserReservationInfoWidget(
                                   value:
@@ -84,7 +84,10 @@ class PrivateDrawer extends StatelessWidget {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () {
-                                  Get.toNamed(ReservationAsOwnerPage.routeName);
+                                  Get.to(ReservationAsOwnerPage(
+                                    reservationId:
+                                        "1578d06d-5eb0-452c-8457-10ee8ce45ba0",
+                                  ));
                                 },
                                 child: ParkaUserReservationInfoWidget(
                                   value:
@@ -96,8 +99,7 @@ class PrivateDrawer extends StatelessWidget {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () {
-                                  Get.toNamed(
-                                      PendingReservationsPage.routeName);
+                                  Get.toNamed(ReservationAsOwnerPage.routeName);
                                 },
                                 child: ParkaUserReservationInfoWidget(
                                   value: null,

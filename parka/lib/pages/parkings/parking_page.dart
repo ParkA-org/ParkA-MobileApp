@@ -1,5 +1,4 @@
 import 'package:ParkA/components/floating-action-button/parka_floating_action_button.dart';
-
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
 import 'package:ParkA/pages/create-parking/create_parking_page.dart';
@@ -8,7 +7,6 @@ import 'package:ParkA/pages/parking-detail/parking_detail_page.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-
 import 'components/parking_list_placeholder.dart';
 import 'components/parking_tile.dart';
 

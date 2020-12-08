@@ -29,7 +29,7 @@ class UpdateParkingFormController extends GetxController {
       mainPicture: parking.mainPicture,
       parkingName: parking.parkingName,
       pictures: parking.pictures,
-      priceHours: parking.perHourPrice,
+      priceHours: parking.priceHours,
     ).obs;
   }
 
@@ -129,7 +129,7 @@ class UpdateParkingFormController extends GetxController {
   void set24hSchedule(String _weekDay) {
     _updateParkingDto.update((_instance) {
       Schedule _schedule = new Schedule(
-        finish: 2400,
+        finish: 2359,
         start: 0,
         is24h: true,
       );
