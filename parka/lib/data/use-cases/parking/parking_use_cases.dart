@@ -240,6 +240,26 @@ class ParkingUseCases {
     return null;
   }
 
+<<<<<<< HEAD
+  static Future<List<Parking>> getAllParking() async {
+    final graphqlClient = Get.find<GraphqlClientController>();
+
+    QueryOptions queryOptions = QueryOptions(documentNode: gql(getAllParkings));
+
+    final QueryResult getAllUserParkingsResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .query(queryOptions);
+
+    print(getAllUserParkingsResult.data);
+    if (getAllUserParkingsResult.data != null &&
+        getAllUserParkingsResult.data["getAllParkings"] != null) {
+      final List<Parking> parkingsData = Parking.parkingsFromJson(
+          getAllUserParkingsResult.data["getAllParkings"]);
+
+      return parkingsData;
+    }
+    return [];
+=======
   static Future<List<PerDaySchedule>> getParkingAvaliability(
       String id, String date) async {
     final graphqlClient = Get.find<GraphqlClientController>();
@@ -266,5 +286,6 @@ class ParkingUseCases {
           _result.data["getParkingAvaliability"]);
     }
     return null;
+>>>>>>> dev
   }
 }
