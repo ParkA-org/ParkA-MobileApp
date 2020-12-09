@@ -171,7 +171,7 @@ query{
         finish
       }
     }
-    
+""";
 const String getParkingAvaliabilityQuery = r""" 
 query($data:GetParkingCalendarInput!){
   getParkingAvaliability(getParkingCalendarInput:$data){
