@@ -3,6 +3,7 @@ import 'package:ParkA/components/buttons/main_fab.dart';
 import 'package:ParkA/components/drawer/private-drawer/private_drawer_n.dart';
 import 'package:ParkA/components/drawer/public-drawer/public_drawer.dart';
 import 'package:ParkA/controllers/graphql_controller.dart';
+import 'package:ParkA/controllers/map_controller.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
@@ -34,10 +35,10 @@ class _MapPageState extends State<MapPage> {
   CameraPosition initialCameraPosition;
   Set<Marker> nearbyParkings;
   BitmapDescriptor _customPinIcon;
-  GoogleMapController _mapController;
 
   final UserController user = Get.find<UserController>();
   final graphqlClient = Get.find<GraphqlClientController>();
+  final mapController = Get.put(MapController());
 
   @override
   void initState() {
@@ -84,8 +85,11 @@ class _MapPageState extends State<MapPage> {
 
   Future<Set<Marker>> getNearParkings(LatLng userLocation) async {
     Set<Marker> parkingPins = {};
-    List<Parking> nearParkings =
-        await ParkingUseCases.getNearParkings(userLocation);
+
+    mapController.setCurrentParkings(
+        await ParkingUseCases.getNearParkings(userLocation));
+
+    List<Parking> nearParkings = mapController.currentParkings;
 
     if (nearParkings != null && nearParkings.length > 0) {
       nearParkings.forEach((parking) {
@@ -97,8 +101,9 @@ class _MapPageState extends State<MapPage> {
               context: context,
               isScrollControlled: true,
               builder: (context) {
-                _mapController.animateCamera(CameraUpdate.newLatLng(
-                    LatLng(parking.latitude - 0.003, parking.longitude)));
+                mapController.mapController.value.animateCamera(
+                    CameraUpdate.newLatLng(
+                        LatLng(parking.latitude - 0.003, parking.longitude)));
                 return ParkingDetailModal(parking: parking);
               }),
         ));
@@ -120,7 +125,7 @@ class _MapPageState extends State<MapPage> {
     print("USER LOCATION IS  ${this.userLocation}");
     this.userLocation = await this._getCurrentLocation();
     print("USER LOCATION NOW IS  ${this.userLocation}");
-    _mapController.animateCamera(CameraUpdate.newLatLng(
+    mapController.mapController.value.animateCamera(CameraUpdate.newLatLng(
         LatLng(userLocation.latitude, userLocation.longitude)));
 
     if (this.userLocation != null) {
@@ -159,8 +164,8 @@ class _MapPageState extends State<MapPage> {
             children: [
               GoogleMap(
                 onMapCreated: (GoogleMapController controller) {
-                  _mapController = controller;
-                  _mapController.setMapStyle(_mapStyle);
+                  mapController.setMapController(controller);
+                  mapController.mapController.value.setMapStyle(_mapStyle);
                 },
                 myLocationButtonEnabled: true,
                 myLocationEnabled: true,
@@ -172,7 +177,6 @@ class _MapPageState extends State<MapPage> {
                 padding: const EdgeInsets.only(bottom: 60.0),
                 child: Builder(
                   builder: (context) => DummySearch(
-                    // statusBarSize: MediaQuery.of(context).padding.top,
                     mainContext: mapPageContext,
                     buttonToggle: toggleFloatingActionButton,
                   ),

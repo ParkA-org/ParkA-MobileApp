@@ -21,9 +21,11 @@ class OwnerParkingDetailPage extends StatefulWidget {
   static String routeName = "owner-parking-detail-page";
 
   final String parkingId;
+  final bool editable;
 
   OwnerParkingDetailPage({
     @required this.parkingId,
+    this.editable,
   });
 
   @override
@@ -35,12 +37,13 @@ class _OwnerParkingDetailPageState extends State<OwnerParkingDetailPage> {
   Parking _parking;
   bool _loading;
   BitmapDescriptor _markerIcon;
-
+  bool _editable;
   @override
   void initState() {
     super.initState();
     this._loading = true;
     this._parkingId = this.widget.parkingId;
+    this._editable = this.widget.editable;
 
     BitmapDescriptor.fromAssetImage(
             ImageConfiguration.empty, 'resources/images/green-parking-icon.png')
@@ -64,6 +67,7 @@ class _OwnerParkingDetailPageState extends State<OwnerParkingDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: ParkaFloatingActionButton(
+        enabled: _editable,
         iconData: Icons.edit,
         onPressedHandler: () {
           Get.to(EditParkingPage(
