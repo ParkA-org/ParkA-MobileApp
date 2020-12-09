@@ -110,7 +110,6 @@ query($userLocation: FilterInput!) {
 		}
 	}
 }
-
 """;
 
 const String getAllParkings = r"""
