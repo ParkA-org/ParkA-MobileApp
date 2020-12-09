@@ -49,7 +49,7 @@ class _SearchPanelState extends State<SearchPanel> {
         child: FilterResultTile(
           parkingId: parking.id,
           parkingName: parking.parkingName,
-          parkingPrice: "${parking.perHourPrice} RD Por Hora",
+          parkingPrice: "${parking.priceHours} RD Por Hora",
           rating: "${parking.rating.toString()}",
         ),
       ));

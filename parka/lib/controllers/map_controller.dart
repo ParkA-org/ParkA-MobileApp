@@ -1,4 +1,3 @@
-import 'package:ParkA/components/filter-result-tile/filter_result_tile.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';

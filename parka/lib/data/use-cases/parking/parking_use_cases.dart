@@ -240,7 +240,6 @@ class ParkingUseCases {
     return null;
   }
 
-<<<<<<< HEAD
   static Future<List<Parking>> getAllParking() async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
@@ -259,7 +258,8 @@ class ParkingUseCases {
       return parkingsData;
     }
     return [];
-=======
+  }
+
   static Future<List<PerDaySchedule>> getParkingAvaliability(
       String id, String date) async {
     final graphqlClient = Get.find<GraphqlClientController>();
@@ -286,6 +286,5 @@ class ParkingUseCases {
           _result.data["getParkingAvaliability"]);
     }
     return null;
->>>>>>> dev
   }
 }
