@@ -249,7 +249,6 @@ class ParkingUseCases {
         .parkaGraphqlClient.value.graphQlClient
         .query(queryOptions);
 
-    print(getAllUserParkingsResult.data);
     if (getAllUserParkingsResult.data != null &&
         getAllUserParkingsResult.data["getAllParkings"] != null) {
       final List<Parking> parkingsData = Parking.parkingsFromJson(

@@ -31,10 +31,13 @@ class _SearchPanelState extends State<SearchPanel> {
   List<Parking> currentParkings = [];
 
   void getAllParkings() async {
-    currentParkings = await ParkingUseCases.getAllParking();
-    mapController.setCurrentParkings(currentParkings);
+    // await list();
+    // mapController.setCurrentParkings(currentParkings);
     mapController.searchParkings(null);
   }
+
+  Future<List<Parking>> list() async =>
+      currentParkings = await ParkingUseCases.getAllParking();
 
   List<Widget> searchResultBuilder(List<Parking> filteredResults) {
     List<Widget> searchResults = [];
