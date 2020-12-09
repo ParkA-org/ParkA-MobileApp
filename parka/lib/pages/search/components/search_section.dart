@@ -47,8 +47,8 @@ class SearchSection extends StatelessWidget {
                         width: 40,
                         height: 40,
                         child: Icon(
-                          Icons.filter_alt,
-                          size: 30,
+                          Icons.filter_list,
+                          size: 35,
                           color: Color(0xFF0B768C),
                         ),
                       ),

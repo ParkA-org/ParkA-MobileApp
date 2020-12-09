@@ -45,10 +45,7 @@ final kParkaTextStyleBoldWhite20 = kParkaTextBaseStyleBold.copyWith(
   fontSize: 20.0,
   color: Colors.white,
 );
-final kParkaTextStyleBoldWhite22 = kParkaTextBaseStyleBold.copyWith(
-  fontSize: 22.0,
-  color: Colors.white,
-);
+
 final kParkaTextStyleBold20 = kParkaTextBaseStyleBold.copyWith(
   fontSize: 20.0,
   fontWeight: FontWeight.normal,
