@@ -20,6 +20,7 @@ import 'package:ParkA/pages/edit-profile/edit_profile_page.dart';
 import 'package:ParkA/pages/edit-user-profile/edit_user_profile_page.dart';
 import 'package:ParkA/pages/filter/filter_page.dart';
 import 'package:ParkA/pages/forgot-password/forgot_password_screen.dart';
+import 'package:ParkA/pages/history/history_page.dart';
 import 'package:ParkA/pages/login/email_login.dart';
 import 'package:ParkA/pages/login/login_screen.dart';
 import 'package:ParkA/pages/map/maps_page.dart';
@@ -65,6 +66,10 @@ List<GetPage> getRoutePages = [
   GetPage(
     name: ForgotPasswordScreen.routeName,
     page: () => ForgotPasswordScreen(),
+  ),
+  GetPage(
+    name: HistoryPage.routeName,
+    page: () => HistoryPage(),
   ),
   GetPage(
     name: RegisterPage.routeName,

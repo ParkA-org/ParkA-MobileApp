@@ -5,6 +5,7 @@ import 'package:ParkA/data/dtos/login/user_login_dto.dart';
 import 'package:ParkA/utils/prefs/shared_preferencies.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
 import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 
 class UserController extends GetxController {
   Rx<User> user = null.obs;

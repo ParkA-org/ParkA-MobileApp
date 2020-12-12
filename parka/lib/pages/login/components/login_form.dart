@@ -11,6 +11,7 @@ import 'package:ParkA/components/curve-painter/curves_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 import 'package:get/utils.dart';
 import 'package:graphql/client.dart';
 
