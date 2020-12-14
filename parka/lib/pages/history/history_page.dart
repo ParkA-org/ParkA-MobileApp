@@ -1,4 +1,5 @@
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
+import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
 import 'package:ParkA/pages/create-vehicle/components/parka_resizable_on_scroll_app_bar.dart';
 import 'package:ParkA/pages/history/Components/reservation_placeholder.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +18,14 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
   bool _loading;
-  List<Reservation> currentReservations = [];
+  List<Reservation> currentReservations = new List();
+
   Future<void> getAllUserReservations() async {
+    this.widget.type == 'Owner'
+        ? currentReservations =
+            await ReservationUseCases.getAllReservationsAsOwner()
+        : currentReservations =
+            await ReservationUseCases.getAllReservationsAsClient();
     setState(() {
       this._loading = false;
     });

@@ -43,4 +43,23 @@ class Reservation {
       status: reservation["status"],
     );
   }
+
+  static List<Reservation> reservationsFromJson(List reservationData) {
+    List<Reservation> userReservations = new List();
+
+    reservationData.forEach((reservation) {
+      userReservations.add(Reservation(
+        id: reservation["id"],
+        client: User.userFromJson(reservation["client"]),
+        owner: User.userFromJson(reservation["owner"]),
+        parking: Parking.parkingFromJsonPersonlized(reservation["parking"]),
+        vehicle: Vehicle.vehiclefromJsonPersonalized(reservation["vehicle"]),
+        checkInDate: reservation["checkInDate"],
+        checkOutDate: reservation["checkOutDate"],
+        status: reservation["status"],
+      ));
+    });
+
+    return userReservations;
+  }
 }
