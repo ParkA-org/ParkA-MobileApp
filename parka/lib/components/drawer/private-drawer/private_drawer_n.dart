@@ -70,7 +70,9 @@ class PrivateDrawer extends StatelessWidget {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () {
-                                  Get.to(HistoryPage());
+                                  Get.to(HistoryPage(
+                                    type: "Client",
+                                  ));
                                 },
                                 child: ParkaUserReservationInfoWidget(
                                   value:
@@ -82,7 +84,9 @@ class PrivateDrawer extends StatelessWidget {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () {
-                                  Get.to(HistoryPage());
+                                  Get.to(HistoryPage(
+                                    type: "Owner",
+                                  ));
                                 },
                                 child: ParkaUserReservationInfoWidget(
                                   value:
@@ -91,6 +95,7 @@ class PrivateDrawer extends StatelessWidget {
                                 ),
                               ),
                             ),
+                            //TODO: This has to be eventually deleted
                             Expanded(
                               child: GestureDetector(
                                 onTap: () {

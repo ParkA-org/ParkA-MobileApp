@@ -1,7 +1,11 @@
+import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:flutter/material.dart';
 
 class ReservationTile extends StatelessWidget {
-  const ReservationTile({Key key}) : super(key: key);
+  final Reservation reservation;
+
+  const ReservationTile({Key key, @required this.reservation})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
