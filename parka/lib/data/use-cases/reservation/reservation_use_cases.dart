@@ -28,6 +28,48 @@ class ReservationUseCases {
     return 0;
   }
 
+  static Future<List<Reservation>> getAllReservationsAsOwner() async {
+    final graphqlClient = Get.find<GraphqlClientController>()
+        .parkaGraphqlClient
+        .value
+        .graphQlClient;
+
+    QueryOptions _queryOptions =
+        new QueryOptions(documentNode: gql(getAllReservationAsOwnerQuery));
+
+    final _result = await graphqlClient.query(_queryOptions);
+
+    print(_result.exception.toString());
+
+    if (_result.data != null) {
+      return Reservation.reservationsFromJson(
+          _result.data["getAllUserReservationsAsOwner"]);
+    }
+
+    return [];
+  }
+
+  static Future<List<Reservation>> getAllReservationsAsClient() async {
+    final graphqlClient = Get.find<GraphqlClientController>()
+        .parkaGraphqlClient
+        .value
+        .graphQlClient;
+
+    QueryOptions _queryOptions =
+        new QueryOptions(documentNode: gql(getAllReservationAsClientQuery));
+
+    final _result = await graphqlClient.query(_queryOptions);
+
+    print(_result.exception.toString());
+
+    if (_result.data != null) {
+      return Reservation.reservationsFromJson(
+          _result.data["getAllUserReservationsAsClient"]);
+    }
+
+    return [];
+  }
+
   static Future<int> getAllReservationsAsClientCount() async {
     final graphqlClient = Get.find<GraphqlClientController>()
         .parkaGraphqlClient

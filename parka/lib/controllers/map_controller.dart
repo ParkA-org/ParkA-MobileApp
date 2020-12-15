@@ -26,11 +26,11 @@ class MapController extends GetxController {
 
   void searchParkings(String searchQuery) {
     if (searchQuery == null || (searchQuery?.isEmpty ?? true)) {
-      filteredResults.update((value) {
+      filteredResults.obs.update((value) {
         filteredResults = currentParkings;
       });
     } else {
-      filteredResults.update((value) {
+      filteredResults.obs.update((value) {
         filteredResults = RxList<Parking>();
 
         searchQuery = searchQuery.toUpperCase();

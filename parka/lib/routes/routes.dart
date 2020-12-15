@@ -20,11 +20,11 @@ import 'package:ParkA/pages/edit-profile/edit_profile_page.dart';
 import 'package:ParkA/pages/edit-user-profile/edit_user_profile_page.dart';
 import 'package:ParkA/pages/filter/filter_page.dart';
 import 'package:ParkA/pages/forgot-password/forgot_password_screen.dart';
+import 'package:ParkA/pages/history/history_page.dart';
 import 'package:ParkA/pages/login/email_login.dart';
 import 'package:ParkA/pages/login/login_screen.dart';
 import 'package:ParkA/pages/map/maps_page.dart';
 import 'package:ParkA/pages/parkings/parking_page.dart';
-import 'package:ParkA/pages/pending-reservations/pending_reservation_page.dart';
 import 'package:ParkA/pages/profile-picture/profile_pic_page.dart';
 import 'package:ParkA/pages/profile/profile_page.dart';
 import 'package:ParkA/pages/register/register_page.dart';
@@ -65,6 +65,10 @@ List<GetPage> getRoutePages = [
   GetPage(
     name: ForgotPasswordScreen.routeName,
     page: () => ForgotPasswordScreen(),
+  ),
+  GetPage(
+    name: HistoryPage.routeName,
+    page: () => HistoryPage(),
   ),
   GetPage(
     name: RegisterPage.routeName,
@@ -189,11 +193,6 @@ List<GetPage> getRoutePages = [
     page: () => ReservationAsOwnerPage(
       reservationId: "",
     ),
-  ),
-  GetPage(
-    bindings: [GraphqlClientBiding()],
-    name: PendingReservationsPage.routeName,
-    page: () => PendingReservationsPage(),
   ),
   GetPage(
     bindings: [GraphqlClientBiding()],
