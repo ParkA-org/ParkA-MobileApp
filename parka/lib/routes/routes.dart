@@ -197,11 +197,6 @@ List<GetPage> getRoutePages = [
   ),
   GetPage(
     bindings: [GraphqlClientBiding()],
-    name: PendingReservationsPage.routeName,
-    page: () => PendingReservationsPage(),
-  ),
-  GetPage(
-    bindings: [GraphqlClientBiding()],
     name: SearchPanel.routeName,
     page: () => SearchPanel(),
   ),

@@ -5,6 +5,7 @@ import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class ReservationTile extends StatelessWidget {
@@ -24,8 +25,8 @@ class ReservationTile extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       onTap: () {
         type == "Owner"
-            ? ReservationAsOwnerPage(reservationId: reservation.id)
-            : ReservationAsClientPage(reservationId: reservation.id);
+            ? Get.to(ReservationAsOwnerPage(reservationId: reservation.id))
+            : Get.to(ReservationAsClientPage(reservationId: reservation.id));
       },
       child: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -38,7 +39,7 @@ class ReservationTile extends StatelessWidget {
                 Expanded(
                   child: Container(
                       padding: EdgeInsets.all(8),
-                      height: 125,
+                      height: 100,
                       decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
@@ -141,6 +142,7 @@ class ReservationTile extends StatelessWidget {
                         : "${reservation.owner.name}",
                     style: kParkaTextBaseStyle.copyWith(
                       fontSize: 22,
+                      fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                     minFontSize: 18,

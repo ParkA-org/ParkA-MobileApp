@@ -7,6 +7,7 @@ import 'package:ParkA/components/user/other_user_personal_information_widget.dar
 import 'package:ParkA/controllers/create-reservation-form/create_reservation_controller.dart';
 import 'package:ParkA/pages/create-reservation/steps/select_payment_method_page.dart';
 import 'package:ParkA/pages/create-reservation/steps/select_vehile_page.dart';
+import 'package:ParkA/pages/history/history_page.dart';
 import 'package:ParkA/pages/map/maps_page.dart';
 import 'package:ParkA/pages/pending-reservations/pending_reservation_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
@@ -278,8 +279,9 @@ class ConfirmReservationPage extends StatelessWidget {
                                 Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (ctx) =>
-                                          PendingReservationsPage(),
+                                      builder: (ctx) => HistoryPage(
+                                        type: "Client",
+                                      ),
                                     ),
                                     ModalRoute.withName(MapPage.routeName));
                               } else {
