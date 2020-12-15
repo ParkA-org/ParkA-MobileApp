@@ -1,6 +1,6 @@
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
-import 'package:ParkA/pages/create-vehicle/components/parka_resizable_on_scroll_app_bar.dart';
+import 'package:ParkA/pages/history/Components/history_header.dart';
 import 'package:ParkA/pages/history/Components/reservation_placeholder.dart';
 import 'package:ParkA/pages/history/Components/reservation_tile.dart';
 import 'package:flutter/material.dart';
@@ -63,8 +63,9 @@ class _HistoryPageState extends State<HistoryPage> {
           onRefresh: this.getAllUserReservations,
           child: CustomScrollView(
             slivers: [
-              ParkaResizableOnScrollAppBar(
-                title: "Historial de Reservaciones",
+              HistorySliverAppBar(
+                typeTitle:
+                    this.widget.type == "Owner" ? "Anfitrión" : "Cliente",
               ),
               SliverList(
                 delegate: SliverChildListDelegate([

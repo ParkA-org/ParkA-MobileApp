@@ -21,6 +21,29 @@ class ReservationTile extends StatelessWidget {
   Widget build(BuildContext context) {
     String reservationDate = DateFormat("dd MMM, yyyy")
         .format(DateFormat("yyyy-MM-dd").parse(reservation.rentDate));
+
+    TextSpan statusText = TextSpan(
+        style: reservation.status == "Completed"
+            ? kParkaTextBaseStyle.copyWith(
+                color: Color(0xFF259513),
+                fontSize: 16,
+                fontWeight: FontWeight.bold)
+            : (reservation.status == "Cancelled"
+                ? kParkaTextBaseStyle.copyWith(
+                    color: Color(0xFFDA0909),
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold)
+                : kParkaTextBaseStyle.copyWith(
+                    color: Color(0xFF646B10),
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold)),
+        text: reservation.status == "Completed"
+            ? "Completado"
+            : (reservation.status == "In-progress"
+                ? "En Progreso"
+                : (reservation.status == "Cancelled"
+                    ? "Cancelado"
+                    : "Pendiente")));
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
@@ -32,14 +55,14 @@ class ReservationTile extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         child: Container(
             child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
                 Expanded(
                   child: Container(
                       padding: EdgeInsets.all(8),
-                      height: 100,
+                      height: 125,
                       decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
@@ -55,7 +78,7 @@ class ReservationTile extends StatelessWidget {
                                   "${reservation.parking.mainPicture}")))),
                 ),
                 SizedBox(
-                  width: 10,
+                  width: 15,
                 ),
                 Expanded(
                   child: Container(
@@ -74,32 +97,35 @@ class ReservationTile extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                         ),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Text(
                           "Fecha",
                           style: kParkaTextBaseStyle.copyWith(
                               color: ParkaColors.parkaGreen,
-                              fontSize: 18,
+                              fontSize: 20,
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
                           "$reservationDate",
                           style: kParkaTextBaseStyle.copyWith(
                             color: Colors.black,
-                            fontSize: 18,
+                            fontSize: 20,
                           ),
                         ),
                         Text(
                           "Total",
                           style: kParkaTextBaseStyle.copyWith(
                               color: ParkaColors.parkaGreen,
-                              fontSize: 18,
+                              fontSize: 20,
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
                           " ${reservation.total} RD" r"$",
                           style: kParkaTextBaseStyle.copyWith(
                             color: Colors.black,
-                            fontSize: 18,
+                            fontSize: 20,
                           ),
                         )
                       ],
@@ -110,6 +136,17 @@ class ReservationTile extends StatelessWidget {
             ),
             SizedBox(
               height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+              child: Text(
+                type == "Owner" ? "Cliente" : "Propietario",
+                style: kParkaTextBaseStyle.copyWith(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
             ),
             Row(
               children: [
@@ -142,7 +179,6 @@ class ReservationTile extends StatelessWidget {
                         : "${reservation.owner.name}",
                     style: kParkaTextBaseStyle.copyWith(
                       fontSize: 22,
-                      fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                     minFontSize: 18,
@@ -150,6 +186,13 @@ class ReservationTile extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
+                RichText(
+                    text: TextSpan(
+                        style: kParkaTextBaseStyle.copyWith(
+                            color: ParkaColors.parkaGreen,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
+                        children: [TextSpan(text: "Estatus: "), statusText]))
               ],
             ),
             Divider(
