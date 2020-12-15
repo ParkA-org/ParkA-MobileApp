@@ -21,6 +21,8 @@ query{
     id   
     checkInDate
     checkOutDate
+    rentDate
+    total
     client{
       id
       name
@@ -58,6 +60,8 @@ query{
     id 
     checkInDate
     checkOutDate
+    rentDate
+    total
     client{
       id
       name

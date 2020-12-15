@@ -26,6 +26,7 @@ class _HistoryPageState extends State<HistoryPage> {
 
     currentReservations.forEach((reservation) {
       reservationResults.add(ReservationTile(
+        type: this.widget.type,
         reservation: reservation,
       ));
     });
