@@ -25,7 +25,6 @@ import 'package:ParkA/pages/login/email_login.dart';
 import 'package:ParkA/pages/login/login_screen.dart';
 import 'package:ParkA/pages/map/maps_page.dart';
 import 'package:ParkA/pages/parkings/parking_page.dart';
-import 'package:ParkA/pages/pending-reservations/pending_reservation_page.dart';
 import 'package:ParkA/pages/profile-picture/profile_pic_page.dart';
 import 'package:ParkA/pages/profile/profile_page.dart';
 import 'package:ParkA/pages/register/register_page.dart';
