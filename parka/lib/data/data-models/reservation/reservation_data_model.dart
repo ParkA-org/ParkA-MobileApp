@@ -10,7 +10,7 @@ class Reservation {
   final Vehicle vehicle;
   final String paymentInfoId;
   final String rentDate;
-  final int total;
+  final double total;
   final Parking parking;
   final String status;
   final User client;
