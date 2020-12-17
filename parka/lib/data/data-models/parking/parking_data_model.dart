@@ -20,6 +20,7 @@ class Parking {
   final bool verified;
   final double rating;
   final User user;
+  final bool isAvaible;
 
   Parking({
     this.rating,
@@ -39,6 +40,7 @@ class Parking {
     this.status,
     this.verified,
     this.user,
+    this.isAvaible,
   });
 
   static Parking parkingFromJson(Map<String, dynamic> parking) {
@@ -60,6 +62,7 @@ class Parking {
       ),
       information: parking["information"],
       user: User.userFromJson(parking['user']),
+      isAvaible: parking["isAvailable"],
     );
   }
 
@@ -86,6 +89,7 @@ class Parking {
           rating: double.tryParse(
             parking["rating"].toString(),
           ),
+          isAvaible: parking["isAvaible"],
         ),
       );
     });
