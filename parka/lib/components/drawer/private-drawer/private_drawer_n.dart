@@ -41,6 +41,7 @@ class PrivateDrawer extends StatelessWidget {
                 child: Column(
                   children: [
                     Expanded(
+                      flex: 3,
                       child: GestureDetector(
                         onTap: () {
                           Navigator.pushNamed(
@@ -53,15 +54,15 @@ class PrivateDrawer extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 24.0, vertical: 14.0),
+                      padding: const EdgeInsets.only(
+                          left: 24.0, right: 24.0, top: 14.0),
                       child: Divider(
                         thickness: 1.0,
                         color: Color(0xFF949494),
                       ),
                     ),
                     Expanded(
-                      flex: 2,
+                      flex: 4,
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 24.0, vertical: 8.0),
