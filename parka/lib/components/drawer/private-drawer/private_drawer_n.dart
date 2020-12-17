@@ -6,8 +6,6 @@ import 'package:ParkA/pages/history/history_page.dart';
 import 'package:ParkA/pages/parkings/parking_page.dart';
 import 'package:ParkA/pages/profile/components/profile_personal_information_widget.dart';
 import 'package:ParkA/pages/login/login_screen.dart';
-import 'package:ParkA/pages/reservation/reservation-as-owner-detail/reservation_as_owner.dart';
-import 'package:ParkA/pages/reservation/reservations-as-client-detail/reservation_as_client.dart';
 import 'package:ParkA/pages/search/search_panel.dart';
 import 'package:ParkA/pages/user-payments/user_registered_payment_methods_screen.dart';
 import 'package:ParkA/pages/vehicles/vehicle_page.dart';
