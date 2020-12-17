@@ -59,7 +59,7 @@ class Reservation {
           checkOutDate: reservation["checkOutDate"],
           status: reservation["status"],
           rentDate: reservation["rentDate"],
-          total: reservation["total"]));
+          total: (reservation["total"]).toDouble()));
     });
 
     return userReservations;
