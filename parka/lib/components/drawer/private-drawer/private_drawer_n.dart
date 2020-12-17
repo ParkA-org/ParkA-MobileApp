@@ -93,6 +93,7 @@ class PrivateDrawer extends StatelessWidget {
                                 ),
                               ),
                             ),
+                            // ignore: todo
                             //TODO: This has to be eventually deleted
                             Expanded(
                               child: GestureDetector(
