@@ -1,5 +1,4 @@
 import 'package:ParkA/components/headers/parka_header.dart';
-import 'package:ParkA/styles/parkaIcons.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import "package:flutter/material.dart";
