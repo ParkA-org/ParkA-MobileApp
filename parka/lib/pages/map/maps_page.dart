@@ -127,6 +127,7 @@ class _MapPageState extends State<MapPage> {
   void _getMapPageData() async {
     this._mapStyle = await this.getMapStyle();
     this._customGreenPinIcon = await this._getCustomPin();
+    this._customRedPinIcon = await this._getCustomPinRed();
     await this._getUserReservationsCount();
     print("USER LOCATION IS  ${this.userLocation}");
     this.userLocation = await this._getCurrentLocation();
