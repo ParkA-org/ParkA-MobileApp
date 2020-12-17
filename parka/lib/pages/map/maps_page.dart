@@ -34,7 +34,8 @@ class _MapPageState extends State<MapPage> {
   LocationData userLocation;
   CameraPosition initialCameraPosition;
   Set<Marker> nearbyParkings;
-  BitmapDescriptor _customPinIcon;
+  BitmapDescriptor _customGreenPinIcon;
+  BitmapDescriptor _customRedPinIcon;
 
   final UserController user = Get.find<UserController>();
   final graphqlClient = Get.find<GraphqlClientController>();
@@ -56,6 +57,11 @@ class _MapPageState extends State<MapPage> {
   Future<BitmapDescriptor> _getCustomPin() async {
     return BitmapDescriptor.fromAssetImage(
         ImageConfiguration.empty, 'resources/images/green-parking-icon.png');
+  }
+
+  Future<BitmapDescriptor> _getCustomPinRed() async {
+    return BitmapDescriptor.fromAssetImage(
+        ImageConfiguration.empty, 'resources/images/red-parking-icon.png');
   }
 
   Future<void> _getUserReservationsCount() async {
@@ -96,7 +102,9 @@ class _MapPageState extends State<MapPage> {
         parkingPins.add(Marker(
           markerId: MarkerId("${parking.id}"),
           position: LatLng(parking.latitude, parking.longitude),
-          icon: _customPinIcon,
+          icon: parking.isAvailable == true
+              ? _customGreenPinIcon
+              : _customRedPinIcon,
           onTap: () => showModalBottomSheet(
               context: context,
               isScrollControlled: true,
@@ -120,7 +128,8 @@ class _MapPageState extends State<MapPage> {
 
   void _getMapPageData() async {
     this._mapStyle = await this.getMapStyle();
-    this._customPinIcon = await this._getCustomPin();
+    this._customGreenPinIcon = await this._getCustomPin();
+    this._customRedPinIcon = await this._getCustomPinRed();
     await this._getUserReservationsCount();
     print("USER LOCATION IS  ${this.userLocation}");
     this.userLocation = await this._getCurrentLocation();
