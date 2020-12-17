@@ -94,19 +94,6 @@ class PrivateDrawer extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            // ignore: todo
-                            //TODO: This has to be eventually deleted
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () {
-                                  Get.toNamed(HistoryPage.routeName);
-                                },
-                                child: ParkaUserReservationInfoWidget(
-                                  value: null,
-                                  label: "Reservas pendientes",
-                                ),
-                              ),
-                            ),
                           ],
                         ),
                       ),
