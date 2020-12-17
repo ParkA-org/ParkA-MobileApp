@@ -13,6 +13,7 @@ class CreditCardNumberForm extends StatelessWidget {
     this.formHandlers.forEach((handler) {
       ret.add(Expanded(
         child: ParkaInputTest(
+          enable: false,
           handler: handler,
           inputMaxLength: 4,
           inputType: TextInputType.number,
