@@ -102,7 +102,7 @@ class _MapPageState extends State<MapPage> {
         parkingPins.add(Marker(
           markerId: MarkerId("${parking.id}"),
           position: LatLng(parking.latitude, parking.longitude),
-          icon: parking.isAvaible == true
+          icon: parking.isAvailable == true
               ? _customGreenPinIcon
               : _customRedPinIcon,
           onTap: () => showModalBottomSheet(
