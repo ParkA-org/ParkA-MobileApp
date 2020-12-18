@@ -65,18 +65,32 @@ class ParkaImageCardWidget extends StatelessWidget {
                   ],
                 ),
                 child: this.image != null
-                    ? Container(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(16.0),
-                          child: GetUtils.isURL(this.image)
-                              ? Image.network(
-                                  this.image,
-                                  fit: BoxFit.cover,
-                                )
-                              : Image.file(
-                                  File(this.image),
-                                  fit: BoxFit.cover,
-                                ),
+                    ? GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return ImagePage(this.image);
+                              },
+                            ),
+                          );
+                        },
+                        child: Hero(
+                          tag: this.image,
+                          child: Container(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(16.0),
+                              child: GetUtils.isURL(this.image)
+                                  ? Image.network(
+                                      this.image,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.file(
+                                      File(this.image),
+                                      fit: BoxFit.cover,
+                                    ),
+                            ),
+                          ),
                         ),
                       )
                     : CarImagePLaceholder(
@@ -88,6 +102,23 @@ class ParkaImageCardWidget extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+}
+
+class ImagePage extends StatelessWidget {
+  final String image;
+  ImagePage(this.image);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+      ),
+      backgroundColor: Colors.black,
+      body: Hero(
+          tag: this.image, child: Center(child: Image.network(this.image))),
     );
   }
 }
