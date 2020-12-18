@@ -151,10 +151,16 @@ class ReservationTile extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Get.to(ProfileScreen(
-                    userId: type == "Owner"
-                        ? reservation.client.id
-                        : reservation.owner.id));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfileScreen(
+                      userId: type == "Owner"
+                          ? reservation.client.id
+                          : reservation.owner.id,
+                    ),
+                  ),
+                );
               },
               child: Row(
                 children: [

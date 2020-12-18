@@ -3,6 +3,9 @@ import 'package:ParkA/data/data-models/review/review_data_model.dart';
 import 'package:ParkA/pages/profile/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../profile_page.dart';
 
 class ParkaReviewHistoryTile extends StatelessWidget {
   final Review review;
@@ -23,62 +26,72 @@ class ParkaReviewHistoryTile extends StatelessWidget {
                     : constraints.maxWidth) /
                 6;
 
-        return Container(
-          margin: EdgeInsets.symmetric(vertical: 4.0),
-          height: tileHeight,
-          // color: Colors.blueAccent,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    flex: 0,
-                    child: Container(
-                      margin: EdgeInsets.only(right: 8.0),
-                      width: imageContainerSize,
-                      height: imageContainerSize,
-                      child: ParkaCircleAvatarWidget(
-                        pictureSizeDivider: 2.0,
-                        imageUrl: this.review.user.profilePicture,
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    ProfileScreen(userId: this.review.user.id),
+              ),
+            );
+          },
+          child: Container(
+            margin: EdgeInsets.symmetric(vertical: 4.0),
+            height: tileHeight,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 0,
+                      child: Container(
+                        margin: EdgeInsets.only(right: 8.0),
+                        width: imageContainerSize,
+                        height: imageContainerSize,
+                        child: ParkaCircleAvatarWidget(
+                          pictureSizeDivider: 2.0,
+                          imageUrl: this.review.user.profilePicture,
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          "${this.review.user.name} ${this.review.user.lastName}",
-                          style: kParkaButtonTextStyle.copyWith(
-                            fontSize: 22.0,
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            "${this.review.user.name} ${this.review.user.lastName}",
+                            style: kParkaButtonTextStyle.copyWith(
+                              fontSize: 22.0,
+                            ),
                           ),
-                        ),
-                        StarRating(
-                          rating: this.review.calification.toInt(),
-                        ),
-                      ],
+                          StarRating(
+                            rating: this.review.calification.toInt(),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    this.review.review,
+                    style: kParkaInputTextStyle.copyWith(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.normal,
                     ),
-                  )
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  this.review.review,
-                  style: kParkaInputTextStyle.copyWith(
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.normal,
                   ),
                 ),
-              ),
-              Divider(
-                thickness: 1.0,
-                color: Color(0xFF949494),
-              ),
-            ],
+                Divider(
+                  thickness: 1.0,
+                  color: Color(0xFF949494),
+                ),
+              ],
+            ),
           ),
         );
       },

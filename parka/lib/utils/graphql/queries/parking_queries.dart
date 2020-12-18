@@ -77,11 +77,22 @@ query($data: String!) {
     }
     verified
     rating
-    user{
+    user {
       id
       name
       lastName
       profilePicture
+      reviews {
+        id
+        user {
+          id
+          name
+          lastName
+          profilePicture
+        }
+        calification
+        review
+      }
     }
   }
 }
@@ -96,6 +107,17 @@ query($userLocation: FilterInput!) {
 		id
     user{
       id
+          reviews {
+      id
+      user {
+        id
+        name
+        lastName
+        profilePicture
+      }
+      calification
+      review
+    }
     }
 		latitude
 		longitude

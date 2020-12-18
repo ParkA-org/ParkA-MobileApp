@@ -34,8 +34,8 @@ class Reservation {
   static Reservation reservationFromJson(Map<String, dynamic> reservation) {
     return Reservation(
         id: reservation["id"],
-        client: User.userFromJson(reservation["client"]),
-        owner: User.userFromJson(reservation["owner"]),
+        client: User.otherUserFromJson(reservation["client"]),
+        owner: User.otherUserFromJson(reservation["owner"]),
         parking: Parking.parkingFromJsonPersonlized(reservation["parking"]),
         vehicle: Vehicle.vehiclefromJsonPersonalized(reservation["vehicle"]),
         checkInDate: reservation["checkInDate"],
@@ -51,8 +51,8 @@ class Reservation {
     reservationData.forEach((reservation) {
       userReservations.add(Reservation(
           id: reservation["id"],
-          client: User.userFromJson(reservation["client"]),
-          owner: User.userFromJson(reservation["owner"]),
+          client: User.otherUserFromJson(reservation["client"]),
+          owner: User.otherUserFromJson(reservation["owner"]),
           parking: Parking.parkingFromJsonPersonlized(reservation["parking"]),
           vehicle: Vehicle.vehiclefromJsonPersonalized(reservation["vehicle"]),
           checkInDate: reservation["checkInDate"],

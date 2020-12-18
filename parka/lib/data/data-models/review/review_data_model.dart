@@ -8,7 +8,7 @@ class Review {
   Parking parking;
   Reservation reservation;
   String review;
-  int calification;
+  double calification;
   bool type;
   String title;
 
@@ -25,7 +25,7 @@ class Review {
 
   static Review reviewFromJson(Map<String, dynamic> _reviewData) {
     return Review(
-      calification: _reviewData["calification"],
+      calification: double.tryParse(_reviewData["calification"].toString()),
       id: _reviewData["id"],
       // parking: _reviewData["parking"],
       // reservation: _reviewData["reservation"],

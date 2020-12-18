@@ -1,19 +1,19 @@
 const String getUserInformationQuery = r"""
-      query{
-        getUserInformationById{
-          id
-          documentNumber
-          telephoneNumber
-          birthDate
-          placeOfBirth{
-            name
-          }
-          nationality{
-            name
-          }
-        }
-      }
-      """;
+query {
+  getUserInformationById {
+    id
+    documentNumber
+    telephoneNumber
+    birthDate
+    placeOfBirth {
+      name
+    }
+    nationality {
+      name
+    }
+  }
+}
+""";
 
 const String getLoggedUserQuery = r"""
 query{
@@ -24,6 +24,17 @@ query{
     email
     profilePicture
     confirmed
+    reviews {
+      id
+      user {
+        id
+        name
+        lastName
+        profilePicture
+      }
+      calification
+      review
+    }
   }
 }
 """;
@@ -42,6 +53,17 @@ query($id: String!) {
         name
         lastName
         profilePicture
+            reviews {
+      id
+      user {
+        id
+        name
+        lastName
+        profilePicture
+      }
+      calification
+      review
+    }
       }
       calification
       review

@@ -29,12 +29,34 @@ query{
       name
       lastName
       profilePicture
+          reviews {
+      id
+      user {
+        id
+        name
+        lastName
+        profilePicture
+      }
+      calification
+      review
+    }
     }
     owner{
       id
       name
       lastName
       profilePicture
+          reviews {
+      id
+      user {
+        id
+        name
+        lastName
+        profilePicture
+      }
+      calification
+      review
+    }
     }
     vehicle{
       id
@@ -68,12 +90,34 @@ query{
       name
       lastName
       profilePicture
+          reviews {
+      id
+      user {
+        id
+        name
+        lastName
+        profilePicture
+      }
+      calification
+      review
+    }
     }
     owner{
       id
       name
       lastName
       profilePicture
+          reviews {
+      id
+      user {
+        id
+        name
+        lastName
+        profilePicture
+      }
+      calification
+      review
+    }
     }
     vehicle{
       id
@@ -105,12 +149,34 @@ query($data: GetReservationById!){
       name
       lastName
       profilePicture
+          reviews {
+      id
+      user {
+        id
+        name
+        lastName
+        profilePicture
+      }
+      calification
+      review
+    }
     }
     owner{
       id
       name
       lastName
       profilePicture
+          reviews {
+      id
+      user {
+        id
+        name
+        lastName
+        profilePicture
+      }
+      calification
+      review
+    }
     }
     vehicle{
       id

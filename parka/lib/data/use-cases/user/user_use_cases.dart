@@ -83,13 +83,7 @@ class UserUseCases {
     if (_getLoggedUserResult.data != null) {
       final userData = _getLoggedUserResult.data["getLoggedUser"];
 
-      return User(
-        id: userData["id"],
-        name: userData["name"],
-        lastName: userData['lastName'],
-        email: userData['email'],
-        profilePicture: userData["profilePicture"],
-      );
+      return User.otherUserFromJson(userData);
     }
 
     return null;
