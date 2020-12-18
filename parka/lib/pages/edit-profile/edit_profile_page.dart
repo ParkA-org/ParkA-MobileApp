@@ -63,10 +63,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         Navigator.pop(context);
                       },
                     ),
-                    // trailing: Text(
-                    //   "Guardar",
-                    //   style: kParkaInputDefaultSyle,
-                    // ),
                   ),
                 ),
               ),
@@ -88,8 +84,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 flex: 2,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Obx(() => ParkaCircleAvatarWidget(
-                        imageUrl: userController.user.value?.profilePicture,
+                  child: Obx(() => Hero(
+                        tag: 'profile',
+                        child: ParkaCircleAvatarWidget(
+                          imageUrl: userController.user.value?.profilePicture,
+                        ),
                       )),
                 ),
               ),
