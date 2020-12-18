@@ -27,3 +27,26 @@ query{
   }
 }
 """;
+
+const String getUserByIdQuery = r""" 
+query($id: String!) {
+  getUserById(id: $id) {
+    id
+    name
+    lastName
+    profilePicture
+    reviews {
+      id
+      user {
+        id
+        name
+        lastName
+        profilePicture
+      }
+      calification
+      review
+    }
+  }
+}
+
+""";

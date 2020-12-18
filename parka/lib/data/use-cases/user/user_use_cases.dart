@@ -95,6 +95,31 @@ class UserUseCases {
     return null;
   }
 
+  static Future getOtherUser(String userId) async {
+    final graphqlClient = Get.find<GraphqlClientController>();
+
+    final _input = {"id": userId};
+
+    QueryOptions _queryOptions = new QueryOptions(
+      documentNode: gql(getUserByIdQuery),
+      variables: _input,
+    );
+
+    final QueryResult _getUserResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .query(_queryOptions);
+
+    if (_getUserResult.data != null) {
+      final userData = _getUserResult.data["getUserById"];
+
+      print(userData);
+
+      return User.otherUserFromJson(userData);
+    }
+
+    return null;
+  }
+
   static Future createUser(CreateUserDto createUserDto) async {
     final graphqlClient = Get.find<GraphqlClientController>();
 

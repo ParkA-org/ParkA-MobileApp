@@ -7,8 +7,6 @@ import "package:flutter/material.dart";
 import 'package:get/get.dart';
 
 class OtherUserProfilePersonalInformationWidget extends StatelessWidget {
-  final UserController userController = Get.find();
-
   final Color color;
 
   final User user;
@@ -35,12 +33,14 @@ class OtherUserProfilePersonalInformationWidget extends StatelessWidget {
             padding: EdgeInsets.only(left: 8.0),
             alignment: Alignment.centerLeft,
             child: AutoSizeText(
-              userController.user.value != null
-                  ? '${user.name} ${user.lastName}'
-                  : "Iniciar sesion",
+              '${user.name} ${user.lastName}',
               maxLines: 1,
               minFontSize: 14.0,
-              style: kParkaTextStyleBlack16,
+              style: this.color == null
+                  ? kParkaTextStyleBlack16
+                  : kParkaTextStyleBlack16.copyWith(
+                      color: this.color,
+                    ),
             ),
           )
         ],

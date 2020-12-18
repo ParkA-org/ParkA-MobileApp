@@ -153,8 +153,8 @@ class ReservationTile extends StatelessWidget {
               onTap: () {
                 Get.to(ProfileScreen(
                     userId: type == "Owner"
-                        ? reservation.owner.id
-                        : reservation.client.id));
+                        ? reservation.client.id
+                        : reservation.owner.id));
               },
               child: Row(
                 children: [

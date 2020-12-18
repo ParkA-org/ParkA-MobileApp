@@ -1,8 +1,12 @@
+import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
+import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
+import 'package:ParkA/data/data-models/user/user_data_model.dart';
+
 class Review {
   String id;
-  String userId;
-  String parkingId;
-  String reservationId;
+  User user;
+  Parking parking;
+  Reservation reservation;
   String review;
   int calification;
   bool type;
@@ -11,11 +15,34 @@ class Review {
   Review({
     this.calification,
     this.id,
-    this.parkingId,
-    this.reservationId,
+    this.parking,
+    this.reservation,
     this.review,
     this.title,
     this.type,
-    this.userId,
+    this.user,
   });
+
+  static Review reviewFromJson(Map<String, dynamic> _reviewData) {
+    return Review(
+      calification: _reviewData["calification"],
+      id: _reviewData["id"],
+      // parking: _reviewData["parking"],
+      // reservation: _reviewData["reservation"],
+      review: _reviewData["review"],
+      title: _reviewData["title"],
+      type: _reviewData["type"],
+      user: User.userFromJson(_reviewData["user"]),
+    );
+  }
+
+  static List<Review> reviewsFromJson(List<dynamic> _reviewData) {
+    List<Review> ret = new List();
+
+    _reviewData.forEach((element) {
+      ret.add(Review.reviewFromJson(element));
+    });
+
+    return ret;
+  }
 }
