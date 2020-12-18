@@ -19,10 +19,6 @@ class ProfilePersonalInformationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final String userName = userController.user.value != null
-    //     ? '${userController.user.value.name} ${userController.user.value.lastName}'
-    //     : "login";
-
     return Row(
       children: [
         Expanded(
