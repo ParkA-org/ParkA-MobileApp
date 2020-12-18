@@ -14,6 +14,7 @@ const String getAllUserParkingQuery = r"""
     user{
       id
     }
+    isAvailable
   }
 }
 """;
@@ -104,6 +105,7 @@ query($userLocation: FilterInput!) {
 		priceHours
     rating
 		verified
+    isAvailable
 		features {
 		id
 		name
@@ -127,6 +129,7 @@ query{
     sector
     direction
     information
+    isAvaible
     features{
       name
       id
