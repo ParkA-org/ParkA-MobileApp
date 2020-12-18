@@ -88,10 +88,6 @@ class ProfilePersonalInformationWidget extends StatelessWidget {
                     userController.user.value != null
                         ? Row(
                             children: [
-                              Icon(
-                                Icons.star,
-                                color: this.color,
-                              ),
                               Text(
                                 userRating(userController.user.value)
                                     .toString(),
@@ -99,7 +95,12 @@ class ProfilePersonalInformationWidget extends StatelessWidget {
                                   fontWeight: FontWeight.normal,
                                   fontSize: 12.0,
                                 ),
-                              )
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: this.color,
+                                size: 12.0,
+                              ),
                             ],
                           )
                         : Container(),
