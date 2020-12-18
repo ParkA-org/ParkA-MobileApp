@@ -10,6 +10,11 @@ import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
   static String routeName = "/profileScreen";
+  final String userId;
+
+  ProfileScreen({
+    @required this.userId,
+  });
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();

@@ -10,7 +10,7 @@ class Reservation {
   final Vehicle vehicle;
   final String paymentInfoId;
   final String rentDate;
-  final int total;
+  final double total;
   final Parking parking;
   final String status;
   final User client;
@@ -59,7 +59,7 @@ class Reservation {
           checkOutDate: reservation["checkOutDate"],
           status: reservation["status"],
           rentDate: reservation["rentDate"],
-          total: reservation["total"]));
+          total: double.parse(reservation["total"].toString())));
     });
 
     return userReservations;
