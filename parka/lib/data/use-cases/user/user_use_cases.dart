@@ -42,13 +42,7 @@ class UserUseCases {
       return UserLoginDto(
         jwt: _jwt,
         status: true,
-        user: User(
-          id: userData["id"],
-          name: userData["name"],
-          lastName: userData['lastName'],
-          email: userData['email'],
-          profilePicture: userData["profilePicture"],
-        ),
+        user: User.otherUserFromJson(userData),
       );
     }
 
@@ -393,12 +387,7 @@ class UserUseCases {
     if (updateUserResult.data != null) {
       final userUpdatedData = updateUserResult.data['updateUser'];
       print(userUpdatedData);
-      return User(
-        name: userUpdatedData["name"],
-        lastName: userUpdatedData['lastName'],
-        email: userUpdatedData['email'],
-        profilePicture: userUpdatedData["profilePicture"],
-      );
+      return User.otherUserFromJson(userUpdatedData);
     }
 
     return null;
