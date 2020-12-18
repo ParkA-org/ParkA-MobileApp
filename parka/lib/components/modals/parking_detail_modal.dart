@@ -1,4 +1,5 @@
 import 'package:ParkA/components/buttons/circle_button.dart';
+import 'package:ParkA/components/images/image_page.dart';
 import 'package:ParkA/components/place-holders/no_image_placeholder.dart';
 import 'package:ParkA/components/rating/star_rating.dart';
 import 'package:ParkA/controllers/user_controller.dart';
@@ -29,7 +30,8 @@ class ParkingDetailModal extends StatelessWidget {
     }
   }
 
-  List<Widget> _pictureGalleryBuilder(List<String> pictures) {
+  List<Widget> _pictureGalleryBuilder(
+      List<String> pictures, BuildContext context) {
     if (!pictures.contains(parking.mainPicture)) {
       pictures.insert(0, parking.mainPicture);
     }
@@ -37,19 +39,25 @@ class ParkingDetailModal extends StatelessWidget {
     pictures.forEach((picture) {
       imageGallery.add(Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Container(
-            width: 140,
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                    offset: Offset(1.0, 10.0),
-                    blurRadius: 5.0,
-                    color: Colors.grey[600])
-              ],
-              image: DecorationImage(
-                  fit: BoxFit.cover, image: NetworkImage(picture)),
-              borderRadius: BorderRadius.circular(15.0),
-            )),
+        child: GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => ImagePage(picture)));
+          },
+          child: Container(
+              width: 140,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                      offset: Offset(1.0, 10.0),
+                      blurRadius: 5.0,
+                      color: Colors.grey[600])
+                ],
+                image: DecorationImage(
+                    fit: BoxFit.cover, image: NetworkImage(picture)),
+                borderRadius: BorderRadius.circular(15.0),
+              )),
+        ),
       ));
     });
 
@@ -149,7 +157,7 @@ class ParkingDetailModal extends StatelessWidget {
                                   parking.mainPicture != null) ||
                               (parking.pictures.isNotEmpty &&
                                   parking.mainPicture.isNotEmpty)
-                          ? _pictureGalleryBuilder(parking.pictures)
+                          ? _pictureGalleryBuilder(parking.pictures, context)
                           : [NoImagePlaceholder()],
                     ),
                   )
