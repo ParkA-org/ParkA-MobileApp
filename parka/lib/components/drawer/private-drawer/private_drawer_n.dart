@@ -13,6 +13,7 @@ import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PrivateDrawer extends StatelessWidget {
   final int reservationsAsCLientCount;
@@ -23,6 +24,17 @@ class PrivateDrawer extends StatelessWidget {
     this.reservationsAsCLientCount,
     this.reservationsAsOwnerCount,
   }) : super(key: key);
+
+  _gotoHelp() async {
+    String url = "https://github.com/ParkA-org/ParkA-MobileApp/wiki";
+    final String encodedURL = Uri.encodeFull(url);
+
+    if (await canLaunch(encodedURL)) {
+      await launch(encodedURL);
+    } else {
+      throw 'Could not launch URL';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -161,6 +173,7 @@ class PrivateDrawer extends StatelessWidget {
                       child: ParkAMenuItem(
                         label: "Ayuda",
                         itemStyle: kParkaInputDefaultStyleBlue,
+                        onTapHandler: _gotoHelp,
                       ),
                     ),
                     Expanded(
