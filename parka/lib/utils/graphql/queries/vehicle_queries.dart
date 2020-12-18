@@ -1,39 +1,40 @@
 const String getAllUserVehiclesQuery = r"""
-    query{
-      getAllUserVehicles{
-        id
-        licensePlate
-        model{
-          name
-                make{
+query {
+  getAllUserVehicles {
+    id
+    licensePlate
+    model {
+      name
+      make {
         id
         name
       }
-        }
-        verified
-        detail
-        colorExterior{
-          name
-        }
-        mainPicture
-        pictures
-        year
-        alias
-        bodyStyle{
-          name
-        } 
-      }
     }
-    """;
+    verified
+    detail
+    colorExterior {
+      name
+    }
+    mainPicture
+    pictures
+    year
+    alias
+    bodyStyle {
+      name
+    }
+  }
+}
+
+""";
 
 const String getVehicleByIdQuery = r"""
-query($input: GetVehicleByIdInput!){
-  getVehicleById(getVehicleByIdInput:$input){
+query($input: GetVehicleByIdInput!) {
+  getVehicleById(getVehicleByIdInput: $input) {
     id
-    model{
+    model {
       id
       name
-      make{
+      make {
         id
         name
       }
@@ -41,7 +42,7 @@ query($input: GetVehicleByIdInput!){
     licensePlate
     verified
     detail
-    colorExterior{
+    colorExterior {
       id
       name
     }
@@ -49,10 +50,11 @@ query($input: GetVehicleByIdInput!){
     pictures
     year
     alias
-    bodyStyle{
+    bodyStyle {
       id
       name
     }
   }
 }
+
 """;

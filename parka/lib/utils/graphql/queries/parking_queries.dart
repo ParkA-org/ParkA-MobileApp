@@ -1,6 +1,6 @@
 const String getAllUserParkingQuery = r"""
-  query{
-  getAllUserParkings{
+query {
+  getAllUserParkings {
     id
     rating
     pictures
@@ -11,7 +11,7 @@ const String getAllUserParkingQuery = r"""
     longitude
     priceHours
     countParking
-    user{
+    user {
       id
     }
     isAvailable
@@ -96,49 +96,48 @@ query($data: String!) {
     }
   }
 }
+
 """;
 
 const String getNearbyParkingsQuery = r"""
 query($userLocation: FilterInput!) {
-	getAllParkings(
-	input:$userLocation
-	) 
-  {
-		id
-    user{
+  getAllParkings(input: $userLocation) {
+    id
+    user {
       id
-          reviews {
-      id
-      user {
+      reviews {
         id
-        name
-        lastName
-        profilePicture
+        user {
+          id
+          name
+          lastName
+          profilePicture
+        }
+        calification
+        review
       }
-      calification
-      review
     }
-    }
-		latitude
-		longitude
-		mainPicture
+    latitude
+    longitude
+    mainPicture
     pictures
-		parkingName
-		priceHours
+    parkingName
+    priceHours
     rating
-		verified
+    verified
     isAvailable
-		features {
-		id
-		name
-		}
-	}
+    features {
+      id
+      name
+    }
+  }
 }
+
 """;
 
 const String getAllParkings = r"""
-query{
-  getAllParkings(input:{where:{}}){
+query {
+  getAllParkings(input: { where: {} }) {
     id
     countParking
     latitude
@@ -151,15 +150,15 @@ query{
     sector
     direction
     information
-    isAvaible
-    features{
+    isAvailable
+    features {
       name
       id
     }
     verified
     rating
     parkingName
-     calendar {
+    calendar {
       id
       parkingId
       monday {
@@ -195,18 +194,21 @@ query{
         finish
       }
     }
+  }
+}
 """;
 
 const String getParkingAvaliabilityQuery = r""" 
-query($data:GetParkingCalendarInput!){
-  getParkingAvaliability(getParkingCalendarInput:$data){
+query($data: GetParkingCalendarInput!) {
+  getParkingAvaliability(getParkingCalendarInput: $data) {
     id
     date
     parking
-    schedules{
+    schedules {
       start
       finish
     }
   }
 }
+
 """;

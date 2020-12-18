@@ -16,8 +16,8 @@ query {
 """;
 
 const String getLoggedUserQuery = r"""
-query{
-  getLoggedUser{
+query {
+  getLoggedUser {
     id
     name
     lastName
@@ -37,6 +37,7 @@ query{
     }
   }
 }
+
 """;
 
 const String getUserByIdQuery = r""" 
@@ -53,17 +54,17 @@ query($id: String!) {
         name
         lastName
         profilePicture
-            reviews {
-      id
-      user {
-        id
-        name
-        lastName
-        profilePicture
-      }
-      calification
-      review
-    }
+        reviews {
+          id
+          user {
+            id
+            name
+            lastName
+            profilePicture
+          }
+          calification
+          review
+        }
       }
       calification
       review

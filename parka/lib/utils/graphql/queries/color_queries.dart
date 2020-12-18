@@ -1,8 +1,8 @@
 const String getAllColorsQuery = r"""
-    query{
-      getAllColors{
-        id
-        name
-      }
-    }
-    """;
+query {
+  getAllColors {
+    id
+    name
+  }
+}
+""";
