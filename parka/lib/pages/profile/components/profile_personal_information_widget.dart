@@ -1,6 +1,7 @@
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/pages/profile/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/styles/text.dart';
+import 'package:ParkA/utils/functions/get_user_rating.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
@@ -87,17 +88,19 @@ class ProfilePersonalInformationWidget extends StatelessWidget {
                     userController.user.value != null
                         ? Row(
                             children: [
-                              Icon(
-                                Icons.star,
-                                color: this.color,
-                              ),
                               Text(
-                                "4.20",
+                                userRating(userController.user.value)
+                                    .toString(),
                                 style: kParkaInputDefaultSyle.copyWith(
                                   fontWeight: FontWeight.normal,
                                   fontSize: 12.0,
                                 ),
-                              )
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: this.color,
+                                size: 12.0,
+                              ),
                             ],
                           )
                         : Container(),

@@ -17,108 +17,54 @@ query{
 }
 """;
 const String getAllReservationAsOwnerQuery = r"""
-query{
-  getAllUserReservationsAsOwner{
-    id   
-    checkInDate
-    checkOutDate
-    rentDate
-    total
-    client{
-      id
-      name
-      lastName
-      profilePicture
-    }
-    owner{
-      id
-      name
-      lastName
-      profilePicture
-    }
-    vehicle{
-      id
-      pictures
-      mainPicture
-      alias
-    }
-    parking{
-      id
-      parkingName
-      priceHours
-      mainPicture
-      rating
-      pictures
-    }
-    status
-  }
-}
-""";
-
-const String getAllReservationAsClientQuery = r"""
-query{
-  getAllUserReservationsAsClient{
-    id 
-    checkInDate
-    checkOutDate
-    rentDate
-    total
-    client{
-      id
-      name
-      lastName
-      profilePicture
-    }
-    owner{
-      id
-      name
-      lastName
-      profilePicture
-    }
-    vehicle{
-      id
-      pictures
-      mainPicture
-      alias
-    }
-    parking{
-      id
-      parkingName
-      priceHours
-      mainPicture
-      rating
-      pictures
-    }
-    status   
-  }
-}
-""";
-
-const String getReservationByIdQuery = r"""
-query($data: GetReservationById!){
-  getReservationById(getReservationByIdInput: $data){
+query {
+  getAllUserReservationsAsOwner {
     id
     checkInDate
     checkOutDate
-    client{
+    rentDate
+    total
+    client {
       id
       name
       lastName
       profilePicture
+      reviews {
+        id
+        user {
+          id
+          name
+          lastName
+          profilePicture
+        }
+        calification
+        review
+      }
     }
-    owner{
+    owner {
       id
       name
       lastName
       profilePicture
+      reviews {
+        id
+        user {
+          id
+          name
+          lastName
+          profilePicture
+        }
+        calification
+        review
+      }
     }
-    vehicle{
+    vehicle {
       id
       pictures
       mainPicture
       alias
     }
-    parking{
+    parking {
       id
       parkingName
       priceHours
@@ -129,4 +75,127 @@ query($data: GetReservationById!){
     status
   }
 }
+
+""";
+
+const String getAllReservationAsClientQuery = r"""
+query {
+  getAllUserReservationsAsClient {
+    id
+    checkInDate
+    checkOutDate
+    rentDate
+    total
+    client {
+      id
+      name
+      lastName
+      profilePicture
+      reviews {
+        id
+        user {
+          id
+          name
+          lastName
+          profilePicture
+        }
+        calification
+        review
+      }
+    }
+    owner {
+      id
+      name
+      lastName
+      profilePicture
+      reviews {
+        id
+        user {
+          id
+          name
+          lastName
+          profilePicture
+        }
+        calification
+        review
+      }
+    }
+    vehicle {
+      id
+      pictures
+      mainPicture
+      alias
+    }
+    parking {
+      id
+      parkingName
+      priceHours
+      mainPicture
+      rating
+      pictures
+    }
+    status
+  }
+}
+
+""";
+
+const String getReservationByIdQuery = r"""
+query($data: GetReservationById!) {
+  getReservationById(getReservationByIdInput: $data) {
+    id
+    checkInDate
+    checkOutDate
+    client {
+      id
+      name
+      lastName
+      profilePicture
+      reviews {
+        id
+        user {
+          id
+          name
+          lastName
+          profilePicture
+        }
+        calification
+        review
+      }
+    }
+    owner {
+      id
+      name
+      lastName
+      profilePicture
+      reviews {
+        id
+        user {
+          id
+          name
+          lastName
+          profilePicture
+        }
+        calification
+        review
+      }
+    }
+    vehicle {
+      id
+      pictures
+      mainPicture
+      alias
+    }
+    parking {
+      id
+      parkingName
+      priceHours
+      mainPicture
+      rating
+      pictures
+    }
+    status
+  }
+}
+
 """;

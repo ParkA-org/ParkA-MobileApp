@@ -1,6 +1,7 @@
 import 'package:ParkA/components/inputs/parka_input_test.dart';
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/data/data-models/review/review_data_model.dart';
+import 'package:ParkA/data/dtos/review/create_review_dto.dart';
 import 'package:ParkA/pages/profile/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -38,7 +39,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
   }
 
   void sendReview() {
-    Review review = new Review();
+    CreateReviewDto review = new CreateReviewDto();
     review.review = this.review;
     review.parkingId = this.parkingId;
     review.calification = parkingVoteFilter;

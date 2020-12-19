@@ -42,13 +42,7 @@ class UserUseCases {
       return UserLoginDto(
         jwt: _jwt,
         status: true,
-        user: User(
-          id: userData["id"],
-          name: userData["name"],
-          lastName: userData['lastName'],
-          email: userData['email'],
-          profilePicture: userData["profilePicture"],
-        ),
+        user: User.otherUserFromJson(userData),
       );
     }
 
@@ -83,13 +77,32 @@ class UserUseCases {
     if (_getLoggedUserResult.data != null) {
       final userData = _getLoggedUserResult.data["getLoggedUser"];
 
-      return User(
-        id: userData["id"],
-        name: userData["name"],
-        lastName: userData['lastName'],
-        email: userData['email'],
-        profilePicture: userData["profilePicture"],
-      );
+      return User.otherUserFromJson(userData);
+    }
+
+    return null;
+  }
+
+  static Future getOtherUser(String userId) async {
+    final graphqlClient = Get.find<GraphqlClientController>();
+
+    final _input = {"id": userId};
+
+    QueryOptions _queryOptions = new QueryOptions(
+      documentNode: gql(getUserByIdQuery),
+      variables: _input,
+    );
+
+    final QueryResult _getUserResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .query(_queryOptions);
+
+    if (_getUserResult.data != null) {
+      final userData = _getUserResult.data["getUserById"];
+
+      print(userData);
+
+      return User.otherUserFromJson(userData);
     }
 
     return null;
@@ -374,12 +387,7 @@ class UserUseCases {
     if (updateUserResult.data != null) {
       final userUpdatedData = updateUserResult.data['updateUser'];
       print(userUpdatedData);
-      return User(
-        name: userUpdatedData["name"],
-        lastName: userUpdatedData['lastName'],
-        email: userUpdatedData['email'],
-        profilePicture: userUpdatedData["profilePicture"],
-      );
+      return User.otherUserFromJson(userUpdatedData);
     }
 
     return null;

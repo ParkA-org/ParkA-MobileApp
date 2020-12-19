@@ -11,8 +11,10 @@ import 'package:ParkA/pages/user-payments/user_registered_payment_methods_screen
 import 'package:ParkA/pages/vehicles/vehicle_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PrivateDrawer extends StatelessWidget {
   final int reservationsAsCLientCount;
@@ -23,6 +25,17 @@ class PrivateDrawer extends StatelessWidget {
     this.reservationsAsCLientCount,
     this.reservationsAsOwnerCount,
   }) : super(key: key);
+
+  _gotoHelp() async {
+    String url = "https://github.com/ParkA-org/ParkA-MobileApp/wiki";
+    final String encodedURL = Uri.encodeFull(url);
+
+    if (await canLaunch(encodedURL)) {
+      await launch(encodedURL);
+    } else {
+      throw 'Could not launch URL';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -161,6 +174,7 @@ class PrivateDrawer extends StatelessWidget {
                       child: ParkAMenuItem(
                         label: "Ayuda",
                         itemStyle: kParkaInputDefaultStyleBlue,
+                        onTapHandler: _gotoHelp,
                       ),
                     ),
                     Expanded(
@@ -211,11 +225,12 @@ class ParkaUserReservationInfoWidget extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          flex: 0,
+          flex: 1,
           child: Padding(
             padding: EdgeInsets.only(right: 24.0),
-            child: Text(
+            child: AutoSizeText(
               this.value ?? "0",
+              maxLines: 1,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24.0,
@@ -226,9 +241,10 @@ class ParkaUserReservationInfoWidget extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 2,
-          child: Text(
+          flex: 3,
+          child: AutoSizeText(
             this.label,
+            maxLines: 1,
             style: TextStyle(
               color: Colors.white,
               fontSize: 14.0,
