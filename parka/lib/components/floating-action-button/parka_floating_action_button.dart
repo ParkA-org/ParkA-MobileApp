@@ -6,31 +6,50 @@ class ParkaFloatingActionButton extends StatelessWidget {
   final Color color;
   final Color iconColor;
   final bool enabled;
+  final bool diferentUser;
 
-  const ParkaFloatingActionButton({
-    Key key,
-    this.iconData,
-    this.onPressedHandler,
-    this.color,
-    this.iconColor,
-    this.enabled,
-  }) : super(key: key);
+  const ParkaFloatingActionButton(
+      {Key key,
+      this.iconData,
+      this.onPressedHandler,
+      this.color,
+      this.iconColor,
+      this.enabled,
+      this.diferentUser})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: enabled ?? true,
-      child: FloatingActionButton(
-        elevation: 10.0,
-        backgroundColor: color ?? Color(0xff086174),
-        child: Icon(
-          this.iconData,
-          size: 40,
-          color: iconColor ?? Colors.white,
-        ),
-        highlightElevation: 20,
-        onPressed: this.onPressedHandler,
-      ),
-    );
+    return Container(
+        child: diferentUser != true
+            ? Visibility(
+                visible: enabled ?? true,
+                child: FloatingActionButton(
+                  elevation: 10.0,
+                  backgroundColor: color ?? Color(0xff086174),
+                  child: Icon(
+                    this.iconData,
+                    size: 40,
+                    color: iconColor ?? Colors.white,
+                  ),
+                  highlightElevation: 20,
+                  onPressed: this.onPressedHandler,
+                ),
+              )
+            : Visibility(
+                visible: diferentUser ?? true,
+                child: GestureDetector(
+                  onTap: this.onPressedHandler,
+                  child: FloatingActionButton(
+                    elevation: 10.0,
+                    backgroundColor: color ?? Color(0xff086174),
+                    child: Container(
+                      child: Text("hola"),
+                    ),
+                    highlightElevation: 20,
+                    onPressed: this.onPressedHandler,
+                  ),
+                ),
+              ));
   }
 }

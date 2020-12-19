@@ -10,7 +10,6 @@ import 'package:ParkA/pages/create-parking/steps/parking_calendar_creator_page.d
 import 'package:ParkA/pages/create-parking/steps/parking_image_selector_page.dart';
 import 'package:ParkA/pages/create-parking/steps/parking_position_selector_page.dart';
 import 'package:ParkA/pages/create-payment/payment_info.dart';
-
 import 'package:ParkA/pages/create-vehicle/create_vehicle_page.dart';
 import 'package:ParkA/pages/edit-payment/edit_payment_page.dart';
 import 'package:ParkA/pages/edit-parking/edit_parking_page.dart';
@@ -24,6 +23,7 @@ import 'package:ParkA/pages/history/history_page.dart';
 import 'package:ParkA/pages/login/email_login.dart';
 import 'package:ParkA/pages/login/login_screen.dart';
 import 'package:ParkA/pages/map/maps_page.dart';
+import 'package:ParkA/pages/parking-detail/parking_detail_page.dart';
 import 'package:ParkA/pages/parkings/parking_page.dart';
 import 'package:ParkA/pages/profile-picture/profile_pic_page.dart';
 import 'package:ParkA/pages/profile/profile_page.dart';
@@ -97,6 +97,12 @@ List<GetPage> getRoutePages = [
   GetPage(
     name: MapPage.routeName,
     page: () => MapPage(),
+    bindings: [UserBinding(), GraphqlClientBiding()],
+  ),
+  GetPage(
+    name: OwnerParkingDetailPage.routeName,
+    // ignore: missing_required_param
+    page: () => OwnerParkingDetailPage(),
     bindings: [UserBinding(), GraphqlClientBiding()],
   ),
   GetPage(
