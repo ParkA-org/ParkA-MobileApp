@@ -81,7 +81,7 @@ class _TimeSelectorWidgetState extends State<TimeSelectorWidget> {
       this._schedule.start = this._schedule.finish;
     }
 
-    if (this._schedule.finish < (this._schedule.start ?? 0)) {
+    if (this._schedule.finish <= (this._schedule.start ?? 0)) {
       this._schedule.start = this._schedule.finish <= 100 ? 0 : hour - 100;
     }
 
