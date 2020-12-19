@@ -3,7 +3,6 @@ import 'package:ParkA/pages/filter/components/featureFilterWidget/feature_filter
 import 'package:ParkA/pages/filter/components/top_bar.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import "package:flutter/material.dart";
-
 import 'components/buttons_reservation_type_widget.dart';
 import 'components/filter_date_widget.dart';
 import 'components/slider_price_widget.dart';

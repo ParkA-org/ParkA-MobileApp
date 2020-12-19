@@ -1,7 +1,6 @@
 import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/pages/parkings/parking_page.dart';
-
 import 'package:ParkA/pages/profile/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/pages/edit-user-profile/edit_user_profile_page.dart';
 import 'package:ParkA/pages/update-password/update_user_password_screen.dart';
