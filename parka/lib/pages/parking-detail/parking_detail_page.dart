@@ -1,11 +1,13 @@
 import 'package:ParkA/components/floating-action-button/parka_floating_action_button.dart';
 import 'package:ParkA/components/images/parka_add_images_carousel.dart';
 import 'package:ParkA/components/map/position_viewer_card.dart';
+import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/data/data-models/calendar/calendar_data_model.dart';
 import 'package:ParkA/data/data-models/feature/parking_feature_data_model.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/enums/parking_place_holder_type.dart';
 import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
+import 'package:ParkA/pages/create-reservation/create_reservation_page.dart';
 import 'package:ParkA/pages/edit-parking/edit_parking_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
@@ -19,7 +21,6 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class OwnerParkingDetailPage extends StatefulWidget {
   static String routeName = "owner-parking-detail-page";
-
   final String parkingId;
   final bool editable;
 
@@ -33,6 +34,7 @@ class OwnerParkingDetailPage extends StatefulWidget {
 }
 
 class _OwnerParkingDetailPageState extends State<OwnerParkingDetailPage> {
+  final UserController userController = Get.find();
   String _parkingId;
   Parking _parking;
   bool _loading;
@@ -66,15 +68,27 @@ class _OwnerParkingDetailPageState extends State<OwnerParkingDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: ParkaFloatingActionButton(
-        enabled: _editable,
-        iconData: Icons.edit,
-        onPressedHandler: () {
-          Get.to(EditParkingPage(
-            parking: this._parking,
-          ));
-        },
-      ),
+      floatingActionButton: this._loading
+          ? Container()
+          : ParkaFloatingActionButton(
+              enabled: _editable,
+              iconData: Icons.edit,
+              diferentUser:
+                  this.userController?.user?.value?.id != this._parking.user?.id
+                      ? true
+                      : false,
+              onPressedHandler:
+                  this.userController?.user?.value?.id == this._parking.user?.id
+                      ? () {
+                          Get.to(EditParkingPage(
+                            parking: this._parking,
+                          ));
+                        }
+                      : () {
+                          Get.to(CreateParkingReservationPage(
+                              parkingId: this._parking.id));
+                        },
+            ),
       body: SafeArea(
           child: ModalProgressHUD(
         color: ParkaColors.parkaGreen,

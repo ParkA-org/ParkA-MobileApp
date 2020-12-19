@@ -66,7 +66,7 @@ class ChatTile extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 8.0),
                             child: AutoSizeText(
-                              "Pagame Mmgvaso ....",
+                              "Pagame ....",
                               maxLines: 1,
                               maxFontSize: 20,
                               minFontSize: 18,
