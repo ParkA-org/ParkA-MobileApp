@@ -18,9 +18,11 @@ class TimeSelectorPillWidget extends StatelessWidget {
     List<Widget> ret = new List();
 
     this.times.forEach((String element) {
+      String _text = "${element.substring(0, 2)}:${element.substring(2)}";
+
       ret.add(
         Center(
-          child: Text(element),
+          child: Text(_text),
         ),
       );
     });
