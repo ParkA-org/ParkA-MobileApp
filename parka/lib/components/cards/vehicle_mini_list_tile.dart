@@ -1,3 +1,4 @@
+import 'package:ParkA/components/images/parka_add_images_carousel.dart';
 import 'package:ParkA/components/images/parka_image_card_widget.dart';
 import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
 import 'package:ParkA/data/enums/parking_place_holder_type.dart';
@@ -46,6 +47,7 @@ class MiniVehicleListTile extends StatelessWidget {
                                   padding: const EdgeInsets.only(right: 8.0),
                                   child: ParkaImageCardWidget(
                                     type: PlaceHolderType.Car,
+                                    carouselType: CarouselType.Form,
                                     image: this.vehicle.mainPicture,
                                   ),
                                 ),

@@ -95,6 +95,7 @@ class ParkingImageSelectorPage extends StatelessWidget {
                         image: createParkingFormController
                             .createPArkingDto.value.mainPicture,
                         type: PlaceHolderType.Parking,
+                        carouselType: CarouselType.Form,
                         onTapHandler: () async {
                           String imagePath = await getImageFunction();
                           if (imagePath != null) {

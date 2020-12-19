@@ -3,8 +3,6 @@ import 'package:ParkA/data/data-models/review/review_data_model.dart';
 import 'package:ParkA/pages/profile/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
 import '../profile_page.dart';
 
 class ParkaReviewHistoryTile extends StatelessWidget {

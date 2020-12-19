@@ -1,15 +1,9 @@
-import 'package:ParkA/components/buttons/round_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/components/user/other_user_personal_information_widget.dart';
 import 'package:ParkA/data/data-models/review/review_data_model.dart';
 import 'package:ParkA/data/data-models/user/user_data_model.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
-import 'package:ParkA/pages/profile/components/informative_tab.dart';
 import 'package:ParkA/pages/profile/components/parka_review_history_tile.dart';
-import 'package:ParkA/pages/profile/components/parka_service_history_tile_widget.dart';
-import 'package:ParkA/pages/profile/components/profile_personal_information_widget.dart';
-import 'package:ParkA/pages/edit-profile/edit_profile_page.dart';
-import 'package:ParkA/pages/reservation/components/profile_tab_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';

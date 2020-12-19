@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 
 class TimeSelectorPillWidget extends StatelessWidget {
   final String hourString;
@@ -10,7 +9,7 @@ class TimeSelectorPillWidget extends StatelessWidget {
 
   const TimeSelectorPillWidget({
     Key key,
-    this.hourString,
+    @required this.hourString,
     this.setHourString,
     @required this.times,
   }) : super(key: key);
@@ -27,6 +26,23 @@ class TimeSelectorPillWidget extends StatelessWidget {
     });
 
     return ret;
+  }
+
+  int _getIndex() {
+    if (this.hourString == null || this.hourString.length == 0) {
+      return 0;
+    }
+
+    List<String> parts = this.hourString.split(":");
+
+    String _part1 = parts[0].length == 1 ? "0${parts[0]}" : parts[0];
+    String _part2 = parts[1].length == 1 ? "0${parts[1]}" : parts[1];
+
+    String _check = '$_part1$_part2';
+
+    int idx = this.times.indexOf(_check);
+
+    return idx;
   }
 
   @override
@@ -67,14 +83,14 @@ class TimeSelectorPillWidget extends StatelessWidget {
               body: CupertinoPicker(
                   backgroundColor: Colors.white,
                   scrollController: FixedExtentScrollController(
-                    initialItem: 0,
+                    initialItem: _getIndex(),
                   ),
                   itemExtent: 60,
                   onSelectedItemChanged: (int value) {
                     String _hour = this.times[value].substring(0, 2);
                     String _minutes = this.times[value].substring(2);
 
-                    int hour = int.tryParse('${_hour}${_minutes}');
+                    int hour = int.tryParse('$_hour$_minutes');
 
                     if (this.setHourString != null) {
                       this.setHourString(hour);
