@@ -61,7 +61,7 @@ class Parking {
         parking["rating"].toString(),
       ),
       information: parking["information"],
-      user: User.otherUserFromJson(parking['user']),
+      user: User.userFromJson(parking['user']),
       isAvailable: parking["isAvailable"],
     );
   }
@@ -84,7 +84,7 @@ class Parking {
           mainPicture: parking["mainPicture"],
           features: _features,
           pictures: _pictures,
-          user: User.otherUserFromJson(parking["user"]),
+          user: User.userFromJson(parking["user"]),
           priceHours: double.tryParse(parking["priceHours"].toString()),
           rating: double.tryParse(
             parking["rating"].toString(),
