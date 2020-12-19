@@ -40,6 +40,10 @@ class TimeSelectorPillWidget extends StatelessWidget {
 
     String _check = '$_part1$_part2';
 
+    if (_check == "2359") {
+      return this.times.length - 1;
+    }
+
     int idx = this.times.indexOf(_check);
 
     return idx;
