@@ -187,29 +187,6 @@ class _FilterPageState extends State<FilterPage> {
                                             changeParkingPriceFilter,
                                       ),
                                     ),
-                                    Expanded(
-                                      child: ReserveTypeSelectorWidget(
-                                        types: [
-                                          "Horas",
-                                          "Dias",
-                                          "Semanas",
-                                        ],
-                                        selectedTypes:
-                                            this.isSelectedParkingType,
-                                        onPressedHandler:
-                                            this.changeParkingTypeFilter,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: FilterDatePicker(
-                                        date: this.selectedDate,
-                                        datePickerHandler: this.parseDate,
-                                        minHourPickerHandler:
-                                            this.changeParkingMinHourFilter,
-                                        maxHourPickerHandler:
-                                            this.changeParkingMaxHourFilter,
-                                      ),
-                                    ),
                                     FeatureSelectorFilter(
                                       renderAvaliableWidth:
                                           viewportConstraints.maxWidth,
