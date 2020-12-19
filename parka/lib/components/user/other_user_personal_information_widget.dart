@@ -1,4 +1,3 @@
-import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/data/data-models/user/user_data_model.dart';
 import 'package:ParkA/pages/profile/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/pages/profile/profile_page.dart';
@@ -6,7 +5,6 @@ import 'package:ParkA/styles/text.dart';
 import 'package:ParkA/utils/functions/get_user_rating.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import "package:flutter/material.dart";
-import 'package:get/get.dart';
 
 class OtherUserProfilePersonalInformationWidget extends StatelessWidget {
   final Color color;

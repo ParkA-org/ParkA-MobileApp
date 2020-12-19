@@ -34,6 +34,7 @@ class ParkaAddImagesCarousel extends StatelessWidget {
           child: ParkaImageCardWidget(
             image: element,
             index: index,
+            carouselType: this.carouselType,
             type: this.placeholderType,
             onLongPressHandler: this.onLongPressHandler,
           ),
@@ -48,6 +49,7 @@ class ParkaAddImagesCarousel extends StatelessWidget {
           margin: EdgeInsets.symmetric(horizontal: 16.0),
           child: ParkaImageCardWidget(
             type: this.placeholderType,
+            carouselType: this.carouselType,
             onTapHandler: this.onTapHandler,
           ),
         ),
@@ -82,6 +84,7 @@ class ParkaAddImagesCarousel extends StatelessWidget {
               ? ParkaImageCardWidget(
                   type: this.placeholderType,
                   onTapHandler: this.onTapHandler,
+                  carouselType: this.carouselType,
                 )
               : Container(
                   height: (cardWidth) / creditCardProp,
