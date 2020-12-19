@@ -44,7 +44,8 @@ class ParkaFloatingActionButton extends StatelessWidget {
                     elevation: 10.0,
                     backgroundColor: color ?? Color(0xff086174),
                     child: Container(
-                      child: Text("hola"),
+                      child: Icon(Icons.calendar_today_outlined,
+                          size: 35, color: Colors.white),
                     ),
                     highlightElevation: 20,
                     onPressed: this.onPressedHandler,
