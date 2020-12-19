@@ -1,11 +1,8 @@
 import 'dart:io';
-
 import 'package:ParkA/data/enums/parking_place_holder_type.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
 import 'image_page.dart';
 
 class ParkaImageCardWidget extends StatelessWidget {

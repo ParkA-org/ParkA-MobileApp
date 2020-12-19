@@ -50,7 +50,7 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton: this._loading != true
+      floatingActionButton: !this._loading
           ? ActionButtonsOwnerState(
               reservation: this._reservation,
               screenSize: screenSize,
