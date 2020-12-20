@@ -167,6 +167,7 @@ class _EditVehiclePageState extends State<EditVehiclePage> {
                         children: [
                           ParkaImageCardWidget(
                             type: PlaceHolderType.Car,
+                            carouselType: CarouselType.Form,
                             image: this._updateVehicleDto.mainPicture,
                             onTapHandler: () async {
                               String imagePath = await getImageFunction();

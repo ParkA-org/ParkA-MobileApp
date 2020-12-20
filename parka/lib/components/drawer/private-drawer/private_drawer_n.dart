@@ -2,20 +2,19 @@ import 'package:ParkA/components/menu-item/parka_menu_item.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/pages/chats/chats_page.dart';
 import 'package:ParkA/pages/edit-profile/edit_profile_page.dart';
+import 'package:ParkA/pages/history/history_page.dart';
 import 'package:ParkA/pages/parkings/parking_page.dart';
-import 'package:ParkA/pages/pending-reservations/pending_reservation_page.dart';
-
 import 'package:ParkA/pages/profile/components/profile_personal_information_widget.dart';
 import 'package:ParkA/pages/login/login_screen.dart';
-import 'package:ParkA/pages/reservation-as-owner/reservation_as_owner.dart';
-import 'package:ParkA/pages/reservations-as-client/reservation_as_client.dart';
 import 'package:ParkA/pages/search/search_panel.dart';
 import 'package:ParkA/pages/user-payments/user_registered_payment_methods_screen.dart';
 import 'package:ParkA/pages/vehicles/vehicle_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PrivateDrawer extends StatelessWidget {
   final int reservationsAsCLientCount;
@@ -26,6 +25,17 @@ class PrivateDrawer extends StatelessWidget {
     this.reservationsAsCLientCount,
     this.reservationsAsOwnerCount,
   }) : super(key: key);
+
+  _gotoHelp() async {
+    String url = "https://github.com/ParkA-org/ParkA-MobileApp/wiki";
+    final String encodedURL = Uri.encodeFull(url);
+
+    if (await canLaunch(encodedURL)) {
+      await launch(encodedURL);
+    } else {
+      throw 'Could not launch URL';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +52,7 @@ class PrivateDrawer extends StatelessWidget {
                 child: Column(
                   children: [
                     Expanded(
+                      flex: 3,
                       child: GestureDetector(
                         onTap: () {
                           Navigator.pushNamed(
@@ -54,15 +65,15 @@ class PrivateDrawer extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 24.0, vertical: 8.0),
+                      padding: const EdgeInsets.only(
+                          left: 24.0, right: 24.0, top: 14.0),
                       child: Divider(
                         thickness: 1.0,
                         color: Color(0xFF949494),
                       ),
                     ),
                     Expanded(
-                      flex: 3,
+                      flex: 4,
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 24.0, vertical: 8.0),
@@ -71,8 +82,9 @@ class PrivateDrawer extends StatelessWidget {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () {
-                                  Get.toNamed(
-                                      ReservationAsClientPage.routeName);
+                                  Get.to(HistoryPage(
+                                    type: "Client",
+                                  ));
                                 },
                                 child: ParkaUserReservationInfoWidget(
                                   value:
@@ -84,24 +96,14 @@ class PrivateDrawer extends StatelessWidget {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () {
-                                  Get.toNamed(ReservationAsOwnerPage.routeName);
+                                  Get.to(HistoryPage(
+                                    type: "Owner",
+                                  ));
                                 },
                                 child: ParkaUserReservationInfoWidget(
                                   value:
                                       this.reservationsAsOwnerCount.toString(),
                                   label: "Reservaciones como anfitrion",
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () {
-                                  Get.toNamed(
-                                      PendingReservationsPage.routeName);
-                                },
-                                child: ParkaUserReservationInfoWidget(
-                                  value: null,
-                                  label: "Reservas pendientes",
                                 ),
                               ),
                             ),
@@ -114,7 +116,7 @@ class PrivateDrawer extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 3,
+              flex: 4,
               child: Padding(
                 padding: EdgeInsets.only(left: 24.0),
                 child: Column(
@@ -172,6 +174,7 @@ class PrivateDrawer extends StatelessWidget {
                       child: ParkAMenuItem(
                         label: "Ayuda",
                         itemStyle: kParkaInputDefaultStyleBlue,
+                        onTapHandler: _gotoHelp,
                       ),
                     ),
                     Expanded(
@@ -222,11 +225,12 @@ class ParkaUserReservationInfoWidget extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          flex: 0,
+          flex: 1,
           child: Padding(
             padding: EdgeInsets.only(right: 24.0),
-            child: Text(
+            child: AutoSizeText(
               this.value ?? "0",
+              maxLines: 1,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24.0,
@@ -237,9 +241,10 @@ class ParkaUserReservationInfoWidget extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 2,
-          child: Text(
+          flex: 3,
+          child: AutoSizeText(
             this.label,
+            maxLines: 1,
             style: TextStyle(
               color: Colors.white,
               fontSize: 14.0,

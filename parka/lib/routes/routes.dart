@@ -1,4 +1,6 @@
 import 'package:ParkA/controllers/bindings/graphql_biding.dart';
+import 'package:ParkA/controllers/bindings/login_binding.dart';
+import 'package:ParkA/controllers/bindings/registration_controller_binding.dart';
 import 'package:ParkA/controllers/bindings/user_binding.dart';
 import 'package:ParkA/pages/chats/chat_user_page.dart';
 import 'package:ParkA/pages/chats/chats_page.dart';
@@ -8,7 +10,6 @@ import 'package:ParkA/pages/create-parking/steps/parking_calendar_creator_page.d
 import 'package:ParkA/pages/create-parking/steps/parking_image_selector_page.dart';
 import 'package:ParkA/pages/create-parking/steps/parking_position_selector_page.dart';
 import 'package:ParkA/pages/create-payment/payment_info.dart';
-import 'package:ParkA/pages/create-user-information/ID_page.dart';
 import 'package:ParkA/pages/create-vehicle/create_vehicle_page.dart';
 import 'package:ParkA/pages/edit-payment/edit_payment_page.dart';
 import 'package:ParkA/pages/edit-parking/edit_parking_page.dart';
@@ -18,16 +19,18 @@ import 'package:ParkA/pages/edit-profile/edit_profile_page.dart';
 import 'package:ParkA/pages/edit-user-profile/edit_user_profile_page.dart';
 import 'package:ParkA/pages/filter/filter_page.dart';
 import 'package:ParkA/pages/forgot-password/forgot_password_screen.dart';
+import 'package:ParkA/pages/history/history_page.dart';
 import 'package:ParkA/pages/login/email_login.dart';
 import 'package:ParkA/pages/login/login_screen.dart';
 import 'package:ParkA/pages/map/maps_page.dart';
 import 'package:ParkA/pages/parkings/parking_page.dart';
-import 'package:ParkA/pages/pending-reservations/pending_reservation_page.dart';
 import 'package:ParkA/pages/profile-picture/profile_pic_page.dart';
 import 'package:ParkA/pages/profile/profile_page.dart';
 import 'package:ParkA/pages/register/register_page.dart';
-import 'package:ParkA/pages/reservation-as-owner/reservation_as_owner.dart';
-import 'package:ParkA/pages/reservations-as-client/reservation_as_client.dart';
+import 'package:ParkA/pages/register/steps/user_information_page.dart';
+import 'package:ParkA/pages/register/steps/profile_pic_page.dart';
+import 'package:ParkA/pages/reservation/reservation-as-owner-detail/reservation_as_owner.dart';
+import 'package:ParkA/pages/reservation/reservations-as-client-detail/reservation_as_client.dart';
 import 'package:ParkA/pages/reset-password/reset_password_page.dart';
 import 'package:ParkA/pages/search/search_panel.dart';
 import 'package:ParkA/pages/splash-screen/splash_screen.dart';
@@ -47,11 +50,8 @@ List<GetPage> getRoutePages = [
     bindings: [
       UserBinding(),
       GraphqlClientBiding(),
+      LoginBinding(),
     ],
-  ),
-  GetPage(
-    name: IDPage.routeName,
-    page: () => IDPage(),
   ),
   GetPage(
     name: ProfilePicPage.routeName,
@@ -66,8 +66,32 @@ List<GetPage> getRoutePages = [
     page: () => ForgotPasswordScreen(),
   ),
   GetPage(
+    name: HistoryPage.routeName,
+    page: () => HistoryPage(),
+  ),
+  GetPage(
     name: RegisterPage.routeName,
     page: () => RegisterPage(),
+    binding: RegistrationFormBinding(),
+  ),
+  GetPage(
+    name: ProfilePicturePage.routeName,
+    page: () => ProfilePicturePage(),
+    binding: RegistrationFormBinding(),
+  ),
+  GetPage(
+    name: UserInformationPage.routeName,
+    page: () => UserInformationPage(),
+    bindings: [
+      GraphqlClientBiding(),
+      RegistrationFormBinding(),
+      LoginBinding(),
+    ],
+  ),
+  GetPage(
+    name: ChatUserPage.routeName,
+    page: () => ChatUserPage(),
+    bindings: [GraphqlClientBiding()],
   ),
   GetPage(
     name: MapPage.routeName,
@@ -85,6 +109,10 @@ List<GetPage> getRoutePages = [
   GetPage(
     name: ConfirmAccountPage.routeName,
     page: () => ConfirmAccountPage(),
+    bindings: [
+      GraphqlClientBiding(),
+      LoginBinding(),
+    ],
   ),
   GetPage(
     name: ResetPasswordPage.routeName,
@@ -154,17 +182,16 @@ List<GetPage> getRoutePages = [
   GetPage(
     bindings: [GraphqlClientBiding()],
     name: ReservationAsClientPage.routeName,
-    page: () => ReservationAsClientPage(),
+    page: () => ReservationAsClientPage(
+      reservationId: "",
+    ),
   ),
   GetPage(
     bindings: [GraphqlClientBiding()],
     name: ReservationAsOwnerPage.routeName,
-    page: () => ReservationAsOwnerPage(),
-  ),
-  GetPage(
-    bindings: [GraphqlClientBiding()],
-    name: PendingReservationsPage.routeName,
-    page: () => PendingReservationsPage(),
+    page: () => ReservationAsOwnerPage(
+      reservationId: "",
+    ),
   ),
   GetPage(
     bindings: [GraphqlClientBiding()],
@@ -182,6 +209,7 @@ List<GetPage> getRoutePages = [
   ),
   GetPage(
     name: EditParkingPage.routeName,
+    // ignore: missing_required_param
     page: () => EditParkingPage(),
     bindings: [GraphqlClientBiding()],
   ),

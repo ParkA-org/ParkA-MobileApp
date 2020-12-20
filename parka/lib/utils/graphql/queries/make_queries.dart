@@ -1,9 +1,9 @@
 const String getAllMakesQuery = r"""
-query{
-  getAllMakes{
+query {
+  getAllMakes {
     id
     name
-    models{
+    models {
       id
       name
     }

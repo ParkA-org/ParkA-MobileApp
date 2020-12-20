@@ -3,6 +3,7 @@ import 'package:ParkA/components/buttons/main_fab.dart';
 import 'package:ParkA/components/drawer/private-drawer/private_drawer_n.dart';
 import 'package:ParkA/components/drawer/public-drawer/public_drawer.dart';
 import 'package:ParkA/controllers/graphql_controller.dart';
+import 'package:ParkA/controllers/map_controller.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
@@ -33,11 +34,12 @@ class _MapPageState extends State<MapPage> {
   LocationData userLocation;
   CameraPosition initialCameraPosition;
   Set<Marker> nearbyParkings;
-  BitmapDescriptor _customPinIcon;
-  GoogleMapController _mapController;
+  BitmapDescriptor _customGreenPinIcon;
+  BitmapDescriptor _customRedPinIcon;
 
   final UserController user = Get.find<UserController>();
   final graphqlClient = Get.find<GraphqlClientController>();
+  final mapController = Get.put(MapController());
 
   @override
   void initState() {
@@ -55,6 +57,11 @@ class _MapPageState extends State<MapPage> {
   Future<BitmapDescriptor> _getCustomPin() async {
     return BitmapDescriptor.fromAssetImage(
         ImageConfiguration.empty, 'resources/images/green-parking-icon.png');
+  }
+
+  Future<BitmapDescriptor> _getCustomPinRed() async {
+    return BitmapDescriptor.fromAssetImage(
+        ImageConfiguration.empty, 'resources/images/red-parking-icon.png');
   }
 
   Future<void> _getUserReservationsCount() async {
@@ -82,55 +89,53 @@ class _MapPageState extends State<MapPage> {
     return await rootBundle.loadString('resources/styles/map_style.txt');
   }
 
-  Future<Set<Marker>> getNearParkings(LatLng userLocation) async {
-    Set<Marker> parkingPins = {};
-    List<Parking> nearParkings =
-        await ParkingUseCases.getNearParkings(userLocation);
-
-    if (nearParkings != null && nearParkings.length > 0) {
-      nearParkings.forEach((parking) {
-        parkingPins.add(Marker(
-          markerId: MarkerId("${parking.id}"),
-          position: LatLng(parking.latitude, parking.longitude),
-          icon: _customPinIcon,
-          onTap: () => showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              builder: (context) {
-                _mapController.animateCamera(CameraUpdate.newLatLng(
-                    LatLng(parking.latitude - 0.003, parking.longitude)));
-                return ParkingDetailModal(parking: parking);
-              }),
-        ));
-      });
-    }
-
-    if (!nearbyParkings.containsAll(parkingPins) &&
-        nearbyParkings.length != parkingPins.length) {
-      return parkingPins;
-    }
-
-    return new Set();
-  }
-
   void _getMapPageData() async {
     this._mapStyle = await this.getMapStyle();
-    this._customPinIcon = await this._getCustomPin();
+    this._customGreenPinIcon = await this._getCustomPin();
+    this._customRedPinIcon = await this._getCustomPinRed();
     await this._getUserReservationsCount();
     print("USER LOCATION IS  ${this.userLocation}");
     this.userLocation = await this._getCurrentLocation();
     print("USER LOCATION NOW IS  ${this.userLocation}");
-    _mapController.animateCamera(CameraUpdate.newLatLng(
+    mapController.mapController.value.animateCamera(CameraUpdate.newLatLng(
         LatLng(userLocation.latitude, userLocation.longitude)));
 
     if (this.userLocation != null) {
-      this.nearbyParkings = await this.getNearParkings(
-          LatLng(userLocation.latitude, userLocation.longitude));
+      this
+          .mapController
+          .setPosition(LatLng(userLocation.latitude, userLocation.longitude));
+
+      this.mapController.loadParkings();
     }
 
     setState(() {
       this._loading = false;
     });
+  }
+
+  Set<Marker> _markerBuilder(List<Parking> _parkings) {
+    Set<Marker> ret = new Set();
+
+    _parkings.forEach((parking) {
+      ret.add(Marker(
+        markerId: MarkerId("${parking.id}"),
+        position: LatLng(parking.latitude, parking.longitude),
+        icon: parking.isAvailable == true
+            ? _customGreenPinIcon
+            : _customRedPinIcon,
+        onTap: () => showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            builder: (context) {
+              mapController.mapController.value.animateCamera(
+                  CameraUpdate.newLatLng(
+                      LatLng(parking.latitude - 0.003, parking.longitude)));
+              return ParkingDetailModal(parking: parking);
+            }),
+      ));
+    });
+
+    return ret;
   }
 
   @override
@@ -157,22 +162,24 @@ class _MapPageState extends State<MapPage> {
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
-              GoogleMap(
-                onMapCreated: (GoogleMapController controller) {
-                  _mapController = controller;
-                  _mapController.setMapStyle(_mapStyle);
-                },
-                myLocationButtonEnabled: true,
-                myLocationEnabled: true,
-                initialCameraPosition: initialCameraPosition,
-                zoomControlsEnabled: false,
-                markers: nearbyParkings,
+              Obx(
+                () => GoogleMap(
+                  onMapCreated: (GoogleMapController controller) {
+                    mapController.setMapController(controller);
+                    mapController.mapController.value.setMapStyle(_mapStyle);
+                  },
+                  myLocationButtonEnabled: true,
+                  myLocationEnabled: true,
+                  initialCameraPosition: initialCameraPosition,
+                  zoomControlsEnabled: false,
+                  // markers: nearbyParkings,
+                  markers: this._markerBuilder(this.mapController.parkings),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 60.0),
                 child: Builder(
                   builder: (context) => DummySearch(
-                    // statusBarSize: MediaQuery.of(context).padding.top,
                     mainContext: mapPageContext,
                     buttonToggle: toggleFloatingActionButton,
                   ),

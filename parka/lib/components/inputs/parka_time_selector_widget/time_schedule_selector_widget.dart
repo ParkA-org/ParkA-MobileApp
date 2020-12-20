@@ -25,8 +25,6 @@ class TimeScheduleSelectorWidget extends StatelessWidget {
 
     int i = 0;
     this.schedules.forEach((element) {
-      print(i < 2 && this.schedules.length < 2);
-      print(!(element?.is24h ?? false));
       ret.add(
         TimeSelectorWidget(
           key: Key(DateTime.now().toIso8601String()),

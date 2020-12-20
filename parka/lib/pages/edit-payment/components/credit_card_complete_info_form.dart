@@ -1,5 +1,5 @@
 import 'package:ParkA/components/cards/credit_card.dart';
-import 'package:ParkA/pages/create-payment/components/credit_card_info_form.dart';
+import 'package:ParkA/pages/edit-payment/components/credit_card_info_form.dart';
 import 'package:ParkA/styles/text.dart';
 import "package:flutter/material.dart";
 

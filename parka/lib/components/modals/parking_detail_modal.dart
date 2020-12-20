@@ -1,15 +1,20 @@
 import 'package:ParkA/components/buttons/circle_button.dart';
+import 'package:ParkA/components/images/image_page.dart';
 import 'package:ParkA/components/place-holders/no_image_placeholder.dart';
 import 'package:ParkA/components/rating/star_rating.dart';
+import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
+import 'package:ParkA/pages/create-reservation/create_reservation_page.dart';
 import 'package:ParkA/pages/parking-detail/parking_detail_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ParkingDetailModal extends StatelessWidget {
   final Parking parking;
+  final UserController _userController = Get.find<UserController>();
 
   ParkingDetailModal({Key key, @required this.parking}) : super(key: key);
 
@@ -25,7 +30,8 @@ class ParkingDetailModal extends StatelessWidget {
     }
   }
 
-  List<Widget> _pictureGalleryBuilder(List<String> pictures) {
+  List<Widget> _pictureGalleryBuilder(
+      List<String> pictures, BuildContext context) {
     if (!pictures.contains(parking.mainPicture)) {
       pictures.insert(0, parking.mainPicture);
     }
@@ -33,19 +39,25 @@ class ParkingDetailModal extends StatelessWidget {
     pictures.forEach((picture) {
       imageGallery.add(Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Container(
-            width: 140,
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                    offset: Offset(1.0, 10.0),
-                    blurRadius: 5.0,
-                    color: Colors.grey[600])
-              ],
-              image: DecorationImage(
-                  fit: BoxFit.cover, image: NetworkImage(picture)),
-              borderRadius: BorderRadius.circular(15.0),
-            )),
+        child: GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => ImagePage(picture)));
+          },
+          child: Container(
+              width: 140,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                      offset: Offset(1.0, 10.0),
+                      blurRadius: 5.0,
+                      color: Colors.grey[600])
+                ],
+                image: DecorationImage(
+                    fit: BoxFit.cover, image: NetworkImage(picture)),
+                borderRadius: BorderRadius.circular(15.0),
+              )),
+        ),
       ));
     });
 
@@ -90,7 +102,31 @@ class ParkingDetailModal extends StatelessWidget {
                         children: [
                           CircleButton(
                             onTap: () {
-                              //TODO: Reservation Page//
+                              if (_userController.user.value == null) {
+                                Get.snackbar(
+                                  "Error",
+                                  "Necesitas iniciar sesion para reservar",
+                                  margin: EdgeInsets.all(8.0),
+                                  backgroundColor: ParkaColors.parkaGoogleRed,
+                                );
+
+                                return;
+                              } else if (_userController.user.value.id ==
+                                  this.parking.user.id) {
+                                Get.snackbar(
+                                  "Error",
+                                  "No puedes alquilar tu parqueo",
+                                  margin: EdgeInsets.all(8.0),
+                                  backgroundColor: ParkaColors.parkaGoogleRed,
+                                );
+                                return;
+                              }
+
+                              Get.to(
+                                CreateParkingReservationPage(
+                                  parkingId: this.parking.id,
+                                ),
+                              );
                             },
                           ),
                           CircleButton(
@@ -109,7 +145,7 @@ class ParkingDetailModal extends StatelessWidget {
                     thickness: 1.0,
                     color: Color(0xFF949494),
                   ),
-                  Text("${parking.perHourPrice}" r" RD$ por hora",
+                  Text("${parking.priceHours}" r" RD$ por hora",
                       style: kParkaTextStyleGrey.copyWith(
                           color: ParkaColors.parkaGreen,
                           fontWeight: FontWeight.bold)),
@@ -121,7 +157,7 @@ class ParkingDetailModal extends StatelessWidget {
                                   parking.mainPicture != null) ||
                               (parking.pictures.isNotEmpty &&
                                   parking.mainPicture.isNotEmpty)
-                          ? _pictureGalleryBuilder(parking.pictures)
+                          ? _pictureGalleryBuilder(parking.pictures, context)
                           : [NoImagePlaceholder()],
                     ),
                   )

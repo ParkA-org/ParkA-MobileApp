@@ -1,4 +1,5 @@
 import 'package:ParkA/components/inputs/parka_input.dart';
+import 'package:ParkA/controllers/login/login_controller.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/data/dtos/login/login_result_dto.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
@@ -10,6 +11,7 @@ import 'package:ParkA/components/curve-painter/curves_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 import 'package:get/utils.dart';
 import 'package:graphql/client.dart';
 
@@ -21,6 +23,8 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  final LoginController _loginController = Get.find<LoginController>();
+
   String user, password;
   QueryResult result;
 
@@ -42,6 +46,7 @@ class _LoginFormState extends State<LoginForm> {
         await Get.find<UserController>().loginUser(this.user, this.password);
 
     if (loginCheck.message != null) {
+      _loginController.setPassword(this.password);
       await UserUseCases.resendConfirmationCode(email: this.user);
       return Get.toNamed(ConfirmAccountPage.routeName);
     } else if (!loginCheck.status) {

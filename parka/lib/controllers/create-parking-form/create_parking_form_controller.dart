@@ -69,23 +69,23 @@ class CreateParkingFormController extends GetxController {
   void addFeature(String _featureId) {
     createPArkingDto.update((_instance) {
       _instance.features.add(_featureId);
-      print("add");
-      print(_instance.features);
+      // print("add");
+      // print(_instance.features);
     });
   }
 
   void removeFeature(String _featureId) {
     createPArkingDto.update((_instance) {
       _instance.features.remove(_featureId);
-      print(_instance.features);
+      // print(_instance.features);
     });
   }
 
   void addSchedule(String _weekDay, Schedule _schedule, int _index) {
     createPArkingDto.update((_instance) {
-      print(_weekDay);
-      print(_instance.calendar[_weekDay]);
-      print("ADDING");
+      // print(_weekDay);
+      // print(_instance.calendar[_weekDay]);
+      // print("ADDING");
 
       if (_instance.calendar[_weekDay].length == _index) {
         _instance.calendar[_weekDay].add(_schedule);
@@ -97,9 +97,9 @@ class CreateParkingFormController extends GetxController {
 
   void removeSchedule(String _weekDay, int _index) {
     createPArkingDto.update((_instance) {
-      print(_weekDay);
-      print(_instance.calendar[_weekDay]);
-      print("REMOVING");
+      // print(_weekDay);
+      // print(_instance.calendar[_weekDay]);
+      // print("REMOVING");
       _instance.calendar[_weekDay].removeAt(_index);
       if (_instance.calendar[_weekDay].length == 1) {
         if (_instance.calendar[_weekDay][0] == null) {
@@ -112,7 +112,7 @@ class CreateParkingFormController extends GetxController {
   void set24hSchedule(String _weekDay) {
     createPArkingDto.update((_instance) {
       Schedule _schedule = new Schedule(
-        finish: 2400,
+        finish: 2359,
         start: 0,
         is24h: true,
       );

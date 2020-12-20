@@ -1,8 +1,8 @@
 const String getAllCountriesQuery = r"""
-        query{
-      getAllCountries{
-        id
-        name
-      }
-    }
-    """;
+query {
+  getAllCountries {
+    id
+    name
+  }
+}
+""";

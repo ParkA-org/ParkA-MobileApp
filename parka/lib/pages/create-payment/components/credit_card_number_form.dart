@@ -1,4 +1,4 @@
-import 'package:ParkA/pages/create-payment/components/parka_input_test.dart';
+import 'package:ParkA/components/inputs/parka_input_test.dart';
 import "package:flutter/material.dart";
 
 class CreditCardNumberForm extends StatelessWidget {
@@ -13,7 +13,7 @@ class CreditCardNumberForm extends StatelessWidget {
     this.formHandlers.forEach((handler) {
       ret.add(Expanded(
         child: ParkaInputTest(
-          enable: false,
+          enable: true,
           handler: handler,
           inputMaxLength: 4,
           inputType: TextInputType.number,

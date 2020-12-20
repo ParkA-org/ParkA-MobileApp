@@ -52,6 +52,7 @@ class ParkaCircleAvatarWidget extends StatelessWidget {
                     image: GetUtils.isURL(this.imageUrl)
                         ? NetworkImage(
                             this.imageUrl,
+                            scale: 20,
                           )
                         : FileImage(
                             File(this.imageUrl),

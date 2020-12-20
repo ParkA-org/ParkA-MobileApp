@@ -1,14 +1,16 @@
 import 'package:ParkA/components/rating/star_rating.dart';
+import 'package:ParkA/data/data-models/review/review_data_model.dart';
 import 'package:ParkA/pages/profile/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:flutter/material.dart';
+import '../profile_page.dart';
 
 class ParkaReviewHistoryTile extends StatelessWidget {
-  final double rating;
+  final Review review;
 
   const ParkaReviewHistoryTile({
     Key key,
-    @required this.rating,
+    @required this.review,
   }) : super(key: key);
 
   @override
@@ -22,76 +24,72 @@ class ParkaReviewHistoryTile extends StatelessWidget {
                     : constraints.maxWidth) /
                 6;
 
-        return Container(
-          margin: EdgeInsets.symmetric(vertical: 4.0),
-          height: tileHeight,
-          // color: Colors.blueAccent,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    flex: 0,
-                    child: Container(
-                      margin: EdgeInsets.only(right: 8.0),
-                      width: imageContainerSize,
-                      height: imageContainerSize,
-                      child: ParkaCircleAvatarWidget(
-                        pictureSizeDivider: 2.0,
-                        imageUrl:
-                            "https://upload.wikimedia.org/wikipedia/commons/3/3f/TechCrunch_Disrupt_2019_%2848834434641%29_%28cropped%29.jpg",
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    ProfileScreen(userId: this.review.user.id),
+              ),
+            );
+          },
+          child: Container(
+            margin: EdgeInsets.symmetric(vertical: 4.0),
+            height: tileHeight,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 0,
+                      child: Container(
+                        margin: EdgeInsets.only(right: 8.0),
+                        width: imageContainerSize,
+                        height: imageContainerSize,
+                        child: ParkaCircleAvatarWidget(
+                          pictureSizeDivider: 2.0,
+                          imageUrl: this.review.user.profilePicture,
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          "Sebastiano Faiella",
-                          style: kParkaButtonTextStyle.copyWith(
-                            fontSize: 22.0,
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            "${this.review.user.name} ${this.review.user.lastName}",
+                            style: kParkaButtonTextStyle.copyWith(
+                              fontSize: 22.0,
+                            ),
                           ),
-                        ),
-                        StarRating(
-                          rating: rating.toInt(),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  "Me agrado poco el parqueo me dieron golpe y me amenazaron con una apunalada",
-                  style: kParkaInputTextStyle.copyWith(
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.normal,
-                  ),
+                          StarRating(
+                            rating: this.review.calification.toInt(),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 8.0),
-                child: Text(
-                  "Hace 6 meses",
-                  style: kParkaInputTextStyle.copyWith(
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w500,
-                    color: Color(
-                      0xFF7B7777,
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    this.review.review,
+                    style: kParkaInputTextStyle.copyWith(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                 ),
-              ),
-              Divider(
-                thickness: 1.0,
-                color: Color(0xFF949494),
-              ),
-            ],
+                Divider(
+                  thickness: 1.0,
+                  color: Color(0xFF949494),
+                ),
+              ],
+            ),
           ),
         );
       },

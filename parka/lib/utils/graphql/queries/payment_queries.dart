@@ -1,19 +1,19 @@
 const String getAllUserPaymentMethodsQuery = r""" 
-    query{
-      getUserInformationById{
+query{
+  getUserInformationById{
+    id
+    paymentInformation{
+      id
+      cardHolder
+      expirationDate
+      digit
+      activated
+      card{
         id
-        paymentInformation{
-          id
-          cardHolder
-          expirationDate
-          digit
-          activated
-          card{
-            id
-            name
-          }
-          
-        }
+        name
       }
+      
     }
-    """;
+  }
+}
+""";

@@ -42,12 +42,7 @@ class UserUseCases {
       return UserLoginDto(
         jwt: _jwt,
         status: true,
-        user: User(
-          name: userData["name"],
-          lastName: userData['lastName'],
-          email: userData['email'],
-          profilePicture: userData["profilePicture"],
-        ),
+        user: User.otherUserFromJson(userData),
       );
     }
 
@@ -82,12 +77,32 @@ class UserUseCases {
     if (_getLoggedUserResult.data != null) {
       final userData = _getLoggedUserResult.data["getLoggedUser"];
 
-      return User(
-        name: userData["name"],
-        lastName: userData['lastName'],
-        email: userData['email'],
-        profilePicture: userData["profilePicture"],
-      );
+      return User.otherUserFromJson(userData);
+    }
+
+    return null;
+  }
+
+  static Future getOtherUser(String userId) async {
+    final graphqlClient = Get.find<GraphqlClientController>();
+
+    final _input = {"id": userId};
+
+    QueryOptions _queryOptions = new QueryOptions(
+      documentNode: gql(getUserByIdQuery),
+      variables: _input,
+    );
+
+    final QueryResult _getUserResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .query(_queryOptions);
+
+    if (_getUserResult.data != null) {
+      final userData = _getUserResult.data["getUserById"];
+
+      print(userData);
+
+      return User.otherUserFromJson(userData);
     }
 
     return null;
@@ -95,6 +110,12 @@ class UserUseCases {
 
   static Future createUser(CreateUserDto createUserDto) async {
     final graphqlClient = Get.find<GraphqlClientController>();
+
+    print(createUserDto.name);
+    print(createUserDto.lastName);
+    print(createUserDto.password);
+    print(createUserDto.email);
+    print(createUserDto.userInformation);
 
     final createUserInput = {
       "data": {
@@ -137,9 +158,9 @@ class UserUseCases {
         "paymentInformation": "cc78a504-aafe-4917-afe9-f3a3ecee8b07",
         "documentNumber": createUserInformationDto.documentNumber,
         "telephoneNumber": createUserInformationDto.telephonNumber,
-        "birthDate": createUserInformationDto.birthDate,
-        "placeOfBirth": createUserInformationDto.placeOfBirth,
-        "nationality": createUserInformationDto.nationality,
+        "birthDate": createUserInformationDto.birthDate.toIso8601String(),
+        "placeOfBirth": createUserInformationDto.placeOfBirth.id,
+        "nationality": createUserInformationDto.nationality.id
       }
     };
 
@@ -153,7 +174,7 @@ class UserUseCases {
         .mutate(mutationOptions);
 
     print(createUserInformationResult.data);
-    print(createUserInformationResult.exception);
+    print(createUserInformationResult.exception?.graphqlErrors.toString());
 
     if (createUserInformationResult.data != null) {
       return createUserInformationResult.data["createUserInformation"];
@@ -166,6 +187,10 @@ class UserUseCases {
       UserRegistrationForm userRegistrationForm) async {
     final createUserInformationResult = await createUserInformation(
         userRegistrationForm.createUserInformationDto);
+
+    if (createUserInformationResult == null) {
+      return false;
+    }
 
     userRegistrationForm.createUserDto.userInformation =
         createUserInformationResult["id"];
@@ -343,9 +368,11 @@ class UserUseCases {
       updateUserInput["data"]["lastName"] = lastName;
     }
 
-    if (!(GetUtils.isURL(profilePicture))) {
-      updateUserInput["data"]["profilePicture"] =
-          await uploadImage(profilePicture);
+    if (profilePicture != null) {
+      if (!(GetUtils.isURL(profilePicture))) {
+        updateUserInput["data"]["profilePicture"] =
+            await uploadImage(profilePicture);
+      }
     }
 
     MutationOptions mutationOptions = MutationOptions(
@@ -360,12 +387,7 @@ class UserUseCases {
     if (updateUserResult.data != null) {
       final userUpdatedData = updateUserResult.data['updateUser'];
       print(userUpdatedData);
-      return User(
-        name: userUpdatedData["name"],
-        lastName: userUpdatedData['lastName'],
-        email: userUpdatedData['email'],
-        profilePicture: userUpdatedData["profilePicture"],
-      );
+      return User.otherUserFromJson(userUpdatedData);
     }
 
     return null;
