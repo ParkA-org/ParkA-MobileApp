@@ -18,7 +18,6 @@ class ParkingFilterDto {
     this.rating,
     this.position,
   }) {
-    this.rating = this.rating ?? 5;
     this.features = this.features ?? [];
   }
 }

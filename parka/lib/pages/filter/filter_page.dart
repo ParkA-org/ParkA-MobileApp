@@ -120,10 +120,10 @@ class _FilterPageState extends State<FilterPage> {
                             Obx(
                               () => StarRatingFilter(
                                 rating: this
-                                    ._mapController
-                                    .parkingFilterDto
-                                    .rating
-                                    .toInt(),
+                                        ._mapController
+                                        .parkingFilterDto
+                                        .rating ??
+                                    5,
                                 rateHandler: this._mapController.setRating,
                               ),
                             ),

@@ -2,7 +2,7 @@ import 'package:ParkA/styles/parka_colors.dart';
 import "package:flutter/material.dart";
 
 class StarRatingFilter extends StatelessWidget {
-  final int rating;
+  final double rating;
   final Function rateHandler;
 
   const StarRatingFilter({
