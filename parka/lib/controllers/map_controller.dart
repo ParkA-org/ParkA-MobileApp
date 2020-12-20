@@ -1,13 +1,22 @@
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
+import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
+import 'package:ParkA/pages/filter/data/filter_input_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapController extends GetxController {
   Rx<GoogleMapController> mapController = Rx();
+
   RxList<Parking> currentParkings = List<Parking>().obs;
   RxList<Parking> filteredResults = List<Parking>().obs;
   RxList<Widget> searchResults = List<Widget>().obs;
+
+  RxBool _loading;
+  RxList<Parking> _parkings = RxList();
+  Rx<ParkingFilterDto> _filterParkingDto = new ParkingFilterDto().obs;
+
+  ParkingFilterDto get parkingFilterDto => this._filterParkingDto.value;
 
   void setCurrentParkings(List<Parking> newParkings) {
     newParkings.forEach((parking) {
@@ -46,5 +55,57 @@ class MapController extends GetxController {
     }
     update();
     return;
+  }
+
+  // search
+  void loadParkings() async {
+    List<Parking> _searchResult = await ParkingUseCases.getAllParking();
+    print(_searchResult.length);
+    // this._parkings.update((_instance) {
+    //   _instance = _searchResult;
+    // });
+  }
+
+  //filter logic
+  void resetFilters() {
+    this._filterParkingDto.update((_instance) {
+      this._filterParkingDto = new ParkingFilterDto().obs;
+    });
+  }
+
+  void setParkingNameSearch(String _searchString) {
+    this._filterParkingDto.update((_instance) {
+      _instance.parkingName = _searchString;
+    });
+  }
+
+  void setRating(int _rating) {
+    this._filterParkingDto.update((_instance) {
+      _instance.rating = _rating.toDouble();
+    });
+  }
+
+  void setMaxPrice(double _maxPrice) {
+    this._filterParkingDto.update((_instance) {
+      _instance.maxPrice = _maxPrice;
+    });
+  }
+
+  void setMinPrice(double _minPrice) {
+    this._filterParkingDto.update((_instance) {
+      _instance.minPrice = _minPrice;
+    });
+  }
+
+  void addFeature(String _feature) {
+    this._filterParkingDto.update((_instance) {
+      _instance.features.add(_feature);
+    });
+  }
+
+  void removeFeature(String _feature) {
+    this._filterParkingDto.update((_instance) {
+      _instance.features.remove(_feature);
+    });
   }
 }

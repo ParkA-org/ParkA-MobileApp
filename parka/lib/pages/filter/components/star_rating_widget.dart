@@ -38,26 +38,29 @@ class StarRatingFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: Center(
-            child: Text(
-              "Puntuacion Minima",
-              style: TextStyle(
-                  color: ParkaColors.parkaGreen,
-                  fontSize: 28.0,
-                  fontWeight: FontWeight.bold),
+    return Container(
+      height: 125,
+      child: Column(
+        children: [
+          Expanded(
+            child: Center(
+              child: Text(
+                "Puntuacion Minima",
+                style: TextStyle(
+                    color: ParkaColors.parkaGreen,
+                    fontSize: 28.0,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
           ),
-        ),
-        Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: this._reviewStars(),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: this._reviewStars(),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

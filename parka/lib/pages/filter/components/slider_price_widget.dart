@@ -17,54 +17,57 @@ class PriceSliderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: Center(
-            child: Text(
-              "Precio",
-              style: TextStyle(
-                color: ParkaColors.parkaGreen,
-                fontSize: 28.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          child: SliderTheme(
-            data: SliderThemeData(
-              activeTrackColor: Color(0xFF0B768C),
-              thumbColor: Color(0xFF0B768C),
-            ),
-            child: Slider(
-              value: this.rentPriceFilter,
-              min: this.minSliderValue,
-              max: this.maxSliderValue,
-              onChanged: (value) {
-                this.sliderChangeHandler(value);
-              },
-            ),
-          ),
-        ),
-        Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "${this.minSliderValue.toInt()}\$",
+    return Container(
+      height: 150,
+      child: Column(
+        children: [
+          Expanded(
+            child: Center(
+              child: Text(
+                "Precio",
                 style: TextStyle(
-                  color: Color(0xFF0B768C),
+                  color: ParkaColors.parkaGreen,
+                  fontSize: 28.0,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Text("${this.maxSliderValue.toInt()}\$",
+            ),
+          ),
+          Expanded(
+            child: SliderTheme(
+              data: SliderThemeData(
+                activeTrackColor: Color(0xFF0B768C),
+                thumbColor: Color(0xFF0B768C),
+              ),
+              child: Slider(
+                value: this.rentPriceFilter,
+                min: this.minSliderValue,
+                max: this.maxSliderValue,
+                onChanged: (value) {
+                  this.sliderChangeHandler(value);
+                },
+              ),
+            ),
+          ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "${this.minSliderValue.toInt()}\$",
                   style: TextStyle(
                     color: Color(0xFF0B768C),
-                  ))
-            ],
-          ),
-        )
-      ],
+                  ),
+                ),
+                Text("${this.maxSliderValue.toInt()}\$",
+                    style: TextStyle(
+                      color: Color(0xFF0B768C),
+                    ))
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

@@ -13,5 +13,8 @@ class ParkingFilterDto {
     this.minPrice,
     this.parkingName,
     this.rating,
-  });
+  }) {
+    this.rating = this.rating ?? 5;
+    this.features = this.features ?? [];
+  }
 }
