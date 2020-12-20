@@ -80,7 +80,10 @@ class _FilterPageState extends State<FilterPage> {
     return Scaffold(
       floatingActionButton: ParkaFloatingActionButton(
         iconData: Icons.search,
-        onPressedHandler: this._mapController.loadParkings,
+        onPressedHandler: () {
+          this._mapController.loadParkings();
+          Get.back();
+        },
       ),
       body: SafeArea(
         child: ModalProgressHUD(
