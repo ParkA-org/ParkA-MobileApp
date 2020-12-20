@@ -4,13 +4,13 @@ import "package:flutter/material.dart";
 class PriceSliderWidget extends StatelessWidget {
   const PriceSliderWidget({
     Key key,
-    @required this.rentPriceFilter,
+    @required this.rangeFilter,
     @required this.sliderChangeHandler,
     @required this.maxSliderValue,
     @required this.minSliderValue,
   }) : super(key: key);
 
-  final double rentPriceFilter;
+  final RangeValues rangeFilter;
   final Function sliderChangeHandler;
   final double minSliderValue;
   final double maxSliderValue;
@@ -39,11 +39,16 @@ class PriceSliderWidget extends StatelessWidget {
                 activeTrackColor: Color(0xFF0B768C),
                 thumbColor: Color(0xFF0B768C),
               ),
-              child: Slider(
-                value: this.rentPriceFilter,
+              child: RangeSlider(
+                divisions: (this.maxSliderValue / this.minSliderValue).floor(),
+                values: this.rangeFilter,
                 min: this.minSliderValue,
                 max: this.maxSliderValue,
-                onChanged: (value) {
+                labels: RangeLabels(
+                  this.rangeFilter.start.round().toString(),
+                  this.rangeFilter.end.round().toString(),
+                ),
+                onChanged: (RangeValues value) {
                   this.sliderChangeHandler(value);
                 },
               ),

@@ -4,6 +4,7 @@ import 'package:ParkA/data/data-models/schedule/per_day_schedule_data_model.dart
 import 'package:ParkA/data/data-models/schedule/schedule_data_model.dart';
 import 'package:ParkA/data/dtos/parking/create_parking_dto.dart';
 import 'package:ParkA/data/dtos/parking/update_parking_dto.dart';
+import 'package:ParkA/pages/filter/data/filter_input_dto.dart';
 import 'package:ParkA/utils/functions/upload_image.dart';
 import 'package:ParkA/utils/graphql/mutations/parking_mutations.dart';
 import 'package:ParkA/utils/graphql/queries/parking_queries.dart';
@@ -244,6 +245,58 @@ class ParkingUseCases {
     final graphqlClient = Get.find<GraphqlClientController>();
 
     QueryOptions queryOptions = QueryOptions(documentNode: gql(getAllParkings));
+
+    final QueryResult getAllUserParkingsResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .query(queryOptions);
+
+    if (getAllUserParkingsResult.data != null &&
+        getAllUserParkingsResult.data["getAllParkings"] != null) {
+      final List<Parking> parkingsData = Parking.parkingsFromJson(
+          getAllUserParkingsResult.data["getAllParkings"]);
+
+      return parkingsData;
+    }
+    return [];
+  }
+
+  static Future<List<Parking>> getAllParkingsSpots(
+    ParkingFilterDto _parkingFilterDto,
+  ) async {
+    final graphqlClient = Get.find<GraphqlClientController>();
+
+    Map<String, dynamic> _input = {
+      "data": {"where": {}}
+    };
+
+    if (_parkingFilterDto.parkingName != null &&
+        _parkingFilterDto.parkingName.length == 0) {
+      _input["data"]["where"]["parkingName_contains"] =
+          _parkingFilterDto.parkingName;
+    }
+
+    if (_parkingFilterDto.rating != null) {
+      _input["data"]["where"]["rating_gte"] = _parkingFilterDto.rating;
+    }
+
+    if (_parkingFilterDto.maxPrice != null) {
+      _input["data"]["where"]["priceHours_lte"] = _parkingFilterDto.maxPrice;
+    }
+
+    if (_parkingFilterDto.minPrice != null) {
+      _input["data"]["where"]["priceHours_gte"] = _parkingFilterDto.minPrice;
+    }
+
+    if (_parkingFilterDto.features.length != 0) {
+      _input["data"]["where"]["features_in"] = _parkingFilterDto.features;
+    }
+
+    print(_input);
+
+    QueryOptions queryOptions = QueryOptions(
+      documentNode: gql(getFilteredParkingsQuery),
+      variables: _input,
+    );
 
     final QueryResult getAllUserParkingsResult = await graphqlClient
         .parkaGraphqlClient.value.graphQlClient

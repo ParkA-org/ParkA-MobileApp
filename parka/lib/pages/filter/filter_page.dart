@@ -3,7 +3,9 @@ import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/components/tabs/feature_tab.dart';
 import 'package:ParkA/controllers/map_controller.dart';
 import 'package:ParkA/data/data-models/feature/parking_feature_data_model.dart';
+import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/use-cases/feature/feature_use_cases.dart';
+import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
 import 'package:ParkA/pages/filter/components/featureFilterWidget/feature_filter_widget.dart';
 import 'package:ParkA/pages/filter/components/top_bar.dart';
 import 'package:ParkA/styles/parka_colors.dart';
@@ -23,13 +25,12 @@ class FilterPage extends StatefulWidget {
 class _FilterPageState extends State<FilterPage> {
   MapController _mapController = Get.find<MapController>();
 
-  double minRentPriceFilter = 50.0;
-  double maxRentPriceFilter = 2000.0;
-
-  String minHour = '';
-  String maxHour = '';
+  double _min;
+  double _max;
 
   List<Feature> features;
+  List<Parking> _priceParkings;
+  List<double> _prices;
   bool _loadingData;
 
   @override
@@ -64,6 +65,11 @@ class _FilterPageState extends State<FilterPage> {
 
   void getFormData() async {
     this.features = await FeatureUseCases.getAllFeatures();
+    this._priceParkings = await ParkingUseCases.getAllParking();
+    this._prices = List.from(this._priceParkings.map((e) => e.priceHours));
+    this._prices.sort();
+    this._min = this._prices[0];
+    this._max = this._prices[this._prices.length - 1];
 
     setState(() {
       this._loadingData = false;
@@ -121,17 +127,21 @@ class _FilterPageState extends State<FilterPage> {
                             ),
                             Obx(
                               () => PriceSliderWidget(
-                                rentPriceFilter: this
-                                        ._mapController
-                                        .parkingFilterDto
-                                        .maxPrice ??
-                                    (this.minRentPriceFilter +
-                                            this.maxRentPriceFilter) /
-                                        2,
-                                minSliderValue: this.minRentPriceFilter,
-                                maxSliderValue: this.maxRentPriceFilter,
+                                rangeFilter: RangeValues(
+                                    this
+                                            ._mapController
+                                            .parkingFilterDto
+                                            .minPrice ??
+                                        this._min,
+                                    this
+                                            ._mapController
+                                            .parkingFilterDto
+                                            .maxPrice ??
+                                        this._max),
+                                minSliderValue: this._min,
+                                maxSliderValue: this._max,
                                 sliderChangeHandler:
-                                    this._mapController.setMaxPrice,
+                                    this._mapController.setPriceFilter,
                               ),
                             ),
                             Obx(

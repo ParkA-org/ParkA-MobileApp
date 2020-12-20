@@ -17,6 +17,7 @@ class MapController extends GetxController {
   Rx<ParkingFilterDto> _filterParkingDto = new ParkingFilterDto().obs;
 
   ParkingFilterDto get parkingFilterDto => this._filterParkingDto.value;
+  bool get loading => this._loading.value;
 
   void setCurrentParkings(List<Parking> newParkings) {
     newParkings.forEach((parking) {
@@ -59,11 +60,12 @@ class MapController extends GetxController {
 
   // search
   void loadParkings() async {
-    List<Parking> _searchResult = await ParkingUseCases.getAllParking();
+    List<Parking> _searchResult =
+        await ParkingUseCases.getAllParkingsSpots(this.parkingFilterDto);
     print(_searchResult.length);
-    // this._parkings.update((_instance) {
-    //   _instance = _searchResult;
-    // });
+    this._parkings.update((_instance) {
+      this._parkings = _searchResult.obs;
+    });
   }
 
   //filter logic
@@ -85,15 +87,10 @@ class MapController extends GetxController {
     });
   }
 
-  void setMaxPrice(double _maxPrice) {
+  void setPriceFilter(RangeValues _values) {
     this._filterParkingDto.update((_instance) {
-      _instance.maxPrice = _maxPrice;
-    });
-  }
-
-  void setMinPrice(double _minPrice) {
-    this._filterParkingDto.update((_instance) {
-      _instance.minPrice = _minPrice;
+      _instance.maxPrice = _values.end;
+      _instance.minPrice = _values.start;
     });
   }
 
