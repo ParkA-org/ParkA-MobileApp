@@ -72,7 +72,16 @@ class MapController extends GetxController {
   //filter logic
   void resetFilters() {
     this._filterParkingDto.update((_instance) {
-      this._filterParkingDto = new ParkingFilterDto().obs;
+      final _position = _instance.position;
+      this._filterParkingDto = new ParkingFilterDto(
+        position: _position,
+      ).obs;
+    });
+  }
+
+  void setPosition(LatLng _position) {
+    this._filterParkingDto.update((_instance) {
+      _instance.position = _position;
     });
   }
 

@@ -1,9 +1,12 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 class ParkingFilterDto {
   double rating;
   double minPrice;
   double maxPrice;
   List<String> features;
   String parkingName;
+  LatLng position;
   bool isAvaliable;
 
   ParkingFilterDto({
@@ -13,6 +16,7 @@ class ParkingFilterDto {
     this.minPrice,
     this.parkingName,
     this.rating,
+    this.position,
   }) {
     this.rating = this.rating ?? 5;
     this.features = this.features ?? [];

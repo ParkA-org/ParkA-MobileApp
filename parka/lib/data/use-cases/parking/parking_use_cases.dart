@@ -275,6 +275,13 @@ class ParkingUseCases {
           _parkingFilterDto.parkingName;
     }
 
+    if (_parkingFilterDto.position != null) {
+      _input["data"]["where"]["position_near"] = {
+        "latitude": _parkingFilterDto.position.latitude,
+        "longitude": _parkingFilterDto.position.longitude
+      };
+    }
+
     if (_parkingFilterDto.rating != null) {
       _input["data"]["where"]["rating_gte"] = _parkingFilterDto.rating;
     }
