@@ -25,9 +25,9 @@ class SearchPanel extends StatefulWidget {
 }
 
 class _SearchPanelState extends State<SearchPanel> {
-  final mapController = Get.find<MapController>();
+  MapController mapController = Get.find<MapController>();
 
-  List<Parking> currentParkings = [];
+  // List<Parking> currentParkings = [];
 
   void getAllParkings() async {
     // await list();
@@ -35,8 +35,8 @@ class _SearchPanelState extends State<SearchPanel> {
     mapController.searchParkings(null);
   }
 
-  Future<List<Parking>> list() async =>
-      currentParkings = await ParkingUseCases.getAllParking();
+  // Future<List<Parking>> list() async =>
+  //     currentParkings = await ParkingUseCases.getAllParking();
 
   List<Widget> searchResultBuilder(List<Parking> filteredResults) {
     List<Widget> searchResults = [];
@@ -62,7 +62,7 @@ class _SearchPanelState extends State<SearchPanel> {
   @override
   void initState() {
     super.initState();
-    getAllParkings();
+    // getAllParkings();
   }
 
   @override
@@ -117,12 +117,11 @@ class _SearchPanelState extends State<SearchPanel> {
               child: FavoritePlaceButton(),
             ),
             Expanded(
-              child: GetBuilder<MapController>(
-                  init: mapController,
-                  builder: (_) => ListView(
-                        children:
-                            searchResultBuilder(mapController.filteredResults),
-                      )),
+              child: Obx(
+                () => ListView(
+                  children: searchResultBuilder(this.mapController.parkings),
+                ),
+              ),
             ),
           ],
         ),

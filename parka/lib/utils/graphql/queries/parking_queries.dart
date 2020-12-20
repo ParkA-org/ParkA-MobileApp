@@ -135,6 +135,42 @@ query($userLocation: FilterInput!) {
 
 """;
 
+const String getFilteredParkingsQuery = r"""
+query($data: FilterInput!) {
+  getAllParkings(input: $data) {
+    id
+    user {
+      id
+      reviews {
+        id
+        user {
+          id
+          name
+          lastName
+          profilePicture
+        }
+        calification
+        review
+      }
+    }
+    latitude
+    longitude
+    mainPicture
+    pictures
+    parkingName
+    priceHours
+    rating
+    verified
+    isAvailable
+    features {
+      id
+      name
+    }
+  }
+}
+
+""";
+
 const String getAllParkings = r"""
 query {
   getAllParkings(input: { where: {} }) {

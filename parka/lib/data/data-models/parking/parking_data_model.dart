@@ -61,7 +61,7 @@ class Parking {
         parking["rating"].toString(),
       ),
       information: parking["information"],
-      user: User.userFromJson(parking['user']),
+      user: User.otherUserFromJson(parking['user']),
       isAvailable: parking["isAvailable"],
     );
   }
