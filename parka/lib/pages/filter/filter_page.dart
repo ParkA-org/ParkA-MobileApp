@@ -6,7 +6,6 @@ import 'package:ParkA/data/data-models/feature/parking_feature_data_model.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/use-cases/feature/feature_use_cases.dart';
 import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
-import 'package:ParkA/pages/filter/components/featureFilterWidget/feature_filter_widget.dart';
 import 'package:ParkA/pages/filter/components/top_bar.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import "package:flutter/material.dart";

@@ -18,6 +18,7 @@ class MapController extends GetxController {
 
   ParkingFilterDto get parkingFilterDto => this._filterParkingDto.value;
   bool get loading => this._loading.value;
+  List<Parking> get parkings => this._parkings;
 
   void setCurrentParkings(List<Parking> newParkings) {
     newParkings.forEach((parking) {

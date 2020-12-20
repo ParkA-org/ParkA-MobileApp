@@ -270,7 +270,7 @@ class ParkingUseCases {
     };
 
     if (_parkingFilterDto.parkingName != null &&
-        _parkingFilterDto.parkingName.length == 0) {
+        _parkingFilterDto.parkingName.length != 0) {
       _input["data"]["where"]["parkingName_contains"] =
           _parkingFilterDto.parkingName;
     }
