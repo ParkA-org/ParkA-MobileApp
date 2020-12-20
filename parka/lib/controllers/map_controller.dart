@@ -64,9 +64,8 @@ class MapController extends GetxController {
     List<Parking> _searchResult =
         await ParkingUseCases.getAllParkingsSpots(this.parkingFilterDto);
     print(_searchResult.length);
-    this._parkings.update((_instance) {
-      this._parkings = _searchResult.obs;
-    });
+
+    this._parkings.assignAll(_searchResult);
   }
 
   //filter logic
