@@ -62,7 +62,7 @@ class LoginScreen extends StatelessWidget {
                     label: "Iniciar sesion con Google",
                     onTapHandler: () {
                       GoogleSignInController signInController =
-                          Get.find<GoogleSignInController>();
+                          Get.put(GoogleSignInController());
                       signInController.signIn();
                     },
                     hasIcon: true,
