@@ -262,6 +262,7 @@ class ParkingUseCases {
 
   static Future<List<Parking>> getAllParkingsSpots(
     ParkingFilterDto _parkingFilterDto,
+    bool _textSearch,
   ) async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
@@ -269,7 +270,8 @@ class ParkingUseCases {
       "data": {"where": {}}
     };
 
-    if (_parkingFilterDto.parkingName != null &&
+    if (_textSearch &&
+        _parkingFilterDto.parkingName != null &&
         _parkingFilterDto.parkingName.length != 0) {
       _input["data"]["where"]["parkingName_contains"] =
           _parkingFilterDto.parkingName;
