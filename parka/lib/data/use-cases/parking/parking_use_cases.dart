@@ -277,7 +277,7 @@ class ParkingUseCases {
           _parkingFilterDto.parkingName;
     }
 
-    if (_parkingFilterDto.position != null) {
+    if (!_textSearch && _parkingFilterDto.position != null) {
       _input["data"]["where"]["position_near"] = {
         "latitude": _parkingFilterDto.position.latitude,
         "longitude": _parkingFilterDto.position.longitude
