@@ -50,6 +50,8 @@ class MapController extends GetxController {
         position: _position,
       ).obs;
     });
+    this._firstSearch = true;
+    this.loadParkings(false);
   }
 
   void setPosition(LatLng _position) {
