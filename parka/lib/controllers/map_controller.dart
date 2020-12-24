@@ -9,6 +9,7 @@ class MapController extends GetxController {
   Rx<GoogleMapController> mapController = Rx();
 
   RxBool _loading;
+  bool _firstSearch = true;
   RxList<Parking> _parkings = RxList();
   RxList<Parking> _textSearchParkings = RxList();
   Rx<ParkingFilterDto> _filterParkingDto = new ParkingFilterDto().obs;
@@ -29,12 +30,15 @@ class MapController extends GetxController {
       this.parkingFilterDto,
       _textSearch,
     );
-    print(_searchResult.length);
 
     if (_textSearch) {
       this._textSearchParkings.assignAll(_searchResult);
     } else {
       this._parkings.assignAll(_searchResult);
+      if (this._firstSearch) {
+        this._textSearchParkings.assignAll(_searchResult);
+        this._firstSearch = false;
+      }
     }
   }
 
