@@ -89,7 +89,7 @@ class PrivateDrawer extends StatelessWidget {
                                 child: ParkaUserReservationInfoWidget(
                                   value:
                                       this.reservationsAsCLientCount.toString(),
-                                  label: "Reservaciones como cliente",
+                                  label: "Siendo cliente",
                                 ),
                               ),
                             ),
@@ -103,7 +103,7 @@ class PrivateDrawer extends StatelessWidget {
                                 child: ParkaUserReservationInfoWidget(
                                   value:
                                       this.reservationsAsOwnerCount.toString(),
-                                  label: "Reservaciones como anfitrion",
+                                  label: "Siendo anfitrion",
                                 ),
                               ),
                             ),
@@ -231,9 +231,10 @@ class ParkaUserReservationInfoWidget extends StatelessWidget {
             child: AutoSizeText(
               this.value ?? "0",
               maxLines: 1,
+              minFontSize: 24,
+              maxFontSize: 30,
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 24.0,
                 fontWeight: FontWeight.w600,
                 fontFamily: "Montserrat",
               ),
@@ -245,9 +246,10 @@ class ParkaUserReservationInfoWidget extends StatelessWidget {
           child: AutoSizeText(
             this.label,
             maxLines: 1,
+            minFontSize: 18,
+            maxFontSize: 24,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 14.0,
               fontWeight: FontWeight.normal,
               fontFamily: "Montserrat",
             ),
