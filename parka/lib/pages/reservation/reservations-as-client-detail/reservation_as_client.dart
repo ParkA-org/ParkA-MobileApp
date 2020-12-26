@@ -250,7 +250,6 @@ class ActionButtonsOwnerState extends StatelessWidget {
                       )
                     : this.reservation.status == "Cancelled"
                         ? InkWell(
-                            onTap: () {},
                             child: Container(
                               decoration: BoxDecoration(
                                 color: Colors.red,
@@ -287,7 +286,7 @@ class ActionButtonsOwnerState extends StatelessWidget {
                                 onTap: () {},
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: Color(0xff077187),
+                                    color: Colors.blueGrey,
                                     borderRadius: BorderRadius.circular(12.0),
                                     boxShadow: [
                                       BoxShadow(
@@ -304,7 +303,7 @@ class ActionButtonsOwnerState extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 12, vertical: 10.0),
                                     child: AutoSizeText(
-                                      "Mostrar Calificación",
+                                      "En Progreso",
                                       maxLines: 1,
                                       maxFontSize: 30,
                                       minFontSize: 25,
