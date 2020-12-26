@@ -164,18 +164,13 @@ class ReservationUseCases {
       }
     };
 
-    QueryOptions _queryOptions = new QueryOptions(
-        documentNode: gql(getReservationByIdQuery), variables: data);
+    final options = MutationOptions(
+        variables: data, documentNode: gql(createReservationMutation));
 
-    final _result = await graphqlClient.mutate(_queryOptions);
+    final _result = await graphqlClient.mutate(options);
 
     if (_result.data != null) {
-      final reservation = _result.data['getReservationById'];
-
-      final Reservation reservationData =
-          Reservation.reservationFromJson(reservation);
-
-      return reservationData;
+      return _result.data;
     }
     return null;
   }
