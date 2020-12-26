@@ -21,9 +21,12 @@ class ParkingTile extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
         child: Container(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 200,
+                height: 120,
+                width: 300,
                 margin: EdgeInsets.symmetric(vertical: 5.0),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(15)),

@@ -8,6 +8,7 @@ query {
     parkingName
     information
     latitude
+    direction
     longitude
     priceHours
     countParking
