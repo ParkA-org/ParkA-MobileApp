@@ -128,7 +128,7 @@ class ActionButtonsOwnerState extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Padding(
         padding: const EdgeInsets.only(left: 32.0),
-        child: true != true
+        child: this.reservation.status == "Created"
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -205,7 +205,7 @@ class ActionButtonsOwnerState extends StatelessWidget {
                 ],
               )
             : Center(
-                child: true != false
+                child: this.reservation != false
                     ? InkWell(
                         onTap: () {
                           showDialog(
