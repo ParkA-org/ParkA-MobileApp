@@ -151,4 +151,32 @@ class ReservationUseCases {
     }
     return null;
   }
+
+  static Future<Reservation> cancelReservation(id) async {
+    final graphqlClient = Get.find<GraphqlClientController>()
+        .parkaGraphqlClient
+        .value
+        .graphQlClient;
+
+    final data = {
+      "data": {
+        "id": id,
+      }
+    };
+
+    QueryOptions _queryOptions = new QueryOptions(
+        documentNode: gql(getReservationByIdQuery), variables: data);
+
+    final _result = await graphqlClient.mutate(_queryOptions);
+
+    if (_result.data != null) {
+      final reservation = _result.data['getReservationById'];
+
+      final Reservation reservationData =
+          Reservation.reservationFromJson(reservation);
+
+      return reservationData;
+    }
+    return null;
+  }
 }
