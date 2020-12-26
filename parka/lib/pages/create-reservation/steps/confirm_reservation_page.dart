@@ -7,8 +7,8 @@ import 'package:ParkA/components/user/other_user_personal_information_widget.dar
 import 'package:ParkA/controllers/create-reservation-form/create_reservation_controller.dart';
 import 'package:ParkA/pages/create-reservation/steps/select_payment_method_page.dart';
 import 'package:ParkA/pages/create-reservation/steps/select_vehile_page.dart';
-import 'package:ParkA/pages/history/history_page.dart';
 import 'package:ParkA/pages/map/maps_page.dart';
+import 'package:ParkA/pages/reservation/history/history_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
