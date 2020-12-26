@@ -205,7 +205,8 @@ class ActionButtonsOwnerState extends StatelessWidget {
                 ],
               )
             : Center(
-                child: this.reservation != false
+                child: !this.reservation.reviewed &&
+                        this.reservation.status == "Completed"
                     ? InkWell(
                         onTap: () {
                           showDialog(
@@ -247,12 +248,12 @@ class ActionButtonsOwnerState extends StatelessWidget {
                           ),
                         ),
                       )
-                    : true != true
+                    : this.reservation.status == "Cancelled"
                         ? InkWell(
                             onTap: () {},
                             child: Container(
                               decoration: BoxDecoration(
-                                color: Color(0xff077187),
+                                color: Colors.red,
                                 borderRadius: BorderRadius.circular(12.0),
                                 boxShadow: [
                                   BoxShadow(
@@ -268,7 +269,7 @@ class ActionButtonsOwnerState extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 12, vertical: 10.0),
                                 child: AutoSizeText(
-                                  "Editar Calificación",
+                                  "Cancelado",
                                   maxLines: 1,
                                   maxFontSize: 30,
                                   minFontSize: 25,
@@ -281,39 +282,75 @@ class ActionButtonsOwnerState extends StatelessWidget {
                               ),
                             ),
                           )
-                        : InkWell(
-                            onTap: () {},
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Color(0xff077187),
-                                borderRadius: BorderRadius.circular(12.0),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.transparent.withOpacity(0.2),
-                                    spreadRadius: 4,
-                                    blurRadius: 7,
-                                    offset: Offset(
-                                        0, 6), // changes position of shadow
+                        : this.reservation.status == "InProgress"
+                            ? InkWell(
+                                onTap: () {},
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Color(0xff077187),
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            Colors.transparent.withOpacity(0.2),
+                                        spreadRadius: 4,
+                                        blurRadius: 7,
+                                        offset: Offset(
+                                            0, 6), // changes position of shadow
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 10.0),
-                                child: AutoSizeText(
-                                  "Mostrar Calificación",
-                                  maxLines: 1,
-                                  maxFontSize: 30,
-                                  minFontSize: 25,
-                                  style: TextStyle(
-                                    fontFamily: "Montserrat",
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 12, vertical: 10.0),
+                                    child: AutoSizeText(
+                                      "Mostrar Calificación",
+                                      maxLines: 1,
+                                      maxFontSize: 30,
+                                      minFontSize: 25,
+                                      style: TextStyle(
+                                        fontFamily: "Montserrat",
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : InkWell(
+                                onTap: () {},
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Color(0xff077187),
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            Colors.transparent.withOpacity(0.2),
+                                        spreadRadius: 4,
+                                        blurRadius: 7,
+                                        offset: Offset(
+                                            0, 6), // changes position of shadow
+                                      ),
+                                    ],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 12, vertical: 10.0),
+                                    child: AutoSizeText(
+                                      "Mostrar Calificación",
+                                      maxLines: 1,
+                                      maxFontSize: 30,
+                                      minFontSize: 25,
+                                      style: TextStyle(
+                                        fontFamily: "Montserrat",
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
               ),
       ),
     );

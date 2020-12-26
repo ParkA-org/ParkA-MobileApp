@@ -1,5 +1,4 @@
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
-import 'package:ParkA/data/data-models/review/review_data_model.dart';
 import 'package:ParkA/data/data-models/user/user_data_model.dart';
 import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
 
