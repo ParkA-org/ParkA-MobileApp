@@ -91,6 +91,7 @@ class Parking {
           ),
           isAvailable: parking["isAvailable"],
           direction: parking["direction"],
+          information: parking["information"],
         ),
       );
     });
