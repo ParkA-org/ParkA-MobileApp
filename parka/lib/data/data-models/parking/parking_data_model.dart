@@ -90,6 +90,7 @@ class Parking {
             parking["rating"].toString(),
           ),
           isAvailable: parking["isAvailable"],
+          direction: parking["direction"],
         ),
       );
     });
