@@ -73,7 +73,9 @@ class _ParkingPageState extends State<ParkingPage> {
               child: CustomScrollView(
                 slivers: [
                   ParkaResizableOnScrollAppBar(
+                    appBarHeight: 150.0,
                     title: "Tus Parqueos",
+                    pinned: false,
                   ),
                   SliverList(
                     delegate: SliverChildListDelegate(
