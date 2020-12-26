@@ -104,6 +104,7 @@ List<GetPage> getRoutePages = [
   ),
   GetPage(
     name: ProfileScreen.routeName,
+    // ignore: missing_required_param
     page: () => ProfileScreen(),
   ),
   GetPage(
