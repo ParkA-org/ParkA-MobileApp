@@ -46,6 +46,18 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
     setState(() {});
   }
 
+  Future<void> cancelReservation() async {
+    bool result =
+        await ReservationUseCases.cancelReservation(this._reservationId);
+    if (result != null) {
+      return Navigator.pop(
+        context,
+      );
+    } else {
+      print("Something happened");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -54,6 +66,7 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
           ? ActionButtonsOwnerState(
               reservation: this._reservation,
               screenSize: screenSize,
+              handled: this.cancelReservation,
             )
           : Container(),
       body: SafeArea(
@@ -111,19 +124,12 @@ class ActionButtonsOwnerState extends StatelessWidget {
     Key key,
     @required this.reservation,
     @required this.screenSize,
+    @required this.handled,
   }) : super(key: key);
 
   final Reservation reservation;
   final Size screenSize;
-
-  Future<void> cancelReservation() async {
-    Reservation result =
-        await ReservationUseCases.getReservationById(reservation.id);
-    if (result != null) {
-    } else {
-      print("Something happened");
-    }
-  }
+  final Function handled;
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +179,7 @@ class ActionButtonsOwnerState extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 8.0),
                     child: InkWell(
                       onTap: () {
-                        this.cancelReservation();
+                        this.handled();
                       },
                       child: Center(
                         child: Container(
