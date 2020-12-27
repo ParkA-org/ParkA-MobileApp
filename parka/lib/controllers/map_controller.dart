@@ -8,64 +8,38 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class MapController extends GetxController {
   Rx<GoogleMapController> mapController = Rx();
 
-  RxList<Parking> currentParkings = List<Parking>().obs;
-  RxList<Parking> filteredResults = List<Parking>().obs;
-  RxList<Widget> searchResults = List<Widget>().obs;
-
   RxBool _loading;
+  bool _firstSearch = true;
   RxList<Parking> _parkings = RxList();
+  RxList<Parking> _textSearchParkings = RxList();
   Rx<ParkingFilterDto> _filterParkingDto = new ParkingFilterDto().obs;
 
   ParkingFilterDto get parkingFilterDto => this._filterParkingDto.value;
   bool get loading => this._loading.value;
   List<Parking> get parkings => this._parkings;
-
-  void setCurrentParkings(List<Parking> newParkings) {
-    newParkings.forEach((parking) {
-      if (!currentParkings.contains(parking)) {
-        currentParkings = newParkings.obs;
-        filteredResults = newParkings.obs;
-        return;
-      }
-    });
-  }
+  List<Parking> get textSearchParkings => this._textSearchParkings;
 
   void setMapController(GoogleMapController controller) {
     mapController = controller.obs;
     return;
   }
 
-  void searchParkings(String searchQuery) {
-    if (searchQuery == null || (searchQuery?.isEmpty ?? true)) {
-      filteredResults.obs.update((value) {
-        filteredResults = currentParkings;
-      });
-    } else {
-      filteredResults.obs.update((value) {
-        filteredResults = RxList<Parking>();
-
-        searchQuery = searchQuery.toUpperCase();
-        currentParkings.forEach((parking) {
-          if (parking.parkingName.toUpperCase().contains(searchQuery) ||
-              (parking.sector?.toUpperCase()?.contains(searchQuery) ?? false) ||
-              (parking.information?.toUpperCase()?.contains(searchQuery) ??
-                  false)) {
-            filteredResults.add(parking);
-          }
-        });
-      });
-    }
-    update();
-    return;
-  }
-
   // search
-  void loadParkings() async {
-    List<Parking> _searchResult =
-        await ParkingUseCases.getAllParkingsSpots(this.parkingFilterDto);
-    print(_searchResult.length);
+  void loadParkings(bool _textSearch) async {
+    List<Parking> _searchResult = await ParkingUseCases.getAllParkingsSpots(
+      this.parkingFilterDto,
+      _textSearch,
+    );
 
-    this._parkings.assignAll(_searchResult);
+    if (_textSearch) {
+      this._textSearchParkings.assignAll(_searchResult);
+    } else {
+      this._parkings.assignAll(_searchResult);
+      if (this._firstSearch) {
+        this._textSearchParkings.assignAll(_searchResult);
+        this._firstSearch = false;
+      }
+    }
   }
 
   //filter logic
@@ -76,6 +50,8 @@ class MapController extends GetxController {
         position: _position,
       ).obs;
     });
+    this._firstSearch = true;
+    this.loadParkings(false);
   }
 
   void setPosition(LatLng _position) {

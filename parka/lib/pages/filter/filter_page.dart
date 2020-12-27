@@ -81,7 +81,7 @@ class _FilterPageState extends State<FilterPage> {
       floatingActionButton: ParkaFloatingActionButton(
         iconData: Icons.search,
         onPressedHandler: () {
-          this._mapController.loadParkings();
+          this._mapController.loadParkings(false);
           Get.back();
         },
       ),

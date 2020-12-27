@@ -40,7 +40,7 @@ class SearchBar extends StatelessWidget {
         onSubmitted: (String value) {
           mapController.setParkingNameSearch(value);
 
-          mapController.loadParkings();
+          mapController.loadParkings(true);
         },
         decoration: InputDecoration(
           border: InputBorder.none,
