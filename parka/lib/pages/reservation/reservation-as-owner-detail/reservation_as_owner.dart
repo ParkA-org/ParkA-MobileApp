@@ -140,14 +140,16 @@ class ActionButtonsOwnerState extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 32.0),
         child: this.reservation.status == "Created"
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    onTap: () {},
+            ? Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: InkWell(
+                  onTap: () {
+                    this.handled();
+                  },
+                  child: Center(
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Color(0xff077187),
+                        color: Color(0xffF30F1D),
                         borderRadius: BorderRadius.circular(15.0),
                         boxShadow: [
                           BoxShadow(
@@ -160,12 +162,12 @@ class ActionButtonsOwnerState extends StatelessWidget {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 40, vertical: 12.0),
+                            horizontal: 40, vertical: 16.0),
                         child: AutoSizeText(
-                          "Confirmar",
+                          "Cancelar",
                           maxLines: 1,
-                          maxFontSize: 26,
-                          minFontSize: 18,
+                          maxFontSize: 30,
+                          minFontSize: 24,
                           style: TextStyle(
                             fontFamily: "Montserrat",
                             fontWeight: FontWeight.bold,
@@ -175,50 +177,10 @@ class ActionButtonsOwnerState extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: InkWell(
-                      onTap: () {
-                        this.handled();
-                      },
-                      child: Center(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Color(0xffF30F1D),
-                            borderRadius: BorderRadius.circular(15.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.transparent.withOpacity(0.2),
-                                spreadRadius: 1,
-                                blurRadius: 7,
-                                offset:
-                                    Offset(0, 2), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 30, vertical: 12.0),
-                            child: AutoSizeText(
-                              "Cancelar",
-                              maxLines: 1,
-                              maxFontSize: 26,
-                              minFontSize: 18,
-                              style: TextStyle(
-                                fontFamily: "Montserrat",
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
+                ),
               )
             : Center(
-                child: true != false
+                child: !this.reservation.reviewed
                     ? InkWell(
                         onTap: () {},
                         child: Container(
