@@ -41,7 +41,7 @@ class ReviewUseCases {
     return false;
   }
 
-  static Future<Reservation> getReviewById(id) async {
+  static Future<Reservation> getReviewByReservation(id) async {
     final graphqlClient = Get.find<GraphqlClientController>()
         .parkaGraphqlClient
         .value
