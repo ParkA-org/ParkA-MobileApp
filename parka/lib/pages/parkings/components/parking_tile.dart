@@ -130,21 +130,6 @@ class ParkingTile extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      flex: 0,
-                      child: Row(
-                        children: [
-                          AutoSizeText(
-                            "Nombre: ",
-                            maxFontSize: 24,
-                            minFontSize: 22,
-                            style: kParkaTextBaseStyle.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
                       child: AutoSizeText(
                         "${parking.parkingName}",
                         maxFontSize: 24,
@@ -152,8 +137,7 @@ class ParkingTile extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: kParkaTextBaseStyle.copyWith(
-                          fontWeight: FontWeight.normal,
-                        ),
+                            fontWeight: FontWeight.bold, color: Colors.black87),
                       ),
                     ),
                     Expanded(
