@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:graphql/client.dart';
 
 class ReviewUseCases {
-  static Future<bool> createReservation(
+  static Future<bool> createReview(
       CreateReservationDto _createReservationDto) async {
     final graphqlClient = Get.find<GraphqlClientController>()
         .parkaGraphqlClient
@@ -41,7 +41,7 @@ class ReviewUseCases {
     return false;
   }
 
-  static Future<Reservation> getReservationById(id) async {
+  static Future<Reservation> getReviewById(id) async {
     final graphqlClient = Get.find<GraphqlClientController>()
         .parkaGraphqlClient
         .value
