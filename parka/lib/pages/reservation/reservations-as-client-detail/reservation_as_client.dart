@@ -51,6 +51,16 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
     setState(() {});
   }
 
+  Future cancelReservation() async {
+    bool result =
+        await ReservationUseCases.cancelReservation(this._reservationId);
+    if (result != null) {
+      return Navigator.pop(
+        context,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -59,6 +69,7 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
           ? ActionButtonsOwnerState(
               screenSize: screenSize,
               reservation: this._reservation,
+              handled: this.cancelReservation,
             )
           : Container(),
       body: SafeArea(
@@ -115,8 +126,10 @@ class ActionButtonsOwnerState extends StatelessWidget {
     Key key,
     @required this.screenSize,
     @required this.reservation,
+    @required this.handled,
   }) : super(key: key);
 
+  final Function handled;
   final Reservation reservation;
   final Size screenSize;
 
@@ -167,7 +180,9 @@ class ActionButtonsOwnerState extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        this.handled();
+                      },
                       child: Center(
                         child: Container(
                           decoration: BoxDecoration(

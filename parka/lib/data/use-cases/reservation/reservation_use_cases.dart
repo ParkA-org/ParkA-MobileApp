@@ -115,8 +115,6 @@ class ReservationUseCases {
 
     final _result = await graphqlClient.mutate(options);
 
-    print(_result.exception.toString());
-
     if (_result.data != null) {
       return true;
     }
@@ -152,7 +150,7 @@ class ReservationUseCases {
     return null;
   }
 
-  static Future<Reservation> cancelReservation(id) async {
+  static Future<bool> cancelReservation(id) async {
     final graphqlClient = Get.find<GraphqlClientController>()
         .parkaGraphqlClient
         .value
@@ -165,12 +163,12 @@ class ReservationUseCases {
     };
 
     final options = MutationOptions(
-        variables: data, documentNode: gql(createReservationMutation));
+        variables: data, documentNode: gql(cancelReservationMutation));
 
     final _result = await graphqlClient.mutate(options);
 
     if (_result.data != null) {
-      return _result.data;
+      return true;
     }
     return null;
   }
