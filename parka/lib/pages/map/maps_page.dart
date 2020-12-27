@@ -104,7 +104,7 @@ class _MapPageState extends State<MapPage> {
           .mapController
           .setPosition(LatLng(userLocation.latitude, userLocation.longitude));
 
-      this.mapController.loadParkings();
+      this.mapController.loadParkings(false);
     }
 
     setState(() {
