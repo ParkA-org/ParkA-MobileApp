@@ -1,6 +1,8 @@
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
+import 'package:ParkA/data/data-models/review/review_data_model.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
+import 'package:ParkA/data/use-cases/review/review_use_cases.dart';
 import 'package:ParkA/pages/reservation/components/parking_price_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/profile_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/review_dialog_widget.dart';
@@ -29,6 +31,7 @@ class ReservationAsClientPage extends StatefulWidget {
 class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
   String _reservationId;
   Reservation _reservation;
+  Review review;
   bool _loading;
   Parking a = new Parking(priceHours: 100);
 
@@ -51,6 +54,12 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
     setState(() {});
   }
 
+  Future getReview() async {
+    this.review =
+        await ReviewUseCases.getReviewByReservation(this._reservationId);
+    setState(() {});
+  }
+
   Future cancelReservation() async {
     bool result =
         await ReservationUseCases.cancelReservation(this._reservationId);
@@ -67,6 +76,7 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
     return Scaffold(
       floatingActionButton: !this._loading
           ? ActionButtonsOwnerState(
+              getRewiew: this.getReview,
               screenSize: screenSize,
               reservation: this._reservation,
               handled: this.cancelReservation,
@@ -127,9 +137,11 @@ class ActionButtonsOwnerState extends StatelessWidget {
     @required this.screenSize,
     @required this.reservation,
     @required this.handled,
+    @required this.getRewiew,
   }) : super(key: key);
 
   final Function handled;
+  final Function getRewiew;
   final Reservation reservation;
   final Size screenSize;
 
