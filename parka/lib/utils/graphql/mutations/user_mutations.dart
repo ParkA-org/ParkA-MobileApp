@@ -25,6 +25,19 @@ mutation($input: LoginUserInput!) {
     
 ''';
 
+const String socialLoginMutation = r"""
+mutation($input: SocialLoginInput!){
+  socialLogin(socialLoginInput: $input){
+    JWT
+    user{
+      id
+      name
+    }
+    register
+  }
+}
+""";
+
 const String createUserMutation = r"""
     mutation($data:CreateUserInput!){
       createUser(createUserInput:$data){

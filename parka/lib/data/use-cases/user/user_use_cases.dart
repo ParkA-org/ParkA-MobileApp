@@ -11,6 +11,27 @@ import 'package:graphql/client.dart';
 import '../../dtos/user/user_registration_dto.dart';
 
 class UserUseCases {
+  static Future<bool> socialLogin(
+      String email, String displayName, String photoURL, String origin) async {
+    final graphqlClient = Get.find<GraphqlClientController>();
+
+    final socialLoginInput = {
+      "input": {
+        "email": email,
+        "displayName": displayName,
+        "origin": origin,
+        "photoUrl": photoURL
+      }
+    };
+
+    MutationOptions socialLoginMutationOptions = MutationOptions(
+        documentNode: gql(socialLoginMutation), variables: socialLoginInput);
+
+    final QueryResult socialLoginResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .mutate(socialLoginMutationOptions);
+  }
+
   static Future<UserLoginDto> userLogin(String email, String password) async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
