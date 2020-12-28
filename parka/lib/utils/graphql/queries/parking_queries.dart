@@ -118,6 +118,42 @@ query($userLocation: FilterInput!) {
         review
       }
     }
+    calendar {
+      id
+      parkingId
+      monday {
+        start
+        finish
+      }
+      monday {
+        start
+        finish
+      }
+      tuesday {
+        start
+        finish
+      }
+      wednesday {
+        start
+        finish
+      }
+      thursday {
+        start
+        finish
+      }
+      friday {
+        start
+        finish
+      }
+      saturday {
+        start
+        finish
+      }
+      sunday {
+        start
+        finish
+      }
+    }
     latitude
     longitude
     mainPicture
@@ -152,6 +188,42 @@ query($data: FilterInput!) {
         }
         calification
         review
+      }
+    }
+    calendar {
+      id
+      parkingId
+      monday {
+        start
+        finish
+      }
+      monday {
+        start
+        finish
+      }
+      tuesday {
+        start
+        finish
+      }
+      wednesday {
+        start
+        finish
+      }
+      thursday {
+        start
+        finish
+      }
+      friday {
+        start
+        finish
+      }
+      saturday {
+        start
+        finish
+      }
+      sunday {
+        start
+        finish
       }
     }
     latitude

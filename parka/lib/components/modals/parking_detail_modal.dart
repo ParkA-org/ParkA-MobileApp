@@ -90,6 +90,7 @@ class ParkingDetailModal extends StatelessWidget {
                               color: ParkaColors.parkaGreen))
                     ],
                   ),
+                  WeekScheduleViewerWidget(calendar: parking.calendar),
                   ShowParkingFeaturesWidget(features: parking.features),
                   Divider(
                     thickness: 1.0,
