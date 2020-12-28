@@ -20,7 +20,8 @@ class ReviewUseCases {
         "review": _createReviewDto.review,
         "title": _createReviewDto.title,
         "calification": _createReviewDto.calification,
-        "type": _createReviewDto.type
+        "type": _createReviewDto.type,
+        "reviewedUser": _createReviewDto.reviewedUser
       }
     };
 

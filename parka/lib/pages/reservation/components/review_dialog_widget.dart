@@ -46,6 +46,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
     review.title = title;
     review.type = type;
     review.reservationId = this.reservationId;
+    review.reviewedUser = this.widget._reservation.owner.id;
 
     await ReviewUseCases.createReview(review);
   }

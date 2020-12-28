@@ -2,6 +2,7 @@ class CreateReviewDto {
   String parkingId;
   String reservationId;
   String review;
+  String reviewedUser;
   int calification;
   bool type;
   String title;
@@ -13,5 +14,6 @@ class CreateReviewDto {
     this.review,
     this.title,
     this.type,
+    this.reviewedUser,
   });
 }
