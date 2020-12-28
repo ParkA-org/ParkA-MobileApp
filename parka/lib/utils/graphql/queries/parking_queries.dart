@@ -12,6 +12,42 @@ query {
     longitude
     priceHours
     countParking
+    calendar {
+      id
+      parkingId
+      monday {
+        start
+        finish
+      }
+      monday {
+        start
+        finish
+      }
+      tuesday {
+        start
+        finish
+      }
+      wednesday {
+        start
+        finish
+      }
+      thursday {
+        start
+        finish
+      }
+      friday {
+        start
+        finish
+      }
+      saturday {
+        start
+        finish
+      }
+      sunday {
+        start
+        finish
+      }
+    }
     user {
       id
     }
