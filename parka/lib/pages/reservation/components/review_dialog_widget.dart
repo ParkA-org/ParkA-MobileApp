@@ -1,6 +1,7 @@
 import 'package:ParkA/components/inputs/parka_input_test.dart';
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/data/dtos/review/create_review_dto.dart';
+import 'package:ParkA/data/use-cases/review/review_use_cases.dart';
 import 'package:ParkA/pages/profile/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -45,10 +46,8 @@ class _ReviewDialogState extends State<ReviewDialog> {
     review.title = title;
     review.type = type;
     review.reservationId = this.reservationId;
-    print(review.calification);
-    print(review.title);
-    print(review.parkingId);
-    print(review.review);
+
+    await ReviewUseCases.createReview(this.review);
   }
 
   void changeReview(value) {

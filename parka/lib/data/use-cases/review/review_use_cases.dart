@@ -1,6 +1,7 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/data-models/review/review_data_model.dart';
 import 'package:ParkA/data/dtos/reservation/create_reservation_dto.dart';
+import 'package:ParkA/data/dtos/review/create_review_dto.dart';
 import 'package:ParkA/pages/create-reservation/utils/generate_schedule_util.dart';
 import 'package:ParkA/utils/graphql/mutations/reservation_mutation.dart';
 import 'package:ParkA/utils/graphql/queries/review_queries.dart';
@@ -8,19 +9,15 @@ import 'package:get/get.dart';
 import 'package:graphql/client.dart';
 
 class ReviewUseCases {
-  static Future<bool> createReview(
-      CreateReservationDto _createReservationDto) async {
+  static Future<bool> createReview(CreateReviewDto _createReviewDto) async {
     final graphqlClient = Get.find<GraphqlClientController>()
         .parkaGraphqlClient
         .value
         .graphQlClient;
 
-    final Map<String, dynamic> createReservationInput = {
+    final Map<String, dynamic> createReviewInput = {
       "data": {
         "parking": _createReservationDto.parking.id,
-        "owner": _createReservationDto.parking.user.id,
-        "checkInDate": _createReservationDto.checkInDate,
-        "checkOutDate": _createReservationDto.checkOutDate,
         "vehicle": _createReservationDto.vehicle.id,
         "paymentInfo": _createReservationDto.paymentInfo.id,
         "total": _createReservationDto.total,
@@ -29,7 +26,7 @@ class ReviewUseCases {
     };
 
     final options = MutationOptions(
-        variables: createReservationInput,
+        variables: createReviewInput,
         documentNode: gql(createReservationMutation));
 
     final _result = await graphqlClient.mutate(options);
