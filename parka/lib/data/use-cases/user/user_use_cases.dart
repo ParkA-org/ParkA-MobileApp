@@ -35,6 +35,8 @@ class UserUseCases {
       print(socialLoginResult.exception);
       return null;
     }
+    graphqlClient.updateGraphqlClientwithJwt(
+        socialLoginResult.data["socialLogin"]["JWT"]);
     return SocialLoginResult(
         jwt: socialLoginResult.data["socialLogin"]["JWT"],
         user: User.otherUserFromJson(

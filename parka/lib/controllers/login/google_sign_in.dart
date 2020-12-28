@@ -22,10 +22,10 @@ class GoogleSignInController extends GetxController {
     if (loginResult != null && loginResult.userIsRegistered) {
       Get.find<UserController>().socialLoginUser(loginResult);
       Get.toNamed(MapPage.routeName);
+    } else {
+      final authHeaders = await googleSignIn.currentUser.authHeaders;
+      await getContactInfo(authHeaders, googleAccount.id);
     }
-    final authHeaders = await googleSignIn.currentUser.authHeaders;
-    await getContactInfo(authHeaders, googleAccount.id);
-    googleSignIn.signOut();
   }
 
   Future<String> getContactInfo(authHeader, accountId) async {

@@ -1,4 +1,5 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
+import 'package:ParkA/controllers/login/google_sign_in.dart';
 import 'package:ParkA/data/data-models/user/user_data_model.dart';
 import 'package:ParkA/data/dtos/login/login_result_dto.dart';
 import 'package:ParkA/data/dtos/login/social_login_dto.dart';
@@ -84,6 +85,13 @@ class UserController extends GetxController {
   }
 
   logout() async {
+    if (SharedPreferenciesUtil.storage.getString("origin") == "google") {
+      try {
+        await Get.find<GoogleSignInController>().googleSignIn.signOut();
+      } catch (ex) {
+        await Get.put(GoogleSignInController()).googleSignIn.signOut();
+      }
+    }
     await SharedPreferenciesUtil.storage.remove("jwt");
     await SharedPreferenciesUtil.storage.remove("origin");
     print("REMOVED");

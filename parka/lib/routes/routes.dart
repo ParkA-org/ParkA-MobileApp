@@ -41,10 +41,9 @@ import 'package:get/route_manager.dart';
 
 List<GetPage> getRoutePages = [
   GetPage(
-    name: LoginScreen.routeName,
-    page: () => LoginScreen(),
-    binding: GraphqlClientBinding(),
-  ),
+      name: LoginScreen.routeName,
+      page: () => LoginScreen(),
+      bindings: [GraphqlClientBinding(), UserBinding()]),
   GetPage(
     name: EmailLogin.routeName,
     page: () => EmailLogin(),
