@@ -38,7 +38,6 @@ import 'package:ParkA/pages/update-password/update_user_password_screen.dart';
 import 'package:ParkA/pages/user-payments/user_registered_payment_methods_screen.dart';
 import 'package:ParkA/pages/vehicles/vehicle_page.dart';
 import 'package:get/route_manager.dart';
-import 'package:graphql/client.dart';
 
 List<GetPage> getRoutePages = [
   GetPage(

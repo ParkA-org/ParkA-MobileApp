@@ -6,7 +6,8 @@ import '../graphql_controller.dart';
 class GraphqlClientBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(GraphqlClientController(),
-        builder: () => GraphqlClientController());
+    Get.lazyPut<GraphqlClientController>(
+      () => GraphqlClientController(),
+    );
   }
 }
