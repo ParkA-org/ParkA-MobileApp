@@ -2,7 +2,7 @@ class CreateReviewDto {
   String parkingId;
   String reservationId;
   String review;
-  double calification;
+  int calification;
   bool type;
   String title;
 

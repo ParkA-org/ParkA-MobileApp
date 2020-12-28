@@ -38,7 +38,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
     this.parkingName = this.widget._reservation.parking.parkingName;
   }
 
-  void sendReview() {
+  void sendReview() async {
     CreateReviewDto review = new CreateReviewDto();
     review.review = this.review;
     review.parkingId = this.parkingId;
@@ -47,7 +47,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
     review.type = type;
     review.reservationId = this.reservationId;
 
-    await ReviewUseCases.createReview(this.review);
+    await ReviewUseCases.createReview(review);
   }
 
   void changeReview(value) {
