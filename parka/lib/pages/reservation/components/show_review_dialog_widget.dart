@@ -1,7 +1,5 @@
-import 'package:ParkA/components/inputs/parka_input_test.dart';
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/data/data-models/review/review_data_model.dart';
-import 'package:ParkA/data/dtos/review/create_review_dto.dart';
 import 'package:ParkA/pages/profile/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -39,20 +37,9 @@ class _ShowReviewState extends State<ShowReview> {
     this.reservationId = this.widget._reservation.id;
     this.picture = this.widget._reservation.parking.mainPicture;
     this.parkingName = this.widget._reservation.parking.parkingName;
-  }
-
-  void sendReview() {
-    CreateReviewDto review = new CreateReviewDto();
-    review.review = this.review;
-    review.parkingId = this.parkingId;
-    review.calification = parkingVoteFilter;
-    review.title = title;
-    review.type = type;
-    review.reservationId = this.reservationId;
-    print(review.calification);
-    print(review.title);
-    print(review.parkingId);
-    print(review.review);
+    this.review = this.widget._review.review;
+    this.title = this.widget._review.title;
+    this.parkingVoteFilter = this.widget._review.calification as int;
   }
 
   void changeReview(value) {
@@ -158,9 +145,15 @@ class _ShowReviewState extends State<ShowReview> {
                 ),
               ),
               Expanded(
-                child: ParkaInputTest(
-                  enable_padding: true,
-                  handler: this.changeTitle,
+                child: AutoSizeText(
+                  this.title,
+                  maxLines: 1,
+                  maxFontSize: 24,
+                  minFontSize: 22,
+                  style: TextStyle(
+                      fontFamily: "Montserrat",
+                      fontWeight: FontWeight.normal,
+                      color: Color(0xff077187)),
                 ),
               ),
               Expanded(
@@ -178,9 +171,15 @@ class _ShowReviewState extends State<ShowReview> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
-                  child: ParkaInputTest(
-                    handler: this.changeReview,
-                    enable_padding: true,
+                  child: AutoSizeText(
+                    this.review,
+                    maxLines: 2,
+                    maxFontSize: 24,
+                    minFontSize: 22,
+                    style: TextStyle(
+                        fontFamily: "Montserrat",
+                        fontWeight: FontWeight.normal,
+                        color: Color(0xff077187)),
                   ),
                 ),
               ),
@@ -188,7 +187,6 @@ class _ShowReviewState extends State<ShowReview> {
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: InkWell(
                   onTap: () {
-                    this.sendReview();
                     Navigator.pop(context);
                   },
                   child: Container(
@@ -197,7 +195,7 @@ class _ShowReviewState extends State<ShowReview> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 6, horizontal: 20.0),
                       child: AutoSizeText(
-                        "Enviar",
+                        "Salir",
                         maxLines: 1,
                         maxFontSize: 20,
                         minFontSize: 20,
