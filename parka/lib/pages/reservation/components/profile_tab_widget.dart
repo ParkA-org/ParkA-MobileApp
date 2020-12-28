@@ -15,7 +15,6 @@ class ProfileTabWidget extends StatelessWidget {
         super(key: key);
 
   final String _name;
-  // ignore: unused_field
   final User _user;
 
   @override
