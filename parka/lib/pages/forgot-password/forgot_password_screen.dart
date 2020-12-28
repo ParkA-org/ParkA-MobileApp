@@ -44,87 +44,94 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size currentScreen = MediaQuery.of(context).size;
+
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              flex: 4,
-              child: Container(
-                color: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      "Olvidaste tu contraseña?",
-                      textAlign: TextAlign.center,
-                      style: kParkaPageTitleTextStyle,
+        child: SingleChildScrollView(
+          child: Container(
+            height: currentScreen.height,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  flex: 4,
+                  child: Container(
+                    color: Colors.white,
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "Olvidaste tu contraseña?",
+                          textAlign: TextAlign.center,
+                          style: kParkaPageTitleTextStyle,
+                        ),
+                        SvgPicture.asset(
+                          'resources/images/ForgotPasswordIcon.svg',
+                          allowDrawingOutsideViewBox: true,
+                          height: 150.0,
+                        ),
+                        Text(
+                          "Ingresa tu correo electronico y te enviaremos un mensaje con las instrucciones para recuperar tu cuenta",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 22.0,
+                            color: ParkaColors.parkaGreen,
+                          ),
+                        ),
+                        TextField(
+                          onChanged: (value) {
+                            setState(() {
+                              this.email = value;
+                            });
+                          },
+                          decoration: kInputStyle.copyWith(
+                            hintText: "Email",
+                          ),
+                        ),
+                      ],
                     ),
-                    SvgPicture.asset(
-                      'resources/images/ForgotPasswordIcon.svg',
-                      allowDrawingOutsideViewBox: true,
-                      height: 150.0,
-                    ),
-                    Text(
-                      "Ingresa tu correo electronico y te enviaremos un mensaje con las instrucciones para recuperar tu cuenta",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 22.0,
-                        color: ParkaColors.parkaGreen,
-                      ),
-                    ),
-                    TextField(
-                      onChanged: (value) {
-                        setState(() {
-                          this.email = value;
-                        });
-                      },
-                      decoration: kInputStyle.copyWith(
-                        hintText: "Email",
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Expanded(
-              child: WavyClipper.withTopWave(
-                child: Container(
-                  color: ParkaColors.parkaGreen,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      RoundedButton(
-                        label: "Enviar",
-                        color: ParkaColors.parkaLimeGreen,
-                        hasIcon: false,
-                        hasShadow: true,
-                        width: 150.0,
-                        onTapHandler: () {
-                          // return buildShowDialog(
-                          //   context,
-                          //   BaseAlertWidget(
-                          //     child: EmailSentConfirmationWidget(),
-                          //   ),
-                          // );
-                          sendButtonHandler();
-                        },
-                      ),
-                      TransparentButton(
-                        label: "Cancelar",
-                        color: ParkaColors.parkaLightGreen,
-                        onTapHandler: () => Navigator.pop(context),
-                        buttonTextStyle: kParkaInputDefaultSyle,
-                      )
-                    ],
                   ),
                 ),
-              ),
-            )
-          ],
+                Expanded(
+                  child: WavyClipper.withTopWave(
+                    child: Container(
+                      color: ParkaColors.parkaGreen,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          RoundedButton(
+                            label: "Enviar",
+                            color: ParkaColors.parkaLimeGreen,
+                            hasIcon: false,
+                            hasShadow: true,
+                            width: 150.0,
+                            onTapHandler: () {
+                              // return buildShowDialog(
+                              //   context,
+                              //   BaseAlertWidget(
+                              //     child: EmailSentConfirmationWidget(),
+                              //   ),
+                              // );
+                              sendButtonHandler();
+                            },
+                          ),
+                          TransparentButton(
+                            label: "Cancelar",
+                            color: ParkaColors.parkaLightGreen,
+                            onTapHandler: () => Navigator.pop(context),
+                            buttonTextStyle: kParkaInputDefaultSyle,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
