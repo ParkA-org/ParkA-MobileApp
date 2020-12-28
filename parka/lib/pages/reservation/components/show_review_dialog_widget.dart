@@ -39,7 +39,7 @@ class _ShowReviewState extends State<ShowReview> {
     this.parkingName = this.widget._reservation.parking.parkingName;
     this.review = this.widget._review.review;
     this.title = this.widget._review.title;
-    this.parkingVoteFilter = this.widget._review.calification as int;
+    this.parkingVoteFilter = (this.widget._review.calification).round();
   }
 
   void changeReview(value) {
@@ -93,7 +93,7 @@ class _ShowReviewState extends State<ShowReview> {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       child: Container(
-        height: 470,
+        height: 570,
         width: 350,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -108,6 +108,7 @@ class _ShowReviewState extends State<ShowReview> {
                   maxLines: 1,
                   maxFontSize: 30,
                   minFontSize: 25,
+                  overflow: TextOverflow.ellipsis,
                   locale: Locale.fromSubtags(),
                   style: TextStyle(
                       fontFamily: "Montserrat",
@@ -153,7 +154,7 @@ class _ShowReviewState extends State<ShowReview> {
                   style: TextStyle(
                       fontFamily: "Montserrat",
                       fontWeight: FontWeight.normal,
-                      color: Color(0xff077187)),
+                      color: Colors.black),
                 ),
               ),
               Expanded(
@@ -169,42 +170,22 @@ class _ShowReviewState extends State<ShowReview> {
                 ),
               ),
               Expanded(
+                flex: 2,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
-                  child: AutoSizeText(
-                    this.review,
-                    maxLines: 2,
-                    maxFontSize: 24,
-                    minFontSize: 22,
-                    style: TextStyle(
-                        fontFamily: "Montserrat",
-                        fontWeight: FontWeight.normal,
-                        color: Color(0xff077187)),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Container(
-                    color: Color(0xff077187),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 6, horizontal: 20.0),
-                      child: AutoSizeText(
-                        "Salir",
-                        maxLines: 1,
-                        maxFontSize: 20,
-                        minFontSize: 20,
+                  child: ListView(
+                    children: [
+                      AutoSizeText(
+                        this.review,
+                        maxFontSize: 24,
+                        minFontSize: 22,
                         style: TextStyle(
-                            fontFamily: "Montserrat",
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
+                          fontFamily: "Montserrat",
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ),

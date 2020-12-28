@@ -1,7 +1,10 @@
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
+import 'package:ParkA/data/data-models/review/review_data_model.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
+import 'package:ParkA/data/use-cases/review/review_use_cases.dart';
 import 'package:ParkA/pages/reservation/components/parking_price_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/profile_tab_widget.dart';
+import 'package:ParkA/pages/reservation/components/show_review_dialog_widget.dart';
 import 'package:ParkA/pages/reservation/components/sliver_app_bar_reservation_detail.dart';
 import 'package:ParkA/pages/reservation/components/time_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/vehicle_tab_widget.dart';
@@ -26,6 +29,7 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
   String _reservationId;
   Reservation _reservation;
   bool _loading;
+  Review review;
 
   @override
   void initState() {
@@ -43,6 +47,20 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
       this._loading = false;
     }
 
+    setState(() {});
+  }
+
+  Future getReview() async {
+    this.review =
+        await ReviewUseCases.getReviewByReservation(this._reservationId);
+    showDialog(
+        context: context,
+        builder: (context) {
+          return ShowReview(
+            reservation: this._reservation,
+            review: review,
+          );
+        });
     setState(() {});
   }
 
@@ -64,6 +82,7 @@ class _ReservationAsOwnerPageState extends State<ReservationAsOwnerPage> {
     return Scaffold(
       floatingActionButton: !this._loading
           ? ActionButtonsOwnerState(
+              getRewiew: this.getReview,
               reservation: this._reservation,
               screenSize: screenSize,
               handled: this.cancelReservation,
@@ -125,11 +144,13 @@ class ActionButtonsOwnerState extends StatelessWidget {
     @required this.reservation,
     @required this.screenSize,
     @required this.handled,
+    @required this.getRewiew,
   }) : super(key: key);
 
   final Reservation reservation;
   final Size screenSize;
   final Function handled;
+  final Function getRewiew;
 
   @override
   Widget build(BuildContext context) {
@@ -215,7 +236,9 @@ class ActionButtonsOwnerState extends StatelessWidget {
                         ),
                       )
                     : InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          this.getRewiew();
+                        },
                         child: Container(
                           decoration: BoxDecoration(
                             color: Color(0xff077187),

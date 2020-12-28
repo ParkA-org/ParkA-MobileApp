@@ -52,17 +52,14 @@ class ReviewUseCases {
         "id": id,
       }
     };
-
     QueryOptions _queryOptions = new QueryOptions(
         documentNode: gql(getReviewByReservationQuery), variables: data);
 
     final _result = await graphqlClient.query(_queryOptions);
-
+    print(_result);
     if (_result.data != null) {
       final review = _result.data['getReviewByReservation'];
-
       final Review reviewData = Review.reviewFromJson(review);
-
       return reviewData;
     }
     return null;

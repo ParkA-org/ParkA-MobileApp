@@ -6,6 +6,7 @@ import 'package:ParkA/data/use-cases/review/review_use_cases.dart';
 import 'package:ParkA/pages/reservation/components/parking_price_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/profile_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/review_dialog_widget.dart';
+import 'package:ParkA/pages/reservation/components/show_review_dialog_widget.dart';
 import 'package:ParkA/pages/reservation/components/sliver_app_bar_reservation_detail.dart';
 import 'package:ParkA/pages/reservation/components/time_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/vehicle_tab_widget.dart';
@@ -57,6 +58,14 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
   Future getReview() async {
     this.review =
         await ReviewUseCases.getReviewByReservation(this._reservationId);
+    showDialog(
+        context: context,
+        builder: (context) {
+          return ShowReview(
+            reservation: this._reservation,
+            review: review,
+          );
+        });
     setState(() {});
   }
 
