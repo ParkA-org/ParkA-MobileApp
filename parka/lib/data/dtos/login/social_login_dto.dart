@@ -4,6 +4,7 @@ class SocialLoginResult {
   final String jwt;
   final bool userIsRegistered;
   final User user;
+  final String origin;
 
-  SocialLoginResult({this.jwt, this.userIsRegistered, this.user});
+  SocialLoginResult({this.origin, this.jwt, this.userIsRegistered, this.user});
 }

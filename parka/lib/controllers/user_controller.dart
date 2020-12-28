@@ -1,6 +1,7 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/data-models/user/user_data_model.dart';
 import 'package:ParkA/data/dtos/login/login_result_dto.dart';
+import 'package:ParkA/data/dtos/login/social_login_dto.dart';
 import 'package:ParkA/data/dtos/login/user_login_dto.dart';
 import 'package:ParkA/utils/prefs/shared_preferencies.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
@@ -28,6 +29,20 @@ class UserController extends GetxController {
     this._init();
   }
 
+  Future<void> socialLoginUser(SocialLoginResult _loginResult) async {
+    //Get the User and JWT from the Previous Social Login attempt
+    User loggedUser = _loginResult.user;
+    String _jwt = _loginResult.jwt;
+
+    SharedPreferenciesUtil.storage.setString("jwt", _jwt);
+
+    SharedPreferenciesUtil.storage.setString("origin", _loginResult.origin);
+
+    user.update((user) {
+      this.user = loggedUser.obs;
+    });
+  }
+
   Future<LoginResult> loginUser(String email, String password) async {
     UserLoginDto _userLoginDto = await UserUseCases.userLogin(email, password);
 
@@ -41,7 +56,9 @@ class UserController extends GetxController {
     if (_userLoginDto != null) {
       SharedPreferenciesUtil.storage.setString("jwt", _jwt);
 
-      user.update((user) async {
+      SharedPreferenciesUtil.storage.setString("origin", "email");
+
+      user.update((user) {
         this.user = loggedUser.obs;
       });
       return LoginResult(status: true);
@@ -68,6 +85,7 @@ class UserController extends GetxController {
 
   logout() async {
     await SharedPreferenciesUtil.storage.remove("jwt");
+    await SharedPreferenciesUtil.storage.remove("origin");
     print("REMOVED");
     user.update((user) {
       this.user = null.obs;

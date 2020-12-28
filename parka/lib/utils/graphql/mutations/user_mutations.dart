@@ -32,6 +32,20 @@ mutation($input: SocialLoginInput!){
     user{
       id
       name
+      lastName
+      email
+      profilePicture
+      reviews {
+        id
+        user {
+          id
+          name
+          lastName
+          profilePicture
+        }
+        calification
+        review
+      }
     }
     register
   }

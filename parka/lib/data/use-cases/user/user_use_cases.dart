@@ -1,6 +1,7 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/data-models/information/information_data_model.dart';
 import 'package:ParkA/data/data-models/user/user_data_model.dart';
+import 'package:ParkA/data/dtos/login/social_login_dto.dart';
 import 'package:ParkA/data/dtos/login/user_login_dto.dart';
 import 'package:ParkA/utils/functions/upload_image.dart';
 import 'package:ParkA/utils/graphql/mutations/user_mutations.dart';
@@ -11,7 +12,7 @@ import 'package:graphql/client.dart';
 import '../../dtos/user/user_registration_dto.dart';
 
 class UserUseCases {
-  static Future<bool> socialLogin(
+  static Future<SocialLoginResult> socialLogin(
       String email, String displayName, String photoURL, String origin) async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
@@ -30,6 +31,16 @@ class UserUseCases {
     final QueryResult socialLoginResult = await graphqlClient
         .parkaGraphqlClient.value.graphQlClient
         .mutate(socialLoginMutationOptions);
+    if (socialLoginResult.data == null || socialLoginResult.data.length < 1) {
+      print(socialLoginResult.exception);
+      return null;
+    }
+    return SocialLoginResult(
+        jwt: socialLoginResult.data["socialLogin"]["JWT"],
+        user: User.otherUserFromJson(
+            socialLoginResult.data["socialLogin"]["user"]),
+        userIsRegistered: socialLoginResult.data["socialLogin"]["register"],
+        origin: origin);
   }
 
   static Future<UserLoginDto> userLogin(String email, String password) async {
