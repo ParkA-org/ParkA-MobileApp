@@ -344,7 +344,9 @@ class ActionButtonsOwnerState extends StatelessWidget {
                                 ),
                               )
                             : InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  this.getRewiew();
+                                },
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: Color(0xff077187),
