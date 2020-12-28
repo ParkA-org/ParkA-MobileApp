@@ -3,7 +3,7 @@ import 'package:ParkA/data/dtos/reservation/create_reservation_dto.dart';
 import 'package:ParkA/pages/create-reservation/utils/generate_schedule_util.dart';
 import 'package:ParkA/utils/graphql/mutations/reservation_mutation.dart';
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
-import 'package:ParkA/utils/graphql/queries/reservation_queries.dart';
+import 'package:ParkA/utils/graphql/queries/review_queries.dart';
 import 'package:get/get.dart';
 import 'package:graphql/client.dart';
 
@@ -54,7 +54,7 @@ class ReviewUseCases {
     };
 
     QueryOptions _queryOptions = new QueryOptions(
-        documentNode: gql(getReservationByIdQuery), variables: data);
+        documentNode: gql(getReviewByReservationQuery), variables: data);
 
     final _result = await graphqlClient.query(_queryOptions);
 
