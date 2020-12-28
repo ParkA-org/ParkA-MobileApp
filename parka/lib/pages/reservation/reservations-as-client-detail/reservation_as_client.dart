@@ -244,14 +244,15 @@ class ActionButtonsOwnerState extends StatelessWidget {
                 child: !this.reservation.reviewed &&
                         this.reservation.status == "Completed"
                     ? InkWell(
-                        onTap: () {
-                          showDialog(
+                        onTap: () async {
+                          await showDialog(
                               context: context,
                               builder: (context) {
                                 return ReviewDialog(
                                   reservation: this.reservation,
                                 );
                               });
+                          Navigator.pop(context);
                         },
                         child: Container(
                           decoration: BoxDecoration(
