@@ -29,7 +29,7 @@ class ParkingTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    height: this.screenSize.height * 0.15,
+                    height: this.screenSize.height * 0.20,
                     width: this.screenSize.width * 0.50,
                     margin: EdgeInsets.symmetric(vertical: 5.0),
                     decoration: BoxDecoration(
@@ -47,7 +47,7 @@ class ParkingTile extends StatelessWidget {
                   ),
                   Container(
                     width: this.screenSize.width * 0.40,
-                    height: this.screenSize.height * 0.15,
+                    height: this.screenSize.height * 0.20,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8.0, right: 10),
                       child: Column(
@@ -112,6 +112,7 @@ class ParkingTile extends StatelessWidget {
                             maxFontSize: 24,
                             minFontSize: 12,
                             maxLines: 2,
+                            group: AutoSizeGroup(),
                             overflow: TextOverflow.ellipsis,
                             style: kParkaTextBaseStyle.copyWith(
                               color: Colors.black,
