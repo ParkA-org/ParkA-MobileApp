@@ -54,7 +54,7 @@ class ParkingTile extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           AutoSizeText(
-                            "Precio por hora:",
+                            "Precio:",
                             maxFontSize: 24,
                             minFontSize: 18,
                             maxLines: 1,
