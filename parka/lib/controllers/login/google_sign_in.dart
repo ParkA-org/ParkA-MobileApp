@@ -1,3 +1,5 @@
+import 'package:ParkA/controllers/bindings/registration_controller_binding.dart';
+import 'package:ParkA/controllers/register-user-form/register_user_controller.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/data/dtos/login/social_login_dto.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
@@ -9,6 +11,7 @@ import 'package:http/http.dart' as http;
 
 class GoogleSignInController extends GetxController {
   GoogleSignIn googleSignIn = GoogleSignIn(
+      //Permission for user creation in case user is not registered
       scopes: ["https://www.googleapis.com/auth/user.phonenumbers.read"]);
 
   void signIn() async {
@@ -21,13 +24,36 @@ class GoogleSignInController extends GetxController {
         "google");
 
     if (loginResult != null && loginResult.userIsRegistered) {
-      Get.find<UserController>().socialLoginUser(loginResult);
-      Get.toNamed(MapPage.routeName);
+      //Login attempt is not null and User is previously registered
+      loginUserWithGoogle(loginResult);
     } else {
-      final authHeaders = await googleSignIn.currentUser.authHeaders;
-      await getContactInfo(authHeaders, googleAccount.id);
-      Get.toNamed(UserInformationPage.routeName);
+      //Login Attempt was succesful but user is not Registered
+      registerUserWithGoogle(googleAccount);
     }
+  }
+
+  void registerUserWithGoogle(GoogleSignInAccount currentUser) async {
+    //Create different Page to use a differente Binding
+    GetPage(
+        name: UserInformationPage.routeName + "WithGoogle",
+        page: () => UserInformationPage(),
+        binding: RegistrationFormBinding());
+
+    //Find the newly created instance of the register form and fill it in with the user Data
+    RegisterUSerController registerController =
+        Get.find<RegisterUSerController>();
+
+    //Get the user's phone number if the user has one on the google account
+    final authHeaders = await googleSignIn.currentUser.authHeaders;
+    await getContactInfo(authHeaders, currentUser.id);
+
+    //Navigate to the next missing step
+    Get.toNamed(UserInformationPage.routeName);
+  }
+
+  void loginUserWithGoogle(SocialLoginResult loginResult) async {
+    await Get.find<UserController>().socialLoginUser(loginResult);
+    Get.toNamed(MapPage.routeName);
   }
 
   Future<String> getContactInfo(authHeader, accountId) async {
