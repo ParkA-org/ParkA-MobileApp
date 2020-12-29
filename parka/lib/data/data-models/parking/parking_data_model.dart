@@ -83,6 +83,7 @@ class Parking {
           parkingName: parking["parkingName"],
           mainPicture: parking["mainPicture"],
           features: _features,
+          calendar: Calendar.calendarFromJson(parking["calendar"]),
           pictures: _pictures,
           user: User.userFromJson(parking["user"]),
           priceHours: double.tryParse(parking["priceHours"].toString()),
@@ -90,6 +91,8 @@ class Parking {
             parking["rating"].toString(),
           ),
           isAvailable: parking["isAvailable"],
+          direction: parking["direction"],
+          information: parking["information"],
         ),
       );
     });

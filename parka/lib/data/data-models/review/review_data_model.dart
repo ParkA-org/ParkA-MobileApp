@@ -27,8 +27,6 @@ class Review {
     return Review(
       calification: double.tryParse(_reviewData["calification"].toString()),
       id: _reviewData["id"],
-      // parking: _reviewData["parking"],
-      // reservation: _reviewData["reservation"],
       review: _reviewData["review"],
       title: _reviewData["title"],
       type: _reviewData["type"],

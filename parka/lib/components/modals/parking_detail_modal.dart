@@ -68,7 +68,7 @@ class ParkingDetailModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
       expand: false,
-      maxChildSize: 0.75,
+      maxChildSize: 0.85,
       builder: (context, scrollController) =>
           ListView(controller: scrollController, children: [
         Padding(
@@ -90,6 +90,7 @@ class ParkingDetailModal extends StatelessWidget {
                               color: ParkaColors.parkaGreen))
                     ],
                   ),
+                  WeekScheduleViewerWidget(calendar: parking.calendar),
                   ShowParkingFeaturesWidget(features: parking.features),
                   Divider(
                     thickness: 1.0,
