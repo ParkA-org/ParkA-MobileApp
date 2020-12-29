@@ -107,18 +107,6 @@ class ParkingTile extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                          AutoSizeText(
-                            "${this.parking.information}",
-                            maxFontSize: 24,
-                            minFontSize: 12,
-                            maxLines: 2,
-                            group: AutoSizeGroup(),
-                            overflow: TextOverflow.ellipsis,
-                            style: kParkaTextBaseStyle.copyWith(
-                              color: Colors.black,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
                         ],
                       ),
                     ),
