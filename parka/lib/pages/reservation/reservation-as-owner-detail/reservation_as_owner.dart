@@ -202,39 +202,7 @@ class ActionButtonsOwnerState extends StatelessWidget {
               )
             : Center(
                 child: !this.reservation.reviewed
-                    ? InkWell(
-                        onTap: () {},
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Color(0xff077187),
-                            borderRadius: BorderRadius.circular(12.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.transparent.withOpacity(0.2),
-                                spreadRadius: 4,
-                                blurRadius: 7,
-                                offset:
-                                    Offset(0, 6), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 10.0),
-                            child: AutoSizeText(
-                              "Aun no hay review",
-                              maxLines: 1,
-                              maxFontSize: 30,
-                              minFontSize: 25,
-                              style: TextStyle(
-                                fontFamily: "Montserrat",
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
+                    ? Container()
                     : InkWell(
                         onTap: () {
                           this.getRewiew();
