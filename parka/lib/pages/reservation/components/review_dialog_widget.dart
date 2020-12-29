@@ -188,7 +188,10 @@ class _ReviewDialogState extends State<ReviewDialog> {
                     Navigator.pop(context);
                   },
                   child: Container(
-                    color: Color(0xff077187),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: Color(0xff077187),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 6, horizontal: 20.0),

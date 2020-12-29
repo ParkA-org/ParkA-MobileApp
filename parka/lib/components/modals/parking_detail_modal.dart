@@ -68,7 +68,7 @@ class ParkingDetailModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
       expand: false,
-      maxChildSize: 0.75,
+      maxChildSize: 0.85,
       builder: (context, scrollController) =>
           ListView(controller: scrollController, children: [
         Padding(
