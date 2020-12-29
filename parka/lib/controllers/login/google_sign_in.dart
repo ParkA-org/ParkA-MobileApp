@@ -2,6 +2,7 @@ import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/data/dtos/login/social_login_dto.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
 import 'package:ParkA/pages/map/maps_page.dart';
+import 'package:ParkA/pages/register/steps/user_information_page.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
@@ -25,6 +26,7 @@ class GoogleSignInController extends GetxController {
     } else {
       final authHeaders = await googleSignIn.currentUser.authHeaders;
       await getContactInfo(authHeaders, googleAccount.id);
+      Get.toNamed(UserInformationPage.routeName);
     }
   }
 
