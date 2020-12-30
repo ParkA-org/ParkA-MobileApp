@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:ParkA/controllers/bindings/registration_controller_binding.dart';
 import 'package:ParkA/controllers/register-user-form/register_user_controller.dart';
 import 'package:ParkA/controllers/user_controller.dart';
+import 'package:ParkA/data/data-models/google_contact/google_contact.dart';
 import 'package:ParkA/data/dtos/login/social_login_dto.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
 import 'package:ParkA/pages/map/maps_page.dart';
@@ -33,19 +36,12 @@ class GoogleSignInController extends GetxController {
   }
 
   void registerUserWithGoogle(GoogleSignInAccount currentUser) async {
-    //Create different Page to use a differente Binding
-    GetPage(
-        name: UserInformationPage.routeName + "WithGoogle",
-        page: () => UserInformationPage(),
-        binding: RegistrationFormBinding());
+    //Create new instance of the Register to fill the forms
+    Get.lazyPut<RegisterUSerController>(() => RegisterUSerController());
 
-    //Find the newly created instance of the register form and fill it in with the user Data
-    RegisterUSerController registerController =
-        Get.find<RegisterUSerController>();
-
-    //Get the user's phone number if the user has one on the google account
+    //Get the user's contact information and fills the previous forms
     final authHeaders = await googleSignIn.currentUser.authHeaders;
-    await getContactInfo(authHeaders, currentUser.id);
+    await setUserInfo(authHeaders, currentUser.id);
 
     //Navigate to the next missing step
     Get.toNamed(UserInformationPage.routeName);
@@ -56,13 +52,25 @@ class GoogleSignInController extends GetxController {
     Get.toNamed(MapPage.routeName);
   }
 
-  Future<String> getContactInfo(authHeader, accountId) async {
-    String url =
-        "https://people.googleapis.com/v1/people/$accountId?personFields=phoneNumbers";
+  Future<String> setUserInfo(authHeader, accountId) async {
+    //Find the newly created instance of the register form and fill it in with the user Data
+    final RegisterUSerController _registerController =
+        Get.find<RegisterUSerController>();
 
-    var response = await http.get(url, headers: authHeader);
+    //People API V1
+    String _url =
+        "https://people.googleapis.com/v1/people/$accountId?personFields=names,emailAddresses,phoneNumbers";
 
-    print(response.body);
+    //Response from API with all available info
+    var _response = await http.get(_url, headers: authHeader);
+    var data = jsonDecode(_response.body);
+
+    GoogleContact _userInfo =
+        GoogleContact.contactFromJson(jsonDecode(_response.body));
+
+    // String _email = _userInfo["emailAddresses"]["emailAddresses"];
+
+    print(_userInfo);
     return "Yes";
   }
 }
