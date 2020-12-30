@@ -16,7 +16,7 @@ class GoogleContact {
         firstName: json["names"][0]["givenName"] ?? null,
         lastName: json["names"][0]["familyName"] ?? null,
         email: json["emailAddresses"][0]["value"] ?? null,
-        phoneNumber: json["phoneNumbers"] == null
+        phoneNumber: json["phoneNumbers"] != null
             ? json["phoneNumbers"][0]["value"]
             : null);
   }

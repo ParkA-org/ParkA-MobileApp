@@ -52,7 +52,7 @@ class GoogleSignInController extends GetxController {
     Get.toNamed(MapPage.routeName);
   }
 
-  Future<String> setUserInfo(authHeader, accountId) async {
+  Future<void> setUserInfo(authHeader, accountId) async {
     //Find the newly created instance of the register form and fill it in with the user Data
     final RegisterUSerController _registerController =
         Get.find<RegisterUSerController>();
@@ -63,14 +63,21 @@ class GoogleSignInController extends GetxController {
 
     //Response from API with all available info
     var _response = await http.get(_url, headers: authHeader);
-    var data = jsonDecode(_response.body);
 
+    //Creates Google Contact from People API response
     GoogleContact _userInfo =
         GoogleContact.contactFromJson(jsonDecode(_response.body));
 
-    // String _email = _userInfo["emailAddresses"]["emailAddresses"];
+    // Sets Registration Email
 
-    print(_userInfo);
-    return "Yes";
+    _registerController.setEmail(_userInfo.email);
+
+    // Sets Registration Names
+    _registerController.setName(_userInfo.firstName);
+    _registerController.setLastName(_userInfo.lastName);
+
+    // Sets Resgistration Phone Number if existent
+
+    _registerController.setPhoneNumber(_userInfo.phoneNumber ?? "");
   }
 }
