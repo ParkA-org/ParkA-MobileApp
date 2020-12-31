@@ -59,7 +59,7 @@ class GoogleSignInController extends GetxController {
 
     //People API V1
     String _url =
-        "https://people.googleapis.com/v1/people/$accountId?personFields=names,emailAddresses,phoneNumbers";
+        "https://people.googleapis.com/v1/people/$accountId?personFields=names,emailAddresses,phoneNumbers,photos";
 
     //Response from API with all available info
     var _response = await http.get(_url, headers: authHeader);
@@ -68,16 +68,14 @@ class GoogleSignInController extends GetxController {
     GoogleContact _userInfo =
         GoogleContact.contactFromJson(jsonDecode(_response.body));
 
-    // Sets Registration Email
+    // Sets Registration Form Information
 
     _registerController.setEmail(_userInfo.email);
-
-    // Sets Registration Names
     _registerController.setName(_userInfo.firstName);
     _registerController.setLastName(_userInfo.lastName);
-
-    // Sets Resgistration Phone Number if existent
-
-    _registerController.setPhoneNumber(_userInfo.phoneNumber ?? "");
+    _registerController.setProfilePicture(_userInfo.profilePictureUrl);
+    if (!_userInfo.phoneNumber.isNull && _userInfo.phoneNumber.length > 9) {
+      _registerController.setPhoneNumber(_userInfo.phoneNumber);
+    }
   }
 }

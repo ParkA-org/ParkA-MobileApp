@@ -162,7 +162,8 @@ class UserUseCases {
       }
     };
 
-    if (createUserDto.profilePicture != null) {
+    if (createUserDto.profilePicture != null &&
+        !createUserDto.profilePicture.isURL) {
       createUserInput["data"]["profilePicture"] =
           await uploadImage(createUserDto.profilePicture);
     }
@@ -187,16 +188,21 @@ class UserUseCases {
       CreateUserInformationDto createUserInformationDto) async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
-    final createUserInformationInput = {
+    var createUserInformationInput = {
       "data": {
         "paymentInformation": "cc78a504-aafe-4917-afe9-f3a3ecee8b07",
         "documentNumber": createUserInformationDto.documentNumber,
-        "telephoneNumber": createUserInformationDto.telephonNumber,
         "birthDate": createUserInformationDto.birthDate.toIso8601String(),
         "placeOfBirth": createUserInformationDto.placeOfBirth.id,
         "nationality": createUserInformationDto.nationality.id
       }
     };
+
+    //Telephone Number issue Fix
+    if (!createUserInformationDto.telephonNumber.isNull) {
+      createUserInformationInput["data"]["telephoneNumber"] =
+          createUserInformationDto.telephonNumber;
+    }
 
     MutationOptions mutationOptions = MutationOptions(
       documentNode: gql(createUserInformationMutation),
