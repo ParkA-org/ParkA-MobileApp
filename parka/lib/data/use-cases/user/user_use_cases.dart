@@ -235,8 +235,14 @@ class UserUseCases {
     userRegistrationForm.createUserDto.userInformation =
         createUserInformationResult["id"];
 
-    final createUserResult =
-        await createUser(userRegistrationForm.createUserDto);
+    var createUserResult;
+
+    if (userRegistrationForm.createUserDto.origin == "google") {
+      createUserResult =
+          await addUserInformation(userRegistrationForm.createUserDto);
+    } else {
+      createUserResult = await createUser(userRegistrationForm.createUserDto);
+    }
 
     if (createUserResult != null) {
       return true;
@@ -460,6 +466,7 @@ class UserUseCases {
     return null;
   }
 
+  static Future<dynamic> addUserInformation(CreateUserDto userDto) async {}
   static Future<bool> updateUserInformation(
     String documentNumber,
     String birthDate,

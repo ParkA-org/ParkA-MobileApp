@@ -70,6 +70,7 @@ class GoogleSignInController extends GetxController {
 
     // Sets Registration Form Information
 
+    _registerController.setOrigin("google");
     _registerController.setEmail(_userInfo.email);
     _registerController.setName(_userInfo.firstName);
     _registerController.setLastName(_userInfo.lastName);
