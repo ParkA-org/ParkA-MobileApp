@@ -127,6 +127,19 @@ mutation($data:UpdateUserPasswordInput!){
 }
 """;
 
+const String addUserInformationMutation = r"""
+mutation($data: AddUserInformationInput!){
+  addUserInformation(addUserInformationInput: $data){
+    JWT
+    user{
+      name
+      email
+    }
+    register
+  }
+}
+""";
+
 const String updateUserMutation = r'''
 mutation($data: UpdateUserInput!) {
   updateUser(updateUserInput: $data) {

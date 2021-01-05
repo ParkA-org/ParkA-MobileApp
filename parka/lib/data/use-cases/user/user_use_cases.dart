@@ -238,8 +238,8 @@ class UserUseCases {
     var createUserResult;
 
     if (userRegistrationForm.createUserDto.origin == "google") {
-      createUserResult =
-          await addUserInformation(userRegistrationForm.createUserDto);
+      createUserResult = await addUserInformation(
+          userRegistrationForm.createUserDto.userInformation);
     } else {
       createUserResult = await createUser(userRegistrationForm.createUserDto);
     }
@@ -466,7 +466,28 @@ class UserUseCases {
     return null;
   }
 
-  static Future<dynamic> addUserInformation(CreateUserDto userDto) async {}
+  static Future<dynamic> addUserInformation(String userInformation) async {
+    final graphqlClient = Get.find<GraphqlClientController>();
+    final addUserinformationInput = {
+      "data": {
+        "userInformation": userInformation,
+      }
+    };
+
+    MutationOptions mutationOptions = MutationOptions(
+      documentNode: gql(addUserInformationMutation),
+      variables: addUserinformationInput,
+    );
+
+    QueryResult addUserInformationResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .mutate(mutationOptions);
+
+    print(addUserInformationResult.exception?.graphqlErrors.toString());
+
+    return addUserInformationResult;
+  }
+
   static Future<bool> updateUserInformation(
     String documentNumber,
     String birthDate,
