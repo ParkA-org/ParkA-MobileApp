@@ -24,6 +24,7 @@ query {
     checkOutDate
     rentDate
     total
+    reviewed
     client {
       id
       name
@@ -86,6 +87,7 @@ query {
     checkOutDate
     rentDate
     total
+    reviewed
     client {
       id
       name
@@ -146,6 +148,7 @@ query($data: GetReservationById!) {
     id
     checkInDate
     checkOutDate
+    reviewed
     client {
       id
       name
