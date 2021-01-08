@@ -21,15 +21,16 @@ class CreateUserDto {
   String password;
   String profilePicture;
   String userInformation;
+  String origin;
 
-  CreateUserDto({
-    this.name,
-    this.lastName,
-    this.email,
-    this.password,
-    this.profilePicture,
-    this.userInformation,
-  });
+  CreateUserDto(
+      {this.name,
+      this.lastName,
+      this.email,
+      this.password,
+      this.profilePicture,
+      this.userInformation,
+      this.origin});
 }
 
 class CreateUserInformationDto {

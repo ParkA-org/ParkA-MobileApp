@@ -25,6 +25,33 @@ mutation($input: LoginUserInput!) {
     
 ''';
 
+const String socialLoginMutation = r"""
+mutation($input: SocialLoginInput!){
+  socialLogin(socialLoginInput: $input){
+    JWT
+    user{
+      id
+      name
+      lastName
+      email
+      profilePicture
+      reviews {
+        id
+        user {
+          id
+          name
+          lastName
+          profilePicture
+        }
+        calification
+        review
+      }
+    }
+    register
+  }
+}
+""";
+
 const String createUserMutation = r"""
     mutation($data:CreateUserInput!){
       createUser(createUserInput:$data){
@@ -96,6 +123,19 @@ const String updateUserPasswordMutation = r"""
 mutation($data:UpdateUserPasswordInput!){
   updateUserPassword(updateUserPasswordInput:$data){
     email
+  }
+}
+""";
+
+const String addUserInformationMutation = r"""
+mutation($data: AddUserInformationInput!){
+  addUserInformation(addUserInformationInput: $data){
+    JWT
+    user{
+      name
+      email
+    }
+    register
   }
 }
 """;

@@ -1,6 +1,7 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/data-models/information/information_data_model.dart';
 import 'package:ParkA/data/data-models/user/user_data_model.dart';
+import 'package:ParkA/data/dtos/login/social_login_dto.dart';
 import 'package:ParkA/data/dtos/login/user_login_dto.dart';
 import 'package:ParkA/utils/functions/upload_image.dart';
 import 'package:ParkA/utils/graphql/mutations/user_mutations.dart';
@@ -11,6 +12,39 @@ import 'package:graphql/client.dart';
 import '../../dtos/user/user_registration_dto.dart';
 
 class UserUseCases {
+  static Future<SocialLoginResult> socialLogin(
+      String email, String displayName, String photoURL, String origin) async {
+    final graphqlClient = Get.find<GraphqlClientController>();
+
+    final socialLoginInput = {
+      "input": {
+        "email": email,
+        "displayName": displayName,
+        "origin": origin,
+        "photoUrl": photoURL
+      }
+    };
+
+    MutationOptions socialLoginMutationOptions = MutationOptions(
+        documentNode: gql(socialLoginMutation), variables: socialLoginInput);
+
+    final QueryResult socialLoginResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .mutate(socialLoginMutationOptions);
+    if (socialLoginResult.data == null || socialLoginResult.data.length < 1) {
+      print(socialLoginResult.exception);
+      return null;
+    }
+    graphqlClient.updateGraphqlClientwithJwt(
+        socialLoginResult.data["socialLogin"]["JWT"]);
+    return SocialLoginResult(
+        jwt: socialLoginResult.data["socialLogin"]["JWT"],
+        user: User.otherUserFromJson(
+            socialLoginResult.data["socialLogin"]["user"]),
+        userIsRegistered: socialLoginResult.data["socialLogin"]["register"],
+        origin: origin);
+  }
+
   static Future<UserLoginDto> userLogin(String email, String password) async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
@@ -128,7 +162,8 @@ class UserUseCases {
       }
     };
 
-    if (createUserDto.profilePicture != null) {
+    if (createUserDto.profilePicture != null &&
+        !createUserDto.profilePicture.isURL) {
       createUserInput["data"]["profilePicture"] =
           await uploadImage(createUserDto.profilePicture);
     }
@@ -153,16 +188,21 @@ class UserUseCases {
       CreateUserInformationDto createUserInformationDto) async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
-    final createUserInformationInput = {
+    var createUserInformationInput = {
       "data": {
         "paymentInformation": "cc78a504-aafe-4917-afe9-f3a3ecee8b07",
         "documentNumber": createUserInformationDto.documentNumber,
-        "telephoneNumber": createUserInformationDto.telephonNumber,
         "birthDate": createUserInformationDto.birthDate.toIso8601String(),
         "placeOfBirth": createUserInformationDto.placeOfBirth.id,
         "nationality": createUserInformationDto.nationality.id
       }
     };
+
+    //Telephone Number issue Fix
+    if (!createUserInformationDto.telephonNumber.isNull) {
+      createUserInformationInput["data"]["telephoneNumber"] =
+          createUserInformationDto.telephonNumber;
+    }
 
     MutationOptions mutationOptions = MutationOptions(
       documentNode: gql(createUserInformationMutation),
@@ -195,8 +235,14 @@ class UserUseCases {
     userRegistrationForm.createUserDto.userInformation =
         createUserInformationResult["id"];
 
-    final createUserResult =
-        await createUser(userRegistrationForm.createUserDto);
+    var createUserResult;
+
+    if (userRegistrationForm.createUserDto.origin == "google") {
+      createUserResult = await addUserInformation(
+          userRegistrationForm.createUserDto.userInformation);
+    } else {
+      createUserResult = await createUser(userRegistrationForm.createUserDto);
+    }
 
     if (createUserResult != null) {
       return true;
@@ -418,6 +464,28 @@ class UserUseCases {
     }
 
     return null;
+  }
+
+  static Future<dynamic> addUserInformation(String userInformation) async {
+    final graphqlClient = Get.find<GraphqlClientController>();
+    final addUserinformationInput = {
+      "data": {
+        "userInformation": userInformation,
+      }
+    };
+
+    MutationOptions mutationOptions = MutationOptions(
+      documentNode: gql(addUserInformationMutation),
+      variables: addUserinformationInput,
+    );
+
+    QueryResult addUserInformationResult = await graphqlClient
+        .parkaGraphqlClient.value.graphQlClient
+        .mutate(mutationOptions);
+
+    print(addUserInformationResult.exception?.graphqlErrors.toString());
+
+    return addUserInformationResult;
   }
 
   static Future<bool> updateUserInformation(

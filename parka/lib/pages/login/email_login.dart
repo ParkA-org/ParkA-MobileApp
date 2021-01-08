@@ -1,14 +1,10 @@
 import 'package:ParkA/components/headers/parka_header.dart';
-import 'package:ParkA/controllers/login/login_controller.dart';
 import 'package:ParkA/pages/login/components/login_form.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'components/login_header.dart';
 
 class EmailLogin extends StatelessWidget {
-  // ignore: unused_field
-  final LoginController _loginController = Get.find<LoginController>();
   EmailLogin({Key key}) : super(key: key);
   static const String routeName = "/EmailLogin";
 

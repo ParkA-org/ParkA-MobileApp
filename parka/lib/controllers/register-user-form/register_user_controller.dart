@@ -39,6 +39,12 @@ class RegisterUSerController extends GetxController {
     });
   }
 
+  void setOrigin(String _origin) {
+    _userRegistrationForm.update((_instance) {
+      this.createUserDto.origin = _origin;
+    });
+  }
+
   void setProfilePicture(String _imagePath) {
     _userRegistrationForm.update((_instance) {
       this.createUserDto.profilePicture = _imagePath;
