@@ -17,147 +17,196 @@ class ParkingTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: this.onTapHandler,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 6.0),
-        child: Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    height: this.screenSize.height * 0.20,
-                    width: this.screenSize.width * 0.50,
-                    margin: EdgeInsets.symmetric(vertical: 5.0),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(0.0, 5.0),
-                            color: Colors.black38,
-                            blurRadius: 5.0,
-                          )
-                        ],
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage("${parking.mainPicture}"))),
+    Future<bool> confirmDelete() async {
+      bool _response;
+      await showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+                title: Text("Delete this Parking?"),
+                content: Text("Are you sure you want to delete this parking?"),
+                actions: [
+                  FlatButton(
+                    onPressed: () {
+                      _response = true;
+                      Navigator.pop(context);
+                    },
+                    child: Text("Yes"),
                   ),
-                  Container(
-                    width: this.screenSize.width * 0.40,
-                    height: this.screenSize.height * 0.20,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8.0, right: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AutoSizeText(
-                            "Precio:",
-                            maxFontSize: 24,
-                            minFontSize: 18,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: kParkaTextBaseStyle.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          AutoSizeText(
-                            "${this.parking.priceHours}",
-                            maxFontSize: 24,
-                            minFontSize: 18,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: kParkaTextBaseStyle.copyWith(
-                              color: Colors.black54,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          AutoSizeText(
-                            "Status:",
-                            maxFontSize: 24,
-                            minFontSize: 18,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: kParkaTextBaseStyle.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          this.parking.isAvailable
-                              ? AutoSizeText(
-                                  "Disponible",
-                                  maxFontSize: 24,
-                                  minFontSize: 18,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: kParkaTextBaseStyle.copyWith(
-                                    color: Colors.green[600],
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )
-                              : AutoSizeText(
-                                  "Ocupado",
-                                  maxFontSize: 24,
-                                  minFontSize: 18,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: kParkaTextBaseStyle.copyWith(
-                                    color: Colors.red[600],
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                        ],
-                      ),
+                  FlatButton(
+                    onPressed: () {
+                      _response = false;
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      "No",
+                      style: TextStyle(color: Colors.red),
                     ),
-                  ),
+                  )
                 ],
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
-                child: Row(
+              ));
+
+      return _response ?? false;
+    }
+
+    return Dismissible(
+      key: UniqueKey(),
+      confirmDismiss: (direction) async => await confirmDelete(),
+      direction: DismissDirection.endToStart,
+      background: Container(
+        alignment: Alignment.centerRight,
+        color: Colors.red,
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Icon(
+            Icons.delete,
+            size: 50,
+            color: Colors.white,
+          ),
+        ),
+      ),
+      child: GestureDetector(
+        onTap: this.onTapHandler,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 6.0),
+          child: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: AutoSizeText(
-                        "${parking.parkingName}",
-                        maxFontSize: 24,
-                        minFontSize: 22,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: kParkaTextBaseStyle.copyWith(
-                            fontWeight: FontWeight.bold, color: Colors.black87),
-                      ),
+                    Container(
+                      height: this.screenSize.height * 0.20,
+                      width: this.screenSize.width * 0.50,
+                      margin: EdgeInsets.symmetric(vertical: 5.0),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          boxShadow: [
+                            BoxShadow(
+                              offset: Offset(0.0, 5.0),
+                              color: Colors.black38,
+                              blurRadius: 5.0,
+                            )
+                          ],
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage("${parking.mainPicture}"))),
                     ),
-                    Expanded(
-                      flex: 0,
-                      child: Row(
-                        children: [
-                          Text(
-                            "${parking.rating}",
-                            style: kParkaTextBaseStyle.copyWith(
-                              fontSize: 24,
+                    Container(
+                      width: this.screenSize.width * 0.40,
+                      height: this.screenSize.height * 0.20,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AutoSizeText(
+                              "Precio:",
+                              maxFontSize: 24,
+                              minFontSize: 18,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: kParkaTextBaseStyle.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          Icon(
-                            Icons.star,
-                            color: ParkaColors.parkaGreen,
-                            size: 30.0,
-                          )
-                        ],
+                            AutoSizeText(
+                              "${this.parking.priceHours}",
+                              maxFontSize: 24,
+                              minFontSize: 18,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: kParkaTextBaseStyle.copyWith(
+                                color: Colors.black54,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            AutoSizeText(
+                              "Status:",
+                              maxFontSize: 24,
+                              minFontSize: 18,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: kParkaTextBaseStyle.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            this.parking.isAvailable
+                                ? AutoSizeText(
+                                    "Disponible",
+                                    maxFontSize: 24,
+                                    minFontSize: 18,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: kParkaTextBaseStyle.copyWith(
+                                      color: Colors.green[600],
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )
+                                : AutoSizeText(
+                                    "Ocupado",
+                                    maxFontSize: 24,
+                                    minFontSize: 18,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: kParkaTextBaseStyle.copyWith(
+                                      color: Colors.red[600],
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Divider(
-                  color: Color(0xFFA9A5A5),
-                  thickness: 1,
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 2.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: AutoSizeText(
+                          "${parking.parkingName}",
+                          maxFontSize: 24,
+                          minFontSize: 22,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: kParkaTextBaseStyle.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 0,
+                        child: Row(
+                          children: [
+                            Text(
+                              "${parking.rating}",
+                              style: kParkaTextBaseStyle.copyWith(
+                                fontSize: 24,
+                              ),
+                            ),
+                            Icon(
+                              Icons.star,
+                              color: ParkaColors.parkaGreen,
+                              size: 30.0,
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              )
-            ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Divider(
+                    color: Color(0xFFA9A5A5),
+                    thickness: 1,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
