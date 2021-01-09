@@ -78,9 +78,7 @@ class ParkingUseCases {
         .graphQlClient;
 
     final deleteParkingInput = {
-      "data": {
-        "id": _parkingID,
-      }
+      "data": _parkingID,
     };
 
     MutationOptions mutationOptions = MutationOptions(

@@ -1,4 +1,5 @@
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
+import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -51,6 +52,8 @@ class ParkingTile extends StatelessWidget {
     return Dismissible(
       key: UniqueKey(),
       confirmDismiss: (direction) async => await confirmDelete(),
+      onDismissed: (direction) async =>
+          await ParkingUseCases.deleteParking(this.parking.id),
       direction: DismissDirection.endToStart,
       background: Container(
         alignment: Alignment.centerRight,
