@@ -7,12 +7,15 @@ import 'package:ParkA/components/inputs/parka_input.dart';
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/controllers/login/login_controller.dart';
 import 'package:ParkA/controllers/register-user-form/register_user_controller.dart';
+import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/data/data-models/country/country_data_model.dart';
 import 'package:ParkA/data/data-models/nationality/nationality_data_model.dart';
+import 'package:ParkA/data/dtos/login/social_login_dto.dart';
 import 'package:ParkA/data/use-cases/country/country_use_cases.dart';
 import 'package:ParkA/data/use-cases/nationality/nationality_use_cases.dart';
 import 'package:ParkA/data/use-cases/user/user_use_cases.dart';
 import 'package:ParkA/pages/confirm-account/confirm_account_page.dart';
+import 'package:ParkA/pages/map/maps_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:ParkA/utils/form-validations/register_validation.dart';
@@ -94,9 +97,20 @@ class _UserInformationPageState extends State<UserInformationPage> {
         _registerUSerController.registrationForm);
 
     if (userRegistrationResult) {
-      _loginController
-          .setPassword(_registerUSerController.createUserDto.password);
-      Navigator.pushNamed(context, ConfirmAccountPage.routeName);
+      if (_registerUSerController.createUserDto.origin == "google") {
+        SocialLoginResult loginResult = await UserUseCases.socialLogin(
+            _registerUSerController.createUserDto.email,
+            _registerUSerController.createUserDto.name,
+            _registerUSerController.createUserDto.origin,
+            _registerUSerController.createUserDto.profilePicture);
+
+        await Get.find<UserController>().socialLoginUser(loginResult);
+        Get.toNamed(MapPage.routeName);
+      } else {
+        _loginController
+            .setPassword(_registerUSerController.createUserDto.password);
+        Navigator.pushNamed(context, ConfirmAccountPage.routeName);
+      }
     } else {
       Get.snackbar(
         "Error",

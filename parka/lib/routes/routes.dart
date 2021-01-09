@@ -1,4 +1,4 @@
-import 'package:ParkA/controllers/bindings/graphql_biding.dart';
+import 'package:ParkA/controllers/bindings/graphql_binding.dart';
 import 'package:ParkA/controllers/bindings/login_binding.dart';
 import 'package:ParkA/controllers/bindings/registration_controller_binding.dart';
 import 'package:ParkA/controllers/bindings/user_binding.dart';
@@ -41,15 +41,15 @@ import 'package:get/route_manager.dart';
 
 List<GetPage> getRoutePages = [
   GetPage(
-    name: LoginScreen.routeName,
-    page: () => LoginScreen(),
-  ),
+      name: LoginScreen.routeName,
+      page: () => LoginScreen(),
+      bindings: [GraphqlClientBinding(), UserBinding()]),
   GetPage(
     name: EmailLogin.routeName,
     page: () => EmailLogin(),
     bindings: [
       UserBinding(),
-      GraphqlClientBiding(),
+      GraphqlClientBinding(),
       LoginBinding(),
     ],
   ),
@@ -83,7 +83,7 @@ List<GetPage> getRoutePages = [
     name: UserInformationPage.routeName,
     page: () => UserInformationPage(),
     bindings: [
-      GraphqlClientBiding(),
+      GraphqlClientBinding(),
       RegistrationFormBinding(),
       LoginBinding(),
     ],
@@ -91,12 +91,12 @@ List<GetPage> getRoutePages = [
   GetPage(
     name: ChatUserPage.routeName,
     page: () => ChatUserPage(),
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
   ),
   GetPage(
     name: MapPage.routeName,
     page: () => MapPage(),
-    bindings: [UserBinding(), GraphqlClientBiding()],
+    bindings: [UserBinding(), GraphqlClientBinding()],
   ),
   GetPage(
     name: FilterPage.routeName,
@@ -111,96 +111,96 @@ List<GetPage> getRoutePages = [
     name: ConfirmAccountPage.routeName,
     page: () => ConfirmAccountPage(),
     bindings: [
-      GraphqlClientBiding(),
+      GraphqlClientBinding(),
       LoginBinding(),
     ],
   ),
   GetPage(
     name: ResetPasswordPage.routeName,
     page: () => ResetPasswordPage(),
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
   ),
   GetPage(
     name: UserPaymentMethodsScreen.routeName,
     page: () => UserPaymentMethodsScreen(),
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
   ),
   GetPage(
     name: EditProfilePage.routeName,
     page: () => EditProfilePage(),
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
   ),
   GetPage(
     name: UpdateUserPasswordPage.routeName,
     page: () => UpdateUserPasswordPage(),
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
   ),
   GetPage(
     name: EditUserProfileInformationPage.routeName,
     page: () => EditUserProfileInformationPage(),
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
   ),
   GetPage(
     name: VehiclePage.routeName,
     page: () => VehiclePage(),
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
   ),
   GetPage(
     name: CreateVehiclePage.routeName,
     page: () => CreateVehiclePage(),
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
   ),
   GetPage(
     name: ParkingPage.routeName,
     page: () => ParkingPage(),
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
   ),
   GetPage(
     name: CreateParkingPage.routeName,
     page: () => CreateParkingPage(),
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
   ),
   GetPage(
     name: ParkingPositionSelectorPage.routeName,
     page: () => ParkingPositionSelectorPage(),
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
   ),
   GetPage(
     name: ParkingCalendarCreatorPage.routeName,
     page: () => ParkingCalendarCreatorPage(),
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
   ),
   GetPage(
     name: ParkingImageSelectorPage.routeName,
     page: () => ParkingImageSelectorPage(),
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
   ),
   GetPage(
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
     name: SplashScreen.routeName,
     page: () => SplashScreen(),
   ),
   GetPage(
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
     name: ReservationAsClientPage.routeName,
     page: () => ReservationAsClientPage(
       reservationId: "",
     ),
   ),
   GetPage(
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
     name: ReservationAsOwnerPage.routeName,
     page: () => ReservationAsOwnerPage(
       reservationId: "",
     ),
   ),
   GetPage(
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
     name: SearchPanel.routeName,
     page: () => SearchPanel(),
   ),
   GetPage(
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
     name: ChatsPage.routeName,
     page: () => ChatsPage(),
   ),
@@ -212,21 +212,21 @@ List<GetPage> getRoutePages = [
     name: EditParkingPage.routeName,
     // ignore: missing_required_param
     page: () => EditParkingPage(),
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
   ),
   GetPage(
     name: ParkingCalendarEditorPage.routeName,
     page: () => ParkingCalendarEditorPage(),
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
   ),
   GetPage(
     name: ParkingImageEditorPage.routeName,
     page: () => ParkingImageEditorPage(),
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
   ),
   GetPage(
     name: ChatUserPage.routeName,
     page: () => ChatUserPage(),
-    bindings: [GraphqlClientBiding()],
+    bindings: [GraphqlClientBinding()],
   ),
 ];
