@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:ParkA/controllers/bindings/registration_controller_binding.dart';
 import 'package:ParkA/controllers/register-user-form/register_user_controller.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/data/data-models/google_contact/google_contact.dart';
