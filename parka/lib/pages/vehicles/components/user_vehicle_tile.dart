@@ -49,7 +49,7 @@ class VehicleTile extends StatelessWidget {
       key: UniqueKey(),
       confirmDismiss: (direction) async => await confirmDelete(),
       onDismissed: (direction) async =>
-          await VehicleUseCases().deleteVehicle(this.parking.id),
+          await VehicleUseCases.deleteVehicle(this.vehicle.id),
       direction: DismissDirection.endToStart,
       background: Container(
         alignment: Alignment.centerRight,
@@ -62,7 +62,7 @@ class VehicleTile extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-      ),,
+      ),
       child: Padding(
         padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 14.0),
         child: GestureDetector(
