@@ -44,6 +44,7 @@ class PaymentUseCases {
     return false;
   }
 
+  static Future<bool> deletePayment(String _paymentId) async {}
   static Future updatePayment(UpdatePaymentDto updatePaymentDto) async {
     final graphqlClient = Get.find<GraphqlClientController>()
         .parkaGraphqlClient
