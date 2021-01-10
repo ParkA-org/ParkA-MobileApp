@@ -23,15 +23,15 @@ class ParkingTile extends StatelessWidget {
       await showDialog(
           context: context,
           builder: (_) => AlertDialog(
-                title: Text("Delete this Parking?"),
-                content: Text("Are you sure you want to delete this parking?"),
+                title: Text("Eliminar parqueo?"),
+                content: Text("Esta seguro que desea eliminar este parqueo?"),
                 actions: [
                   FlatButton(
                     onPressed: () {
                       _response = true;
                       Navigator.pop(context);
                     },
-                    child: Text("Yes"),
+                    child: Text("Si"),
                   ),
                   FlatButton(
                     onPressed: () {

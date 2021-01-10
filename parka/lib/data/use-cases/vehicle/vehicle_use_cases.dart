@@ -35,6 +35,10 @@ class VehicleUseCases {
     return null;
   }
 
+  static Future<bool> deleteVehicle(String id) async {
+    final graphqlClient = Get.find<GraphqlClientController>();
+  }
+
   static Future<List<Vehicle>> getAllUserVehicles() async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
@@ -62,7 +66,6 @@ class VehicleUseCases {
     final graphqlClient = Get.find<GraphqlClientController>();
 
     String imageUrl = await uploadImage(createVehicleDto.mainPicture);
-
 
     List<String> _vehiclePictures =
         await uploadMultipleImages(createVehicleDto.pictures);
