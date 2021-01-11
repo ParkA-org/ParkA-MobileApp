@@ -1,6 +1,7 @@
 import 'package:ParkA/components/floating-action-button/parka_floating_action_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/controllers/graphql_controller.dart';
+import 'package:ParkA/data/data-models/payment/payment_data_model.dart';
 import 'package:ParkA/data/use-cases/payment/payment_use_cases.dart';
 import 'package:ParkA/pages/create-payment/payment_info.dart';
 import 'package:ParkA/pages/edit-payment/edit_payment_page.dart';
@@ -22,7 +23,7 @@ class UserPaymentMethodsScreen extends StatefulWidget {
 class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
   final graphqlClient = Get.find<GraphqlClientController>();
   bool paymentsLoaded;
-  List userPaymentMethods;
+  List<Payment> userPaymentMethods;
 
   Future getAllUserPayment() async {
     this.paymentsLoaded = false;
@@ -33,20 +34,70 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
     });
   }
 
+  Future<bool> confirmDelete() async {
+    bool _response;
+    await showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+              title: Text("Eliminar este método de pago?"),
+              content:
+                  Text("Estas seguro que desea eliminar este método de pago?"),
+              actions: [
+                FlatButton(
+                  onPressed: () {
+                    _response = true;
+                    Navigator.pop(context);
+                  },
+                  child: Text("Si"),
+                ),
+                FlatButton(
+                  onPressed: () {
+                    _response = false;
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "No",
+                    style: TextStyle(color: Colors.red),
+                  ),
+                )
+              ],
+            ));
+
+    return _response ?? false;
+  }
+
   List<Widget> buildPaymentView() {
     List<Widget> ret = new List<Widget>();
 
-    this.userPaymentMethods.forEach((element) {
-      ret.add(RaisedButton(
-        child: CardListTile(
-          payment: element,
-        ),
-        color: Colors.white,
-        onPressed: () => {
-          Navigator.of(context)
-              .pushNamed(EditPaymentScreen.routeName, arguments: element)
-        },
-      ));
+    this.userPaymentMethods.forEach((Payment element) {
+      ret.add(Dismissible(
+          key: UniqueKey(),
+          confirmDismiss: (direction) async => await confirmDelete(),
+          onDismissed: (direction) async =>
+              await PaymentUseCases.deletePayment(element.id),
+          direction: DismissDirection.endToStart,
+          background: Container(
+            alignment: Alignment.centerRight,
+            color: Colors.red,
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Icon(
+                Icons.delete,
+                size: 50,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          child: RaisedButton(
+            child: CardListTile(
+              payment: element,
+            ),
+            color: Colors.white,
+            onPressed: () => {
+              Navigator.of(context)
+                  .pushNamed(EditPaymentScreen.routeName, arguments: element)
+            },
+          )));
     });
 
     return ret;
