@@ -23,6 +23,12 @@ const String createVehicleMutation = r"""
     }
     """;
 
+const String deleteVehicleMutation = r"""
+mutation($data:GetVehicleByIdInput!){
+  deleteVehicle(deleteVehicle:$data)
+}
+""";
+
 const String updateVehicleMutation = r"""
 mutation($input:UpdateVehicleInput!){
   updateVehicle(updateVehicleInput:$input){

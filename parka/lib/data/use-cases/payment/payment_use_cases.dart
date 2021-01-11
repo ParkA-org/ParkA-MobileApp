@@ -44,6 +44,29 @@ class PaymentUseCases {
     return false;
   }
 
+  static Future<bool> deletePayment(String _paymentId) async {
+    final graphqlClient = Get.find<GraphqlClientController>()
+        .parkaGraphqlClient
+        .value
+        .graphQlClient;
+
+    final deleteVehicleInput = {"data": _paymentId};
+
+    MutationOptions mutationOptions = MutationOptions(
+      documentNode: gql(deletePaymentMutation),
+      variables: deleteVehicleInput,
+    );
+
+    final deletePaymentResult = await graphqlClient.mutate(mutationOptions);
+
+    if (deletePaymentResult.data != null) {
+      return true;
+    }
+
+    print(deletePaymentResult.exception ?? "");
+    return false;
+  }
+
   static Future updatePayment(UpdatePaymentDto updatePaymentDto) async {
     final graphqlClient = Get.find<GraphqlClientController>()
         .parkaGraphqlClient

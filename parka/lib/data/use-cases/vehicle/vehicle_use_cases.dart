@@ -35,6 +35,31 @@ class VehicleUseCases {
     return null;
   }
 
+  static Future<bool> deleteVehicle(String _vehicleId) async {
+    final graphqlClient = Get.find<GraphqlClientController>()
+        .parkaGraphqlClient
+        .value
+        .graphQlClient;
+
+    final deleteVehicleInput = {
+      "data": {"id": _vehicleId}
+    };
+
+    MutationOptions mutationOptions = MutationOptions(
+      documentNode: gql(deleteVehicleMutation),
+      variables: deleteVehicleInput,
+    );
+
+    final deleteVehicleResult = await graphqlClient.mutate(mutationOptions);
+
+    if (deleteVehicleResult.data != null) {
+      return true;
+    }
+
+    print(deleteVehicleResult.exception ?? "");
+    return false;
+  }
+
   static Future<List<Vehicle>> getAllUserVehicles() async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
@@ -62,7 +87,6 @@ class VehicleUseCases {
     final graphqlClient = Get.find<GraphqlClientController>();
 
     String imageUrl = await uploadImage(createVehicleDto.mainPicture);
-
 
     List<String> _vehiclePictures =
         await uploadMultipleImages(createVehicleDto.pictures);

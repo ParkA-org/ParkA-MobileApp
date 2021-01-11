@@ -9,6 +9,12 @@ const String createPaymentMutation = r"""
     }
     """;
 
+const String deletePaymentMutation = r"""
+mutation($data:String!){
+  deletePayment(id:$data)
+}
+""";
+
 const String updatePaymentMutation = r"""
     mutation($data:UpdatePaymentInput!){
       updatePayment(updatePaymentInput: $data){
