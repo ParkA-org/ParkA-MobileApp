@@ -148,6 +148,7 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                           ParkaImageCardWidget(
                             type: PlaceHolderType.Car,
                             image: this.createVehicleDto.mainPicture,
+                            carouselType: CarouselType.Form,
                             onTapHandler: () async {
                               String imagePath = await getImageFunction();
                               if (imagePath != null) {

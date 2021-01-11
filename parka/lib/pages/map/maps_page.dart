@@ -6,7 +6,6 @@ import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/controllers/map_controller.dart';
 import 'package:ParkA/controllers/user_controller.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
-import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
 import 'package:ParkA/pages/map/components/dummy_search.dart';
 import 'package:flutter/material.dart';
@@ -89,43 +88,6 @@ class _MapPageState extends State<MapPage> {
     return await rootBundle.loadString('resources/styles/map_style.txt');
   }
 
-  Future<Set<Marker>> getNearParkings(LatLng userLocation) async {
-    Set<Marker> parkingPins = {};
-
-    mapController.setCurrentParkings(
-        await ParkingUseCases.getNearParkings(userLocation));
-
-    List<Parking> nearParkings = mapController.currentParkings;
-
-    if (nearParkings != null && nearParkings.length > 0) {
-      nearParkings.forEach((parking) {
-        parkingPins.add(Marker(
-          markerId: MarkerId("${parking.id}"),
-          position: LatLng(parking.latitude, parking.longitude),
-          icon: parking.isAvailable == true
-              ? _customGreenPinIcon
-              : _customRedPinIcon,
-          onTap: () => showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              builder: (context) {
-                mapController.mapController.value.animateCamera(
-                    CameraUpdate.newLatLng(
-                        LatLng(parking.latitude - 0.003, parking.longitude)));
-                return ParkingDetailModal(parking: parking);
-              }),
-        ));
-      });
-    }
-
-    if (!nearbyParkings.containsAll(parkingPins) &&
-        nearbyParkings.length != parkingPins.length) {
-      return parkingPins;
-    }
-
-    return new Set();
-  }
-
   void _getMapPageData() async {
     this._mapStyle = await this.getMapStyle();
     this._customGreenPinIcon = await this._getCustomPin();
@@ -138,13 +100,41 @@ class _MapPageState extends State<MapPage> {
         LatLng(userLocation.latitude, userLocation.longitude)));
 
     if (this.userLocation != null) {
-      this.nearbyParkings = await this.getNearParkings(
-          LatLng(userLocation.latitude, userLocation.longitude));
+      this
+          .mapController
+          .setPosition(LatLng(userLocation.latitude, userLocation.longitude));
+
+      this.mapController.loadParkings(false);
     }
 
     setState(() {
       this._loading = false;
     });
+  }
+
+  Set<Marker> _markerBuilder(List<Parking> _parkings) {
+    Set<Marker> ret = new Set();
+
+    _parkings.forEach((parking) {
+      ret.add(Marker(
+        markerId: MarkerId("${parking.id}"),
+        position: LatLng(parking.latitude, parking.longitude),
+        icon: parking.isAvailable == true
+            ? _customGreenPinIcon
+            : _customRedPinIcon,
+        onTap: () => showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            builder: (context) {
+              mapController.mapController.value.animateCamera(
+                  CameraUpdate.newLatLng(
+                      LatLng(parking.latitude - 0.003, parking.longitude)));
+              return ParkingDetailModal(parking: parking);
+            }),
+      ));
+    });
+
+    return ret;
   }
 
   @override
@@ -171,16 +161,19 @@ class _MapPageState extends State<MapPage> {
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
-              GoogleMap(
-                onMapCreated: (GoogleMapController controller) {
-                  mapController.setMapController(controller);
-                  mapController.mapController.value.setMapStyle(_mapStyle);
-                },
-                myLocationButtonEnabled: true,
-                myLocationEnabled: true,
-                initialCameraPosition: initialCameraPosition,
-                zoomControlsEnabled: false,
-                markers: nearbyParkings,
+              Obx(
+                () => GoogleMap(
+                  onMapCreated: (GoogleMapController controller) {
+                    mapController.setMapController(controller);
+                    mapController.mapController.value.setMapStyle(_mapStyle);
+                  },
+                  myLocationButtonEnabled: true,
+                  myLocationEnabled: true,
+                  initialCameraPosition: initialCameraPosition,
+                  zoomControlsEnabled: false,
+                  // markers: nearbyParkings,
+                  markers: this._markerBuilder(this.mapController.parkings),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 60.0),

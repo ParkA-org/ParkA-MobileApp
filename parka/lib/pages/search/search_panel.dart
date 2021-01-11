@@ -2,7 +2,6 @@ import 'package:ParkA/components/filter-result-tile/filter_result_tile.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
 import 'package:ParkA/controllers/map_controller.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
-import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
 import 'package:ParkA/pages/parking-detail/parking_detail_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
@@ -25,18 +24,7 @@ class SearchPanel extends StatefulWidget {
 }
 
 class _SearchPanelState extends State<SearchPanel> {
-  final mapController = Get.find<MapController>();
-
-  List<Parking> currentParkings = [];
-
-  void getAllParkings() async {
-    // await list();
-    // mapController.setCurrentParkings(currentParkings);
-    mapController.searchParkings(null);
-  }
-
-  Future<List<Parking>> list() async =>
-      currentParkings = await ParkingUseCases.getAllParking();
+  MapController mapController = Get.find<MapController>();
 
   List<Widget> searchResultBuilder(List<Parking> filteredResults) {
     List<Widget> searchResults = [];
@@ -62,7 +50,6 @@ class _SearchPanelState extends State<SearchPanel> {
   @override
   void initState() {
     super.initState();
-    getAllParkings();
   }
 
   @override
@@ -117,12 +104,12 @@ class _SearchPanelState extends State<SearchPanel> {
               child: FavoritePlaceButton(),
             ),
             Expanded(
-              child: GetBuilder<MapController>(
-                  init: mapController,
-                  builder: (_) => ListView(
-                        children:
-                            searchResultBuilder(mapController.filteredResults),
-                      )),
+              child: Obx(
+                () => ListView(
+                  children: searchResultBuilder(
+                      this.mapController.textSearchParkings),
+                ),
+              ),
             ),
           ],
         ),

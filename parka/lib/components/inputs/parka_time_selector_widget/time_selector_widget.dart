@@ -3,6 +3,7 @@ import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/utils/functions/convert_int_to_time_string.dart';
 import 'package:flutter/material.dart';
 import 'time_selector_pill_widget.dart';
+import "package:ParkA/pages/create-reservation/utils/generate_schedule_util.dart";
 
 class TimeSelectorWidget extends StatefulWidget {
   final bool showAddSign;
@@ -33,6 +34,8 @@ class _TimeSelectorWidgetState extends State<TimeSelectorWidget> {
   Function _onChangeHadler;
   Function _onRemoveHadler;
   bool _is24h;
+  List<String> _startTimes;
+  List<String> _endTimes;
 
   @override
   void initState() {
@@ -43,6 +46,8 @@ class _TimeSelectorWidgetState extends State<TimeSelectorWidget> {
     this._index = this.widget.index;
     this._showAddSign = this.widget.showAddSign;
     this._is24h = this.widget?.is24h ?? false;
+    this._endTimes = buildRange(30, 2400);
+    this._startTimes = buildRange(0, 2330);
   }
 
   void _setStartTime(int hour) {
@@ -54,11 +59,11 @@ class _TimeSelectorWidgetState extends State<TimeSelectorWidget> {
     }
 
     if (this._schedule.start >= (this._schedule.finish ?? 2500)) {
-      this._schedule.finish = this._schedule.start >= 2300 ? 2400 : hour + 100;
+      this._schedule.finish = this._schedule.start >= 2300 ? 2359 : hour + 100;
     }
 
     this._schedule.is24h =
-        this._schedule.start == 0 && this._schedule.finish == 2400;
+        this._schedule.start == 0 && this._schedule.finish == 2359;
 
     if (this._onChangeHadler != null) {
       this._onChangeHadler(this._schedule, this._index);
@@ -68,6 +73,7 @@ class _TimeSelectorWidgetState extends State<TimeSelectorWidget> {
   }
 
   void _setFinishTime(int hour) {
+    hour = hour == 2400 ? 2359 : hour;
     this._schedule = this._schedule ?? new Schedule();
 
     this._schedule.finish = hour;
@@ -75,12 +81,12 @@ class _TimeSelectorWidgetState extends State<TimeSelectorWidget> {
       this._schedule.start = this._schedule.finish;
     }
 
-    if (this._schedule.finish < (this._schedule.start ?? 0)) {
+    if (this._schedule.finish <= (this._schedule.start ?? 0)) {
       this._schedule.start = this._schedule.finish <= 100 ? 0 : hour - 100;
     }
 
     this._schedule.is24h =
-        this._schedule.start == 0 && this._schedule.finish == 2400;
+        this._schedule.start == 0 && this._schedule.finish == 2359;
 
     if (this._onChangeHadler != null) {
       this._onChangeHadler(this._schedule, this._index);
@@ -131,6 +137,7 @@ class _TimeSelectorWidgetState extends State<TimeSelectorWidget> {
             child: TimeSelectorPillWidget(
               hourString: convertIntToTimeString(this._schedule?.start),
               setHourString: this._setStartTime,
+              times: this._startTimes,
             ),
           ),
           Expanded(
@@ -140,6 +147,7 @@ class _TimeSelectorWidgetState extends State<TimeSelectorWidget> {
             child: TimeSelectorPillWidget(
               hourString: convertIntToTimeString(this._schedule?.finish),
               setHourString: this._setFinishTime,
+              times: this._endTimes,
             ),
           ),
           Expanded(

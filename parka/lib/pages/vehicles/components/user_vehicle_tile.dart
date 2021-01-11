@@ -44,13 +44,6 @@ class VehicleTile extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 16.0),
                 child: Row(
                   children: [
-                    // Container(
-                    //   height: 50,
-                    //   child: Image.network(
-                    //       'https://parka-api-bucket-aws.s3.amazonaws.com/pngwave_0e69969129.png',
-                    //       height: 40.0,
-                    //       width: 40.0),
-                    // ),
                     SizedBox(width: 12),
                     Expanded(
                       child: Container(

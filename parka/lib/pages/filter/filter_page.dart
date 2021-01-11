@@ -1,11 +1,16 @@
+import 'package:ParkA/components/floating-action-button/parka_floating_action_button.dart';
 import 'package:ParkA/components/headers/parka_header.dart';
-import 'package:ParkA/pages/filter/components/featureFilterWidget/feature_filter_widget.dart';
+import 'package:ParkA/components/tabs/feature_tab.dart';
+import 'package:ParkA/controllers/map_controller.dart';
+import 'package:ParkA/data/data-models/feature/parking_feature_data_model.dart';
+import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
+import 'package:ParkA/data/use-cases/feature/feature_use_cases.dart';
+import 'package:ParkA/data/use-cases/parking/parking_use_cases.dart';
 import 'package:ParkA/pages/filter/components/top_bar.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import "package:flutter/material.dart";
-
-import 'components/buttons_reservation_type_widget.dart';
-import 'components/filter_date_widget.dart';
+import 'package:get/get.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'components/slider_price_widget.dart';
 import 'components/star_rating_widget.dart';
 
@@ -17,243 +22,168 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPageState extends State<FilterPage> {
-  double minRentPriceFilter = 50.0;
-  double maxRentPriceFilter = 2000.0;
-  double rentPriceFilter;
-  int parkingVoteFilter = 4;
+  MapController _mapController = Get.find<MapController>();
 
-  List<String> parkingTypeReservation = new List();
-  List<String> parkingFeatureList = new List();
-  List<bool> isSelectedParkingType = [false, false, false];
-  List<String> iconNames = [
-    "camFeature.svg",
-    "accessControlFeature.svg",
-    "guardFeature.svg",
-    "carWashFeature.svg",
-    "carChargeFeature.svg",
-    "valetParkingFeature.svg",
-  ];
-  List<bool> isSelectedParkingFeature = [
-    false,
-    false,
-    false,
-    false,
-    false,
-    false
-  ];
-  String selectedDate = "";
-  String minHour = '';
-  String maxHour = '';
+  double _min;
+  double _max;
+
+  List<Feature> features;
+  List<Parking> _priceParkings;
+  List<double> _prices;
+  bool _loadingData;
 
   @override
   void initState() {
     super.initState();
-    this.rentPriceFilter = (minRentPriceFilter + maxRentPriceFilter) / 2;
+
+    this._loadingData = true;
+    getFormData();
   }
 
-  void changeParkingVoteFilter(int vote) {
-    setState(() {
-      this.parkingVoteFilter = vote;
-    });
-  }
+  List<Widget> featureListBuilder(
+      List<Feature> _features, List<String> _selectedFeatures) {
+    List<Widget> ret = new List();
 
-  void changeParkingPriceFilter(double price) {
-    setState(
-      () {
-        this.rentPriceFilter = price;
-      },
-    );
-  }
+    _features.forEach((element) {
+      bool check = _selectedFeatures.indexOf(element.id) != -1;
 
-  void changeParkingTypeFilter(String type, int index) {
-    setState(() {
-      this.isSelectedParkingType[index] = !this.isSelectedParkingType[index];
-      if (!this.isSelectedParkingType[index]) {
-        this.parkingTypeReservation.remove(type);
-        return;
-      }
-
-      this.parkingTypeReservation.add(type);
+      ret.add(FeatureTab(
+        feature: element,
+        selected: check,
+        onTapHanlder: (bool _selected) {
+          if (!_selected)
+            this._mapController.addFeature(element.id);
+          else
+            this._mapController.removeFeature(element.id);
+        },
+      ));
     });
 
-    print(this.parkingTypeReservation);
+    return ret;
   }
 
-  void changeParkingFeatureFilter(String type, int index) {
+  void getFormData() async {
+    this.features = await FeatureUseCases.getAllFeatures();
+    this._priceParkings = await ParkingUseCases.getAllParking();
+    this._prices = List.from(this._priceParkings.map((e) => e.priceHours));
+    this._prices.sort();
+    this._min = this._prices[0];
+    this._max = this._prices[this._prices.length - 1];
+
     setState(() {
-      this.isSelectedParkingFeature[index] =
-          !this.isSelectedParkingFeature[index];
-      if (!this.isSelectedParkingFeature[index]) {
-        this.parkingFeatureList.remove(type);
-        return;
-      }
-
-      this.parkingFeatureList.add(type);
-    });
-
-    print(this.parkingFeatureList);
-  }
-
-  void parseDate(DateTime date) {
-    String year = date.toString().split(" ")[0].split("-")[0];
-    String month = date.toString().split(" ")[0].split("-")[1];
-    String day = date.toString().split(" ")[0].split("-")[2];
-    setState(() {
-      this.selectedDate = "$day $month $year";
-    });
-  }
-
-  void changeParkingMinHourFilter(String hour) {
-    String filterhour = hour.length == 2 ? hour + ":" : hour;
-    setState(() {
-      this.minHour = filterhour;
-    });
-    print(this.minHour);
-  }
-
-  void changeParkingMaxHourFilter(String hour) {
-    setState(() {
-      this.maxHour = hour.length == 2 ? "$hour:" : hour;
-    });
-  }
-
-  void resetFilters() {
-    setState(() {
-      this.selectedDate = "";
-      this.parkingTypeReservation.clear();
-      this.parkingFeatureList.clear();
-      this.minHour = "";
-      this.maxHour = "";
-      for (int i = 0; i < this.isSelectedParkingType.length; i++) {
-        this.isSelectedParkingType[i] = false;
-      }
-
-      for (int i = 0; i < this.isSelectedParkingFeature.length; i++) {
-        this.isSelectedParkingFeature[i] = false;
-      }
+      this._loadingData = false;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: ParkaFloatingActionButton(
+        iconData: Icons.search,
+        onPressedHandler: () {
+          this._mapController.loadParkings(false);
+          Get.back();
+        },
+      ),
       body: SafeArea(
-        child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints viewportConstraints) {
-            return Column(
-              children: [
-                Expanded(
-                  flex: 0,
-                  child: ParkaHeader(
-                    color: ParkaColors.parkaGreen,
-                  ),
-                ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        minHeight: viewportConstraints.maxHeight,
+        child: ModalProgressHUD(
+          inAsyncCall: this._loadingData,
+          child: this._loadingData
+              ? Container()
+              : Column(
+                  children: [
+                    Expanded(
+                      flex: 0,
+                      child: ParkaHeader(
+                        color: ParkaColors.parkaGreen,
                       ),
-                      child: IntrinsicHeight(
-                        child: Column(
+                    ),
+                    Expanded(
+                      flex: 0,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                        ),
+                        child: FilterPageTopBar(
+                          onTapHandler: this._mapController.resetFilters,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                        ),
+                        child: ListView(
+                          shrinkWrap: true,
                           children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20.0,
+                            Obx(
+                              () => StarRatingFilter(
+                                rating: this
+                                        ._mapController
+                                        .parkingFilterDto
+                                        .rating ??
+                                    5,
+                                rateHandler: this._mapController.setRating,
+                              ),
+                            ),
+                            Obx(
+                              () => PriceSliderWidget(
+                                rangeFilter: RangeValues(
+                                    this
+                                            ._mapController
+                                            .parkingFilterDto
+                                            .minPrice ??
+                                        this._min,
+                                    this
+                                            ._mapController
+                                            .parkingFilterDto
+                                            .maxPrice ??
+                                        this._max),
+                                minSliderValue: this._min,
+                                maxSliderValue: this._max,
+                                sliderChangeHandler:
+                                    this._mapController.setPriceFilter,
+                              ),
+                            ),
+                            Obx(
+                              () => ExpansionTile(
+                                title: Text(
+                                  "Caracteristicas",
+                                  style: TextStyle(
+                                      color: Color(0xFF0B768C),
+                                      fontSize: 28.0,
+                                      fontWeight: FontWeight.bold),
                                 ),
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: <Widget>[
-                                    Expanded(
-                                      flex: 0,
-                                      child: FilterPageTopBar(
-                                        onTapHandler: this.resetFilters,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: StarRatingFilter(
-                                        rating: this.parkingVoteFilter,
-                                        rateHandler:
-                                            this.changeParkingVoteFilter,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: PriceSliderWidget(
-                                        rentPriceFilter: rentPriceFilter,
-                                        minSliderValue: this.minRentPriceFilter,
-                                        maxSliderValue: this.maxRentPriceFilter,
-                                        sliderChangeHandler:
-                                            changeParkingPriceFilter,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: ReserveTypeSelectorWidget(
-                                        types: [
-                                          "Horas",
-                                          "Dias",
-                                          "Semanas",
-                                        ],
-                                        selectedTypes:
-                                            this.isSelectedParkingType,
-                                        onPressedHandler:
-                                            this.changeParkingTypeFilter,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: FilterDatePicker(
-                                        date: this.selectedDate,
-                                        datePickerHandler: this.parseDate,
-                                        minHourPickerHandler:
-                                            this.changeParkingMinHourFilter,
-                                        maxHourPickerHandler:
-                                            this.changeParkingMaxHourFilter,
-                                      ),
-                                    ),
-                                    FeatureSelectorFilter(
-                                      renderAvaliableWidth:
-                                          viewportConstraints.maxWidth,
-                                      onTapHandler:
-                                          this.changeParkingFeatureFilter,
-                                      selectedFeatures:
-                                          this.isSelectedParkingFeature,
-                                      featureTypes: [
-                                        "Camara de seguridad",
-                                        "Control de acceso",
-                                        "Vigilancia",
-                                        "Car Wash",
-                                        "Puerto de Carga",
-                                        "Valet Parking"
-                                      ],
-                                      iconNames: this.iconNames,
-                                    ),
-                                    Expanded(
-                                      flex: 0,
-                                      child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 8.0),
-                                        child: Text(
-                                          "Terminos y condiciones legales",
-                                          style: TextStyle(
-                                            color: ParkaColors.parkaGreen,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                children: [
+                                  GridView.count(
+                                    crossAxisCount: 2,
+                                    children: featureListBuilder(
+                                        this.features,
+                                        this
+                                            ._mapController
+                                            .parkingFilterDto
+                                            .features),
+                                    shrinkWrap: true,
+                                  )
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Text(
+                                "Terminos y condiciones legales",
+                                style: TextStyle(
+                                  color: ParkaColors.parkaGreen,
                                 ),
                               ),
                             ),
                           ],
                         ),
                       ),
-                    ),
-                  ),
+                    )
+                  ],
                 ),
-              ],
-            );
-          },
         ),
       ),
     );

@@ -1,6 +1,6 @@
 const String getAllFeaturesQuery = r"""
-query{
-  getAllFeatures{
+query {
+  getAllFeatures {
     id
     name
   }

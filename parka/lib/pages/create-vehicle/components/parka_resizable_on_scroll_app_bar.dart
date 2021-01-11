@@ -7,13 +7,17 @@ import "package:flutter/material.dart";
 class ParkaResizableOnScrollAppBar extends StatelessWidget {
   final appBarHeight;
   final headerHeight = 36.0;
-  final minAppBarHeight = 56.0;
+  final minAppBarHeight = 140.0;
+  final preferredSize;
   final title;
+  final pinned;
 
   const ParkaResizableOnScrollAppBar({
     Key key,
     this.title = "Agrega tu vehiculo",
     this.appBarHeight = 256.0,
+    this.pinned = true,
+    this.preferredSize = 30,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -26,6 +30,10 @@ class ParkaResizableOnScrollAppBar extends StatelessWidget {
         ),
       ),
       expandedHeight: this.appBarHeight,
+      bottom: PreferredSize(
+        preferredSize: Size.fromHeight(preferredSize / 2),
+        child: Container(),
+      ),
       leading: Container(),
       flexibleSpace: Container(
         child: Column(
@@ -51,23 +59,30 @@ class ParkaResizableOnScrollAppBar extends StatelessWidget {
 
                   return Column(
                     children: [
-                      Expanded(
-                        flex: childrenSpace > resizableSpace ? 1 : 0,
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          height: childrenSpace > resizableSpace
-                              ? childrenSpace
-                              : 0.0,
-                          child: Icon(
-                            ParkaIcons.parkaCar,
-                            size: childrenSpace > resizableSpace
-                                ? childrenSpace
-                                : 0.0,
-                            color: Color.fromRGBO(255, 255, 255,
-                                carProportion > 0.9 ? 1 : carProportion / 2),
-                          ),
-                        ),
-                      ),
+                      this.title != "Tus Parqueos"
+                          ? Expanded(
+                              flex: childrenSpace > resizableSpace ? 1 : 0,
+                              child: Container(
+                                alignment: Alignment.centerLeft,
+                                height: childrenSpace > resizableSpace
+                                    ? childrenSpace
+                                    : 0.0,
+                                child: Icon(
+                                  ParkaIcons.parkaCar,
+                                  size: childrenSpace > resizableSpace
+                                      ? childrenSpace
+                                      : 0.0,
+                                  color: Color.fromRGBO(
+                                      255,
+                                      255,
+                                      255,
+                                      carProportion > 0.9
+                                          ? 1
+                                          : carProportion / 2),
+                                ),
+                              ),
+                            )
+                          : Container(),
                       Expanded(
                         child: Center(
                           child: Padding(

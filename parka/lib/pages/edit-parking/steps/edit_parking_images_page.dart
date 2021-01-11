@@ -113,6 +113,7 @@ class ParkingImageEditorPage extends StatelessWidget {
                     flex: 2,
                     child: Obx(
                       () => ParkaImageCardWidget(
+                        carouselType: CarouselType.Form,
                         image: _updateParkingFormController
                             .updateParkingDto.mainPicture,
                         type: PlaceHolderType.Parking,

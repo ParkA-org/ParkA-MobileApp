@@ -166,10 +166,10 @@ ReservationScheduleList _formatTimeSchedules(List<Schedule> _schedules) {
 }
 
 List<String> _getRange(Schedule _schedule) {
-  return _buildRange(_schedule.start, _schedule.finish);
+  return buildRange(_schedule.start, _schedule.finish);
 }
 
-List<String> _buildRange(int _start, int _end) {
+List<String> buildRange(int _start, int _end) {
   List<String> ret = new List();
 
   String _startHour = _start.toString();

@@ -75,10 +75,30 @@ class _VehicleDetailPageState extends State<VehicleDetailPage> {
                       title: AutoSizeText(
                         this._vehicle.alias,
                         maxLines: 1,
+                        maxFontSize: 24,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Montserrat"),
                       ),
-                      background: Image(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(_vehicle.mainPicture),
+                      background: Stack(
+                        alignment: Alignment.center,
+                        fit: StackFit.expand,
+                        children: [
+                          Image(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(_vehicle.mainPicture),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 190.0),
+                                color: Colors.black54,
+                                blurRadius: 18.0,
+                                spreadRadius: 15.0,
+                              ),
+                            ]),
+                          )
+                        ],
                       ),
                     ),
                   ),

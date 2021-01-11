@@ -1,13 +1,15 @@
 import 'dart:io';
+import 'package:ParkA/components/images/parka_add_images_carousel.dart';
 
 import 'package:ParkA/data/enums/parking_place_holder_type.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'image_page.dart';
 
 class ParkaImageCardWidget extends StatelessWidget {
   final PlaceHolderType type;
+  final CarouselType carouselType;
   final Function onTapHandler;
   final Function onLongPressHandler;
   final String image;
@@ -16,11 +18,56 @@ class ParkaImageCardWidget extends StatelessWidget {
   ParkaImageCardWidget({
     Key key,
     this.index,
+    @required this.carouselType,
     this.onTapHandler,
     this.onLongPressHandler,
     this.image,
     @required this.type,
   }) : super(key: key);
+
+  Widget _image() {
+    return Container(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16.0),
+        child: GetUtils.isURL(this.image)
+            ? Image.network(
+                this.image,
+                fit: BoxFit.cover,
+              )
+            : Image.file(
+                File(this.image),
+                fit: BoxFit.cover,
+              ),
+      ),
+    );
+  }
+
+  Widget _cardImage(BuildContext context, double cardWidth) {
+    if (this.image != null) {
+      return this.carouselType == CarouselType.Form
+          ? this._image()
+          : GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return ImagePage(this.image);
+                    },
+                  ),
+                );
+              },
+              child: Hero(
+                tag: this.image,
+                child: this._image(),
+              ),
+            );
+    }
+
+    return CarImagePlaceholder(
+      cardWidth: cardWidth,
+      type: this.type,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,66 +111,12 @@ class ParkaImageCardWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: this.image != null
-                    ? Container(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(16.0),
-                          child: GetUtils.isURL(this.image)
-                              ? Image.network(
-                                  this.image,
-                                  fit: BoxFit.cover,
-                                )
-                              : Image.file(
-                                  File(this.image),
-                                  fit: BoxFit.cover,
-                                ),
-                        ),
-                      )
-                    : CarImagePLaceholder(
-                        cardWidth: cardWidth,
-                        type: this.type,
-                      ),
+                child: _cardImage(context, cardWidth),
               ),
             );
           },
         ),
       ),
-    );
-  }
-}
-
-class CarImagePLaceholder extends StatelessWidget {
-  final PlaceHolderType type;
-
-  CarImagePLaceholder({
-    Key key,
-    @required this.cardWidth,
-    @required this.type,
-  }) : super(key: key);
-
-  final double cardWidth;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SvgPicture.asset(
-          this.type == PlaceHolderType.Car
-              ? "resources/images/carPlaceHolder.svg"
-              : "resources/images/parkingPlaceHolder.svg",
-          height: cardWidth / 6,
-          width: cardWidth / 6,
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Icon(
-            Icons.add,
-            color: Colors.white,
-            size: cardWidth / 6,
-          ),
-        ),
-      ],
     );
   }
 }

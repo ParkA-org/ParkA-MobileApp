@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import "package:flutter/material.dart";
 
 class RoundedButton extends StatelessWidget {
@@ -54,8 +55,9 @@ class RoundedButton extends StatelessWidget {
                 width: this.hasIcon ? 15.0 : 0,
               ),
               Expanded(
-                child: Text(
+                child: AutoSizeText(
                   this.label,
+                  maxLines: 1,
                   textAlign: this.hasIcon ? TextAlign.start : TextAlign.center,
                   style: TextStyle(
                       color: this.isSelected ? Colors.white : this.color,

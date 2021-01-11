@@ -1,4 +1,5 @@
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
+import 'package:ParkA/pages/profile/profile_page.dart';
 import 'package:ParkA/pages/reservation/reservation-as-owner-detail/reservation_as_owner.dart';
 import 'package:ParkA/pages/reservation/reservations-as-client-detail/reservation_as_client.dart';
 import 'package:ParkA/styles/parka_colors.dart';
@@ -95,7 +96,7 @@ class ReservationTile extends StatelessWidget {
                           minFontSize: 18,
                           maxFontSize: 22,
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
+                          maxLines: 1,
                         ),
                         SizedBox(
                           height: 10,
@@ -148,52 +149,66 @@ class ReservationTile extends StatelessWidget {
                 ),
               ),
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              offset: Offset(0.0, 6.0),
-                              color: Colors.black38,
-                              blurRadius: 2.0,
-                            )
-                          ],
-                          image: DecorationImage(
-                              image: NetworkImage(type == "Owner"
-                                  ? "${reservation.client.profilePicture}"
-                                  : "${reservation.owner.profilePicture}"))),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfileScreen(
+                      userId: type == "Owner"
+                          ? reservation.client.id
+                          : reservation.owner.id,
                     ),
                   ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: AutoSizeText(
-                    type == "Owner"
-                        ? "${reservation.client.name}"
-                        : "${reservation.owner.name}",
-                    style: kParkaTextBaseStyle.copyWith(
-                      fontSize: 22,
-                      color: Colors.black,
+                );
+              },
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0.0, 6.0),
+                                color: Colors.black38,
+                                blurRadius: 2.0,
+                              )
+                            ],
+                            image: DecorationImage(
+                                image: NetworkImage(type == "Owner"
+                                    ? "${reservation.client.profilePicture}"
+                                    : "${reservation.owner.profilePicture}"))),
+                      ),
                     ),
-                    minFontSize: 18,
-                    maxFontSize: 22,
-                    overflow: TextOverflow.ellipsis,
                   ),
-                ),
-                RichText(
-                    text: TextSpan(
-                        style: kParkaTextBaseStyle.copyWith(
-                            color: ParkaColors.parkaGreen,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                        children: [TextSpan(text: "Estatus: "), statusText]))
-              ],
+                  Expanded(
+                    flex: 3,
+                    child: AutoSizeText(
+                      type == "Owner"
+                          ? "${reservation.client.name}"
+                          : "${reservation.owner.name}",
+                      style: kParkaTextBaseStyle.copyWith(
+                        fontSize: 22,
+                        color: Colors.black,
+                      ),
+                      minFontSize: 18,
+                      maxFontSize: 22,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  RichText(
+                      text: TextSpan(
+                          style: kParkaTextBaseStyle.copyWith(
+                              color: ParkaColors.parkaGreen,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                          children: [TextSpan(text: "Estatus: "), statusText]))
+                ],
+              ),
             ),
             Divider(
               thickness: 1.0,

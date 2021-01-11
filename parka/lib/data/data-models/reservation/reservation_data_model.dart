@@ -10,11 +10,12 @@ class Reservation {
   final Vehicle vehicle;
   final String paymentInfoId;
   final String rentDate;
-  final int total;
+  final double total;
   final Parking parking;
   final String status;
   final User client;
   final User owner;
+  final bool reviewed;
 
   Reservation({
     this.checkInDate,
@@ -29,20 +30,22 @@ class Reservation {
     this.owner,
     this.vehicle,
     this.parking,
+    this.reviewed,
   });
 
   static Reservation reservationFromJson(Map<String, dynamic> reservation) {
     return Reservation(
         id: reservation["id"],
-        client: User.userFromJson(reservation["client"]),
-        owner: User.userFromJson(reservation["owner"]),
+        client: User.otherUserFromJson(reservation["client"]),
+        owner: User.otherUserFromJson(reservation["owner"]),
         parking: Parking.parkingFromJsonPersonlized(reservation["parking"]),
         vehicle: Vehicle.vehiclefromJsonPersonalized(reservation["vehicle"]),
         checkInDate: reservation["checkInDate"],
         checkOutDate: reservation["checkOutDate"],
         status: reservation["status"],
         rentDate: reservation["rentDate"],
-        total: reservation["total"]);
+        total: reservation["total"],
+        reviewed: reservation["reviewed"]);
   }
 
   static List<Reservation> reservationsFromJson(List reservationData) {
@@ -51,15 +54,16 @@ class Reservation {
     reservationData.forEach((reservation) {
       userReservations.add(Reservation(
           id: reservation["id"],
-          client: User.userFromJson(reservation["client"]),
-          owner: User.userFromJson(reservation["owner"]),
+          client: User.otherUserFromJson(reservation["client"]),
+          owner: User.otherUserFromJson(reservation["owner"]),
           parking: Parking.parkingFromJsonPersonlized(reservation["parking"]),
           vehicle: Vehicle.vehiclefromJsonPersonalized(reservation["vehicle"]),
           checkInDate: reservation["checkInDate"],
           checkOutDate: reservation["checkOutDate"],
           status: reservation["status"],
           rentDate: reservation["rentDate"],
-          total: reservation["total"]));
+          total: double.parse(reservation["total"].toString()),
+          reviewed: reservation["reviewed"]));
     });
 
     return userReservations;

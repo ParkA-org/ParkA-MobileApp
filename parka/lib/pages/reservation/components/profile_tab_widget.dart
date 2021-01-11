@@ -1,6 +1,8 @@
 import 'package:ParkA/data/data-models/user/user_data_model.dart';
 import 'package:ParkA/pages/profile/components/parka_circle_avatar_widget.dart';
+import 'package:ParkA/pages/profile/profile_page.dart';
 import 'package:ParkA/styles/text.dart';
+import 'package:ParkA/utils/functions/get_user_rating.dart';
 import 'package:flutter/material.dart';
 
 class ProfileTabWidget extends StatelessWidget {
@@ -13,7 +15,6 @@ class ProfileTabWidget extends StatelessWidget {
         super(key: key);
 
   final String _name;
-  // ignore: unused_field
   final User _user;
 
   @override
@@ -29,7 +30,16 @@ class ProfileTabWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProfileScreen(
+                  userId: this._user.id,
+                ),
+              ),
+            );
+          },
           child: Row(
             children: [
               Expanded(
@@ -62,7 +72,7 @@ class ProfileTabWidget extends StatelessWidget {
                         child: Row(
                           children: [
                             Text(
-                              '4.20 ',
+                              userRating(this._user).toString(),
                               style: kParkaTextStyleBlack18,
                             ),
                             Icon(

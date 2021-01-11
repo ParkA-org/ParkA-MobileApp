@@ -1,17 +1,56 @@
 const String loginMutation = r'''
-    mutation($input:LoginUserInput!){
-      login(loginUserInput:$input){
-        JWT,
-        user{
+mutation($input: LoginUserInput!) {
+  login(loginUserInput: $input) {
+    JWT
+    user {
+      id
+      name
+      email
+      lastName
+      profilePicture
+      reviews {
+        id
+        user {
           id
           name
-          email
           lastName
           profilePicture
-          }
         }
+        calification
+        review
       }
-    ''';
+    }
+  }
+}
+    
+''';
+
+const String socialLoginMutation = r"""
+mutation($input: SocialLoginInput!){
+  socialLogin(socialLoginInput: $input){
+    JWT
+    user{
+      id
+      name
+      lastName
+      email
+      profilePicture
+      reviews {
+        id
+        user {
+          id
+          name
+          lastName
+          profilePicture
+        }
+        calification
+        review
+      }
+    }
+    register
+  }
+}
+""";
 
 const String createUserMutation = r"""
     mutation($data:CreateUserInput!){
@@ -88,17 +127,43 @@ mutation($data:UpdateUserPasswordInput!){
 }
 """;
 
+const String addUserInformationMutation = r"""
+mutation($data: AddUserInformationInput!){
+  addUserInformation(addUserInformationInput: $data){
+    JWT
+    user{
+      name
+      email
+    }
+    register
+  }
+}
+""";
+
 const String updateUserMutation = r'''
-     mutation($data:UpdateUserInput!){
-      updateUser(updateUserInput:$data){
+mutation($data: UpdateUserInput!) {
+  updateUser(updateUserInput: $data) {
+    name
+    lastName
+    email
+    profilePicture
+    confirmed
+    origin
+    reviews {
+      id
+      user {
+        id
         name
         lastName
-        email
         profilePicture
-        confirmed
-        origin
       }
-    }''';
+      calification
+      review
+    }
+  }
+}
+
+''';
 
 const String updateUserInformationMutation = r"""
     mutation($data:UpdateUserInformationInput!){

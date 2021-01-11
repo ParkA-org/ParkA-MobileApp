@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "98484105015-c4tdc6lsj4c3tlfrasfeh9e7nh00atf3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.parka.parka",
+            "certificate_hash": "b29275d127ce6e90776731f0cf0626d344c3b05c"
+          }
+        },
+        {
+          "client_id": "98484105015-r48mclgfsonnrgr8qldjpc1jgqqhrn3q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.parka.parka",
+            "certificate_hash": "644ce1605d74a971aa86bca73766f76dfaa84986"
+          }
+        },
+        {
           "client_id": "98484105015-933btdv0havf7bl4kkc225kehcl59du8.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -30,6 +46,13 @@
             {
               "client_id": "98484105015-933btdv0havf7bl4kkc225kehcl59du8.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "98484105015-cmg5bsjccbijc0b5v30p6trmd5gf97k2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.parkatest"
+              }
             }
           ]
         }

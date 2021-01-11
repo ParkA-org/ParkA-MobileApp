@@ -42,13 +42,12 @@ class _CreateParkingPageState extends State<CreateParkingPage> {
     getFormData();
   }
 
-  List<Widget> featureListBuilder() {
+  List<Widget> featureListBuilder(
+      List<Feature> _features, List<String> _selectedFeatures) {
     List<Widget> ret = new List();
 
-    this.features.forEach((element) {
-      bool check = createParkingFormController.createPArkingDto.value.features
-              .indexOf(element.id) !=
-          -1;
+    _features.forEach((element) {
+      bool check = _selectedFeatures.indexOf(element.id) != -1;
 
       ret.add(FeatureTab(
         feature: element,
@@ -163,7 +162,12 @@ class _CreateParkingPageState extends State<CreateParkingPage> {
                                     children: [
                                       GridView.count(
                                         crossAxisCount: 2,
-                                        children: featureListBuilder(),
+                                        children: featureListBuilder(
+                                            this.features,
+                                            createParkingFormController
+                                                .createPArkingDto
+                                                .value
+                                                .features),
                                         shrinkWrap: true,
                                       )
                                     ],
