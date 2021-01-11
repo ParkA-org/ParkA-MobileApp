@@ -71,6 +71,31 @@ class ParkingUseCases {
     return null;
   }
 
+  static Future deleteParking(String _parkingID) async {
+    final graphqlClient = Get.find<GraphqlClientController>()
+        .parkaGraphqlClient
+        .value
+        .graphQlClient;
+
+    final deleteParkingInput = {
+      "data": _parkingID,
+    };
+
+    MutationOptions mutationOptions = MutationOptions(
+      documentNode: gql(deleteParkingMutation),
+      variables: deleteParkingInput,
+    );
+
+    final deleteParkingResult = await graphqlClient.mutate(mutationOptions);
+
+    if (deleteParkingResult.data != null) {
+      return true;
+    }
+
+    print(deleteParkingResult.exception ?? "");
+    return false;
+  }
+
   static Future updateParking(UpdateParkingDto _updateParkingDto) async {
     final graphqlClient = Get.find<GraphqlClientController>()
         .parkaGraphqlClient
@@ -262,6 +287,7 @@ class ParkingUseCases {
 
   static Future<List<Parking>> getAllParkingsSpots(
     ParkingFilterDto _parkingFilterDto,
+    bool _textSearch,
   ) async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
@@ -269,13 +295,14 @@ class ParkingUseCases {
       "data": {"where": {}}
     };
 
-    if (_parkingFilterDto.parkingName != null &&
+    if (_textSearch &&
+        _parkingFilterDto.parkingName != null &&
         _parkingFilterDto.parkingName.length != 0) {
       _input["data"]["where"]["parkingName_contains"] =
           _parkingFilterDto.parkingName;
     }
 
-    if (_parkingFilterDto.position != null) {
+    if (!_textSearch && _parkingFilterDto.position != null) {
       _input["data"]["where"]["position_near"] = {
         "latitude": _parkingFilterDto.position.latitude,
         "longitude": _parkingFilterDto.position.longitude

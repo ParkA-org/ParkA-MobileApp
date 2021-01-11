@@ -15,6 +15,7 @@ class Reservation {
   final String status;
   final User client;
   final User owner;
+  final bool reviewed;
 
   Reservation({
     this.checkInDate,
@@ -29,6 +30,7 @@ class Reservation {
     this.owner,
     this.vehicle,
     this.parking,
+    this.reviewed,
   });
 
   static Reservation reservationFromJson(Map<String, dynamic> reservation) {
@@ -42,7 +44,8 @@ class Reservation {
         checkOutDate: reservation["checkOutDate"],
         status: reservation["status"],
         rentDate: reservation["rentDate"],
-        total: reservation["total"]);
+        total: reservation["total"],
+        reviewed: reservation["reviewed"]);
   }
 
   static List<Reservation> reservationsFromJson(List reservationData) {
@@ -59,7 +62,8 @@ class Reservation {
           checkOutDate: reservation["checkOutDate"],
           status: reservation["status"],
           rentDate: reservation["rentDate"],
-          total: double.parse(reservation["total"].toString())));
+          total: double.parse(reservation["total"].toString()),
+          reviewed: reservation["reviewed"]));
     });
 
     return userReservations;

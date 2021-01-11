@@ -49,7 +49,8 @@ class ProfilePersonalInformationWidget extends StatelessWidget {
                           ? '${userController.user.value.name} ${userController.user.value.lastName}'
                           : "Iniciar sesion",
                       maxLines: 1,
-                      minFontSize: 14.0,
+                      minFontSize: 18.0,
+                      maxFontSize: 25.0,
                       style: kParkaTextBaseStyleBold.copyWith(
                         color: this.color,
                       ),
@@ -89,13 +90,13 @@ class ProfilePersonalInformationWidget extends StatelessWidget {
                                     .toString(),
                                 style: kParkaInputDefaultSyle.copyWith(
                                   fontWeight: FontWeight.normal,
-                                  fontSize: 12.0,
+                                  fontSize: 20.0,
                                 ),
                               ),
                               Icon(
                                 Icons.star,
                                 color: this.color,
-                                size: 12.0,
+                                size: 20.0,
                               ),
                             ],
                           )

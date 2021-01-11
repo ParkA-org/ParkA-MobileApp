@@ -96,7 +96,7 @@ class ReservationTile extends StatelessWidget {
                           minFontSize: 18,
                           maxFontSize: 22,
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
+                          maxLines: 1,
                         ),
                         SizedBox(
                           height: 10,

@@ -243,7 +243,8 @@ class _EditUserProfileInformationPageState
                                   style: kParkaTextStyleBoldWhite24,
                                 ),
                                 ParkaPhoneEdit(
-                                  value: this.userInformation.telephoneNumber,
+                                  value: this.userInformation.telephoneNumber ??
+                                      "",
                                   textFieldMaxLength: 13,
                                   onChangedHandler: (String value) {
                                     setState(

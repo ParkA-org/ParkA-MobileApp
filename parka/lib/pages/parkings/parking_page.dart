@@ -29,12 +29,13 @@ class _ParkingPageState extends State<ParkingPage> {
     });
   }
 
-  List<Widget> parkingListBuilder() {
+  List<Widget> parkingListBuilder(size) {
     List<Widget> parkingList = new List();
 
     this.userParkings.forEach((parking) {
       parkingList.add(
         ParkingTile(
+          screenSize: size,
           parking: parking,
           onTapHandler: () => Get.to(
             OwnerParkingDetailPage(
@@ -56,6 +57,7 @@ class _ParkingPageState extends State<ParkingPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButton: ParkaFloatingActionButton(
         iconData: Icons.add,
@@ -73,14 +75,16 @@ class _ParkingPageState extends State<ParkingPage> {
               child: CustomScrollView(
                 slivers: [
                   ParkaResizableOnScrollAppBar(
+                    appBarHeight: 150.0,
                     title: "Tus Parqueos",
+                    pinned: false,
                   ),
                   SliverList(
                     delegate: SliverChildListDelegate(
                       [
                         !this._loading && this.userParkings.length != 0
                             ? Column(
-                                children: parkingListBuilder(),
+                                children: parkingListBuilder(screenSize),
                               )
                             : ParkingListPlaceholder()
                       ],

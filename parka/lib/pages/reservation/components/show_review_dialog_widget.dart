@@ -1,26 +1,27 @@
-import 'package:ParkA/components/inputs/parka_input_test.dart';
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
-import 'package:ParkA/data/dtos/review/create_review_dto.dart';
-import 'package:ParkA/data/use-cases/review/review_use_cases.dart';
+import 'package:ParkA/data/data-models/review/review_data_model.dart';
 import 'package:ParkA/pages/profile/components/parka_circle_avatar_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
-class ReviewDialog extends StatefulWidget {
-  const ReviewDialog({
+class ShowReview extends StatefulWidget {
+  const ShowReview({
     Key key,
     @required Reservation reservation,
+    @required Review review,
   })  : _reservation = reservation,
+        _review = review,
         super(key: key);
 
   final Reservation _reservation;
+  final Review _review;
 
   @override
-  _ReviewDialogState createState() => _ReviewDialogState();
+  _ShowReviewState createState() => _ShowReviewState();
 }
 
-class _ReviewDialogState extends State<ReviewDialog> {
+class _ShowReviewState extends State<ShowReview> {
   int parkingVoteFilter = 4;
   String title;
   String review;
@@ -36,19 +37,9 @@ class _ReviewDialogState extends State<ReviewDialog> {
     this.reservationId = this.widget._reservation.id;
     this.picture = this.widget._reservation.parking.mainPicture;
     this.parkingName = this.widget._reservation.parking.parkingName;
-  }
-
-  void sendReview() async {
-    CreateReviewDto review = new CreateReviewDto();
-    review.review = this.review;
-    review.parkingId = this.parkingId;
-    review.calification = parkingVoteFilter;
-    review.title = title;
-    review.type = type;
-    review.reservationId = this.reservationId;
-    review.reviewedUser = this.widget._reservation.owner.id;
-
-    await ReviewUseCases.createReview(review);
+    this.review = this.widget._review.review;
+    this.title = this.widget._review.title;
+    this.parkingVoteFilter = (this.widget._review.calification).round();
   }
 
   void changeReview(value) {
@@ -102,7 +93,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       child: Container(
-        height: 470,
+        height: 570,
         width: 350,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -117,6 +108,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
                   maxLines: 1,
                   maxFontSize: 30,
                   minFontSize: 25,
+                  overflow: TextOverflow.ellipsis,
                   locale: Locale.fromSubtags(),
                   style: TextStyle(
                       fontFamily: "Montserrat",
@@ -154,9 +146,15 @@ class _ReviewDialogState extends State<ReviewDialog> {
                 ),
               ),
               Expanded(
-                child: ParkaInputTest(
-                  enable_padding: true,
-                  handler: this.changeTitle,
+                child: AutoSizeText(
+                  this.title,
+                  maxLines: 1,
+                  maxFontSize: 24,
+                  minFontSize: 22,
+                  style: TextStyle(
+                      fontFamily: "Montserrat",
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black),
                 ),
               ),
               Expanded(
@@ -172,40 +170,22 @@ class _ReviewDialogState extends State<ReviewDialog> {
                 ),
               ),
               Expanded(
+                flex: 2,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
-                  child: ParkaInputTest(
-                    handler: this.changeReview,
-                    enable_padding: true,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: InkWell(
-                  onTap: () {
-                    this.sendReview();
-                    Navigator.pop(context);
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Color(0xff077187),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 6, horizontal: 20.0),
-                      child: AutoSizeText(
-                        "Enviar",
-                        maxLines: 1,
-                        maxFontSize: 20,
-                        minFontSize: 20,
+                  child: ListView(
+                    children: [
+                      AutoSizeText(
+                        this.review,
+                        maxFontSize: 24,
+                        minFontSize: 22,
                         style: TextStyle(
-                            fontFamily: "Montserrat",
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
+                          fontFamily: "Montserrat",
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ),

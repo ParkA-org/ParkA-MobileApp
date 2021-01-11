@@ -19,6 +19,8 @@ class ParkaPhoneEdit extends StatelessWidget {
           this.value.substring(
                 9,
               );
+    } else if (data.isEmpty) {
+      return "";
     } else {
       return this.value.substring(0, 3) +
           "-" +

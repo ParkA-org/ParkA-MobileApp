@@ -55,6 +55,12 @@ class TimeSelectorPillWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        if (this.setHourString != null &&
+            this.times.length > 0 &&
+            this.hourString.isEmpty) {
+          this.setHourString(0);
+        }
+
         showModalBottomSheet(
           context: context,
           builder: (BuildContext context) => Container(
