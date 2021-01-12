@@ -85,7 +85,7 @@ class ParkaDropDownField extends StatelessWidget {
       onTap: () {
         if (this.onChangedHandler != null &&
             this.pickerOptions.length > 0 &&
-            this.value == "") {
+            (this.value == "" || this.value == null)) {
           this.onChangedHandler(0);
         }
         showModalBottomSheet(
