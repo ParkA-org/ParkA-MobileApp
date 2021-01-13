@@ -45,12 +45,14 @@ class PaymentCardTile extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                Text(
+                                AutoSizeText(
                                   this.payment.cardHolder,
+                                  maxLines: 1,
                                   style: kParkaTextStyleBoldBlack18,
                                 ),
-                                Text(
+                                AutoSizeText(
                                   "• • • •  ${this.payment.digit.substring(12)}",
+                                  maxLines: 1,
                                   style: kParkaTextStyleBoldBlack18,
                                 )
                               ],

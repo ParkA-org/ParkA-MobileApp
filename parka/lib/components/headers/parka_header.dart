@@ -1,4 +1,5 @@
 import 'package:ParkA/components/buttons/transparent_button.dart';
+import 'package:ParkA/pages/map/maps_page.dart';
 import 'package:ParkA/styles/text.dart';
 import "package:flutter/material.dart";
 
@@ -34,7 +35,11 @@ class ParkaHeader extends StatelessWidget {
                 color: this.color,
                 leadingIconData: Icons.keyboard_arrow_left,
                 onTapHandler: () {
-                  Navigator.of(context).pop();
+                  if (Navigator.of(context).canPop()) {
+                    Navigator.of(context).pop();
+                  }
+
+                  Navigator.pushNamed(context, MapPage.routeName);
                 },
               ),
           this.central ?? Container(),

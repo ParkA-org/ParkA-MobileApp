@@ -1,9 +1,12 @@
 import 'package:ParkA/components/menu-item/parka_menu_item.dart';
 import 'package:ParkA/pages/login/login_screen.dart';
 import 'package:ParkA/pages/profile/components/profile_personal_information_widget.dart';
+import 'package:ParkA/pages/search/search_panel.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
+import 'package:ParkA/utils/functions/help_launcher.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PublicDrawer extends StatelessWidget {
   PublicDrawer({Key key}) : super(key: key);
@@ -50,11 +53,14 @@ class PublicDrawer extends StatelessWidget {
                             Expanded(
                               child: ParkAMenuItem(
                                 label: "Buscar Parqueo",
+                                onTapHandler: () =>
+                                    Get.toNamed(SearchPanel.routeName),
                               ),
                             ),
                             Expanded(
                               child: ParkAMenuItem(
                                 label: "Ayuda",
+                                onTapHandler: gotoHelp,
                               ),
                             ),
                             Expanded(

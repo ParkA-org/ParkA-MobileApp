@@ -493,6 +493,7 @@ class UserUseCases {
     String birthDate,
     String placeOfBirth,
     String nationality,
+    String telephoneNumber,
   ) async {
     final graphqlClient = Get.find<GraphqlClientController>();
 
@@ -503,6 +504,10 @@ class UserUseCases {
 
     if (documentNumber != null) {
       updateUserInformationInput["data"]['documentNumber'] = documentNumber;
+    }
+
+    if (telephoneNumber != null) {
+      updateUserInformationInput["data"]['telephoneNumber'] = telephoneNumber;
     }
 
     if (birthDate != null) {

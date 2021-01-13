@@ -83,11 +83,7 @@ class _EditUserProfileInformationPageState
     );
 
     bool updateUserInformationCheck = await UserUseCases.updateUserInformation(
-      documentNumber,
-      birthDate,
-      placeOfBirth,
-      nationality,
-    );
+        documentNumber, birthDate, placeOfBirth, nationality, telephoneNumber);
 
     if (!(updateUserCheck && updateUserInformationCheck)) {
       Get.snackbar(
