@@ -79,11 +79,13 @@ class ParkaDropDownField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(pickerOptions);
+
     return GestureDetector(
       onTap: () {
         if (this.onChangedHandler != null &&
             this.pickerOptions.length > 0 &&
-            this.value.isEmpty) {
+            (this.value == "" || this.value == null)) {
           this.onChangedHandler(0);
         }
         showModalBottomSheet(

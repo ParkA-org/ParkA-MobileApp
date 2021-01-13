@@ -184,9 +184,11 @@ class _CreateVehiclePageState extends State<CreateVehiclePage> {
                                 label: "Placa del vehiculo",
                                 maxLength: 7,
                                 onChangedHandler: (String value) {
+                                  if (value.length >= 7) {
+                                    value = value.substring(0, 7);
+                                  }
                                   setState(() {
-                                    this.createVehicleDto.licensePlate =
-                                        value.substring(0, 7);
+                                    this.createVehicleDto.licensePlate = value;
                                   });
                                 },
                               ),

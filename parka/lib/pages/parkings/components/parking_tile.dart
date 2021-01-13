@@ -79,7 +79,7 @@ class ParkingTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      height: this.screenSize.height * 0.20,
+                      height: this.screenSize.height * 0.15,
                       width: this.screenSize.width * 0.50,
                       margin: EdgeInsets.symmetric(vertical: 5.0),
                       decoration: BoxDecoration(
@@ -97,9 +97,10 @@ class ParkingTile extends StatelessWidget {
                     ),
                     Container(
                       width: this.screenSize.width * 0.40,
-                      height: this.screenSize.height * 0.20,
+                      height: this.screenSize.height * 0.15,
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 8.0, right: 10),
+                        padding: const EdgeInsets.only(
+                            left: 8.0, right: 10, top: 3.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -113,15 +114,18 @@ class ParkingTile extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            AutoSizeText(
-                              "${this.parking.priceHours}",
-                              maxFontSize: 24,
-                              minFontSize: 18,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: kParkaTextBaseStyle.copyWith(
-                                color: Colors.black54,
-                                fontWeight: FontWeight.bold,
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: AutoSizeText(
+                                "${this.parking.priceHours}",
+                                maxFontSize: 24,
+                                minFontSize: 18,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: kParkaTextBaseStyle.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                             AutoSizeText(

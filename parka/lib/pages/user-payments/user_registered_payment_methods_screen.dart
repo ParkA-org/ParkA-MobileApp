@@ -10,6 +10,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'components/card_preview_widget.dart';
 
 class UserPaymentMethodsScreen extends StatefulWidget {
@@ -22,15 +23,15 @@ class UserPaymentMethodsScreen extends StatefulWidget {
 
 class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
   final graphqlClient = Get.find<GraphqlClientController>();
-  bool paymentsLoaded;
+  bool _loading;
   List<Payment> userPaymentMethods;
 
   Future getAllUserPayment() async {
-    this.paymentsLoaded = false;
+    this._loading = true;
     this.userPaymentMethods = await PaymentUseCases.getAllUserPaymentMethods();
 
     setState(() {
-      this.paymentsLoaded = true;
+      this._loading = false;
     });
   }
 
@@ -121,77 +122,81 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
         },
       ),
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: ParkaColors.parkaGreen,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(15.0),
-                      bottomRight: Radius.circular(15.0),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        offset: Offset(3.0, 7.0),
-                        color: Colors.black38,
-                        blurRadius: 5.0,
+        child: ModalProgressHUD(
+          inAsyncCall: this._loading,
+          opacity: 0.5,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: ParkaColors.parkaGreen,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(15.0),
+                        bottomRight: Radius.circular(15.0),
                       ),
-                    ]),
-                child: Column(
-                  children: [
-                    Expanded(
-                      flex: 0,
-                      child: ParkaHeader(
-                        color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          offset: Offset(3.0, 7.0),
+                          color: Colors.black38,
+                          blurRadius: 5.0,
+                        ),
+                      ]),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        flex: 0,
+                        child: ParkaHeader(
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 16.0),
-                          child: AutoSizeText(
-                            "Metodos de Pago",
-                            maxLines: 1,
-                            maxFontSize: 40,
-                            minFontSize: 30,
-                            style: TextStyle(
-                                fontFamily: "Montserrat",
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                      Expanded(
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: AutoSizeText(
+                              "Metodos de Pago",
+                              maxLines: 1,
+                              maxFontSize: 40,
+                              minFontSize: 30,
+                              style: TextStyle(
+                                  fontFamily: "Montserrat",
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Expanded(
-              flex: 5,
-              child: this.paymentsLoaded && this.userPaymentMethods.length > 0
-                  ? RefreshIndicator(
-                      onRefresh: this.getAllUserPayment,
-                      child: ListView(
-                        children: buildPaymentView(),
-                      ),
-                    )
-                  : Container(
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 50.0),
-                        child: Center(
-                          child: SvgPicture.asset(
-                            "resources/images/InitialMethod.svg",
-                            height: screenSize.height * 0.50,
+              Expanded(
+                flex: 5,
+                child: !this._loading && this.userPaymentMethods.length > 0
+                    ? RefreshIndicator(
+                        onRefresh: this.getAllUserPayment,
+                        child: ListView(
+                          children: buildPaymentView(),
+                        ),
+                      )
+                    : Container(
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 50.0),
+                          child: Center(
+                            child: SvgPicture.asset(
+                              "resources/images/InitialMethod.svg",
+                              height: screenSize.height * 0.50,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
