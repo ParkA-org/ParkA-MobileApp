@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "98484105015-qp0ins567uqcf0cn6iidsqajruq974ls.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.parka.parka",
+            "certificate_hash": "aa3de4677f90b4b3e29e9d47e65462f18fbeb007"
+          }
+        },
+        {
           "client_id": "98484105015-r48mclgfsonnrgr8qldjpc1jgqqhrn3q.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
