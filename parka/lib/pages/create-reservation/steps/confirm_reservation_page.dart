@@ -286,7 +286,7 @@ class ConfirmReservationPage extends StatelessWidget {
                               } else {
                                 Get.snackbar(
                                   "Error",
-                                  "Ocurrio un error crenado tu reserva",
+                                  "Ocurrio un error creando tu reserva",
                                   margin: EdgeInsets.all(8.0),
                                   backgroundColor: ParkaColors.parkaGoogleRed,
                                 );
