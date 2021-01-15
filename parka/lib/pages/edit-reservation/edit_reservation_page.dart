@@ -5,6 +5,7 @@ import 'package:ParkA/components/info/info_label.dart';
 import 'package:ParkA/components/price/price_tab_widget.dart';
 import 'package:ParkA/components/reservation/date_time_reservation_selector.dart';
 import 'package:ParkA/controllers/create-reservation-form/create_reservation_controller.dart';
+import 'package:ParkA/controllers/edit-reservation-form/edit_reservation_controller.dart';
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/data/data-models/schedule/per_day_schedule_data_model.dart';
@@ -17,6 +18,7 @@ import 'package:ParkA/pages/create-reservation/utils/generate_schedule_util.dart
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:ParkA/utils/form-validations/create_rservation_form_validator.dart';
+import 'package:ParkA/utils/form-validations/edit_reservation_form_validator.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -41,8 +43,8 @@ class EditParkingReservationPage extends StatefulWidget {
 
 class _EditParkingReservationPageState
     extends State<EditParkingReservationPage> {
-  CreateReservationFormController _formController =
-      Get.put(CreateReservationFormController());
+  EditReservationFormController _formController =
+      Get.put(EditReservationFormController());
 
   String _parkingId;
   String _reservationId;
@@ -211,7 +213,7 @@ class _EditParkingReservationPageState
       floatingActionButton: ParkaFloatingActionButton(
         iconData: Icons.check,
         onPressedHandler: () {
-          if (createReservationFormValidator(
+          if (editReservationFormValidator(
               this._formController.createReservationDto)) {
             return Get.to(ConfirmReservationPage());
           }

@@ -149,6 +149,17 @@ query($data: GetReservationById!) {
     checkInDate
     checkOutDate
     reviewed
+    paymentInfo{
+      id
+      cardHolder
+      expirationDate
+      digit
+      activated
+      card{
+        id
+        name
+      }
+    }
     client {
       id
       name
@@ -200,5 +211,4 @@ query($data: GetReservationById!) {
     status
   }
 }
-
 """;
