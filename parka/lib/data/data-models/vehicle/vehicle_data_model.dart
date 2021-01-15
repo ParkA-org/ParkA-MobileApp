@@ -95,6 +95,9 @@ class Vehicle {
       mainPicture: vehicleData["mainPicture"],
       pictures: carPictures,
       alias: vehicleData["alias"],
+      model: vehicleData["model"] == null
+          ? new Model()
+          : Model.modelFromJson(vehicleData["model"]),
     );
   }
 }

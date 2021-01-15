@@ -49,13 +49,13 @@ class LoginScreen extends StatelessWidget {
                     "Simplificando la busqueda y alquiler de parqueos",
                     style: kParkaTextBaseStyleBold,
                   ),
-                  RoundedButton(
-                    color: ParkaColors.parkaFacebookBlue,
-                    icon: FontAwesomeIcons.facebookF,
-                    label: "Iniciar sesion con Facebook",
-                    hasIcon: true,
-                    hasShadow: false,
-                  ),
+                  // RoundedButton(
+                  //   color: ParkaColors.parkaFacebookBlue,
+                  //   icon: FontAwesomeIcons.facebookF,
+                  //   label: "Iniciar sesion con Facebook",
+                  //   hasIcon: true,
+                  //   hasShadow: false,
+                  // ),
                   RoundedButton(
                     color: ParkaColors.parkaGoogleRed,
                     icon: FontAwesomeIcons.google,

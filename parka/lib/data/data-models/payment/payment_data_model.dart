@@ -17,6 +17,18 @@ class Payment {
     this.cardId,
   });
 
+  static paymentFromJson(Map paymentData) {
+    return Payment(
+      id: paymentData["id"],
+      activated: paymentData["activated"],
+      cardHolder: paymentData["cardHolder"],
+      digit: paymentData["digit"],
+      expirationDate: paymentData["expirationDate"],
+      cardId: paymentData["card"]["id"],
+      card: paymentData["card"]["name"],
+    );
+  }
+
   static paymentsFromJson(List paymentsData) {
     List<Payment> ret = new List<Payment>();
 
