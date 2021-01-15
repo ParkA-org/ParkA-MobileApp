@@ -15,6 +15,7 @@ class EditReservationFormController extends GetxController {
     print(_reservation.vehicle.model.name);
 
     _editReservationDto.update((_instance) {
+      _instance.reservationId = _reservation.id;
       _instance.checkInDate = _reservation.checkInDate;
       _instance.checkOutDate = _reservation.checkOutDate;
       _instance.owner = _reservation.owner;
@@ -124,10 +125,10 @@ class EditReservationFormController extends GetxController {
     return hours;
   }
 
-  Future<bool> createReservation() async {
-    // final result = await ReservationUseCases.createReservation(
-    //     this._createReservationDto.value);
+  Future<bool> editReservation() async {
+    final result = await ReservationUseCases.editReservation(
+        this._editReservationDto.value);
 
-    // return result;
+    return result;
   }
 }

@@ -268,9 +268,8 @@ class ConfirmEditReservationPage extends StatelessWidget {
                             label: "Confirmar reserva",
                             color: ParkaColors.parkaGreen,
                             onTapHandler: () async {
-                              final result = await this
-                                  ._formController
-                                  .createReservation();
+                              final result =
+                                  await this._formController.editReservation();
 
                               if (result) {
                                 Navigator.pushAndRemoveUntil(

@@ -4,6 +4,7 @@ import 'package:ParkA/data/data-models/user/user_data_model.dart';
 import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
 
 class EditReservationDto {
+  String reservationId;
   Parking parking;
   User owner;
   String checkInDate;
@@ -15,6 +16,7 @@ class EditReservationDto {
   double hours;
 
   EditReservationDto({
+    this.reservationId,
     this.parking,
     this.checkInDate,
     this.checkOutDate,

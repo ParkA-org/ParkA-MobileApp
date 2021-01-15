@@ -1,5 +1,6 @@
 import 'package:ParkA/controllers/graphql_controller.dart';
 import 'package:ParkA/data/dtos/reservation/create_reservation_dto.dart';
+import 'package:ParkA/data/dtos/reservation/edit_reservation_dto.dart';
 import 'package:ParkA/pages/create-reservation/utils/generate_schedule_util.dart';
 import 'package:ParkA/utils/graphql/mutations/reservation_mutation.dart';
 import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
@@ -118,6 +119,44 @@ class ReservationUseCases {
     if (_result.data != null) {
       return true;
     }
+
+    return false;
+  }
+
+  static Future<bool> editReservation(
+      EditReservationDto _editReservationDto) async {
+    final graphqlClient = Get.find<GraphqlClientController>()
+        .parkaGraphqlClient
+        .value
+        .graphQlClient;
+
+    final Map<String, dynamic> editReservationInput = {
+      "data": {
+        "where": {"id": _editReservationDto.reservationId},
+        "data": {
+          "checkInDate": _editReservationDto.checkInDate,
+          "checkOutDate": _editReservationDto.checkOutDate,
+          "vehicle": _editReservationDto.vehicle.id,
+          "paymentInfo": _editReservationDto.paymentInfo.id,
+          "total": _editReservationDto.total,
+          "rentDate": formatDate(_editReservationDto.rentDate),
+        }
+      }
+    };
+
+    print(editReservationInput);
+
+    final options = MutationOptions(
+        variables: editReservationInput,
+        documentNode: gql(editReservationMutation));
+
+    final _result = await graphqlClient.mutate(options);
+
+    if (_result.data != null) {
+      return true;
+    }
+
+    print(_result.exception.graphqlErrors.toString());
 
     return false;
   }
