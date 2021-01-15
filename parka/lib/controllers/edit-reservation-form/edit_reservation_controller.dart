@@ -7,15 +7,14 @@ import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
 import 'package:get/get.dart';
 
 class EditReservationFormController extends GetxController {
-  Rx<EditReservationDto> _createReservationDto = new EditReservationDto().obs;
+  Rx<EditReservationDto> _editReservationDto = new EditReservationDto().obs;
 
-  EditReservationDto get createReservationDto =>
-      this._createReservationDto.value;
+  EditReservationDto get editReservationDto => this._editReservationDto.value;
 
   void initReservation(Reservation _reservation) {
     print(_reservation.vehicle.model.name);
 
-    _createReservationDto.update((_instance) {
+    _editReservationDto.update((_instance) {
       _instance.checkInDate = _reservation.checkInDate;
       _instance.checkOutDate = _reservation.checkOutDate;
       _instance.owner = _reservation.owner;
@@ -30,26 +29,26 @@ class EditReservationFormController extends GetxController {
   }
 
   void setParkingData(Parking _parkingData) {
-    _createReservationDto.update((_instance) {
+    _editReservationDto.update((_instance) {
       _instance.parking = _parkingData;
       _instance.owner = _parkingData.user;
     });
   }
 
   void setVehicle(Vehicle _vehicle) {
-    _createReservationDto.update((_instance) {
+    _editReservationDto.update((_instance) {
       _instance.vehicle = _vehicle;
     });
   }
 
   void setPaymentInfo(Payment _payment) {
-    _createReservationDto.update((_instance) {
+    _editReservationDto.update((_instance) {
       _instance.paymentInfo = _payment;
     });
   }
 
   void setReservationDate(DateTime _datetime) {
-    _createReservationDto.update((_instance) {
+    _editReservationDto.update((_instance) {
       _instance.rentDate = _datetime;
       _instance.checkInDate = null;
       _instance.checkOutDate = null;
@@ -71,46 +70,46 @@ class EditReservationFormController extends GetxController {
   }
 
   void setStartTime(String _startTime, {String finishTime}) {
-    _createReservationDto.update((_instance) {
+    _editReservationDto.update((_instance) {
       _instance.checkInDate = _generateISOStringFromTime(
         _startTime,
-        this.createReservationDto.rentDate,
+        this.editReservationDto.rentDate,
       );
 
       if (finishTime != null) {
         finishTime = finishTime == "24:00" ? "23:59" : finishTime;
         _instance.checkOutDate = _generateISOStringFromTime(
           finishTime,
-          this.createReservationDto.rentDate,
+          this.editReservationDto.rentDate,
         );
       }
-      this.createReservationDto.hours = _getTotalTime(
-          this.createReservationDto.checkInDate,
-          this.createReservationDto.checkOutDate);
-      this.createReservationDto.total =
-          this.createReservationDto.parking.priceHours *
-              this.createReservationDto.hours;
+      this.editReservationDto.hours = _getTotalTime(
+          this.editReservationDto.checkInDate,
+          this.editReservationDto.checkOutDate);
+      this.editReservationDto.total =
+          this.editReservationDto.parking.priceHours *
+              this.editReservationDto.hours;
     });
   }
 
   void setFinishTime(String _finishTime, {String startTime}) {
-    _createReservationDto.update((_instance) {
+    _editReservationDto.update((_instance) {
       _instance.checkOutDate = _generateISOStringFromTime(
         _finishTime,
-        this.createReservationDto.rentDate,
+        this.editReservationDto.rentDate,
       );
       if (startTime != null) {
         _instance.checkInDate = _generateISOStringFromTime(
           startTime,
-          this.createReservationDto.rentDate,
+          this.editReservationDto.rentDate,
         );
       }
-      this.createReservationDto.hours = _getTotalTime(
-          this.createReservationDto.checkInDate,
-          this.createReservationDto.checkOutDate);
-      this.createReservationDto.total =
-          this.createReservationDto.parking.priceHours *
-              this.createReservationDto.hours;
+      this.editReservationDto.hours = _getTotalTime(
+          this.editReservationDto.checkInDate,
+          this.editReservationDto.checkOutDate);
+      this.editReservationDto.total =
+          this.editReservationDto.parking.priceHours *
+              this.editReservationDto.hours;
     });
   }
 

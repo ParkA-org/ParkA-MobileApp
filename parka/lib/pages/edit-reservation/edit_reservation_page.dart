@@ -97,7 +97,7 @@ class _EditParkingReservationPageState
 
   void _setStartTime(int idx) {
     ReservationSchedule _start = this._scheduleOptions.start[idx];
-    String finish = this._formController.createReservationDto.checkOutDate;
+    String finish = this._formController.editReservationDto.checkOutDate;
     String _finish =
         this._scheduleOptions.finish[_start.maxRangeValueIdx].value;
     this._startItemIndex = idx;
@@ -121,7 +121,7 @@ class _EditParkingReservationPageState
 
   void _setFinishTime(int idx) {
     ReservationSchedule _finish = this._scheduleOptions.finish[idx];
-    String start = this._formController.createReservationDto.checkInDate;
+    String start = this._formController.editReservationDto.checkInDate;
     String _start = this._scheduleOptions.start[_finish.minRangeValueIdx].value;
     this._finishItemIndex = idx;
 
@@ -216,7 +216,7 @@ class _EditParkingReservationPageState
         iconData: Icons.check,
         onPressedHandler: () {
           if (editReservationFormValidator(
-              this._formController.createReservationDto)) {
+              this._formController.editReservationDto)) {
             return Get.to(ConfirmReservationPage());
           }
 
@@ -327,23 +327,23 @@ class _EditParkingReservationPageState
                                   () => DateTimeReservationPicker(
                                     dateTime: this
                                         ._formController
-                                        .createReservationDto
+                                        .editReservationDto
                                         .rentDate,
                                     selectDate: this._setReservationDate,
                                     avaliableTimes: this._scheduleOptions,
                                     startTime: _getTime(this
                                         ._formController
-                                        .createReservationDto
+                                        .editReservationDto
                                         .checkInDate),
                                     selectStartHour: this._setStartTime,
                                     finishTIme: _getTime(this
                                         ._formController
-                                        .createReservationDto
+                                        .editReservationDto
                                         .checkOutDate),
                                     selectFinishHour: this._setFinishTime,
                                     reservationDuration: this
                                         ._formController
-                                        .createReservationDto
+                                        .editReservationDto
                                         .hours,
                                     finishTImeIdx: this._finishItemIndex,
                                     startTimeIdx: this._startItemIndex,
@@ -357,7 +357,7 @@ class _EditParkingReservationPageState
                                   () => PaymentMethodSelectorWidget(
                                     payment: this
                                         ._formController
-                                        .createReservationDto
+                                        .editReservationDto
                                         .paymentInfo,
                                     onTapHandler: () {
                                       Get.to(
@@ -374,7 +374,7 @@ class _EditParkingReservationPageState
                                   () => VehicleSelectorWidget(
                                     vehicle: this
                                         ._formController
-                                        .createReservationDto
+                                        .editReservationDto
                                         .vehicle,
                                     onTapHandler: () {
                                       Get.to(
@@ -387,7 +387,7 @@ class _EditParkingReservationPageState
                                   () => InfoLabelWidget(
                                     label: "Total:",
                                     value:
-                                        "\$${this._formController.createReservationDto.total ?? 0} RD",
+                                        "\$${this._formController.editReservationDto.total ?? 0} RD",
                                   ),
                                 ),
                               ],
