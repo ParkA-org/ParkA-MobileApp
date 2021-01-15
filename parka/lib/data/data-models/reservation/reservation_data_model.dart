@@ -45,7 +45,7 @@ class Reservation {
       checkOutDate: reservation["checkOutDate"],
       status: reservation["status"],
       rentDate: reservation["rentDate"],
-      total: reservation["total"],
+      total: double.parse(reservation["total"].toString()),
       reviewed: reservation["reviewed"],
       paymentInfo: Payment.paymentFromJson(reservation['paymentInfo']),
     );

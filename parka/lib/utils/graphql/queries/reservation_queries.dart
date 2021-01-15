@@ -149,6 +149,8 @@ query($data: GetReservationById!) {
     checkInDate
     checkOutDate
     reviewed
+    rentDate
+    total
     paymentInfo{
       id
       cardHolder
@@ -199,6 +201,15 @@ query($data: GetReservationById!) {
       pictures
       mainPicture
       alias
+      model{
+        id
+        make{
+          id
+          name
+          icon
+        }
+        name
+      }
     }
     parking {
       id

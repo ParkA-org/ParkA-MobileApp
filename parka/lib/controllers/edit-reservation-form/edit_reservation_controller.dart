@@ -1,5 +1,6 @@
 import 'package:ParkA/data/data-models/parking/parking_data_model.dart';
 import 'package:ParkA/data/data-models/payment/payment_data_model.dart';
+import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
 import 'package:ParkA/data/dtos/reservation/edit_reservation_dto.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
@@ -10,6 +11,23 @@ class EditReservationFormController extends GetxController {
 
   EditReservationDto get createReservationDto =>
       this._createReservationDto.value;
+
+  void initReservation(Reservation _reservation) {
+    print(_reservation.vehicle.model.name);
+
+    _createReservationDto.update((_instance) {
+      _instance.checkInDate = _reservation.checkInDate;
+      _instance.checkOutDate = _reservation.checkOutDate;
+      _instance.owner = _reservation.owner;
+      _instance.parking = _reservation.parking;
+      _instance.paymentInfo = _reservation.paymentInfo;
+      _instance.rentDate = DateTime.tryParse(_reservation.rentDate);
+      _instance.total = _reservation.total;
+      _instance.vehicle = _reservation.vehicle;
+      _instance.hours =
+          _getTotalTime(_reservation.checkInDate, _reservation.checkOutDate);
+    });
+  }
 
   void setParkingData(Parking _parkingData) {
     _createReservationDto.update((_instance) {

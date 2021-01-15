@@ -191,6 +191,8 @@ class _EditParkingReservationPageState
     this._scheduleOptions =
         await this.getParkingAvalibility(this.queryDateTime);
 
+    this._formController.initReservation(this.reservation);
+
     setState(() {
       this._loading = false;
     });

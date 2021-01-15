@@ -13,4 +13,16 @@ class EditReservationDto {
   double total;
   DateTime rentDate;
   double hours;
+
+  EditReservationDto({
+    this.parking,
+    this.checkInDate,
+    this.checkOutDate,
+    this.hours,
+    this.owner,
+    this.paymentInfo,
+    this.rentDate,
+    this.total,
+    this.vehicle,
+  });
 }
