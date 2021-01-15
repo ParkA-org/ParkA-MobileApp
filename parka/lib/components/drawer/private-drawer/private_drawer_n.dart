@@ -138,13 +138,13 @@ class PrivateDrawer extends StatelessWidget {
                         },
                       ),
                     ),
-                    Expanded(
-                      child: ParkAMenuItem(
-                        label: "Chats",
-                        itemStyle: kParkaInputDefaultStyleBlue,
-                        onTapHandler: () => Get.toNamed(ChatsPage.routeName),
-                      ),
-                    ),
+                    // Expanded(
+                    //   child: ParkAMenuItem(
+                    //     label: "Chats",
+                    //     itemStyle: kParkaInputDefaultStyleBlue,
+                    //     onTapHandler: () => Get.toNamed(ChatsPage.routeName),
+                    //   ),
+                    // ),
                     Expanded(
                       child: ParkAMenuItem(
                         label: "Buscar Parqueo",

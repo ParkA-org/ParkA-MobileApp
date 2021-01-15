@@ -37,9 +37,9 @@ class ParkaHeader extends StatelessWidget {
                 onTapHandler: () {
                   if (Navigator.of(context).canPop()) {
                     Navigator.of(context).pop();
+                  } else {
+                    Navigator.pushNamed(context, MapPage.routeName);
                   }
-
-                  Navigator.pushNamed(context, MapPage.routeName);
                 },
               ),
           this.central ?? Container(),

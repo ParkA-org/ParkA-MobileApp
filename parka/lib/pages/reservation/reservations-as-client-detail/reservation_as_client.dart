@@ -3,6 +3,7 @@ import 'package:ParkA/data/data-models/reservation/reservation_data_model.dart';
 import 'package:ParkA/data/data-models/review/review_data_model.dart';
 import 'package:ParkA/data/use-cases/reservation/reservation_use_cases.dart';
 import 'package:ParkA/data/use-cases/review/review_use_cases.dart';
+import 'package:ParkA/pages/edit-reservation/edit_reservation_page.dart';
 import 'package:ParkA/pages/reservation/components/parking_price_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/profile_tab_widget.dart';
 import 'package:ParkA/pages/reservation/components/review_dialog_widget.dart';
@@ -13,6 +14,7 @@ import 'package:ParkA/pages/reservation/components/vehicle_tab_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class ReservationAsClientPage extends StatefulWidget {
@@ -79,6 +81,13 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
     }
   }
 
+  Future gotToEditReservation() async {
+    Get.to(EditParkingReservationPage(
+      parkingId: this._reservation.parking.id,
+      reservationId: this._reservationId,
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -89,6 +98,7 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
               screenSize: screenSize,
               reservation: this._reservation,
               handled: this.cancelReservation,
+              editHandler: this.gotToEditReservation,
             )
           : Container(),
       body: SafeArea(
@@ -145,11 +155,13 @@ class ActionButtonsOwnerState extends StatelessWidget {
     Key key,
     @required this.screenSize,
     @required this.reservation,
+    this.editHandler,
     @required this.handled,
     @required this.getRewiew,
   }) : super(key: key);
 
   final Function handled;
+  final Function editHandler;
   final Function getRewiew;
   final Reservation reservation;
   final Size screenSize;
@@ -167,7 +179,7 @@ class ActionButtonsOwnerState extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InkWell(
-                    onTap: () {},
+                    onTap: this.editHandler,
                     child: Container(
                       decoration: BoxDecoration(
                         color: Color(0xff077187),

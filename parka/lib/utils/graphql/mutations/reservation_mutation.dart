@@ -6,6 +6,14 @@ mutation($data:CreateReservationInput!){
 }
 """;
 
+const String editReservationMutation = r"""
+mutation ($data:UpdateReservationInput!){
+  updateReservation(updateReservationInput:$data){
+    id
+  }
+}
+""";
+
 const String cancelReservationMutation = r"""
 mutation($data: CancelReservationInput!){
   cancelReservation(cancelReservationInput: $data){

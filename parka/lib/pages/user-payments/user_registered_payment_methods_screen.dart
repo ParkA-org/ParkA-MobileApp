@@ -83,7 +83,7 @@ class _UserPaymentMethodsScreenState extends State<UserPaymentMethodsScreen> {
             child: Padding(
               padding: const EdgeInsets.all(15.0),
               child: Icon(
-                Icons.delete,
+                Icons.delete_forever,
                 size: 50,
                 color: Colors.white,
               ),

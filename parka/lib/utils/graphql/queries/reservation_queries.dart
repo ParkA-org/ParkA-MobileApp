@@ -149,6 +149,19 @@ query($data: GetReservationById!) {
     checkInDate
     checkOutDate
     reviewed
+    rentDate
+    total
+    paymentInfo{
+      id
+      cardHolder
+      expirationDate
+      digit
+      activated
+      card{
+        id
+        name
+      }
+    }
     client {
       id
       name
@@ -188,6 +201,15 @@ query($data: GetReservationById!) {
       pictures
       mainPicture
       alias
+      model{
+        id
+        make{
+          id
+          name
+          icon
+        }
+        name
+      }
     }
     parking {
       id
@@ -196,9 +218,15 @@ query($data: GetReservationById!) {
       mainPicture
       rating
       pictures
+      user{
+        id
+        name
+        lastName
+        email
+        profilePicture
+      }
     }
     status
   }
 }
-
 """;
