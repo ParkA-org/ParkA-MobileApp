@@ -1,5 +1,6 @@
 import 'package:ParkA/components/cards/vehicle_mini_list_tile.dart';
 import 'package:ParkA/controllers/create-reservation-form/create_reservation_controller.dart';
+import 'package:ParkA/controllers/edit-reservation-form/edit_reservation_controller.dart';
 import 'package:ParkA/data/data-models/vehicle/vehicle_data_model.dart';
 import 'package:ParkA/data/use-cases/vehicle/vehicle_use_cases.dart';
 import 'package:ParkA/styles/parka_colors.dart';
@@ -17,8 +18,8 @@ class EditSelectVehiclePage extends StatefulWidget {
 }
 
 class _EditSelectVehiclePageState extends State<EditSelectVehiclePage> {
-  CreateReservationFormController _formController =
-      Get.find<CreateReservationFormController>();
+  EditReservationFormController _formController =
+      Get.find<EditReservationFormController>();
 
   bool _loading;
 
@@ -89,7 +90,7 @@ class _EditSelectVehiclePageState extends State<EditSelectVehiclePage> {
                                 child: AutoSizeText(
                                   this
                                       ._formController
-                                      .createReservationDto
+                                      .editReservationDto
                                       .parking
                                       .parkingName,
                                   maxLines: 1,
@@ -103,7 +104,7 @@ class _EditSelectVehiclePageState extends State<EditSelectVehiclePage> {
                                   child: Row(
                                     children: [
                                       AutoSizeText(
-                                        '${this._formController.createReservationDto.parking.rating.toStringAsPrecision(2)}',
+                                        '${this._formController.editReservationDto.parking.rating.toStringAsPrecision(2)}',
                                         maxLines: 1,
                                         style: kParkaTextStyleBold16,
                                       ),
@@ -130,7 +131,7 @@ class _EditSelectVehiclePageState extends State<EditSelectVehiclePage> {
                               fit: BoxFit.cover,
                               image: NetworkImage(this
                                   ._formController
-                                  .createReservationDto
+                                  .editReservationDto
                                   .parking
                                   .mainPicture),
                             ),

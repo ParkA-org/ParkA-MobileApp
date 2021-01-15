@@ -1,4 +1,5 @@
 import 'package:ParkA/controllers/create-reservation-form/create_reservation_controller.dart';
+import 'package:ParkA/controllers/edit-reservation-form/edit_reservation_controller.dart';
 import 'package:ParkA/data/use-cases/payment/payment_use_cases.dart';
 import 'package:ParkA/pages/user-payments/components/card_preview_widget.dart';
 import 'package:ParkA/styles/parka_colors.dart';
@@ -18,8 +19,8 @@ class EditSelectPaymentMethodPage extends StatefulWidget {
 
 class _EditSelectPaymentMethodPageState
     extends State<EditSelectPaymentMethodPage> {
-  CreateReservationFormController _formController =
-      Get.find<CreateReservationFormController>();
+  EditReservationFormController _formController =
+      Get.find<EditReservationFormController>();
 
   bool _loading;
 
@@ -90,7 +91,7 @@ class _EditSelectPaymentMethodPageState
                                 child: AutoSizeText(
                                   this
                                       ._formController
-                                      .createReservationDto
+                                      .editReservationDto
                                       .parking
                                       .parkingName,
                                   maxLines: 1,
@@ -104,7 +105,7 @@ class _EditSelectPaymentMethodPageState
                                   child: Row(
                                     children: [
                                       AutoSizeText(
-                                        '${this._formController.createReservationDto.parking.rating.toStringAsPrecision(2)}',
+                                        '${this._formController.editReservationDto.parking.rating.toStringAsPrecision(2)}',
                                         maxLines: 1,
                                         style: kParkaTextStyleBold16,
                                       ),
@@ -131,7 +132,7 @@ class _EditSelectPaymentMethodPageState
                               fit: BoxFit.cover,
                               image: NetworkImage(this
                                   ._formController
-                                  .createReservationDto
+                                  .editReservationDto
                                   .parking
                                   .mainPicture),
                             ),

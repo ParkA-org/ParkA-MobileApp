@@ -5,6 +5,7 @@ import 'package:ParkA/components/info/info_label.dart';
 import 'package:ParkA/components/price/price_tab_widget.dart';
 import 'package:ParkA/components/user/other_user_personal_information_widget.dart';
 import 'package:ParkA/controllers/create-reservation-form/create_reservation_controller.dart';
+import 'package:ParkA/controllers/edit-reservation-form/edit_reservation_controller.dart';
 import 'package:ParkA/pages/create-reservation/steps/select_payment_method_page.dart';
 import 'package:ParkA/pages/create-reservation/steps/select_vehile_page.dart';
 import 'package:ParkA/pages/map/maps_page.dart';
@@ -15,11 +16,11 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ConfirmReservationPage extends StatelessWidget {
+class ConfirmEditReservationPage extends StatelessWidget {
   static String routeName = "confirm-reservation-page";
 
-  final CreateReservationFormController _formController =
-      Get.find<CreateReservationFormController>();
+  final EditReservationFormController _formController =
+      Get.find<EditReservationFormController>();
 
   String _formatDate(String _date) {
     // if (_date == null) return "";
@@ -74,7 +75,7 @@ class ConfirmReservationPage extends StatelessWidget {
                         child: AutoSizeText(
                           this
                               ._formController
-                              .createReservationDto
+                              .editReservationDto
                               .parking
                               .parkingName,
                           maxLines: 1,
@@ -88,7 +89,7 @@ class ConfirmReservationPage extends StatelessWidget {
                           child: Row(
                             children: [
                               AutoSizeText(
-                                '${this._formController.createReservationDto.parking.rating.toPrecision(2)}',
+                                '${this._formController.editReservationDto.parking.rating.toPrecision(2)}',
                                 maxLines: 1,
                                 style: kParkaTextStyleBold16,
                               ),
@@ -115,7 +116,7 @@ class ConfirmReservationPage extends StatelessWidget {
                       fit: BoxFit.cover,
                       image: NetworkImage(this
                           ._formController
-                          .createReservationDto
+                          .editReservationDto
                           .parking
                           .mainPicture),
                     ),
@@ -173,9 +174,8 @@ class ConfirmReservationPage extends StatelessWidget {
                               () => OtherUserProfilePersonalInformationWidget(
                                 user: this
                                     ._formController
-                                    .createReservationDto
-                                    .parking
-                                    .user,
+                                    .editReservationDto
+                                    .owner,
                               ),
                             )
                           ],
@@ -198,7 +198,7 @@ class ConfirmReservationPage extends StatelessWidget {
                                 valueStyle: kParkaTextStyleBlack16,
                                 value: _formatDate(this
                                     ._formController
-                                    .createReservationDto
+                                    .editReservationDto
                                     .checkInDate),
                               ),
                             ),
@@ -209,14 +209,14 @@ class ConfirmReservationPage extends StatelessWidget {
                                 valueStyle: kParkaTextStyleBlack16,
                                 value: _formatDate(this
                                     ._formController
-                                    .createReservationDto
+                                    .editReservationDto
                                     .checkOutDate),
                               ),
                             ),
                             ParkingPriceWidgetTab(
                               label: "Precio por hora",
                               value:
-                                  'RD\$ ${this._formController.createReservationDto.parking.priceHours}',
+                                  'RD\$ ${this._formController.editReservationDto.parking.priceHours}',
                               valueStyle: kParkaTextStyleBoldBlack16,
                             ),
                             Divider(
@@ -229,7 +229,7 @@ class ConfirmReservationPage extends StatelessWidget {
                           () => PaymentMethodSelectorWidget(
                             payment: this
                                 ._formController
-                                .createReservationDto
+                                .editReservationDto
                                 .paymentInfo,
                             onTapHandler: () {
                               Get.to(
@@ -244,10 +244,8 @@ class ConfirmReservationPage extends StatelessWidget {
                         ),
                         Obx(
                           () => VehicleSelectorWidget(
-                            vehicle: this
-                                ._formController
-                                .createReservationDto
-                                .vehicle,
+                            vehicle:
+                                this._formController.editReservationDto.vehicle,
                             onTapHandler: () {
                               Get.to(
                                 SelectVehiclePage(),
@@ -259,7 +257,7 @@ class ConfirmReservationPage extends StatelessWidget {
                           () => InfoLabelWidget(
                             label: "Total a pagar:",
                             value:
-                                "\$${this._formController.createReservationDto.total ?? 0} RD",
+                                "\$${this._formController.editReservationDto.total ?? 0} RD",
                           ),
                         ),
                         Padding(

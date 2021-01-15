@@ -218,6 +218,13 @@ query($data: GetReservationById!) {
       mainPicture
       rating
       pictures
+      user{
+        id
+        name
+        lastName
+        email
+        profilePicture
+      }
     }
     status
   }

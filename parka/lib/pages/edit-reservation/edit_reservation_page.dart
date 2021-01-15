@@ -15,6 +15,9 @@ import 'package:ParkA/pages/create-reservation/steps/confirm_reservation_page.da
 import 'package:ParkA/pages/create-reservation/steps/select_payment_method_page.dart';
 import 'package:ParkA/pages/create-reservation/steps/select_vehile_page.dart';
 import 'package:ParkA/pages/create-reservation/utils/generate_schedule_util.dart';
+import 'package:ParkA/pages/edit-reservation/steps/confirm_edit_reservation_page.dart';
+import 'package:ParkA/pages/edit-reservation/steps/edit_select_payment_method_page.dart';
+import 'package:ParkA/pages/edit-reservation/steps/edit_select_vehicle_page.dart';
 import 'package:ParkA/styles/parka_colors.dart';
 import 'package:ParkA/styles/text.dart';
 import 'package:ParkA/utils/form-validations/create_rservation_form_validator.dart';
@@ -217,7 +220,7 @@ class _EditParkingReservationPageState
         onPressedHandler: () {
           if (editReservationFormValidator(
               this._formController.editReservationDto)) {
-            return Get.to(ConfirmReservationPage());
+            return Get.to(ConfirmEditReservationPage());
           }
 
           Get.snackbar(
@@ -361,7 +364,7 @@ class _EditParkingReservationPageState
                                         .paymentInfo,
                                     onTapHandler: () {
                                       Get.to(
-                                        SelectPaymentMethodPage(),
+                                        EditSelectPaymentMethodPage(),
                                       );
                                     },
                                   ),
@@ -378,7 +381,7 @@ class _EditParkingReservationPageState
                                         .vehicle,
                                     onTapHandler: () {
                                       Get.to(
-                                        SelectVehiclePage(),
+                                        EditSelectVehiclePage(),
                                       );
                                     },
                                   ),
