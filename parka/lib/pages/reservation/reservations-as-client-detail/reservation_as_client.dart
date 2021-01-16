@@ -58,8 +58,10 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
   }
 
   Future getReview() async {
+    print(this._reservationId);
     this.review =
         await ReviewUseCases.getReviewByReservation(this._reservationId);
+    print(review);
     showDialog(
         context: context,
         builder: (context) {
