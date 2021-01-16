@@ -1,6 +1,6 @@
 import 'package:ParkA/components/menu-item/parka_menu_item.dart';
 import 'package:ParkA/controllers/user_controller.dart';
-import 'package:ParkA/pages/chats/chats_page.dart';
+// import 'package:ParkA/pages/chats/chats_page.dart';
 import 'package:ParkA/pages/edit-profile/edit_profile_page.dart';
 import 'package:ParkA/pages/parkings/parking_page.dart';
 import 'package:ParkA/pages/profile/components/profile_personal_information_widget.dart';
@@ -15,7 +15,6 @@ import 'package:ParkA/utils/functions/help_launcher.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class PrivateDrawer extends StatelessWidget {
   final int reservationsAsCLientCount;

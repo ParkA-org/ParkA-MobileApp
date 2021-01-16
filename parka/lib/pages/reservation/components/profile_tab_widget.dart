@@ -89,31 +89,31 @@ class ProfileTabWidget extends StatelessWidget {
             ],
           ),
         ),
-        true != true
-            ? Container()
-            : InkWell(
-                onTap: () {},
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 12.0, bottom: 8.0),
-                  child: Container(
-                    child: Row(
-                      children: [
-                        Text(
-                          "Contatar ",
-                          style: TextStyle(
-                              fontFamily: "Montserrat",
-                              color: Color(0xff077187),
-                              fontSize: 17.0),
-                        ),
-                        Icon(
-                          Icons.message,
-                          color: Color(0xff077187),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+        // true != true
+        //     ? Container()
+        //     // : InkWell(
+        //     //     onTap: () {},
+        //     //     child: Padding(
+        //     //       padding: const EdgeInsets.only(top: 12.0, bottom: 8.0),
+        //     //       child: Container(
+        //     //         child: Row(
+        //     //           children: [
+        //     //             Text(
+        //     //               "Contatar ",
+        //     //               style: TextStyle(
+        //     //                   fontFamily: "Montserrat",
+        //     //                   color: Color(0xff077187),
+        //     //                   fontSize: 17.0),
+        //     //             ),
+        //     //             Icon(
+        //     //               Icons.message,
+        //     //               color: Color(0xff077187),
+        //     //             ),
+        //     //           ],
+        //     //         ),
+        //     //       ),
+        //     //     ),
+        //     //   ),
       ],
     );
   }

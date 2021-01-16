@@ -58,8 +58,10 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
   }
 
   Future getReview() async {
+    print(this._reservationId);
     this.review =
         await ReviewUseCases.getReviewByReservation(this._reservationId);
+    print(review);
     showDialog(
         context: context,
         builder: (context) {
@@ -130,8 +132,11 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
                                   ProfileTabWidget(
                                       user: this._reservation.owner,
                                       name: "Propietario"),
-                                  VehicleTabWidget(
-                                      vehicle: this._reservation.vehicle),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: VehicleTabWidget(
+                                        vehicle: this._reservation.vehicle),
+                                  ),
                                   ParkingPriceTabWidget(
                                       parking: this._reservation.parking),
                                   TimeTabWidget(reservation: this._reservation),

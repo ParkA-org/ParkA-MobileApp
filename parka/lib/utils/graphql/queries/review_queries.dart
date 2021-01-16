@@ -1,6 +1,6 @@
 const String getReviewByReservationQuery = r"""
 query($data: GetReviewByIdInput!){
-  getReviewByReservation(getReservationByReservationInput: $data){
+  getReviewByReservation(getReviewByReservationInput: $data){
     id
     user{
       id
