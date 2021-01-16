@@ -132,8 +132,11 @@ class _ReservationAsClientPageState extends State<ReservationAsClientPage> {
                                   ProfileTabWidget(
                                       user: this._reservation.owner,
                                       name: "Propietario"),
-                                  VehicleTabWidget(
-                                      vehicle: this._reservation.vehicle),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: VehicleTabWidget(
+                                        vehicle: this._reservation.vehicle),
+                                  ),
                                   ParkingPriceTabWidget(
                                       parking: this._reservation.parking),
                                   TimeTabWidget(reservation: this._reservation),
