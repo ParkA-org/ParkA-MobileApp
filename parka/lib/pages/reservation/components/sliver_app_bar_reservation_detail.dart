@@ -42,7 +42,7 @@ class SliverAppBarReservationDetail extends StatelessWidget {
                   child: Row(
                     children: [
                       AutoSizeText(
-                        this._parking.rating.toString(),
+                        this._parking.rating.toStringAsFixed(2),
                         maxLines: 1,
                         style: kParkaTextStyleBold16,
                       ),
